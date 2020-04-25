@@ -108,7 +108,7 @@
 			<!--========================-->
 			<!--Artifact Unique Breaking-->
 			<!--========================-->
-			
+
 			<!--  Dummy recipes to override component display for recipe book: -->
             <node id="Combo">
                 <attribute id="CombinationID" value="Shard_Artifact_A" type="22" />
@@ -160,7 +160,7 @@
                 <attribute id="StatsID" value="AMER_LOOT_UNI_Shard_E" type="22" />
                 <attribute id="CraftAmount" value="3" type="4" />
             </node>
-			
+
 			<!--  Actual recipes: -->
             <node id="Combo">
                 <attribute id="CombinationID" value="Shard_Artifact_C" type="22" />
