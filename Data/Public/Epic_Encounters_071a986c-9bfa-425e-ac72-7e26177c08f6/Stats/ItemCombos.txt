@@ -748,6 +748,26 @@ use object TOOL_Pouch_Dust_Pixie_A on object AMER_LOOT_TormentedSwole with trans
 use object CON_Food_Dinner_A on object CON_Drink_Bottle_Beer_A with transform code Destroy2Transform1 parameters CON_Food_Stew_Dwarven_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
 use object CON_Food_Dinner_A on object CON_UNI_Mug_Beer_Nurrid_Ovrur with transform code Transform1 parameters CON_Food_Stew_Dwarven_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
 
+// Make scraps from armor and clothes.
+//
+// The categories here only apply to the torso armor. They don't work on boots, helms, etc.
+// The "scale" category actually includes mail, metal, and plate. The three duplicate recipes mean you get a random result. That's intentional.
+//
+use category ClothArmor on category Knife with transform code Transform1 parameters LOOT_Scraps_Cloth_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
+use category ClothArmor on category Dagger with transform code Transform1 parameters LOOT_Scraps_Cloth_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
+use category RobeArmor on category Knife with transform code Transform1 parameters LOOT_Scraps_Cloth_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
+use category RobeArmor on category Dagger with transform code Transform1 parameters LOOT_Scraps_Cloth_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
+use category Garment on category Knife with transform code Transform1 parameters LOOT_Scraps_Cloth_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
+use category Garment on category Dagger with transform code Transform1 parameters LOOT_Scraps_Cloth_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
+use object ITEM_FoldedShirts on category Dagger with transform code Transform1 parameters LOOT_Scraps_Cloth_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
+use object ITEM_FoldedShirts on category Knife with transform code Transform1 parameters LOOT_Scraps_Cloth_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
+use category ArmorLeather on category Knife with transform code Transform1 parameters LOOT_Scraps_Leather_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
+use category ArmorLeather on category Dagger with transform code Transform1 parameters LOOT_Scraps_Leather_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
+use category ArmorScale on object TOOL_Hammer with transform code Transform1 parameters LOOT_Scraps_Scale_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
+use category ArmorScale on object TOOL_Hammer with transform code Transform1 parameters LOOT_Scraps_Metal_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
+use category ArmorScale on object TOOL_Hammer with transform code Transform1 parameters LOOT_Scraps_Plate_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
+
+
 //================================================================//
 //================================================================//
 //

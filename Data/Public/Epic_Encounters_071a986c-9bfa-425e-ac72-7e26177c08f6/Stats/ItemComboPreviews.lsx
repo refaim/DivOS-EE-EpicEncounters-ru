@@ -4607,6 +4607,26 @@
                 <attribute id="CraftAmount" value="2" type="4" />
             </node>
 
+            <!-- Make scraps -->
+            <node id="Combo">
+                <attribute id="CombinationID" value="LFR_LOOT_Scraps_Cloth_A" type="22" />
+                <attribute id="RecipeCategory" value="Objects" type="22" />
+                <attribute id="Object1" value="ITEM_FoldedShirts" type="22" />
+                <attribute id="Category2" value="Knife" type="22" />
+                <attribute id="RequiredSkillLevel" value="0" type="4" />
+                <attribute id="StatsID" value="LOOT_Scraps_Cloth_A" type="22" />
+                <attribute id="CraftAmount" value="2" type="4" />
+            </node>
+            <node id="Combo">
+                <attribute id="CombinationID" value="LFR_LOOT_Scraps_Cloth_B" type="22" />
+                <attribute id="RecipeCategory" value="Objects" type="22" />
+                <attribute id="Object1" value="ITEM_FoldedShirts" type="22" />
+                <attribute id="Category2" value="Dagger" type="22" />
+                <attribute id="RequiredSkillLevel" value="0" type="4" />
+                <attribute id="StatsID" value="LOOT_Scraps_Cloth_A" type="22" />
+                <attribute id="CraftAmount" value="2" type="4" />
+            </node>
+
         </children>
     </node>
 </region>
