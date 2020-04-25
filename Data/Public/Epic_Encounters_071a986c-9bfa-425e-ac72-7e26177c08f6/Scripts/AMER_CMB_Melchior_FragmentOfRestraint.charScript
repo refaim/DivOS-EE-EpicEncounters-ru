@@ -1,0 +1,213 @@
+//===============================================//
+//                                               //
+//   F R A G M E N T   O F   R E S T R A I N T   //
+//                                               //
+//     Written by Matteo "Ameranth" T. (2016)    //
+//===============================================//
+INIT
+CHARACTER:__Me
+CHARACTER:%AMER_MelchiorFragment_Perfection = null
+CHARACTER:%AMER_FragmentOfRestraint_Target = null
+INT:%AMER_FragmentOfRestraint_Combat = 0
+INT:%AMER_FragmentOfRestraint_Handle
+	
+EVENTS
+EVENT FragmentOfRestraintInit
+ON
+	OnInit()
+ACTIONS
+	CharacterApplyStatus(__Me, ETHEREAL_SOLES, -1, 1)
+	AddStatusInfluence(__Me, CONSUME, 1, "AMER_CMB_MelchiorRestraint_Thorns", 0)
+	StartTimer("AMER_FragmentOfRestraint_PlayEffectDelay", 0.25, 0)
+	StartTimer("AMER_FragmentOfRestraint_RemoveSpawnEffect", 3.5, 0)
+	
+	
+	
+EVENT FragmentOfRestraintPlayEffectDelay
+ON
+	OnTimer("AMER_FragmentOfRestraint_PlayEffectDelay")
+ACTIONS
+	CharacterPlayLoopEffect(%AMER_FragmentOfRestraint_Handle, __Me, "FX_Skills_WitchCraft_Summon_Prepare_A")
+	
+	
+	
+EVENT FragmentOfRestraintRemoveSpawnEffect
+ON
+	OnTimer("AMER_FragmentOfRestraint_RemoveSpawnEffect")
+ACTIONS
+	StopLoopEffect(%AMER_FragmentOfRestraint_Handle)
+	
+	
+	
+EVENT FragmentOfRestraintCombatEnded
+ON
+	OnCombatEnded()
+ACTIONS
+	IF "!c1"
+		CharacterIsDead(%AMER_MelchiorFragment_Perfection)
+	THEN
+		IF "!c1"
+			CharacterIsDead(__Me)
+		THEN
+			PlayEffectAt(__Me, "FX_Skills_Air_NetherSwap_Disappear_A")
+			CharacterDestroy(__Me)
+		ENDIF
+	ENDIF
+	
+	
+	
+EVENT FragmentOfRestraintOnTurn
+ON
+	OnTurn()
+ACTIONS
+	StartTimer("AMER_FragmentOfRestraint_AutoDie", 0.5, -1)
+	
+	
+	
+EVENT FragmentOfRestraintTurnEnded
+ON
+	OnTurnEnded()
+ACTIONS
+	StopTimer("AMER_FragmentOfRestraint_AutoDie")
+	
+	
+	/*
+EVENT FragmentOfRestraintDeathDamage
+VARS
+//============================//
+	SKILL:_Projectile = AMER_SCRIPTSKILL_EnemyMelchiorFragmentRestraintDamage
+	FLOAT:_HealAmount = 0.3
+//============================//
+	CHARACTER:_Char
+ON
+	OnIterateCharacter(_Char, "AMER_FragmentOfRestraint_DeathHeal")
+ACTIONS
+	IF "!c1"
+		CharacterIsDead(_Char)
+	THEN
+		IF "!c1"
+			IsEqual(_Char, %AMER_MelchiorFragment_Perfection)
+		THEN
+			ExplodeAt(_Char, _Projectile, 
+		ENDIF
+	ENDIF
+	*/
+	
+	
+EVENT FragmentOfRestraintDie
+//Damage those around me when I die.
+VARS
+	FLOAT:_SourceLevel
+	INT:_Level
+ON
+	OnDie(__Me, _, _, _)
+ACTIONS
+	IF "c1"
+		CharacterGetStat(_SourceLevel, __Me, Level)
+	THEN
+		Cast(_Level, _SourceLevel)
+	ELSE
+		Set(_Level, INT:25)
+	ENDIF
+	ExplodeAt(__Me, AMER_SCRIPTSKILL_EnemyMelchiorFragmentRestraintDamage, _Level, %AMER_MelchiorFragment_Perfection)
+	//PlayEffectAt(__Me, "FX_Skills_Water_GrenadeHealing_Impact_A")
+	//IterateCharactersNear(__Me, _HealRadius, "AMER_FragmentOfRestraint_DeathHeal")
+	
+	
+	
+	
+	
+EVENT FragmentOfRestraintCheckForCharacters
+//During its turn, the fragment automatically dies whenever
+//it comes within a set radius of a player or Melchior.
+VARS
+	CHARACTER:_Char
+ON
+	OnIterateCharacter(_Char, "AMER_FragmentOfRestraint_CheckForCharacters")
+ACTIONS
+	IF "c1|(!c2&c3)"
+		CharacterIsPlayer(_Char)
+		CharacterIsEnemy(__Me, _Char)
+		CharacterHasStatus(__Me, CHARMED)
+	THEN
+		IF "!c1"
+			CharacterIsDead(_Char)
+		THEN
+			CharacterDie(__Me, FrozenShatter)
+		ENDIF
+	ENDIF
+	
+	
+	
+EVENT FragmentOfRestraintAutoDie
+//Timer to check during my turn if Melchior
+//or a player is close to me.
+ON
+	OnTimer("AMER_FragmentOfRestraint_AutoDie")
+ACTIONS
+	IterateCharactersNear(__Me, 3.0, "AMER_FragmentOfRestraint_CheckForCharacters")
+	
+	
+	
+EVENT FragmentOfRestraintFindTarget
+VARS
+	CHARACTER:_Char
+ON
+	OnIterateCharacter(_Char, "AMER_FragmentOfRestraint_FindTarget")
+ACTIONS
+	IF "c1"
+		IsEqual(%AMER_FragmentOfRestraint_Target, null)
+	THEN
+		IF "c1"
+			CharacterIsEnemy(__Me, _Char)
+		THEN
+			IF "!c1"
+				CharacterIsDead(_Char)
+			THEN
+				Set(%AMER_FragmentOfRestraint_Target, _Char)
+			ENDIF
+		ENDIF
+	ENDIF
+	
+	
+	
+//===================BEHAVIOR====================//
+BEHAVIOUR
+REACTION FragmentOfRestraintMoveTowardMelchior, 10000
+USAGE COMBAT
+ACTIONS
+	Set(%AMER_FragmentOfRestraint_Target, null)
+	IterateCharactersInCombat(__Me, "AMER_FragmentOfRestraint_FindTarget", Lowest, Distance)
+	
+	IF "!c1"
+		IsEqual(%AMER_FragmentOfRestraint_Target, null)
+	THEN
+		CharacterMoveTo(%AMER_FragmentOfRestraint_Target, 1)
+		
+		Sleep(2.0)
+		CharacterEndTurn()
+	ELSE
+		CharacterEndTurn()
+	ENDIF
+	
+	
+	
+REACTION FragmentOfRestraintEngageCombat, 20000
+USAGE ALL
+VARS
+	FLOAT3:_Pos
+CHECK "c1"
+	IsEqual(%AMER_FragmentOfRestraint_Combat, INT:0)
+ACTIONS
+	GetPosition(__Me, _Pos)
+	TeleportTo(__Me, %AMER_MelchiorFragment_Perfection, 1)
+	Sleep(0.05)
+	TeleportTo(__Me, _Pos, 1)
+	Set(%AMER_FragmentOfRestraint_Combat, INT:1)
+	
+	
+//===============================================//
+//                                               //
+//   F R A G M E N T   O F   R E S T R A I N T   //
+//                                               //
+//===============================================//

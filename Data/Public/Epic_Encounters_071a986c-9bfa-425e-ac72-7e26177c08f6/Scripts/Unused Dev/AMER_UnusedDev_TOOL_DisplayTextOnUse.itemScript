@@ -1,0 +1,57 @@
+//===============================================//
+//                                               //
+//     D I S P L A Y   T E X T   O N   U S E     //
+//                                               //
+//     Written by Matteo "Ameranth" T. (2016)    //
+//===============================================//
+INIT
+ITEM:__Me
+EXTERN INT:%AMER_DisplayTextOnUse_OccuranceLimit = -1
+EXTERN FIXEDSTRING:%AMER_DisplayTextOnUse_Text = null
+EXTERN FLOAT:%AMER_DisplayTextOnUse_TextDuration = 3.5
+EXTERN INT:%AMER_DisplayTextOnUse_TextOverUser = 0
+EXTERN INT:%AMER_DisplayTextOnUse_TextOverMe = 1
+EXTERN ITEM:%AMER_DisplayTextOnUse_TextOverItem = null
+	
+	
+EVENTS
+EVENT DisplayTextOnUse
+VARS
+	CHARACTER:_Char
+ON
+	OnUseItem(_Char, __Me)
+ACTIONS
+	IF "!c1"
+		IsEqual(%AMER_DisplayTextOnUse_OccuranceLimit, INT:0)
+	THEN
+		IF "c1"
+			IsGreaterThen(%AMER_DisplayTextOnUse_OccuranceLimit, INT:0)
+		THEN
+			Subtract(%AMER_DisplayTextOnUse_OccuranceLimit, INT:1)
+		ENDIF
+		
+		IF "!c1"
+			IsEqual(%AMER_DisplayTextOnUse_TextOverItem, null)
+		THEN
+			DisplayText(%AMER_DisplayTextOnUse_TextOverItem, %AMER_DisplayTextOnUse_Text, %AMER_DisplayTextOnUse_TextDuration)
+		ENDIF
+		
+		IF "c1"
+			IsEqual(%AMER_DisplayTextOnUse_TextOverMe, INT:1)
+		THEN
+			DisplayText(__Me, %AMER_DisplayTextOnUse_Text, %AMER_DisplayTextOnUse_TextDuration)
+		ENDIF
+		
+		IF "c1"
+			IsEqual(%AMER_DisplayTextOnUse_TextOverUser, INT:1)
+		THEN
+			DisplayText(_Char, %AMER_DisplayTextOnUse_Text, %AMER_DisplayTextOnUse_TextDuration)
+		ENDIF
+	ELSE
+		CallFunction("AMER_RevealItemOnUse_Reveal")
+	ENDIF
+//===============================================//
+//                                               //
+//     D I S P L A Y   T E X T   O N   U S E     //
+//                                               //
+//===============================================//

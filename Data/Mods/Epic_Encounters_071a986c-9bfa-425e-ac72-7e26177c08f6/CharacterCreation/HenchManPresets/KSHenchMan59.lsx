@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<save>
+    <header version="2" time="1427201041" />
+    <version major="1" minor="3" revision="1" build="3" />
+    <region id="CharacterCreationClass">
+        <node id="root">
+            <attribute id="Armour" value="" type="22" />
+            <attribute id="Boots" value="" type="22" />
+            <attribute id="ClassDescription" value="No pointy hat or broom, but she&apos;s a witch nonetheless." handle="h3e0b9d16g6549g47dfgb781g160cce227818" type="28" />
+            <attribute id="ClassLongDescription" value="Maya has been wandering the world alone ever since she lost a third companion to the clutches of death. Even with all her fascination toward the dark arts, the dead can’t be brought back to life. Well, not in the true meaning of the word anyway.  Determined not to let any more such tragedies happen, she offers her skills for your use. She’s made it this far after all, so she can’t be without skill. Why not trust her? " handle="h7c534136g9cbag443cg91eagd6e48880895d" type="28" />
+            <attribute id="ClassName" value="Witch" handle="h2415c3c6g6c2bg45c1g8640gb36e5ab74e73" type="28" />
+            <attribute id="ClassType" value="Witch" type="22" />
+            <attribute id="ExtraEquipmentSet" value="" type="22" />
+            <attribute id="Gloves" value="" type="22" />
+            <attribute id="Leggings" value="" type="22" />
+            <attribute id="SkillSet" value="" type="22" />
+            <attribute id="Voice" value="0" type="5" />
+            <children>
+                <node id="AbilityChanges">
+                    <children>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="Sourcery" type="23" />
+                            <attribute id="AmountIncreased" value="3" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="Willpower" type="23" />
+                            <attribute id="AmountIncreased" value="2" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="WaterSpecialist" type="23" />
+                            <attribute id="AmountIncreased" value="3" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="EarthSpecialist" type="23" />
+                            <attribute id="AmountIncreased" value="1" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="Loremaster" type="23" />
+                            <attribute id="AmountIncreased" value="2" type="4" />
+                        </node>
+                    </children>
+                </node>
+                <node id="AttributeChanges">
+                    <children>
+                        <node id="AttributeChange">
+                            <attribute id="AmountIncreased" value="4" type="4" />
+                            <attribute id="Attribute" value="INT" type="23" />
+                        </node>
+                        <node id="AttributeChange">
+                            <attribute id="AmountIncreased" value="2" type="4" />
+                            <attribute id="Attribute" value="CON" type="23" />
+                        </node>
+                        <node id="AttributeChange">
+                            <attribute id="AmountIncreased" value="3" type="4" />
+                            <attribute id="Attribute" value="SPD" type="23" />
+                        </node>
+                        <node id="AttributeChange">
+                            <attribute id="AmountIncreased" value="1" type="4" />
+                            <attribute id="Attribute" value="PER" type="23" />
+                        </node>
+                    </children>
+                </node>
+                <node id="HenchManData">
+                    <attribute id="HairColor" value="14" type="5" />
+                    <attribute id="HairType" value="0" type="5" />
+                    <attribute id="HeadType" value="5" type="5" />
+                    <attribute id="ID" value="b14bbbac-a319-4bf6-b2f7-b145bb1b9572" type="22" />
+                    <attribute id="Icon" value="7" type="5" />
+                    <attribute id="IsMale" value="0" type="19" />
+                    <attribute id="Level" value="10" type="4" />
+                    <attribute id="Name" value="Maya Deimon" type="30" />
+                    <attribute id="Race" value="0" type="5" />
+                    <attribute id="SkinColor" value="0" type="5" />
+                    <children>
+                        <node id="Skills">
+                            <attribute id="Object" value="Target_ImmuneToPoisoning" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="Target_TargetedCurse" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="Target_DrainWillpower" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="Shout_WaterOfLife" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="Target_ImmuneToFreeze" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="Target_TargetedOilSurface" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="Target_BanishSummon" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="Rain_Water" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="Target_Fortify" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="Projectile_IceShardStart" type="22" />
+                        </node>
+                    </children>
+                </node>
+                <node id="TalentsAdded">
+                    <children>
+                        <node id="TalentAdded">
+                            <attribute id="Talent" value="FaroutDude" type="23" />
+                        </node>
+                        <node id="TalentAdded">
+                            <attribute id="Talent" value="Leech" type="23" />
+                        </node>
+                        <node id="TalentAdded">
+                            <attribute id="Talent" value="ElementalAffinity" type="23" />
+                        </node>
+                        <node id="TalentAdded">
+                            <attribute id="Talent" value="Stench" type="23" />
+                        </node>
+                    </children>
+                </node>
+            </children>
+        </node>
+    </region>
+</save>

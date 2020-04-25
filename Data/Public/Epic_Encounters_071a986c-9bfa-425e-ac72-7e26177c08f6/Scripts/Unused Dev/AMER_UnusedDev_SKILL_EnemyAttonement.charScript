@@ -1,0 +1,280 @@
+#TEMPLATE "_SKILL_Base" : AMER_SKILL_Attonement
+	
+INIT
+CHARACTER:__Me
+FLOAT:%SkillTargetScore_AMER_SKILL_Attonement=-1000000
+// [GLOBAL_VARS]
+EXTERN FLOAT:%AMER_SKILL_Attonement_ResistanceLimit = 90
+FLOAT:%AMER_SKILL_Attonement_SplashScore
+// [~GLOBAL_VARS]
+	
+EVENTS
+	
+// [EVENTS]
+// [~EVENTS]
+	
+// Calculate the priority of the skill
+EVENT CalculateScore_AMER_SKILL_Attonement
+VARS
+	// [CALC_VARS]
+	FLOAT:_SkillRangeMin
+	FLOAT:_SkillRangeMax
+	FLOAT3:_TargetPos
+	// [~CALC_VARS]
+ON
+	OnFunction("CalculateScore_AMER_SKILL_Attonement")
+ACTIONS
+	Set(%SkillTargetScore_AMER_SKILL_Attonement, -1000000)
+
+	// [CALC_ACTIONS_PRE]
+	// [~CALC_ACTIONS_PRE]
+	// [CALC_ACTIONS]
+	IterateCharactersInCombat(__Me, "CalculateTarget_AMER_SKILL_Attonement", Lowest, Vitality)
+	IF "!c1"
+		IsEqual(%SkillTargetChar_AMER_SKILL_Attonement, null)
+	THEN
+		Add(%ActionScore_AMER_SKILL_Attonement, %SkillTargetScore_AMER_SKILL_Attonement)
+	ENDIF
+	// [~CALC_ACTIONS]
+	
+	
+	
+EVENT SplashScore_AMER_SKILL_Attonement
+VARS
+	CHARACTER:_SplashChar
+	FLOAT:_Resistance
+ON
+	OnIterateCharacter(_SplashChar, "SplashScore_AMER_SKILL_Attonement")
+ACTIONS
+	IF "c1"
+		CharacterIsEnemy(__Me, _SplashChar)
+	THEN
+		IF "!c1"
+			CharacterIsDead(_SplashChar)
+		THEN
+			IF "c1&!c2"
+				CharacterGetStat(_Resistance, _SplashChar, WaterResistance)
+				IsGreaterThen(_Resistance, %AMER_SKILL_Attonement_ResistanceLimit)
+			THEN
+				//Summons are worth less, Charmed allies impact the splash score negatively.
+				IF "c1"
+					CharacterIsSummon(_SplashChar)
+				THEN
+					IF "!c1"
+						CharacterHasStatus(_SplashChar CHARMED)
+					THEN
+						Add(%AMER_SKILL_Attonement_SplashScore, 1.0)
+					ENDIF
+				ELSE
+					IF "!c1"
+						CharacterHasStatus(_SplashChar CHARMED)
+					THEN
+						Add(%AMER_SKILL_Attonement_SplashScore, 5.0)
+					ELSE
+						Add(%AMER_SKILL_Attonement_SplashScore, -1.0)
+					ENDIF
+				ENDIF
+			ENDIF
+		ENDIF
+	ENDIF
+	
+	
+	
+	
+// Calculate the character we should target
+EVENT CalculateTarget_AMER_SKILL_Attonement
+VARS	
+	CHARACTER:_Char
+	// [CALC_TARGET_VARS]
+	INT:_ClassScore_AMER_SKILL_Attonement
+	FLOAT:_StatResistance
+	FLOAT:_Score
+	FLOAT:_SkillRangeMin
+	FLOAT:_SkillRangeMax
+	FLOAT:_DistanceToChar
+	FLOAT:_DistanceScore
+	FLOAT:_SaveScore
+	FLOAT:_Vitality
+	INT:_SaveAmount
+	FLOAT:_VitalityPercentage = 0.75
+	FLOAT:_SplashRadius = 3
+	// [~CALC_TARGET_VARS]
+ON
+	OnIterateCharacter(_Char, "CalculateTarget_AMER_SKILL_Attonement")	
+ACTIONS
+	// [CALC_CHAR_TARGET_ACTIONS_PRE]
+	Set(_Score, 0.0)
+	// [~CALC_CHAR_TARGET_ACTIONS_PRE]
+	// [CALC_CHAR_TARGET_ACTIONS]
+	IF "!c1"
+		CharacterIsDead(_Char)
+	THEN
+		IF "c1"
+			CharacterIsAlly(__Me, _Char)
+		THEN
+			IF "c1&((c2&!c3)|c4)"
+				CharacterGetStat(_Vitality, _Char, Vitality)
+				IsLessThen(_Vitality, _VitalityPercentage)
+				CharacterHasStatus(_Char, UNHEALABLE)
+				CharacterHasStatus(_Char, FEAR)
+			THEN
+				IF "!c1&!c2"
+					CharacterHasTalent(_Char, Zombie)
+					CharacterHasStatus(_Char, DECAYING_TOUCH)
+				THEN
+					IF "!c1"
+						CharacterHasStatus(_Char CHARMED)
+					THEN
+						IF "!c1"
+							CharacterHasStatus(_Char INVULNERABLE)
+						THEN
+							//Splash score calculation
+							Set(%AMER_SKILL_Attonement_SplashScore, 0.0)
+							IterateCharactersNear(_Char, _SplashRadius, "SplashScore_AMER_SKILL_Attonement")
+							Add(_Score, %AMER_SKILL_Attonement_SplashScore)
+							
+							//Triage score calculation
+							Multiply(_Vitality, -1.0)
+							Add(_Vitality, 1.0)
+							Multiply(_Vitality, 5.0)
+							Add(_Score, _Vitality)
+									
+							//Summons are worth less.
+							IF "c1"
+								CharacterIsSummon(_Char)
+							THEN
+								Add(_Score, -5.0)
+							ENDIF
+							
+							//Fear removal bonus
+							IF "c1"
+								CharacterHasStatus(_Char, FEAR)
+							THEN
+								Add(_Score, 5.0)
+							ENDIF
+							
+							// Range score calculation
+							IF "c1&c2"
+								CharacterGetSkillRange(_SkillRangeMin, _SkillRangeMax, __Me, AMER_SKILL_Attonement)
+								GetDistance(_DistanceToChar, __Me, _Char)
+							THEN
+								Set(_DistanceScore, _DistanceToChar)
+								IF "c1"
+									IsGreaterThen(_DistanceScore, _SkillRangeMax)
+								THEN
+									Subtract(_DistanceScore, _SkillRangeMax)
+									Multiply(_DistanceScore, -1.0)
+								ELIF "c1"
+									IsLessThen(_DistanceScore, _SkillRangeMin)
+								THEN
+									Subtract(_DistanceScore, _SkillRangeMin)
+									Multiply(_DistanceScore, 1.0)
+								ELSE 
+									Set(_DistanceScore, 0.0)
+								ENDIF
+								Add(_Score, _DistanceScore)
+							ENDIF
+							
+							// Can see score calculation
+							IF "!c1"
+								CharacterCanSee(__Me, _Char)
+							THEN
+								Add(_Score, -10.0)
+							ENDIF
+							
+							IF "c1"
+								IsGreaterThen(_Score, %SkillTargetScore_AMER_SKILL_Attonement)
+							THEN
+								Set(%SkillTargetChar_AMER_SKILL_Attonement, _Char)
+								Set(%SkillTargetScore_AMER_SKILL_Attonement, _Score)
+							ENDIF
+						ENDIF
+					ENDIF
+				ENDIF
+			ENDIF
+		ELIF "c1|c2"
+			CharacterHasTalent(_Char, Zombie)
+			CharacterHasStatus(_Char, DECAYING_TOUCH)
+		THEN
+			IF "!c1"
+				CharacterHasStatus(_Char, FEAR)
+			THEN
+				IF "!c1"
+					CharacterHasStatus(_Char, CHARMED)
+				THEN
+					IF "!c1"
+						CharacterHasStatus(_Char INVULNERABLE)
+					THEN
+						//Damaging heal bonus
+						Add(_Score, 15.0)
+						
+						//Kill range calculation
+						IF "c1"
+							CharacterGetStat(_Vitality,  _Char, Vitality)
+						THEN
+							//Favor low vitality targets.
+							Multiply(_Vitality, -2.0)
+							Add(_Score, _Vitality)
+						ENDIF
+											
+						//Summons are worth less.
+						IF "c1"
+							CharacterIsSummon(_Char)
+						THEN
+							Add(_Score, -15.0)
+						ENDIF
+						
+						//Splash score calculation
+						Set(%AMER_SKILL_Attonement_SplashScore, 0.0)
+						IterateCharactersNear(_Char, _SplashRadius, "SplashScore_AMER_SKILL_Attonement")
+						Add(_Score, %AMER_SKILL_Attonement_SplashScore)
+								
+						// Range score calculation
+						IF "c1&c2"
+							CharacterGetSkillRange(_SkillRangeMin, _SkillRangeMax, __Me, AMER_SKILL_Attonement)
+							GetDistance(_DistanceToChar, __Me, _Char)
+						THEN
+							Set(_DistanceScore, _DistanceToChar)
+							IF "c1"
+								IsGreaterThen(_DistanceScore, _SkillRangeMax)
+							THEN
+								Subtract(_DistanceScore, _SkillRangeMax)
+								Multiply(_DistanceScore, -1.0)
+							ELIF "c1"
+								IsLessThen(_DistanceScore, _SkillRangeMin)
+							THEN
+								Subtract(_DistanceScore, _SkillRangeMin)
+								Multiply(_DistanceScore, 1.0)
+							ELSE 
+								Set(_DistanceScore, 0.0)
+							ENDIF
+							Add(_Score, _DistanceScore)
+						ENDIF
+								
+						// Can see score calculation
+						IF "!c1"
+							CharacterCanSee(__Me, _Char)
+						THEN
+							Add(_Score, -10.0)
+						ENDIF
+								
+						IF "c1"
+							IsGreaterThen(_Score, %SkillTargetScore_AMER_SKILL_Attonement)
+						THEN
+							Set(%SkillTargetChar_AMER_SKILL_Attonement, _Char)
+							Set(%SkillTargetScore_AMER_SKILL_Attonement, _Score)
+						ENDIF
+					ENDIF
+				ENDIF
+			ENDIF
+		ENDIF
+	ENDIF
+	// [~CALC_CHAR_TARGET_ACTIONS]
+	
+	
+	
+	
+	
+	
+	
+	

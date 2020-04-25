@@ -1,0 +1,1298 @@
+//===============================================//
+//                                               //
+//     C H A R A C T E R   M E C H A N I C S     //
+//                                               //
+//     Written by Matteo "Ameranth" T. (2017)    //
+//===============================================//
+INIT
+CHARACTER:__Me
+	
+INT:%AMER_Chain = 0
+INT:%AMER_ChainMax = 5
+INT:%AMER_ChainThisTurn = 0
+INT:%AMER_ChainPerTurn = 2
+INT:%AMER_BlockChain = 0
+	
+//If set to 1 then AMER_SetChain will run for %AMER_CharSource
+//instead of for __Me
+INT:%AMER_SetChainForSource = 0
+	
+//Flag which reverses the Hyperacute detection algorithm to treat
+//__Me as a sneaker looking for spotters rather than a spotter
+//looking for sneakers. This is used to simulate out-of-combat
+//hyperacute detection against the player.
+INT:%AMER_ReverseDetect = 0
+	
+//Flag which determines if a character will be afflicted with
+//Resurrection Sickness when they are resurrected. Zero is
+//Affected by Resurrection Sickness, other values are not.
+//If set to 2, Resurrection Sickness will only be ignored once,
+//it will automatically be set back to zero after this.
+INT:%AMER_IgnoreResSickness = 0
+	
+//Disable history is used to remember which hard-disables were
+//present on each turn up to 4 turns ago. This is most notably
+//necessary to prevent creatures from suffering from the same
+//disable for too many turns in a range of 6 turns. A pseudo-
+//"bitwise" assignment system is used for these values to track
+//on which turns these statuses were present.
+//10000  = Last turn
+//1000   = two turns ago
+//100    = three turns ago
+//10     = four turns ago
+//1    	 = five turns ago
+INT:%AMER_FrozenHistory = 0
+INT:%AMER_StunnedHistory = 0
+INT:%AMER_PetrifiedHistory = 0
+INT:%AMER_KnockedDownHistory = 0
+INT:%AMER_FearHistory = 0
+INT:%AMER_BlindHistory = 0
+	
+//Used to prevent two instances of backstab bonus damage per
+//attack when dual-wielding. This is necessary to do because
+//the bonus damage is weapon damage based, which considers
+//the combined damage of both weapons when dual-wielding, and
+//there is no way to detect for dual-wielding.
+INT:%AMER_BackstabChoke = 0
+	
+//Used to pre-load which backstab bonus will be used on a backstab.
+//This allows support for backstabbing spells that have damage
+//multipliers other than 100%.
+SKILL:%AMER_BackstabDamageProjectile
+	
+//Used to track if this character has been set invisible by
+//a blind player's simulated blindness.
+INT:%AMER_InvisibleFromBlind = 0
+	
+//Used to pass what target was struck by a critical/backstab.
+CHARACTER:%AMER_CritTarget
+	
+//Flag for if a creature has already been scaled or not.
+//Only used for scaling that is applied via permanent
+//status influences.
+INT:%AMER_HasScaled = 0
+	
+//Used to pass the magnitude of creature scaling.
+INT:%AMER_ScalingIndex
+INT:%AMER_ScalingBreakpoint
+FLOAT:%AMER_ScalingMyLevel
+CHARACTERSTAT:%AMER_ScalingWhichResist
+STRING:%AMER_ScalingResistName
+	
+EVENTS
+//===========================================================//
+//                Scale NonGlobal Character                  //
+//         (Now scales globals and non-globals alike.)       //
+//===========================================================//
+EVENT ScaleNonGlobalCharacter
+VARS
+//========================//
+	//Breakpoints are 0, 6, 8, 10, 12, 14, 16, 18, 20 (v1.1.9)
+//========================//
+	CHARACTER:_Player1
+	CHARACTER:_Player2
+	FLOAT:_Player1Level
+	FLOAT:_Player2Level
+	FLOAT:_HighestLevel
+	FLOAT:_LevelDifference
+	INT:_Index
+	POTION:_WhichEffect
+ON
+	OnTimer("AMER_ScaleNonGlobal")
+ACTIONS
+	IF "!c1&!c2"
+		//scaling doesn't work on targets like this, scale them
+		//when they lose invulnerability instead.
+		CharacterHasStatus(__Me, VOID_AURA)
+		CharacterHasStatus(__Me, INVULNERABLE)
+	THEN
+		IF "c1&c2&c3&c4"
+			GetPlayerByIndex(_Player1, 0)
+			GetPlayerByIndex(_Player2, 1)
+			CharacterGetStat(_Player1Level, _Player1, Level)
+			CharacterGetStat(_Player2Level, _Player2, Level)
+		THEN
+			//Consider both player 1 and 2 for scaling, use whichever
+			//level is highest.
+			IF "c1|c2"
+				IsLessThen(%AMER_ScalingMyLevel, _Player1Level)
+				IsLessThen(%AMER_ScalingMyLevel, _Player2Level)
+			THEN
+				Set(_LevelDifference, %AMER_ScalingMyLevel)
+				IF "c1"
+					IsGreaterThen(_Player1Level, _Player2Level)
+				THEN
+					Set(_HighestLevel, _Player1Level)
+					Subtract(_Player1Level, _LevelDifference)
+					Set(_LevelDifference, _Player1Level)
+				ELSE
+					Set(_HighestLevel, _Player2Level)
+					Subtract(_Player2Level, _LevelDifference)
+					Set(_LevelDifference, _Player2Level)
+				ENDIF
+				
+				Cast(_Index, _LevelDifference)
+				Subtract(_Index, INT:1)	//Index starts at zero.
+				
+		
+				//You can use the value below to offset the magnitude of the scaling
+				//system. The value set will be added to the "level difference"
+				//between the party and enemies. Therefore, positive values will
+				//make for more powerful opponents, while negative values will
+				//require enemies to be more severely underleveled before scaling
+				//occurs.
+				Add(_Index, INT:0)
+				IF "c1"
+					//If playing on Explorer mode, scaling is halved.
+					IsCasual()
+				THEN
+					Divide(_Index, INT:2)
+				ENDIF
+		
+				IF "!c1"
+					//Don't go out of bounds
+					IsLessThen(_Index, INT:0)
+				THEN
+					IF "c1"
+						//Don't go out of bounds
+						IsGreaterThen(_Index, 7)
+					THEN
+						Set(_Index, 7)
+					ENDIF
+					
+					IF "(c1&!c2)|(c3&c4)|(!c5&!c6)"
+						CharacterIsEnemy(__Me, _Player1)
+						CharacterHasStatus(__Me, CHARMED)
+						CharacterIsAlly(__Me, _Player1)
+						CharacterHasStatus(__Me, CHARMED)
+						//Handle neutral case:
+						CharacterIsEnemy(__Me, _Player1)
+						CharacterIsAlly(__Me, _Player1)
+					THEN
+						
+						//Calculate the party's scaling bracket.
+						//Breakpoints are 0, 6, 8, 10, 12, 14, 16, 18, 20 (v1.1.9)
+						IF "!c1"
+							IsLessThen(_HighestLevel, 20)
+						THEN
+							Set(%AMER_ScalingBreakpoint, INT:8)
+						ELIF "!c1"
+							IsLessThen(_HighestLevel, 18)
+						THEN
+							Set(%AMER_ScalingBreakpoint, INT:7)
+						ELIF "!c1"
+							IsLessThen(_HighestLevel, 16)
+						THEN
+							Set(%AMER_ScalingBreakpoint, INT:6)
+						ELIF "!c1"
+							IsLessThen(_HighestLevel, 14)
+						THEN
+							Set(%AMER_ScalingBreakpoint, INT:5)
+						ELIF "!c1"
+							IsLessThen(_HighestLevel, 12)
+						THEN
+							Set(%AMER_ScalingBreakpoint, INT:4)
+						ELIF "!c1"
+							IsLessThen(_HighestLevel, 10)
+						THEN
+							Set(%AMER_ScalingBreakpoint, INT:3)
+						ELIF "!c1"
+							IsLessThen(_HighestLevel, 8)
+						THEN
+							Set(%AMER_ScalingBreakpoint, INT:2)
+						ELIF "!c1"
+							IsLessThen(_HighestLevel, 6)
+						THEN
+							Set(%AMER_ScalingBreakpoint, INT:1)
+						ELSE
+							Set(%AMER_ScalingBreakpoint, INT:0)
+						ENDIF
+						
+						Set(%AMER_ScalingIndex, _Index)
+						IF "c1"
+							IsEqual(%AMER_HasScaled, INT:0)
+						THEN
+							Set(%AMER_HasScaled, INT:1)
+							CallFunction("AMER_ScaleResistancesControl")
+							CallFunction("AMER_ScaleSavingThrows")
+							
+							//Scale init and AP for nonglobals.
+							IF "!c1"
+								CharacterIsStoryGlobal(__Me)
+							THEN
+								CallFunction("AMER_ScaleInitAndAP")
+							ENDIF
+						ENDIF
+						
+						//Generic damage/statistic scaling:
+						IF "c1&c2"
+							IsGreaterThen(%AMER_ScalingMyLevel, 22.0)
+							CharacterIsBoss(__Me)
+						THEN
+							GetElement(_WhichEffect, _Index, AMER_EndgameBossScaling1, AMER_EndgameBossScaling2, AMER_EndgameBossScaling3, AMER_EndgameBossScaling4, AMER_EndgameBossScaling5, AMER_EndgameBossScaling6, AMER_EndgameBossScaling7, AMER_EndgameBossScaling8)
+						ELIF "c1"
+							CharacterIsStoryGlobal(__Me)
+						THEN
+							IF "c1"
+								IsHardcore()
+							THEN
+								GetElement(_WhichEffect, _Index, AMER_GlobalTacticianScaling1, AMER_GlobalTacticianScaling2, AMER_GlobalTacticianScaling3, AMER_GlobalTacticianScaling4, AMER_GlobalTacticianScaling5, AMER_GlobalTacticianScaling6, AMER_GlobalTacticianScaling7, AMER_GlobalTacticianScaling8)
+							ELSE
+								GetElement(_WhichEffect, _Index, AMER_GlobalScaling1, AMER_GlobalScaling2, AMER_GlobalScaling3, AMER_GlobalScaling4, AMER_GlobalScaling5, AMER_GlobalScaling6, AMER_GlobalScaling7, AMER_GlobalScaling8)
+							ENDIF
+						ELSE
+							GetElement(_WhichEffect, _Index, AMER_Scaling1, AMER_Scaling2, AMER_Scaling3, AMER_Scaling4, AMER_Scaling5, AMER_Scaling6, AMER_Scaling7, AMER_Scaling8)
+						ENDIF
+						CharacterConsume(__Me, _WhichEffect)
+					ELIF "!c1"
+						//Scale NPCs with only CON, so quest-sensitive
+						//NPCs don't die unreasonably easily.
+						CharacterIsSummon(__Me)
+					THEN
+						GetElement(_WhichEffect, _Index, AMER_ScalingNPCCon1, AMER_ScalingNPCCon2, AMER_ScalingNPCCon3, AMER_ScalingNPCCon4, AMER_ScalingNPCCon5, AMER_ScalingNPCCon6, AMER_ScalingNPCCon7, AMER_ScalingNPCCon8)
+						CharacterConsume(__Me, _WhichEffect)
+					ENDIF
+				ENDIF
+			ENDIF
+		ENDIF
+	ENDIF
+	
+EVENT ScaleSavingThrows
+VARS
+	INT:_SaveToAdd
+	INT:_SaveLimit
+	INT:_SaveMinimum
+	INT:_GritLimit
+	INT:_GToWPDisparity
+	INT:_WillpowerLimit
+	INT:_SaveFromScaling
+	INT:_Grit
+	INT:_Willpower
+	FLOAT:_MyLevel
+	POTION:_WhichEffect
+	
+ON
+	OnFunction("AMER_ScaleSavingThrows")
+ACTIONS
+	IF "c1"
+		CharacterGetStat(_MyLevel, __Me, Level)
+	THEN
+		//How much BodyBuilding/Willpower the level difference
+		//between __Me and the party gives __Me. Creatures
+		//of levels 20 and above are tuned for endgame, do not
+		//scale their saves very much.
+		IF "c1"
+			IsLessThen(_MyLevel, 20.0)
+		THEN
+			GetElement(_SaveFromScaling, %AMER_ScalingIndex, INT:1, INT:2, INT:3, INT:3, INT:4, INT:4, INT:5, INT:5)
+		ELSE
+			GetElement(_SaveFromScaling, %AMER_ScalingIndex, INT:0, INT:0, INT:1, INT:1, INT:1, INT:2, INT:2, INT:2)
+		ENDIF
+		
+		IF "c1"
+			IsGreaterThen(_SaveFromScaling, INT:0)
+		THEN
+			IF "!c1"
+				CharacterGetAbility(_Grit, __Me, BodyBuilding)
+			THEN
+				Set(_Grit, INT:0)
+			ENDIF
+			IF "!c1"
+				CharacterGetAbility(_Willpower, __Me, Willpower)
+			THEN
+				Set(_Willpower, INT:0)
+			ENDIF
+			
+			//Detect if the creature's base stats favors one save-
+			//type. If it does, respect this disparity.
+			Set(_GritLimit, INT:0)
+			Set(_WillpowerLimit, INT:0)
+			IF "!c1"
+				IsEqual(_Grit, _Willpower)
+			THEN
+				Set(_GToWPDisparity, _Grit)
+				Subtract(_GToWPDisparity, _Willpower)
+				
+				//If less than zero, then Willpower is higher than Grit.
+				IF "c1"
+					IsLessThen(_GToWPDisparity, INT:0)
+				THEN
+					Set(_GritLimit, INT:-1)
+					Set(_WillpowerLimit, INT:1)
+				ELIF "c1"
+					IsGreaterThen(_GToWPDisparity, INT:0)
+				THEN
+					Set(_GritLimit, INT:1)
+					Set(_WillpowerLimit, INT:-1)
+				ENDIF
+			ENDIF
+			
+			//The maximum Grit/Willpower as dictated by the party's level bracket.
+			//Breakpoints are 0, 6, 8, 10, 12, 14, 16, 18, 20 (v1.1.9)
+			GetElement(_SaveLimit, %AMER_ScalingBreakpoint, INT:1, INT:2, INT:2, INT:3, INT:3, INT:4, INT:4, INT:5, INT:5)
+			
+			//The minimum Grit/Willpower as dictated by the party's level bracket.
+			//This determines whether a Grit/Willpower disparity can lower the
+			//save limit of Grit/Willpower or not.
+			GetElement(_SaveMinimum, %AMER_ScalingBreakpoint, INT:0, INT:0, INT:0, INT:0, INT:1, INT:1, INT:2, INT:2, INT:3)
+			
+			//Don't add more than our current level threshold allows.
+			IF "c1"
+				IsGreaterThen(_SaveFromScaling, _SaveLimit)
+			THEN
+				Set(_SaveFromScaling, _SaveLimit)
+			ENDIF
+				
+			//Calculate the individual Grit/Willpower limit as is influenced by
+			//the Grit/Willpower disparity and the save minimum.
+			Add(_GritLimit, _SaveLimit)
+			Add(_WillpowerLimit, _SaveLimit)
+			
+			IF "c1"
+				IsLessThen(_GritLimit, _SaveMinimum)
+			THEN
+				Set(_GritLimit, _SaveMinimum)
+			ENDIF
+			IF "c1"
+				IsLessThen(_WillpowerLimit, _SaveMinimum)
+			THEN
+				Set(_WillpowerLimit, _SaveMinimum)
+			ENDIF
+			
+			//Scale BodyBuilding.
+			IF "c1"
+				IsLessThen(_Grit, _GritLimit)
+			THEN
+				//Find how much needs to be added to reach _GritLimit
+				//but don't add more than _SaveFromScaling.
+				Set(_SaveToAdd, _GritLimit)
+				Subtract(_SaveToAdd, _Grit)
+				IF "c1"
+					IsGreaterThen(_SaveToAdd, _SaveFromScaling)
+				THEN
+					Set(_SaveToAdd, _SaveFromScaling)
+				ENDIF
+				
+				//Don't go over supported maximum.
+				IF "c1"
+					IsGreaterThen(_SaveToAdd, 5)
+				THEN
+					Set(_SaveToAdd, 5)
+				ENDIF
+					
+				Subtract(_SaveToAdd, INT:1)	//Index starts at zero.
+				GetElement(_WhichEffect, _SaveToAdd, AMER_BodyBuildingScaling1, AMER_BodyBuildingScaling2, AMER_BodyBuildingScaling3, AMER_BodyBuildingScaling4, AMER_BodyBuildingScaling5)
+				CharacterConsume(__Me, _WhichEffect)
+			ENDIF
+			
+			//Scale Willpower.
+			IF "c1"
+				IsLessThen(_Willpower, _WillpowerLimit)
+			THEN
+				//Find how much needs to be added to reach _WillpowerLimit
+				//but don't add more than _SaveFromScaling.
+				Set(_SaveToAdd, _WillpowerLimit)
+				Subtract(_SaveToAdd, _Willpower)
+				IF "c1"
+					IsGreaterThen(_SaveToAdd, _SaveFromScaling)
+				THEN
+					Set(_SaveToAdd, _SaveFromScaling)
+				ENDIF
+				
+				//Don't go over supported maximum.
+				IF "c1"
+					IsGreaterThen(_SaveToAdd, 5)
+				THEN
+					Set(_SaveToAdd, 5)
+				ENDIF
+					
+				Subtract(_SaveToAdd, INT:1)	//Index starts at zero.
+				GetElement(_WhichEffect, _SaveToAdd, AMER_WillpowerScaling1, AMER_WillpowerScaling2, AMER_WillpowerScaling3, AMER_WillpowerScaling4, AMER_WillpowerScaling5)
+				CharacterConsume(__Me, _WhichEffect)
+			ENDIF
+		ENDIF
+	ENDIF
+	
+EVENT ScaleResistancesControl
+VARS
+	INT:_Count
+ON
+	OnFunction("AMER_ScaleResistancesControl")
+ACTIONS
+	Set(_Count, INT:0)
+	WHILE "c1"
+		IsLessThen(_Count, 9)
+	DO
+		GetElement(%AMER_ScalingWhichResist, _Count, FireResistance, WaterResistance, AirResistance, EarthResistance, PoisonResistance, ShadowResistance, PiercingResistance, SlashingResistance, CrushingResistance)
+		GetElement(%AMER_ScalingResistName, _Count, "Fire", "Water", "Air", "Earth", "Poison", "Shadow", "Piercing", "Slashing", "Crushing")
+		CallFunction("AMER_ScaleResistances")
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+EVENT ScaleResistances
+VARS
+	STRING:_Str
+	FIXEDSTRING:_WhichEffect
+	INT:_Value
+	INT:_Index
+	INT:_Breakpoint
+	INT:_Count
+	INT:_ResToAdd
+	INT:_ResAfterScaling
+	INT:_ResLimit
+	FLOAT:_ResBeforeScaling
+ON
+	OnFunction("AMER_ScaleResistances")
+ACTIONS
+	IF "c1"
+		CharacterGetStat(_ResBeforeScaling, __Me, %AMER_ScalingWhichResist)
+	THEN
+		//Breakpoints are 0, 6, 8, 10, 12, 14, 16, 18, 20 (v1.1.9)
+		GetElement(_ResLimit, %AMER_ScalingBreakpoint, 15, 20, 26, 34, 42, 50, 60, 70, 80)
+		GetElement(_ResToAdd, %AMER_ScalingIndex, 8, 16, 24, 34, 44, 56, 68, 85)
+		
+		//Physical Resistances are limited more severely, they are 2/3 of ele.
+		IF "c1|c2|c3"
+			IsEqual(%AMER_ScalingWhichResist, PiercingResistance)
+			IsEqual(%AMER_ScalingWhichResist, SlashingResistance)
+			IsEqual(%AMER_ScalingWhichResist, CrushingResistance)
+		THEN
+			Divide(_ResLimit, INT:3)
+			Divide(_ResToAdd, INT:3)
+			Multiply(_ResLimit, INT:2)
+			Multiply(_ResToAdd, INT:2)
+		ENDIF
+		
+		IF "c1"
+			IsLessThen(_ResBeforeScaling, _ResLimit)
+		THEN
+			//Don't add more resistance than is allowed.
+			Subtract(_ResLimit, _ResBeforeScaling)
+			IF "c1"
+				IsGreaterThen(_ResToAdd, _ResLimit)
+			THEN
+				Set(_ResToAdd, _ResLimit)
+			ENDIF
+			
+			Set(_Count, INT:0)
+			WHILE "c1&c2"
+				IsLessThen(_Count, 7)
+				IsGreaterThen(_ResToAdd, INT:0)
+			DO
+				GetElement(_Value, _Count, INT:64, INT:32, INT:16, INT:8, INT:4, INT:2, INT:1)
+				IF "!c1"
+					IsGreaterThen(_Value, _ResToAdd)
+				THEN
+					Print(_Str, "AMER_Scaling[1]Res[2]", %AMER_ScalingResistName, _Value)
+					Cast(_WhichEffect, _Str)
+					IF "!c1"
+						CharacterHasStatus(__Me, CONSUME, _WhichEffect)
+					THEN
+						AddStatusInfluence(__Me, CONSUME, 1, _WhichEffect, 0)
+					ENDIF
+					Subtract(_ResToAdd, _Value)
+					/*
+				ELSE
+					//Remove 
+					Print(_Str, "AMER_Scaling[1]Res[2]", %AMER_ScalingResistname, _Value)
+					Cast(_WhichEffect, _Str)
+					IF "c1"
+						CharacterHasStatus(__Me, CONSUME, _WhichEffect)
+					THEN
+						RemoveStatusInfluence(__Me, CONSUME, 1, _WhichEffect, 0)
+					ENDIF
+					*/
+				ENDIF
+				
+				Add(_Count, INT:1)
+			ENDWHILE
+		ENDIF
+	ENDIF
+	
+EVENT ScaleInitAndAP
+VARS
+	STRING:_Str
+	FIXEDSTRING:_WhichEffect
+	INT:_Count
+	INT:_Value
+	INT:_NegativeFlag
+	FLOAT:_Stat
+	FLOAT:_StatLimit
+	FLOAT:_InitToAdd
+	FLOAT:_APRToAdd
+	FLOAT:_APStartToAdd
+ON
+	OnFunction("AMER_ScaleInitAndAP")
+ACTIONS
+	Set(_NegativeFlag, INT:0)
+	
+	//Initiative.
+	IF "c1"
+		CharacterGetStat(_Stat, __Me, Initiative)
+	THEN
+		//Breakpoints are 0, 6, 8, 10, 12, 14, 16, 18, 20 (v1.1.9)
+		GetElement(_StatLimit, %AMER_ScalingBreakpoint, 7.0, 10.0, 13.0, 16.0, 19.0, 22.0, 25.0, 28.0, 31.0)
+		
+		//We know that %AMER_ScalingIndex was set for use as
+		//an index, so it starts from zero. For use here, we
+		//need to start from one, so add one to these values.
+		Cast(_InitToAdd, %AMER_ScalingIndex)
+		Add(_InitToAdd, 1.0)
+		
+		Add(_Stat, _InitToAdd)
+		IF "c1"
+			IsGreaterThen(_Stat, _StatLimit)
+		THEN
+			Subtract(_Stat, _StatLimit)
+			Subtract(_InitToAdd, _Stat)
+		ENDIF
+	ENDIF
+	
+	//AP Recovery.
+	IF "c1"
+		CharacterGetStat(_Stat, __Me, APRecovery)
+	THEN
+		GetElement(_StatLimit, %AMER_ScalingBreakpoint, 5.0, 6.0, 7.0, 8.0, 10.0, 12.0, 14.0, 16.0, 18.0)
+		
+		Cast(_APRToAdd, %AMER_ScalingIndex)
+		Add(_APRToAdd, 1.0)
+		
+		Add(_Stat, _APRToAdd)
+		IF "c1"
+			IsGreaterThen(_Stat, _StatLimit)
+		THEN
+			Subtract(_Stat, _StatLimit)
+			Subtract(_APRToAdd, _Stat)
+		ENDIF
+	ENDIF
+	
+	//AP Start.
+	IF "c1"
+		CharacterGetStat(_Stat, __Me, APStart)
+	THEN
+		GetElement(_StatLimit, %AMER_ScalingBreakpoint, 6.0, 7.0, 8.0, 9.0, 11.0, 13.0, 15.0, 17.0, 19.0)
+		
+		Cast(_APStartToAdd, %AMER_ScalingIndex)
+		Add(_APStartToAdd, 1.0)
+		
+		Add(_Stat, _APStartToAdd)
+		IF "c1"
+			IsGreaterThen(_Stat, _StatLimit)
+		THEN
+			Subtract(_Stat, _StatLimit)
+			Subtract(_APStartToAdd, _Stat)
+			IF "c1&!c2"
+				IsLessThen(_APStartToAdd, 0.0)
+				CharacterIsBoss(__Me)	//Don't nerf bosses.
+			THEN
+				Multiply(_APStartToAdd, -1.0)
+				Set(_NegativeFlag, INT:1)
+			ENDIF
+		ENDIF
+	ENDIF
+	
+	Set(_Count, INT:0)
+	WHILE "c1"
+		IsLessThen(_Count, 4)
+	DO
+		GetElement(_Value, _Count, INT:8, INT:4, INT:2, INT:1)
+		
+		//Initiative.
+		IF "!c1"
+			IsGreaterThen(_Value, _InitToAdd)
+		THEN
+			Print(_Str, "AMER_ScalingInitiative[1]", _Value)
+			Cast(_WhichEffect, _Str)
+			AddStatusInfluence(__Me, CONSUME, 1, _WhichEffect, 0)
+			Subtract(_InitToAdd, _Value)
+		ENDIF
+		
+		//AP Recovery.
+		IF "!c1"
+			IsGreaterThen(_Value, _APRToAdd)
+		THEN
+			Print(_Str, "AMER_ScalingAPRecovery[1]", _Value)
+			Cast(_WhichEffect, _Str)
+			AddStatusInfluence(__Me, CONSUME, 1, _WhichEffect, 0)
+			Subtract(_APRToAdd, _Value)
+		ENDIF
+		
+		//AP Start.
+		IF "!c1"
+			IsGreaterThen(_Value, _APStartToAdd)
+		THEN
+			IF "c1"
+				IsEqual(_NegativeFlag, INT:0)
+			THEN
+				Print(_Str, "AMER_ScalingAPStart[1]", _Value)
+			ELSE
+				Print(_Str, "AMER_ScalingAPStartN[1]", _Value)
+			ENDIF
+			Cast(_WhichEffect, _Str)
+			AddStatusInfluence(__Me, CONSUME, 1, _WhichEffect, 0)
+			Subtract(_APStartToAdd, _Value)
+		ENDIF
+		
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+	
+	
+//===========================================================//
+//                Expect Applicator Consume                  //
+//===========================================================//
+EVENT ExpectApplicatorConsume
+VARS
+	CHARACTER:_Char
+	FLOAT:_Window
+	FLOAT:_Heal
+	INT:_Instances
+	INT:_IsStatus
+	FIXEDSTRING:_Function
+ON
+	OnCharacterEvent(_Char, "AMER_ExpectApplicatorConsume")
+ACTIONS
+	IF "c1&c2&c3&c4&c5"
+		GetVar(_Window, _Char, "AMER_ExpectApplicatorWindow")
+		GetVar(_Instances, _Char, "AMER_ApplicatorConsumeInstances")
+		GetVar(_IsStatus, _Char, "AMER_ApplicatorIsStatus")
+		GetVar(_Function, _Char, "AMER_ApplicatorFunction")
+		GetVar(_Heal, _Char, "AMER_ScalingHealAmount")
+	THEN
+		SetVar(__Me, "AMER_SkillSource", _Char)
+		SetVar(__Me, "AMER_ExpectApplicator", _Instances)
+		SetVar(__Me, "AMER_ApplicatorIsStatus", _IsStatus)
+		SetVar(__Me, "AMER_ApplicatorFunction", _Function)
+		SetVar(__Me, "AMER_ScalingHealAmount", _Heal)
+		StopTimer("AMER_ResetExpectApplicator")
+		StartTimer("AMER_ResetExpectApplicator", _Window, 0)
+	ENDIF
+	
+	
+	
+EVENT ResetExpectApplicator
+ON
+	OnTimer("AMER_ResetExpectApplicator")
+ACTIONS
+	SetVar(__Me, "AMER_ExpectApplicator", INT:0)
+	
+	
+	
+//===========================================================//
+//                    Limit Shotgunning                      //
+//===========================================================//	
+EVENT LimitShotgunning
+VARS
+	CHARACTER:_CharSource
+	INT:_ShotgunHits
+	INT:_ShotgunHitsTaken
+	DAMAGE:_ShotgunType
+	DAMAGE:_DamageType
+ON
+	OnFunction("AMER_LimitShotgunning")
+ACTIONS
+	IF "c1"
+		GetVar(_CharSource, __Me, "AMER_CharSource")
+	THEN
+		IF "c1&c2&c3"
+			GetVar(_ShotgunType, _CharSource, "AMER_ShotgunType")
+			GetVar(_DamageType, __Me, "AMER_DamageTakenType")
+			IsEqual(_DamageType, _ShotgunType)
+		THEN
+			IF "c1&c2"
+				GetVar(_ShotgunHits, _CharSource, "AMER_ShotgunHits")
+				GetVar(_ShotgunHitsTaken, __Me, "AMER_ShotgunHitsTaken")
+			THEN	
+				//Check if that dick is done shotgunning, if he is, reset my hits taken.
+				//Only fire the timer once, it will keep checking and stop itself when
+				//the shotgunner is done.
+				//Set(%AMER_CharSource, _CharSource)
+				IF "!c1"
+					IsGreaterThen(_ShotgunHitsTaken, INT:0)
+				THEN
+					StartTimer("AMER_ResetShotgunHitsTaken", 0.5, -1)
+				ENDIF
+				
+				//Check if too many hits have been taken, if yes, then make me
+				//invulnerable. Otherwise, just record that the hit was taken.
+				Add(_ShotgunHitsTaken, INT:1)
+				SetVar(__Me, "AMER_ShotgunHitsTaken", _ShotgunHitsTaken)
+				IF "!c1"
+					IsLessThen(_ShotgunHitsTaken, _ShotgunHits)
+				THEN
+					CharacterSetInvulnerable(__Me, 1)
+					//Run a "failsafe" timer to remove invulnerability in case something goes
+					//wrong, because I've received bug reports of invulnerable creatures.
+					StartTimer("AMER_ShotgunInvulnerableFailsafe", 3.0, 0)
+				ENDIF
+			ENDIF
+		ENDIF
+	ENDIF
+	
+EVENT ResetShotgunHitsTaken
+//Used to reset the counter for instances of damage suffered by
+//a "shotgunning" skill.
+VARS
+	CHARACTER:_CharSource
+	INT:_Shotgunning
+ON
+	OnTimer("AMER_ResetShotgunHitsTaken")
+ACTIONS
+	IF "c1"
+		GetVar(_CharSource, __Me, "AMER_CharSource")
+	THEN
+		//If the source of the shotgun damage is done casting their spell,
+		//then reset our shotgun hits taken.
+		IF "c1&c2"
+			GetVar(_Shotgunning, _CharSource, "AMER_IsCastingShotgun")
+			IsEqual(_Shotgunning, INT:0)
+		THEN
+			StopTimer("AMER_ResetShotgunHitsTaken")
+			SetVar(__Me, "AMER_ShotgunHitsTaken", INT:0)
+			CharacterSetInvulnerable(__Me, 0)
+		ENDIF
+	ENDIF
+	
+EVENT ShotgunInvulnerableFailsafe
+ON
+	OnTimer("AMER_ShotgunInvulnerableFailsafe")
+ACTIONS
+	CharacterSetInvulnerable(__Me, 0)
+	
+	
+	
+//===========================================================//
+//                   Limit Hard-Disables                     //
+//===========================================================//	
+EVENT LimitHardDisables
+VARS
+	INT:_StatusHistory
+	FIXEDSTRING:_WhichHistory
+	INT:_Amount
+	INT:_Count
+	INT:_HistoryCount
+	STATUS:_WhichStatus
+	INT:_ImmunityIndex
+	POTION:_WhichEffect
+ON
+	OnFunction("AMER_LimitHardDisables")
+ACTIONS
+	Set(_Count, INT:0)
+	WHILE "c1"
+		IsLessThen(_Count, 6)
+	DO
+		//Check for each supported status; if we have it, record it and
+		//check previous turns for this status to see if we need to
+		//become immune to it.
+		GetElement(_WhichStatus, _Count, "FROZEN", "STUNNED", "PETRIFIED", "KNOCKED_DOWN", "FEAR", "BLIND")
+		IF "c1"
+			CharacterHasStatus(__Me, _WhichStatus)
+		THEN
+			//Get the history value of this status
+			GetElement(_WhichHistory, _Count, "AMER_FrozenHistory", "AMER_StunnedHistory", "AMER_PetrifiedHistory", "AMER_KnockedDownHistory", "AMER_FearHistory", "AMER_BlindHistory")
+			IF "c1"
+				GetVar(_StatusHistory, __Me, _WhichHistory)
+			THEN
+				//If the history value is greater than zero, we know we need to become immune.
+				//Figure out how long ago we had this status so we know how long to apply the
+				//immunity for. Doing this makes matters more complex, but allows the player
+				//to see an accurate(tm) duration of the immunity on the character.
+				IF "c1"
+					IsGreaterThen(_StatusHistory, INT:0)
+				THEN
+					Set(_HistoryCount, INT:0)
+					WHILE "c1"
+						IsLessThen(_HistoryCount, 4)
+					DO
+						//largest values to smallest; last turn to three turns ago.
+						GetElement(_Amount, _HistoryCount, INT:1000, INT:100, INT:10, INT:1)
+						IF "!c1"
+							IsLessThen(_StatusHistory, _Amount)
+						THEN
+							//Ex: If I was stunned five turns ago, then dont give me immunity because,
+							//next turn, the stun from five turns ago will be within a seven turn range.
+							//If I was stunned last turn, give me stun immunity for 4 turns.
+							Set(_ImmunityIndex, _Count)
+							
+							//Split potion arrays to avoid editor crash from line being too long.
+							IF "c1"
+								IsLessThen(_Count, INT:3)
+							THEN
+								Multiply(_ImmunityIndex, 4)		//Index offset based on which status we're dealing with
+								Add(_ImmunityIndex, _HistoryCount)
+								GetElement(_WhichEffect, _ImmunityIndex, AMER_STATUS_FrozenImmune4, AMER_STATUS_FrozenImmune3, AMER_STATUS_FrozenImmune2, AMER_STATUS_FrozenImmune1, AMER_STATUS_StunnedImmune4, AMER_STATUS_StunnedImmune3, AMER_STATUS_StunnedImmune2, AMER_STATUS_StunnedImmune1, AMER_STATUS_PetrifiedImmune4, AMER_STATUS_PetrifiedImmune3, AMER_STATUS_PetrifiedImmune2, AMER_STATUS_PetrifiedImmune1)
+							ELSE
+								Subtract(_ImmunityIndex, INT:3)
+								Multiply(_ImmunityIndex, 4)		//Index offset based on which status we're dealing with
+								Add(_ImmunityIndex, _HistoryCount)
+								GetElement(_WhichEffect, _ImmunityIndex, AMER_STATUS_KnockedDownImmune4, AMER_STATUS_KnockedDownImmune3, AMER_STATUS_KnockedDownImmune2, AMER_STATUS_KnockedDownImmune1, AMER_STATUS_FearImmune4, AMER_STATUS_FearImmune3, AMER_STATUS_FearImmune2, AMER_STATUS_FearImmune1, AMER_STATUS_BlindImmune4, AMER_STATUS_BlindImmune3, AMER_STATUS_BlindImmune2, AMER_STATUS_BlindImmune1)
+							ENDIF
+							
+							CharacterConsume(__Me, _WhichEffect)
+							
+							//If we're applying Knockdown immunity, we need to manually
+							//remove the knockdown because, while Knockdown Immunity prevents
+							//knockdown from occurring, it doesn't remove it.
+							IF "c1"
+								IsEqual(_Count, INT:3)
+							THEN
+								//In this case, removing Knockdown needs a delay to avoid a crash.
+								StartTimer("AMER_LimitHardDisables_RemoveKDDelay", 0.3, 0)
+							ENDIF
+							
+							//Immunity is applied, so flag for exit.
+							Set(_HistoryCount, 4)
+						ENDIF
+						
+						Add(_HistoryCount, INT:1)
+					ENDWHILE
+				ENDIF
+				
+				//record that we had this status this turn, shift bits over one.
+				Add(_StatusHistory, INT:10000)
+				Divide(_StatusHistory, INT:10)
+				SetVar(__Me, _WhichHistory, _StatusHistory)
+			ENDIF
+		ELSE
+			//Even if we didn't have the status, update our history for that
+			//status if we were afflicted by it within our history depth.
+			GetElement(_WhichHistory, _Count, "AMER_FrozenHistory", "AMER_StunnedHistory", "AMER_PetrifiedHistory", "AMER_KnockedDownHistory", "AMER_FearHistory", "AMER_BlindHistory")
+			IF "c1&c2"
+				GetVar(_StatusHistory, __Me, _WhichHistory)
+				IsGreaterThen(_StatusHistory, INT:0)
+			THEN
+				Divide(_StatusHistory, INT:10)
+				SetVar(__Me, _WhichHistory, _StatusHistory)
+			ENDIF
+		ENDIF
+		
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+EVENT LimitHardDisablesRemoveKDDelay
+//Thanks to FrauBlake and Abraxas* for help in diagnosing this problem!
+//
+//Need to use a timer to allow the calling event time to finish its execution
+//before removing Knocked Down. This is necessary as removing a status from a
+//script environment that was fired from said status' application will cause
+//a crash to desktop.
+ON
+	OnTimer("AMER_LimitHardDisables_RemoveKDDelay")
+ACTIONS
+	CharacterRemoveStatus(__Me, KNOCKED_DOWN)
+	
+	
+	
+//===========================================================//
+//                      Invis Detection                      //
+//===========================================================//
+EVENT InvisDetectionIterate
+VARS
+CHARACTER:_Char
+CHARACTER:_Spotter
+CHARACTER:_Sneaker
+FLOAT:_Roll
+FLOAT:_Chance
+FLOAT:_Perception
+INT:_TargetSneaking
+FLOAT:_WhichPenalty
+FLOAT:_Range
+FLOAT:_Distance
+FLOAT:_SpotterLevel
+FLOAT:_SneakerLevel
+FLOAT:_LevelModifier
+INT:_WhichThreshold
+ON
+	OnIterateCharacter(_Char, "AMER_DetectInvis")
+ACTIONS
+	//This block is called for every character in combat on every Hyperacute's turn
+	//start and end. Also, it is called on a heartbeat for sneaking or invisible
+	//players when out of combat.
+	IF "!c1"
+		CharacterIsAlly(__Me, _Char)
+	THEN
+		IF "!c1"
+			CharacterIsDead(_Char)
+		THEN
+			//If the reverse flag was set, __Me is sneaking and looking for enemy
+			//Hyperacutes to spot her. This is likely happening when a player is
+			//sneaking out of combat, to simulate the Hyperacute enemy detecting.
+			IF "c1"
+				IsEqual(%AMER_ReverseDetect, INT:1)
+			THEN
+				IF "!c1"
+					CharacterHasTalent(_Char, LightStep)
+				THEN
+					RETURN
+				ENDIF
+				//Reverse flag was set, and _Char is a spotter
+				Set(_Spotter, _Char)
+				Set(_Sneaker, __Me)
+			ELIF "!c1&!c2"
+				CharacterHasStatus(_Char, INVISIBLE)
+				CharacterHasStatus(_Char, SNEAKING)
+			THEN
+				RETURN
+			ELSE
+				//Reverse flag was not set, I am the spotter.
+				Set(_Spotter, __Me)
+				Set(_Sneaker, _Char)
+			ENDIF
+			
+			IF "!c1&!c2&!c3&!c4&!c5&!c6"
+				CharacterHasStatus(_Spotter, FROZEN)
+				CharacterHasStatus(_Spotter, KNOCKED_DOWN)
+				CharacterHasStatus(_Spotter, FEAR)
+				CharacterHasStatus(_Spotter, PETRIFIED)
+				CharacterHasStatus(_Spotter, STUNNED)
+				CharacterHasStatus(_Spotter, CONSUME, "AMER_STATUS_Maze")
+			THEN
+				IF "c1&c2&c3&c4&c5&c6"
+					CharacterGetStat(_Perception, _Spotter, Perception)
+					IsGreaterThen(_Perception, FLOAT:5)
+					CharacterGetAbility(_TargetSneaking, _Sneaker, Sneaking)
+					CharacterGetStat(_SpotterLevel, _Spotter, Level)
+					CharacterGetStat(_SneakerLevel, _Sneaker, Level)
+					CanSee(_Spotter, _Sneaker)
+				THEN
+					//Only use Perception above 5.
+					Subtract(_Perception, FLOAT:5)
+					
+					//Apply the hidden target's sneaking as a penalty to perception.
+					IF "c1"
+						IsGreaterThen(_TargetSneaking, INT:0)
+					THEN
+						//Don't surpass maximum supported value.
+						IF "c1"
+							IsGreaterThen(_TargetSneaking, INT:9)
+						THEN
+							Set(_TargetSneaking, INT:9)
+						ENDIF
+						
+						Subtract(_TargetSneaking, INT:1)	//Index starts from zero.
+						GetElement(_WhichPenalty, _TargetSneaking, 1.0, 2.0, 3.0, 5.0, 7.0, 10.0, 13.0, 16.0, 20.0)
+						Subtract(_Perception, _WhichPenalty)
+						
+						//If the spotter's relative perception isn't higher than zero
+						//after applying the sneaking penalty, there is no chance to
+						//to detect the hidden character, so exit.
+						IF "!c1"
+							IsGreaterThen(_Perception, FLOAT:0)
+						THEN
+							RETURN
+						ENDIF
+						
+					ENDIF
+				
+					//Find the detector's maximum detection range.
+					Set(_Range, _Perception)
+					Multiply(_Range, 2.0)
+					
+					//If the detector is Blind, modify their range by the blindness
+					//range penalty. This occurs before limiting range by the maximum
+					//to allow hyper perceptive characters to be effective even without
+					//their sense of sight.
+					IF "c1"
+						CharacterHasStatus(_Spotter, BLIND)
+					THEN
+						Multiply(_Range, 0.5)
+					ENDIF
+					
+					//If the detector's range is greater than the maximum, limit it.
+					IF "c1"
+						IsGreaterThen(_Range, 20.0)
+					THEN
+						Set(_Range, 20.0)
+					ENDIF
+					
+					IF "c1&!c2"
+						GetInnerDistance(_Distance, _Spotter, _Sneaker)	//Distance between detector and target.
+						IsGreaterThen(_Distance, _Range)			//Target must be within detector's range.
+					THEN
+						Divide(_Distance, _Range)				//what precent of range is the target at.
+						Multiply(_Distance, 4.0)	//which threshold this percentage falls into.
+						Cast(_WhichThreshold, _Distance)		//Cast into INT so we can use the threshold number as an index, result is always floored.
+						
+						//List the last threshold twice because there is a chance that the index can be that number; if the target is perfectly at the maximum range.
+						GetElement(_Chance, _WhichThreshold, 0.35, 0.25, 0.10, 0.05, 0.05)
+						Multiply(_Chance, _Perception)
+						
+						//Difference between levels is used as a percentile modifier
+						//to the end chance of success at any distance.
+						Subtract(_SpotterLevel, _SneakerLevel)
+						Set(_LevelModifier _SpotterLevel)
+						Multiply(_LevelModifier, 0.25)
+						IF "!c1"
+							IsEqual(_LevelModifier, FLOAT:0)
+						THEN
+							Add(_LevelModifier, FLOAT:1)
+							Multiply(_Chance, _LevelModifier)
+						ENDIF
+						
+						//Apply Blindness penalty if Blind.
+						IF "!c1"
+							CharacterHasStatus(_Spotter, BLIND)
+						THEN
+							Multiply(_Chance, 0.4)
+						ENDIF
+						
+						Multiply(_Chance, FLOAT:100)
+						GetRandomBetween(_Roll, FLOAT:1, FLOAT:100)
+						
+						//Example: If my chance is 25, then I want to roll within 1 to 25. If my chance is
+						//300, I cannot lose because I cannot roll higher than 100. If my chance is -50, I
+						//cannot win because I cannot roll lower than 1.
+						IF "!c1"
+							IsGreaterThen(_Roll, _Chance)
+						THEN
+							CharacterRemoveStatus(_Sneaker, INVISIBLE)
+							CharacterRemoveStatus(_Sneaker, SNEAKING)
+							DisplayCombatInfoText(_Spotter, "AMER_InvisSpotted", 1)
+							DisplayText(_Spotter, "AMER_BLANK", 1)
+							DisplayCombatInfoText(_Sneaker, "AMER_Detected", 1)
+							DisplayText(_Sneaker, "AMER_BLANK", 1)
+							StatusText(_Sneaker, "AMER_Detected")
+						ENDIF
+					ENDIF
+				ENDIF
+			ENDIF
+		ENDIF
+	ENDIF
+	
+	
+	
+EVENT BackstabDamageBonus
+//====================================//
+//       Backstab Damage Bonus:       //
+//====================================//
+VARS
+	CHARACTER:_CharTarget
+	INT:_Tricks
+	INT:_Override
+	INT:_Instances
+	SKILL:_Projectile
+	FIXEDSTRING:_WhichStr
+ON
+	OnFunction("AMER_BackstabDamageBonus")
+ACTIONS
+
+	Set(_CharTarget, %AMER_CritTarget)
+	
+	IF "c1&!c2"
+		CharacterGetAbility(_Tricks, __Me, Sneaking)
+		IsLessThen(_Tricks, 3)
+	THEN
+		//Don't let the index go out of bounds.
+		IF "c1"
+			IsGreaterThen(_Tricks, 9)
+		THEN
+			Set(_Tricks, 9)
+		ENDIF
+		
+		Subtract(_Tricks, 3)	//Index starts from zero, bonus starts at tricks 3.
+		
+		GetElement(_WhichStr, _Tricks, "AMER_BackstabBonus3", "AMER_BackstabBonus4", "AMER_BackstabBonus5", "AMER_BackstabBonus6", "AMER_BackstabBonus7", "AMER_BackstabBonus8", "AMER_BackstabBonus9")
+		
+		//When %AMER_BackstabDamageInstances is non-zero,
+		//don't choke backstab and see if a different
+		//backstab damage needs to be used.
+		IF "c1&!c2"
+			GetVar(_Instances, __Me, "AMER_BackstabDamageInstances")
+			IsEqual(_Instances, INT:0)
+		THEN
+			Subtract(_Instances, INT:1)
+			SetVar(__Me, "AMER_BackstabDamageInstances", _Instances)
+			
+			//Load the override, if it fails for some reason, use default.
+			IF "!c1"
+				GetVar(_Projectile, __Me, "AMER_BackstabDamageProjectile")
+			THEN
+				GetElement(_Projectile, _Tricks, "AMER_SCRIPTSKILL_BackstabBonus30", "AMER_SCRIPTSKILL_BackstabBonus60", "AMER_SCRIPTSKILL_BackstabBonus90", "AMER_SCRIPTSKILL_BackstabBonus120", "AMER_SCRIPTSKILL_BackstabBonus150", "AMER_SCRIPTSKILL_BackstabBonus180", "AMER_SCRIPTSKILL_BackstabBonus210")
+			ENDIF
+		ELSE
+			Set(%AMER_BackstabChoke, INT:1)
+			StartTimer("AMER_ResetBackstabChoke", 1.0, 0)
+			GetElement(_Projectile, _Tricks, "AMER_SCRIPTSKILL_BackstabBonus30", "AMER_SCRIPTSKILL_BackstabBonus60", "AMER_SCRIPTSKILL_BackstabBonus90", "AMER_SCRIPTSKILL_BackstabBonus120", "AMER_SCRIPTSKILL_BackstabBonus150", "AMER_SCRIPTSKILL_BackstabBonus180", "AMER_SCRIPTSKILL_BackstabBonus210")
+		ENDIF
+		
+		//Prevent the damage instance from generating chain.
+		Add(%AMER_BlockChain, INT:1)
+		StartTimer("AMER_ResetBlockChain", 1.0, 0)
+		
+		//Fire the bonus damage projectile.
+		SetVar(__Me, "AMER_RemoteEffectProjectile", _Projectile)
+		SetVar(__Me, "AMER_RemoteEffectSource", _CharTarget)
+		SetVar(__Me, "AMER_RemoteEffectSourceAsTarget", INT:1)
+		CallFunction("AMER_DoRemoteEffect")
+		StatusText(_CharTarget, _WhichStr)
+	ELSE
+		StatusText(_CharTarget, "AMER_BackstabBonus2")
+	ENDIF
+	
+	
+	
+EVENT ResetBackstabChoke
+//Reset the backstab choke, allowing more
+//backstab bonus damage to occur.
+ON
+	OnTimer("AMER_ResetBackstabChoke")
+ACTIONS
+	Set(%AMER_BackstabChoke, INT:0)
+	
+	
+	
+EVENT SetChainBonus
+//====================================//
+//          Set Chain Bonus:          //
+//====================================//
+VARS
+	CHARACTER:_Char
+	INT:_Chain
+	FIXEDSTRING:_WhichString
+	INT:_Count
+ON
+	OnFunction("AMER_SetChain")
+ACTIONS
+	
+	//If %AMER_SetChainForSource is set to 1, then this function
+	//runs for %AMER_CharSource instead of for __Me.
+	IF "c1"
+		IsEqual(%AMER_SetChainForSource, INT:1)
+	THEN
+		Set(%AMER_SetChainForSource, INT:0)
+		IF "!c1"
+			GetVar(_Char, __Me, "AMER_CharSource")
+		THEN
+			RETURN
+		ENDIF
+	ELSE
+		Set(_Char, __Me)
+	ENDIF
+	
+	
+	Set(_Count, INT:0)
+	WHILE "c1"
+		IsLessThen(_Count, 5)
+	DO
+		//Check if any chain icon(s) are present, remove them.
+		GetElement(_WhichString, _Count, "AMER_ChainOne", "AMER_ChainTwo", "AMER_ChainThree", "AMER_ChainFour", "AMER_ChainFive")
+		RemoveStatusInfluence(_Char, CONSUME, 1, _WhichString, 0)
+		
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+	//Apply the correct icon for the current chain.
+	IF "c1&c2"
+		GetVar(_Chain, _Char, "AMER_Chain")
+		IsGreaterThen(_Chain, INT:0)
+	THEN
+		//Don't go out of bounds
+		IF "c1"
+			IsGreaterThen(_Chain, 5)
+		THEN
+			Set(_Chain, 5)
+		ENDIF
+		
+		Subtract(_Chain, INT:1)		//Array starts at index zero.
+		GetElement(_WhichString, _Chain, "AMER_ChainOne", "AMER_ChainTwo", "AMER_ChainThree", "AMER_ChainFour", "AMER_ChainFive")
+		AddStatusInfluence(_Char, CONSUME, 1, _WhichString, 0)
+	ENDIF
+	
+	
+	
+EVENT AddChainBonus
+//====================================//
+//          Add Chain Bonus:          //
+//====================================//
+VARS
+	CHARACTER:_CharSource
+	INT:_AttackerChain
+	INT:_AttackerChainMax
+	INT:_AttackerChainThisTurn
+	INT:_AttackerChainPerTurn
+	INT:_IsChainBlocked
+ON
+	OnFunction("AMER_AddChain")
+ACTIONS
+	IF "c1"
+		GetVar(_CharSource, __Me, "AMER_CharSource")
+	THEN
+		IF "c1"
+			GetVar(_IsChainBlocked, _CharSource, "AMER_BlockChain")
+		THEN
+			IF "!c1"
+				IsGreaterThen(_IsChainBlocked, INT:0)
+			THEN
+				IF "c1"
+					GetVar(_AttackerChainPerTurn, _CharSource, "AMER_ChainPerTurn")
+				THEN
+					//If attacker has Master Assassin they have extra Chain per turn.
+					IF "c1"
+						CharacterHasTalent(_CharSource, FolkDancer)
+					THEN
+						Add(_AttackerChainPerTurn, INT:1)
+					ENDIF
+					
+					//If attacker has Zeal they have 5 Chain per turn.
+					IF "c1"
+						CharacterHasStatus(_CharSource, CONSUME, "AMER_UNI_Zeal")
+					THEN
+						Add(_AttackerChainPerTurn, 5)
+					ENDIF
+						
+					//Make sure attacker doesnt have max Chain or already got max per turn.
+					IF "c1&c2"
+						GetVar(_AttackerChainThisTurn, _CharSource, "AMER_ChainThisTurn")
+						IsLessThen(_AttackerChainThisTurn, _AttackerChainPerTurn)
+					THEN
+						IF "c1&c2"
+							GetVar(_AttackerChain, _CharSource, "AMER_Chain")
+							GetVar(_AttackerChainMax, _CharSource, "AMER_ChainMax")
+						THEN
+							//Discipline sets max chain  to 4.
+							IF "c1"
+								CharacterHasStatus(_CharSource, CONSUME, "AMER_UNI_Discipline")
+							THEN
+								Set(_AttackerChainMax, 4)
+							ENDIF
+							
+							IF "c1"
+								IsLessThen(_AttackerChain, _AttackerChainMax)
+							THEN
+								//Increment and store new chain values into attacker's global variables.
+								Add(_AttackerChainThisTurn, 1)
+								Add(_AttackerChain, 1)
+								SetVar(_CharSource, "AMER_ChainThisTurn", _AttackerChainThisTurn)
+										
+								//Update the chain icon for the source character.
+								Set(%AMER_SetChainForSource, INT:1)
+								SetVar(_CharSource, "AMER_Chain", _AttackerChain)
+								CallFunction("AMER_SetChain")
+							ENDIF
+						ENDIF
+					ENDIF
+				ENDIF
+			ELSE
+				Subtract(_IsChainBlocked, INT:1)
+				SetVar(_CharSource, "AMER_BlockChain", _IsChainBlocked)
+			ENDIF
+		ENDIF
+	ENDIF
+	
+EVENT ResetBlockChain
+//====================================//
+//        Reset Blocked Chain:        //
+//====================================//
+//Reset instances of "AMER_BlockChain" in case something
+//goes wrong. This is mostly a precaution to get this
+//value back to zero, if everything works as expected
+//(never does) then it will always be redundant.
+ON
+	OnTimer("AMER_ResetBlockChain")
+ACTIONS
+	SetVar(__Me, "AMER_BlockChain", INT:0)
+//===============================================//
+//                                               //
+//     C H A R A C T E R   M E C H A N I C S     //
+//                                               //
+//===============================================//

@@ -1,0 +1,16 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+IF
+DialogCharacterEventSet("MulchRespec", _Char, _)
+THEN
+DialogClearCharacterEvent("MulchRespec", _Char, 0);
+ProcIncreaseCompMaxIfLonewolf(_Char);
+ProcAMERHandleRespec(_Char);
+ProcAMERRespec(_Char);
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "__Start"

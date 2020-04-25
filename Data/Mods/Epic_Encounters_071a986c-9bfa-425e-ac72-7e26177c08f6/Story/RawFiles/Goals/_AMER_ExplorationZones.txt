@@ -1,0 +1,42 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+DB_ExplorationZones(TRIGGER_AMER_WST_XP_SinkingWarehouse, 1, 0, 1);
+DB_ExplorationZones(TRIGGER_AMER_WST_XP_LegionTerrace, 1, 0, 1);
+DB_ExplorationZones(TRIGGER_AMER_WST_XP_EternalHall, 1, 0, 1);
+DB_ExplorationZones(TRIGGER_AMER_WST_XP_MelchTower, 1, 0, 1);
+DB_ExplorationZones(TRIGGER_AMER_WST_XP_AbyssalTower, 1, 10, 1);
+DB_ExplorationZones(TRIGGER_AMER_WST_XP_AstralTower, 1, 0, 1);
+DB_ExplorationZones(TRIGGER_AMER_WST_XP_ShadowTower, 1, 0, 1);
+DB_ExplorationZones(TRIGGER_AMER_WST_XP_PrimordialTower, 1, 0, 1);
+DB_ExplorationZones(TRIGGER_AMER_LED_REGION_OssurotMarker, 1, 0, 1);
+DB_ExplorationZones(TRIGGER_AMER_LED_REGION_OssurotLair, 1, 0, 1);
+DB_ExplorationZones(TRIGGER_AMER_ASC_REGION_Ascension, 1, 0, 1);
+DB_ExplorationZones(TRIGGER_AMER_ASC_REGION_AstralLock, 1, 0, 1);
+DB_ExplorationZones(TRIGGER_AMER_ASC_REGION_PrimordialLock, 1, 0, 1);
+DB_ExplorationZones(TRIGGER_AMER_ASC_REGION_ShadowLock, 1, 0, 1);
+DB_ExplorationZones(TRIGGER_AMER_ASC_REGION_AbyssalLock, 1, 0, 1);
+DB_ExplorationZones(TRIGGER_AMER_ASC_REGION_TowerHub, 1, 0, 1);
+
+DB_Subregion(TRIGGER_AMER_WST_XP_SinkingWarehouse, "AMER_WST_SinkingWarehouse", 0);
+DB_Subregion(TRIGGER_AMER_WST_XP_LegionTerrace, "AMER_WST_LegionTerrace", 1);
+DB_Subregion(TRIGGER_AMER_WST_XP_EternalHall, "AMER_WST_EternalHall", 0);
+DB_Subregion(TRIGGER_AMER_WST_XP_MelchTower, "AMER_WST_MelchTower", 1);
+DB_Subregion(TRIGGER_AMER_WST_XP_AbyssalTower, "AMER_WST_AbyssalTower", 1);
+DB_Subregion(TRIGGER_AMER_WST_XP_AstralTower, "AMER_WST_AstralTower", 1);
+DB_Subregion(TRIGGER_AMER_WST_XP_ShadowTower, "AMER_WST_ShadowTower", 1);
+DB_Subregion(TRIGGER_AMER_WST_XP_PrimordialTower, "AMER_WST_PrimordialTower", 1);
+DB_Subregion(TRIGGER_AMER_LED_REGION_OssurotMarker, "AMER_LED_OssurotTomb", 1);
+DB_Subregion(TRIGGER_AMER_LED_REGION_OssurotLair, "AMER_LED_OssurotLair", 1);
+DB_Subregion(TRIGGER_AMER_ASC_REGION_Ascension, "AMER_ASC_Ascension", 1);
+DB_Subregion(TRIGGER_AMER_ASC_REGION_AstralLock, "AMER_ASC_AstralLock", 1);
+DB_Subregion(TRIGGER_AMER_ASC_REGION_PrimordialLock, "AMER_ASC_PrimordialLock", 1);
+DB_Subregion(TRIGGER_AMER_ASC_REGION_ShadowLock, "AMER_ASC_ShadowLock", 1);
+DB_Subregion(TRIGGER_AMER_ASC_REGION_AbyssalLock, "AMER_ASC_AbyssalLock", 1);
+DB_Subregion(TRIGGER_AMER_ASC_REGION_TowerHub, "AMER_ASC_TowerHub", 1);
+KBSECTION
+
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "__Start"

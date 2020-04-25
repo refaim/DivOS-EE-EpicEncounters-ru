@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<save>
+    <header version="2" time="1430205466" />
+    <version major="1" minor="3" revision="1" build="3" />
+    <region id="CharacterCreationClass">
+        <node id="root">
+            <attribute id="Armour" value="" type="22" />
+            <attribute id="Boots" value="" type="22" />
+            <attribute id="ClassDescription" value="An agile-looking man with an absent-minded look in his eyes" handle="hd0af5950g0c2ag4dd4g8cb2g948f40662746" type="28" />
+            <attribute id="ClassLongDescription" value="A rogue by trade and a swashbuckler at heart, people avoid Kourach because he favours dark clothes and cloaks, and his behavior is, as some would say, pretty weird (at best; looney at worst). He tends to look absent-minded, ignoring most of what happens around him, and talking to people that are not really there. He acts in sudden bursts of activity, which some find disconcerting. In combat he favours light swords and daggers and relies on his agility and a little touch of magic to avoid harm." handle="he9c19df6gc5acg4ccfgb15bg01fffdd8dd30" type="28" />
+            <attribute id="ClassName" value="Rogue" handle="h82f88f08gba5bg4164g9821gf53ed0fb69ff" type="28" />
+            <attribute id="ClassType" value="Rogue" type="22" />
+            <attribute id="ExtraEquipmentSet" value="" type="22" />
+            <attribute id="Gloves" value="" type="22" />
+            <attribute id="Leggings" value="" type="22" />
+            <attribute id="SkillSet" value="" type="22" />
+            <attribute id="Voice" value="0" type="5" />
+            <children>
+                <node id="AbilityChanges">
+                    <children>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="WarriorLore" type="23" />
+                            <attribute id="AmountIncreased" value="1" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="RogueLore" type="23" />
+                            <attribute id="AmountIncreased" value="2" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="DualWielding" type="23" />
+                            <attribute id="AmountIncreased" value="2" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="ArmorMastery" type="23" />
+                            <attribute id="AmountIncreased" value="2" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="AirSpecialist" type="23" />
+                            <attribute id="AmountIncreased" value="1" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="Sneaking" type="23" />
+                            <attribute id="AmountIncreased" value="1" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="Lockpicking" type="23" />
+                            <attribute id="AmountIncreased" value="1" type="4" />
+                        </node>
+                    </children>
+                </node>
+                <node id="AttributeChanges">
+                    <children>
+                        <node id="AttributeChange">
+                            <attribute id="AmountIncreased" value="1" type="4" />
+                            <attribute id="Attribute" value="STR" type="23" />
+                        </node>
+                        <node id="AttributeChange">
+                            <attribute id="AmountIncreased" value="3" type="4" />
+                            <attribute id="Attribute" value="DEX" type="23" />
+                        </node>
+                        <node id="AttributeChange">
+                            <attribute id="AmountIncreased" value="1" type="4" />
+                            <attribute id="Attribute" value="INT" type="23" />
+                        </node>
+                        <node id="AttributeChange">
+                            <attribute id="AmountIncreased" value="3" type="4" />
+                            <attribute id="Attribute" value="SPD" type="23" />
+                        </node>
+                    </children>
+                </node>
+                <node id="HenchManData">
+                    <attribute id="HairColor" value="8" type="5" />
+                    <attribute id="HairType" value="2" type="5" />
+                    <attribute id="HeadType" value="5" type="5" />
+                    <attribute id="ID" value="1ed3dc66-a6b2-4e8f-a01c-4fb09461fb48" type="22" />
+                    <attribute id="Icon" value="14" type="5" />
+                    <attribute id="IsMale" value="1" type="19" />
+                    <attribute id="Level" value="7" type="4" />
+                    <attribute id="Name" value="Kourach" type="30" />
+                    <attribute id="Race" value="0" type="5" />
+                    <attribute id="SkinColor" value="0" type="5" />
+                    <children>
+                        <node id="Skills">
+                            <attribute id="Object" value="Target_StunStart" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="Projectile_BlitzBoltStart" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="Target_RemovePetrification" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="Shout_MeleePowerStance" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="Target_ShockingTouch" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="Shout_InspireStart" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="Target_Poison" type="22" />
+                        </node>
+                    </children>
+                </node>
+                <node id="TalentsAdded">
+                    <children>
+                        <node id="TalentAdded">
+                            <attribute id="Talent" value="Durability" type="23" />
+                        </node>
+                        <node id="TalentAdded">
+                            <attribute id="Talent" value="LightStep" type="23" />
+                        </node>
+                        <node id="TalentAdded">
+                            <attribute id="Talent" value="WhatARush" type="23" />
+                        </node>
+                        <node id="TalentAdded">
+                            <attribute id="Talent" value="ElementalAffinity" type="23" />
+                        </node>
+                    </children>
+                </node>
+            </children>
+        </node>
+    </region>
+</save>

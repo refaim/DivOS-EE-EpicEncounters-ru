@@ -1,0 +1,80 @@
+//===============================================//
+//                                               //
+//      O S S U R O T   R E P O S I T O R Y      //
+//                                               //
+//     Written by Matteo "Ameranth" T. (2016)    //
+//===============================================//
+INIT
+ITEM:__Me
+EXTERN ITEM:%AMER_OssurotRepository_OnlyWithItem = null
+EXTERN INT:%AMER_OssurotRepository_StartState = 0
+EXTERN ITEM:%AMER_OssurotRepository_ItemToManipulate = null
+INT:%AMER_OssurotRepository_ToggleState = 0
+INT:%AMER_OssurotRepository_InitOnce = 0
+//CHARACTER:%AMER_OssurotRepository_Char
+	
+EVENTS
+EVENT OssurotRepositoryInit
+ON
+	OnInit()
+ACTIONS
+	IF "c1"
+		IsEqual(%AMER_OssurotRepository_InitOnce, INT:0)
+	THEN
+		Set(%AMER_OssurotRepository_InitOnce, INT:1)
+		SetVisible(%AMER_OssurotRepository_ItemToManipulate, %AMER_OssurotRepository_StartState)
+	ENDIF
+	
+	
+	
+EVENT OssurotRepositoryUse
+VARS
+	//Patch 1.1.7 adds this hard-define to fix an issue for saved games.
+	ITEM:_PatchItem = "AMER_KEY_GrislyOffering_8091925b-8ff5-485c-acd0-2c2dbe8ff306"
+	CHARACTER:_Char
+ON
+	OnUseItem(_Char, __Me)
+ACTIONS
+	IF "c1"
+		IsEqual(%AMER_OssurotRepository_ToggleState, INT:0)
+	THEN
+		//Set(%AMER_OssurotRepository_Char, _Char)
+		
+		IF "!c1"
+			IsEqual(%AMER_OssurotRepository_OnlyWithItem, null)
+		THEN
+			IF "c1"
+				ItemIsInCharacterInventory(_PatchItem, _Char)
+			THEN
+				CallFunction("AMER_OssurotRepository_Reveal")
+			ELSE
+				DisplayText(__Me, "AMER_LED_OssurotDoorFailedUse", 4.5)
+			ENDIF
+		ELSE
+			CallFunction("AMER_OssurotRepository_Reveal")
+		ENDIF
+	ENDIF
+	
+	
+	
+EVENT OssurotRepositoryReveal
+ON
+	OnFunction("AMER_OssurotRepository_Reveal")
+ACTIONS
+	IF "c1"
+		IsEqual(%AMER_OssurotRepository_ToggleState, INT:0)
+	THEN
+		Set(%AMER_OssurotRepository_ToggleState, INT:1)
+		DisplayText(__Me, "AMER_LED_OssurotDoorActivate", 6.0)
+		
+		ItemEvent(__Me, "AMER_LED_RepositoryTriggered")
+		
+		//SetVisible(%AMER_OssurotRepository_ItemToManipulate, INT:1)
+		//ItemPlayEffect(%AMER_OssurotRepository_ItemToManipulate, "FX_Skills_Fire_GrenadeMolotov_Impact_A")
+	ENDIF
+	
+//===============================================//
+//                                               //
+//      O S S U R O T   R E P O S I T O R Y      //
+//                                               //
+//===============================================//

@@ -1,0 +1,348 @@
+//===============================================//
+//                                               //
+//                 O S S U R O T                 //
+//                                               //
+//     Written by Matteo "Ameranth" T. (2016)    //
+//===============================================//
+INIT
+CHARACTER:__Me
+EXTERN INT:%AMER_Ossurot_GateCooldown = 3
+EXTERN INT:%AMER_Ossurot_GateStart = 4
+EXTERN INT:%AMER_Ossurot_PillarBust = 8
+EXTERN TRIGGER:%AMER_Ossurot_GatePoint1 = null
+EXTERN TRIGGER:%AMER_Ossurot_GatePoint2 = null
+EXTERN TRIGGER:%AMER_Ossurot_PillarPoint = null
+EXTERN ITEM:%AMER_Ossurot_GatePlane1 = null
+EXTERN ITEM:%AMER_Ossurot_GatePlane2 = null
+EXTERN ITEM:%AMER_Ossurot_BreakPillar1 = null
+EXTERN ITEM:%AMER_Ossurot_BreakPillar2 = null
+EXTERN ITEM:%AMER_Ossurot_BreakPillar3 = null
+EXTERN ITEM:%AMER_Ossurot_BreakPillar4 = null
+EXTERN ITEM:%AMER_Ossurot_PhylacteryBubble = null
+EXTERN CHARACTERTEMPLATE:%AMER_Ossurot_GateRoot1 =  null
+EXTERN CHARACTERTEMPLATE:%AMER_Ossurot_GateRoot2 =  null
+EXTERN CHARACTERTEMPLATE:%AMER_Ossurot_GateRoot3 =  null
+EXTERN CHARACTERTEMPLATE:%AMER_Ossurot_PillarChar = null
+EXTERN CHARACTER:%AMER_Ossurot_Advisor1 = null
+EXTERN CHARACTER:%AMER_Ossurot_Advisor2 = null
+EXTERN CHARACTER:%AMER_Ossurot_Phylactery = null
+INT:%AMER_Ossurot_TurnCount
+INT:%AMER_Ossurot_GateCountdown
+INT:%AMER_Ossurot_WhichGateIndex
+INT:%AMER_Ossurot_FreshEngage = 1	//Is it the first time I was attacked?
+INT:%AMER_Ossurot_PhylacteryRezCountdown = 2
+CHARACTER:%AMER_Ossurot_PillarSpawn = null
+	
+EVENTS
+EVENT OssurotInit
+ON
+	OnInit()
+ACTIONS
+	SetVar(__Me, "AMER_ExpectApplicatorTimeOffset", FLOAT:0.6)
+	
+	
+	
+EVENT OssurotCombatEnded
+ON
+	OnCombatEnded()
+ACTIONS
+	//Reset the fight if combat ends and I am not dead.
+	IF "!c1"
+		CharacterIsDead(__Me)
+	THEN
+		IF "!c1"
+			IsEqual(%AMER_Ossurot_PillarSpawn, null)
+		THEN
+			IF "!c1"
+				CharacterIsDead(%AMER_Ossurot_PillarSpawn)
+			THEN
+				CharacterDestroy(%AMER_Ossurot_PillarSpawn)
+			ENDIF
+		ENDIF
+		
+		IF "c1"
+			CharacterIsDead(%AMER_Ossurot_Phylactery)
+		THEN
+			CharacterResurrect(%AMER_Ossurot_Phylactery, 100)
+		ENDIF
+		
+		IF "c1"
+			CharacterIsDead(%AMER_Ossurot_Advisor1)
+		THEN
+			CharacterResurrect(%AMER_Ossurot_Advisor1, 100)
+		ENDIF
+		
+		IF "c1"
+			CharacterIsDead(%AMER_Ossurot_Advisor2)
+		THEN
+			CharacterResurrect(%AMER_Ossurot_Advisor2, 100)
+		ENDIF
+		
+		ItemSetOnStage(%AMER_Ossurot_BreakPillar1, INT:1)
+		ItemSetOnStage(%AMER_Ossurot_BreakPillar2, INT:1)
+		ItemSetOnStage(%AMER_Ossurot_BreakPillar3, INT:1)
+		ItemSetOnStage(%AMER_Ossurot_BreakPillar4, INT:1)
+		
+		Set(%AMER_Ossurot_PhylacteryRezCountdown, INT:2)
+	ELSE
+		//Activate my exit portal when the fight is over.
+		CharacterEvent(__Me, "AMER_LED_OssurotActivateExit")
+	ENDIF
+	
+	//Turn off the side gates in either case.
+	IF "!c1"
+		IsEqual(%AMER_Ossurot_GatePlane1, null)
+	THEN
+		ItemSetOnStage(%AMER_Ossurot_GatePlane1, INT:0)
+	ENDIF
+	IF "!c1"
+		IsEqual(%AMER_Ossurot_GatePlane2, null)
+	THEN
+		ItemSetOnStage(%AMER_Ossurot_GatePlane2, INT:0)
+	ENDIF
+	
+	
+	
+EVENT OssurotCombatStart
+ON
+	OnCombatStarted()
+ACTIONS
+	//BG2 greeting reference.
+	DisplayCombatInfoText(__Me, "AMER_CMB_Ossurot_Greeting" 3.0)
+	
+	//First gate is random, subsequent gates alternate.
+	GetRandomBetween(%AMER_Ossurot_WhichGateIndex, INT:0, INT:1)
+	
+	Set(%AMER_Ossurot_TurnCount, INT:0)
+	Set(%AMER_Ossurot_GateCountdown, %AMER_Ossurot_GateStart)
+	
+	
+	
+EVENT OssurotPhylacteryDies
+ON
+	OnDie(%AMER_Ossurot_Phylactery, _, _, _)
+ACTIONS
+	DisplayCombatInfoText(%AMER_Ossurot_Phylactery, "AMER_CMB_OssurotPhylacteryDied", 4.5)
+	SetVisible(%AMER_Ossurot_PhylacteryBubble, INT:0)
+	CharacterPlayEffect(%AMER_Ossurot_Phylactery, "FX_Skills_WitchCraft_HorrificScream_Cast_A")
+	IterateCharactersNear(%AMER_Ossurot_Phylactery, 15.0, "AMER_Ossurot_PhylacteryFear")
+	
+	
+	
+EVENT OssurotPhylacteryFear
+VARS
+	CHARACTER:_Char
+ON
+	OnIterateCharacter(_Char, "AMER_Ossurot_PhylacteryFear")
+ACTIONS
+	IF "c1"
+		CharacterIsEnemy(__Me, _Char)
+	THEN
+		CharacterApplyStatus(_Char, FEAR, 2)
+	ENDIF
+	
+	
+	
+EVENT OssurotOnTurn
+ON
+	OnTurn()
+ACTIONS
+	Add(%AMER_Ossurot_TurnCount, INT:1)
+	Subtract(%AMER_Ossurot_GateCountdown, INT:1)
+	
+	IF "c1&!c2"
+		CharacterIsDead(__Me)
+		CharacterIsDead(%AMER_Ossurot_Phylactery)
+	THEN
+		Subtract(%AMER_Ossurot_PhylacteryRezCountdown, INT:1)
+		IF "c1"
+			IsEqual(%AMER_Ossurot_PhylacteryRezCountdown, INT:1)
+		THEN
+			DisplayCombatInfoText(%AMER_Ossurot_Phylactery, "AMER_CMB_OssurotPhylacteryAlmostRez", 4.0)
+		ENDIF
+		
+		IF "c1"
+			IsEqual(%AMER_Ossurot_PhylacteryRezCountdown, INT:0)
+		THEN
+			Set(%AMER_Ossurot_PhylacteryRezCountdown, INT:2)
+			CharacterResurrect(__Me, 100)
+			CharacterPlayEffect(__Me, "FX_Skills_Fire_GrenadeMolotov_Impact_A")
+			//Need to use a timer here to only try speaking when I am "actually"
+			//resurrected; the effects are not completely instantaneous.
+			StartTimer("AMER_Ossurot_PhylacteryRezSpeech", 0.3, -1)
+		ENDIF
+	ENDIF
+	
+	IF "c1"
+		IsEqual(%AMER_Ossurot_GateCountdown, INT:0)
+	THEN
+		SetPriority(OssurotGate, 10000)
+	ENDIF
+	
+	//Spawn Yenk after an amount of turns or when both advisors are dead.
+	IF "(c1|(c2&c3))&c4"
+		IsEqual(%AMER_Ossurot_TurnCount, %AMER_Ossurot_PillarBust)
+		CharacterIsDead(%AMER_Ossurot_Advisor1)
+		CharacterIsDead(%AMER_Ossurot_Advisor2)
+		IsEqual(%AMER_Ossurot_PillarSpawn, null)
+	THEN
+		SetPriority(OssurotPillarBust, 10000)
+	ENDIF
+	
+	
+	
+EVENT OssurotPhylacteryRezSpeech
+ON
+	OnTimer("AMER_Ossurot_PhylacteryRezSpeech")
+ACTIONS
+	IF "!c1"
+		CharacterIsDead(__Me)
+	THEN
+		DisplayCombatInfoText(__Me, "AMER_CMB_OssurotPhylacteryRez", 4.5)
+		StopTimer("AMER_Ossurot_PhylacteryRezSpeech")
+	ENDIF
+	
+	
+	
+	
+//===================BEHAVIOR====================//
+BEHAVIOUR
+REACTION OssurotGate, 0
+USAGE COMBAT
+VARS
+//===========================//
+	FLOAT:_PreSleep = 0.7
+	FLOAT:_Sleep = 4
+//===========================//
+	INT:_Handle
+	CHARACTERTEMPLATE:_Root
+	TRIGGER:_WhichGate
+	ITEM:_WhichPlane
+	CHARACTER:_Spawn
+	FLOAT:_SourceLevel
+	INT:_Level
+ACTIONS
+	//Short sleep here ensures the cast declaration
+	//isn't lost far up in the combat log.
+	Sleep(_PreSleep)
+	
+	//Need extra time for animations.
+	SetVar(__Me, "AMER_TimeoutDetection", INT:-8)
+	
+	//Animations and text biznis for casting Gate.
+	DisplayCombatInfoText(__Me, "AMER_CMB_Ossurot_Gate", 1.0)
+	DisplayText(__Me, "AMER_BLANK", 1.0)
+	CharacterPlayLoopEffect(_Handle, __Me, "FX_Skills_WitchCraft_Summon_Prepare_A")
+	CharacterPlayAnimation("cast_self_start",1,1)
+	CharacterPlayEffect(__Me, "FX_Skills_WitchCraft_TargetedCurse_Impact_A")
+	CharacterPlayAnimation("cast_self_loop",1,1)
+	CharacterPlayEffect(__Me, "FX_Skills_WitchCraft_TargetedCurse_Impact_A")
+	CharacterPlayAnimation("cast_self_cast",1,0)
+	
+	Sleep(0.75)	//Small delay so the animation lines up correctly.
+	
+	GetRandom(_Root, %AMER_Ossurot_GateRoot1, %AMER_Ossurot_GateRoot2, %AMER_Ossurot_GateRoot3)
+	GetElement(_WhichGate, %AMER_Ossurot_WhichGateIndex, %AMER_Ossurot_GatePoint1, %AMER_Ossurot_GatePoint2)
+	GetElement(_WhichPlane, %AMER_Ossurot_WhichGateIndex, %AMER_Ossurot_GatePlane1, %AMER_Ossurot_GatePlane2)
+	
+	IF "!c1&c2"
+		IsEqual(_Root, null)
+		CharacterGetStat(_SourceLevel, __Me, Level)
+	THEN
+		//Reveal Gate Plane.
+		ItemSetOnStage(_WhichPlane, INT:1)
+		
+		//Spawn the guy.
+		Cast(_Level, _SourceLevel)
+		SpawnCharacter(_Spawn, _Root, _WhichGate, 1, 1, __Me, _Level)
+		PlaySound(_Spawn, "FX_Sua_Beam")
+		CharacterPlayEffect(_Spawn, "FX_Skills_Fire_GrenadeMolotov_Impact_A")
+		
+		//Alternate Gates.
+		IF "c1"
+			IsEqual(%AMER_Ossurot_WhichGateIndex, INT:0)
+		THEN
+			//Hide opposite plane.
+			ItemSetOnStage(%AMER_Ossurot_GatePlane2, INT:0)
+			Set(AMER_Ossurot_WhichGateIndex, INT:1)
+		ELSE
+			//Hide opposite plane.
+			ItemSetOnStage(%AMER_Ossurot_GatePlane1, INT:0)
+			Set(%AMER_Ossurot_WhichGateIndex, INT:0)
+		ENDIF
+		
+		Sleep(_Sleep)
+		
+		StopLoopEffect(_Handle)	//Remove the casting effect.
+	ENDIF
+	
+	Set(%AMER_Ossurot_GateCountdown, %AMER_Ossurot_GateCooldown)
+	SetPriority(OssurotGate, INT:0)
+	
+	
+	
+REACTION OssurotPillarBust, 0
+USAGE COMBAT
+VARS
+//===========================//
+	FLOAT:_PreSleep = 0.7
+	FLOAT:_Sleep = 4
+//===========================//
+	INT:_Handle
+	CHARACTERTEMPLATE:_Root
+	FLOAT:_SourceLevel
+	INT:_Level
+ACTIONS
+	//Short sleep here ensures the cast declaration
+	//isn't lost far up in the combat log.
+	Sleep(_PreSleep)
+	
+	//Need extra time for animations.
+	SetVar(__Me, "AMER_TimeoutDetection", INT:-8)
+	
+	//Animations and text biznis for casting Gate.
+	DisplayCombatInfoText(__Me, "AMER_CMB_Ossurot_PillarBust", 1.0)
+	DisplayText(__Me, "AMER_BLANK", 1.0)
+	CharacterPlayLoopEffect(_Handle, __Me, "FX_Skills_WitchCraft_Summon_Prepare_A")
+	CharacterPlayAnimation("cast_self_start",1,1)
+	CharacterPlayAnimation("cast_self_loop",1,1)
+	CharacterPlayAnimation("cast_self_cast",1,0)
+	
+	IF "!c1&!c2&c3"
+		IsEqual(%AMER_Ossurot_PillarChar, null)
+		IsEqual(%AMER_Ossurot_PillarPoint, null)
+		CharacterGetStat(_SourceLevel, __Me, Level)
+	THEN
+		//Pillar Destroy FX.
+		PlayEffectAt(%AMER_Ossurot_BreakPillar1, "FX_Skills_Ranger_SummonBloodSwarm_Summon_A")
+		PlayEffectAt(%AMER_Ossurot_BreakPillar2, "FX_Skills_Ranger_SummonBloodSwarm_Summon_A")
+		PlayEffectAt(%AMER_Ossurot_BreakPillar3, "FX_Skills_Ranger_SummonBloodSwarm_Summon_A")
+		PlayEffectAt(%AMER_Ossurot_BreakPillar4, "FX_Skills_Ranger_SummonBloodSwarm_Summon_A")
+		ItemSetOnStage(%AMER_Ossurot_BreakPillar1, INT:0)
+		ItemSetOnStage(%AMER_Ossurot_BreakPillar2, INT:0)
+		ItemSetOnStage(%AMER_Ossurot_BreakPillar3, INT:0)
+		ItemSetOnStage(%AMER_Ossurot_BreakPillar4, INT:0)
+		//ItemDie(%AMER_Ossurot_BreakPillar1)
+		//ItemDie(%AMER_Ossurot_BreakPillar2)
+		//ItemDie(%AMER_Ossurot_BreakPillar3)
+		//ItemDie(%AMER_Ossurot_BreakPillar4)
+		
+		//Spawn the guy.
+		Cast(_Level, _SourceLevel)
+		SpawnCharacter(%AMER_Ossurot_PillarSpawn, %AMER_Ossurot_PillarChar, %AMER_Ossurot_PillarPoint, 1, 1, __Me, _Level)
+		PlaySound(%AMER_Ossurot_PillarSpawn, "FX_Sua_Beam")
+		CharacterPlayEffect(%AMER_Ossurot_PillarSpawn, "FX_Skills_Fire_GrenadeMolotov_Impact_A")
+		
+		Sleep(_Sleep)
+		
+		StopLoopEffect(_Handle)	//Remove the casting effect.
+	ENDIF
+	
+	SetPriority(OssurotPillarBust, INT:0)
+	
+	
+//===============================================//
+//                                               //
+//                 O S S U R O T                 //
+//                                               //
+//===============================================//

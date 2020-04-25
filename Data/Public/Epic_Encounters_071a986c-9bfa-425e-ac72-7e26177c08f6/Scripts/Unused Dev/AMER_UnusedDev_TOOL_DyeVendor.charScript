@@ -1,0 +1,74 @@
+//=====================================================//
+//                                                     //
+//                 D Y E   V E N D O R                 //
+//                                                     //
+//       Written by Matteo "Ameranth" T. (2017)        //
+//=====================================================//
+//The purpose of this script is to simulate the game's
+//basic treasure generation system for vendors, for dyes.
+//The reason this is done is to save item handles by only
+//generating the dyes when they are actually missing
+//(have been purchased), rather than on every vendor cycle.
+INIT
+CHARACTER:__Me
+	
+EVENTS
+EVENT DyeVendorOnInit
+ON
+	OnInit()
+ACTIONS
+	IF "!c1"
+		CharacterIsDead(__Me)
+	THEN
+		CallFunction("AMER_DyeVendor_GenerateOldDyes")
+		CallFunction("AMER_DyeVendor_GenerateEEDyes")
+	ENDIF
+	
+EVENT DyeVendorGenerateOldDyes
+VARS
+	FIXEDSTRING:_WhichItem = null
+	ITEM:_Item
+	INT:_Count
+ON
+	OnFunction("AMER_DyeVendor_GenerateOldDyes")
+ACTIONS
+	Set(_Count, INT:0)
+	WHILE "c1"
+		IsLessThen(_Count, 10)
+	DO
+		GetElement(_WhichItem, _Count, "TOOL_DLC_Dye_Candy", "TOOL_DLC_Dye_Petrol", "TOOL_DLC_Dye_Triad", "TOOL_Dye_Black", "TOOL_Dye_Blue", "TOOL_Dye_Green", "TOOL_Dye_Purple", "TOOL_Dye_Red", "TOOL_Dye_White", "TOOL_Dye_Yellow")
+		IF "!c1"
+			ItemGetFromInventory(_Item, __Me, _WhichItem)
+		THEN
+			CharacterAddToInventory(__Me, _WhichItem, 10)
+		ENDIF
+		Add(_Count, 1)
+	ENDWHILE
+	
+EVENT DyeVendorGenerateEEDyes
+VARS
+	FIXEDSTRING:_WhichItem = null
+	ITEM:_Item
+	INT:_Count
+ON
+	OnFunction("AMER_DyeVendor_GenerateEEDyes")
+ACTIONS
+	Set(_Count, INT:0)
+	WHILE "c1"
+		IsLessThen(_Count, 14)
+	DO
+		GetElement(_WhichItem, _Count, "AMER_TOOL_Dye_Abyss", "AMER_TOOL_Dye_Clay", "AMER_TOOL_Dye_Coral", "AMER_TOOL_Dye_Earth", "AMER_TOOL_Dye_Fog", "AMER_TOOL_Dye_Lichen", "AMER_TOOL_Dye_Midnight", "AMER_TOOL_Dye_Nemesis", "AMER_TOOL_Dye_Saffron", "AMER_TOOL_Dye_Seafoam", "AMER_TOOL_Dye_Smoke", "AMER_TOOL_Dye_Stealth", "AMER_TOOL_Dye_Verdure", "AMER_TOOL_Dye_Void")
+		IF "!c1"
+			ItemGetFromInventory(_Item, __Me, _WhichItem)
+		THEN
+			CharacterAddToInventory(__Me, _WhichItem, 10)
+		ENDIF
+		Add(_Count, 1)
+	ENDWHILE
+	
+	
+//=====================================================//
+//                                                     //
+//                 D Y E   V E N D O R                 //
+//                                                     //
+//=====================================================//

@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<save>
+    <header version="2" time="1427201041" />
+    <version major="1" minor="3" revision="1" build="3" />
+    <region id="CharacterCreationClass">
+        <node id="root">
+            <attribute id="Armour" value="" type="22" />
+            <attribute id="Boots" value="" type="22" />
+            <attribute id="ClassDescription" value="Cunning, reclusive, and deadly, with a taste for stolen goods" handle="h1ec1c00dg8e54g42fagb8fdg8a957cb5249b" type="28" />
+            <attribute id="ClassLongDescription" value="Few know Vynn&apos;s true history; she keeps mostly to herself, but there are many rumours as to her origin. Most believe she was born into nobility but later exiled when she lost her family&apos;s favour. Outcast, she makes her fortune with her blade, willing to kill or steal for the right price." handle="hfaba7b0fg5d65g479egbee4g5e04860bda13" type="28" />
+            <attribute id="ClassName" value="Shadowblade" handle="hb6eb0f87gcc24g447fg82f2g959446e5edec" type="28" />
+            <attribute id="ClassType" value="Shadowblade" type="22" />
+            <attribute id="ExtraEquipmentSet" value="" type="22" />
+            <attribute id="Gloves" value="" type="22" />
+            <attribute id="Leggings" value="" type="22" />
+            <attribute id="SkillSet" value="" type="22" />
+            <attribute id="Voice" value="0" type="5" />
+            <children>
+                <node id="AbilityChanges">
+                    <children>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="RangerLore" type="23" />
+                            <attribute id="AmountIncreased" value="3" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="RogueLore" type="23" />
+                            <attribute id="AmountIncreased" value="3" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="SingleHanded" type="23" />
+                            <attribute id="AmountIncreased" value="3" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="Bow" type="23" />
+                            <attribute id="AmountIncreased" value="3" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="Sneaking" type="23" />
+                            <attribute id="AmountIncreased" value="2" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="Pickpocket" type="23" />
+                            <attribute id="AmountIncreased" value="2" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="Lockpicking" type="23" />
+                            <attribute id="AmountIncreased" value="2" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="Loremaster" type="23" />
+                            <attribute id="AmountIncreased" value="2" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="Barter" type="23" />
+                            <attribute id="AmountIncreased" value="2" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="Charisma" type="23" />
+                            <attribute id="AmountIncreased" value="2" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="Leadership" type="23" />
+                            <attribute id="AmountIncreased" value="2" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="Luck" type="23" />
+                            <attribute id="AmountIncreased" value="2" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="BodyBuilding" type="23" />
+                            <attribute id="AmountIncreased" value="1" type="4" />
+                        </node>
+                    </children>
+                </node>
+                <node id="AttributeChanges">
+                    <children>
+                        <node id="AttributeChange">
+                            <attribute id="AmountIncreased" value="5" type="4" />
+                            <attribute id="Attribute" value="DEX" type="23" />
+                        </node>
+                        <node id="AttributeChange">
+                            <attribute id="AmountIncreased" value="2" type="4" />
+                            <attribute id="Attribute" value="CON" type="23" />
+                        </node>
+                        <node id="AttributeChange">
+                            <attribute id="AmountIncreased" value="3" type="4" />
+                            <attribute id="Attribute" value="SPD" type="23" />
+                        </node>
+                        <node id="AttributeChange">
+                            <attribute id="AmountIncreased" value="5" type="4" />
+                            <attribute id="Attribute" value="PER" type="23" />
+                        </node>
+                    </children>
+                </node>
+                <node id="HenchManData">
+                    <attribute id="HairColor" value="5" type="5" />
+                    <attribute id="HairType" value="0" type="5" />
+                    <attribute id="HeadType" value="7" type="5" />
+                    <attribute id="ID" value="e0f75ec0-4adb-41c6-bea6-c1ef2394eb08" type="22" />
+                    <attribute id="Icon" value="6" type="5" />
+                    <attribute id="IsMale" value="0" type="19" />
+                    <attribute id="Level" value="20" type="4" />
+                    <attribute id="Name" value="Vynn" type="30" />
+                    <attribute id="Race" value="0" type="5" />
+                    <attribute id="SkinColor" value="4" type="5" />
+                    <children>
+                        <node id="Skills">
+                            <attribute id="Object" value="Target_Poison" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="Shout_Blink" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="Shout_RangedPrecisionStance" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="Target_Infect" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="Target_EndureElements" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="Target_Resurrect" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="Target_Lacerate" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="Target_FirstAid" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="Shout_RangedPowerStance" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="Target_Trip" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="Shout_FastTrack" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="Shout_SurvivorsKarma" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="Target_PreciseIncision" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="Projectile_Ricochet" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="Jump_CloakAndDagger" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="Target_Doctor" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="Target_TreatPoisoning" type="22" />
+                        </node>
+                    </children>
+                </node>
+                <node id="TalentsAdded">
+                    <children>
+                        <node id="TalentAdded">
+                            <attribute id="Talent" value="Durability" type="23" />
+                        </node>
+                        <node id="TalentAdded">
+                            <attribute id="Talent" value="LightStep" type="23" />
+                        </node>
+                        <node id="TalentAdded">
+                            <attribute id="Talent" value="WhatARush" type="23" />
+                        </node>
+                        <node id="TalentAdded">
+                            <attribute id="Talent" value="Leech" type="23" />
+                        </node>
+                        <node id="TalentAdded">
+                            <attribute id="Talent" value="Bully" type="23" />
+                        </node>
+                        <node id="TalentAdded">
+                            <attribute id="Talent" value="Politician" type="23" />
+                        </node>
+                        <node id="TalentAdded">
+                            <attribute id="Talent" value="RangerLoreArrowRecover" type="23" />
+                        </node>
+                    </children>
+                </node>
+            </children>
+        </node>
+    </region>
+</save>

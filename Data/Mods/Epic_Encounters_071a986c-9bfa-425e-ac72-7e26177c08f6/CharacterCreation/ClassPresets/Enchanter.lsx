@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<save>
+    <header version="2" time="1387205254" />
+    <version major="1" minor="3" revision="0" build="0" />
+    <region id="CharacterCreationClass">
+        <node id="root">
+            <attribute id="Armour" value="ARM_Robe_SourceHunter_Water" type="22" />
+			<attribute id="Leggings" value="ARM_Garment_Sourcehunter" type="22" />
+            <attribute id="Boots" value="ARM_SourceHunter_Boots" type="22" />
+            <attribute id="ClassDescription" value="Prefers to turn the tide of battle from afar, manipulating foes with powerful magic" handle="he22fd687gca97g44f2g85c7g0653361df5e2" type="28" />
+			<attribute id="ClassLongDescription" value="Orcs? Puppets. Creatures of the Void? Dolls. For the Enchanter, enemies are more toys than threats, and battle is equal parts play and experimentation.<br><br>Raised by dedicated natural philosophers, the Enchanter grew up believing the less-desireable races were profoundly important. A living orc could be experimented upon in ways one would never dream of applying to a human, after all. Trained to assist in capturing and controlling these test subjects, the Enchanter's expertise is unparalleled. What those natural philosophers didn't expect, however, was for their well-trained Enchanter to realise the horror of their experiments and to turn that expertise against them.<br><br>The Source Hunters who pulled them down from the spikes upon which they'd been compelled to impale themselves offered the Enchanter a choice: Rot in jail, or turn those powers of manipulation toward the greater good." handle="h873e4421gef72g4383gb716gdb73981f2977" type="28" />
+            <attribute id="ClassName" value="Enchanter" handle="hc90a89f0g940bg4e5bgb26cg0558461f7209" type="28" />
+            <attribute id="ClassType" value="Enchanter" type="22" />
+            <attribute id="ExtraEquipmentSet" value="Class_Enchanter" type="22" />
+            <attribute id="Gloves" value="ARM_SourceHunter_Bracers" type="22" />
+            <attribute id="SkillSet" value="Class_Enchanter" type="22" />
+            <attribute id="Voice" value="1" type="5" />
+			<attribute id="Icon" value="3" type="5" />
+            <children>
+                <node id="AbilityChanges">
+                    <children>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="Wand" type="23" />
+                            <attribute id="AmountIncreased" value="1" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="AirSpecialist" type="23" />
+                            <attribute id="AmountIncreased" value="1" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="Charisma" type="23" />
+                            <attribute id="AmountIncreased" value="1" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="WaterSpecialist" type="23" />
+                            <attribute id="AmountIncreased" value="1" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="Loremaster" type="23" />
+                            <attribute id="AmountIncreased" value="1" type="4" />
+                        </node>
+                    </children>
+                </node>
+                <node id="AttributeChanges">
+                    <children>
+                        <node id="AttributeChange">
+                            <attribute id="AmountIncreased" value="2" type="4" />
+                            <attribute id="Attribute" value="INT" type="23" />
+                        </node>
+                        <node id="AttributeChange">
+                            <attribute id="AmountIncreased" value="2" type="4" />
+                            <attribute id="Attribute" value="SPD" type="23" />
+                        </node>
+                        <node id="AttributeChange">
+                            <attribute id="AmountIncreased" value="1" type="4" />
+                            <attribute id="Attribute" value="PER" type="23" />
+                        </node>
+                    </children>
+                </node>
+                <node id="TalentsAdded">
+                    <children>
+                        <node id="TalentAdded">
+                            <attribute id="Talent" value="Escapist" type="23" />
+                        </node>
+                        <node id="TalentAdded">
+                            <attribute id="Talent" value="ElementalAffinity" type="23" />
+                        </node>
+                    </children>
+                </node>
+            </children>
+        </node>
+    </region>
+</save>

@@ -1,0 +1,73 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+DB_CharacterCreationLevels("Epic Creation");
+KBSECTION
+PROC
+Proc_LimitAbilitiesForCompanion((CHARACTER)_Companion)
+AND
+_Companion == CHARACTER_Bairdotr
+THEN
+TimerLaunch("AMER_CompanionHook_Bairdotr", 500);
+
+PROC
+Proc_LimitAbilitiesForCompanion((CHARACTER)_Companion)
+AND
+_Companion == CHARACTER_Madoc
+THEN
+TimerLaunch("AMER_CompanionHook_Madora", 500);
+
+PROC
+Proc_LimitAbilitiesForCompanion((CHARACTER)_Companion)
+AND
+_Companion == CHARACTER_Wolgraff
+THEN
+TimerLaunch("AMER_CompanionHook_Wolgraff", 500);
+
+PROC
+Proc_LimitAbilitiesForCompanion((CHARACTER)_Companion)
+AND
+_Companion == CHARACTER_Jahan
+THEN
+TimerLaunch("AMER_CompanionHook_Jahan", 500);
+
+
+
+IF
+TimerFinished("AMER_CompanionHook_Bairdotr")
+THEN
+CharacterAddAbilityPoint(CHARACTER_Bairdotr, 6);
+CharacterAddAttributePoint(CHARACTER_Bairdotr, 6);
+CharacterAddTalentPoint(CHARACTER_Bairdotr, 3);
+CharacterUnlockAbility(CHARACTER_Bairdotr, "Charisma");
+
+IF
+TimerFinished("AMER_CompanionHook_Madora")
+THEN
+CharacterAddAbilityPoint(CHARACTER_Madoc, 4);
+CharacterAddAttributePoint(CHARACTER_Madoc, 6);
+CharacterAddTalentPoint(CHARACTER_Madoc, 2);	//Madora starts with a talent allocated.
+CharacterUnlockAbility(CHARACTER_Madoc, "Charisma");
+
+IF
+TimerFinished("AMER_CompanionHook_Wolgraff")
+THEN
+CharacterAddAbilityPoint(CHARACTER_Wolgraff, 4);
+CharacterAddAttributePoint(CHARACTER_Wolgraff, 6);
+CharacterAddTalentPoint(CHARACTER_Wolgraff, 3);
+CharacterUnlockAbility(CHARACTER_Wolgraff, "Charisma");
+
+IF
+TimerFinished("AMER_CompanionHook_Jahan")
+THEN
+CharacterAddAbilityPoint(CHARACTER_Jahan, 5);
+CharacterAddAttributePoint(CHARACTER_Jahan, 6);
+CharacterAddTalentPoint(CHARACTER_Jahan, 3);
+CharacterUnlockAbility(CHARACTER_Jahan, "Charisma");
+
+
+
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "__Start"

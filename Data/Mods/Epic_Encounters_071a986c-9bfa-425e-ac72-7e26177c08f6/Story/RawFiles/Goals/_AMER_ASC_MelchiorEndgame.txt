@@ -1,0 +1,16 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+IF
+CharacterEvent(CHARACTER_AMER_ASC_Melchior_Perfection, "AMER_Melchior_Endgame")
+THEN
+TriggerUnregisterForPlayers(TRIGGER_AMER_ASC_PortalToAscension);
+ItemSetOnstage(ITEM_AMER_ASC_AscensionEntrance, 0);
+CharacterTeleportPartyToTrigger(CHARACTER_Player1, TRIGGER_AMER_ASC_Point_MelchiorDiePartyTele, "AMER_Melchior_DieTele");
+CharacterTeleportToTrigger(CHARACTER_AMER_ASC_Melchior_Perfection, TRIGGER_AMER_ASC_Point_MelchiorDieTele, "AMER_Melchior_DieTele");
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "__Start"

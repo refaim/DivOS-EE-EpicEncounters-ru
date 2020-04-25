@@ -1,0 +1,9 @@
+#INCLUDE DefaultCharacter
+INIT
+	USING DefaultCharacter
+	CHARACTER:__Me
+
+//--------------------
+
+//Overwritten with blank script because this behavior was very poor.
+//Should eventually manually remove this script from creatures that have it.

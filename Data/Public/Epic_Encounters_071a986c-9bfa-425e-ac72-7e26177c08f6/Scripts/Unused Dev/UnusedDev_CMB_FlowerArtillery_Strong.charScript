@@ -1,0 +1,165 @@
+#INCLUDE Base
+#INCLUDE AMER_SKILL_EnemyFlowerDeadlySpores
+
+INIT
+USING Base
+USING AMER_SKILL_EnemyFlowerDeadlySpores
+EXTERN INT:%ArtilFlower_BurrowPriority = 500
+CHARACTER:__Me
+INT:%AMER_ArtilFlower_BurrowCD = 0
+
+EVENTS
+EVENT FlowerArtilleryStrongAddSkill
+ON
+	OnInit()
+ACTIONS
+	//CharacterAddSkill(Projectile_EnemyBigDeadlySpores)
+	CharacterAddSkill(Cone_EnemyArtilleryFlower)
+	
+	
+EVENT ArtilFlowerOnTurn
+ON
+	OnTurn()
+ACTIONS
+	IF "c1"
+		IsGreaterThen(%AMER_ArtilFlower_BurrowCD, INT:0)
+	THEN
+		Subtract(%AMER_ArtilFlower_BurrowCD, INT:1)
+		IF "c1"
+			IsEqual(%AMER_ArtilFlower_BurrowCD, INT:0)
+		THEN
+			SetPriority(BurrowEngage, %ArtilFlower_BurrowPriority)
+			SetPriority(BurrowRetreat, %ArtilFlower_BurrowPriority)
+		ENDIF
+	ENDIF
+	
+	
+	
+EVENT ArtilFlowerOnCombat
+ON
+	OnCombatStarted()
+ACTIONS
+	Set(%AMER_ArtilFlower_BurrowCD, INT:0)
+	SetPriority(BurrowEngage, %ArtilFlower_BurrowPriority)
+	SetPriority(BurrowRetreat, %ArtilFlower_BurrowPriority)
+	
+	
+	
+BEHAVIOUR
+REACTION BurrowEngage, 0
+VARS
+	CHARACTER:_Char
+	FLOAT3:_Pos
+USAGE COMBAT
+CHECK "!c1|!c2"
+	CharacterGet(_Char, __Me, 20.0, Lowest, Distance, Enemy)
+	CanSee(__Me, _Char)
+ACTIONS
+	IF "c1"
+		CharacterGet(_Char, __Me, 35.0, Lowest, Distance, Enemy)
+	THEN
+		//GetPosition(__Me, _Pos)
+		IF "c1"
+			FindPosition(_Pos, _Char, 35.0, 10.0, __Me, -1, -1, -1, 0)
+		THEN
+			IF "c1"
+				FindValidPosition(_Pos, 3.0, __Me)
+			THEN
+				CharacterPlayAnimation("cast_self_start",1,1)
+				CharacterPlayAnimation("cast_self_loop",1,1)
+				CharacterPlayAnimation("cast_self_cast",1,0)
+				PlayEffectAt(__Me,"FX_GP_Arrow_Poison_Impact_A")
+				PlayEffectAt(__Me,"FX_GP_Arrow_PoisonCloud_Impact_A")
+				//CallFunction("ArtilFlower_InvisFadeOut")
+				
+				Sleep(0.1)
+				CharacterTeleportTo(_Pos)
+				PlayEffectAt(__Me,"FX_GP_Arrow_Poison_Impact_A")
+				PlayEffectAt(__Me,"FX_GP_Arrow_PoisonCloud_Impact_A")
+				CharacterPlayAnimation("spawn")
+				Set(%AMER_ArtilFlower_BurrowCD, INT:2)
+			ENDIF
+		ENDIF
+	ENDIF
+	
+	SetPriority(BurrowEngage, 0)
+	
+	
+	
+REACTION BurrowRetreat, 0
+VARS
+	CHARACTER:_Char
+	FLOAT3:_TargetPos
+	FLOAT:_CheckRadius
+	FLOAT:_Distance
+USAGE COMBAT
+CHECK "c1"
+	CharacterGet(_Char, __Me, 5.0, Lowest, Distance, Enemy)
+ACTIONS
+	IF "c1"
+		GetDistance(_Distance, __Me, _Char)
+	THEN
+		Set(_CheckRadius, 15.0)
+		Add(_CheckRadius, _Distance)
+		WHILE "!c1"
+			IsLessThen(_CheckRadius, 6.0)
+		DO
+			IF "c1"
+				FindPosition(_TargetPos, __Me, 10.0, _CheckRadius, __Me, -1, -1, -1, 0)
+			THEN
+				IF "c1&!c2&!c3&!c4&c5"
+					FindValidPosition(_TargetPos, 3.0, __Me)
+					ContainsSurface(_TargetPos, 1.0, Lava)
+					ContainsSurface(_TargetPos, 1.0, Electrified)
+					ContainsSurface(_TargetPos, 1.0, BloodElectrified)
+					CanSee(__Me, _TargetPos)
+				THEN
+					CharacterPlayAnimation("cast_self_start",1,1)
+					CharacterPlayAnimation("cast_self_loop",1,1)
+					CharacterPlayAnimation("cast_self_cast",1,0)
+					PlayEffectAt(__Me,"FX_GP_Arrow_Poison_Impact_A")
+					PlayEffectAt(__Me,"FX_GP_Arrow_PoisonCloud_Impact_A")
+					//CallFunction("ArtilFlower_InvisFadeOut")
+					
+					Sleep(0.1)
+					CharacterTeleportTo(_TargetPos)
+					PlayEffectAt(__Me,"FX_GP_Arrow_Poison_Impact_A")
+					PlayEffectAt(__Me,"FX_GP_Arrow_PoisonCloud_Impact_A")
+					CharacterPlayAnimation("spawn")
+					Set(%AMER_ArtilFlower_BurrowCD, INT:2)
+					Set(_CheckRadius, -1.0)	//exit loop
+				ENDIF
+			ENDIF
+			Subtract(_CheckRadius, 0.5)
+		ENDWHILE
+	ENDIF
+	
+	SetPriority(BurrowRetreat, 0)
+	
+	
+	
+REACTION CastOozeSpray,300
+VARS
+	CHARACTER:_char
+	FLOAT:_minRange
+	FLOAT:_maxRange
+	FLOAT:_hp
+USAGE COMBAT
+CHECK "c1&c2&c3&c4"
+	CharacterCanCast(__Me,Cone_EnemyArtilleryFlower)
+	CharacterGetSkillRange(_minRange,_maxRange,__Me,Cone_EnemyArtilleryFlower)
+	CharacterGet(_char,__Me,_maxRange,Lowest,Distance,Enemy)
+	CharacterCanSee(__Me,_char)
+ACTIONS
+	CharacterUseSkill(Cone_EnemyArtilleryFlower,_char)
+INTERRUPT
+	Reset()
+	
+	
+	
+REACTION CannotMoveSoEndTurn,200
+USAGE COMBAT
+ACTIONS
+	CharacterEndTurn()
+INTERRUPT
+	Reset()

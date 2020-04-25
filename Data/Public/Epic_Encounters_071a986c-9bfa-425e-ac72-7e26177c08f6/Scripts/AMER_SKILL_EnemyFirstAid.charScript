@@ -1,0 +1,204 @@
+#TEMPLATE "_SKILL_Base" : Target_FirstAidEnemy
+	
+INIT
+CHARACTER:__Me
+FLOAT:%SkillTargetScore_Target_FirstAidEnemy=-1000000
+// [GLOBAL_VARS]
+FLOAT:%Target_FirstAidEnemy_MyInitiative
+// [~GLOBAL_VARS]
+	
+EVENTS
+	
+// [EVENTS]
+// [~EVENTS]
+	
+// Calculate the priority of the skill
+EVENT CalculateScore_Target_FirstAidEnemy
+VARS
+	// [CALC_VARS]
+	FLOAT:_SkillRangeMin
+	FLOAT:_SkillRangeMax
+	FLOAT3:_TargetPos
+	// [~CALC_VARS]
+ON
+	OnFunction("CalculateScore_Target_FirstAidEnemy")
+ACTIONS
+	Set(%SkillTargetScore_Target_FirstAidEnemy, -1000000)
+
+	// [CALC_ACTIONS_PRE]
+	// [~CALC_ACTIONS_PRE]
+	// [CALC_ACTIONS]
+	IF "c1"
+		CharacterGetStat(%Target_FirstAidEnemy_MyInitiative, __Me, Initiative)
+	THEN
+		IterateCharactersInCombat(__Me, "CalculateTarget_Target_FirstAidEnemy", Lowest, Vitality)
+		IF "!c1"
+			IsEqual(%SkillTargetChar_Target_FirstAidEnemy, null)
+		THEN
+			Add(%ActionScore_Target_FirstAidEnemy, %SkillTargetScore_Target_FirstAidEnemy)
+		ENDIF
+	ENDIF
+	// [~CALC_ACTIONS]
+	
+	
+	
+// Calculate the character we should target
+EVENT CalculateTarget_Target_FirstAidEnemy
+VARS	
+	CHARACTER:_Char
+	// [CALC_TARGET_VARS]
+	INT:_ClassScore_Target_FirstAidEnemy
+	FLOAT:_StatResistance
+	FLOAT:_Score
+	FLOAT:_SkillRangeMin
+	FLOAT:_SkillRangeMax
+	FLOAT:_DistanceToChar
+	FLOAT:_DistanceScore
+	FLOAT:_SaveScore
+	FLOAT:_Vitality
+	FLOAT:_TargetInit
+	FLOAT:_APRecovery
+	INT:_AllyCount
+	INT:_Grit
+	// [~CALC_TARGET_VARS]
+ON
+	OnIterateCharacter(_Char, "CalculateTarget_Target_FirstAidEnemy")	
+ACTIONS
+	// [CALC_CHAR_TARGET_ACTIONS_PRE]
+	Set(_Score, 0.0)
+	// [~CALC_CHAR_TARGET_ACTIONS_PRE]
+	// [CALC_CHAR_TARGET_ACTIONS]
+	IF "!c1"
+		CharacterIsDead(_Char)
+	THEN
+		IF "c1"
+			CharacterIsAlly(__Me, _Char)
+		THEN
+			IF "!c1"
+				CharacterIsSummon(_Char)
+			THEN
+				IF "!c1"
+					CharacterHasStatus(_Char, CHARMED)
+				THEN
+					IF "(!c1&!c2)|(c3&c4)"
+						CharacterHasStatus(_Char, DECAYING_TOUCH)	//Either no Decay/Zombie or decent vitality.
+						CharacterHasTalent(_Char, Zombie)
+						CharacterGetStat(_Vitality, _Char, Vitality)
+						IsGreaterThen(_Vitality, 0.6)
+					THEN
+						IF "c1|c2|c3"
+							CharacterHasStatus(_Char, INFECTIOUS_DISEASED)
+							CharacterHasStatus(_Char, CRIPPLED)
+							CharacterHasStatus(_Char, DISEASED)
+						THEN
+							//Triage score calculation
+							Multiply(_Vitality, -1.0)
+							Add(_Vitality, 1.0)
+							Multiply(_Vitality, 5.0)
+							Add(_Score, _Vitality)
+							
+							//Status removal calculation
+							IF "c1"
+								CharacterHasStatus(_Char, INFECTIOUS_DISEASED)
+							THEN
+								//Infectious Disease worth more with allies around.
+								IF "c1"
+									CharacterCount(_AllyCount, _Char, 5.0, Ally)
+								THEN
+									Multiply(_AllyCount, INT:2)
+									Add(_Score, _AllyCount)
+								ENDIF
+								//Infectious Disease worth more if it's removing lots of Grit.
+								IF "c1&c2"
+									CharacterGetAbility(_Grit, _Char, BodyBuilding)
+									IsEqual(_Grit, INT:0)
+								THEN
+									Add(_Score, 4.6)	//tiny bit more than Disease even with no allies around.
+								ELSE
+									Add(_Score, 3.1)
+								ENDIF
+							ENDIF
+							IF "c1"
+								CharacterHasStatus(_Char, DISEASED)
+							THEN
+								//Can't know what unmodified Grit is, so just see if the
+								//target has at least 1 Grit while Diseased, this way we
+								//know the Disease is fully effective.
+								IF "c1&!c2"
+									CharacterGetAbility(_Grit, _Char, BodyBuilding)
+									IsEqual(_Grit, INT:0)
+								THEN
+									Add(_Score, 4.5)
+								ELSE
+									Add(_Score, 3.0)
+								ENDIF
+							ENDIF
+							IF "c1"
+								CharacterHasStatus(_Char, CRIPPLED)
+							THEN
+								//Worth more if at very low AP Recovery.
+								IF "c1&!c2"
+									CharacterGetStat(_APRecovery, _Char, APRecovery)
+									IsGreaterThen(_APRecovery, 4.0)
+								THEN
+									Add(_Score, 5.5)
+								ELSE
+									Add(_Score, 3.0)
+								ENDIF
+							ENDIF
+							IF "c1"
+								CharacterHasStatus(_Char, BLEEDING)
+							THEN
+								Add(_Score, 0.2)
+							ENDIF
+							
+							// Range score calculation
+							IF "c1&c2"
+								CharacterGetSkillRange(_SkillRangeMin, _SkillRangeMax, __Me, Target_FirstAidEnemy)
+								GetDistance(_DistanceToChar, __Me, _Char)
+							THEN
+								Set(_DistanceScore, _DistanceToChar)
+								IF "c1"
+									IsGreaterThen(_DistanceScore, _SkillRangeMax)
+								THEN
+									Subtract(_DistanceScore, _SkillRangeMax)
+									Multiply(_DistanceScore, -1.0)
+								ELIF "c1"
+									IsLessThen(_DistanceScore, _SkillRangeMin)
+								THEN
+									Subtract(_DistanceScore, _SkillRangeMin)
+									Multiply(_DistanceScore, 1.0)
+								ELSE 
+									Set(_DistanceScore, 0.0)
+								ENDIF
+								Add(_Score, _DistanceScore)
+							ENDIF
+							
+							// Can see score calculation
+							IF "!c1"
+								CharacterCanSee(__Me, _Char)
+							THEN
+								Add(_Score, -10.0)
+							ENDIF
+							
+							IF "c1"
+								IsGreaterThen(_Score, %SkillTargetScore_Target_FirstAidEnemy)
+							THEN
+								Set(%SkillTargetChar_Target_FirstAidEnemy, _Char)
+								Set(%SkillTargetScore_Target_FirstAidEnemy, _Score)
+							ENDIF
+						ENDIF
+					ENDIF
+				ENDIF
+			ENDIF
+		ENDIF
+	ENDIF
+	// [~CALC_CHAR_TARGET_ACTIONS]
+	
+	
+	
+	
+	
+	
+	
+	

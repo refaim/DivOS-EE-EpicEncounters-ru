@@ -1,0 +1,2136 @@
+//===============================================//
+//                                               //
+//     C H A R A C T E R   F U N C T I O N S     //
+//                                               //
+//     Written by Matteo "Ameranth" T. (2017)    //
+//===============================================//
+INIT
+CHARACTER:__Me
+	
+INT:%AMER_PredatorShots = 0		//How many Predator shots a character has stored.
+INT:%AMER_DemonReactions = 0	//How many Demon reactions a character has stored.
+INT:%AMER_AngelReactions = 0	//How many Angel reactions a character has stored.
+INT:%AMER_CharismaReactions = 0	//How many Charisma reactions a character has stored.
+INT:%AMER_PredatorReactionRecovery = 1
+INT:%AMER_AngelReactionRecovery = 1
+INT:%AMER_DemonReactionRecovery = 1
+INT:%AMER_CharismaReactionRecovery = 2
+	
+INT:%AMER_CharismaReactionIndex = -1	//Index for which Charisma reaction to perform.
+	
+//Used to pass which character should get Attack of Opportunity bonuses.
+CHARACTER:%AMER_OpportunityAttackingChar
+	
+//Used to trigger Demon's reactive component.
+CHARACTER:%AMER_DemonTarget
+	
+//Used to trigger Angel's reactive component.
+CHARACTER:%AMER_AngelTarget
+	
+//Used to trigger Charisma reactive component.
+CHARACTER:%AMER_CharismaBestBard
+CHARACTER:%AMER_CharismaTarget
+CHARACTER:%AMER_CharismaTargetOverride
+INT:%AMER_CharismaBestStat = 0
+INT:%AMER_CharismaMostReactions = 0
+	
+//Used to trigger a free attack, like Attack of Opportunity.
+CHARACTER:%AMER_FreeAttackTarget
+FIXEDSTRING:%AMER_FreeAttackText
+	
+//Used to make a character stop their current animation.
+FIXEDSTRING:%AMER_PlayAnimation = null
+	
+//Used to pass lucky charm data to child functions.
+INT:%AMER_LuckyCharmSuccess
+INT:%AMER_LuckyCharmApplied
+	
+//Used to track how many times Alchemist can stack Untreated Poison this round.
+INT:%AMER_AlchemistCharges = 0
+	
+//Used to limit the application of Astrologer's Gaze consumes
+//whenever possible because applying consumes causes lag.
+//As of patch 1.1.9, we have architecture to use int instead
+//of character variables for this. This works by storing the
+//randomly generated combat ID instead of the character GUID.
+INT:%AMER_AstroGazeFireSource
+INT:%AMER_AstroGazeWaterSource
+INT:%AMER_AstroGazeAirSource
+INT:%AMER_AstroGazeEarthSource
+INT:%AMER_AstroGazePoisonSource
+INT:%AMER_AstroGazeShadowSource
+INT:%AMER_AstroGazePiercingSource
+INT:%AMER_AstroGazeSlashingSource
+INT:%AMER_AstroGazeCrushingSource
+	
+EVENTS
+EVENT ReactionRecovery
+//====================================//
+//         Reaction Recovery:         //
+//====================================//
+//Recover a character's reactions, if they have any skills or abilities that provide them.
+VARS
+	INT:_Ability
+	INT:_MaximumReactions
+	INT:_TextIndex
+	INT:_OldAmount
+	STRING:_Str
+	FIXEDSTRING:_Text
+ON
+	OnFunction("AMER_ReactionRecovery")
+ACTIONS
+	//PREDATOR
+	IF "c1"
+		CharacterHasTalent(__Me, RangerLoreEvasionBonus)
+	THEN
+		Set(_OldAmount, %AMER_PredatorShots)	//Remember how many we have now
+			
+		//Recover reactions, don't go over maximum.
+		Add(%AMER_PredatorShots, %AMER_PredatorReactionRecovery)
+		IF "c1"
+			IsGreaterThen(%AMER_PredatorShots, 3)
+		THEN
+			Set(%AMER_PredatorShots, 3)
+		ENDIF
+			
+		//Display information for players.
+		IF "c1"
+			CharacterIsPlayer(__Me)
+		THEN
+			//Figure out how many we actually gained, display recovery text accordingly.
+			Set(_TextIndex, %AMER_PredatorShots)
+			Subtract(_TextIndex, _OldAmount)
+			Print(_Str, "AMER_Predator_Recovered[1]", _TextIndex)
+			Cast(_Text, _Str)
+			DisplayCombatInfoText(__Me, _Text, 1.0)
+				
+			//Display remaining text.
+			Print(_Str, "AMER_Predator_Reactions[1]", %AMER_PredatorShots)
+			Cast(_Text, _Str)
+			DisplayCombatInfoText(__Me, _Text, 1.0)
+			DisplayText(__Me, "AMER_BLANK", 1.0)
+		ENDIF
+	ENDIF
+	
+	//DEMON
+	IF "c1"
+		CharacterHasTalent(__Me, Demon)
+	THEN
+		Set(_OldAmount, %AMER_DemonReactions)	//Remember how many we have now
+			
+		//Recover reactions, don't go over maximum.
+		Add(%AMER_DemonReactions, %AMER_DemonReactionRecovery)
+		IF "c1"
+			IsGreaterThen(%AMER_DemonReactions, 3)
+		THEN
+			Set(%AMER_DemonReactions, 3)
+		ENDIF
+			
+		//Display information for players.
+		IF "c1"
+			CharacterIsPlayer(__Me)
+		THEN
+			//Figure out how many we actually gained, display recovery text accordingly.
+			Set(_TextIndex, %AMER_DemonReactions)
+			Subtract(_TextIndex, _OldAmount)
+			Print(_Str, "AMER_Demon_Recovered[1]", _TextIndex)
+			Cast(_Text, _Str)
+			DisplayCombatInfoText(__Me, _Text, 1.0)
+				
+			//Display remaining text.
+			Print(_Str, "AMER_Demon_Reactions[1]", %AMER_DemonReactions)
+			Cast(_Text, _Str)
+			DisplayCombatInfoText(__Me, _Text, 1.0)
+			DisplayText(__Me, "AMER_BLANK", 1.0)
+		ENDIF
+	ENDIF
+	
+	//ANGEL
+	IF "c1"
+		CharacterHasTalent(__Me, IceKing)
+	THEN
+		Set(_OldAmount, %AMER_AngelReactions)	//Remember how many we have now
+			
+		//Recover reactions, don't go over maximum.
+		Add(%AMER_AngelReactions, %AMER_AngelReactionRecovery)
+		IF "c1"
+			IsGreaterThen(%AMER_AngelReactions, 3)
+		THEN
+			Set(%AMER_AngelReactions, 3)
+		ENDIF
+			
+		//Display information for players.
+		IF "c1"
+			CharacterIsPlayer(__Me)
+		THEN
+			//Figure out how many we actually gained, display recovery text accordingly.
+			Set(_TextIndex, %AMER_AngelReactions)
+			Subtract(_TextIndex, _OldAmount)
+			Print(_Str, "AMER_Angel_Recovered[1]", _TextIndex)
+			Cast(_Text, _Str)
+			DisplayCombatInfoText(__Me, _Text, 1.0)
+				
+			//Display remaining text.
+			Print(_Str, "AMER_Angel_Reactions[1]", %AMER_AngelReactions)
+			Cast(_Text, _Str)
+			DisplayCombatInfoText(__Me, _Text, 1.0)
+			DisplayText(__Me, "AMER_BLANK", 1.0)
+		ENDIF
+	ENDIF
+	
+	//BARD
+	IF "c1&c2"
+		CharacterGetAbility(_Ability, __Me, Charisma)
+		IsGreaterThen(_Ability, INT:0)
+	THEN
+		//Don't go out of bounds
+		IF "c1"
+			IsGreaterThen(_Ability, 9)
+		THEN
+			Set(_Ability, 9)
+		ENDIF
+		
+		//Get maximum charisma reactions
+		Subtract(_Ability, INT:1)	//index starts at zero.
+		GetElement(_MaximumReactions, _Ability, INT:1, INT:2, INT:3, INT:3, INT:4, INT:5, INT:5, INT:6, INT:7)
+		
+		Set(_OldAmount, %AMER_CharismaReactions)	//Remember how many we have now
+		Add(%AMER_CharismaReactions, %AMER_CharismaReactionRecovery)
+		IF "c1"
+			IsGreaterThen(%AMER_CharismaReactions, _MaximumReactions)
+		THEN
+			Set(%AMER_CharismaReactions, _MaximumReactions)
+		ENDIF
+		
+		//Display information for players.
+		IF "c1"
+			CharacterIsPlayer(__Me)
+		THEN
+			//Figure out how many we actually gained, display recovery text accordingly.
+			Set(_TextIndex, %AMER_CharismaReactions)
+			Subtract(_TextIndex, _OldAmount)
+			
+			IF "c1"
+				IsLessThen(_TextIndex, INT:0)
+			THEN
+				Set(_TextIndex, INT:0)
+			ENDIF
+			
+			Print(_Str, "AMER_Bard_Recovered[1]", _TextIndex)
+			Cast(_Text, _Str)
+			DisplayCombatInfoText(__Me, _Text, 1.0)
+				
+			//Display remaining text.
+			Print(_Str, "AMER_Bard_Reactions[1]", %AMER_CharismaReactions)
+			Cast(_Text, _Str)
+			DisplayCombatInfoText(__Me, _Text, 1.0)
+			DisplayText(__Me, "AMER_BLANK", 1.0)
+		ENDIF
+	ENDIF
+	
+	
+	
+EVENT PoisonedResPenalty
+//====================================//
+//          Untreated Poison:         //
+//====================================//
+//Make Poisoned status impose an increasing resistance penalty to Poison.
+ON
+	OnFunction("AMER_PoisonedResPenalty")
+ACTIONS
+	IF "c1"
+		CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_PoisonedResPenalty1")
+	THEN
+		CharacterConsume(__Me, "AMER_STATUS_PoisonedResPenalty2")
+	ELIF "c1"
+		CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_PoisonedResPenalty2")
+	THEN
+		CharacterConsume(__Me, "AMER_STATUS_PoisonedResPenalty3")
+	ELIF "c1"
+		CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_PoisonedResPenalty3")
+	THEN
+		CharacterConsume(__Me, "AMER_STATUS_PoisonedResPenalty3")
+	//Stacks 4 through 6 are from Alchemist, they should refresh themselves
+	//but should not grow of their own accord.
+	ELIF "c1"
+		CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_PoisonedResPenalty4")
+	THEN
+		CharacterConsume(__Me, "AMER_STATUS_PoisonedResPenalty4")
+	ELIF "c1"
+		CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_PoisonedResPenalty5")
+	THEN
+		CharacterConsume(__Me, "AMER_STATUS_PoisonedResPenalty5")
+	ELIF "c1"
+		CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_PoisonedResPenalty6")
+	THEN
+		CharacterConsume(__Me, "AMER_STATUS_PoisonedResPenalty6")
+	ELSE
+		CharacterConsume(__Me, "AMER_STATUS_PoisonedResPenalty1")
+	ENDIF
+	
+	
+	
+EVENT CheckCharisma
+//====================================//
+//            Charisma:               //
+//====================================//
+VARS
+//=========================//
+	FIXEDSTRING:_Stop = "STOP"
+//====================
+	INT:_Index
+	FLOAT:_Distance
+	CHARACTER:_Char
+	CHARACTER:_CharTarget
+ON
+	OnCharacterEvent(__Me, "AMER_CheckCharisma")
+ACTIONS
+	//As of 1.1.9.4, FindBestBard does condition checking instead of this routine.
+	//If this event is called, the reaction should already be legitimate.
+	Set(_Char, %AMER_CharismaBestBard)	//The best Bard passed us the target through this variable.
+	Set(%AMER_CharismaBestBard, null)
+			
+	//Don't react to dead or dying characters.
+	IF "!c1&!c2"
+		CharacterHasStatus(_Char, DYING)
+		CharacterIsDead(_Char)
+	THEN
+		//Start reset timer in case reaction isn't handled fast enough.
+		StopTimer("AMER_ResetCharismaTarget")
+		StartTimer("AMER_ResetCharismaTarget", 1.0, 0)
+									
+		//Reset animation of the Bard.
+		Set(%AMER_PlayAnimation, _Stop)
+									
+		//Set the reaction target variable, which will trigger the behavior.
+		//The best Bard passed me the reaction index already.
+		Set(%AMER_CharismaTarget, _Char)
+	ENDIF
+	
+EVENT InitializeBardicReactions
+ON
+	OnFunction("AMER_InitializeBardicReaction")
+ACTIONS
+	Set(%AMER_CharismaBestBard, null)
+	IterateCharactersInCombat(__Me, "AMER_FindBestBard")
+	IF "!c1"
+		IsEqual(%AMER_CharismaBestBard, null)
+	THEN
+		CharacterEvent(%AMER_CharismaBestBard, "AMER_CheckCharisma")
+	ENDIF
+	Set(%AMER_CharismaBestStat, INT:0)
+	Set(%AMER_CharismaMostReactions, INT:0)
+	
+EVENT FindBestBard
+//In order to have only one Bard responding to reaction triggers, we need
+//to find which Bard has the highest Bard score. If more than one has the
+//same score, the one with more reactions remaining is preferred.
+VARS
+	FIXEDSTRING:_WhichEffect
+	CHARACTER:_Target
+	CHARACTER:_Char
+	FLOAT:_Distance
+	INT:_Charisma
+	INT:_Reactions
+	INT:_BlockIndex
+ON
+	OnIterateCharacter(_Char, "AMER_FindBestBard")
+ACTIONS
+	IF "c1&c2"
+		GetVar(_Reactions, _Char, "AMER_CharismaReactions")
+		IsGreaterThen(_Reactions, INT:0)
+	THEN
+		//Only set reaction if not in the active turn.
+		//Don't allow reacting when dead.
+		IF "!c1&!c2"
+			CharacterIsDead(_Char)
+			CharacterIsInActiveTurn(_Char)
+		THEN
+			//If there was a target override, use that instead of __Me.
+			IF "!c1"
+				IsEqual(%AMER_CharismaTargetOverride, null)
+			THEN
+				Set(_Target, %AMER_CharismaTargetOverride)
+			ELSE
+				Set(_Target, __Me)
+			ENDIF
+			
+			//Index 9 is block reactions, so can be done by either friend or foe.
+			//Index 10 is charm removal, so it is the only one to be used if the
+			//target is a charmed "enemy."
+			IF "(c1&c2)|(c3&c4)&(!c5|c6)"
+				IsGreaterThen(%AMER_CharismaReactionIndex, 8)
+				CharacterIsEnemy(_Char, _Target)
+				IsLessThen(%AMER_CharismaReactionIndex, 10)
+				CharacterIsAlly(_Char, _Target)
+				CharacterHasStatus(_Char, CHARMED)
+				IsEqual(%AMER_CharismaReactionIndex, 10)
+			THEN
+				IF "c1"
+					CanSee(__Me, _Char)
+				THEN
+					IF "c1&!c2"
+						GetInnerDistance(_Distance, _Target, _Char)
+						IsGreaterThen(_Distance, 20.0)
+					THEN
+						//Check to make sure the Bard is not disabled.
+						IF "!c1&!c2&!c3&!c4&!c5&!c6&!c7&!c8"
+							CharacterHasStatus(_Char, FROZEN)
+							CharacterHasStatus(_Char, STUNNED)
+							CharacterHasStatus(_Char, FEAR)
+							CharacterHasStatus(_Char, KNOCKED_DOWN)
+							CharacterHasStatus(_Char, PETRIFIED)
+							CharacterHasStatus(_Char, MUTED)
+							CharacterHasStatus(_Char, BLIND)
+							CharacterHasStatus(_Char, CONSUME, "AMER_STATUS_Maze")
+						THEN
+							IF "c1"
+								CharacterGetAbility(_Charisma, _Char, Charisma)
+							THEN
+								//If it was the block reaction index, check if the target already has
+								//the intended block buff or not. This will prevent opposed bards who
+								//are "more qualified" from causing no block reactions to occur.
+								IF "c1"
+									IsEqual(%AMER_CharismaReactionIndex, 9)
+								THEN
+									IF "c1"
+										IsGreaterThen(_Charisma, 6)
+									THEN
+										IF "(c1&c2)|(c3&c4)"
+											CharacterIsAlly(_Target, _Char)
+											CharacterHasStatus(_Target, CONSUME, "AMER_Charisma_BlockBuff3")
+											CharacterIsEnemy(_Target, _Char)
+											CharacterHasStatus(_Target, CONSUME, "AMER_Charisma_BlockDebuff3")
+										THEN
+											RETURN
+										ENDIF
+									ELIF "c1"
+										IsGreaterThen(_Charisma, 3)
+									THEN
+										IF "(c1&c2)|(c3&c4)"
+											CharacterIsAlly(_Target, _Char)
+											CharacterHasStatus(_Target, CONSUME, "AMER_Charisma_BlockBuff2")
+											CharacterIsEnemy(_Target, _Char)
+											CharacterHasStatus(_Target, CONSUME, "AMER_Charisma_BlockDebuff2"
+										THEN
+											RETURN
+										ENDIF
+									ENDIF
+								ENDIF
+								
+								//Higher Bard level is prefered.
+								IF "!c1"
+									IsLessThen(_Charisma, %AMER_CharismaBestStat)
+								THEN
+									//If the amounts are equal, let reaction amount arbitrate.
+									IF "!c1|c2"
+										IsEqual(_Charisma, %AMER_CharismaBestStat)
+										IsGreaterThen(_Reactions, %AMER_CharismaMostReactions)
+									THEN
+										SetVar(_Char, "AMER_CharismaBestBard", _Target)	//Reuse %AMER_CharismaBestBard as a means to pass target to the Bard.
+										SetVar(_Char, "AMER_CharismaReactionIndex", %AMER_CharismaReactionIndex)	//Pass the reaction index to the Bard.
+										Set(%AMER_CharismaBestBard, _Char)
+										Set(%AMER_CharismaBestStat, _Charisma)
+										Set(%AMER_CharismaMostReactions, _Reactions)
+									ENDIF
+								ENDIF
+							ENDIF
+						ENDIF
+					ENDIF
+				ENDIF
+			ENDIF
+		ENDIF
+	ENDIF
+	
+EVENT ResetCharismaTarget
+ON
+	OnTimer("AMER_ResetCharismaTarget")
+ACTIONS
+	Set(%AMER_CharismaTarget, null)
+	
+	
+	
+EVENT CheckAngel
+//====================================//
+//              Angel:                //
+//====================================//
+VARS
+//============================//
+	FIXEDSTRING:_Stop = "STOP"
+//============================//
+	CHARACTER:_Char
+	FLOAT:_Distance
+ON
+	OnCharacterEvent(_Char, "AMER_CheckAngel")
+ACTIONS
+	IF "c1"
+		CharacterHasTalent(__Me, IceKing)
+		//Check for the talent as well as reactions because I've getting
+		//bug reports that they fire without the correct talent. This
+		//should leave no room for error.
+	THEN
+		IF "c1"
+			IsGreaterThen(%AMER_AngelReactions, INT:0)
+		THEN
+			IF "c1"
+				CharacterIsAlly(__Me, _Char)
+			THEN
+				IF "c1"
+					CanSee(__Me, _Char)
+				THEN
+					IF "c1&!c2"
+						GetInnerDistance(_Distance, __Me, _Char)
+						IsGreaterThen(_Distance, 20.0)
+					THEN
+						//Don't react to dead or dying characters.
+						IF "!c1&!c2"
+							CharacterHasStatus(_Char, DYING)
+							CharacterIsDead(_Char)
+						THEN
+							IF "!c1&!c2"
+								CharacterIsInActiveTurn(__Me)
+								CharacterIsDead(__Me)
+							THEN
+								//Check to make sure I am not disabled.
+								IF "!c1&!c2&!c3&!c4&!c5&!c6&!c7&!c8"
+									CharacterHasStatus(__Me, FROZEN)
+									CharacterHasStatus(__Me, STUNNED)
+									CharacterHasStatus(__Me, FEAR)
+									CharacterHasStatus(__Me, KNOCKED_DOWN)
+									CharacterHasStatus(__Me, PETRIFIED)
+									CharacterHasStatus(__Me, MUTED)
+									CharacterHasStatus(__Me, BLIND)
+									CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_Maze")
+								THEN
+									//Start reset timer in case reaction isn't handled fast enough.
+									StopTimer("AMER_ResetAngelTarget")
+									StartTimer("AMER_ResetAngelTarget", 1.0, 0)
+										
+									Set(%AMER_PlayAnimation, _Stop)
+									Set(%AMER_AngelTarget, _Char)
+								ENDIF
+							ENDIF
+						ENDIF
+					ENDIF
+				ENDIF
+			ENDIF
+		ENDIF
+	ENDIF
+	
+EVENT ResetAngelTarget
+ON
+	OnTimer("AMER_ResetAngelTarget")
+ACTIONS
+	Set(%AMER_AngelTarget, null)
+	
+EVENT CheckAngelInitial
+VARS
+	FLOAT:_Vitality
+ON
+	OnFunction("AMER_CheckAngelInitial")
+ACTIONS
+	//Angel only triggers on those who do not have Decaying
+	//Touch, are not charmed, and are missing vitality.
+	IF "!c1"
+		CharacterHasStatus(__Me, DECAYING_TOUCH)
+	THEN
+		IF "!c1"
+			CharacterHasStatus(__Me, CHARMED)
+		THEN
+			IF "c1&c2"
+				CharacterGetStat(_Vitality, __Me, Vitality)
+				IsLessThen(_Vitality, 1.0)
+			THEN
+				CharacterEvent(__Me, "AMER_CheckAngel")
+			ENDIF
+		ENDIF
+	ENDIF
+	
+	
+	
+EVENT CheckDemon
+//====================================//
+//              Demon:                //
+//====================================//
+VARS
+//============================//
+	FIXEDSTRING:_Stop = "STOP"
+//============================//
+	CHARACTER:_Char
+	FLOAT:_Distance
+ON
+	OnCharacterEvent(_Char, "AMER_CheckDemon")
+ACTIONS
+	IF "c1"
+		CharacterHasTalent(__Me, Demon)
+		//Check for the talent as well as reactions because I've getting
+		//bug reports that they fire without the correct talent. This
+		//should leave no room for error.
+	THEN
+		IF "c1"
+			IsGreaterThen(%AMER_DemonReactions, INT:0)
+		THEN
+			IF "!c1"
+				CharacterIsAlly(__Me, _Char)
+			THEN
+				IF "c1"
+					CanSee(__Me, _Char)
+				THEN
+					IF "c1&!c2"
+						GetInnerDistance(_Distance, __Me, _Char)
+						IsGreaterThen(_Distance, 20.0)
+					THEN
+						//Don't react to dead or dying characters.
+						IF "!c1&!c2"
+							CharacterHasStatus(_Char, DYING)
+							CharacterIsDead(_Char)
+						THEN
+							//Only set reaction if not in the active turn.
+							//Don't allow reacting when dead.
+							IF "!c1&!c2"
+								CharacterIsInActiveTurn(__Me)
+								CharacterIsDead(__Me)
+							THEN
+								//Check to make sure the Demon is not disabled.
+								IF "!c1&!c2&!c3&!c4&!c5&!c6&!c7&!c8"
+									CharacterHasStatus(__Me, FROZEN)
+									CharacterHasStatus(__Me, STUNNED)
+									CharacterHasStatus(__Me, FEAR)
+									CharacterHasStatus(__Me, KNOCKED_DOWN)
+									CharacterHasStatus(__Me, PETRIFIED)
+									CharacterHasStatus(__Me, MUTED)
+									CharacterHasStatus(__Me, BLIND)
+									CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_Maze")
+								THEN
+									//Start reset timer in case reaction isn't handled fast enough.
+									StopTimer("AMER_ResetDemonTarget")
+									StartTimer("AMER_ResetDemonTarget", 1.0, 0)
+										
+									Set(%AMER_PlayAnimation, _Stop)
+									Set(%AMER_DemonTarget, _Char)
+								ENDIF
+							ENDIF
+						ENDIF
+					ENDIF
+				ENDIF
+			ENDIF
+		ENDIF
+	ENDIF
+	
+EVENT ResetDemonTarget
+ON
+	OnTimer("AMER_ResetDemonTarget")
+ACTIONS
+	Set(%AMER_DemonTarget, null)
+	
+	
+	
+EVENT CheckPredator
+//====================================//
+//              Predator:             //
+//====================================//
+//Predator allows a character to take a ranged Attack of
+//Opportunity on an enemy when it becomes Crippled, Knocked
+//Down, Blind, or Feared. The Predator can only do this when
+//not in the active turn, and can only take _MaximumShots
+//Attacks of Opportunity per round. The conditionals are
+//separated to reduce the average number of conditionals
+//executed each iteration.
+VARS
+//=============================//
+	FIXEDSTRING:_Text = "AMER_PredatorText"
+//=============================//
+	CHARACTER:_Char
+ON
+	OnCharacterEvent(_Char, "AMER_CheckPredator")
+ACTIONS
+	IF "c1"
+		CharacterHasTalent(__Me, RangerLoreEvasionBonus)
+		//Check for the talent as well as reactions because I've getting
+		//bug reports that they fire without the correct talent. This
+		//should leave no room for error.
+	THEN
+		//Do I have Predator Shots?
+		IF "c1"
+			IsGreaterThen(%AMER_PredatorShots, INT:0)
+		THEN
+			IF "!c1"
+				CharacterIsAlly(__Me, _Char)
+			THEN
+				IF "c1"
+					CanSee(__Me, _Char)
+				THEN
+					//Don't react to dead or dying characters.
+					IF "!c1&!c2"
+						CharacterHasStatus(_Char, DYING)
+						CharacterIsDead(_Char)
+					THEN
+						IF "!c1&!c2"
+							CharacterIsInActiveTurn(__Me)
+							CharacterIsDead(__Me)
+						THEN
+							IF "!c1&!c2&!c3&!c4&!c5&!c6&!c7"
+								CharacterHasStatus(__Me, FROZEN)
+								CharacterHasStatus(__Me, STUNNED)
+								CharacterHasStatus(__Me, FEAR)
+								CharacterHasStatus(__Me, KNOCKED_DOWN)
+								CharacterHasStatus(__Me, PETRIFIED)
+								CharacterHasStatus(__Me, BLIND)
+								CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_Maze")
+							THEN
+								//If target in range of me and I have
+								//an appropriate weapon, I shoot it.
+								IF "c1"
+									CharacterInWeaponRange(__Me, _Char)
+								THEN
+									//Solve shooting at roaming neutrals.
+									IF "c1"
+										IsInCombat(_Char)
+									THEN
+										IF "c1"
+											IsEqual(%AMER_FreeAttackTarget, null)
+										THEN
+											StopTimer("AMER_ResetFreeAttack")
+											StartTimer("AMER_ResetFreeAttack", 1.0, 0)
+											//Subtract(%AMER_PredatorShots, INT:1)
+											//Set(%AMER_PlayAnimation, _Stop)
+											Set(%AMER_FreeAttackTarget, _Char)
+											Set(%AMER_FreeAttackText, _Text)
+										ENDIF
+									ENDIF
+								ENDIF
+							ENDIF
+						ENDIF
+					ENDIF
+				ENDIF
+			ENDIF
+		ENDIF
+	ENDIF
+	
+	
+	
+EVENT CenturionHook
+//====================================//
+//             Centuiron:             //
+//====================================//
+//This event serves as a way to hook into the Centurion's
+//charscript, since the onblock and onmiss events are
+//handled by the attacked character. This is necessary
+//to do so the Centurion can run a timer to reset its free
+//attack behavior if it doesn't get handled fast enough,
+//preventing oddly timed attacks in some specific scenarios.
+VARS
+	CHARACTER:_Char
+ON
+	OnCharacterEvent(_Char, "AMER_CenturionHook")
+ACTIONS
+	IF "c1"
+		IsEqual(_Char, __Me)
+	THEN
+		StopTimer("AMER_ResetFreeAttack")
+		StartTimer("AMER_ResetFreeAttack", 1.0, 0)
+	ENDIF
+	
+	
+	
+	/*
+EVENT OpportunityBonuses
+//=================================//
+//  Attack of Opportunity Bonuses: //
+//=================================//
+VARS
+	CHARACTER:_AttackingChar
+	INT:_Chain
+	INT:_ChainMax
+ON
+	OnFunction("AMER_OpportunityBonuses")
+ACTIONS
+	Set(_AttackingChar, %AMER_OpportunityAttackingChar)
+	
+	//Add Attack of Opportunity damage boost.
+	AddTemporaryStatusInfluence(_AttackingChar, CONSUME, 1, "AMER_AttackOfOpportunityDamage", 0)
+	
+	//If wielding a dagger, give a stack of chain and
+	//make me invisible.
+	IF "c1"
+		CharacterHasWeaponType(_AttackingChar, SmallWeapons, 1)
+	THEN
+		IF "c1&c2"
+			GetVar(_Chain, _AttackingChar, "AMER_Chain")
+			GetVar(_ChainMax, _AttackingChar, "AMER_ChainMax")
+		THEN
+			Add(_Chain, INT:1)
+			IF "!c1"
+				IsGreaterThen(_Chain, _ChainMax)
+			THEN
+				SetVar(_AttackingChar, "AMER_Chain", _Chain)
+				
+				//If I am not the attacking character, AMER_SetChain needs
+				//to be flagged to set Chain for %AMER_CharSource instead of __Me.
+				IF "c1"
+					IsEqual(_AttackingChar, __Me)
+				THEN
+					CallFunction("AMER_SetChain")
+				ELSE
+					SetVar(__Me, "AMER_CharSource", _AttackingChar)
+					SetVar(_AttackingChar, "AMER_SetChainForSource", INT:1)
+					CallFunction("AMER_SetChain")
+				ENDIF
+			ENDIF
+		ENDIF
+		
+	//If wielding a one-hander, try to make the target Bleed.
+	ELIF "c1"
+		CharacterHasWeaponType(_AttackingChar, OneHanded, 1)
+	THEN
+		//StartTimer("AMER_BleedOpportunity", 0.8, 0)
+		
+	//If wielding a two-hander, try to make the target Crippled.
+	ELIF "!c1&!c2&!c3"
+		CharacterHasWeaponType(_AttackingChar, Wands, 1)
+		CharacterHasWeaponType(_AttackingChar, Bow, 1)
+		CharacterHasWeaponType(_AttackingChar, CrossBow, 1)
+	THEN
+		//StartTimer("AMER_CrippleOpportunity", 1.15, 0)
+	ENDIF
+	*/
+	
+EVENT OpportunityBonuses
+VARS
+	CHARACTER:_AttackingChar
+	INT:_Chain
+	INT:_ChainMax
+ON
+	//OnFunction("AMER_OpportunityDebuffs")
+	OnFunction("AMER_OpportunityBonuses")
+ACTIONS
+	Set(_AttackingChar, %AMER_OpportunityAttackingChar)
+	
+	//If wielding a dagger, give a stack of chain and
+	//make me invisible.
+	IF "c1"
+		CharacterHasWeaponType(_AttackingChar, SmallWeapons, 1)
+	THEN
+		IF "c1&c2"
+			GetVar(_Chain, _AttackingChar, "AMER_Chain")
+			GetVar(_ChainMax, _AttackingChar, "AMER_ChainMax")
+		THEN
+			Add(_Chain, INT:1)
+			IF "!c1"
+				IsGreaterThen(_Chain, _ChainMax)
+			THEN
+				SetVar(_AttackingChar, "AMER_Chain", _Chain)
+				
+				//If I am not the attacking character, AMER_SetChain needs
+				//to be flagged to set Chain for %AMER_CharSource instead of __Me.
+				IF "c1"
+					IsEqual(_AttackingChar, __Me)
+				THEN
+					CallFunction("AMER_SetChain")
+				ELSE
+					SetVar(__Me, "AMER_CharSource", _AttackingChar)
+					SetVar(_AttackingChar, "AMER_SetChainForSource", INT:1)
+					CallFunction("AMER_SetChain")
+				ENDIF
+			ENDIF
+		ENDIF
+		
+	//If wielding a one-hander, try to make the target Bleed.
+	ELIF "c1"
+		CharacterHasWeaponType(_AttackingChar, OneHanded, 1)
+	THEN
+		CallFunction("AMER_BleedOpportunity")
+		//StartTimer("AMER_BleedOpportunity", 0.8, 0)
+		
+	//If wielding a two-hander, try to make the target Crippled.
+	ELIF "!c1&!c2&!c3"
+		CharacterHasWeaponType(_AttackingChar, Wands, 1)
+		CharacterHasWeaponType(_AttackingChar, Bow, 1)
+		CharacterHasWeaponType(_AttackingChar, CrossBow, 1)
+	THEN
+		CallFunction("AMER_CrippleOpportunity")
+		//StartTimer("AMER_CrippleOpportunity", 1.15, 0)
+	ENDIF
+	
+	Set(%AMER_OpportunityAttackingChar, null)
+	
+EVENT ResetOpportunityHook
+ON
+	OnCharacterEvent(__Me, "AMER_ResetOpportunityHook")
+ACTIONS
+	StartTimer("AMER_OpportunityReset", 1.5, 0)
+	
+EVENT OpportunityReset
+ON
+	OnTimer("AMER_OpportunityReset")
+ACTIONS
+	Set(%AMER_OpportunityAttackingChar, null)
+	
+EVENT BleedOpportunity
+//Make Attack of Opportunity cause Bleeding
+ON
+	OnFunction("AMER_BleedOpportunity")
+	//OnTimer("AMER_BleedOpportunity")
+ACTIONS
+	SetVar(__Me, "AMER_RemoteEffectSource", %AMER_OpportunityAttackingChar)
+	SetVar(__Me, "AMER_RemoteEffectProjectile", SKILL:AMER_SCRIPTSKILL_OpportunityBleed)
+	CallFunction("AMER_DoRemoteEffect")
+	
+EVENT CrippleOpportunity
+//Make Attack of Opportunity cause Cripple
+ON
+	OnFunction("AMER_CrippleOpportunity")
+	//OnTimer("AMER_CrippleOpportunity")
+ACTIONS
+	SetVar(__Me, "AMER_RemoteEffectSource", %AMER_OpportunityAttackingChar)
+	SetVar(__Me, "AMER_RemoteEffectProjectile", SKILL:AMER_SCRIPTSKILL_OpportunityCripple)
+	CallFunction("AMER_DoRemoteEffect")
+	
+	
+	
+EVENT LuckyCharm
+//====================================//
+//            Lucky Charm:            //
+//====================================//
+VARS
+	INT:_Luck
+	INT:_Tier1Chance
+	INT:_Tier2Chance
+	INT:_Tier3Chance
+	INT:_Roll
+	INT:_StatusTextIndex
+	INT:_RebirthCD
+	FIXEDSTRING:_StatusText
+ON
+	OnFunction("AMER_LuckyCharm")
+ACTIONS
+	IF "c1"
+		CharacterGetAbility(_Luck, __Me, Luck)
+	THEN
+		//Don't go out of bounds.
+		IF "c1"
+			IsGreaterThen(_Luck, 12)
+		THEN
+			Set(_Luck, 12)
+		ENDIF
+		
+		Subtract(_Luck, INT:1)	//index starts at zero.
+		
+		GetElement(_Tier1Chance, _Luck, INT:30, INT:60, INT:80, INT:70, INT:40, INT:10, INT:0, INT:0, INT:0, INT:0, INT:0, INT:0)
+		GetElement(_Tier2Chance, _Luck, INT:0, INT:0, INT:10, INT:30, INT:60, INT:60, INT:40, INT:0, INT:0, INT:0, INT:0, INT:0)
+		GetElement(_Tier3Chance, _Luck, INT:0, INT:0, INT:0, INT:0, INT:0, INT:30, INT:60, INT:100, INT:130, INT:160, INT:190, INT:220)
+		
+		GetRandomBetween(_Roll, INT:1, INT:100)
+		Set(%AMER_LuckyCharmApplied, INT:0)
+		IF "!c1"
+			CharacterIsDead(__Me)
+		THEN
+			IF "!c1"
+				IsGreaterThen(_Roll, _Tier1Chance)
+			THEN
+				Set(_StatusTextIndex, INT:0)
+				//APPLY TIER 1 BONUS
+				WHILE "c1"
+					IsEqual(%AMER_LuckyCharmApplied, INT:0)
+				DO
+					CallFunction("AMER_LuckyCharmTier1")
+				ENDWHILE
+			ELSE
+				Set(%AMER_LuckyCharmSuccess, _Tier1Chance)
+				Add(%AMER_LuckyCharmSuccess, _Tier2Chance)
+				IF "!c1"
+					IsGreaterThen(_Roll, %AMER_LuckyCharmSuccess)
+				THEN
+					Set(_StatusTextIndex, INT:0)
+					//APPLY TIER 2 BONUS
+					WHILE "c1"
+						IsEqual(%AMER_LuckyCharmApplied, INT:0)
+					DO
+						CallFunction("AMER_LuckyCharmTier2")
+					ENDWHILE
+				ELSE
+					Add(%AMER_LuckyCharmSuccess, _Tier3Chance)
+					IF "!c1"
+						IsGreaterThen(_Roll, %AMER_LuckyCharmSuccess)
+					THEN
+						Set(_StatusTextIndex, INT:-1)	//Tier 3 adds 1 for each effect applied.
+						//APPLY TIER 3 BONUS
+						WHILE "c1|!c2"
+							IsEqual(%AMER_LuckyCharmApplied, INT:0)
+							IsGreaterThen(_Roll, %AMER_LuckyCharmSuccess)
+						DO
+							CallFunction("AMER_LuckyCharmTier3")
+							IF "c1"
+								IsEqual(%AMER_LuckyCharmApplied, INT:1)
+							THEN
+								Add(_StatusTextIndex, INT:1)
+							ENDIF
+						ENDWHILE
+					ENDIF
+				ENDIF
+			ENDIF
+		ELIF "c1"
+			CharacterIsPlayer(__Me)
+		THEN
+			//Give players a chance to resurrect if dead. Up to 75%.
+			Subtract(_Tier3Chance, INT:100)
+			IF "c1"
+				IsGreaterThen(_Tier3Chance, INT:75)
+			THEN
+				Set(_Tier3Chance, INT:75)
+			ENDIF
+			IF "!c1"
+				IsGreaterThen(_Roll, _Tier3Chance)
+			THEN
+				IF "c1&c2"
+					GetVar(_RebirthCD, __Me, "AMER_RebirthCountdown")
+					IsGreaterThen(_RebirthCD, INT:0)
+				THEN
+					SetVar(__Me, "AMER_RebirthCountdown", INT:0)
+					CallFunction("AMER_RebirthRez")
+				ELSE
+					CharacterResurrect(__Me, _Roll)
+				ENDIF
+				Set(_StatusTextIndex, INT:3)
+				Set(%AMER_LuckyCharmApplied, INT:1)
+			ENDIF
+		ENDIF
+		
+		IF "c1"
+			IsEqual(%AMER_LuckyCharmApplied, INT:1)
+		THEN
+			GetElement(_StatusText, _StatusTextIndex, "AMER_STATUS_Lucky", "AMER_STATUS_Lucky2", "AMER_STATUS_Lucky3", "AMER_STATUS_LuckyRez")
+			StatusText(__Me, _StatusText)
+			CharacterPlayEffect(__Me, "FX_GP_Clover_A")
+			PlaySound(__Me, "Skill_SurvivorsKarma_Cast")
+		ENDIF
+	ENDIF
+	
+EVENT LuckyCharmTier1
+VARS
+	INT:_EffectIndex
+	FLOAT:_Vitality
+	STRING:_Str
+	FIXEDSTRING:_CombatText
+	POTION:_WhichEffect
+ON
+	OnFunction("AMER_LuckyCharmTier1")
+ACTIONS
+	GetRandomBetween(_EffectIndex, INT:1, 10)
+	Print(_Str, "AMER_LuckyCombatText[1]", _EffectIndex)
+	Cast(_CombatText, _Str)
+	Subtract(_EffectIndex, INT:1)	//Index starts at zero.
+	GetElement(_WhichEffect, _EffectIndex, "AMER_LuckyCharm_Armor1", "AMER_LuckyCharm_HitChance1", "AMER_LuckyCharm_CritChance1", "AMER_LuckyCharm_Damage1", "AMER_LuckyCharm_Resist1", "AMER_LuckyCharm_Heal1", "AMER_LuckyCharm_AP1", "AMER_LuckyCharm_Initiative1", "AMER_LuckyCharm_MoveSpeed1", "AMER_LuckyCharm_Sight1")
+	
+	
+	//Check if it was an effect that might warrant a re-roll
+	//if particular conditions aren't met.
+	IF "c1"
+		IsEqual(_WhichEffect, "AMER_LuckyCharm_Heal1")
+	THEN
+		IF "c1&c2&!c3"
+			CharacterGetStat(_Vitality, __Me, Vitality)
+			IsLessThen(_Vitality, FLOAT:1)
+			CharacterHasStatus(__Me, DECAYING_TOUCH)
+		THEN
+			Set(%AMER_LuckyCharmApplied, INT:1)
+			CharacterHeal(__Me, 0.10)
+			//CharacterConsume(__Me, _WhichEffect)
+		ENDIF
+	ELIF "c1"
+		IsEqual(_WhichEffect, "AMER_LuckyCharm_Sight1")
+	THEN
+		IF "c1|c2"
+			CharacterHasWeaponType(__Me, Bow, 1)
+			CharacterHasWeaponType(__Me, CrossBow, 1)
+		THEN
+			Set(%AMER_LuckyCharmApplied, INT:1)
+			CharacterConsume(__Me, _WhichEffect)
+		ENDIF
+	ELIF "c1"
+		IsEqual(_WhichEffect, "AMER_LuckyCharm_HitChance1")
+	THEN
+		IF "!c1"
+			CharacterHasWeaponType(__Me, Wands, 1)
+		THEN
+			Set(%AMER_LuckyCharmApplied, INT:1)
+			CharacterConsume(__Me, _WhichEffect)
+		ENDIF
+	ELSE
+		Set(%AMER_LuckyCharmApplied, INT:1)
+		CharacterConsume(__Me, _WhichEffect)
+	ENDIF
+			
+	//Display combat text for effect applied.
+	IF "c1"
+		IsEqual(%AMER_LuckyCharmApplied, INT:1)
+	THEN
+		DisplayCombatInfoText(__Me, _CombatText, 1.0)
+		DisplayText(__Me, "AMER_BLANK", 1.0)
+	ENDIF
+	
+EVENT LuckyCharmTier2
+VARS
+	INT:_EffectIndex
+	FLOAT:_Vitality
+	STRING:_Str
+	FIXEDSTRING:_CombatText
+	POTION:_WhichEffect
+ON
+	OnFunction("AMER_LuckyCharmTier2")
+ACTIONS
+	GetRandomBetween(_EffectIndex, INT:1, 16)
+	Print(_Str, "AMER_LuckyCombatText[1]", _EffectIndex)
+	Cast(_CombatText, _Str)
+	Subtract(_EffectIndex, INT:1)	//Index starts at zero.
+	GetElement(_WhichEffect, _EffectIndex, "AMER_LuckyCharm_Armor2", "AMER_LuckyCharm_HitChance2", "AMER_LuckyCharm_CritChance2", "AMER_LuckyCharm_Damage2", "AMER_LuckyCharm_Resist2", "AMER_LuckyCharm_Heal2", "AMER_LuckyCharm_AP2", "AMER_LuckyCharm_Initiative2", "AMER_LuckyCharm_MoveSpeed2", "AMER_LuckyCharm_Sight2", "AMER_LuckyCharm_Shield2", "AMER_LuckyCharm_Strength2", "AMER_LuckyCharm_Dexterity2", "AMER_LuckyCharm_Intelligence2", "AMER_LuckyCharm_Perception2", "AMER_LuckyCharm_StatusRemoval2")
+	
+	//Check if it was an effect that might warrant a re-roll
+	//if particular conditions aren't met.
+	IF "c1"
+		IsEqual(_WhichEffect, "AMER_LuckyCharm_StatusRemoval2")
+	THEN
+		IF "c1|c2|c3"
+			CharacterHasStatus(__Me, CHILLED)
+			CharacterHasStatus(__Me, CONSUME, AMER_STATUS_Shocked)
+			CharacterHasStatus(__Me, CURSED)
+		THEN
+			CharacterRemoveStatus(__Me, CHILLED)
+			CharacterConsume(__Me, "AMER_STATUS_RemoveShocked")
+			CharacterRemoveStatus(__Me, CURSED)
+			Set(%AMER_LuckyCharmApplied, INT:1)
+		ENDIF
+	ELIF "c1"
+		IsEqual(_WhichEffect, "AMER_LuckyCharm_Heal2")
+	THEN
+		IF "c1&c2&!c3"
+			CharacterGetStat(_Vitality, __Me, Vitality)
+			IsLessThen(_Vitality, FLOAT:1)
+			CharacterHasStatus(__Me, DECAYING_TOUCH)
+		THEN
+			Set(%AMER_LuckyCharmApplied, INT:1)
+			//CharacterConsume(__Me, _WhichEffect)
+			CharacterHeal(__Me, 0.20)
+		ENDIF
+	ELIF "c1"
+		IsEqual(_WhichEffect, "AMER_LuckyCharm_Sight2")
+	THEN
+		IF "c1|c2"
+			CharacterHasWeaponType(__Me, Bow, 1)
+			CharacterHasWeaponType(__Me, CrossBow, 1)
+		THEN
+			Set(%AMER_LuckyCharmApplied, INT:1)
+			CharacterConsume(__Me, _WhichEffect)
+		ENDIF
+	ELIF "c1"
+		IsEqual(_WhichEffect, "AMER_LuckyCharm_HitChance2")
+	THEN
+		IF "!c1"
+			CharacterHasWeaponType(__Me, Wands, 1)
+		THEN
+			Set(%AMER_LuckyCharmApplied, INT:1)
+			CharacterConsume(__Me, _WhichEffect)
+		ENDIF
+	ELIF "c1"
+		IsEqual(_WhichEffect, "AMER_LuckyCharm_Shield2")
+	THEN
+		IF "c1"
+			CharacterHasWeaponType(__Me, Shield, 1)
+		THEN
+			Set(%AMER_LuckyCharmApplied, INT:1)
+			CharacterConsume(__Me, _WhichEffect)
+		ENDIF
+	ELSE
+		Set(%AMER_LuckyCharmApplied, INT:1)
+		CharacterConsume(__Me, _WhichEffect)
+	ENDIF
+		
+	//Display combat text for effect applied.
+	IF "c1"
+		IsEqual(%AMER_LuckyCharmApplied, INT:1)
+	THEN
+		DisplayCombatInfoText(__Me, _CombatText, 1.0)
+		DisplayText(__Me, "AMER_BLANK", 1.0)
+	ENDIF
+	
+EVENT LuckyCharmTier3
+VARS
+	INT:_EffectIndex
+	INT:_SplitTier
+	FLOAT:_Vitality
+	STRING:_Str
+	FIXEDSTRING:_CombatText
+	POTION:_WhichEffect
+ON
+	OnFunction("AMER_LuckyCharmTier3")
+ACTIONS
+	Set(%AMER_LuckyCharmApplied, INT:0)
+	
+	GetRandomBetween(_EffectIndex, INT:1, 19)
+	Print(_Str, "AMER_LuckyCombatText[1]", _EffectIndex)
+	Cast(_CombatText, _Str)
+	IF "c1"
+		IsGreaterThen(_EffectIndex, 9)
+	THEN
+		Set(_SplitTier, INT:1)
+		Subtract(_EffectIndex, 9)	//Modify to relative index for split set.
+	ELSE
+		Set(_SplitTier, INT:0)
+	ENDIF
+	Subtract(_EffectIndex, INT:1)	//Index starts at zero.
+	
+	//Need to split this tier into two lists because the editor crashes when trying
+	//to save the script with too many elements in the list.
+	IF "c1"
+		IsEqual(_SplitTier, INT:0)
+	THEN
+		GetElement(_WhichEffect, _EffectIndex, "AMER_LuckyCharm_Armor3", "AMER_LuckyCharm_HitChance3", "AMER_LuckyCharm_CritChance3", "AMER_LuckyCharm_Damage3", "AMER_LuckyCharm_Resist3", "AMER_LuckyCharm_Heal3", "AMER_LuckyCharm_AP3", "AMER_LuckyCharm_Initiative3", "AMER_LuckyCharm_MoveSpeed3")
+	ELSE
+		GetElement(_WhichEffect, _EffectIndex, "AMER_LuckyCharm_Sight3", "AMER_LuckyCharm_Shield3", "AMER_LuckyCharm_Strength3", "AMER_LuckyCharm_Dexterity3", "AMER_LuckyCharm_Intelligence3", "AMER_LuckyCharm_Perception3", "AMER_LuckyCharm_StatusRemoval3", "AMER_LuckyCharm_Constitution3", "AMER_LuckyCharm_Grit3", "AMER_LuckyCharm_Willpower3")
+	ENDIF
+	
+	//Check if it was an effect that might warrant a re-roll
+	//if particular conditions aren't met.
+	IF "c1"
+		IsEqual(_WhichEffect, "AMER_LuckyCharm_StatusRemoval3")
+	THEN
+		IF "c1|c2|c3|c4|c5|c6|c7|c8|c9|c10"
+			CharacterHasStatus(__Me, SLOWED)
+			CharacterHasStatus(__Me, CHILLED)
+			CharacterHasStatus(__Me, BURNING)
+			CharacterHasStatus(__Me, CRIPPLED)
+			CharacterHasStatus(__Me, CONSUME, AMER_STATUS_Shocked)
+			CharacterHasStatus(__Me, BLEEDING)
+			CharacterHasStatus(__Me, POISONED)
+			CharacterHasStatus(__Me, CURSED)
+			CharacterHasStatus(__Me, WEAK)
+			CharacterHasStatus(__Me, DISEASED)
+		THEN
+			CharacterRemoveStatus(__Me, SLOWED)
+			CharacterRemoveStatus(__Me, CHILLED)
+			CharacterRemoveStatus(__Me, BURNING)
+			CharacterRemoveStatus(__Me, CRIPPLED)
+			CharacterConsume(__Me, "AMER_STATUS_RemoveShocked")
+			CharacterRemoveStatus(__Me, BLEEDING)
+			CharacterRemoveStatus(__Me, POISONED)
+			CharacterRemoveStatus(__Me, CURSED)
+			CharacterRemoveStatus(__Me, WEAK)
+			CharacterRemoveStatus(__Me, DISEASED)
+			Set(%AMER_LuckyCharmApplied, INT:1)
+		ENDIF
+	ELIF "c1"
+		IsEqual(_WhichEffect, "AMER_LuckyCharm_Heal3")
+	THEN
+		IF "c1&c2&!c3"
+			CharacterGetStat(_Vitality, __Me, Vitality)
+			IsLessThen(_Vitality, FLOAT:1)
+			CharacterHasStatus(__Me, DECAYING_TOUCH)
+		THEN
+			Set(%AMER_LuckyCharmApplied, INT:1)
+			CharacterHeal(__Me, 0.30)
+			//CharacterConsume(__Me, _WhichEffect)
+		ENDIF
+	ELIF "c1"
+		IsEqual(_WhichEffect, "AMER_LuckyCharm_Sight3")
+	THEN
+		IF "c1|c2"
+			CharacterHasWeaponType(__Me, Bow, 1)
+			CharacterHasWeaponType(__Me, CrossBow, 1)
+		THEN
+			Set(%AMER_LuckyCharmApplied, INT:1)
+			CharacterConsume(__Me, _WhichEffect)
+		ENDIF
+	ELIF "c1"
+		IsEqual(_WhichEffect, "AMER_LuckyCharm_HitChance3")
+	THEN
+		IF "!c1"
+			CharacterHasWeaponType(__Me, Wands, 1)
+		THEN
+			Set(%AMER_LuckyCharmApplied, INT:1)
+			CharacterConsume(__Me, _WhichEffect)
+		ENDIF
+	ELIF "c1"
+		IsEqual(_WhichEffect, "AMER_LuckyCharm_Shield3")
+	THEN
+		IF "c1"
+			CharacterHasWeaponType(__Me, Shield, 1)
+		THEN
+			Set(%AMER_LuckyCharmApplied, INT:1)
+			CharacterConsume(__Me, _WhichEffect)
+		ENDIF
+	ELSE
+		Set(%AMER_LuckyCharmApplied, INT:1)
+		CharacterConsume(__Me, _WhichEffect)
+	ENDIF
+	
+	//Display combat text for effect applied.
+	//Tier 3 can apply extra bonuses by manipulating
+	//the relative chance until it is no longer > 100.
+	IF "c1"
+		IsEqual(%AMER_LuckyCharmApplied, INT:1)
+	THEN
+		DisplayCombatInfoText(__Me, _CombatText, 1.0)
+		DisplayText(__Me, "AMER_BLANK", 1.0)
+		Subtract(%AMER_LuckyCharmSuccess, INT:100)
+	ENDIF
+		
+		
+	
+//===========================================================//
+//                        Fossilize                          //
+//===========================================================//
+EVENT FossilizeUpdateAbsorb
+VARS
+	DAMAGE:_Type
+	FLOAT:_Damage
+	FLOAT:_Absorb
+ON
+	OnFunction("AMER_FossilizeUpdateAbsorb")
+ACTIONS
+	//Fossilize doesn't affect damage without a type. Also this prevents
+	//the initial Vitality modification of Fossilize from exhausting the spell.
+	//I don't know the syntax for a non-typed damage, it's not null.
+	IF "c1&c2&c3"
+		GetVar(_Type, __Me, "AMER_DamageTakenType")
+		GetVar(_Damage, __Me, "AMER_DamageTaken")
+		GetVar(_Absorb, __Me, "AMER_FossilizeAbsorb")
+	THEN
+		IF "c1|c2|c3|c4|c5|c6|c7|c8|c9"
+			IsEqual(_Type, Fire)
+			IsEqual(_Type, Water)
+			IsEqual(_Type, Air)
+			IsEqual(_Type, Earth)
+			IsEqual(_Type, Poison)
+			IsEqual(_Type, Shadow)
+			IsEqual(_Type, Piercing)
+			IsEqual(_Type, Slashing)
+			IsEqual(_Type, Crushing)
+		THEN
+			Subtract(_Absorb, _Damage)
+			SetVar(__Me, "AMER_FossilizeAbsorb", _Absorb)
+			IF "!c1"
+				IsGreaterThen(_Absorb, FLOAT:0)
+			THEN
+				CharacterConsume(__Me, "AMER_RemoveFossilize")
+			ENDIF
+		ENDIF
+	ENDIF
+	
+	
+	
+//===========================================================//
+//                    Astrologer's Gaze                      //
+//===========================================================//
+EVENT AstrologerGaze
+VARS
+	DAMAGE:_Type
+	CHARACTER:_CharSource
+	INT:_Metamind
+	INT:_Round
+	POTION:_WhichEffect
+	FIXEDSTRING:_WhichString
+ON
+	OnFunction("AMER_AstroGaze")
+ACTIONS
+	IF "c1&c2&c3"
+		GetVar(_Type, __Me, "AMER_DamageTakenType")
+		GetVar(_CharSource, __Me, "AMER_CharSource")
+		GetVar(_Round, _CharSource, "AMER_CombatID")
+	THEN
+		IF "c1"
+			CharacterGetAbility(_Metamind, _CharSource, Loremaster)
+		THEN
+			//Don't go out of bounds.
+			IF "c1"
+				IsGreaterThen(_Metamind, 8)
+			THEN
+				Set(_Metamind, 8)
+			ENDIF
+			Subtract(_Metamind, INT:1)	//Index starts from zero.
+				
+			//Fire
+			IF "c1"
+				IsEqual(_Type, Fire)
+			THEN
+				GetElement(_WhichEffect, _Metamind, "AMER_AstroGazeFire1", "AMER_AstroGazeFire2", "AMER_AstroGazeFire3", "AMER_AstroGazeFire4", "AMER_AstroGazeFire5", "AMER_AstroGazeFire6", "AMER_AstroGazeFire7", "AMER_AstroGazeFire8")
+				IF "!c1"
+					IsEqual(%AMER_AstroGazeFireSource, _Round)
+				THEN
+					CharacterConsume(__Me, _WhichEffect)
+					Set(%AMER_AstroGazeFireSource, _Round)
+				ELSE
+					GetElement(_WhichString, _Metamind, "AMER_AstroGazeFire1", "AMER_AstroGazeFire2", "AMER_AstroGazeFire3", "AMER_AstroGazeFire4", "AMER_AstroGazeFire5", "AMER_AstroGazeFire6", "AMER_AstroGazeFire7", "AMER_AstroGazeFire8")
+					IF "!c1"
+						CharacterHasStatus(__Me, CONSUME, _WhichString)
+					THEN
+						CharacterConsume(__Me, _WhichEffect)
+					ENDIF
+				ENDIF
+			//Water
+			ELIF "c1"
+				IsEqual(_Type, Water)
+			THEN
+				GetElement(_WhichEffect, _Metamind, "AMER_AstroGazeWater1", "AMER_AstroGazeWater2", "AMER_AstroGazeWater3", "AMER_AstroGazeWater4", "AMER_AstroGazeWater5", "AMER_AstroGazeWater6", "AMER_AstroGazeWater7", "AMER_AstroGazeWater8")
+				IF "!c1"
+					IsEqual(%AMER_AstroGazeWaterSource, _Round)
+				THEN
+					CharacterConsume(__Me, _WhichEffect)
+					Set(%AMER_AstroGazeWaterSource, _Round)
+				ELSE
+					GetElement(_WhichString, _Metamind, "AMER_AstroGazeWater1", "AMER_AstroGazeWater2", "AMER_AstroGazeWater3", "AMER_AstroGazeWater4", "AMER_AstroGazeWater5", "AMER_AstroGazeWater6", "AMER_AstroGazeWater7", "AMER_AstroGazeWater8")
+					IF "!c1"
+						CharacterHasStatus(__Me, CONSUME, _WhichString)
+					THEN
+						CharacterConsume(__Me, _WhichEffect)
+					ENDIF
+				ENDIF
+			//Earth
+			ELIF "c1"
+				IsEqual(_Type, Earth)
+			THEN
+				GetElement(_WhichEffect, _Metamind, "AMER_AstroGazeEarth1", "AMER_AstroGazeEarth2", "AMER_AstroGazeEarth3", "AMER_AstroGazeEarth4", "AMER_AstroGazeEarth5", "AMER_AstroGazeEarth6", "AMER_AstroGazeEarth7", "AMER_AstroGazeEarth8")
+				IF "!c1"
+					IsEqual(%AMER_AstroGazeEarthSource, _Round)
+				THEN
+					CharacterConsume(__Me, _WhichEffect)
+					Set(%AMER_AstroGazeEarthSource, _Round)
+				ELSE
+					GetElement(_WhichString, _Metamind, "AMER_AstroGazeEarth1", "AMER_AstroGazeEarth2", "AMER_AstroGazeEarth3", "AMER_AstroGazeEarth4", "AMER_AstroGazeEarth5", "AMER_AstroGazeEarth6", "AMER_AstroGazeEarth7", "AMER_AstroGazeEarth8")
+					IF "!c1"
+						CharacterHasStatus(__Me, CONSUME, _WhichString)
+					THEN
+						CharacterConsume(__Me, _WhichEffect)
+					ENDIF
+				ENDIF
+			//Air
+			ELIF "c1"
+				IsEqual(_Type, Air)
+			THEN
+				GetElement(_WhichEffect, _Metamind, "AMER_AstroGazeAir1", "AMER_AstroGazeAir2", "AMER_AstroGazeAir3", "AMER_AstroGazeAir4", "AMER_AstroGazeAir5", "AMER_AstroGazeAir6", "AMER_AstroGazeAir7", "AMER_AstroGazeAir8")
+				IF "!c1"
+					IsEqual(%AMER_AstroGazeAirSource, _Round)
+				THEN
+					CharacterConsume(__Me, _WhichEffect)
+					Set(%AMER_AstroGazeAirSource, _Round)
+				ELSE
+					GetElement(_WhichString, _Metamind, "AMER_AstroGazeAir1", "AMER_AstroGazeAir2", "AMER_AstroGazeAir3", "AMER_AstroGazeAir4", "AMER_AstroGazeAir5", "AMER_AstroGazeAir6", "AMER_AstroGazeAir7", "AMER_AstroGazeAir8")
+					IF "!c1"
+						CharacterHasStatus(__Me, CONSUME, _WhichString)
+					THEN
+						CharacterConsume(__Me, _WhichEffect)
+					ENDIF
+				ENDIF
+			//Poison
+			ELIF "c1"
+				IsEqual(_Type, Poison)
+			THEN
+				GetElement(_WhichEffect, _Metamind, "AMER_AstroGazePoison1", "AMER_AstroGazePoison2", "AMER_AstroGazePoison3", "AMER_AstroGazePoison4", "AMER_AstroGazePoison5", "AMER_AstroGazePoison6", "AMER_AstroGazePoison7", "AMER_AstroGazePoison8")
+				IF "!c1"
+					IsEqual(%AMER_AstroGazePoisonSource, _Round)
+				THEN
+					CharacterConsume(__Me, _WhichEffect)
+					Set(%AMER_AstroGazePoisonSource, _Round)
+				ELSE
+					GetElement(_WhichString, _Metamind, "AMER_AstroGazePoison1", "AMER_AstroGazePoison2", "AMER_AstroGazePoison3", "AMER_AstroGazePoison4", "AMER_AstroGazePoison5", "AMER_AstroGazePoison6", "AMER_AstroGazePoison7", "AMER_AstroGazePoison8")
+					IF "!c1"
+						CharacterHasStatus(__Me, CONSUME, _WhichString)
+					THEN
+						CharacterConsume(__Me, _WhichEffect)
+					ENDIF
+				ENDIF
+			//Shadow
+			ELIF "c1"
+				IsEqual(_Type, Shadow)
+			THEN
+				GetElement(_WhichEffect, _Metamind, "AMER_AstroGazeShadow1", "AMER_AstroGazeShadow2", "AMER_AstroGazeShadow3", "AMER_AstroGazeShadow4", "AMER_AstroGazeShadow5", "AMER_AstroGazeShadow6", "AMER_AstroGazeShadow7", "AMER_AstroGazeShadow8")
+				IF "!c1"
+					IsEqual(%AMER_AstroGazeShadowSource, _Round)
+				THEN
+					CharacterConsume(__Me, _WhichEffect)
+					Set(%AMER_AstroGazeShadowSource, _Round)
+				ELSE
+					GetElement(_WhichString, _Metamind, "AMER_AstroGazeShadow1", "AMER_AstroGazeShadow2", "AMER_AstroGazeShadow3", "AMER_AstroGazeShadow4", "AMER_AstroGazeShadow5", "AMER_AstroGazeShadow6", "AMER_AstroGazeShadow7", "AMER_AstroGazeShadow8")
+					IF "!c1"
+						CharacterHasStatus(__Me, CONSUME, _WhichString)
+					THEN
+						CharacterConsume(__Me, _WhichEffect)
+					ENDIF
+				ENDIF
+			//Piercing
+			ELIF "c1"
+				IsEqual(_Type, Piercing)
+			THEN
+				GetElement(_WhichEffect, _Metamind, "AMER_AstroGazePiercing1", "AMER_AstroGazePiercing2", "AMER_AstroGazePiercing3", "AMER_AstroGazePiercing4", "AMER_AstroGazePiercing5", "AMER_AstroGazePiercing6", "AMER_AstroGazePiercing7", "AMER_AstroGazePiercing8")
+				IF "!c1"
+					IsEqual(%AMER_AstroGazePiercingSource, _Round)
+				THEN
+					CharacterConsume(__Me, _WhichEffect)
+					Set(%AMER_AstroGazePiercingSource, _Round)
+				ELSE
+					GetElement(_WhichString, _Metamind, "AMER_AstroGazePiercing1", "AMER_AstroGazePiercing2", "AMER_AstroGazePiercing3", "AMER_AstroGazePiercing4", "AMER_AstroGazePiercing5", "AMER_AstroGazePiercing6", "AMER_AstroGazePiercing7", "AMER_AstroGazePiercing8")
+					IF "!c1"
+						CharacterHasStatus(__Me, CONSUME, _WhichString)
+					THEN
+						CharacterConsume(__Me, _WhichEffect)
+					ENDIF
+				ENDIF
+			//Slashing
+			ELIF "c1"
+				IsEqual(_Type, Slashing)
+			THEN
+				GetElement(_WhichEffect, _Metamind, "AMER_AstroGazeSlashing1", "AMER_AstroGazeSlashing2", "AMER_AstroGazeSlashing3", "AMER_AstroGazeSlashing4", "AMER_AstroGazeSlashing5", "AMER_AstroGazeSlashing6", "AMER_AstroGazeSlashing7", "AMER_AstroGazeSlashing8")
+				IF "!c1"
+					IsEqual(%AMER_AstroGazeSlashingSource, _Round)
+				THEN
+					CharacterConsume(__Me, _WhichEffect)
+					Set(%AMER_AstroGazeSlashingSource, _Round)
+				ELSE
+					GetElement(_WhichString, _Metamind, "AMER_AstroGazeSlashing1", "AMER_AstroGazeSlashing2", "AMER_AstroGazeSlashing3", "AMER_AstroGazeSlashing4", "AMER_AstroGazeSlashing5", "AMER_AstroGazeSlashing6", "AMER_AstroGazeSlashing7", "AMER_AstroGazeSlashing8")
+					IF "!c1"
+						CharacterHasStatus(__Me, CONSUME, _WhichString)
+					THEN
+						CharacterConsume(__Me, _WhichEffect)
+					ENDIF
+				ENDIF
+			//Crushing
+			ELIF "c1"
+				IsEqual(_Type, Crushing)
+			THEN
+				GetElement(_WhichEffect, _Metamind, "AMER_AstroGazeCrushing1", "AMER_AstroGazeCrushing2", "AMER_AstroGazeCrushing3", "AMER_AstroGazeCrushing4", "AMER_AstroGazeCrushing5", "AMER_AstroGazeCrushing6", "AMER_AstroGazeCrushing7", "AMER_AstroGazeCrushing8")
+				IF "!c1"
+					IsEqual(%AMER_AstroGazeCrushingSource, _Round)
+				THEN
+					CharacterConsume(__Me, _WhichEffect)
+					Set(%AMER_AstroGazeCrushingSource, _Round)
+				ELSE
+					GetElement(_WhichString, _Metamind, "AMER_AstroGazeCrushing1", "AMER_AstroGazeCrushing2", "AMER_AstroGazeCrushing3", "AMER_AstroGazeCrushing4", "AMER_AstroGazeCrushing5", "AMER_AstroGazeCrushing6", "AMER_AstroGazeCrushing7", "AMER_AstroGazeCrushing8")
+					IF "!c1"
+						CharacterHasStatus(__Me, CONSUME, _WhichString)
+					THEN
+						CharacterConsume(__Me, _WhichEffect)
+					ENDIF
+				ENDIF
+			ENDIF
+		ENDIF
+	ENDIF
+	
+	
+	
+//===========================================================//
+//                         Alchemist                         //
+//===========================================================//
+EVENT AlchemistTalentEffects
+VARS
+	CHARACTER:_CharSource
+	INT:_Crafting
+	INT:_AlchemistCharges
+ON
+	OnFunction("AMER_AlchemistTalentEffects")
+ACTIONS
+	IF "!c1"
+		//Untreated Poison doesn't work on Zombies.
+		CharacterHasTalent(__Me, Zombie)
+	THEN
+		IF "c1&c2"
+			GetVar(_CharSource, __Me, "AMER_CharSource")
+			CharacterGetAbility(_Crafting, _CharSource, Crafting)
+		THEN
+			IF "!c1"
+				CharacterHasStatus(__Me, CONSUME, AMER_STATUS_PoisonedResPenalty6)
+			THEN
+				IF "c1"
+					CharacterHasStatus(__Me, CONSUME, AMER_STATUS_PoisonedResPenalty5)
+				THEN
+					IF "c1"
+						IsGreaterThen(_Crafting, INT:6)	//Need at least 7 crafting for stack 6.
+					THEN
+						IF "c1&c2"
+							GetVar(_AlchemistCharges, _CharSource, "AMER_AlchemistCharges")
+							IsGreaterThen(_AlchemistCharges, INT:0)
+						THEN
+							CharacterConsume(__Me, AMER_STATUS_PoisonedResPenalty6)
+							Subtract(_AlchemistCharges, INT:1)
+							SetVar(_CharSource, "AMER_AlchemistCharges", _AlchemistCharges)
+						ENDIF
+					ENDIF
+				ELIF "c1"
+					CharacterHasStatus(__Me, CONSUME, AMER_STATUS_PoisonedResPenalty4)
+				THEN
+					IF "c1"
+						IsGreaterThen(_Crafting, INT:4)	//Need at least 5 crafting for stack 5.
+					THEN
+						IF "c1&c2"
+							GetVar(_AlchemistCharges, _CharSource, "AMER_AlchemistCharges")
+							IsGreaterThen(_AlchemistCharges, INT:0)
+						THEN
+							CharacterConsume(__Me, AMER_STATUS_PoisonedResPenalty5)
+							Subtract(_AlchemistCharges, INT:1)
+							SetVar(_CharSource, "AMER_AlchemistCharges", _AlchemistCharges)
+						ENDIF
+					ENDIF
+				ELIF "c1"
+					CharacterHasStatus(__Me, CONSUME, AMER_STATUS_PoisonedResPenalty3)
+				THEN
+					IF "c1"
+						IsGreaterThen(_Crafting, INT:2)	//Need at least 3 crafting for stack 4.
+					THEN
+						IF "c1&c2"
+							GetVar(_AlchemistCharges, _CharSource, "AMER_AlchemistCharges")
+							IsGreaterThen(_AlchemistCharges, INT:0)
+						THEN
+							CharacterConsume(__Me, AMER_STATUS_PoisonedResPenalty4)
+							Subtract(_AlchemistCharges, INT:1)
+							SetVar(_CharSource, "AMER_AlchemistCharges", _AlchemistCharges)
+						ENDIF
+					ENDIF
+				ELIF "c1"
+					CharacterHasStatus(__Me, CONSUME, AMER_STATUS_PoisonedResPenalty2)
+				THEN
+					IF "c1"
+						IsGreaterThen(_Crafting, INT:7)	//Need at least 8 crafting to always apply stack 3.
+					THEN
+						CharacterConsume(__Me, AMER_STATUS_PoisonedResPenalty3)
+					ELIF "c1&c2"
+						GetVar(_AlchemistCharges, _CharSource, "AMER_AlchemistCharges")
+						IsGreaterThen(_AlchemistCharges, INT:0)
+					THEN
+						CharacterConsume(__Me, AMER_STATUS_PoisonedResPenalty3)
+						Subtract(_AlchemistCharges, INT:1)
+						SetVar(_CharSource, "AMER_AlchemistCharges", _AlchemistCharges)
+					ENDIF
+				ELIF "c1"
+					CharacterHasStatus(__Me, CONSUME, AMER_STATUS_PoisonedResPenalty1)
+				THEN
+					IF "c1"
+						IsGreaterThen(_Crafting, INT:7)	//Need at least 8 crafting to always apply stack 3.
+					THEN
+						CharacterConsume(__Me, AMER_STATUS_PoisonedResPenalty3)
+					ELIF "c1"
+						IsGreaterThen(_Crafting, INT:5)	//Need at least 6 crafting to always apply stack 2.
+					THEN
+						CharacterConsume(__Me, AMER_STATUS_PoisonedResPenalty2)
+					ELIF "c1&c2"
+						GetVar(_AlchemistCharges, _CharSource, "AMER_AlchemistCharges")
+						IsGreaterThen(_AlchemistCharges, INT:0)
+					THEN
+						CharacterConsume(__Me, AMER_STATUS_PoisonedResPenalty2)
+						Subtract(_AlchemistCharges, INT:1)
+						SetVar(_CharSource, "AMER_AlchemistCharges", _AlchemistCharges)
+					ENDIF
+				ELIF "c1"
+					IsGreaterThen(_Crafting, INT:7)	//Need at least 8 crafting to always apply stack 3.
+				THEN
+					CharacterConsume(__Me, AMER_STATUS_PoisonedResPenalty3)
+				ELIF "c1"
+					IsGreaterThen(_Crafting, INT:5)	//Need at least 6 crafting to always apply stack 2.
+				THEN
+					CharacterConsume(__Me, AMER_STATUS_PoisonedResPenalty2)
+				ELIF "c1"
+					IsGreaterThen(_Crafting, INT:3)	//Need at least 4 crafting to always apply stack 1.
+				THEN
+					CharacterConsume(__Me, AMER_STATUS_PoisonedResPenalty1)
+				ELIF "c1&c2"
+					GetVar(_AlchemistCharges, _CharSource, "AMER_AlchemistCharges")
+					IsGreaterThen(_AlchemistCharges, INT:0)
+				THEN
+					CharacterConsume(__Me, AMER_STATUS_PoisonedResPenalty1)
+					Subtract(_AlchemistCharges, INT:1)
+					SetVar(_CharSource, "AMER_AlchemistCharges", _AlchemistCharges)
+				ENDIF
+			ENDIF
+		ENDIF
+	ENDIF
+	
+	
+	
+//===========================================================//
+//                        Anaconda                           //
+//===========================================================//
+EVENT AnacondaInitiative
+ON
+	OnFunction("AMER_AnacondaInitiative")
+ACTIONS
+	IF "c1"
+		CharacterHasStatus(__Me, CONSUME, AMER_AnacondaInitiative4)
+	THEN
+		CharacterConsume(__Me, AMER_AnacondaInitiative4)
+	ELIF "c1"
+		CharacterHasStatus(__Me, CONSUME, AMER_AnacondaInitiative3)
+	THEN
+		CharacterConsume(__Me, AMER_AnacondaInitiative4)
+	ELIF "c1"
+		CharacterHasStatus(__Me, CONSUME, AMER_AnacondaInitiative2)
+	THEN
+		CharacterConsume(__Me, AMER_AnacondaInitiative3)
+	ELIF "c1"
+		CharacterHasStatus(__Me, CONSUME, AMER_AnacondaInitiative1)
+	THEN
+		CharacterConsume(__Me, AMER_AnacondaInitiative2)
+	ELSE
+		CharacterConsume(__Me, AMER_AnacondaInitiative1)
+	ENDIF
+	
+	
+	
+//===========================================================//
+//                       Occultist                           //
+//===========================================================//
+EVENT OccultistEffects
+VARS
+	CHARACTER:_CharSource
+	POTION:_WhichEffect
+	INT:_Ability
+ON
+	OnFunction("AMER_OccultistTalentEffects")
+ACTIONS
+	IF "c1&c2&c3"
+		GetVar(_CharSource, __Me, "AMER_CharSource")
+		CharacterGetAbility(_Ability, _CharSource, Blackrock
+		IsGreaterThen(_Ability, INT:3)
+	THEN
+		//Benefits start at Tenebrium 4, index at zero.
+		//Maximum benefit is at Tenebrium 9.
+		IF "c1"
+			IsGreaterThen(_Ability, INT:9)
+		THEN
+			Set(_Ability, INT:9)
+		ENDIF
+		
+		Subtract(_Ability, INT:4)
+		GetElement(_WhichEffect, _Ability, AMER_Delerium1, AMER_Delerium2, AMER_Delerium3, AMER_Delerium4, AMER_Delerium5, AMER_Delerium6)
+		CharacterConsume(__Me, _WhichEffect)
+	ENDIF
+	
+	
+	
+EVENT ResetFreeAttack
+//Clear the free attack reaction if it couldn't be completed immediately.
+ON
+	OnTimer("AMER_ResetFreeAttack")
+ACTIONS
+	Set(%AMER_FreeAttackTarget, null)
+	
+	
+	
+//===========================================================//
+//		  ***			Behaviors      		  ***		     //
+//===========================================================//
+BEHAVIOUR
+	
+REACTION FreeAttack, 19997
+//=========================//
+//       Free Attack:      //
+//=========================//
+VARS
+	FIXEDSTRING:_Text
+USAGE ALL
+Check "!c1"
+	IsEqual(%AMER_FreeAttackTarget, null)
+ACTIONS
+	IF "!c1&!c2"
+		CharacterIsDead(%AMER_FreeAttackTarget)
+		CharacterHasStatus(%AMER_FreeAttackTarget, DYING)
+	THEN
+		//Set(_Target, %AMER_FreeAttackAttacking)
+		//Set(%AMER_FreeAttackAttacking, null)
+		//CharacterAttackWithoutMove(_Target)
+		IF "!c1"
+			IsEqual(%AMER_FreeAttackText, null)
+		THEN
+			StatusText(__Me, %AMER_FreeAttackText)
+			//Consume a reaction if predator.
+			IF "c1"
+				IsEqual(%AMER_FreeAttackText, "AMER_PredatorText")
+			THEN
+				Subtract(%AMER_PredatorShots, INT:1)
+				//Display remaining reactions if it was a player.
+				IF "c1"
+					CharacterIsPlayer(__Me)
+				THEN
+					GetElement(_Text, %AMER_PredatorShots, "AMER_Predator_Reactions0", "AMER_Predator_Reactions1", "AMER_Predator_Reactions2", "AMER_Predator_Reactions3")
+					DisplayCombatInfoText(__Me, "AMER_PredatorCombatText", 1.0)
+					DisplayCombatInfoText(__Me, _Text, 1.0)
+					DisplayText(__Me, "AMER_BLANK", 1.0)
+				ENDIF
+			ENDIF
+		ENDIF
+		CharacterAttackWithoutMove(%AMER_FreeAttackTarget)
+	ENDIF
+	Set(%AMER_FreeAttackTarget, null)
+	StopTimer("AMER_ResetFreeAttack")
+	/*
+INTERRUPT
+ON
+	OnManualInterrupt(FreeAttack)
+ACTIONS
+	Reset()
+	*/
+	
+//This reaction forces the character to attack, even if it
+//is already attempting to perform an attack. This is necessary
+//because sometimes a character is asked to perform a free attack
+//faster than its animation will allow. Simultaneous requests are
+//still not handled by this, however.
+REACTION PlayAnimation, 100000
+VARS
+	CHARACTER:_Target
+	FIXEDSTRING:_Animation
+USAGE ALL
+CHECK "!c1"
+	IsEqual(%AMER_PlayAnimation, null)
+ACTIONS
+	Set(_Animation, %AMER_PlayAnimation)
+	Set(%AMER_PlayAnimation, null)
+	IF "c1"
+		IsEqual(_Animation, "STOP")
+	THEN
+		CharacterStopAnimation()
+	ELSE
+		CharacterPlayAnimation(_Animation)
+	ENDIF
+	
+	
+	
+REACTION Demon, 19999
+//=========================//
+//          Demon:         //
+//=========================//
+VARS
+	FIXEDSTRING:_Text
+USAGE ALL
+CHECK "!c1"
+	IsEqual(%AMER_DemonTarget, null)
+ACTIONS
+	IF "!c1&!c2"
+		CharacterIsDead(%AMER_DemonTarget)
+		CharacterHasStatus(%AMER_DemonTarget, DYING)
+	THEN
+		Subtract(%AMER_DemonReactions, INT:1)
+		
+		//Display reaction description text.
+		DisplayCombatInfoText(%AMER_DemonTarget, "AMER_DemonCombatText", 1.0)
+		DisplayText(%AMER_DemonTarget, "AMER_BLANK", 1.0)
+		StatusText(__Me, "AMER_DemonText")
+		
+		//Fire the projectile.
+		SetVar(__Me, "AMER_RemoteEffectSourceAsTarget", INT:1)
+		SetVar(__Me, "AMER_RemoteEffectSource", %AMER_DemonTarget)
+		SetVar(__Me, "AMER_RemoteEffectProjectile", SKILL:AMER_SCRIPTSKILL_Demon)
+		CallFunction("AMER_DoRemoteEffect")
+		
+		//Display remaining text for players.
+		IF "c1"
+			CharacterIsPlayer(__Me)
+		THEN
+			GetElement(_Text, %AMER_DemonReactions, "AMER_Demon_Reactions0", "AMER_Demon_Reactions1", "AMER_Demon_Reactions2", "AMER_Demon_Reactions3")
+			DisplayCombatInfoText(__Me, _Text, 1.0)
+			DisplayText(__Me, "AMER_BLANK", 1.0)
+		ENDIF
+		
+		//Play animation.
+		CharacterPlayAnimation("skill_fear_cast")
+	ENDIF
+		
+	//Clear reaction target.
+	Set(%AMER_DemonTarget, null)
+INTERRUPT
+	Reset()
+	
+	
+	
+REACTION Angel, 19999
+//=========================//
+//          Angel:         //
+//=========================//
+VARS
+	FLOAT:_Heal
+	FLOAT:_Intelligence
+	FIXEDSTRING:_Text
+USAGE ALL
+CHECK "!c1"
+	IsEqual(%AMER_AngelTarget, null)
+ACTIONS
+	IF "!c1&!c2"
+		CharacterIsDead(%AMER_AngelTarget)
+		CharacterHasStatus(%AMER_AngelTarget, DYING)
+	THEN
+		//Consume a reaction.
+		Subtract(%AMER_AngelReactions, INT:1)
+		
+		//Calculate the heal.
+		Set(_Heal, 0.07)
+		IF "c1&c2"
+			CharacterGetStat(_Intelligence, __Me, Intelligence)
+			IsGreaterThen(_Intelligence, 10.0)
+		THEN
+			Subtract(_Intelligence, 10.0)
+			Multiply(_Intelligence, 0.02)
+			Add(_Heal, _Intelligence)
+		ENDIF
+		
+		//Heal and cleanse.
+		CharacterHeal(%AMER_AngelTarget, _Heal)
+		IF "c1"
+			CharacterHasStatus(%AMER_AngelTarget, BURNING)
+		THEN
+			CharacterRemoveStatus(%AMER_AngelTarget, BURNING)
+		ENDIF
+		IF "c1"
+			CharacterHasStatus(%AMER_AngelTarget, WEAK)
+		THEN
+			CharacterRemoveStatus(%AMER_AngelTarget, WEAK)
+		ENDIF
+		
+		//Create special effect.
+		ExplodeAt(%AMER_AngelTarget, SKILL:AMER_SCRIPTSKILL_Angel)
+		/*
+		//Fire the effect.
+		SetVar(__Me, "AMER_RemoteEffectSourceAsTarget", INT:1)
+		SetVar(__Me, "AMER_RemoteEffectSource", %AMER_AngelTarget)
+		SetVar(__Me, "AMER_RemoteEffectProjectile", _Projectile)
+		CallFunction("AMER_DoRemoteEffect")
+		*/
+		
+		//Display reaction description text.
+		DisplayCombatInfoText(%AMER_AngelTarget, "AMER_AngelCombatText", 1.0)
+		DisplayText(%AMER_AngelTarget, "AMER_BLANK", 1.0)
+		StatusText(__Me, "AMER_AngelText")
+		
+		//Display remaining text for players.
+		IF "c1"
+			CharacterIsPlayer(__Me)
+		THEN
+			GetElement(_Text, %AMER_AngelReactions, "AMER_Angel_Reactions0", "AMER_Angel_Reactions1", "AMER_Angel_Reactions2", "AMER_Angel_Reactions3")
+			DisplayCombatInfoText(__Me, _Text, 1.0)
+			DisplayText(__Me, "AMER_BLANK", 1.0)
+		ENDIF
+		
+		//Play animation.
+		CharacterPlayAnimation("skill_fireshield_cast")
+	ENDIF
+		
+	//Clear the reaction target.
+	Set(%AMER_AngelTarget, null)
+INTERRUPT
+	Reset()
+	
+	
+	
+REACTION Charisma, 19998
+//=========================//
+//        Charisma:        //
+//=========================//
+//0=hit buff, 1=Stunned, 2=Frozen, 3=Burning, 4=Petrified, 5=Fear, 6=Slowed 7=Charmed,
+//8=invis reapply, 9=Blocked, 10=slipped, 11=enemyHastened, 12=miss debuff
+VARS
+	INT:_Index
+	INT:_Charisma
+	INT:_EffectTier
+	INT:_ReactionTaken = 0
+	POTION:_WhichEffect
+	STATUS:_WhichStatus
+	CHARACTER:_Target
+	SKILL:_Projectile
+	STRING:_Str
+	FIXEDSTRING:_Text
+USAGE ALL
+CHECK "!c1"
+	IsEqual(%AMER_CharismaTarget, null)
+ACTIONS
+	Set(_Target, %AMER_CharismaTarget)
+	Set(%AMER_CharismaTarget, null)
+	IF "!c1&!c2"
+		CharacterIsDead(_Target)
+		CharacterHasStatus(_Target, DYING)
+	THEN
+		Set(_Index, %AMER_CharismaReactionIndex)
+		Set(_ReactionTaken, INT:0)
+		
+		IF "c1"
+			CharacterGetAbility(_Charisma, __Me, Charisma)
+		THEN
+			//Get the character's effect tier "offset."
+			Subtract(_Charisma, INT:1)	//index starts at zero.
+			GetElement(_EffectTier, _Charisma, INT:0, INT:0, INT:0, INT:1, INT:1, INT:1, INT:2, INT:2, INT:2)
+			
+			//3-tier effects, simple consume usage.
+			IF "c1"
+				IsLessThen(_Index, INT:5)
+			THEN
+				//Calculate relative index.
+				Multiply(_Index, INT:3)
+				Add(_Index, _EffectTier)
+					
+				//Don't use a reaction that the target already has.
+				GetElement(_Text, _Index, "AMER_Charisma_HitChance1", "AMER_Charisma_HitChance2", "AMER_Charisma_HitChance3", "AMER_Charisma_AirRes1", "AMER_Charisma_AirRes2", "AMER_Charisma_AirRes3", "AMER_Charisma_WaterRes1", "AMER_Charisma_WaterRes2", "AMER_Charisma_WaterRes3", "AMER_Charisma_FireRes1", "AMER_Charisma_FireRes2", "AMER_Charisma_FireRes3", "AMER_Charisma_EarthRes1", "AMER_Charisma_EarthRes2", "AMER_Charisma_EarthRes3")
+				IF "!c1"
+					CharacterHasStatus(_Target, CONSUME, _Text)
+				THEN
+					GetElement(_WhichEffect, _Index, "AMER_Charisma_HitChance1", "AMER_Charisma_HitChance2", "AMER_Charisma_HitChance3", "AMER_Charisma_AirRes1", "AMER_Charisma_AirRes2", "AMER_Charisma_AirRes3", "AMER_Charisma_WaterRes1", "AMER_Charisma_WaterRes2", "AMER_Charisma_WaterRes3", "AMER_Charisma_FireRes1", "AMER_Charisma_FireRes2", "AMER_Charisma_FireRes3", "AMER_Charisma_EarthRes1", "AMER_Charisma_EarthRes2", "AMER_Charisma_EarthRes3")
+					CharacterConsume(_Target, _WhichEffect)
+					Set(_ReactionTaken, INT:1)
+				ENDIF
+				
+			//Status removal effects
+			//These effects require at least Tier 2.
+			ELIF "c1"
+				IsLessThen(_Index, INT:7)
+			THEN
+				IF "c1"
+					IsGreaterThen(_EffectTier, INT:0)
+				THEN
+					//Calculate relative index.
+					Subtract(_Index, INT:5)
+					GetElement(_WhichStatus, _Index, "FEAR", "SLOWED")
+					CharacterRemoveStatus(_Target, _WhichStatus)
+					Set(_ReactionTaken, INT:1)
+				ENDIF
+			
+			//Ally slipped.
+			ELIF "c1"
+				IsEqual(_Index, INT:7)
+			THEN
+				CharacterRemoveStatus(_Target, "KNOCKED_DOWN")
+				CharacterConsume(_Target, "AMER_Charisma_SlipImmune")
+				Set(_ReactionTaken, INT:1)
+			
+			//Invis reapply requires at least Tier 3.
+			ELIF "c1"
+				IsEqual(_Index, INT:8)
+			THEN
+				IF "c1"
+					IsGreaterThen(_EffectTier, INT:1)
+				THEN
+					CharacterApplyStatus(_Target, INVISIBLE, 1)
+					Set(_ReactionTaken, INT:1)
+				ENDIF
+			
+			//Block chance reactions require at least Tier 2.
+			ELIF "c1"
+				IsEqual(_Index, INT:9)
+			THEN
+				IF "c1"
+					IsGreaterThen(_EffectTier, INT:0)
+				THEN
+					//_EffectTier is at least 1 here, but only two effects, so subtract one.
+					Subtract(_EffectTier, INT:1)
+					
+					IF "c1"
+						CharacterIsAlly(_Target, __Me)
+					THEN
+						GetElement(_Text, _EffectTier, "AMER_Charisma_BlockBuff2", "AMER_Charisma_BlockBuff3")
+						IF "!c1"
+							CharacterHasStatus(_Target, CONSUME, _Text)
+						THEN
+							GetElement(_WhichEffect, _EffectTier, "AMER_Charisma_BlockBuff2", "AMER_Charisma_BlockBuff3")
+							CharacterConsume(_Target, _WhichEffect)
+							Set(_ReactionTaken, INT:1)
+						ENDIF
+					//Only use block debuffs if the target is not a player, since testing revealed
+					//that this effect will likely unequip a player's shield, very frustratingly.
+					ELIF "!c1"
+						CharacterIsPlayer(_Target)
+					THEN
+						GetElement(_Text, _EffectTier, "AMER_Charisma_BlockDebuff2", "AMER_Charisma_BlockDebuff3")
+						IF "!c1"
+							CharacterHasStatus(_Target, CONSUME, _Text)
+						THEN
+							GetElement(_WhichEffect, _EffectTier, "AMER_Charisma_BlockDebuff2", "AMER_Charisma_BlockDebuff3")
+							CharacterConsume(_Target, _WhichEffect)
+							Set(_ReactionTaken, INT:1)
+						ENDIF
+					ENDIF
+				ENDIF
+				
+			//Charm removal, requires at least tier 3.
+			ELIF "c1"
+				IsEqual(_Index, 10)
+			THEN
+				IF "c1"
+					IsGreaterThen(_EffectTier, 1)
+				THEN
+					CharacterRemoveStatus(_Target, CHARMED)
+					Set(_ReactionTaken, 1)
+				ENDIF
+			
+			//Enemy Hasted reactions.
+			ELIF "c1"
+				IsEqual(_Index, INT:11)
+			THEN
+				GetElement(_Projectile, _EffectTier, "AMER_SCRIPTSKILL_CharismaRemoveHaste1", "AMER_SCRIPTSKILL_CharismaRemoveHaste2", "AMER_SCRIPTSKILL_CharismaRemoveHaste3")
+				
+				SetVar(__Me, "AMER_RemoteEffectSourceAsTarget", INT:1)
+				SetVar(__Me, "AMER_RemoteEffectSource", _Target)
+				SetVar(__Me, "AMER_RemoteEffectProjectile", _Projectile)
+				CallFunction("AMER_DoRemoteEffect")
+				Set(_ReactionTaken, INT:1)
+			
+			//Enemy Crit reactions.
+			ELIF "c1"
+				IsEqual(_Index, INT:12)
+			THEN
+				//Don't do this reaction if the target already has it.
+				GetElement(_Text, _EffectTier, "AMER_Charisma_MissChance1", "AMER_Charisma_MissChance2", "AMER_Charisma_MissChance3")
+				IF "!c1"
+					CharacterHasStatus(_Target, CONSUME, _Text)
+				THEN
+					GetElement(_WhichEffect, _EffectTier, "AMER_Charisma_MissChance1", "AMER_Charisma_MissChance2", "AMER_Charisma_MissChance3")
+					CharacterConsume(_Target, _WhichEffect)
+					Set(_ReactionTaken, INT:1)
+				ENDIF
+			ENDIF
+			
+			//If I actually performed a reaction, display animations
+			//and update my reactions taken.
+			IF "c1"
+				IsEqual(_ReactionTaken, INT:1)
+			THEN
+				Subtract(%AMER_CharismaReactions, INT:1)
+				StatusText(__Me, "AMER_CharismaText")
+				
+				//Display reaction combat text.
+				Print(_Str, "AMER_BardCombatText[1]", %AMER_CharismaReactionIndex)
+				Cast(_Text, _Str)
+				DisplayCombatInfoText(_Target, _Text, 1.0)
+				DisplayText(_Target, "AMER_BLANK", 1.0)
+				
+		
+				//Display remaining text for players.
+				IF "c1"
+					CharacterIsPlayer(__Me)
+				THEN
+					Print(_Str, "AMER_Bard_Reactions[1]", %AMER_CharismaReactions)
+					Cast(_Text, _Str)
+					DisplayCombatInfoText(__Me, _Text, 1.0)
+					DisplayText(__Me, "AMER_BLANK", 1.0)
+				ENDIF
+				
+				//Play effects.
+				IF "c1"
+					CharacterIsAlly(__Me, _Target)
+				THEN
+					CharacterPlayEffect(__Me, "FX_Skills_Earth_TargetedBless_Cast_A")
+					CharacterPlayEffect(_Target, "FX_Skills_Earth_TargetedBless_Impact_A")
+				ELSE
+					CharacterPlayEffect(__Me, "FX_Skills_WitchCraft_TargetedCurse_Cast_A")
+					CharacterPlayEffect(_Target, "FX_Skills_WitchCraft_TargetedCurse_Impact_A")
+				ENDIF
+				
+				//Play animation.
+				IF "c1"
+					CharacterIsPlayer(__Me)
+				THEN
+					CharacterPlayAnimation("Loop_Dance_01", 1, 0)
+				ELSE
+					CharacterPlayAnimation("cast_self_cast", 1, 0)
+				ENDIF
+			ENDIF
+		ENDIF
+	ENDIF
+	
+	
+//===============================================//
+//                                               //
+//     C H A R A C T E R   F U N C T I O N S     //
+//                                               //
+//===============================================//

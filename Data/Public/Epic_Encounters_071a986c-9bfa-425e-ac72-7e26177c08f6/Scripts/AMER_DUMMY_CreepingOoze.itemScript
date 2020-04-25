@@ -1,0 +1,131 @@
+//===============================================//
+//                                               //
+//           C R E E P I N G   O O Z E           //
+//                                               //
+//     Written by Matteo "Ameranth" T. (2016)    //
+//===============================================//
+INIT
+ITEM:__Me
+CHARACTER:%AMER_CreepingOoze_Owner
+INT:%AMER_CreepingOoze_Lifetime = 18	//3 turns.
+INT:%AMER_CreepingOoze_TurnHandled
+INT:%AMER_CreepingOoze_NextStage = 3	//Counts downward.
+	
+EVENTS
+EVENT CreepingOozeInit
+VARS
+	CHARACTER:_Char
+	FLOAT3:_Position
+ON
+	OnInit()
+ACTIONS
+	//PlayEffectAt(__Me, "FX_Skills_Ranger_Infect_Cast_A")
+	//IterateCharactersNear(__Me, 20.0, "AMER_CreepingOoze_GetOwner")
+	//CallFunction("AMER_CreepingOoze_Update")
+	StartTimer("AMER_CreepingOoze_Update", 1.0, -1)
+	
+	
+	
+EVENT CreepingOozeGetOwner
+VARS
+	CHARACTER:_Char
+	INT:_RecentCaster
+ON
+	OnIterateCharacter(_Char, "AMER_CreepingOoze_GetOwner")
+ACTIONS
+	IF "c1"
+		GetVar(_RecentCaster, _Char, "AMER_RecentCaster")
+	THEN
+		IF "c1"
+			IsEqual(_RecentCaster, INT:1)
+		THEN
+			Set(%AMER_CreepingOoze_Owner, _Char)
+		ENDIF
+	ENDIF
+	
+	
+	
+EVENT CreepingOozeUpdate
+VARS
+	INT:_GrowThreshold
+ON
+	OnTimer("AMER_CreepingOoze_Update")
+ACTIONS
+	IF "c1"
+		IsEqual(%AMER_CreepingOoze_Owner, null)
+	THEN
+		IterateCharactersNear(__Me, 20.0, "AMER_CreepingOoze_GetOwner")
+	ELSE
+	
+		IF "c1"
+			IsGreaterThen(%AMER_CreepingOoze_NextStage, INT:0)
+		THEN
+			IF "c1"
+				IsInCombat(%AMER_CreepingOoze_Owner)
+			THEN
+				IF "c1"
+					CharacterIsInActiveTurn(%AMER_CreepingOoze_Owner)
+				THEN
+					IF "c1"
+						IsEqual(%AMER_CreepingOoze_TurnHandled, INT:0)
+					THEN
+						Set(%AMER_CreepingOoze_TurnHandled, INT:1)
+						Subtract(%AMER_CreepingOoze_Lifetime, INT:6)
+						Set(_GrowThreshold, %AMER_CreepingOoze_NextStage)
+						Multiply(_GrowThreshold, INT:6)
+						IF "!c1"
+							IsGreaterThen(%AMER_CreepingOoze_Lifetime, _GrowThreshold)
+						THEN
+							CallFunction("AMER_CreepingOozeGrow")
+						ENDIF
+					ENDIF
+				ELSE
+					Set(%AMER_CreepingOoze_TurnHandled, INT:0)
+				ENDIF
+			ELSE
+				Subtract(%AMER_CreepingOoze_Lifetime, INT:1)
+				Set(_GrowThreshold, %AMER_CreepingOoze_NextStage)
+				Multiply(_GrowThreshold, INT:6)
+				IF "!c1"
+					IsGreaterThen(%AMER_CreepingOoze_Lifetime, _GrowThreshold)
+				THEN
+					CallFunction("AMER_CreepingOoze_Grow")
+				ENDIF
+			ENDIF
+		ELSE
+			StopTimer("AMER_CreepingOoze_Update")
+			ItemDestroy(__Me)
+		ENDIF
+	ENDIF
+	
+	
+	
+EVENT CreepingOozeGrow
+VARS
+	FLOAT:_Size
+	FLOAT3:_Pos
+	FLOAT:_Y
+ON
+	OnFunction("AMER_CreepingOoze_Grow")
+ACTIONS
+	Subtract(%AMER_CreepingOoze_NextStage, INT:1)
+	Set(_Size, 3.0)
+	Subtract(_Size, %AMER_CreepingOoze_NextStage)
+	CreateSurfaceAt(__Me, Ooze, _Size, 3)
+	
+	//Do special effects.
+	GetPosition(__Me, _Pos)
+	IF "c1"
+		GetY(_Pos, _Y)
+	THEN
+		Add(_Y, -3.5)
+		SetY(_Pos, _Y)
+		//PlayEffectAt(_Pos, "FX_Skills_Earth_EnemyOozeSpray_Cast_A")
+		PlayEffectAt(_Pos, "FX_Env_OozeSquirt_A")
+	ENDIF
+	
+//===============================================//
+//                                               //
+//           C R E E P I N G   O O Z E           //
+//                                               //
+//===============================================//

@@ -1,0 +1,27 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+//All skilled up
+IF
+	CharacterUnlockedTalent(_Char, "ExtraSkillPoints")
+THEN
+	CharacterAddAbilityPoint(_Char, 2);
+
+
+
+//Lone Wolf
+IF
+	CharacterUnlockedTalent(_Char, "LoneWolf")
+AND
+	CharacterGetLevel(_Char, _Level)
+AND
+	IntegerSubtract(_Level, 1, _Points)
+THEN
+	CharacterAddAbilityPoint(_Char, _Points);
+	CharacterAddTalentPoint(_Char, 1);
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "__Start"

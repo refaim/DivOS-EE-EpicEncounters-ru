@@ -1,0 +1,42 @@
+//===============================================//
+//                                               //
+//            A B Y S S A L   B O S S            //
+//                                               //
+//     Written by Matteo "Ameranth" T. (2016)    //
+//===============================================//
+INIT
+CHARACTER:__Me
+EXTERN ITEM:%AMER_AbyssalBoss_Anchor = null
+	
+EVENTS
+EVENT AbyssalBossInit
+ON
+	OnInit()
+ACTIONS
+	IF "!c1"
+		IsEqual(%AMER_AbyssalBoss_Anchor, null)
+	THEN
+		ItemSetOnStage(%AMER_AbyssalBoss_Anchor, INT:0)
+	ENDIF
+	
+	
+EVENT AbyssalBossCombatEnded
+ON
+	OnCombatEnded()
+ACTIONS
+	IF "c1"
+		CharacterIsDead(__Me)
+	THEN
+	//Reveal my anchor when combat ends and I am dead.
+		IF "!c1"
+			IsEqual(%AMER_AbyssalBoss_Anchor, null)
+		THEN
+			ItemSetOnStage(%AMER_AbyssalBoss_Anchor, INT:1)
+			Set(%AMER_AbyssalBoss_Anchor, null)
+		ENDIF
+	ENDIF
+//===============================================//
+//                                               //
+//            A B Y S S A L   B O S S            //
+//                                               //
+//===============================================//

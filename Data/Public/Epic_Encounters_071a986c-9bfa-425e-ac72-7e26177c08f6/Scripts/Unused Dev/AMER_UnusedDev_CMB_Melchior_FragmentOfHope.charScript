@@ -1,0 +1,171 @@
+//===============================================//
+//                                               //
+//        F R A G M E N T   O F   H O P E        //
+//                                               //
+//     Written by Matteo "Ameranth" T. (2016)    //
+//===============================================//
+INIT
+CHARACTER:__Me
+CHARACTER:%AMER_MelchiorFragment_Perfection = null
+INT:%AMER_FragmentOfHope_Combat = 0
+INT:%AMER_FragmentOfHope_Handle
+	
+EVENTS
+EVENT FragmentOfHopeInit
+ON
+	OnInit()
+ACTIONS
+	CharacterApplyStatus(__Me, ETHEREAL_SOLES, -1, 1)
+	StartTimer("AMER_FragmentOfHope_PlayEffectDelay", 0.25, 0)
+	StartTimer("AMER_FragmentOfHope_RemoveSpawnEffect", 3.5, 0)
+	
+	
+	
+EVENT FragmentOfHopePlayEffectDelay
+ON
+	OnTimer("AMER_FragmentOfHope_PlayEffectDelay")
+ACTIONS
+	CharacterPlayLoopEffect(%AMER_FragmentOfHope_Handle, __Me, "FX_Skills_WitchCraft_Summon_Prepare_A")
+	
+	
+	
+EVENT FragmentOfHopeRemoveSpawnEffect
+ON
+	OnTimer("AMER_FragmentOfHope_RemoveSpawnEffect")
+ACTIONS
+	StopLoopEffect(%AMER_FragmentOfHope_Handle)
+	
+	
+	
+EVENT FragmentOfHopeCombatEnded
+ON
+	OnCombatEnded()
+ACTIONS
+	IF "!c1"
+		CharacterIsDead(%AMER_MelchiorFragment_Perfection)
+	THEN
+		IF "!c1"
+			CharacterIsDead(__Me)
+		THEN
+			PlayEffectAt(__Me, "FX_Skills_Air_NetherSwap_Disappear_A")
+			CharacterDestroy(__Me)
+		ENDIF
+	ENDIF
+	
+	
+	
+EVENT FragmentOfHopeOnTurn
+ON
+	OnTurn()
+ACTIONS
+	StartTimer("AMER_FragmentOfHope_AutoDie", 0.15, -1)
+	
+	
+	
+EVENT FragmentOfHopeTurnEnded
+ON
+	OnTurnEnded()
+ACTIONS
+	StopTimer("AMER_FragmentOfHope_AutoDie")
+	
+	
+	
+EVENT FragmentOfHopeDeathHeal
+VARS
+	CHARACTER:_Char
+ON
+	OnIterateCharacter(_Char, "AMER_FragmentOfHope_DeathHeal")
+ACTIONS
+	IF "!c1"
+		CharacterIsDead(_Char)
+	THEN
+		IF "c1|c2"
+			CharacterHasStatus(_Char, DECAYING_TOUCH)
+			CharacterHasStatus(_Char, UNHEALABLE)
+		THEN
+			CharacterRemoveStatus(_Char, DECAYING_TOUCH)
+			CharacterRemoveStatus(_Char, UNHEALABLE)
+		ELSE
+			CharacterHeal(_Char, 0.3)
+		ENDIF
+	ENDIF
+	
+	
+	
+EVENT FragmentOfHopeDie
+//Do a heal to those around me when I die. If they have Decaying
+//Touch or Unhealable, remove those statuses.
+ON
+	OnDie(__Me, _, _, _)
+ACTIONS
+	PlayEffectAt(__Me, "FX_Skills_Water_GrenadeHealing_Impact_A")
+	IterateCharactersNear(__Me, 4.0, "AMER_FragmentOfHope_DeathHeal")
+	
+	
+	
+	
+	
+EVENT FragmentOfHopeCheckForCharacters
+//During its turn, the fragment automatically dies whenever
+//it comes within a set radius of a player or Melchior.
+VARS
+	CHARACTER:_Char
+ON
+	OnIterateCharacter(_Char, "AMER_FragmentOfHope_CheckForCharacters")
+ACTIONS
+	IF "c1|c2"
+		CharacterIsPlayer(_Char)
+		IsEqual(_Char, %AMER_MelchiorFragment_Perfection)
+	THEN
+		IF "!c1"
+			CharacterIsDead(_Char)
+		THEN
+			CharacterDie(__Me, FrozenShatter)
+		ENDIF
+	ENDIF
+	
+	
+	
+EVENT FragmentOfHopeAutoDie
+//Timer to check during my turn if Melchior
+//or a player is close to me.
+ON
+	OnTimer("AMER_FragmentOfHope_AutoDie")
+ACTIONS
+	IterateCharactersNear(__Me, 3.0, "AMER_FragmentOfHope_CheckForCharacters")
+	
+	
+	
+//===================BEHAVIOR====================//
+BEHAVIOUR
+//Always try to move toward Melchior.
+REACTION FragmentOfHopeMoveTowardMelchior, 10000
+USAGE COMBAT
+ACTIONS
+	CharacterMoveTo(%AMER_MelchiorFragment_Perfection, 1)
+	
+	Sleep(2.0)
+	
+	CharacterEndTurn()
+	
+	
+	
+REACTION FragmentOfHopeEngageCombat, 20000
+USAGE ALL
+VARS
+	FLOAT3:_Pos
+CHECK "c1"
+	IsEqual(%AMER_FragmentOfHope_Combat, INT:0)
+ACTIONS
+	GetPosition(__Me, _Pos)
+	TeleportTo(__Me, %AMER_MelchiorFragment_Perfection, 1)
+	Sleep(0.05)
+	TeleportTo(__Me, _Pos, 1)
+	Set(%AMER_FragmentOfHope_Combat, INT:1)
+	
+	
+//===============================================//
+//                                               //
+//        F R A G M E N T   O F   H O P E        //
+//                                               //
+//===============================================//

@@ -1,0 +1,45 @@
+#TEMPLATE "_SKILL_Base" : Shout_EtherealSoles
+
+INIT
+CHARACTER:__Me
+FLOAT:%SkillTargetScore_Shout_EtherealSoles=-1000000
+// [GLOBAL_VARS]
+// [~GLOBAL_VARS]
+
+EVENTS
+
+// [EVENTS]
+// [~EVENTS]
+
+// Calculate the priority of the skill
+EVENT CalculateScore_Shout_EtherealSoles
+VARS
+	// [CALC_VARS]
+	FLOAT:_SkillRangeMin
+	FLOAT:_SkillRangeMax
+	FLOAT:_SkillImpactRange
+	FLOAT3:_TargetPos
+	// [~CALC_VARS]
+ON
+	OnFunction("CalculateScore_Shout_EtherealSoles")
+ACTIONS
+	Set(%SkillTargetScore_Shout_EtherealSoles, -1000000)
+
+	// [CALC_ACTIONS_PRE]
+	// [~CALC_ACTIONS_PRE]
+	// [CALC_ACTIONS]
+	IF "!c1"
+		CharacterHasStatus(__Me, ETHEREAL_SOLES)
+	THEN
+		Set(%SkillTargetChar_Shout_EtherealSoles, __Me)
+	    Add(%ActionScore_Shout_EtherealSoles, 20.0)
+	ENDIF
+	// [~CALC_ACTIONS]
+	
+	
+	
+	
+	
+	
+	
+	

@@ -1,0 +1,225 @@
+//===============================================//
+//                                               //
+//             M U L T I S U M M O N             //
+//                                               //
+//     Written by Matteo "Ameranth" T. (2017)    //
+//===============================================//
+INIT
+	CHARACTER:__Me
+	EXTERN INT:%AMER_MultiSummon_Amount = 3
+	EXTERN CHARACTERTEMPLATE:%AMER_MultiSummon_Root = Summons_ElementalIce_A_dd619808-e60a-4b91-af03-aa0345dcd159
+	EXTERN INT:%AMER_MultiSummon_Priority = 1000
+	EXTERN INT:%AMER_MultiSummon_Cooldown = -1
+	EXTERN INT:%AMER_MultiSummon_DisabledInCasual = 0
+	EXTERN INT:%AMER_MultiSummon_CastOnCombat = 0
+	EXTERN FLOAT:%AMER_MultiSummon_RandXMin = -5.0
+	EXTERN FLOAT:%AMER_MultiSummon_RandXMax = 5.0
+	EXTERN FLOAT:%AMER_MultiSummon_RandZMin = -5.0
+	EXTERN FLOAT:%AMER_MultiSummon_RandZMax = 5.0
+	EXTERN STRING:%AMER_MultiSummon_SpawnFX = "FX_Creatures_Animals_Zombie_Spawn_A"
+	EXTERN STRING:%AMER_MultiSummon_CastFX = "FX_Skills_WitchCraft_Generic_A_Prepare"
+	INT:%AMER_MultiSummon_CD
+	INT:%AMER_MultiSummon_MyLevel
+	INT:%AMER_MultiSummon_Handle
+
+//------------------------
+BEHAVIOUR
+REACTION MultiSummon_Summon, 0
+USAGE COMBAT
+CHECK "!c1"
+	CharacterHasStatus(__Me, MUTED)
+ACTIONS
+	CharacterPlayAnimation("cast_self_cast", 1, 0)
+	CallFunction("AMER_MultiSummon_DoSummon")
+	SetVar(__Me, "AMER_TimeoutDetection", INT:-4)	//Give extra time for animations.
+INTERRUPT
+	StopLoopEffect(%AMER_MultiSummon_Handle)
+	Reset()
+	
+	
+	
+BEHAVIOUR
+REACTION MultiSummon_Summon_AtAnyTime, 0
+USAGE ALL
+CHECK "!c1"
+	CharacterHasStatus(__Me, MUTED)
+ACTIONS
+	Sleep(0.5)
+	CharacterPlayAnimation("cast_self_cast", 1, 0)
+	SetVar(__Me, "AMER_TimeoutDetection", INT:-4)	//Give extra time for animations.
+	CallFunction("AMER_MultiSummon_DoSummon")
+INTERRUPT
+	StopLoopEffect(%AMER_MultiSummon_Handle)
+	Reset()
+	
+	
+	
+//------------------------
+EVENTS
+EVENT MultiSummonDoSummon
+VARS
+	INT:_Count
+	FLOAT3:_Pos
+	FLOAT:_CheckRadius
+	FLOAT:_RandX
+	FLOAT:_RandZ
+	FLOAT:_X
+	FLOAT:_Z
+	CHARACTER:_Spawn
+ON
+	OnFunction("AMER_MultiSummon_DoSummon")
+ACTIONS
+	Set(%AMER_MultiSummon_CD, %AMER_MultiSummon_Cooldown)
+	CharacterPlayLoopEffect(%AMER_MultiSummon_Handle, __Me, %AMER_MultiSummon_CastFX)
+	
+	Set(_Count, INT:0)
+	WHILE "c1"
+		IsLessThen(_Count, %AMER_MultiSummon_Amount)
+	DO
+		GetRandomBetween(_RandX, %AMER_MultiSummon_RandXMin, %AMER_MultiSummon_RandXMax)
+		GetRandomBetween(_RandZ, %AMER_MultiSummon_RandZMin, %AMER_MultiSummon_RandZMax)
+		GetPosition(__Me, _Pos)
+		IF "c1&c2"
+			GetZ(_Pos, _Z)
+			GetX(_Pos, _X)
+		THEN
+			Add(_Z, _RandZ)
+			Add(_X, _RandX)
+			SetZ(_Pos, _Z)
+			SetX(_Pos, _X)
+		ENDIF
+		//Add(_Pos, {_RandX;0.0;_RandZ})
+		
+		//SpawnCharacter(_Spawn, %AMER_MultiSummon_Root, _Pos, 1, 1, __Me, %AMER_MultiSummon_MyLevel)
+		
+		Set(_CheckRadius, 1.0)
+		WHILE "c1"
+			IsLessThen(_CheckRadius, 9.0)
+		DO
+			IF "c1"
+				FindValidPosition(_Pos, _CheckRadius, __Me)
+			THEN
+				Set(_CheckRadius, 99.0)	//Valid pos found, exit loop.
+				//TeleportTo(_Spawn, _Pos)
+				SpawnCharacter(_Spawn, %AMER_MultiSummon_Root, _Pos, 1, 1, __Me, %AMER_MultiSummon_MyLevel)
+				PlayEffectAt(_Spawn, %AMER_MultiSummon_SpawnFX)
+			ENDIF
+			
+			Add(_CheckRadius, 2.0)
+		ENDWHILE
+		
+		//Couldn't find a valid location, destroy spawn as default.
+		/*
+		IF "!c1"
+			IsGreaterThen(_CheckRadius, 90.0)
+		THEN
+			CharacterDestroy(_Spawn)
+		ENDIF
+		*/
+		
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+	StopLoopEffect(%AMER_MultiSummon_Handle)
+	SetPriority(MultiSummon_Summon_AtAnyTime, 0)
+	SetPriority(MultiSummon_Summon, 0)
+	
+	
+	
+EVENT MultiSummonOnTurn
+ON 
+	OnTurn()
+ACTIONS
+	IF "c1"
+		IsEqual(%AMER_MultiSummon_CD, INT:0)
+	THEN
+		SetPriority(MultiSummon_Summon, %AMER_MultiSummon_Priority)
+	ENDIF
+	Subtract(%AMER_MultiSummon_CD, INT:1)
+	
+	
+	
+EVENT MultiSummonCombatStarted
+VARS
+	FLOAT:_SourceLevel
+	FLOAT:_Distance
+	INT:_Priority
+	CHARACTER:_Char
+ON
+	OnCombatStarted()
+ACTIONS
+	Set(%AMER_MultiSummon_CD, INT:0)
+	IF "c1"
+		CharacterGetStat(_SourceLevel, __Me, Level)
+	THEN
+		Cast(%AMER_MultiSummon_MyLevel, _SourceLevel)
+	ENDIF
+	
+	IF "c1"
+		IsEqual(%AMER_MultiSummon_CastOnCombat, INT:1)
+	THEN
+		//Creatures who start as neutral make CharacterGet() inconsistent
+		//for the purpose of determining distance from the player party.
+		//Use this method to ensure successful detection.
+		IF "c1&c2&c3"
+			GetClosestPlayer(_Char, __Me)
+			GetDistance(_Distance, __Me, _Char)
+			IsLessThen(_Distance, 25.0)
+		THEN
+			//Ensure that these routines do not have equivalent priority.
+			Set(_Priority, %AMER_MultiSummon_Priority)
+			Add(_Priority, 1)
+			SetPriority(MultiSummon_Summon_AtAnyTime, _Priority)
+		ENDIF
+	ENDIF
+	
+	
+	
+EVENT MultiSummonCombatEnded
+ON
+	OnCombatEnded()
+ACTIONS
+	IF "!c1"
+		CharacterIsDead(__Me)
+	THEN
+		IterateCharactersNear(__Me, 30.0, "AMER_MultiSummon_Cleanup")
+	ENDIF
+	
+	
+	
+EVENT MultiSummonCleanup
+VARS
+	CHARACTER:_Char
+	CHARACTER:_Owner
+ON
+	OnIterateCharacter(_Char, "AMER_MultiSummon_Cleanup")
+ACTIONS
+	IF "c1&c2"
+		CharacterGetOwner(_Owner, _Char)
+		IsEqual(_Owner, __Me)
+	THEN
+		CharacterDestroy(_Char)
+	ENDIF
+
+	
+	
+	
+EVENT MultiSummonOnInit
+ON
+	OnInit()
+ACTIONS
+	IF "c1&c2"
+		IsEqual(%AMER_MultiSummon_DisabledInCasual, INT:1)
+		IsCasual()
+	THEN
+		Set(%AMER_MultiSummon_Priority, INT:0)
+	ENDIF
+	
+	
+	
+	
+//===============================================//
+//                                               //
+//             M U L T I S U M M O N             //
+//                                               //
+//===============================================//

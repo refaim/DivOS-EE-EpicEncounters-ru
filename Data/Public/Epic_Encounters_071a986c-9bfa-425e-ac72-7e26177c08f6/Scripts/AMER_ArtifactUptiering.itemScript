@@ -1,0 +1,16 @@
+//===============================================//
+//                                               //
+//      A R T I F A C T   U P T I E R I N G      //
+//                                               //
+//     Written by Matteo "Ameranth" T. (2017)    //
+//===============================================//
+INIT
+ITEM:__Me
+EXTERN INT:%AMER_ArtifactUptiering_MyTier = 1
+EXTERN STRING:%AMER_ArtifactUptiering_Stat = null
+	
+//===============================================//
+//                                               //
+//      A R T I F A C T   U P T I E R I N G      //
+//                                               //
+//===============================================//

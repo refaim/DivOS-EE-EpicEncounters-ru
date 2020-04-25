@@ -1,0 +1,1885 @@
+//===============================================//
+//                                               //
+//             S K I L L   C A S T S             //
+//                                               //
+//     Written by Matteo "Ameranth" T. (2016)    //
+//===============================================//
+INIT
+CHARACTER:__Me
+	
+//Used to limit damage instances inflicted on a single target
+//with "shotgun" capable spells and effects like Hailstorm.
+INT:%AMER_IsCastingShotgun = 0
+INT:%AMER_ShotgunHits
+INT:%AMER_ShotgunHitsTaken = 0
+DAMAGE:%AMER_ShotgunType
+	
+//Used to track what percent of maximum vitality
+//a Fossilized target can suffer before losing
+//Fossilize defense bonuses.
+FLOAT:%AMER_FossilizeAbsorb = -1
+	
+//Used to determine whether a Consume application should be checked
+//for a special applicator effect, instead of simply checking every
+//consume applied. The window is the amount of time after a broadcast
+//that characters will accept an applicator consume. Somes a skill
+//may want to utilize multiple applicators- in these cases the Instances
+//variable is set accordingly, otherwise it is set to 1.
+INT:%AMER_ExpectApplicator = 0
+INT:%AMER_ApplicatorIsStatus = 0						//Set to 1 if the applicator needs to be handled as a status.
+INT:%AMER_ApplicatorConsumeInstances = 0
+FLOAT:%AMER_ExpectApplicatorWindow = 0.0
+FIXEDSTRING:%AMER_ApplicatorFunction = null	//The function that will be run when the applicator is handled.
+	
+//Used to give specific characters additional time for their applicator
+//windows. This is sometimes necessary for characters with exceptionally
+//slow or fast animations.
+FLOAT:%AMER_ExpectApplicatorTimeOffset = 0.0
+FLOAT:%AMER_ApplicatorWindow
+	
+//Used both for calculating the magnitude of a scaling heal as well as
+//the actual application of said heal.
+FLOAT:%AMER_ScalingHealAmount
+FLOAT:%AMER_ScalingHealGrowth
+FLOAT:%AMER_ScalingHealRecommended
+	
+//Used to pass which attribute governs a skill. Probably used for scaling
+//heal calculation.
+CHARACTERSTAT:%AMER_PrimeAttribute
+	
+//Used to allow skills with weapon damage multipliers other than 100% to
+//offset the damage gained from scripted backstab damage bonus.
+INT:%AMER_BackstabDamageInstances = 0
+	
+EVENTS
+//=====================================================//
+//              C A S T E D   S K I L L                //
+//=====================================================//
+//Effects that need to occur and values that need to be set
+//when a spell is casted.
+	
+	
+	
+//==================AEROTHEURGE========================//
+EVENT OnCastEnervate
+// E N E R V A T E
+VARS
+	FLOAT:_Attribute
+ON
+	OnSkillCast(__Me, "AMER_SKILL_Enervate")
+ACTIONS
+	//Broadcast expect applicator event.
+	Set(%AMER_ApplicatorWindow, 2.0)
+	Add(%AMER_ApplicatorWindow, %AMER_ExpectApplicatorTimeOffset)
+	Set(%AMER_ApplicatorConsumeInstances, INT:1)
+	Set(%AMER_ExpectApplicatorWindow, %AMER_ApplicatorWindow)
+	Set(%AMER_ApplicatorIsStatus, INT:1)
+	Set(%AMER_ApplicatorFunction, "AMER_STATUS_EnervateParameters")
+	CharacterEvent(__Me, "AMER_ExpectApplicatorConsume")
+	
+	//Need to know how many targets are affected before buffing.
+	SetVar(__Me, "AMER_BorrowedTimeTargets", INT:0)
+	StartTimer("AMER_EnervateBuff", 1.0, 0)
+	//Report relevant values for faking status.
+	IF "c1"
+		CharacterGetStat(_Attribute, __Me, Intelligence)
+	THEN
+		Subtract(_Attribute, 13.0)
+		SetVar(__Me, "AMER_STATUS_AttributePower", _Attribute)
+		SetVar(__Me, "AMER_STATUS_BaseChance", FLOAT:130.0)
+	ENDIF
+	
+EVENT OnCastBlitzBolt
+// B L I T Z   B O L T
+VARS
+	FLOAT:_Attribute
+ON
+	OnSkillCast(__Me, "Projectile_BlitzBoltStart")
+ACTIONS
+	//Broadcast expect applicator event.
+	Set(%AMER_ApplicatorWindow, 2.0)
+	Add(%AMER_ApplicatorWindow, %AMER_ExpectApplicatorTimeOffset)
+	Set(%AMER_ApplicatorConsumeInstances, INT:1)
+	Set(%AMER_ExpectApplicatorWindow, %AMER_ApplicatorWindow)
+	Set(%AMER_ApplicatorIsStatus, INT:1)
+	Set(%AMER_ApplicatorFunction, "AMER_STATUS_ShockedParameters")
+	CharacterEvent(__Me, "AMER_ExpectApplicatorConsume")
+	
+	IF "c1"
+		CharacterGetStat(_Attribute, __Me, Intelligence)
+	THEN
+		Subtract(_Attribute, 10.0)
+		SetVar(__Me, "AMER_STATUS_AttributePower", _Attribute)
+		SetVar(__Me, "AMER_STATUS_BaseChance", FLOAT:75.0)
+	ENDIF
+	
+EVENT OnCastChainLightning
+// C H A I N   L I G H T N I N G
+VARS
+	FLOAT:_Attribute
+ON
+	OnSkillCast(__Me, "Projectile_ChainLightning")
+ACTIONS
+	//Broadcast expect applicator event.
+	Set(%AMER_ApplicatorWindow, 2.0)
+	Add(%AMER_ApplicatorWindow, %AMER_ExpectApplicatorTimeOffset)
+	Set(%AMER_ApplicatorConsumeInstances, INT:3)
+	Set(%AMER_ExpectApplicatorWindow, %AMER_ApplicatorWindow)
+	Set(%AMER_ApplicatorIsStatus, INT:1)
+	Set(%AMER_ApplicatorFunction, "AMER_STATUS_ShockedParameters")
+	CharacterEvent(__Me, "AMER_ExpectApplicatorConsume")
+	
+	//Report relevant values for faking status.
+	IF "c1"
+		CharacterGetStat(_Attribute, __Me, Intelligence)
+	THEN
+		Subtract(_Attribute, 13.0)
+		SetVar(__Me, "AMER_STATUS_AttributePower", _Attribute)
+		SetVar(__Me, "AMER_STATUS_BaseChance", FLOAT:75.0)
+	ENDIF
+	
+EVENT OnCastGreaterInvisibility
+// G R E A T E R   I N V I S I B I L I T Y
+ON
+	OnSkillCast(__Me, "Target_InvisibilityTarget")
+ACTIONS
+	//Broadcast expect applicator event.
+	Set(%AMER_ApplicatorWindow, 2.0)
+	Add(%AMER_ApplicatorWindow, %AMER_ExpectApplicatorTimeOffset)
+	Set(%AMER_ApplicatorConsumeInstances, INT:1)
+	Set(%AMER_ExpectApplicatorWindow, %AMER_ApplicatorWindow)
+	Set(%AMER_ApplicatorIsStatus, INT:0)
+	Set(%AMER_ApplicatorFunction, "AMER_GreaterInvisInitial")
+	CharacterEvent(__Me, "AMER_ExpectApplicatorConsume")
+	
+EVENT OnCastShockingTouch
+// S H O C K I N G   T O U C H
+VARS
+	FLOAT:_Attribute
+ON
+	OnSkillCast(__Me, "Target_ShockingTouch")
+	OnSkillCast(__Me, "AMER_SKILL_EMPOWERED_Target_ShockingTouch")
+ACTIONS
+	//Broadcast expect applicator event.
+	Set(%AMER_ApplicatorWindow, 2.0)
+	Add(%AMER_ApplicatorWindow, %AMER_ExpectApplicatorTimeOffset)
+	Set(%AMER_ApplicatorConsumeInstances, INT:1)
+	Set(%AMER_ExpectApplicatorWindow, %AMER_ApplicatorWindow)
+	Set(%AMER_ApplicatorIsStatus, INT:1)
+	Set(%AMER_ApplicatorFunction, "AMER_STATUS_ShockedParameters")
+	CharacterEvent(__Me, "AMER_ExpectApplicatorConsume")
+	
+	//Report relevant values for faking status.
+	IF "c1"
+		CharacterGetStat(_Attribute, __Me, Intelligence)
+	THEN
+		Subtract(_Attribute, 8.0)
+		SetVar(__Me, "AMER_STATUS_AttributePower", _Attribute)
+		SetVar(__Me, "AMER_STATUS_BaseChance", FLOAT:90)
+	ENDIF
+	
+EVENT OnCastThunderJump
+// T H U N D E R   J U M P
+VARS
+	FLOAT:_Attribute
+ON
+	OnSkillCast(__Me, "MultiStrike_LightningStrike")
+	OnSkillCast(__Me, "AMER_SKILL_EMPOWERED_MultiStrike_LightningStrike")
+ACTIONS
+	//Broadcast expect applicator event.
+	Set(%AMER_ApplicatorWindow, 2.0)
+	Add(%AMER_ApplicatorWindow, %AMER_ExpectApplicatorTimeOffset)
+	Set(%AMER_ApplicatorConsumeInstances, INT:1)
+	Set(%AMER_ExpectApplicatorWindow, %AMER_ApplicatorWindow)
+	Set(%AMER_ApplicatorIsStatus, INT:1)
+	Set(%AMER_ApplicatorFunction, "AMER_STATUS_ShockedParameters")
+	CharacterEvent(__Me, "AMER_ExpectApplicatorConsume")
+	
+	//Report relevant values for faking status.
+	IF "c1"
+		CharacterGetStat(_Attribute, __Me, Intelligence)
+	THEN
+		Subtract(_Attribute, 10.0)
+		SetVar(__Me, "AMER_STATUS_AttributePower", _Attribute)
+		SetVar(__Me, "AMER_STATUS_BaseChance", FLOAT:80.0)
+	ENDIF
+	
+EVENT OnCastVengeance
+// V E N G E A N C E
+ON
+	OnSkillCast(__Me, "AMER_SKILL_Vengeance")
+ACTIONS
+	//Make Vengeance do damage immediately when cast and
+	//apply its buff to the caster.
+	CharacterConsume(__Me, "AMER_Vengeance")
+	CallFunction("AMER_StartVengeance")
+	
+	
+	
+//==================GEOMANCER========================//
+EVENT OnCastAmberPrison
+// A M B E R   P R I S O N
+VARS
+	FLOAT:_Attribute
+ON
+	OnSkillCast(__Me, "AMER_SKILL_AmberPrison")
+ACTIONS
+	//Broadcast expect applicator event.
+	Set(%AMER_ApplicatorWindow, 2.0)
+	Add(%AMER_ApplicatorWindow, %AMER_ExpectApplicatorTimeOffset)
+	Set(%AMER_ApplicatorConsumeInstances, INT:1)
+	Set(%AMER_ExpectApplicatorWindow, %AMER_ApplicatorWindow)
+	Set(%AMER_ApplicatorIsStatus, INT:1)
+	Set(%AMER_ApplicatorFunction, "AMER_STATUS_AmberPrisonParameters")
+	CharacterEvent(__Me, "AMER_ExpectApplicatorConsume")
+	
+	//Report relevant values for faking status.
+	IF "c1"
+		CharacterGetStat(_Attribute, __Me, Intelligence)
+	THEN
+		Subtract(_Attribute, 13.0)
+		SetVar(__Me, "AMER_STATUS_AttributePower", _Attribute)
+		SetVar(__Me, "AMER_STATUS_BaseChance", FLOAT:130.0)
+	ENDIF
+	
+EVENT OnCastBalance
+// B A L A N C E
+VARS
+	FLOAT:_Attribute
+ON
+	OnSkillCast(__Me, "AMER_SKILL_Balance")
+ACTIONS
+	//Broadcast expect applicator event.
+	Set(%AMER_ApplicatorWindow, 2.0)
+	Add(%AMER_ApplicatorWindow, %AMER_ExpectApplicatorTimeOffset)
+	Set(%AMER_ApplicatorConsumeInstances, INT:1)
+	Set(%AMER_ExpectApplicatorWindow, %AMER_ApplicatorWindow)
+	Set(%AMER_ApplicatorIsStatus, INT:1)
+	Set(%AMER_ApplicatorFunction, "AMER_STATUS_BalanceParameters")
+	CharacterEvent(__Me, "AMER_ExpectApplicatorConsume")
+	
+	//Report relevant values for faking status.
+	IF "c1"
+		CharacterGetStat(_Attribute, __Me, Intelligence)
+	THEN
+		Subtract(_Attribute, 11.0)
+		SetVar(__Me, "AMER_STATUS_AttributePower", _Attribute)
+		SetVar(__Me, "AMER_STATUS_BaseChance", FLOAT:100.0)
+	ENDIF
+	
+EVENT OnCastBless
+// B L E S S
+ON
+	OnSkillCast(__Me, "Target_TargetedBless")
+	OnSkillCast(__Me, "Target_EnemyTargetedBless")
+ACTIONS
+	//Broadcast expect applicator event.
+	Set(%AMER_ApplicatorWindow, 2.0)
+	Add(%AMER_ApplicatorWindow, %AMER_ExpectApplicatorTimeOffset)
+	Set(%AMER_ApplicatorConsumeInstances, INT:1)
+	Set(%AMER_ExpectApplicatorWindow, %AMER_ApplicatorWindow)
+	Set(%AMER_ApplicatorIsStatus, INT:0)
+	Set(%AMER_ApplicatorFunction, "AMER_BlessInitial")
+	CharacterEvent(__Me, "AMER_ExpectApplicatorConsume")
+	
+EVENT OnCastBlessedEarth
+// B L E S S E D   E A R T H
+ON
+	OnSkillCast(__Me, "Shout_BlessedEarth")
+ACTIONS
+	//Broadcast expect applicator event.
+	Set(%AMER_ApplicatorWindow, 2.0)
+	Add(%AMER_ApplicatorWindow, %AMER_ExpectApplicatorTimeOffset)
+	Set(%AMER_ApplicatorConsumeInstances, INT:1)
+	Set(%AMER_ExpectApplicatorWindow, %AMER_ApplicatorWindow)
+	Set(%AMER_ApplicatorIsStatus, INT:0)
+	Set(%AMER_ApplicatorFunction, "AMER_BlessInitial")
+	CharacterEvent(__Me, "AMER_ExpectApplicatorConsume")
+	
+EVENT OnCastEmpoweredBlessedEarth
+// E M P O W E R E D   B L E S S E D   E A R T H
+ON
+	OnSkillCast(__Me, "AMER_SKILL_EMPOWERED_Shout_BlessedEarth")
+ACTIONS
+	//Calculate scaling heal.
+	Set(%AMER_ScalingHealAmount, 0.10)
+	Set(%AMER_ScalingHealGrowth, 0.02)
+	Set(%AMER_ScalingHealRecommended, 10.0)
+	Set(%AMER_PrimeAttribute, Intelligence)
+	CallFunction("AMER_CalcScalingHeal")
+	
+	//Broadcast expect applicator event.
+	Set(%AMER_ApplicatorWindow, 2.0)
+	Add(%AMER_ApplicatorWindow, %AMER_ExpectApplicatorTimeOffset)
+	Set(%AMER_ApplicatorConsumeInstances, INT:1)
+	Set(%AMER_ExpectApplicatorWindow, %AMER_ApplicatorWindow)
+	Set(%AMER_ApplicatorIsStatus, INT:0)
+	Set(%AMER_ApplicatorFunction, "AMER_EmpoweredBlessedEarth")
+	CharacterEvent(__Me, "AMER_ExpectApplicatorConsume")
+	
+EVENT OnCastCreepingOoze
+// C R E E P I N G   O O Z E
+ON
+	OnSkillCast(__Me, "AMER_SKILL_CreepingOoze")
+ACTIONS
+	//Broadcast expect applicator event.
+	Set(%AMER_ApplicatorWindow, 2.0)
+	Add(%AMER_ApplicatorWindow, %AMER_ExpectApplicatorTimeOffset)
+	Set(%AMER_ApplicatorConsumeInstances, INT:1)
+	Set(%AMER_ExpectApplicatorWindow, %AMER_ApplicatorWindow)
+	Set(%AMER_ApplicatorIsStatus, INT:0)
+	Set(%AMER_ApplicatorFunction, "AMER_CreepingOozeInitial")
+	CharacterEvent(__Me, "AMER_ExpectApplicatorConsume")
+	
+EVENT OnCastImpalement
+VARS
+	FLOAT:_SourceLevel
+	INT:_Level
+// I M P A L E M E N T
+ON
+	OnSkillCast(__Me, "AMER_SKILL_Impalement")
+ACTIONS
+	//Impalement is duplicated upon the caster when cast.
+	IF "c1"
+		CharacterGetStat(_SourceLevel, __Me, Level)
+	THEN
+		Cast(_Level, _SourceLevel)
+	ELSE
+		Set(_Level, -1)
+	ENDIF
+	CharacterPlayEffect(__Me, "FX_Skills_WitchCraft_DestroySummon_Impact_A")
+	ExplodeAt(__Me, AMER_SCRIPTSKILL_SelfImpalement, _Level, __Me)
+	
+EVENT OnCastDeadlySpores
+// D E A D L Y   S P O R E S
+ON
+	OnSkillCast(__Me, "Projectile_DeadlySpores")
+ACTIONS
+	//Play a cool sound for Deadly Spores to make it feel more baller.
+	PlaySound(__Me, "Skill_En_PoisonMeteor_Proj")
+	
+EVENT OnCastFallow
+// F A L L O W
+ON
+	OnSkillCast(__Me, "AMER_SKILL_Fallow")
+ACTIONS
+	//Calculate scaling heal.
+	Set(%AMER_ScalingHealAmount, 0.04)
+	Set(%AMER_ScalingHealGrowth, 0.02)
+	Set(%AMER_ScalingHealRecommended, 10.0)
+	Set(%AMER_PrimeAttribute, Intelligence)
+	CallFunction("AMER_CalcScalingHeal")
+	
+	//Broadcast expect applicator event.
+	Set(%AMER_ApplicatorWindow, 2.0)
+	Add(%AMER_ApplicatorWindow, %AMER_ExpectApplicatorTimeOffset)
+	Set(%AMER_ApplicatorConsumeInstances, INT:1)
+	Set(%AMER_ExpectApplicatorWindow, %AMER_ApplicatorWindow)
+	Set(%AMER_ApplicatorIsStatus, INT:0)
+	Set(%AMER_ApplicatorFunction, "AMER_FallowExtraHeal")
+	CharacterEvent(__Me, "AMER_ExpectApplicatorConsume")
+	
+EVENT OnCastErosion
+// E R O S I O N
+ON
+	OnSkillCast(__Me, "AMER_SKILL_Erosion")
+ACTIONS
+	//Broadcast expect applicator event.
+	Set(%AMER_ApplicatorWindow, 2.0)
+	Add(%AMER_ApplicatorWindow, %AMER_ExpectApplicatorTimeOffset)
+	Set(%AMER_ApplicatorConsumeInstances, INT:1)
+	Set(%AMER_ExpectApplicatorWindow, %AMER_ApplicatorWindow)
+	Set(%AMER_ApplicatorIsStatus, INT:0)
+	Set(%AMER_ApplicatorFunction, "AMER_Erosion")
+	CharacterEvent(__Me, "AMER_ExpectApplicatorConsume")
+	
+EVENT OnCastMaze
+// M A Z E
+ON
+	OnSkillCast(__Me, "AMER_SKILL_Maze")
+ACTIONS
+	//Broadcast expect applicator event.
+	Set(%AMER_ApplicatorWindow, 2.0)
+	Add(%AMER_ApplicatorWindow, %AMER_ExpectApplicatorTimeOffset)
+	Set(%AMER_ApplicatorConsumeInstances, INT:1)
+	Set(%AMER_ExpectApplicatorWindow, %AMER_ApplicatorWindow)
+	
+	//Maze does use fake status functionality for upkeep, but
+	//it is not applied as a fake status.
+	Set(%AMER_ApplicatorIsStatus, INT:0)
+	Set(%AMER_ApplicatorFunction, "AMER_MazeDisable")
+	CharacterEvent(__Me, "AMER_ExpectApplicatorConsume")
+	
+EVENT OnCastRuin
+// R U I N
+VARS
+	FLOAT:_Attribute
+ON
+	OnSkillCast(__Me, "AMER_SKILL_Ruin")
+ACTIONS
+	//Broadcast expect applicator event.
+	Set(%AMER_ApplicatorWindow, 2.0)
+	Add(%AMER_ApplicatorWindow, %AMER_ExpectApplicatorTimeOffset)
+	Set(%AMER_ApplicatorConsumeInstances, INT:1)
+	Set(%AMER_ExpectApplicatorWindow, %AMER_ApplicatorWindow)
+	Set(%AMER_ApplicatorIsStatus, INT:1)
+	Set(%AMER_ApplicatorFunction, "AMER_STATUS_RuinParameters")
+	CharacterEvent(__Me, "AMER_ExpectApplicatorConsume")
+	
+	//Report relevant values for faking status.
+	IF "c1"
+		CharacterGetStat(_Attribute, __Me, Intelligence)
+	THEN
+		Subtract(_Attribute, 13.0)
+		SetVar(__Me, "AMER_STATUS_AttributePower", _Attribute)
+		SetVar(__Me, "AMER_STATUS_BaseChance", FLOAT:120.0)
+	ENDIF
+	
+	
+	
+//==================HYDROSOPHIST========================//
+EVENT OnCastHorridWilting
+// H O R R I D   W I L T I N G
+VARS
+	FLOAT:_Attribute
+ON
+	OnSkillCast(__Me, "AMER_SKILL_HorridWilting")
+ACTIONS
+	//Broadcast expect applicator event.
+	Set(%AMER_ApplicatorWindow, 2.0)
+	Add(%AMER_ApplicatorWindow, %AMER_ExpectApplicatorTimeOffset)
+	Set(%AMER_ApplicatorConsumeInstances, INT:1)
+	Set(%AMER_ExpectApplicatorWindow, %AMER_ApplicatorWindow)
+	Set(%AMER_ApplicatorIsStatus, INT:1)
+	Set(%AMER_ApplicatorFunction, "AMER_STATUS_HorridWiltingParameters")
+	CharacterEvent(__Me, "AMER_ExpectApplicatorConsume")
+	
+	//Report relevant values for faking status.
+	IF "c1"
+		CharacterGetStat(_Attribute, __Me, Intelligence)
+	THEN
+		Subtract(_Attribute, 13.0)
+		SetVar(__Me, "AMER_STATUS_AttributePower", _Attribute)
+		SetVar(__Me, "AMER_STATUS_BaseChance", FLOAT:100.0)
+	ENDIF
+	
+EVENT OnCastColdSnap
+// C O L D   S N A P
+ON
+	OnSkillCast(__Me, "AMER_SKILL_ColdSnap")
+ACTIONS
+	//Broadcast expect applicator event.
+	Set(%AMER_ApplicatorWindow, 2.0)
+	Add(%AMER_ApplicatorWindow, %AMER_ExpectApplicatorTimeOffset)
+	Set(%AMER_ApplicatorConsumeInstances, INT:1)
+	Set(%AMER_ExpectApplicatorWindow, %AMER_ApplicatorWindow)
+	Set(%AMER_ApplicatorIsStatus, INT:0)
+	Set(%AMER_ApplicatorFunction, "AMER_ColdSnap")
+	CharacterEvent(__Me, "AMER_ExpectApplicatorConsume")
+	
+EVENT OnCastRime
+// R I M E
+VARS
+	FLOAT:_Attribute
+ON
+	OnSkillCast(__Me, "AMER_SKILL_Rime")
+ACTIONS
+	//Broadcast expect applicator event.
+	Set(%AMER_ApplicatorWindow, 2.25)
+	Add(%AMER_ApplicatorWindow, %AMER_ExpectApplicatorTimeOffset)
+	Set(%AMER_ApplicatorConsumeInstances, INT:1)
+	Set(%AMER_ExpectApplicatorWindow, %AMER_ApplicatorWindow)
+	Set(%AMER_ApplicatorIsStatus, INT:0)
+	Set(%AMER_ApplicatorFunction, "AMER_RimeDifferentiate")
+	CharacterEvent(__Me, "AMER_ExpectApplicatorConsume")
+	
+	//Report relevant values for faking status.
+	IF "c1"
+		CharacterGetStat(_Attribute, __Me, Intelligence)
+	THEN
+		Subtract(_Attribute, 10.0)
+		SetVar(__Me, "AMER_STATUS_AttributePower", _Attribute)
+		SetVar(__Me, "AMER_STATUS_BaseChance", FLOAT:100.0)
+	ENDIF
+	
+EVENT OnCastStasis
+// S T A S I S
+VARS
+	FLOAT:_Vitality
+ON
+	OnSkillCast(__Me, "AMER_SKILL_Stasis")
+ACTIONS
+	//Pay life cost to cast.
+	IF "c1"
+		CharacterGetStat(_Vitality, __Me, Vitality)
+	THEN
+		Subtract(_Vitality, 0.30)
+		SetHealth(__Me, _Vitality)
+	ENDIF
+	
+EVENT OnCastSoothe
+// S O O T H E
+ON
+	OnSkillCast(__Me, "AMER_SKILL_Soothe")
+ACTIONS
+	//Calculate scaling heal.
+	Set(%AMER_ScalingHealAmount, 0.03)
+	Set(%AMER_ScalingHealGrowth, 0.01)
+	Set(%AMER_ScalingHealRecommended, 10.0)
+	Set(%AMER_PrimeAttribute, Intelligence)
+	CallFunction("AMER_CalcScalingHeal")
+	
+	//Broadcast expect applicator event.
+	Set(%AMER_ApplicatorWindow, 2.0)
+	Add(%AMER_ApplicatorWindow, %AMER_ExpectApplicatorTimeOffset)
+	Set(%AMER_ApplicatorConsumeInstances, INT:1)
+	Set(%AMER_ExpectApplicatorWindow, %AMER_ApplicatorWindow)
+	Set(%AMER_ApplicatorIsStatus, INT:0)
+	Set(%AMER_ApplicatorFunction, "AMER_JustScalingHeal")
+	CharacterEvent(__Me, "AMER_ExpectApplicatorConsume")
+	
+EVENT OnCastEmpoweredSoothe
+// E M P O W E R E D   S O O T H E
+ON
+	OnSkillCast(__Me, "AMER_SKILL_EMPOWERED_Soothe")
+ACTIONS
+	//Calculate scaling heal.
+	Set(%AMER_ScalingHealAmount, 0.03)
+	Set(%AMER_ScalingHealGrowth, 0.01)
+	Set(%AMER_ScalingHealRecommended, 10.0)
+	Set(%AMER_PrimeAttribute, Intelligence)
+	CallFunction("AMER_CalcScalingHeal")
+	
+	//Broadcast expect applicator event.
+	Set(%AMER_ApplicatorWindow, 2.0)
+	Add(%AMER_ApplicatorWindow, %AMER_ExpectApplicatorTimeOffset)
+	Set(%AMER_ApplicatorConsumeInstances, INT:1)
+	Set(%AMER_ExpectApplicatorWindow, %AMER_ApplicatorWindow)
+	Set(%AMER_ApplicatorIsStatus, INT:0)
+	Set(%AMER_ApplicatorFunction, "AMER_EmpoweredSootheHeal")
+	CharacterEvent(__Me, "AMER_ExpectApplicatorConsume")
+	
+EVENT OnCastRegenerate
+// R E G E N E R A T E
+ON
+	OnSkillCast(__Me, "Heal_RegenerateStart")
+	OnSkillCast(__Me, "Heal_EnemyRegenerate")
+ACTIONS
+	//Calculate scaling heal.
+	Set(%AMER_ScalingHealAmount, 0.03)
+	Set(%AMER_ScalingHealGrowth, 0.02)
+	Set(%AMER_ScalingHealRecommended, 9.0)
+	Set(%AMER_PrimeAttribute, Intelligence)
+	CallFunction("AMER_CalcScalingHeal")
+	
+	//Broadcast expect applicator event.
+	Set(%AMER_ApplicatorWindow, 2.0)
+	Add(%AMER_ApplicatorWindow, %AMER_ExpectApplicatorTimeOffset)
+	Set(%AMER_ApplicatorConsumeInstances, INT:1)
+	Set(%AMER_ExpectApplicatorWindow, %AMER_ApplicatorWindow)
+	Set(%AMER_ApplicatorIsStatus, INT:0)
+	Set(%AMER_ApplicatorFunction, "AMER_RegenerateInitial")
+	CharacterEvent(__Me, "AMER_ExpectApplicatorConsume")
+	
+EVENT OnCastMassHeal
+// M A S S   H E A L
+ON
+	OnSkillCast(__Me, "Target_MassHeal")
+ACTIONS
+	//Calculate scaling heal.
+	Set(%AMER_ScalingHealAmount, 0.03)
+	Set(%AMER_ScalingHealGrowth, 0.02)
+	Set(%AMER_ScalingHealRecommended, 13.0)
+	Set(%AMER_PrimeAttribute, Intelligence)
+	CallFunction("AMER_CalcScalingHeal")
+	
+	//Broadcast expect applicator event.
+	Set(%AMER_ApplicatorWindow, 2.0)
+	Add(%AMER_ApplicatorWindow, %AMER_ExpectApplicatorTimeOffset)
+	Set(%AMER_ApplicatorConsumeInstances, INT:1)
+	Set(%AMER_ExpectApplicatorWindow, %AMER_ApplicatorWindow)
+	Set(%AMER_ApplicatorIsStatus, INT:0)
+	Set(%AMER_ApplicatorFunction, "AMER_MassHealInitial")
+	CharacterEvent(__Me, "AMER_ExpectApplicatorConsume")
+	
+EVENT OnCastHailStorm
+// H A I L S T O R M
+ON
+	OnSkillCast(__Me, "ProjectileStrike_HailAttack")
+ACTIONS
+	//Tag as a shotgunner, set maximum possible hits.
+	Set(%AMER_ApplicatorWindow, 3.75)
+	Set(%AMER_IsCastingShotgun, INT:1)
+	Set(%AMER_ShotgunHits, INT:8)
+	Set(%AMER_ShotgunType, Water)
+	StartTimer("AMER_ResetShotgunner", %AMER_ApplicatorWindow, 0)
+	
+EVENT OnCastCleansingWater
+// C L E A N S I N G   W A T E R
+ON
+	OnSkillCast(__Me, "Target_CleansingWater")
+ACTIONS
+	//Broadcast expect applicator event.
+	Set(%AMER_ApplicatorWindow, 2.0)
+	Add(%AMER_ApplicatorWindow, %AMER_ExpectApplicatorTimeOffset)
+	Set(%AMER_ApplicatorConsumeInstances, INT:1)
+	Set(%AMER_ExpectApplicatorWindow, %AMER_ApplicatorWindow)
+	Set(%AMER_ApplicatorIsStatus, INT:0)
+	Set(%AMER_ApplicatorFunction, "AMER_CleansingWaterInitial")
+	CharacterEvent(__Me, "AMER_ExpectApplicatorConsume")
+	
+	
+	
+//==================PYROKINETIC========================//
+EVENT OnCastPurifyingFire
+// P U R I F Y I N G   F I R E
+ON
+	OnSkillCast(__Me, "Target_PurifyingFire")
+ACTIONS
+	//Broadcast expect applicator event.
+	Set(%AMER_ApplicatorWindow, 2.0)
+	Add(%AMER_ApplicatorWindow, %AMER_ExpectApplicatorTimeOffset)
+	Set(%AMER_ApplicatorConsumeInstances, INT:1)
+	Set(%AMER_ExpectApplicatorWindow, %AMER_ApplicatorWindow)
+	Set(%AMER_ApplicatorIsStatus, INT:0)
+	Set(%AMER_ApplicatorFunction, "AMER_PurifyingFireInitial")
+	CharacterEvent(__Me, "AMER_ExpectApplicatorConsume")
+	
+EVENT OnCastSoulfire
+// S O U L F I R E
+ON
+	OnSkillCast(__Me, "Target_Immolate")
+ACTIONS
+	//Broadcast expect applicator event.
+	Set(%AMER_ApplicatorWindow, 2.0)
+	Add(%AMER_ApplicatorWindow, %AMER_ExpectApplicatorTimeOffset)
+	Set(%AMER_ApplicatorConsumeInstances, INT:1)
+	Set(%AMER_ExpectApplicatorWindow, %AMER_ApplicatorWindow)
+	Set(%AMER_ApplicatorIsStatus, INT:0)
+	Set(%AMER_ApplicatorFunction, "AMER_SoulburnInitial")
+	CharacterEvent(__Me, "AMER_ExpectApplicatorConsume")
+	
+EVENT OnCastInfectiousFlame
+// I N F E C T I O U S   F L A M E
+VARS
+	FLOAT:_Attribute
+ON
+	OnSkillCast(__Me, "Projectile_InfectiousFlame")
+ACTIONS
+	//Broadcast expect applicator event.
+	Set(%AMER_ApplicatorWindow 4.0)
+	Add(%AMER_ApplicatorWindow, %AMER_ExpectApplicatorTimeOffset)
+	Set(%AMER_ApplicatorConsumeInstances, INT:1)
+	Set(%AMER_ExpectApplicatorWindow, %AMER_ApplicatorWindow)
+	Set(%AMER_ApplicatorIsStatus, INT:1)
+	Set(%AMER_ApplicatorFunction, "AMER_STATUS_InfectiousFlameParameters")
+	CharacterEvent(__Me, "AMER_ExpectApplicatorConsume")
+	
+	//Report relevant values for faking status.
+	IF "c1"
+		CharacterGetStat(_Attribute, __Me, Intelligence)
+	THEN
+		Subtract(_Attribute, 13.0)
+		SetVar(__Me, "AMER_STATUS_AttributePower", _Attribute)
+		SetVar(__Me, "AMER_STATUS_BaseChance", FLOAT:100.0)
+	ENDIF
+	
+EVENT OnCastMeteorShower
+// M E T E O R   S H O W E R
+ON
+	OnSkillCast(__Me, "ProjectileStrike_MeteorShower")
+ACTIONS
+	//Tag as a shotgunner, set maximum possible hits.
+	Set(%AMER_ApplicatorWindow, 3.75)
+	Set(%AMER_IsCastingShotgun, INT:1)
+	Set(%AMER_ShotgunHits, INT:15)
+	Set(%AMER_ShotgunType, Fire)
+	StartTimer("AMER_ResetShotgunner", %AMER_ApplicatorWindow, 0)
+	
+EVENT OnCastRebirth
+// R E B I R T H
+ON
+	OnSkillCast(__Me, "AMER_SKILL_Rebirth")
+ACTIONS
+	CharacterDie(__Me, Incinerate)
+	SetVar(__Me, "AMER_RebirthCountdown", INT:6)
+	StartTimer("AMER_RebirthOutOfCombat", 1.0, -1)
+	
+EVENT OnCastCauterize
+// C A U T E R I Z E
+ON
+	OnSkillCast(__Me, "AMER_SKILL_Cauterize")
+ACTIONS
+	//Calculate scaling heal.
+	Set(%AMER_ScalingHealAmount, 0.10)
+	Set(%AMER_ScalingHealGrowth, 0.03)
+	Set(%AMER_ScalingHealRecommended, 11.0)
+	Set(%AMER_PrimeAttribute, Intelligence)
+	CallFunction("AMER_CalcScalingHeal")
+	
+	//Broadcast expect applicator event.
+	Set(%AMER_ApplicatorWindow, 2.0)
+	Add(%AMER_ApplicatorWindow, %AMER_ExpectApplicatorTimeOffset)
+	Set(%AMER_ApplicatorConsumeInstances, INT:1)
+	Set(%AMER_ExpectApplicatorWindow, %AMER_ApplicatorWindow)
+	Set(%AMER_ApplicatorIsStatus, INT:0)
+	Set(%AMER_ApplicatorFunction, "AMER_CauterizeHeal")
+	CharacterEvent(__Me, "AMER_ExpectApplicatorConsume")
+	
+EVENT OnCastHeatMetal
+// H E A T   M E T A L
+ON
+	OnSkillCast(__Me, "AMER_SKILL_HeatMetal")
+ACTIONS
+	//Broadcast expect applicator event.
+	Set(%AMER_ApplicatorWindow, 2.0)
+	Add(%AMER_ApplicatorWindow, %AMER_ExpectApplicatorTimeOffset)
+	Set(%AMER_ApplicatorConsumeInstances, INT:1)
+	Set(%AMER_ExpectApplicatorWindow, %AMER_ApplicatorWindow)
+	Set(%AMER_ApplicatorIsStatus, INT:0)
+	Set(%AMER_ApplicatorFunction, "AMER_HeatMetal")
+	CharacterEvent(__Me, "AMER_ExpectApplicatorConsume")
+	
+EVENT OnCastBoil
+// B O I L
+ON
+	OnSkillCast(__Me, "AMER_SKILL_Boil")
+ACTIONS
+	//Broadcast expect applicator event.
+	Set(%AMER_ApplicatorWindow, 2.0)
+	Add(%AMER_ApplicatorWindow, %AMER_ExpectApplicatorTimeOffset)
+	Set(%AMER_ApplicatorConsumeInstances, INT:1)
+	Set(%AMER_ExpectApplicatorWindow, %AMER_ApplicatorWindow)
+	Set(%AMER_ApplicatorIsStatus, INT:0)
+	Set(%AMER_ApplicatorFunction, "AMER_Boil")
+	CharacterEvent(__Me, "AMER_ExpectApplicatorConsume")
+	
+	
+	
+//==================RANGER========================//
+EVENT OnCastAnticipate
+// A N T I C I P A T E
+ON
+	OnSkillCast(__Me, "AMER_SKILL_Anticipate")
+ACTIONS
+	//Anticipate consumes all remaining AP.
+	SetVar(__Me, "AMER_RemoveCurrentAPAmount", FLOAT:-1.0)
+	SetVar(__Me, "AMER_RemoveCurrentAPTarget", __Me)
+	CallFunction("AMER_RemoveCurrentAP")
+	
+	SetVar(__Me, "AMER_AnticipateRetaliation", INT:1)
+	
+EVENT OnCastFreezingTrap
+// F R E E Z I N G   T R A P
+VARS
+	ITEM:_Trap
+ON
+	OnSkillCast(__Me, "AMER_SKILL_FreezingTrap")
+ACTIONS
+	SpawnItem("AMER_ITEM_FreezingTrap_49ed876b-6a01-4d6b-a2a9-0cffa96d4b42", __Me, _Trap)
+	SetVar(_Trap, "AMER_FreezingTrap_Owner", __Me)
+	
+EVENT OnCastFirstAid
+// F I R S T   A I D
+ON
+	OnSkillCast(__Me, "Target_FirstAid")
+ACTIONS
+	//Calculate scaling heal.
+	Set(%AMER_ScalingHealAmount, 0.20)
+	Set(%AMER_ScalingHealGrowth, 0.01)
+	Set(%AMER_ScalingHealRecommended, 8.0)
+	Set(%AMER_PrimeAttribute, Dexterity)
+	CallFunction("AMER_CalcScalingHeal")
+	
+	//Broadcast expect applicator event.
+	Set(%AMER_ApplicatorWindow, 2.0)
+	Add(%AMER_ApplicatorWindow, %AMER_ExpectApplicatorTimeOffset)
+	Set(%AMER_ApplicatorConsumeInstances, INT:1)
+	Set(%AMER_ExpectApplicatorWindow, %AMER_ApplicatorWindow)
+	Set(%AMER_ApplicatorIsStatus, INT:0)
+	Set(%AMER_ApplicatorFunction, "AMER_JustScalingHeal")
+	CharacterEvent(__Me, "AMER_ExpectApplicatorConsume")
+	
+EVENT OnCastEmpoweredFirstAid
+// E M P O W E R E D   F I R S T   A I D
+ON
+	OnSkillCast(__Me, "AMER_SKILL_EMPOWERED_Target_FirstAid")
+ACTIONS
+	//Calculate scaling heal.
+	Set(%AMER_ScalingHealAmount, 0.20)
+	Set(%AMER_ScalingHealGrowth, 0.02)
+	Set(%AMER_ScalingHealRecommended, 8.0)
+	Set(%AMER_PrimeAttribute, Dexterity)
+	CallFunction("AMER_CalcScalingHeal")
+	
+	//Broadcast expect applicator event.
+	Set(%AMER_ApplicatorWindow, 2.0)
+	Add(%AMER_ApplicatorWindow, %AMER_ExpectApplicatorTimeOffset)
+	Set(%AMER_ApplicatorConsumeInstances, INT:1)
+	Set(%AMER_ExpectApplicatorWindow, %AMER_ApplicatorWindow)
+	Set(%AMER_ApplicatorIsStatus, INT:0)
+	Set(%AMER_ApplicatorFunction, "AMER_JustScalingHeal")
+	CharacterEvent(__Me, "AMER_ExpectApplicatorConsume")
+	
+EVENT OnCastVampiricArrow
+// V A M P I R I C   A R R O W
+ON
+	OnSkillCast(__Me, "Projectile_VampiricArrow")
+ACTIONS
+	//Calculate scaling heal.
+	Set(%AMER_ScalingHealAmount, 0.05)
+	Set(%AMER_ScalingHealGrowth, 0.03)
+	Set(%AMER_ScalingHealRecommended, 11.0)
+	Set(%AMER_PrimeAttribute, Dexterity)
+	CallFunction("AMER_CalcScalingHeal")
+	
+	//Don't need to broadcast; the caster is the only target
+	//for the healing so just call the heal function.
+	SetVar(__Me, "AMER_ScalingHealIgnoreZombie", INT:1)
+	CallFunction("AMER_ScalingPercentageHeal")
+	SetVar(__Me, "AMER_ScalingHealIgnoreZombie", INT:0)
+	
+EVENT OnCastFusillade
+// F U S I L L A D E
+ON
+	OnSkillCast(__Me, "Projectile_SplittingArrow")
+ACTIONS
+	//Tag as a shotgunner, set maximum possible hits.
+	Set(%AMER_ApplicatorWindow, 3.0)
+	Set(%AMER_IsCastingShotgun, INT:1)
+	Set(%AMER_ShotgunHits, 8)
+	Set(%AMER_ShotgunType, Piercing)
+	StartTimer("AMER_ResetShotgunner", %AMER_ApplicatorWindow, 0)
+	
+EVENT OnCastNaturalOrder
+// N A T U R A L   O R D E R
+VARS
+	FLOAT:_Attribute
+ON
+	OnSkillCast(__Me, "AMER_SKILL_NaturalOrder")
+ACTIONS
+	//Broadcast expect applicator event.
+	Set(%AMER_ApplicatorWindow, 2.0)
+	Add(%AMER_ApplicatorWindow, %AMER_ExpectApplicatorTimeOffset)
+	Set(%AMER_ApplicatorConsumeInstances, INT:1)
+	Set(%AMER_ExpectApplicatorWindow, %AMER_ApplicatorWindow)
+	Set(%AMER_ApplicatorIsStatus, INT:1)
+	Set(%AMER_ApplicatorFunction, "AMER_STATUS_NaturalOrderParameters")
+	CharacterEvent(__Me, "AMER_ExpectApplicatorConsume")
+	
+	//Report relevant values for faking status.
+	IF "c1"
+		CharacterGetStat(_Attribute, __Me, Dexterity)
+	THEN
+		Subtract(_Attribute, 13.0)
+		SetVar(__Me, "AMER_STATUS_AttributePower", _Attribute)
+		SetVar(__Me, "AMER_STATUS_BaseChance", FLOAT:120.0)
+	ENDIF
+	
+EVENT OnCastInsectPlague
+// I N S E C T   P L A G U E
+VARS
+	FLOAT:_Attribute
+ON
+	OnSkillCast(__Me, "AMER_SKILL_InsectPlague")
+ACTIONS
+	//Broadcast expect applicator event.
+	Set(%AMER_ApplicatorWindow, 2.0)
+	Add(%AMER_ApplicatorWindow, %AMER_ExpectApplicatorTimeOffset)
+	Set(%AMER_ApplicatorConsumeInstances, INT:1)
+	Set(%AMER_ExpectApplicatorWindow, %AMER_ApplicatorWindow)
+	Set(%AMER_ApplicatorIsStatus, INT:1)
+	Set(%AMER_ApplicatorFunction, "AMER_STATUS_InsectPlagueParameters")
+	CharacterEvent(__Me, "AMER_ExpectApplicatorConsume")
+	
+	//Play some sound effects.
+	PlaySound(__Me, "Skill_Firefly_ProjIn")
+	//Report relevant values for faking status.
+	IF "c1"
+		CharacterGetStat(_Attribute, __Me, Dexterity)
+	THEN
+		Subtract(_Attribute, 13.0)
+		SetVar(__Me, "AMER_STATUS_AttributePower", _Attribute)
+		SetVar(__Me, "AMER_STATUS_BaseChance", FLOAT:150.0)
+	ENDIF
+	
+	
+	
+//==================SCOUNDREL========================//
+EVENT OnCastCloakAndDagger
+// C L O A K   A N D   D A G G E R
+ON
+	OnSkillCast(__Me, "Jump_CloakAndDagger")
+ACTIONS
+	//Flag for teleportation detection in case a player
+	//uses this to move only a short distance.
+	SetVar(__Me, "AMER_ForceTeleDetect", INT:1)
+	StartTimer("AMER_ResetForceTeleDetect", 2.0, 0)
+	
+EVENT OnCastMistyStep
+// M I S T Y   S T E P
+VARS
+	INT:_Flag = 0
+ON
+	OnSkillCast(__Me, "AMER_SKILL_MistyStep")
+ACTIONS
+	//Make the poofs!
+	IF "c1"
+		IsEqual(_Flag, INT:0)
+	THEN
+		Set(_Flag, INT:1)
+		SetVisible(__Me, INT:0)
+		PlayEffectAt(__Me, "FX_GP_TeleportSmoke_A")
+		CharacterPlayEffect(__Me, "FX_GP_Arrow_Smokescreen_Impact_A")
+		StartTimer("AMER_MistyStepAnimation", 0.27, INT:0)
+	ELSE
+		Set(_Flag, INT:0)
+	ENDIF
+	//StartTimer("AMER_MistyStepFXDelay", _FXDelay, 0)
+	//Misty Step needs to force movement detection as teleportation
+	//since it is very possible that a player could use it to travel
+	//such a short distance that movement detection could treat it
+	//as normal movement.
+	SetVar(__Me, "AMER_ForceTeleDetect", INT:1)
+	StartTimer("AMER_ResetForceTeleDetect", 2.0, 0)
+	
+EVENT OnCastExecute
+// E X E C U T E
+VARS
+	INT:_Chain
+ON
+	OnSkillCast(__Me, "Target_Fatality")
+ACTIONS
+	//Set the appropriate damage multiplier/instances.
+	SetVar(__Me, "AMER_SetBackstabBonusBase", INT:75)
+	CallFunction("AMER_SetBackstabBonusDamage")
+	Set(%AMER_BackstabDamageInstances, 5)
+	StartTimer("AMER_ResetBackstabDamage", 1.3, 0)
+	
+	//Execute allows the caster to take advantage of it's instant
+	//death mechanic if five chain stacks are present when cast.
+	IF "c1&!c2"
+		GetVar(_Chain, __Me, "AMER_Chain")
+		IsLessThen(_Chain, 4)
+	THEN
+		StatusText(__Me, "AMER_ChainFive")
+		SetVar(__Me, "AMER_ExecuteCasted", INT:1)
+		StartTimer("AMER_ResetExecute", 3.5, 0)
+		SetVar(__Me, "AMER_Chain", INT:0)
+		CallFunction("AMER_SetChain")
+	ENDIF
+	
+EVENT OnCastDaggersDrawn
+// D A G G E R S   D R A W N
+ON
+	OnSkillCast(__Me, "Target_DaggersDrawn")
+ACTIONS
+	//Set the appropriate damage multiplier/instances.
+	SetVar(__Me, "AMER_SetBackstabBonusBase", INT:50)
+	CallFunction("AMER_SetBackstabBonusDamage")
+	Set(%AMER_BackstabDamageInstances, 4)
+	StartTimer("AMER_ResetBackstabDamage", 1.3, 0)
+	
+EVENT OnCastShadowstep
+// S H A D O W S T E P
+ON
+	OnSkillCast(__Me, "Target_ShadowStep")
+ACTIONS
+	//Set the appropriate damage multiplier/instances.
+	SetVar(__Me, "AMER_SetBackstabBonusBase", INT:200)
+	CallFunction("AMER_SetBackstabBonusDamage")
+	Set(%AMER_BackstabDamageInstances, 1)
+	StartTimer("AMER_ResetBackstabDamage", 1.3, 0)
+	
+EVENT OnCastSquander
+// S Q U A N D E R
+ON
+	OnSkillCast(__Me, "AMER_SKILL_Squander")
+ACTIONS
+	//Squander consumes all remaining AP.
+	SetVar(__Me, "AMER_RemoveCurrentAPAmount", FLOAT:-1.0)
+	SetVar(__Me, "AMER_RemoveCurrentAPTarget", __Me)
+	CallFunction("AMER_RemoveCurrentAP")
+	
+EVENT OnCastPremeditate
+// P R E M E D I T A TE
+VARS
+	INT:_Chain
+	INT:_ChainLimit
+ON
+	OnSkillCast(__Me, "AMER_SKILL_Premeditate")
+ACTIONS
+	IF "c1"
+		IsInCombat(__Me)
+	THEN
+		IF "c1&c2"
+			GetVar(_Chain, __Me, "AMER_Chain")
+			GetVar(_ChainLimit, __Me, "AMER_ChainMax")
+		THEN
+			//Premeditate adds two stacks of Chain.
+			Add(_Chain, INT:2)
+			
+			//Don't exceed maximum.
+			IF "c1"
+				IsGreaterThen(_Chain, _ChainLimit)
+			THEN
+				Set(_Chain, _ChainLimit)
+			ENDIF
+			
+			SetVar(__Me, "AMER_Chain", _Chain)
+			CallFunction("AMER_SetChain")
+		ENDIF
+	ENDIF
+	
+EVENT OnCastBorrowedTime
+// B O R R O W E D   T I M E
+VARS
+	FLOAT:_Attribute
+ON
+	OnSkillCast(__Me, "AMER_SKILL_BorrowedTime")
+ACTIONS
+	//Broadcast expect applicator event.
+	Set(%AMER_ApplicatorWindow, 2.0)
+	Add(%AMER_ApplicatorWindow, %AMER_ExpectApplicatorTimeOffset)
+	Set(%AMER_ApplicatorConsumeInstances, INT:1)
+	Set(%AMER_ExpectApplicatorWindow, %AMER_ApplicatorWindow)
+	Set(%AMER_ApplicatorIsStatus, INT:1)
+	Set(%AMER_ApplicatorFunction, "AMER_STATUS_BorrowedTimeParameters")
+	CharacterEvent(__Me, "AMER_ExpectApplicatorConsume")
+	
+	//Do special animation.
+	IterateCharactersNear(__Me, 6.5, "AMER_BorrowedTimeAnimation")
+	//Need to know how many targets are affected before hasting.
+	SetVar(__Me, "AMER_BorrowedTimeTargets", INT:0)
+	StartTimer("AMER_BorrowedTimeHaste", 1.0, 0)
+	//Report relevant values for faking status.
+	IF "c1"
+		CharacterGetStat(_Attribute, __Me, Dexterity)
+	THEN
+		Subtract(_Attribute, 10.0)
+		SetVar(__Me, "AMER_STATUS_AttributePower", _Attribute)
+		SetVar(__Me, "AMER_STATUS_BaseChance", FLOAT:100.0)
+	ENDIF
+	
+EVENT OnCastPreciseIncision
+// P R E C I S E   I N C I S I O N
+VARS
+	INT:_BlockChain
+ON
+	OnSkillCast(__Me, "Target_PreciseIncision")
+ACTIONS
+	//Make the Finisher reset Chain stacks after use.
+	StartTimer("AMER_FinisherConsumeChain", 1.0, 0)
+	
+	//Set the appropriate damage multiplier/instances.
+	SetVar(__Me, "AMER_SetBackstabBonusBase", INT:150)
+	CallFunction("AMER_SetBackstabBonusDamage")
+	Set(%AMER_BackstabDamageInstances, 1)
+	StartTimer("AMER_ResetBackstabDamage", 1.3, 0)
+	
+	//Broadcast expect applicator event.
+	Set(%AMER_ApplicatorWindow, 2.0)
+	Add(%AMER_ApplicatorWindow, %AMER_ExpectApplicatorTimeOffset)
+	Set(%AMER_ApplicatorConsumeInstances, INT:1)
+	Set(%AMER_ExpectApplicatorWindow, %AMER_ApplicatorWindow)
+	Set(%AMER_ApplicatorIsStatus, INT:0)
+	Set(%AMER_ApplicatorFunction, "AMER_FinisherPreciseIncision")
+	CharacterEvent(__Me, "AMER_ExpectApplicatorConsume")
+	
+	//Prevent Finisher from generating chain.
+	IF "c1"
+		GetVar(_BlockChain, __Me, "AMER_BlockChain")
+	THEN
+		Add(_BlockChain, INT:1)
+		SetVar(__Me, "AMER_BlockChain", _BlockChain)
+		StartTimer("AMER_ResetBlockChain", 1.0, 0)
+	ENDIF
+	
+EVENT OnCastLacerate
+// L A C E R A T E
+ON
+	OnSkillCast(__Me, "Target_Lacerate")
+ACTIONS
+	//Make the Finisher reset Chain stacks after use.
+	StartTimer("AMER_FinisherConsumeChain", 1.0, 0)
+	
+	//Set the appropriate damage multiplier/instances.
+	SetVar(__Me, "AMER_SetBackstabBonusBase", INT:150)
+	CallFunction("AMER_SetBackstabBonusDamage")
+	Set(%AMER_BackstabDamageInstances, 1)
+	StartTimer("AMER_ResetBackstabDamage", 1.3, 0)
+	
+	//Broadcast expect applicator event.
+	Set(%AMER_ApplicatorWindow, 2.0)
+	Add(%AMER_ApplicatorWindow, %AMER_ExpectApplicatorTimeOffset)
+	Set(%AMER_ApplicatorConsumeInstances, INT:1)
+	Set(%AMER_ExpectApplicatorWindow, %AMER_ApplicatorWindow)
+	Set(%AMER_ApplicatorIsStatus, INT:0)
+	Set(%AMER_ApplicatorFunction, "AMER_FinisherLacerate")
+	CharacterEvent(__Me, "AMER_ExpectApplicatorConsume")
+	
+	//Lacerate deals Slashing damage, so we don't need to prevent
+	//it from generating chain since only Piercing damage will.
+	
+EVENT OnCastVenomousStrike
+// V E N O M O U S   S T R I K E
+ON
+	OnSkillCast(__Me, "Target_Poison")
+ACTIONS
+	//Make the Finisher reset Chain stacks after use.
+	StartTimer("AMER_FinisherConsumeChain", 1.0, 0)
+	
+	//Broadcast expect applicator event.
+	Set(%AMER_ApplicatorWindow, 2.0)
+	Add(%AMER_ApplicatorWindow, %AMER_ExpectApplicatorTimeOffset)
+	Set(%AMER_ApplicatorConsumeInstances, INT:1)
+	Set(%AMER_ExpectApplicatorWindow, %AMER_ApplicatorWindow)
+	Set(%AMER_ApplicatorIsStatus, INT:0)
+	Set(%AMER_ApplicatorFunction, "AMER_FinisherVenomousStrike")
+	CharacterEvent(__Me, "AMER_ExpectApplicatorConsume")
+	
+	//Prevent Finisher from generating chain.
+	//Patch 1.1.9: Venomous strike deals Poison damage
+	//and therefore it is unnecessary to block Chain.
+	
+	
+	
+//==================SOLDIER========================//
+/*
+EVENT OnCastDivineLight
+// D I V I N E   L I G H T
+VARS
+//=========================//
+	FLOAT:%AMER_ApplicatorWindow = 2.0
+//=========================//
+ON
+	OnSkillCast(__Me, "Cone_DivineLight")
+ACTIONS
+	//Broadcast expect applicator event.
+	Add(%AMER_ApplicatorWindow, %AMER_ExpectApplicatorTimeOffset)
+	Set(%AMER_ApplicatorConsumeInstances, INT:1)
+	Set(%AMER_ExpectApplicatorWindow, %AMER_ApplicatorWindow)
+	Set(%AMER_ApplicatorIsStatus, INT:0)
+	Set(%AMER_ApplicatorFunction = "AMER_DivineLightInitial")
+	CharacterEvent(__Me, "AMER_ExpectApplicatorConsume")
+	*/
+	
+EVENT OnCastCureWounds
+// C U R E   W O U N D S
+ON
+	OnSkillCast(__Me, "Heal_CureWoundsKnight")
+ACTIONS
+	//Calculate scaling heal.
+	Set(%AMER_ScalingHealAmount, 0.04)
+	Set(%AMER_ScalingHealGrowth, 0.02)
+	Set(%AMER_ScalingHealRecommended, 10.0)
+	Set(%AMER_PrimeAttribute, Strength)
+	CallFunction("AMER_CalcScalingHeal")
+	
+	//Broadcast expect applicator event.
+	Set(%AMER_ApplicatorWindow, 2.0)
+	Add(%AMER_ApplicatorWindow, %AMER_ExpectApplicatorTimeOffset)
+	Set(%AMER_ApplicatorConsumeInstances, INT:1)
+	Set(%AMER_ExpectApplicatorWindow, %AMER_ApplicatorWindow)
+	Set(%AMER_ApplicatorIsStatus, INT:0)
+	Set(%AMER_ApplicatorFunction, "AMER_JustScalingHeal")
+	CharacterEvent(__Me, "AMER_ExpectApplicatorConsume")
+	
+EVENT OnCastAttonement
+// A T T O N E M E N T
+ON
+	OnSkillCast(__Me, "AMER_SKILL_Attonement")
+ACTIONS
+	//Calculate Heal.
+	Set(%AMER_ScalingHealAmount, 0.15)
+	Set(%AMER_ScalingHealGrowth, 0.03)
+	Set(%AMER_ScalingHealRecommended, 10.0)
+	Set(%AMER_PrimeAttribute, Strength)
+	CallFunction("AMER_CalcScalingHeal")
+	
+	//Broadcast expect applicator event.
+	Set(%AMER_ApplicatorWindow, 1.25)
+	Add(%AMER_ApplicatorWindow, %AMER_ExpectApplicatorTimeOffset)
+	Set(%AMER_ApplicatorConsumeInstances, INT:1)
+	Set(%AMER_ExpectApplicatorWindow, %AMER_ApplicatorWindow)
+	Set(%AMER_ApplicatorIsStatus, INT:0)
+	Set(%AMER_ApplicatorFunction, "AMER_AttonementDamage")
+	CharacterEvent(__Me, "AMER_ExpectApplicatorConsume")
+	
+EVENT OnCastVitalityLink
+// V I T A L I T Y   L I N K
+ON
+	OnSkillCast(__Me, "AMER_SKILL_VitalityLink")
+ACTIONS
+	//Broadcast expect applicator event.
+	Set(%AMER_ApplicatorWindow, 1.25)
+	Add(%AMER_ApplicatorWindow, %AMER_ExpectApplicatorTimeOffset)
+	Set(%AMER_ApplicatorConsumeInstances, INT:1)
+	Set(%AMER_ExpectApplicatorWindow, %AMER_ApplicatorWindow)
+	Set(%AMER_ApplicatorIsStatus, INT:0)
+	Set(%AMER_ApplicatorFunction, "AMER_VitalityLinkInitial")
+	CharacterEvent(__Me, "AMER_ExpectApplicatorConsume")
+	
+EVENT OnCastFossilize
+// F O S S I L I Z E
+VARS
+	FLOAT:_Strength
+ON
+	OnSkillCast(__Me, "AMER_SKILL_Fossilize")
+ACTIONS
+	//Fossilize petrifies the target, sets current vitality
+	//to _Life % of maximum, raises maximum resistances to at
+	//least _MaxResist, and does this until the target suffers
+	//_Absorb % of maximum vitality damage or the duration
+	//expires. 
+	IF "c1"
+		CharacterHasStatus(__Me, CONSUME, "AMER_Fossilize")
+	THEN
+		StatusText(__Me, "AMER_Fossilize")
+		CharacterApplyStatus(__Me, PETRIFIED, 1)
+		SetHealth(__Me, 0.10)
+		IF "c1&c2"
+			CharacterGetStat(_Strength, __Me, Strength)
+			IsGreaterThen(_Strength, 11.0)
+		THEN
+			//Absorb limit = 20% + 3% per strength past recommended.
+			Subtract(_Strength, 11.0)
+			Multiply(_Strength, 0.03)
+			Add(_Strength, 0.20)
+			Set(%AMER_FossilizeAbsorb, _Strength)
+		ELSE
+			Set(%AMER_FossilizeAbsorb, 0.20)
+		ENDIF
+		SetVar(__Me, "AMER_AllResOverride", FLOAT:90.0)
+		StartTimer("AMER_CheckFossilize", 1.0, -1)
+	ENDIF
+	
+EVENT OnCastCripplingBlow
+// C R I P P L I N G   B L O W
+ON
+	OnSkillCast(__Me, "Target_CripplingBlow")
+ACTIONS
+	//Set the appropriate damage multiplier/instances.
+	SetVar(__Me, "AMER_SetBackstabBonusBase", INT:130)
+	CallFunction("AMER_SetBackstabBonusDamage")
+	Set(%AMER_BackstabDamageInstances, 1)
+	StartTimer("AMER_ResetBackstabDamage", 1.3, 0)
+	
+EVENT OnCastFlurry
+// F L U R R Y
+ON
+	OnSkillCast(__Me, "Target_Flurry")
+ACTIONS
+	//Set the appropriate damage multiplier/instances.
+	SetVar(__Me, "AMER_SetBackstabBonusBase", INT:70)
+	CallFunction("AMER_SetBackstabBonusDamage")
+	Set(%AMER_BackstabDamageInstances, 4)
+	StartTimer("AMER_ResetBackstabDamage", 1.3, 0)
+	
+EVENT OnCastWhirlwind
+// W H I R L W I N D
+ON
+	OnSkillCast(__Me, "Shout_Whirlwind")
+ACTIONS
+	//Set the appropriate damage multiplier/instances.
+	SetVar(__Me, "AMER_SetBackstabBonusBase", INT:90)
+	CallFunction("AMER_SetBackstabBonusDamage")
+	Set(%AMER_BackstabDamageInstances, -1)
+	StartTimer("AMER_ResetBackstabDamage", 0.75, 0)
+	
+EVENT OnCastTorment
+// T O R M E N T
+VARS
+	FLOAT:_Attribute
+ON
+	OnSkillCast(__Me, "AMER_SKILL_Torment")
+ACTIONS
+	//Set the appropriate damage multiplier/instances.
+	SetVar(__Me, "AMER_SetBackstabBonusBase", INT:130)
+	CallFunction("AMER_SetBackstabBonusDamage")
+	Set(%AMER_BackstabDamageInstances, 1)
+	StartTimer("AMER_ResetBackstabDamage", 1.3, 0)
+	
+	//Broadcast expect applicator event.
+	Set(%AMER_ApplicatorWindow, 1.5)
+	Add(%AMER_ApplicatorWindow, %AMER_ExpectApplicatorTimeOffset)
+	Set(%AMER_ApplicatorConsumeInstances, INT:1)
+	Set(%AMER_ExpectApplicatorWindow, %AMER_ApplicatorWindow)
+	Set(%AMER_ApplicatorIsStatus, INT:1)
+	Set(%AMER_ApplicatorFunction, "AMER_STATUS_TormentParameters")
+	CharacterEvent(__Me, "AMER_ExpectApplicatorConsume")
+	
+	//Report relevant values for faking status.
+	IF "c1"
+		CharacterGetStat(_Attribute, __Me, Strength)
+	THEN
+		Subtract(_Attribute, 13.0)
+		SetVar(__Me, "AMER_STATUS_AttributePower", _Attribute)
+		SetVar(__Me, "AMER_STATUS_BaseChance", FLOAT:130)
+	ENDIF
+	
+EVENT OnCastCrush
+// C R U S H
+ON
+	OnSkillCast(__Me, "AMER_SKILL_Crush")
+ACTIONS
+	//Set the appropriate damage multiplier/instances.
+	SetVar(__Me, "AMER_SetBackstabBonusBase", INT:180)
+	CallFunction("AMER_SetBackstabBonusDamage")
+	Set(%AMER_BackstabDamageInstances, 1)
+	StartTimer("AMER_ResetBackstabDamage", 1.3, 0)
+	
+	//Broadcast expect applicator event.
+	Set(%AMER_ApplicatorWindow, 1.5)
+	Add(%AMER_ApplicatorWindow, %AMER_ExpectApplicatorTimeOffset)
+	Set(%AMER_ApplicatorConsumeInstances, INT:1)
+	Set(%AMER_ExpectApplicatorWindow, %AMER_ApplicatorWindow)
+	Set(%AMER_ApplicatorIsStatus, INT:0)
+	Set(%AMER_ApplicatorFunction, "AMER_CrushDebuff")
+	CharacterEvent(__Me, "AMER_ExpectApplicatorConsume")
+	
+EVENT OnCastErodingStrike
+// E R O D I N G   S T R I K E
+ON
+	OnSkillCast(__Me, "AMER_SKILL_ErodingStrike")
+ACTIONS
+	//Set the appropriate damage multiplier/instances.
+	SetVar(__Me, "AMER_SetBackstabBonusBase", INT:130)
+	CallFunction("AMER_SetBackstabBonusDamage")
+	Set(%AMER_BackstabDamageInstances, 1)
+	StartTimer("AMER_ResetBackstabDamage", 1.3, 0)
+	
+	//Broadcast expect applicator event.
+	Set(%AMER_ApplicatorWindow, 1.5)
+	Add(%AMER_ApplicatorWindow, %AMER_ExpectApplicatorTimeOffset)
+	Set(%AMER_ApplicatorConsumeInstances, INT:1)
+	Set(%AMER_ExpectApplicatorWindow, %AMER_ApplicatorWindow)
+	Set(%AMER_ApplicatorIsStatus, INT:0)
+	Set(%AMER_ApplicatorFunction, "AMER_Erosion")
+	CharacterEvent(__Me, "AMER_ExpectApplicatorConsume")
+	
+EVENT OnCastAwesomePresence
+// A W E S O M E   P R E S E N C E
+VARS
+	FLOAT:_Attribute
+	INT:_Corpses
+ON
+	OnSkillCast(__Me, "AMER_SKILL_AwesomePresence")
+ACTIONS
+	//Broadcast expect applicator event.
+	Set(%AMER_ApplicatorWindow, 2.0)
+	Add(%AMER_ApplicatorWindow, %AMER_ExpectApplicatorTimeOffset)
+	Set(%AMER_ApplicatorConsumeInstances, INT:1)
+	Set(%AMER_ExpectApplicatorWindow, %AMER_ApplicatorWindow)
+	Set(%AMER_ApplicatorIsStatus, INT:0)
+	Set(%AMER_ApplicatorFunction, "AMER_AwesomePresence")
+	CharacterEvent(__Me, "AMER_ExpectApplicatorConsume")
+	
+	//Awesome Presence needs to find corpses
+	//nearby, up to 3 corpses.
+	SetVar(__Me, "AMER_GenericInt", INT:0)
+	IterateCharactersNear(__Me, 5.0, "AMER_AwesomePresenceCorpses")
+	IF "c1&c2"
+		GetVar(_Corpses, __Me, "AMER_GenericInt")
+		IsGreaterThen(_Corpses, INT:3)
+	THEN
+		SetVar(__Me, "AMER_GenericInt", INT:3)
+	ENDIF
+	
+	//Report relevant values for faking status.
+	IF "c1"
+		CharacterGetStat(_Attribute, __Me, Strength)
+	THEN
+		Subtract(_Attribute, 11.0)
+		SetVar(__Me, "AMER_STATUS_AttributePower", _Attribute)
+		SetVar(__Me, "AMER_STATUS_BaseChance", FLOAT:100.0)
+	ENDIF
+	
+EVENT OnCastBolster
+// B O L S T E R
+ON
+	OnSkillCast(__Me, "AMER_SKILL_Bolster")
+ACTIONS
+	//Bolster consumes all remaining AP.
+	SetVar(__Me, "AMER_RemoveCurrentAPAmount", FLOAT:-1.0)
+	SetVar(__Me, "AMER_RemoveCurrentAPTarget", __Me)
+	CallFunction("AMER_RemoveCurrentAP")
+	
+	SetVar(__Me, "AMER_BolsterRemoval", INT:1)
+	
+EVENT OnCastEmpoweredBolster
+// E M P O W E R E D   B O L S T E R
+ON
+	OnSkillCast(__Me, "AMER_SKILL_EMPOWERED_Bolster")
+ACTIONS
+	//Bolster consumes all remaining AP.
+	SetVar(__Me, "AMER_RemoveCurrentAPAmount", FLOAT:-1.0)
+	SetVar(__Me, "AMER_RemoveCurrentAPTarget", __Me)
+	CallFunction("AMER_RemoveCurrentAP")
+	
+	SetVar(__Me, "AMER_BolsterRemoval", INT:2)
+	
+	
+	
+//==================Witchcraft========================//
+/*
+EVENT OnCastNullifyResistances
+// N U L L I F Y   R E S I S T A N C E S
+VARS
+//=========================//
+	FLOAT:%AMER_ApplicatorWindow = 2.0
+//=========================//
+ON
+	OnSkillCast(__Me, "AMER_SKILL_EMPOWERED_Shout_NullResistanceStart")
+	OnSkillCast(__Me, "Shout_NullResistanceStart")
+ACTIONS
+	//Broadcast expect applicator event.
+	Add(%AMER_ApplicatorWindow, %AMER_ExpectApplicatorTimeOffset)
+	Set(%AMER_ApplicatorConsumeInstances, INT:1)
+	Set(%AMER_ExpectApplicatorWindow, %AMER_ApplicatorWindow)
+	Set(%AMER_ApplicatorIsStatus, INT:0)
+	Set(%AMER_ApplicatorFunction = "AMER_NullifyResistancesInitial")
+	CharacterEvent(__Me, "AMER_ExpectApplicatorConsume")
+	*/
+	
+EVENT OnCastCurseOfCuts
+// C U R S E   O F   C U T S
+VARS
+	FLOAT:_Attribute
+ON
+	OnSkillCast(__Me, "AMER_SKILL_CurseOfCuts")
+ACTIONS
+	//Broadcast expect applicator event.
+	Set(%AMER_ApplicatorWindow, 2.0)
+	Add(%AMER_ApplicatorWindow, %AMER_ExpectApplicatorTimeOffset)
+	Set(%AMER_ApplicatorConsumeInstances, INT:1)
+	Set(%AMER_ExpectApplicatorWindow, %AMER_ApplicatorWindow)
+	Set(%AMER_ApplicatorIsStatus, INT:1)
+	Set(%AMER_ApplicatorFunction, "AMER_STATUS_CurseOfCutsParameters")
+	CharacterEvent(__Me, "AMER_ExpectApplicatorConsume")
+	
+	//Report relevant values for faking status.
+	IF "c1"
+		CharacterGetStat(_Attribute, __Me, Intelligence)
+	THEN
+		Subtract(_Attribute, 9.0)
+		SetVar(__Me, "AMER_STATUS_AttributePower", _Attribute)
+		SetVar(__Me, "AMER_STATUS_BaseChance", FLOAT:100)
+	ENDIF
+	
+EVENT OnCastVampiricTouch
+// V A M P I R I C   T O U C H
+ON
+	OnSkillCast(__Me, "Target_VampiricTouch")
+	OnSkillCast(__Me, "AMER_SKILL_EMPOWERED_Target_VampiricTouch")
+ACTIONS
+	//Calculate scaling heal.
+	Set(%AMER_ScalingHealAmount, 0.03)
+	Set(%AMER_ScalingHealGrowth, 0.01)
+	Set(%AMER_ScalingHealRecommended, 8.0)
+	Set(%AMER_PrimeAttribute, Intelligence)
+	CallFunction("AMER_CalcScalingHeal")
+	
+	//Don't need to broadcast; the caster is the only target
+	//for the healing so just call the heal function.
+	SetVar(__Me, "AMER_ScalingHealIgnoreZombie", INT:1)
+	CallFunction("AMER_ScalingPercentageHeal")
+	SetVar(__Me, "AMER_ScalingHealIgnoreZombie", INT:0)
+	
+EVENT OnCastAttenuate
+// A T T E N U A T E
+VARS
+	FLOAT:_Attribute
+	FLOAT:_Vitality
+ON
+	OnSkillCast(__Me, "AMER_SKILL_Attenuate")
+ACTIONS
+	//Broadcast expect applicator event.
+	Set(%AMER_ApplicatorWindow, 3.0)
+	Add(%AMER_ApplicatorWindow, %AMER_ExpectApplicatorTimeOffset)
+	Set(%AMER_ApplicatorConsumeInstances, INT:1)
+	Set(%AMER_ExpectApplicatorWindow, %AMER_ApplicatorWindow)
+	Set(%AMER_ApplicatorIsStatus, INT:1)
+	Set(%AMER_ApplicatorFunction, "AMER_STATUS_AttenuateParameters")
+	CharacterEvent(__Me, "AMER_ExpectApplicatorConsume")
+	
+	//Report relevant values for faking status.
+	IF "c1"
+		CharacterGetStat(_Attribute, __Me, Intelligence)
+	THEN
+		Subtract(_Attribute, 11.0)
+		SetVar(__Me, "AMER_STATUS_AttributePower", _Attribute)
+		SetVar(__Me, "AMER_STATUS_BaseChance", FLOAT:110.0)
+	ENDIF
+	
+	//Pay life cost to cast.
+	IF "c1"
+		CharacterGetStat(_Vitality, __Me, Vitality)
+	THEN
+		Subtract(_Vitality, 0.20)
+		SetHealth(__Me, _Vitality)
+	ENDIF
+	
+EVENT OnCastFingerOfDeath
+// F I N G E R   O F   D E A T H
+VARS
+	FLOAT:_Attribute
+ON
+	OnSkillCast(__Me, "Target_FingerOfDeath")
+ACTIONS
+	//Broadcast expect applicator event.
+	Set(%AMER_ApplicatorWindow, 2.0)
+	Add(%AMER_ApplicatorWindow, %AMER_ExpectApplicatorTimeOffset)
+	Set(%AMER_ApplicatorConsumeInstances, INT:1)
+	Set(%AMER_ExpectApplicatorWindow, %AMER_ApplicatorWindow)
+	Set(%AMER_ApplicatorIsStatus, INT:1)
+	Set(%AMER_ApplicatorFunction, "AMER_STATUS_FingerOfDeathParameters")
+	CharacterEvent(__Me, "AMER_ExpectApplicatorConsume")
+	
+	//Report relevant values for faking status.
+	IF "c1"
+		CharacterGetStat(_Attribute, __Me, Intelligence)
+	THEN
+		Subtract(_Attribute, 13.0)
+		SetVar(__Me, "AMER_STATUS_AttributePower", _Attribute)
+		SetVar(__Me, "AMER_STATUS_BaseChance", FLOAT:100.0)
+	ENDIF
+	
+EVENT OnCastDrainWillpower
+// D R A I N   W I L L P O W E R
+VARS
+	FLOAT:_Attribute
+ON
+	OnSkillCast(__Me, "Target_DrainWillpower")
+ACTIONS
+	//Broadcast expect applicator event.
+	Set(%AMER_ApplicatorWindow, 2.0)
+	Add(%AMER_ApplicatorWindow, %AMER_ExpectApplicatorTimeOffset)
+	Set(%AMER_ApplicatorConsumeInstances, INT:1)
+	Set(%AMER_ExpectApplicatorWindow, %AMER_ApplicatorWindow)
+	Set(%AMER_ApplicatorIsStatus, INT:1)
+	Set(%AMER_ApplicatorFunction, "AMER_STATUS_DrainWillpowerParameters")
+	CharacterEvent(__Me, "AMER_ExpectApplicatorConsume")
+	
+	//Report relevant values for faking status.
+	IF "c1"
+		CharacterGetStat(_Attribute, __Me, Intelligence)
+	THEN
+		Subtract(_Attribute, 12.0)
+		SetVar(__Me, "AMER_STATUS_AttributePower", _Attribute)
+		SetVar(__Me, "AMER_STATUS_BaseChance", FLOAT:100.0)
+	ENDIF
+	
+EVENT OnCastSoulsap
+// S O U L S A P
+VARS
+	FLOAT:_Attribute
+ON
+	OnSkillCast(__Me, "Target_Enervation")
+ACTIONS
+	//Broadcast expect applicator event.
+	Set(%AMER_ApplicatorWindow, 2.0)
+	Add(%AMER_ApplicatorWindow, %AMER_ExpectApplicatorTimeOffset)
+	Set(%AMER_ApplicatorConsumeInstances, INT:1)
+	Set(%AMER_ExpectApplicatorWindow, %AMER_ApplicatorWindow)
+	Set(%AMER_ApplicatorIsStatus, INT:1)
+	Set(%AMER_ApplicatorFunction, "AMER_STATUS_SoulsapParameters")
+	CharacterEvent(__Me, "AMER_ExpectApplicatorConsume")
+	
+	//Report relevant values for faking status.
+	IF "c1"
+		CharacterGetStat(_Attribute, __Me, Intelligence)
+	THEN
+		Subtract(_Attribute, 13.0)
+		SetVar(__Me, "AMER_STATUS_AttributePower", _Attribute)
+		SetVar(__Me, "AMER_STATUS_BaseChance", FLOAT:100.0)
+	ENDIF
+	
+EVENT OnCastInvulnerability
+// I N V U L N E R A B I L I T Y
+ON
+	OnSkillCast(__Me, "Shout_Invulnerability")
+ACTIONS
+	IF "c1"
+		CharacterHasStatus(__Me, CONSUME, "AMER_Invulnerability")
+	THEN
+		StatusText(__Me, "AMER_Invulnerability")
+		SetVar(__Me, "AMER_AllResOverride", FLOAT:100)
+		StartTimer("AMER_CheckInvulnerability", 1.0, -1)
+	ENDIF
+	
+	
+	
+//==================OTHER========================//
+EVENT OnOvercharge
+// O V E R C H A R G E
+VARS
+	FLOAT:_Damage
+	FLOAT:_Vitality
+	INT:_OverchargeCount
+	STRING:_Str
+	FIXEDSTRING:_WhichEffect
+ON
+	OnSkillCast(__Me, "AMER_SKILL_Overcharge")
+ACTIONS
+	//Overcharge damages the user for each sequential
+	//round wherein it has been used.
+	IF "c1"
+		GetVar(_OverchargeCount, __Me, "AMER_OverchargeCount")
+	THEN
+		IF "c1"
+			CharacterGetStat(_Vitality, __Me, Vitality)
+		THEN
+			IF "c1"
+				IsInCombat(__Me)
+			THEN
+				//Remove old buff indicator.
+				IF "c1"
+					IsGreaterThen(_OverchargeCount, INT:0)
+				THEN
+					RemoveStatusInfluence(__Me, CONSUME, 1, _WhichEffect, 0)
+				ENDIF
+				
+				Add(_OverchargeCount, INT:1)
+				SetVar(__Me, "AMER_OverchargeCount", _OverchargeCount)
+				SetVar(__Me, "AMER_OverchargeUsed", INT:1)
+			ELSE
+				//Don't scale the damage if out of combat.
+				Set(_OverchargeCount, INT:1)
+			ENDIF
+				
+			Cast(_Damage, _OverchargeCount)
+			
+			IF "c1"
+				CharacterHasTalent(__Me, Raistlin)
+			THEN
+				Multiply(_Damage, 0.30)
+			ELSE
+				Multiply(_Damage, 0.20)
+			ENDIF
+			
+			Subtract(_Vitality, _Damage)
+				
+			IF "c1"
+				IsLessThen(_Vitality, 0.0)
+			THEN
+				CharacterDie(__Me, Electrocution)
+			ELSE
+				CharacterPlayEffect(__Me, "FX_Creatures_Skills_Dragon_Astral_LightningBall_Impact_A")
+				SetHealth(__Me, _Vitality)
+				
+				//Add buff for player reference if they didn't die and are in combat.
+				IF "c1"
+					IsInCombat(__Me)
+				THEN
+					Print(_Str, "AMER_Overcharge[1]", _OverchargeCount)
+					Cast(_WhichEffect, _Str)
+					
+					//Sometimes the buff icons can linger, so don't stack the
+					//buff. This method will cause continued use of Overcharge
+					//to "fix itself."
+					IF "!c1"
+						CharacterHasStatus(__Me, CONSUME, WhichEffect)
+					THEN
+						AddStatusInfluence(__Me, CONSUME, 1, _WhichEffect, 0)
+					ENDIF
+				ENDIF
+			ENDIF
+		ENDIF
+	ENDIF
+	
+	
+	
+EVENT OnShockingArrow
+// S H O C K I N G   A R R O W
+ON
+	OnSkillCast(__Me, "Projectile_StunningArrow")
+ACTIONS
+	//Broadcast expect applicator event.
+	Set(%AMER_ApplicatorWindow, 2.0)
+	Add(%AMER_ApplicatorWindow, %AMER_ExpectApplicatorTimeOffset)
+	Set(%AMER_ApplicatorConsumeInstances, INT:1)
+	Set(%AMER_ExpectApplicatorWindow, %AMER_ApplicatorWindow)
+	Set(%AMER_ApplicatorIsStatus, INT:1)
+	Set(%AMER_ApplicatorFunction, "AMER_STATUS_ShockedParameters")
+	CharacterEvent(__Me, "AMER_ExpectApplicatorConsume")
+	
+	//Report relevant values for faking status.
+	SetVar(__Me, "AMER_STATUS_AttributePower", FLOAT:0.0)
+	SetVar(__Me, "AMER_STATUS_BaseChance", FLOAT:90.0)
+	
+	
+	
+EVENT OnShockGrenade
+// S H O C K   G R E N A D E
+ON
+	OnSkillCast(__Me, "Projectile_Grenade_Taser")
+ACTIONS
+	//Broadcast expect applicator event.
+	Set(%AMER_ApplicatorWindow, 2.0)
+	Add(%AMER_ApplicatorWindow, %AMER_ExpectApplicatorTimeOffset)
+	Set(%AMER_ApplicatorConsumeInstances, INT:1)
+	Set(%AMER_ExpectApplicatorWindow, %AMER_ApplicatorWindow)
+	Set(%AMER_ApplicatorIsStatus, INT:1)
+	Set(%AMER_ApplicatorFunction, "AMER_STATUS_ShockedParameters")
+	CharacterEvent(__Me, "AMER_ExpectApplicatorConsume")
+	
+	//Report relevant values for faking status.
+	SetVar(__Me, "AMER_STATUS_AttributePower", FLOAT:0.0)
+	SetVar(__Me, "AMER_STATUS_BaseChance", FLOAT:95.0)
+	
+	
+	
+//==================ENEMY========================//
+EVENT OnCastEnemyChainLightning
+// C H A I N   L I G H T N I N G
+VARS
+	FLOAT:_Attribute
+ON
+	OnSkillCast(__Me, "Projectile_EnemyChainLightning")
+ACTIONS
+	//Broadcast expect applicator event.
+	Set(%AMER_ApplicatorWindow, 2.0)
+	Add(%AMER_ApplicatorWindow, %AMER_ExpectApplicatorTimeOffset)
+	Set(%AMER_ApplicatorConsumeInstances, INT:3)
+	Set(%AMER_ExpectApplicatorWindow, %AMER_ApplicatorWindow)
+	Set(%AMER_ApplicatorIsStatus, INT:1)
+	Set(%AMER_ApplicatorFunction, "AMER_STATUS_ShockedParameters")
+	CharacterEvent(__Me, "AMER_ExpectApplicatorConsume")
+	
+	//Report relevant values for faking status.
+	IF "c1"
+		CharacterGetStat(_Attribute, __Me, Intelligence)
+	THEN
+		SetVar(__Me, "AMER_STATUS_AttributePower", _Attribute)
+		SetVar(__Me, "AMER_STATUS_BaseChance", FLOAT:80.0)
+	ENDIF
+	
+EVENT OnEnemyShockingArrow
+// S H O C K I N G   A R R O W
+ON
+	OnSkillCast(__Me, "Projectile_EnemyStunningArrow")
+ACTIONS
+	//Broadcast expect applicator event.
+	Set(%AMER_ApplicatorWindow, 2.0)
+	Add(%AMER_ApplicatorWindow, %AMER_ExpectApplicatorTimeOffset)
+	Set(%AMER_ApplicatorConsumeInstances, INT:1)
+	Set(%AMER_ExpectApplicatorWindow, %AMER_ApplicatorWindow)
+	Set(%AMER_ApplicatorIsStatus, INT:1)
+	Set(%AMER_ApplicatorFunction, "AMER_STATUS_ShockedParameters")
+	CharacterEvent(__Me, "AMER_ExpectApplicatorConsume")
+	
+	//Report relevant values for faking status.
+	SetVar(__Me, "AMER_STATUS_AttributePower", FLOAT:0.0)
+	SetVar(__Me, "AMER_STATUS_BaseChance", FLOAT:99.0)
+	
+EVENT OnEnemyCastLacerate
+// L A C E R A T E
+VARS
+	INT:_BlockChain
+ON
+	OnSkillCast(__Me, "Target_EnemyLacerate")
+ACTIONS
+	//Broadcast expect applicator event.
+	Set(%AMER_ApplicatorWindow, 2.0)
+	Add(%AMER_ApplicatorWindow, %AMER_ExpectApplicatorTimeOffset)
+	Set(%AMER_ApplicatorConsumeInstances, INT:1)
+	Set(%AMER_ExpectApplicatorWindow, %AMER_ApplicatorWindow)
+	Set(%AMER_ApplicatorIsStatus, INT:0)
+	Set(%AMER_ApplicatorFunction, "AMER_FinisherLacerate")
+	CharacterEvent(__Me, "AMER_ExpectApplicatorConsume")
+	
+	//Prevent Finisher from generating chain.
+	IF "c1"
+		GetVar(_BlockChain, __Me, "AMER_BlockChain")
+	THEN
+		Add(_BlockChain, INT:1)
+		SetVar(__Me, "AMER_BlockChain", _BlockChain)
+		StartTimer("BlockChain", 1.0, 0)
+	ENDIF
+	
+EVENT OnCastEnemyBlessedEarth
+// B L E S S E D   E A R T H
+ON
+	OnSkillCast(__Me, "Shout_EnemyBlessedEarth")
+ACTIONS
+	//Broadcast expect applicator event.
+	Set(%AMER_ApplicatorWindow, 2.0)
+	Add(%AMER_ApplicatorWindow, %AMER_ExpectApplicatorTimeOffset)
+	Set(%AMER_ApplicatorConsumeInstances, INT:1)
+	Set(%AMER_ExpectApplicatorWindow, %AMER_ApplicatorWindow)
+	Set(%AMER_ApplicatorIsStatus, INT:0)
+	Set(%AMER_ApplicatorFunction, "AMER_BlessInitial")
+	CharacterEvent(__Me, "AMER_ExpectApplicatorConsume")
+	
+	
+	
+//=============ON CAST FUNCTIONS=================//
+EVENT ResetShotgunner
+//Used to unassign a character as casting a "shotgunning" skill.
+ON
+	OnTimer("AMER_ResetShotgunner")
+ACTIONS
+	Set(%AMER_IsCastingShotgun, INT:0)
+	
+	
+	
+EVENT ResetBackstabDamage
+//Used to return the relative backstab base damage to normal after
+//using a skill which altered it.
+ON
+	OnTimer("AMER_ResetBackstabDamage")
+ACTIONS
+	Set(%AMER_BackstabDamageInstances, INT:0)
+	
+	
+	
+EVENT MistyStepAnim
+//Timer for Misty Step animation delay.
+ON
+	OnTimer("AMER_MistyStepAnimation")
+ACTIONS
+	CharacterPlayEffect(__Me, "FX_GP_Arrow_Smokescreen_Impact_A")
+	SetVisible(__Me, INT:1)
+	
+	
+	
+EVENT FinisherConsumeChain
+ON
+	OnTimer("AMER_FinisherConsumeChain")
+ACTIONS
+	SetVar(__Me, "AMER_Chain", INT:0)
+	CallFunction("AMER_SetChain")
+	
+	
+	
+EVENT CalcScalingHeal
+//Used to calculate the amount of percentage healing a skill should do.
+VARS
+	FLOAT:_HealGrowth
+	FLOAT:_Recommended
+	FLOAT:_Bonus
+	CHARACTERSTAT:_Attribute
+ON
+	OnFunction("AMER_CalcScalingHeal")
+ACTIONS
+	Set(_Attribute, %AMER_PrimeAttribute)
+	Set(_HealGrowth, %AMER_ScalingHealGrowth)
+	Set(_Recommended, %AMER_ScalingHealRecommended)
+	
+	IF "c1&c2"
+		CharacterGetStat(_Bonus, __Me, _Attribute)
+		IsGreaterThen(_Bonus, _Recommended)
+	THEN
+		Subtract(_Bonus, _Recommended)
+		Multiply(_Bonus, _HealGrowth)
+		Add(%AMER_ScalingHealAmount, _Bonus)
+	ENDIF
+	
+	
+	
+//===============================================//
+//                                               //
+//             S K I L L   C A S T S             //
+//                                               //
+//===============================================//

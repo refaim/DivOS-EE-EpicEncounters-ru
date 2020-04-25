@@ -1,0 +1,32 @@
+//=====================================================//
+//                                                     //
+//           C O N S U M E   O N   I N I T             //
+//                                                     //
+//       Written by Matteo "Ameranth" T. (2017)        //
+//                (longest script ever)                //
+//=====================================================//
+INIT
+CHARACTER:__Me
+EXTERN FIXEDSTRING:%AMER_ConsumeOnInit_ConsumeCheck = null
+EXTERN POTION:%AMER_ConsumeOnInit_Consume = null
+	
+EVENTS
+EVENT ConsumeInfluenceOnInit
+ON
+	OnInit()
+ACTIONS
+	IF "!c1"
+		CharacterIsDead(__Me)
+	THEN
+		IF "!c1"
+			CharacterHasStatus(__Me, CONSUME, %AMER_ConsumeOnInit_ConsumeCheck)
+		THEN
+			AddStatusInfluence(__Me, CONSUME, 1, %AMER_ConsumeOnInit_ConsumeCheck, 0)
+			CharacterConsume(__Me, %AMER_ConsumeOnInit_Consume)
+		ENDIF
+	ENDIF
+//=====================================================//
+//                                                     //
+//           C O N S U M E   O N   I N I T             //
+//                                                     //
+//=====================================================//
