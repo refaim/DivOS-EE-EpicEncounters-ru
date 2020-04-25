@@ -744,6 +744,9 @@ use object LOOT_Wand_C on object AMER_LOOT_Essence_Water_A with transform code D
 use object LOOT_Wand_D on object AMER_LOOT_Essence_Water_A with transform code Destroy2Transform1Boost1 parameters WPN_Wand_Water_M,0,0,Weapon_Small_Consitution_Mod_Late,0,0,1,1 requires Crafting 5 autolevel 1 autoValue 0
 use object TOOL_Pouch_Dust_Pixie_A on object AMER_LOOT_TormentedSwole with transform code Destroy1Transform2 parameters AMER_LOOT_Soul_Tormented_A,0,0,0,0,0,1,1 requires Crafting 1 autolevel 0 autoValue 0
 
+// Make food and drinks
+use object CON_Food_Dinner_A on object CON_Drink_Bottle_Beer_A with transform code Destroy2Transform1 parameters CON_Food_Stew_Dwarven_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
+use object CON_Food_Dinner_A on object CON_UNI_Mug_Beer_Nurrid_Ovrur with transform code Transform1 parameters CON_Food_Stew_Dwarven_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
 
 //================================================================//
 //================================================================//
