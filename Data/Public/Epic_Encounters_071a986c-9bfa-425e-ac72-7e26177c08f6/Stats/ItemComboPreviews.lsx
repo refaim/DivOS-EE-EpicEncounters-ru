@@ -4589,22 +4589,58 @@
 
             <!-- Make food and drinks -->
             <node id="Combo">
-                <attribute id="CombinationID" value="LFR_CON_Food_Stew_Dwarven_A" type="22" />
+                <attribute id="CombinationID" value="LFR_CON_Drink_Mug_Beer_A_ITEM_EmptyBottle" type="22" />
                 <attribute id="RecipeCategory" value="Food" type="22" />
-                <attribute id="Object1" value="CON_Food_Dinner_A" type="22" />
-                <attribute id="Object2" value="CON_Drink_Bottle_Beer_A" type="22" />
+                <attribute id="Object1" value="CON_Drink_Mug_Beer_A" type="22" />
+                <attribute id="Object2" value="ITEM_EmptyBottle" type="22" />
                 <attribute id="RequiredSkillLevel" value="0" type="4" />
-                <attribute id="StatsID" value="CON_Food_Stew_Dwarven_A" type="22" />
+                <attribute id="StatsID" value="CON_Drink_Bottle_Beer_A" type="22" />
                 <attribute id="CraftAmount" value="7" type="4" />
+            </node>
+            <node id="Combo">
+                <attribute id="CombinationID" value="LFR_CON_Drink_Mug_A_Beer_ITEM_EmptyBottle" type="22" />
+                <attribute id="RecipeCategory" value="Food" type="22" />
+                <attribute id="Object1" value="CON_Drink_Mug_Beer_A" type="22" />
+                <attribute id="Object2" value="ITEM_EmptyBottle" type="22" />
+                <attribute id="RequiredSkillLevel" value="0" type="4" />
+                <attribute id="StatsID" value="CON_Drink_Bottle_Beer_A" type="22" />
+                <attribute id="CraftAmount" value="7" type="4" />
+            </node>
+            <node id="Combo">
+                <attribute id="CombinationID" value="LFR_CON_Drink_Bottle_Beer_A" type="22" />
+                <attribute id="RecipeCategory" value="Food" type="22" />
+                <attribute id="Object1" value="CON_UNI_Mug_Beer_Nurrid_Ovrur" type="22" />
+                <attribute id="Object2" value="ITEM_EmptyBottle" type="22" />
+                <attribute id="RequiredSkillLevel" value="0" type="4" />
+                <attribute id="StatsID" value="CON_Drink_Bottle_Beer_A" type="22" />
+                <attribute id="CraftAmount" value="7" type="4" />
+            </node>
+            <node id="Combo">
+                <attribute id="CombinationID" value="LFR_CON_Drink_Mug_Beer_A" type="22" />
+                <attribute id="RecipeCategory" value="Food" type="22" />
+                <attribute id="Object1" value="CON_UNI_Mug_Beer_Nurrid_Ovrur" type="22" />
+                <attribute id="Object2" value="CON_Drink_Mug_A_Empty" type="22" />
+                <attribute id="RequiredSkillLevel" value="0" type="4" />
+                <attribute id="StatsID" value="CON_Drink_Mug_Beer_A" type="22" />
+                <attribute id="CraftAmount" value="3" type="4" />
             </node>
             <node id="Combo">
                 <attribute id="CombinationID" value="LFR_CON_Food_Stew_Dwarven_B" type="22" />
                 <attribute id="RecipeCategory" value="Food" type="22" />
-                <attribute id="Object1" value="CON_Food_Dinner_A" type="22" />
-                <attribute id="Object2" value="CON_UNI_Mug_Beer_Nurrid_Ovrur" type="22" />
+                <attribute id="Object1" value="CON_UNI_Mug_Beer_Nurrid_Ovrur" type="22" />
+                <attribute id="Object2" value="CON_Food_Dinner_A" type="22" />
                 <attribute id="RequiredSkillLevel" value="0" type="4" />
                 <attribute id="StatsID" value="CON_Food_Stew_Dwarven_A" type="22" />
-                <attribute id="CraftAmount" value="2" type="4" />
+                <attribute id="CraftAmount" value="3" type="4" />
+            </node>
+            <node id="Combo">
+                <attribute id="CombinationID" value="LFR_CON_Food_Stew_Dwarven_A" type="22" />
+                <attribute id="RecipeCategory" value="Food" type="22" />
+                <attribute id="Object1" value="CON_Drink_Bottle_Beer_A" type="22" />
+                <attribute id="Object2" value="CON_Food_Dinner_A" type="22" />
+                <attribute id="RequiredSkillLevel" value="0" type="4" />
+                <attribute id="StatsID" value="CON_Food_Stew_Dwarven_A" type="22" />
+                <attribute id="CraftAmount" value="7" type="4" />
             </node>
 
             <!-- Make scraps -->

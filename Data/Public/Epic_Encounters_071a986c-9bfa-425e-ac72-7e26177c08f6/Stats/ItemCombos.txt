@@ -745,8 +745,12 @@ use object LOOT_Wand_D on object AMER_LOOT_Essence_Water_A with transform code D
 use object TOOL_Pouch_Dust_Pixie_A on object AMER_LOOT_TormentedSwole with transform code Destroy1Transform2 parameters AMER_LOOT_Soul_Tormented_A,0,0,0,0,0,1,1 requires Crafting 1 autolevel 0 autoValue 0
 
 // Make food and drinks
-use object CON_Food_Dinner_A on object CON_Drink_Bottle_Beer_A with transform code Destroy2Transform1 parameters CON_Food_Stew_Dwarven_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
-use object CON_Food_Dinner_A on object CON_UNI_Mug_Beer_Nurrid_Ovrur with transform code Transform1 parameters CON_Food_Stew_Dwarven_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
+use object CON_Drink_Mug_Beer_A on object ITEM_EmptyBottle with transform code TransformBoth parameters CON_Drink_Mug_A_Empty,CON_Drink_Bottle_Beer_A,0,0,0,0,1,1 autolevel 0 autoValue 0
+use object CON_Drink_Mug_A_Beer on object ITEM_EmptyBottle with transform code TransformBoth parameters CON_Drink_Mug_A_Empty,CON_Drink_Bottle_Beer_A,0,0,0,0,1,1 autolevel 0 autoValue 0
+use object CON_UNI_Mug_Beer_Nurrid_Ovrur on object ITEM_EmptyBottle with transform code Transform2 parameters CON_Drink_Bottle_Beer_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
+use object CON_UNI_Mug_Beer_Nurrid_Ovrur on object CON_Drink_Mug_A_Empty with transform code Transform2 parameters CON_Drink_Mug_Beer_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
+use object CON_UNI_Mug_Beer_Nurrid_Ovrur on object CON_Food_Dinner_A with transform code Transform2 parameters CON_Food_Stew_Dwarven_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
+use object CON_Drink_Bottle_Beer_A on object CON_Food_Dinner_A with transform code TransformBoth parameters ITEM_EmptyBottle,CON_Food_Stew_Dwarven_A,0,0,0,0,1,1 autolevel 0 autoValue 0
 
 // Make scraps from armor and clothes.
 //
