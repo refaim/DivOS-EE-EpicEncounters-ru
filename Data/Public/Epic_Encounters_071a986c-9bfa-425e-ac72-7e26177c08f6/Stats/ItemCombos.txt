@@ -771,6 +771,68 @@ use category ArmorScale on object TOOL_Hammer with transform code Transform1 par
 use category ArmorScale on object TOOL_Hammer with transform code Transform1 parameters LOOT_Scraps_Metal_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
 use category ArmorScale on object TOOL_Hammer with transform code Transform1 parameters LOOT_Scraps_Plate_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
 
+// Forbid infinite crafted armor reroll
+use object ARM_CraftedRobe_01 on category Knife with transform code Transform1 parameters LOOT_Scraps_Cloth_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
+use object ARM_CraftedRobe_01 on category Knife with transform code Transform1 parameters LOOT_Thread_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
+use object ARM_CraftedRobe_01 on category Knife with transform code Transform1 parameters LOOT_Thread_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
+use object ARM_CraftedRobe_01 on category Dagger with transform code Transform1 parameters LOOT_Scraps_Cloth_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
+use object ARM_CraftedRobe_01 on category Dagger with transform code Transform1 parameters LOOT_Thread_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
+use object ARM_CraftedRobe_01 on category Dagger with transform code Transform1 parameters LOOT_Thread_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
+use object ARM_CraftedClothTorso_01 on category Knife with transform code Transform1 parameters LOOT_Scraps_Cloth_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
+use object ARM_CraftedClothTorso_01 on category Knife with transform code Transform1 parameters LOOT_Thread_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
+use object ARM_CraftedClothTorso_01 on category Knife with transform code Transform1 parameters LOOT_Thread_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
+use object ARM_CraftedClothTorso_01 on category Dagger with transform code Transform1 parameters LOOT_Scraps_Cloth_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
+use object ARM_CraftedClothTorso_01 on category Dagger with transform code Transform1 parameters LOOT_Thread_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
+use object ARM_CraftedClothTorso_01 on category Dagger with transform code Transform1 parameters LOOT_Thread_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
+use object ARM_CraftedClothTorso_02 on category Knife with transform code Transform1 parameters LOOT_Scraps_Cloth_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
+use object ARM_CraftedClothTorso_02 on category Knife with transform code Transform1 parameters LOOT_Thread_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
+use object ARM_CraftedClothTorso_02 on category Knife with transform code Transform1 parameters LOOT_Thread_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
+use object ARM_CraftedClothTorso_02 on category Dagger with transform code Transform1 parameters LOOT_Scraps_Cloth_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
+use object ARM_CraftedClothTorso_02 on category Dagger with transform code Transform1 parameters LOOT_Thread_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
+use object ARM_CraftedClothTorso_02 on category Dagger with transform code Transform1 parameters LOOT_Thread_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
+use object ARM_CraftedClothTorso_03 on category Knife with transform code Transform1 parameters LOOT_Scraps_Cloth_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
+use object ARM_CraftedClothTorso_03 on category Knife with transform code Transform1 parameters LOOT_Thread_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
+use object ARM_CraftedClothTorso_03 on category Knife with transform code Transform1 parameters LOOT_Thread_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
+use object ARM_CraftedClothTorso_03 on category Dagger with transform code Transform1 parameters LOOT_Scraps_Cloth_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
+use object ARM_CraftedClothTorso_03 on category Dagger with transform code Transform1 parameters LOOT_Thread_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
+use object ARM_CraftedClothTorso_03 on category Dagger with transform code Transform1 parameters LOOT_Thread_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
+use object ARM_CraftedClothTorso_04 on category Knife with transform code Transform1 parameters LOOT_Scraps_Cloth_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
+use object ARM_CraftedClothTorso_04 on category Knife with transform code Transform1 parameters LOOT_Thread_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
+use object ARM_CraftedClothTorso_04 on category Knife with transform code Transform1 parameters LOOT_Thread_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
+use object ARM_CraftedClothTorso_04 on category Dagger with transform code Transform1 parameters LOOT_Scraps_Cloth_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
+use object ARM_CraftedClothTorso_04 on category Dagger with transform code Transform1 parameters LOOT_Thread_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
+use object ARM_CraftedClothTorso_04 on category Dagger with transform code Transform1 parameters LOOT_Thread_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
+use object ARM_CraftedClothTorso_05 on category Knife with transform code Transform1 parameters LOOT_Scraps_Cloth_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
+use object ARM_CraftedClothTorso_05 on category Knife with transform code Transform1 parameters LOOT_Thread_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
+use object ARM_CraftedClothTorso_05 on category Knife with transform code Transform1 parameters LOOT_Thread_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
+use object ARM_CraftedClothTorso_05 on category Dagger with transform code Transform1 parameters LOOT_Scraps_Cloth_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
+use object ARM_CraftedClothTorso_05 on category Dagger with transform code Transform1 parameters LOOT_Thread_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
+use object ARM_CraftedClothTorso_05 on category Dagger with transform code Transform1 parameters LOOT_Thread_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
+use object ARM_CraftedLeatherTorso_01 on category Knife with transform code Transform1 parameters LOOT_Scraps_Leather_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
+use object ARM_CraftedLeatherTorso_01 on category Knife with transform code Transform1 parameters LOOT_Thread_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
+use object ARM_CraftedLeatherTorso_01 on category Knife with transform code Transform1 parameters LOOT_Thread_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
+use object ARM_CraftedLeatherTorso_01 on category Dagger with transform code Transform1 parameters LOOT_Scraps_Leather_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
+use object ARM_CraftedLeatherTorso_01 on category Dagger with transform code Transform1 parameters LOOT_Thread_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
+use object ARM_CraftedLeatherTorso_01 on category Dagger with transform code Transform1 parameters LOOT_Thread_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
+use object ARM_CraftedLeatherTorso_02 on category Knife with transform code Transform1 parameters LOOT_Scraps_Leather_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
+use object ARM_CraftedLeatherTorso_02 on category Knife with transform code Transform1 parameters LOOT_Thread_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
+use object ARM_CraftedLeatherTorso_02 on category Knife with transform code Transform1 parameters LOOT_Thread_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
+use object ARM_CraftedLeatherTorso_02 on category Dagger with transform code Transform1 parameters LOOT_Scraps_Leather_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
+use object ARM_CraftedLeatherTorso_02 on category Dagger with transform code Transform1 parameters LOOT_Thread_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
+use object ARM_CraftedLeatherTorso_02 on category Dagger with transform code Transform1 parameters LOOT_Thread_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
+use object ARM_CraftedLeatherTorso_03 on category Knife with transform code Transform1 parameters LOOT_Scraps_Leather_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
+use object ARM_CraftedLeatherTorso_03 on category Knife with transform code Transform1 parameters LOOT_Thread_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
+use object ARM_CraftedLeatherTorso_03 on category Knife with transform code Transform1 parameters LOOT_Thread_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
+use object ARM_CraftedLeatherTorso_03 on category Dagger with transform code Transform1 parameters LOOT_Scraps_Leather_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
+use object ARM_CraftedLeatherTorso_03 on category Dagger with transform code Transform1 parameters LOOT_Thread_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
+use object ARM_CraftedLeatherTorso_03 on category Dagger with transform code Transform1 parameters LOOT_Thread_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
+use object ARM_CraftedLeatherTorso_04 on category Knife with transform code Transform1 parameters LOOT_Scraps_Leather_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
+use object ARM_CraftedLeatherTorso_04 on category Knife with transform code Transform1 parameters LOOT_Thread_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
+use object ARM_CraftedLeatherTorso_04 on category Knife with transform code Transform1 parameters LOOT_Thread_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
+use object ARM_CraftedLeatherTorso_04 on category Dagger with transform code Transform1 parameters LOOT_Scraps_Leather_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
+use object ARM_CraftedLeatherTorso_04 on category Dagger with transform code Transform1 parameters LOOT_Thread_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
+use object ARM_CraftedLeatherTorso_04 on category Dagger with transform code Transform1 parameters LOOT_Thread_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
+
 
 //================================================================//
 //================================================================//
