@@ -1,0 +1,21 @@
+// Make glass stuff
+// use object Gen_Glass on category Oven with transform code Transform1 parameters LOOT_Jar_A,0,0,0,0,0,1,1 requires Crafting 3 autolevel 0 autoValue 0
+// use object ITEM_EmptyBottle on category Oven with transform code Transform1 parameters LOOT_Jar_A,0,0,0,0,0,1,1 requires Crafting 3 autolevel 0 autoValue 0
+// use object LOOT_Jar_A on category Oven with transform code Transform1 parameters ITEM_EmptyBottle,0,0,0,0,0,1,1 requires Crafting 3 autolevel 0 autoValue 0
+// ??? use object ITEM_BrokenBottle on category Oven with transform code Transform1 parameters CON_Potion_Empty_A,0,0,0,0,0,1,1 requires Crafting 4 autolevel 0 autoValue 0
+// somehow make CON_Potion_Empty_A
+// somehow make perfume bottle
+
+// Melt stuff
+// use category Oven on object TOOL_Hammer with transform code Transform2 parameters LOOT_OreBar_A_Iron_A,0,0,0,0,0,1,1 requires Blacksmithing 1 autolevel 0 autoValue 0
+
+2-3 Thread + ??? => 1 Cloth Scraps
+
+3 Identifying Glass + Steel => Scope
+
+2 Empty Spell Books => Essence (Witchcraft => Void)
+
+Magic Skull + ??? => Tormented Soul
+
+use object LOOT_Sinew_A_Strong on category Knife with transform code Transform1 parameters LOOT_Sinew_A,0,0,0,0,0,2,1 autolevel 0 autoValue 0
+use object LOOT_Sinew_A_Strong on category Dagger with transform code Transform1 parameters LOOT_Sinew_A,0,0,0,0,0,2,1 autolevel 0 autoValue 0
