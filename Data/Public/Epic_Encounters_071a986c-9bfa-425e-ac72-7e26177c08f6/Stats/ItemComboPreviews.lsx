@@ -4703,6 +4703,44 @@
                 <attribute id="CraftAmount" value="7" type="4" />
             </node>
 
+            <!-- Extract essences from scrolls -->
+            <node id="Combo">
+                <attribute id="CombinationID" value="LFR_LOOT_Essence_Air_A" type="22" />
+                <attribute id="RecipeCategory" value="Objects" type="22" />
+                <attribute id="Object1" value="TOOL_Pouch_Dust_Pixie_A" type="22" />
+                <attribute id="Object2" value="Scroll_Skill_Air_Blank_A" type="22" />
+                <attribute id="RequiredSkillLevel" value="5" type="4" />
+                <attribute id="StatsID" value="LOOT_Essence_Air_A" type="22" />
+                <attribute id="CraftAmount" value="7" type="4" />
+            </node>
+            <node id="Combo">
+                <attribute id="CombinationID" value="LFR_LOOT_Essence_Earth_A" type="22" />
+                <attribute id="RecipeCategory" value="Objects" type="22" />
+                <attribute id="Object1" value="TOOL_Pouch_Dust_Pixie_A" type="22" />
+                <attribute id="Object2" value="Scroll_Skill_Earth_Blank_A" type="22" />
+                <attribute id="RequiredSkillLevel" value="5" type="4" />
+                <attribute id="StatsID" value="LOOT_Essence_Earth_A" type="22" />
+                <attribute id="CraftAmount" value="7" type="4" />
+            </node>
+            <node id="Combo">
+                <attribute id="CombinationID" value="LFR_LOOT_Essence_Fire_A" type="22" />
+                <attribute id="RecipeCategory" value="Objects" type="22" />
+                <attribute id="Object1" value="TOOL_Pouch_Dust_Pixie_A" type="22" />
+                <attribute id="Object2" value="Scroll_Skill_Fire_Blank_A" type="22" />
+                <attribute id="RequiredSkillLevel" value="5" type="4" />
+                <attribute id="StatsID" value="LOOT_Essence_Fire_A" type="22" />
+                <attribute id="CraftAmount" value="7" type="4" />
+            </node>
+            <node id="Combo">
+                <attribute id="CombinationID" value="LFR_LOOT_Essence_Water_A" type="22" />
+                <attribute id="RecipeCategory" value="Objects" type="22" />
+                <attribute id="Object1" value="TOOL_Pouch_Dust_Pixie_A" type="22" />
+                <attribute id="Object2" value="Scroll_Skill_Water_Blank_A" type="22" />
+                <attribute id="RequiredSkillLevel" value="5" type="4" />
+                <attribute id="StatsID" value="LOOT_Essence_Water_A" type="22" />
+                <attribute id="CraftAmount" value="7" type="4" />
+            </node>
+
         </children>
     </node>
 </region>

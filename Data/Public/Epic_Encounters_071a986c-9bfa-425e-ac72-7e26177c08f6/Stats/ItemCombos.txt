@@ -854,6 +854,13 @@ use object LOOT_Skull_MagicBelt_A_Tattooed on category Knife with transform code
 // Make Scope
 use object TOOL_IdentifyingGlass on object LOOT_OreBar_A_Silver_A with transform code Transform1 parameters TOOL_Scope_A,0,0,0,0,0,1,1 requires Crafting 5 autolevel 0 autoValue 0
 
+// Extract essences from scrolls
+use object TOOL_Pouch_Dust_Pixie_A on object Scroll_Skill_Air_Blank_A with transform code Transform2 parameters LOOT_Essence_Air_A,0,0,0,0,0,1,1 requires Crafting 5 autolevel 0 autoValue 0
+use object TOOL_Pouch_Dust_Pixie_A on object Scroll_Skill_Earth_Blank_A with transform code Transform2 parameters LOOT_Essence_Earth_A,0,0,0,0,0,1,1 requires Crafting 5 autolevel 0 autoValue 0
+use object TOOL_Pouch_Dust_Pixie_A on object Scroll_Skill_Fire_Blank_A with transform code Transform2 parameters LOOT_Essence_Fire_A,0,0,0,0,0,1,1 requires Crafting 5 autolevel 0 autoValue 0
+use object TOOL_Pouch_Dust_Pixie_A on object Scroll_Skill_Water_Blank_A with transform code Transform2 parameters LOOT_Essence_Water_A,0,0,0,0,0,1,1 requires Crafting 5 autolevel 0 autoValue 0
+
+
 //================================================================//
 //================================================================//
 //
