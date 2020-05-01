@@ -4692,6 +4692,17 @@
                 <attribute id="CraftAmount" value="7" type="4" />
             </node>
 
+            <!-- Make Scope -->
+            <node id="Combo">
+                <attribute id="CombinationID" value="LFR_TOOL_Scope_A" type="22" />
+                <attribute id="RecipeCategory" value="Objects" type="22" />
+                <attribute id="Object1" value="TOOL_IdentifyingGlass" type="22" />
+                <attribute id="Object2" value="LOOT_OreBar_A_Silver_A" type="22" />
+                <attribute id="RequiredSkillLevel" value="5" type="4" />
+                <attribute id="StatsID" value="TOOL_Scope_A" type="22" />
+                <attribute id="CraftAmount" value="7" type="4" />
+            </node>
+
         </children>
     </node>
 </region>

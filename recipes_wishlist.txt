@@ -10,8 +10,6 @@
 // Melt stuff
 // use category Oven on object TOOL_Hammer with transform code Transform2 parameters LOOT_OreBar_A_Iron_A,0,0,0,0,0,1,1 requires Blacksmithing 1 autolevel 0 autoValue 0
 
-Identifying Glass + Silver Bar => Scope
-
 Empty Spell Book + Oven => Essence (Witchcraft => Pixie Dust) [requires specific magic school]
 Empty Spell Scroll + Pixie Dust => Essence
 
