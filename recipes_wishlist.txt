@@ -16,5 +16,3 @@ Empty Spell Book + Oven => Essence (Witchcraft => Pixie Dust) [requires specific
 Empty Spell Scroll + Pixie Dust => Essence
 
 Mug + Knife = Cup
-
-Magic Skull + ??? => Tormented Soul

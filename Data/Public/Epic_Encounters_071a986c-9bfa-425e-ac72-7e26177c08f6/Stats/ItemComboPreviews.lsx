@@ -4663,6 +4663,35 @@
                 <attribute id="CraftAmount" value="2" type="4" />
             </node>
 
+            <!-- Make Tormented Souls -->
+            <node id="Combo">
+                <attribute id="CombinationID" value="LFR_AMER_LOOT_Soul_Tormented_A" type="22" />
+                <attribute id="RecipeCategory" value="Objects" type="22" />
+                <attribute id="Object1" value="LOOT_Skull_Human_A_Magic" type="22" />
+                <attribute id="Object2" value="SCROLL_Resurrect_1" type="22" />
+                <attribute id="RequiredSkillLevel" value="4" type="4" />
+                <attribute id="StatsID" value="AMER_LOOT_Soul_Tormented_A" type="22" />
+                <attribute id="CraftAmount" value="7" type="4" />
+            </node>
+            <node id="Combo">
+                <attribute id="CombinationID" value="LFR_AMER_LOOT_Soul_Tormented_B" type="22" />
+                <attribute id="RecipeCategory" value="Objects" type="22" />
+                <attribute id="Object1" value="LOOT_Skull_Human_A_Magic_Tattooed" type="22" />
+                <attribute id="Object2" value="SCROLL_Resurrect_1" type="22" />
+                <attribute id="RequiredSkillLevel" value="4" type="4" />
+                <attribute id="StatsID" value="AMER_LOOT_Soul_Tormented_A" type="22" />
+                <attribute id="CraftAmount" value="7" type="4" />
+            </node>
+            <node id="Combo">
+                <attribute id="CombinationID" value="LFR_AMER_LOOT_Soul_Tormented_C" type="22" />
+                <attribute id="RecipeCategory" value="Objects" type="22" />
+                <attribute id="Object1" value="LOOT_Skull_Human_A_Magic_Ancient" type="22" />
+                <attribute id="Object2" value="SCROLL_Resurrect_1" type="22" />
+                <attribute id="RequiredSkillLevel" value="4" type="4" />
+                <attribute id="StatsID" value="AMER_LOOT_Soul_Tormented_A" type="22" />
+                <attribute id="CraftAmount" value="7" type="4" />
+            </node>
+
         </children>
     </node>
 </region>

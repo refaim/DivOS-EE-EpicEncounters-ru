@@ -833,6 +833,24 @@ use object ARM_CraftedLeatherTorso_04 on category Dagger with transform code Tra
 use object ARM_CraftedLeatherTorso_04 on category Dagger with transform code Transform1 parameters LOOT_Thread_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
 use object ARM_CraftedLeatherTorso_04 on category Dagger with transform code Transform1 parameters LOOT_Thread_A,0,0,0,0,0,1,1 autolevel 0 autoValue 0
 
+// Make Tormented Souls
+use object LOOT_Skull_Human_A_Magic on object SCROLL_Resurrect_1 with transform code Destroy2Transform1 parameters AMER_LOOT_Soul_Tormented_A,0,0,0,0,0,1,1 requires Crafting 4 autolevel 1 autoValue 0
+use object LOOT_Skull_Human_A_Magic_Ancient on object SCROLL_Resurrect_1 with transform code Destroy2Transform1 parameters AMER_LOOT_Soul_Tormented_A,0,0,0,0,0,1,1 requires Crafting 4 autolevel 1 autoValue 0
+use object LOOT_Skull_Human_A_Magic_Tattooed on object SCROLL_Resurrect_1 with transform code Destroy2Transform1 parameters AMER_LOOT_Soul_Tormented_A,0,0,0,0,0,1,1 requires Crafting 4 autolevel 1 autoValue 0
+// Disassemble crafted skull items (to help obtain magic skulls)
+use object LOOT_Skull_MagicAmulet_A on category Dagger with transform code Transform1 parameters LOOT_Skull_Human_A_Magic,0,0,0,0,0,1,1 requires Crafting 1 autolevel 0 autoValue 0
+use object LOOT_Skull_MagicAmulet_A on category Knife with transform code Transform1 parameters LOOT_Skull_Human_A_Magic,0,0,0,0,0,1,1 requires Crafting 1 autolevel 0 autoValue 0
+use object LOOT_Skull_MagicAmulet_A_Ancient on category Dagger with transform code Transform1 parameters LOOT_Skull_Human_A_Magic_Ancient,0,0,0,0,0,1,1 requires Crafting 1 autolevel 0 autoValue 0
+use object LOOT_Skull_MagicAmulet_A_Ancient on category Knife with transform code Transform1 parameters LOOT_Skull_Human_A_Magic_Ancient,0,0,0,0,0,1,1 requires Crafting 1 autolevel 0 autoValue 0
+use object LOOT_Skull_MagicAmulet_A_Tattooed on category Dagger with transform code Transform1 parameters LOOT_Skull_Human_A_Magic_Tattooed,0,0,0,0,0,1,1 requires Crafting 1 autolevel 0 autoValue 0
+use object LOOT_Skull_MagicAmulet_A_Tattooed on category Knife with transform code Transform1 parameters LOOT_Skull_Human_A_Magic_Tattooed,0,0,0,0,0,1,1 requires Crafting 1 autolevel 0 autoValue 0
+use object LOOT_Skull_MagicBelt_A on category Dagger with transform code Transform1 parameters LOOT_Skull_Human_A_Magic,0,0,0,0,0,1,1 requires Crafting 1 autolevel 0 autoValue 0
+use object LOOT_Skull_MagicBelt_A on category Knife with transform code Transform1 parameters LOOT_Skull_Human_A_Magic,0,0,0,0,0,1,1 requires Crafting 1 autolevel 0 autoValue 0
+use object LOOT_Skull_MagicBelt_A_Ancient on category Dagger with transform code Transform1 parameters LOOT_Skull_Human_A_Magic_Ancient,0,0,0,0,0,1,1 requires Crafting 1 autolevel 0 autoValue 0
+use object LOOT_Skull_MagicBelt_A_Ancient on category Knife with transform code Transform1 parameters LOOT_Skull_Human_A_Magic_Ancient,0,0,0,0,0,1,1 requires Crafting 1 autolevel 0 autoValue 0
+use object LOOT_Skull_MagicBelt_A_Tattooed on category Dagger with transform code Transform1 parameters LOOT_Skull_Human_A_Magic_Tattooed,0,0,0,0,0,1,1 requires Crafting 1 autolevel 0 autoValue 0
+use object LOOT_Skull_MagicBelt_A_Tattooed on category Knife with transform code Transform1 parameters LOOT_Skull_Human_A_Magic_Tattooed,0,0,0,0,0,1,1 requires Crafting 1 autolevel 0 autoValue 0
+
 
 //================================================================//
 //================================================================//
