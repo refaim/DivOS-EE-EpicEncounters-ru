@@ -3735,8 +3735,6 @@ data "Damage Range" "10"
 data "DamageType" "Crushing"
 data "ExtraProperties" "Knockdown,100,2"
 
-
-
 new entry "AMER_CMB_Dragon_CrushingAttack"
 type "Potion"
 data "Act part" "20"
@@ -3746,15 +3744,11 @@ data "Damage Range" "10"
 data "DamageType" "Crushing"
 data "ExtraProperties" "Knockdown,100,1"
 
-
-
 new entry "AMER_CMB_Incandescent"
 type "Potion"
 using "_SkillBoost"
 data "Reflection" "40::Fire:all"
 data "StatusIcon" "Skill_Fire_ImmuneToFreezing"
-
-
 
 new entry "AMER_CMB_Vampire_DrainHeal"
 type "Potion"
@@ -3767,23 +3761,17 @@ type "Potion"
 data "Duration" "0"
 data "StackId" "AMERvampiredrain"
 
-
-
 new entry "AMER_CMB_MelchiorRestraint_Thorns"
 type "Potion"
 using "_SkillBoost"
 data "Reflection" "100:all"
 data "StatusIcon" "AMER_Skill_SpikedShell"
 
-
-
 new entry "AMER_CMB_MelchiorFear_Link"
 type "Potion"
 data "Duration" "0"
 data "StatusIcon" "statIcons_ShacklesOfPain"
 data "ExtraProperties" "All damage taken is also suffered by Restraint."
-
-
 
 new entry "AMER_CMB_MelchiorCruelty_Enrage"
 type "Potion"
@@ -3854,8 +3842,6 @@ type "Potion"
 using "_AMER_CMB_MelchiorCruelty_Buff"
 data "DamageBoost" "1600"
 data "APRecovery" "16"
-
-
 
 new entry "AMER_CMB_MelchiorIgnorance_SpikedShell"
 type "Potion"
@@ -3928,8 +3914,6 @@ type "Potion"
 using "_AMER_CMB_MelchiorIgnorance_Buff"
 data "DamageBoost" "1600"
 data "ExtraProperties" "Ignorance has fired upon its likeness."
-
-
 
 new entry "_AMER_CMB_MelchiorCarnality_Buff"
 type "Potion"
@@ -4008,8 +3992,6 @@ type "Potion"
 using "_AMER_CMB_MelchiorCarnality_Buff"
 data "DamageBoost" "1600"
 
-
-
 new entry "AMER_CMB_MelchiorPerfection_First"
 type "Potion"
 data "APCostBoost" "-1"
@@ -4035,8 +4017,6 @@ data "StackId" "AMERvoidregeneration"
 data "StatusIcon" "Skill_Source_Invulnerability"
 data "ExtraProperties" "This tortured soul fuels Balberith's power."
 
-
-
 new entry "AMER_STATUS_TimeStop"
 type "Potion"
 data "Duration" "2"
@@ -4044,13 +4024,9 @@ data "StackId" "AMERtimestop"
 data "StatusIcon" "AMER_Skill_TimeStop"
 data "ExtraProperties" "You are at the mercy of the Timeless."
 
-
-
 new entry "AMER_CMB_Erinyes"
 type "Potion"
 data "StatusEffect" "FX_Skills_Fire_Flare_Prepare_Dummy_A:Bip001 Head"
-
-
 
 new entry "AMER_TOOL_Dye_Abyss"
 type "Potion"
@@ -4178,8 +4154,6 @@ data "Value" "1.4"
 data "ExtraProperties" "Poison,100,2"
 data "InventoryTab" "Ingredient"
 
-
-
 new entry "AMER_VoidRegeneration"
 type "Potion"
 using "_SkillBoost"
@@ -4197,8 +4171,6 @@ new entry "AMER_VoidRemoval"
 type "Potion"
 data "Duration" "0"
 data "StackId" "AMERvoidremoval"
-
-
 
 new entry "AMER_BairdotrTenebrium"
 type "Potion"
@@ -4221,8 +4193,6 @@ using "_SkillBoost"
 data "RogueLore" "1"
 data "StackId" "AMERwolgraffbuff"
 data "Duration" "0"
-
-
 
 new entry "AMER_FieldSmith1"
 type "Potion"
@@ -4254,8 +4224,6 @@ using "_SkillBoost"
 data "Armor" "9"
 data "Duration" "0"
 
-
-
 new entry "AMER_WhatARushAP1"
 type "Potion"
 using "_SkillBoost"
@@ -4280,8 +4248,6 @@ data "APMaximum" "3"
 data "Duration" "0"
 data "StackId" "AMERwhatarushap"
 
-
-
 new entry "AMER_PinpointCrit"
 type "Potion"
 using "_SkillBoost"
@@ -4289,16 +4255,12 @@ data "CriticalChance" "5"
 data "Duration" "0"
 data "StackId" "AMERpinpointcrit"
 
-
-
 new entry "AMER_ParryMasterDefense"
 type "Potion"
 using "_SkillBoost"
 data "Reflexes" "2"
 data "Duration" "0"
 data "StackId" "AMERparrymasterdefense"
-
-
 
 new entry "AMER_AstroGazeFire1"
 type "Potion"
@@ -4876,8 +4838,6 @@ data "StackId" "AMERastrocrushing"
 data "Duration" "1"
 data "StatusIcon" "AMER_statIcons_AstroPhys_C"
 
-
-
 new entry "AMER_ABIL_Pickpocket1"
 type "Potion"
 using "_SkillBoost"
@@ -5060,16 +5020,12 @@ data "Telekinesis" "8"
 data "StackId" "AMERtelekinesis"
 data "Duration" "0"
 
-
-
 new entry "AMER_GuerrillaDamage"
 type "Potion"
 using "_SkillBoost"
 data "DamageBoost" "20"
 data "StackId" "AMERguerrilladamage"
 data "Duration" "0"
-
-
 
 new entry "AMER_InvisHit"
 type "Potion"
@@ -5083,8 +5039,6 @@ type "Potion"
 using "_SkillBoost"
 data "StackId" "AMERinvishit"
 data "Duration" "0"
-
-
 
 new entry "AMER_RezSickness"
 type "Potion"
@@ -5122,8 +5076,6 @@ data "StatusIcon" "AMER_statIcons_TouchOfTheGrave"
 data "Duration" "2"
 data "ExtraProperties" "Recent death has left you exhausted."
 
-
-
 new entry "AMER_RemoveApplyGreaterInvisibility"
 type "Potion"
 using "_SkillBoost"
@@ -5144,8 +5096,6 @@ data "Duration" "3"
 data "StatusIcon" "Skill_Air_InvisibleTarget"
 data "ExtraProperties" "Invisibility is continuously reapplied during your turn."
 
-
-
 new entry "AMER_Sunder"
 type "Potion"
 using "_SkillBoost"
@@ -5160,8 +5110,6 @@ using "_SkillBoost"
 data "StackId" "AMERcrit"
 data "CriticalChance" "5"
 data "Duration" "5"
-
-
 
 new entry "AMER_ChainOne"
 type "Potion"
@@ -5202,8 +5150,6 @@ data "StackId" "AMERchain"
 data "Duration" "-1"
 data "StatusIcon" "AMER_statIcons_ChainFive"
 data "ExtraProperties" "Expend Chain with Chain Finishers."
-
-
 
 new entry "AMER_BullyPenalty"
 type "Potion"
@@ -5261,8 +5207,6 @@ data "StackId" "AMERopportunitydamage"
 data "DamageBoost" "30"
 data "Duration" "0"
 
-
-
 new entry "AMER_TwoHand1"
 type "Potion"
 using "_SkillBoost"
@@ -5318,8 +5262,6 @@ using "_SkillBoost"
 data "Duration" "0"
 data "StackId" "AMER2h8"
 data "DamageBoost" "40"
-
-
 
 new entry "AMER_CrossbowArmor1"
 type "Potion"
@@ -5392,8 +5334,6 @@ data "Duration" "1"
 data "StackId" "AMERcrossbowarmor3"
 data "Armor" "-10"
 data "StatusIcon" "Item_WPN_ArrowHead_Silver_A"
-
-
 
 new entry "AMER_ApplyCrush"
 type "Potion"
@@ -5530,8 +5470,6 @@ data "Duration" "3"
 data "StackId" "AMERcrusharmor100"
 data "Armor" "-10"
 
-
-
 new entry "AMER_RemoveApplyCreepingOoze"
 type "Potion"
 data "StackId" "AMERapplycreepingooze"
@@ -5541,8 +5479,6 @@ new entry "AMER_ApplyCreepingOoze"
 type "Potion"
 data "StackId" "AMERapplycreepingooze"
 data "Duration" "0"
-
-
 
 new entry "AMER_ApplyPreciseIncision"
 type "Potion"
@@ -5567,8 +5503,6 @@ data "Duration" "2"
 data "StackId" "AMERlacerateheal"
 data "StatusIcon" "Skill_Water_Restoration"
 data "ExtraProperties" "Healing each round."
-
-
 
 new entry "AMER_UNI_BountyHunterSelf"
 type "Potion"
@@ -5637,15 +5571,11 @@ data "StatusEffect" "FX_Skills_Warrior_IronCommand_Status_A"
 data "StatusIcon" "statIcons_AggroMarked"
 data "ExtraProperties" "This creature is marked for slaying, and will grant additional gold when slain by a bounty hunter."
 
-
-
 new entry "AMER_UNI_RemoveArtifactAmulet"
 type "Potion"
 using "_SkillBoost"
 data "Duration" "0"
 data "StackId" "AMERArtifactAmulet"
-
-
 
 new entry "AMER_UNI_Wendigo"
 type "Potion"
@@ -5654,16 +5584,12 @@ data "StackId" "AMERArtifactAmulet"
 data "StatusIcon" "AMER_UNI_Amulet_E"
 data "ExtraProperties" "One additional Predator reaction may be recovered each round."
 
-
-
 new entry "AMER_UNI_Seraph"
 type "Potion"
 using "_SkillBoost"
 data "StackId" "AMERArtifactAmulet"
 data "StatusIcon" "AMER_UNI_Amulet_F"
 data "ExtraProperties" "One additional Angel reaction may be recovered each round."
-
-
 
 new entry "AMER_UNI_Ghostflame"
 type "Potion"
@@ -5672,8 +5598,6 @@ data "StackId" "AMERArtifactAmulet"
 data "StatusIcon" "AMER_UNI_Amulet_D"
 data "ExtraProperties" "One additional Demon reaction may be recovered each round."
 
-
-
 new entry "AMER_UNI_Arcturus"
 type "Potion"
 using "_SkillBoost"
@@ -5681,15 +5605,11 @@ data "StackId" "AMERArtifactAmulet"
 data "StatusIcon" "AMER_UNI_Amulet_C"
 data "ExtraProperties" "Opportunist's attack bonuses apply to Centurion retaliations."
 
-
-
 new entry "AMER_UNI_RemoveArtifactChest"
 type "Potion"
 using "_SkillBoost"
 data "Duration" "0"
 data "StackId" "AMERArtifactChest"
-
-
 
 new entry "AMER_UNI_Abyss_A"
 type "Potion"
@@ -5724,8 +5644,6 @@ using "AMER_UNI_Abyss_A"
 data "DamageBoost" "55"
 data "CriticalChance" "10"
 
-
-
 new entry "AMER_UNI_Antediluvian"
 type "Potion"
 using "_SkillBoost"
@@ -5733,16 +5651,12 @@ data "StackId" "AMERArtifactChest"
 data "StatusIcon" "AMER_UNI_Chest_Scale_A"
 data "ExtraProperties" "+5% to all non-physical maximum resistances."
 
-
-
 new entry "AMER_UNI_Empyrean"
 type "Potion"
 using "_SkillBoost"
 data "StackId" "AMERArtifactChest"
 data "StatusIcon" "AMER_UNI_Chest_Cloth_A"
 data "ExtraProperties" "A percentage of damage taken is instantly regenerated."
-
-
 
 new entry "AMER_UNI_Necromancer"
 type "Potion"
@@ -5768,8 +5682,6 @@ type "Potion"
 using "_SkillBoost"
 data "APRecovery" "3"
 data "StackId" "AMERNecromancerAP"
-
-
 
 new entry "AMER_UNI_Vault"
 type "Potion"
@@ -5801,8 +5713,6 @@ type "Potion"
 using "_SkillBoost"
 data "Duration" "1"
 data "APRecovery" "8"
-
-
 
 new entry "AMER_UNI_Urgency"
 type "Potion"
@@ -5861,8 +5771,6 @@ data "ChanceToHitBoost" "50"
 data "DamageBoost" "25"
 data "Duration" "1"
 
-
-
 new entry "AMER_UNI_RemoveZenithProc"
 type "Potion"
 data "Duration" "0"
@@ -5872,8 +5780,6 @@ new entry "AMER_UNI_ZenithProc"
 type "Potion"
 data "Duration" "0"
 data "StackId" "AMERzenithproc"
-
-
 
 new entry "AMER_UNI_RemoveLodestoneProc"
 type "Potion"
@@ -5886,8 +5792,6 @@ type "Potion"
 data "Duration" "0"
 data "StackId" "AMERlodestoneproc"
 
-
-
 new entry "AMER_UNI_RemoveGramProc"
 type "Potion"
 data "Duration" "0"
@@ -5897,8 +5801,6 @@ new entry "AMER_UNI_GramProc"
 type "Potion"
 data "Duration" "0"
 data "StackId" "AMERgramproc"
-
-
 
 new entry "AMER_UNI_RemoveLeviathanProc"
 type "Potion"
@@ -5926,8 +5828,6 @@ data "Duration" "2"
 data "ExtraProperties" "You are wielding Leviathan; you are slowed when you are not Wet."
 data "StackId" "AMERleviathan"
 
-
-
 new entry "AMER_UNI_Discipline"
 type "Potion"
 data "StatusIcon" "AMER_UNI_Dagger_B"
@@ -5935,16 +5835,12 @@ data "Duration" "0"
 data "ExtraProperties" "You are wielding Discipline; your Chain is limited to 4 but is preserved through the start of your turns."
 data "StackId" "AMERdiscipline"
 
-
-
 new entry "AMER_UNI_Zeal"
 type "Potion"
 data "StatusIcon" "AMER_UNI_Dagger_F"
 data "Duration" "0"
 data "ExtraProperties" "You are wielding Zeal; your maximum Chain-per-turn is 5, but you cannot preserve Chain through the start of your turns."
 data "StackId" "AMERzeal"
-
-
 
 new entry "AMER_UNI_RemoveSacrificeProc"
 type "Potion"
@@ -6016,8 +5912,6 @@ data "ExtraProperties" "You are wielding Sacrifice; striking with it increase yo
 data "StatusIcon" "AMER_UNI_Sword_E"
 data "StackId" "AMERsacrificeprocbuff"
 
-
-
 new entry "AMER_UNI_RemoveFurinProc"
 type "Potion"
 data "Duration" "0"
@@ -6027,8 +5921,6 @@ new entry "AMER_UNI_FurinProc"
 type "Potion"
 data "Duration" "0"
 data "StackId" "AMERFurinproc"
-
-
 
 new entry "AMER_UNI_RemovePatienceProc"
 type "Potion"
@@ -6080,8 +5972,6 @@ data "ExtraProperties" "You are wielding Patience; striking with it increase you
 data "StatusIcon" "AMER_UNI_Sword_B"
 data "StackId" "AMERPatienceprocbuff"
 
-
-
 new entry "AMER_UNI_RemovePariahProc"
 type "Potion"
 data "Duration" "0"
@@ -6127,8 +6017,6 @@ data "ExtraProperties" "You are wielding Pariah. Your next strike will drain 5% 
 data "StatusIcon" "AMER_UNI_Sword_B"
 data "StackId" "AMERPariahprocbuff"
 
-
-
 new entry "AMER_UNI_RemoveCataclysmProc"
 type "Potion"
 data "Duration" "0"
@@ -6139,8 +6027,6 @@ type "Potion"
 data "Duration" "0"
 data "StackId" "AMERcataclysmproc"
 
-
-
 new entry "AMER_UNI_RemoveChthonianProc"
 type "Potion"
 data "Duration" "0"
@@ -6150,8 +6036,6 @@ new entry "AMER_UNI_ChthonianProc"
 type "Potion"
 data "Duration" "0"
 data "StackId" "AMERchthonianproc"
-
-
 
 new entry "AMER_UNI_RemoveMomentumProc"
 type "Potion"
@@ -6203,8 +6087,6 @@ data "ExtraProperties" "Your movement speed has been reduced from firing Momentu
 data "StatusIcon" "AMER_UNI_Crossbow_C"
 data "StackId" "AMERmomentumprocbuff"
 
-
-
 new entry "AMER_UNI_UptierItem"
 type "Potion"
 using "Potion"
@@ -6216,8 +6098,6 @@ using "Potion"
 data "Duration" "0"
 data "StatusIcon" "Skill_Warrior_Inspire"
 
-
-
 new entry "AMER_Bolster"
 type "Potion"
 using "_SkillBoost"
@@ -6227,8 +6107,6 @@ data "ExtraProperties" "The next Knockdown, Freeze, Stun, Petrify, Fear, or Char
 data "StackId" "AMERbolster"
 data "StatusIcon" "Skill_Warrior_Inspire"
 
-
-
 new entry "AMER_Anticipate"
 type "Potion"
 using "_SkillBoost"
@@ -6237,8 +6115,6 @@ data "DamageBoost" "40"
 data "ExtraProperties" "Will retaliate against its first damaging attacker within range."
 data "StackId" "AMERanticipate"
 data "StatusIcon" "AMER_Skill_Anticipate"
-
-
 
 new entry "AMER_1PercentHeal"
 type "Potion"
@@ -6420,15 +6296,11 @@ using "Potion"
 data "Duration" "0"
 data "VitalityPercentage" "30"
 
-
-
 new entry "AMER_HolyGrenadeHeal"
 type "Potion"
 using "Potion"
 data "Duration" "0"
 data "VitalityPercentage" "20"
-
-
 
 new entry "AMER_OoCHealing"
 type "Potion"
@@ -6462,7 +6334,6 @@ using "_SkillBoost"
 data "Duration" "2"
 data "Flags" "BlindImmunity"
 
-
 new entry "AMER_Overcharge1"
 type "Potion"
 using "_SkillBoost"
@@ -6495,8 +6366,6 @@ data "StackId" "AMERovercharge"
 data "StatusIcon" "AMER_Skill_OverchargeStack4"
 data "ExtraProperties" "You will suffer additional damage when casting Overcharge."
 
-
-
 new entry "AMER_AnacondaInitiative1"
 type "Potion"
 using "_SkillBoost"
@@ -6528,8 +6397,6 @@ data "Duration" "2"
 data "Initiative" "-12"
 data "StackId" "AMERanacondainitiative"
 data "StatusIcon" "AMER_statIcons_DazeGray"
-
-
 
 new entry "AMER_Delerium1"
 type "Potion"
@@ -6586,8 +6453,6 @@ data "APRecovery" "-3"
 data "ExtraProperties" "Cursed,45,2"
 data "StackId" "AMERdelerium"
 data "StatusIcon" "AMER_statIcons_DeleriumPurple"
-
-
 
 new entry "AMER_STATUS_RemoveUntreatedPoison"
 type "Potion"
@@ -6648,8 +6513,6 @@ data "PoisonResistance" "-90"
 data "StackId" "AMERpoisonedrespenalty"
 data "StatusIcon" "statIcons_Smelly"
 data "ExtraProperties" "Lingering Poison has left you more susceptible to its effects."
-
-
 
 new entry "AMER_STATUS_FrozenImmune1"
 type "Potion"
@@ -6843,8 +6706,6 @@ data "Flags" "BlindImmunity"
 data "StatusIcon" "AMER_statIcons_BlindImmune"
 data "ExtraProperties" "This creature has adapted and is immune to Blind for a time."
 
-
-
 new entry "AMER_STATUS_ApplyShocked"
 type "Potion"
 using "_SkillBoost"
@@ -6873,8 +6734,6 @@ data "EarthResistance" "10"
 data "Duration" "2"
 data "StatusIcon" "AMER_statIcons_Shocked"
 data "ExtraProperties" "Shocked creatures who are Shocked again may become Stunned."
-
-
 
 new entry "AMER_PERC_Init1"
 type "Potion"
@@ -6953,8 +6812,6 @@ data "StackId" "AMERpercinit20"
 data "Duration" "0"
 data "Initiative" "10"
 
-
-
 new entry "AMER_PERC_Crit1"
 type "Potion"
 using "Potion"
@@ -7024,8 +6881,6 @@ using "Potion"
 data "StackId" "AMERperccrit50"
 data "Duration" "0"
 data "CriticalChance" "10"
-
-
 
 new entry "AMER_LuckyCharm_Armor1"
 type "Potion"
@@ -7352,8 +7207,6 @@ new entry "AMER_LuckyCharm_StatusRemoval3"
 type "Potion"
 data "Duration" "1"
 
-
-
 new entry "AMER_LuckyCharm_BaseCrit1"
 type "Potion"
 data "CriticalChance" "1"
@@ -7403,8 +7256,6 @@ new entry "AMER_LuckyCharm_BaseCrit10"
 type "Potion"
 data "CriticalChance" "10"
 data "Duration" "0"
-
-
 
 new entry "AMER_Charisma_HitChance1"
 type "Potion"
@@ -7571,8 +7422,6 @@ data "Shield" "-2"
 data "Duration" "2"
 data "StatusIcon" "Talent_Politician"
 
-
-
 new entry "AMER_REMOVEAP_MaxAP1"
 type "Potion"
 data "Duration" "0"
@@ -7608,14 +7457,10 @@ type "Potion"
 data "Duration" "0"
 data "APMaximum" "-64"
 
-
-
 new entry "AMER_RoundDetector"
 type "Potion"
 using "_SkillBoost"
 data "Duration" "1"
-
-
 
 new entry "_AMER_ScalingNPCCon"
 type "Potion"
@@ -7662,8 +7507,6 @@ type "Potion"
 using "_AMER_ScalingNPCCon"
 data "Constitution" "5"
 
-
-
 new entry "AMER_ScalingFireRes1"
 type "Potion"
 data "Duration" "50"
@@ -7705,8 +7548,6 @@ type "Potion"
 data "Duration" "50"
 data "StackId" "AMERscalingfireres64"
 data "FireResistance" "64"
-
-
 
 new entry "AMER_ScalingWaterRes1"
 type "Potion"
@@ -7750,8 +7591,6 @@ data "Duration" "50"
 data "StackId" "AMERscalingWaterRes64"
 data "WaterResistance" "64"
 
-
-
 new entry "AMER_ScalingAirRes1"
 type "Potion"
 data "Duration" "50"
@@ -7793,8 +7632,6 @@ type "Potion"
 data "Duration" "50"
 data "StackId" "AMERscalingAirRes64"
 data "AirResistance" "64"
-
-
 
 new entry "AMER_ScalingEarthRes1"
 type "Potion"
@@ -7838,8 +7675,6 @@ data "Duration" "50"
 data "StackId" "AMERscalingEarthRes64"
 data "EarthResistance" "64"
 
-
-
 new entry "AMER_ScalingPoisonRes1"
 type "Potion"
 data "Duration" "50"
@@ -7881,8 +7716,6 @@ type "Potion"
 data "Duration" "50"
 data "StackId" "AMERscalingPoisonRes64"
 data "PoisonResistance" "64"
-
-
 
 new entry "AMER_ScalingShadowRes1"
 type "Potion"
@@ -7926,8 +7759,6 @@ data "Duration" "50"
 data "StackId" "AMERscalingShadowRes64"
 data "ShadowResistance" "64"
 
-
-
 new entry "AMER_ScalingPiercingRes1"
 type "Potion"
 data "Duration" "50"
@@ -7970,8 +7801,6 @@ data "Duration" "50"
 data "StackId" "AMERscalingPiercingRes64"
 data "PiercingResistance" "64"
 
-
-
 new entry "AMER_ScalingSlashingRes1"
 type "Potion"
 data "Duration" "50"
@@ -8013,8 +7842,6 @@ type "Potion"
 data "Duration" "50"
 data "StackId" "AMERscalingSlashingRes64"
 data "SlashingResistance" "64"
-
-
 
 new entry "AMER_ScalingCrushingRes1"
 type "Potion"
@@ -8154,8 +7981,6 @@ data "Duration" "50"
 data "StackId" "AMERscalingAPStartN8"
 data "APStart" "-8"
 
-
-
 new entry "AMER_Scaling1"
 type "Potion"
 data "Duration" "50"
@@ -8244,8 +8069,6 @@ data "Dexterity" "15"
 data "Intelligence" "15"
 data "Constitution" "8"
 
-
-
 new entry "AMER_GlobalTacticianScaling1"
 type "Potion"
 data "Duration" "50"
@@ -8309,8 +8132,6 @@ data "ChanceToHitBoost" "57"
 data "DamageBoost" "250"
 data "Constitution" "4"
 
-
-
 new entry "AMER_GlobalScaling1"
 type "Potion"
 data "Duration" "50"
@@ -8366,8 +8187,6 @@ data "Duration" "50"
 data "StackId" "AMERscaling"
 data "ChanceToHitBoost" "57"
 data "DamageBoost" "250"
-
-
 
 new entry "AMER_EndgameBossScaling1"
 type "Potion"
@@ -8516,8 +8335,6 @@ type "Potion"
 data "Duration" "50"
 data "StackId" "AMERbodybuildingscaling"
 data "BodyBuilding" "5"
-
-
 
 new entry "AMER_DIFFICULTY_Damage1"
 type "Potion"
@@ -8799,8 +8616,6 @@ type "Potion"
 data "Duration" "0"
 data "Sight" "-10"
 
-
-
 new entry "AMER_RES_Fire1"
 type "Potion"
 using "Potion"
@@ -8863,8 +8678,6 @@ using "Potion"
 data "StackId" "AMERresfire256"
 data "Duration" "0"
 data "FireResistance" "-256"
-
-
 
 new entry "AMER_RES_Water1"
 type "Potion"
@@ -8929,8 +8742,6 @@ data "StackId" "AMERresWater256"
 data "Duration" "0"
 data "WaterResistance" "-256"
 
-
-
 new entry "AMER_RES_Air1"
 type "Potion"
 using "Potion"
@@ -8993,8 +8804,6 @@ using "Potion"
 data "StackId" "AMERresAir256"
 data "Duration" "0"
 data "AirResistance" "-256"
-
-
 
 new entry "AMER_RES_Earth1"
 type "Potion"
@@ -9059,8 +8868,6 @@ data "StackId" "AMERresEarth256"
 data "Duration" "0"
 data "EarthResistance" "-256"
 
-
-
 new entry "AMER_RES_Poison1"
 type "Potion"
 using "Potion"
@@ -9123,8 +8930,6 @@ using "Potion"
 data "StackId" "AMERresPoison256"
 data "Duration" "0"
 data "PoisonResistance" "-256"
-
-
 
 new entry "AMER_RES_Shadow1"
 type "Potion"
@@ -9189,8 +8994,6 @@ data "StackId" "AMERresShadow256"
 data "Duration" "0"
 data "ShadowResistance" "-256"
 
-
-
 new entry "AMER_RES_Piercing1"
 type "Potion"
 using "Potion"
@@ -9253,8 +9056,6 @@ using "Potion"
 data "StackId" "AMERresPiercing256"
 data "Duration" "0"
 data "PiercingResistance" "-256"
-
-
 
 new entry "AMER_RES_Slashing1"
 type "Potion"
@@ -9319,8 +9120,6 @@ data "StackId" "AMERresSlashing256"
 data "Duration" "0"
 data "SlashingResistance" "-256"
 
-
-
 new entry "AMER_RES_Crushing1"
 type "Potion"
 using "Potion"
@@ -9384,8 +9183,6 @@ data "StackId" "AMERresCrushing256"
 data "Duration" "0"
 data "CrushingResistance" "-256"
 
-
-
 new entry "AMER_ThickSkin1"
 type "Potion"
 data "StackId" "AMERthickskin"
@@ -9426,8 +9223,6 @@ data "PiercingResistance" "15"
 data "SlashingResistance" "15"
 data "CrushingResistance" "15"
 
-
-
 new entry "AMER_PhysiquePoisonRes5"
 type "Potion"
 data "Duration" "0"
@@ -9447,8 +9242,6 @@ new entry "AMER_PhysiquePoisonRes40"
 type "Potion"
 data "Duration" "0"
 data "PoisonResistance" "40"
-
-
 
 new entry "AMER_STATUS_RemoveBorrowedTimeSlow"
 type "Potion"
@@ -9518,8 +9311,6 @@ data "Duration" "2"
 data "StatusEffect" "FX_GP_Status_Hasted_A_Effect1"
 data "StatusIcon" "AMER_Skill_BorrowedTime"
 
-
-
 new entry "AMER_ApplyErosion"
 type "Potion"
 data "StackId" "AMERapplyerosion"
@@ -9547,8 +9338,6 @@ data "BodyBuilding" "-2"
 data "StatusIcon" "AMER_Skill_Erosion"
 data "StatusEffect" "FX_GP_Status_Drunk_A_Effect1"
 
-
-
 new entry "AMER_StasisBuff"
 type "Potion"
 data "StackId" "AMERstasisbuff"
@@ -9557,8 +9346,6 @@ data "Constitution" "4"
 data "Armor" "10"
 data "StatusIcon" "AMER_Skill_Stasis"
 data "StatusEffect" "FX_GP_Status_Frozen_A_Effect1"
-
-
 
 new entry "AMER_RemoveApplyFallow"
 type "Potion"
@@ -9571,8 +9358,6 @@ type "Potion"
 using "_SkillBoost"
 data "StackId" "AMERapplyfallow"
 data "Duration" "0"
-
-
 
 new entry "AMER_STATUS_RemoveApplyHorridWilting"
 type "Potion"
@@ -9603,8 +9388,6 @@ data "WaterResistance" "-30"
 data "ShadowResistance" "-30"
 data "StatusIcon" "AMER_Skill_HorridWilting_A"
 data "Duration" "2"
-
-
 
 new entry "AMER_STATUS_RemoveApplyRuin"
 type "Potion"
@@ -9925,8 +9708,6 @@ data "ShadowResistance" "-128"
 data "StackId" "AMERruinShadow128"
 data "Duration" "3"
 
-
-
 new entry "AMER_STATUS_RemoveApplySoulsap"
 type "Potion"
 data "StackId" "AMERapplysoulsap"
@@ -10000,8 +9781,6 @@ data "CrushingResistance" "-50"
 data "Duration" "2"
 data "StatusIcon" "Skill_Source_Enervation"
 
-
-
 new entry "AMER_STATUS_RemoveApplyDrainWillpower"
 type "Potion"
 data "StackId" "AMERapplydrainwillpower"
@@ -10025,8 +9804,6 @@ data "StackId" "AMERdrainwillpower"
 data "Willpower" "-4"
 data "Duration" "2"
 data "StatusIcon" "Skill_Source_DrainWillpower"
-
-
 
 new entry "AMER_STATUS_RemoveApplyBalance"
 type "Potion"
@@ -10055,8 +9832,6 @@ data "StatusEffect" "FX_GP_Arrow_Poison_Impact_A:Bip001 Pelvis"
 data "StatusIcon" "AMER_Skill_Balance"
 data "ExtraProperties" "Suffering Poison damage and healing nearby allies of the caster each round."
 
-
-
 new entry "AMER_STATUS_RemoveApplyCurseOfCuts"
 type "Potion"
 using "_SkillBoost"
@@ -10083,8 +9858,6 @@ data "Duration" "3"
 data "StatusEffect" "FX_Skills_Witchcraft_Remorse_Status_A"
 data "StatusIcon" "AMER_Skill_CurseOfCuts"
 data "ExtraProperties" "Suffering Slashing damage each round."
-
-
 
 new entry "AMER_STATUS_RemoveApplyEnervate"
 type "Potion"
@@ -10140,8 +9913,6 @@ data "StackId" "AMERenervateself"
 data "Duration" "3"
 data "StatusIcon" "AMER_Skill_Enervate"
 
-
-
 new entry "AMER_STATUS_RemoveApplyAmberPrison"
 type "Potion"
 using "_SkillBoost"
@@ -10193,8 +9964,6 @@ data "StatusEffect" "FX_GP_Status_Slowed_A_Effect1"
 data "StatusIcon" "AMER_Skill_AmberPrison"
 data "ExtraProperties" "Suffering Earth damage and becoming slower each round."
 
-
-
 new entry "AMER_STATUS_ApplyTorment"
 type "Potion"
 data "StackId" "AMERapplytorment"
@@ -10218,8 +9987,6 @@ data "StatusIcon" "AMER_Skill_Torment"
 data "StatusEffect" "FX_GP_Status_Frozen_A_Effect1"
 data "ExtraProperties" "Suffering massive bleeding while moving."
 
-
-
 new entry "AMER_Invulnerability"
 type "Potion"
 data "StackId" "AMERinvulnerability"
@@ -10237,16 +10004,12 @@ data "Duration" "2"
 data "StatusIcon" "Skill_Source_Invulnerability"
 data "StatusMaterial" "1777286d-94a6-430d-94f7-14735781cde8"
 
-
-
 new entry "AMER_InfectGritDebuff"
 type "Potion"
 data "StackId" "AMERinfectgritdebuff"
 data "BodyBuilding" "-1"
 data "StatusIcon" "statIcons_Infectious_Disease"
 data "Duration" "0"
-
-
 
 new entry "AMER_Shaken"
 type "Potion"
@@ -10256,9 +10019,6 @@ data "APRecovery" "-1"
 data "ChanceToHitBoost" "-15"
 data "StatusIcon" "Skill_Source_Fear"
 data "Duration" "0"
-
-
-
 
 new entry "AMER_STATUS_ApplySoulburn"
 type "Potion"
@@ -10289,8 +10049,6 @@ data "Duration" "2"
 data "StatusIcon" "AMER_Skill_Immolate"
 data "StatusEffect" "FX_Env_CampFire_A"
 
-
-
 new entry "AMER_STATUS_ApplyInfectiousFlame"
 type "Potion"
 data "StackId" "AMERapplyinfectiousflame"
@@ -10314,8 +10072,6 @@ data "StatusIcon" "AMER_Skill_InfectiousFlame"
 data "StatusEffect" "FX_Env_CampFire_A"
 data "ExtraProperties" "Suffering Fire damage and Disease each round. All nearby enemies of the caster are also affected."
 
-
-
 new entry "AMER_RageOfThePhoenix"
 type "Potion"
 data "Duration" "3"
@@ -10326,14 +10082,10 @@ data "StatusMaterial" "88be8223-e145-49c1-b6c6-b2230ac723ba"
 data "StatusEffect" "FX_Skills_Fire_Shielded_A"
 data "StatusIcon" "AMER_Skill_Rebirth"
 
-
-
 new entry "AMER_SquanderAdrenaline"
 type "Potion"
 data "Duration" "0"
 data "ExtraProperties" "Adrenaline,100,0,,-100,0"
-
-
 
 new entry "AMER_Audacity"
 type "Potion"
@@ -10342,8 +10094,6 @@ data "Duration" "3"
 data "APCostBoost" "-1"
 data "StatusIcon" "AMER_Skill_Audacity"
 data "StatusEffect" "FX_Skills_Air_ImmuneToElectrifying_Status_A;FX_Skills_Warrior_Stun_Prepare_A_Hands_A:Bip001 R Forearm;FX_Skills_Warrior_Stun_Prepare_A_Hands_A:Bip001 L Forearm"
-
-
 
 new entry "AMER_ApplyJustScalingHeal"
 type "Potion"
@@ -10355,8 +10105,6 @@ type "Potion"
 data "StackId" "AMERapplyjustscalingheal"
 data "Duration" "0"
 
-
-
 new entry "AMER_ApplyEmpoweredSoothe"
 type "Potion"
 data "StackId" "AMERapplyempoweredsoothe"
@@ -10367,8 +10115,6 @@ type "Potion"
 data "StackId" "AMERapplyempoweredsoothe"
 data "Duration" "0"
 
-
-
 new entry "AMER_ApplyHeatMetal"
 type "Potion"
 data "StackId" "AMERapplyheatmetal"
@@ -10378,8 +10124,6 @@ new entry "AMER_RemoveApplyHeatMetal"
 type "Potion"
 data "StackId" "AMERapplyheatmetal"
 data "Duration" "0"
-
-
 
 new entry "AMER_ApplyBoil"
 type "Potion"
@@ -10392,8 +10136,6 @@ data "StackId" "AMERapplyboil"
 data "Duration" "0"
 data "StatusEffect" "FX_GP_Arrow_SteamCloud_Impact_A:Bip001 Pelvis"
 
-
-
 new entry "AMER_ApplyColdSnap"
 type "Potion"
 data "StackId" "AMERapplycoldsnap"
@@ -10404,8 +10146,6 @@ new entry "AMER_RemoveApplyColdSnap"
 type "Potion"
 data "StackId" "AMERapplycoldsnap"
 data "Duration" "0"
-
-
 
 new entry "AMER_ApplyAwesomePresence"
 type "Potion"
@@ -10438,8 +10178,6 @@ data "Duration" "3"
 data "Willpower" "-4"
 data "StatusIcon" "AMER_Skill_AwesomePresence"
 
-
-
 new entry "AMER_ApplyVitalityLink"
 type "Potion"
 data "StackId" "AMERapplyvitalitylink"
@@ -10463,8 +10201,6 @@ data "StatusEffect" "FX_Skills_Warrior_ShacklesOfPain_BeamTip__A:Bip001 Pelvis"
 data "StatusIcon" "AMER_Skill_VitalityLink"
 data "ExtraProperties" "A portion of damage taken is immediately healed while the caster suffers instead."
 
-
-
 new entry "AMER_Windrun"
 type "Potion"
 data "StackId" "AMERwindrun"
@@ -10475,8 +10211,6 @@ data "DamageBoost" "-75"
 data "StatusIcon" "AMER_Skill_Windrun"
 data "StatusEffect" "FX_Skills_Air_Tornado_Prepare_A"
 
-
-
 new entry "AMER_Blur"
 type "Potion"
 data "StackId" "AMERblur"
@@ -10485,8 +10219,6 @@ data "Reflexes" "2"
 data "StatusIcon" "AMER_Skill_Blur"
 data "ExtraProperties" "Chain stacks are preserved when starting your turn."
 
-
-
 new entry "AMER_ImmolationArmor"
 type "Potion"
 using "_SkillBoost"
@@ -10494,8 +10226,6 @@ data "StackId" "AMERimmolationarmor"
 data "Armor" "-10"
 data "Duration" "3"
 data "StatusIcon" "AMER_Skill_Immolate"
-
-
 
 new entry "AMER_Cruelty"
 type "Potion"
@@ -10583,8 +10313,6 @@ data "StackId" "AMERcrueltyarmorpen60"
 data "Armor" "-10"
 data "Duration" "2"
 
-
-
 new entry "AMER_ApplyCauterize"
 type "Potion"
 data "StackId" "AMERcauterize"
@@ -10594,8 +10322,6 @@ new entry "AMER_RemoveApplyCauterize"
 type "Potion"
 data "StackId" "AMERcauterize"
 data "Duration" "0"
-
-
 
 new entry "AMER_ApplyAttonement"
 type "Potion"
@@ -10607,8 +10333,6 @@ type "Potion"
 data "StackId" "AMERattonement"
 data "Duration" "0"
 
-
-
 new entry "AMER_RemoveApplyCleansingWater"
 type "Potion"
 data "StackId" "AMERapplycleansingwater"
@@ -10619,8 +10343,6 @@ type "Potion"
 data "StackId" "AMERapplycleansingwater"
 data "Duration" "0"
 
-
-
 new entry "AMER_RemoveApplyPurifyingFire"
 type "Potion"
 data "StackId" "AMERapplypurifyingfire"
@@ -10630,8 +10352,6 @@ new entry "AMER_ApplyPurifyingFire"
 type "Potion"
 data "StackId" "AMERapplypurifyingfire"
 data "Duration" "0"
-
-
 
 new entry "AMER_RemoveApplyRegenerate"
 type "Potion"
@@ -10655,8 +10375,6 @@ data "Duration" "3"
 data "StatusIcon" "Skill_Water_Regenerate_Minor"
 data "ExtraProperties" "Healing each round."
 
-
-
 new entry "AMER_RemoveApplyMassHeal"
 type "Potion"
 data "StackId" "AMERapplymassheal"
@@ -10679,8 +10397,6 @@ data "Duration" "7"
 data "StatusIcon" "Skill_Water_Restoration"
 data "ExtraProperties" "Healing each round."
 
-
-
 new entry "AMER_STATUS_RemoveApplyFingerOfDeath"
 type "Potion"
 data "StackId" "AMERapplyfingerofdeath"
@@ -10700,8 +10416,6 @@ new entry "AMER_STATUS_FingerOfDeathSave2"
 type "Potion"
 data "Duration" "0"
 data "ExtraProperties" "Diseased,150,2"
-
-
 
 new entry "AMER_STATUS_RemoveApplyInsectPlague"
 type "Potion"
@@ -10744,8 +10458,6 @@ data "Duration" "0"
 data "StackId" "AMERinsectplagueFX3"
 data "StatusEffect" "FX_Creatures_Flies_A_BigGroup:Bip001 Pelvis;FX_Creatures_Flies_A_BigGroup:Dummy_OverheadFX;FX_Creatures_Flies_A_BigGroup:Dummy_StatusFX"
 
-
-
 new entry "AMER_RemoveFossilize"
 type "Potion"
 data "StackId" "AMERfossilize"
@@ -10767,8 +10479,6 @@ data "PiercingResistance" "100"
 data "SlashingResistance" "100"
 data "CrushingResistance" "100"
 data "Flags" "BleedingImmunity"
-
-
 
 new entry "AMER_Empowered_LowerResistances"
 type "Potion"
@@ -10819,16 +10529,12 @@ using "_SkillBoost"
 data "VitalityPercentage" "20"
 data "Duration" "0"
 
-
-
 new entry "AMER_Vengeance"
 type "Potion"
 data "StackId" "AMERvengeance"
 data "Duration" "4"
 data "StatusIcon" "AMER_Skill_Vengeance"
 data "ExtraProperties" "Dealing Air damage and Burning all enemies within range each round."
-
-
 
 new entry "AMER_STATUS_RemoveApplyNullifyResistances"
 type "Potion"
@@ -10841,8 +10547,6 @@ data "StackId" "AMERapplynullifyresistances"
 data "SavingThrow" "NullResist"
 data "Duration" "0"
 
-
-
 new entry "AMER_STATUS_RemoveApplyEmpoweredNullifyResistances"
 type "Potion"
 data "StackId" "AMERapplyempowerednullifyresistances"
@@ -10854,8 +10558,6 @@ data "StackId" "AMERapplyempowerednullifyresistances"
 data "SavingThrow" "NullResist"
 data "Duration" "0"
 
-
-
 new entry "AMER_STATUS_RemoveApplyDivineLight"
 type "Potion"
 data "StackId" "AMERapplydivinelight"
@@ -10866,8 +10568,6 @@ type "Potion"
 data "StackId" "AMERapplydivinelight"
 data "SavingThrow" "DivineLight"
 data "Duration" "0"
-
-
 
 new entry "AMER_STATUS_RemoveApplyBless"
 type "Potion"
@@ -10885,9 +10585,6 @@ data "StackId" "AMERblessedearthdamage"
 data "DamageBoost" "15"
 data "Duration" "5"
 data "StatusIcon" "Skill_Earth_BlessedEarth"
-
-
-
 
 new entry "AMER_STATUS_RemoveApplyRime"
 type "Potion"
@@ -10931,8 +10628,6 @@ data "StatusIcon" "AMER_Skill_Rime"
 data "StatusEffect" "FX_GP_Status_Frozen_A_Effect1"
 data "ExtraProperties" "Ice is continuously created beneath you."
 
-
-
 new entry "AMER_STATUS_RemoveApplyMaze"
 type "Potion"
 data "StackId" "AMERapplymaze"
@@ -10954,8 +10649,6 @@ data "StackId" "AMERmaze"
 data "Duration" "5"
 data "StatusIcon" "AMER_Skill_Maze"
 data "Flags" "BurnImmunity;FreezeImmunity;PetrifiedImmunity;StunImmunity;PoisonImmunity;KnockdownImmunity;FearImmunity;BlindImmunity;BleedingImmunity;ChilledImmunity;WeakImmunity;SlowedImmunity;CharmImmunity;InfectiousDiseasedImmunity;DiseasedImmunity;WarmImmunity"
-
-
 
 new entry "AMER_STATUS_RemoveApplyNaturalOrder"
 type "Potion"
@@ -10992,8 +10685,6 @@ data "StackId" "AMERnaturalorder"
 data "Duration" "2"
 data "StatusIcon" "AMER_Skill_NaturalOrder"
 data "ExtraProperties" "Suffering Piercing damage and Bleeding each round. The parasites will eventually emerge."
-
-
 
 new entry "AMER_STATUS_RemoveApplyAttenuate"
 type "Potion"
@@ -11066,4 +10757,3 @@ data "Value" "10"
 new entry "NONE"
 type "Potion"
 data "Duration" "0"
-

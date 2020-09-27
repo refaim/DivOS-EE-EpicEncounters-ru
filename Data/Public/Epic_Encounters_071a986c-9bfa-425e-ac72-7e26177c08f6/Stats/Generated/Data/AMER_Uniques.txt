@@ -599,19 +599,6 @@ data "Piercing" "0"
 data "Crushing" "0"
 data "Slashing" "0"
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 new entry "AMER_UNI_Drog"
 type "Armor"
 using "_Amulets"
@@ -1142,7 +1129,7 @@ data "ComboCategory" "ClothArmor"
 data "Movement" "1"
 data "APStart" "2"
 data "Skills" "Jump_CloakAndDagger"
-data "DexterityBoost" "1" 
+data "DexterityBoost" "1"
 
 new entry "AMER_UNI_TheJaguar_15"
 type "Armor"
@@ -1154,7 +1141,7 @@ data "ComboCategory" "ClothArmor"
 data "Movement" "1"
 data "APStart" "3"
 data "Skills" "Jump_CloakAndDagger"
-data "DexterityBoost" "1" 
+data "DexterityBoost" "1"
 
 new entry "AMER_UNI_TheJaguar_20"
 type "Armor"
@@ -1166,7 +1153,7 @@ data "ComboCategory" "ClothArmor"
 data "Movement" "1"
 data "APStart" "4"
 data "Skills" "Jump_CloakAndDagger"
-data "DexterityBoost" "2" 
+data "DexterityBoost" "2"
 data "Flags" "SlowedImmunity"
 
 new entry "AMER_UNI_TheJaguar_25"
@@ -1179,7 +1166,7 @@ data "ComboCategory" "ClothArmor"
 data "Movement" "1"
 data "APStart" "5"
 data "Skills" "Jump_CloakAndDagger"
-data "DexterityBoost" "2" 
+data "DexterityBoost" "2"
 data "Flags" "SlowedImmunity"
 
 new entry "AMER_UNI_Mountain_5"
@@ -1644,7 +1631,7 @@ data "Skills" "AMER_SKILL_Fallow"
 data "DexterityBoost" "1"
 data "Initiative" "4"
 data "IntelligenceBoost" "1"
-data "Poison" "6" 
+data "Poison" "6"
 
 new entry "AMER_UNI_Prophecy_5"
 type "Armor"
@@ -1997,7 +1984,7 @@ data "APMaximum" "3"
 data "Skills" "AMER_SKILL_FreezingTrap"
 data "WaterResistanceBoost" "8"
 data "Boosts" "_Enemy_Boost_WaterDamage"
-data "ExtraProperties" "Wet,100,1" 
+data "ExtraProperties" "Wet,100,1"
 data "ComboCategory" "Bow"
 data "Projectile" "c93629e4-021d-4e24-b128-45011e11ab1f"
 
@@ -2013,7 +2000,7 @@ data "APMaximum" "3"
 data "Skills" "AMER_SKILL_FreezingTrap"
 data "WaterResistanceBoost" "9"
 data "Boosts" "_Enemy_Boost_WaterDamage"
-data "ExtraProperties" "Wet,100,1" 
+data "ExtraProperties" "Wet,100,1"
 data "ComboCategory" "Bow"
 data "Projectile" "c93629e4-021d-4e24-b128-45011e11ab1f"
 
@@ -2340,7 +2327,7 @@ data "Act part" "5"
 data "Requirements" "Dexterity 5"
 data "DamageBoost" "2"
 data "SpeedBoost" "-6"
-data "Initiative" "-2" 
+data "Initiative" "-2"
 data "ComboCategory" "Dagger"
 data "ExtraProperties" "SELF:OnHit:Consume,100,2,AMER_UNI_Discipline;Maximum Chain becomes 4.;Chain is always preserved through turns."
 
@@ -2351,7 +2338,7 @@ data "Act part" "10"
 data "Requirements" "Dexterity 7"
 data "DamageBoost" "-21"
 data "SpeedBoost" "-4"
-data "Initiative" "-2" 
+data "Initiative" "-2"
 data "DexterityBoost" "1"
 data "WeaponRange" "1"
 data "ComboCategory" "Dagger"
@@ -2364,7 +2351,7 @@ data "Act part" "15"
 data "Requirements" "Dexterity 8"
 data "DamageBoost" "-28"
 data "SpeedBoost" "-2"
-data "Initiative" "-2" 
+data "Initiative" "-2"
 data "DexterityBoost" "1"
 data "WeaponRange" "1"
 data "ComboCategory" "Dagger"
@@ -2378,7 +2365,7 @@ data "Act part" "20"
 data "Requirements" "Dexterity 9"
 data "DamageBoost" "-27"
 data "SpeedBoost" "-2"
-data "Initiative" "-2" 
+data "Initiative" "-2"
 data "DexterityBoost" "2"
 data "WeaponRange" "1"
 data "ComboCategory" "Dagger"
@@ -2392,7 +2379,7 @@ data "Act part" "25"
 data "Requirements" "Dexterity 16"
 data "DamageBoost" "-19"
 data "SpeedBoost" "-1"
-data "Initiative" "-2" 
+data "Initiative" "-2"
 data "DexterityBoost" "2"
 data "WeaponRange" "1"
 data "ComboCategory" "Dagger"
@@ -2539,7 +2526,6 @@ data "IntelligenceBoost" "2"
 data "ComboCategory" "Dagger"
 data "Boosts" "_Enemy_Boost_AirDamage_100"
 data "ExtraProperties" "Consume,100,2,AirVulnerability;With Air Vulnerability active, target loses 8% Air resistance when struck by Air damage, stacking up to -40%."
-
 data "Skills" "AMER_SKILL_EMPOWERED_MultiStrike_LightningStrike"
 
 new entry "AMER_UNI_Wraith_25"
@@ -4674,9 +4660,6 @@ data "ComboCategory" "Wand"
 data "Projectile" "8796803a-4a1a-400f-8514-e1182d1a22c4"
 data "ExtraProperties" "SELF:OnHit:Consume,40,1,HasteAura;Allies within 6m become Hastened."
 
-
-
-
 new entry "AMER_UNI_FaceOfTheFallen_15"
 type "Shield"
 using "_Shields"
@@ -4733,11 +4716,6 @@ data "ArmorMastery" "1"
 data "Skills" "Shout_InspireStart"
 data "ComboCategory" "ShieldMetal"
 data "ExtraProperties" "Block chance increased."
-
-
-
-
-
 
 new entry "WPN_CYS_UNI_Cathedral_Guardian_Sword"
 type "Weapon"

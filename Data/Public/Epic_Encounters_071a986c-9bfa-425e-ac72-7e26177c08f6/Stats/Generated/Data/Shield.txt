@@ -787,21 +787,18 @@ new entry "_Shield_Reflect_Melee_Small"
 type "Shield"
 using "_BOOSTS_Shield"
 data "Value" "3"
-
 data "Reflection" "15::Crushing:melee"
 
 new entry "_Shield_Reflect_Melee_Medium"
 type "Shield"
 using "_BOOSTS_Shield"
 data "Value" "3.1"
-
 data "Reflection" "20::Crushing:melee"
 
 new entry "_Shield_Reflect_Melee_Large"
 type "Shield"
 using "_BOOSTS_Shield"
 data "Value" "3.2"
-
 data "Reflection" "25::Crushing:melee"
 
 new entry "_Shield_Reflect_Melee_Legendary"
@@ -869,4 +866,3 @@ type "Shield"
 using "_BOOSTS_Shield"
 data "Value" "5"
 data "VitalityBoost" "4"
-

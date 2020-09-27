@@ -869,10 +869,6 @@ data "Value" "4"
 data "DamageBoost" "-15"
 data "Skills" "Summon_GreaterUndead"
 
-
-
-// INACTIVE
-
 new entry "_SelfSmoking_WeaponBoost"
 type "Weapon"
 using "_BOOSTS_Weapon"

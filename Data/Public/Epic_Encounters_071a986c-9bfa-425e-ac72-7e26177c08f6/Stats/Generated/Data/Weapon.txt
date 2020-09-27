@@ -4139,7 +4139,6 @@ data "ComboCategory" "Staff"
 data "Skills" "Wall_Ice"
 data "ExtraProperties" "Frozen,15,2"
 
-
 new entry "WPN_Quarterstaff_Sourcehunter_Earth"
 type "Weapon"
 using "_Staffs"
@@ -8452,7 +8451,6 @@ data "CriticalDamage" "0"
 data "CriticalChance" "0"
 data "Durability" "10"
 data "WeaponType" "None"
-
 data "ExtraProperties" "Bleeding,20,2"
 data "Flags" "Unbreakable"
 data "InventoryTab" "Hidden"
@@ -13137,7 +13135,6 @@ using "_BOOSTS_Weapon"
 data "Damage Type" "Slashing"
 data "DamageFromBase" "400"
 
-
 new entry "_SKILLS"
 type "Weapon"
 
@@ -13267,8 +13264,6 @@ type "Weapon"
 using "_BOOSTS_Weapon"
 data "Value" "5"
 data "Shield" "1"
-
-// AMER
 
 new entry "_AMER_Titan_Stone"
 type "Weapon"
