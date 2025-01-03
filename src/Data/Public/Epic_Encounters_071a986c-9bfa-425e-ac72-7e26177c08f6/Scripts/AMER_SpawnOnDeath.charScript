@@ -1,0 +1,100 @@
+//===============================================//
+//                                               //
+//          S P A W N   O N   D E A T H          //
+//                                               //
+//     Written by Matteo "Ameranth" T. (2016)    //
+//===============================================//
+INIT
+CHARACTER:__Me
+EXTERN STRING:%AMER_SpawnOnDeath_FX = "NONE"
+EXTERN FIXEDSTRING:%AMER_SpawnOnDeath_FXBone = "NONE"
+EXTERN CHARACTERTEMPLATE:%AMER_SpawnOnDeath_RootGUID1 = "NONE"
+EXTERN CHARACTERTEMPLATE:%AMER_SpawnOnDeath_RootGUID2 = "NONE"
+EXTERN CHARACTERTEMPLATE:%AMER_SpawnOnDeath_RootGUID3 = "NONE"
+EXTERN CHARACTERTEMPLATE:%AMER_SpawnOnDeath_RootGUID4 = "NONE"
+EXTERN INT:%AMER_SpawnOnDeath_PlaySpawnAnim = 1
+EXTERN INT:%AMER_SpawnOnDeath_IsSummon = 0
+EXTERN INT:%AMER_SpawnOnDeath_LevelOverride = -1
+EXTERN INT:%AMER_SpawnOnDeath_PossibleOccurances = 1
+EXTERN CHARACTER:%AMER_SpawnOnDeath_OwnerOverride = null
+	
+EVENTS
+EVENT SpawnOnDeath
+VARS
+	CHARACTER:_Spawn
+	INT:_SupportedSpawns = 4
+	INT:_Count
+	FLOAT:_SourceLevel
+	INT:_Level
+	CHARACTERTEMPLATE:_Root
+	TRIGGER:_Point
+ON
+	OnCharacterStatus(__Me, DYING)
+ACTIONS
+	IF "c1&c2"
+		CharacterGetStat(_SourceLevel, __Me, Level)
+		IsGreaterThen(%AMER_SpawnOnDeath_PossibleOccurances, INT:0)
+	THEN
+		//Get the level of __Me to give to the spawn, if a level
+		//override was given, use that instead.
+		Cast(_Level, _SourceLevel)
+		IF "!c1"
+			IsEqual(%AMER_SpawnOnDeath_LevelOverride, INT:-1)
+		THEN
+			Set(_Level, %AMER_SpawnOnDeath_LevelOverride)
+		ENDIF
+		
+		Set(_Count, INT:0)
+		WHILE "c1"
+			IsLessThen(_Count, _SupportedSpawns)
+		DO
+			//Find the given Root GUID for each spawn.
+			GetElement(_Root, _Count, %AMER_SpawnOnDeath_RootGUID1, %AMER_SpawnOnDeath_RootGUID2, %AMER_SpawnOnDeath_RootGUID3, %AMER_SpawnOnDeath_RootGUID4)
+			
+			//If we had a Root GUID this spawn, make it.
+			IF "!c1"
+				IsEqual(_Root, "NONE")
+			THEN
+				//If IsSummon was zero, then make the spawn normally. Otherwise, check if an owner override was given
+				//If no override was given, assume that the summon owner is __Me.
+				IF "c1"
+					IsEqual(%AMER_SpawnOnDeath_IsSummon, INT:0)
+				THEN
+					SpawnCharacter(_Spawn, _Root, __Me, %AMER_SpawnOnDeath_PlaySpawnAnim, INT:0, null, _Level)
+				ELIF "c1&!c2"
+					IsEqual(%AMER_SpawnOnDeath_IsSummon, INT:1)
+					IsEqual(%AMER_SpawnOnDeath_OwnerOverride, null)
+				THEN
+					SpawnCharacter(_Spawn, _Root, __Me, %AMER_SpawnOnDeath_PlaySpawnAnim, INT:1, %AMER_SpawnOnDeath_OwnerOverride, _Level)
+				ELIF "c1&c2"
+					IsEqual(%AMER_SpawnOnDeath_IsSummon, INT:1)
+					IsEqual(%AMER_SpawnOnDeath_OwnerOverride, null)
+				THEN
+					SpawnCharacter(_Spawn, _Root, __Me, %AMER_SpawnOnDeath_PlaySpawnAnim, INT:1, __Me, _Level)
+				ENDIF
+				
+				//If there is a special effect to play, do it.
+				IF "!c1"
+					IsEqual(%AMER_SpawnOnDeath_FX, "NONE")
+				THEN
+					IF "c1"
+						IsEqual(%AMER_SpawnOnDeath_FXBone, "NONE")
+					THEN
+						CharacterPlayEffect(_Spawn, %AMER_SpawnOnDeath_FX)
+					ELSE
+						CharacterPlayEffect(_Spawn, %AMER_SpawnOnDeath_FX, %AMER_SpawnOnDeath_FXBone)
+					ENDIF
+				ENDIF
+			ENDIF
+			
+			Add(_Count, INT:1)
+		ENDWHILE
+		
+		Subtract(%AMER_SpawnOnDeath_PossibleOccurances, INT:1)
+	ENDIF
+	
+//===============================================//
+//                                               //
+//          S P A W N   O N   D E A T H          //
+//                                               //
+//===============================================//

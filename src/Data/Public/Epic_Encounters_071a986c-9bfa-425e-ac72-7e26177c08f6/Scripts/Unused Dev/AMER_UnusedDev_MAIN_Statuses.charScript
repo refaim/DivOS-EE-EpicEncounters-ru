@@ -1,0 +1,1359 @@
+//===============================================//
+//                                               //
+//           F A K E   S T A T U S E S           //
+//                                               //
+//     Written by Matteo "Ameranth" T. (2016)    //
+//===============================================//
+#INCLUDE AMER_MAIN_StatusParameters
+#INCLUDE AMER_MAIN_SubRoutines
+	
+INIT
+CHARACTER:__Me
+	
+//Used to limit status upkeep event handling to only characters
+//who are currently effected by a status that needs handling.
+INT:%AMER_CheckStatusUpkeep = 0
+	
+//Used to track who is the source of a consume.
+CHARACTER:%AMER_SkillSource
+	
+//Used to split Ruin's debuff procedure into multiple parts so
+//the action limit can be circumvented.
+INT:%AMER_RuinResIndex = 0
+INT:%AMER_RuinMagnitude = 0
+
+//Used to display an additional string in-line with saving throw
+//chance when fake statuses are done. This is probably used to
+//make double-save spells display well.
+FIXEDSTRING:%AMER_STATUS_ExtraString
+	
+USING AMER_MAIN_StatusParameters
+USING AMER_MAIN_SubRoutines
+	
+	
+	
+EVENTS
+EVENT FakeStatuses
+//Search for status applicators, initialize the corresponding
+//status if one is found.
+VARS
+	FIXEDSTRING:_Function
+ON
+	OnFunction("AMER_STATUS_FakeStatuses")
+ACTIONS
+	IF "c1&c2"
+		IsEqual(%AMER_STATUS_Handled, INT:0)
+		GetVar(_Function, __Me, "AMER_ApplicatorFunction")
+	THEN
+		CallFunction(_Function)
+	ENDIF
+	
+	
+EVENT ShacklesOfPainStatusText
+//Make Shackles of Pain display a status text above character head.
+ON
+	OnCharacterStatus(__Me, SHACKLES_OF_PAIN)
+ACTIONS
+	StatusText(__Me, "AMER_STATUS_ShacklesOfPain")
+	
+EVENT DecayingTouchStatusText
+//Make Decaying Touch display a status text above character head.
+ON
+	OnCharacterStatus(__Me, DECAYING_TOUCH)
+ACTIONS
+	StatusText(__Me, "AMER_STATUS_DecayingTouch")
+	
+	
+	
+EVENT ResetHandled
+//Reset the Handled flag so we can accept new
+//status applications again.
+ON
+	OnTimer("AMER_STATUS_ResetHandled")
+ACTIONS
+	CharacterConsume(__Me, %AMER_STATUS_RemoveApplicator)
+	Set(%AMER_STATUS_Handled, INT:0)
+	
+	
+	
+//=====================================================//
+//   I N I T I A L   S P E C I A L   R O U T I N E S   //
+//=====================================================//	
+EVENT HorridWiltingInitialSave
+//     H O R R I D   W I L T I N G   I N I T I A L   S A V E
+//Special initial application routine for Horrid Wilting.
+ON
+	OnFunction("AMER_STATUS_HorridWiltingInitialSave")
+ACTIONS
+	Set(%AMER_STATUS_ChanceModifier, 0.0)
+	CallFunction("AMER_STATUS_HorridWiltingDebuff")
+	StatusText(__Me, %AMER_STATUS_FloatingText)
+	Set(%AMER_STATUS_Override = INT:0)	//Still need default behavior
+	
+EVENT HorridWiltingInitial
+//     H O R R I D   W I L T I N G   I N I T I A L
+//Special initial application routine for Horrid Wilting.
+ON
+	OnFunction("AMER_STATUS_HorridWiltingInitial")
+ACTIONS
+	Set(%AMER_STATUS_ChanceModifier, 1.0)
+	CallFunction("AMER_STATUS_HorridWiltingDebuff")
+	Set(%AMER_STATUS_Override = INT:0)	//Still need default behavior
+	
+EVENT HorridWiltingDebuff
+//         H O R R I D   W I L T I N G   D E B U F F
+//Horrid Wilting's initial application routines link to this to apply the debuff.
+VARS
+	POTION:_WhichEffect
+	FLOAT:_Roll
+	INT:_Index
+ON
+	OnFunction("AMER_STATUS_HorridWiltingDebuff")
+ACTIONS
+	//Horrid Wilting offers a Willpower and Grit save, inflicting variable
+	//effect magnitude depending on the success of both, one, or none.
+	Cast(_Index, %AMER_STATUS_ChanceModifier)
+	Set(%AMER_STATUS_ChanceModifier, 0.0)
+	
+	//Perform the second saving throw, on Grit.
+	Set(%AMER_STATUS_SaveType, BodyBuilding)
+	CallFunction("AMER_STATUS_GetRawChance")
+	CallFunction("AMER_STATUS_GetChanceDisplay")
+		
+	//Make the roll for save, add 1  to effect index on a failed save.
+	GetRandomBetween(_Roll, FLOAT:1, FLOAT:100)
+	IF "!c1"
+		IsGreaterThen(_Roll, %AMER_STATUS_RawChance)
+	THEN
+		Add(_Index, INT:1)
+	ENDIF
+	
+	//Apply the derived effect and figure out the save/fail display string.
+	//The display string will be shown when the function stack returns
+	//to the default initial status application behavior.
+	GetElement(%AMER_STATUS_AfflictedString, _Index, "AMER_STATUS_HorridWiltingSave2", "AMER_STATUS_HorridWiltingSave1", "AMER_STATUS_HorridWiltingFail")
+	GetElement(%AMER_STATUS_SavedString, _Index, "AMER_STATUS_HorridWiltingSave2", "AMER_STATUS_HorridWiltingSave1", "AMER_STATUS_HorridWiltingFail")
+	GetElement(%AMER_STATUS_FloatingText, _Index, "AMER_STATUS_HorridWiltingRes1", "AMER_STATUS_HorridWiltingRes1", "AMER_STATUS_HorridWiltingRes2")
+	
+	//Horrid Wilting only has additional behavior if one or more saves failed.
+	IF "c1"
+		IsGreaterThen(_Index, 0)
+	THEN
+		Subtract(_Index, 1)	//Index starts at zero.
+		GetElement(_WhichEffect, _Index, "AMER_STATUS_HorridWiltingRes1", "AMER_STATUS_HorridWiltingRes2")
+		CharacterConsume(__Me, _WhichEffect)
+		
+		//Fire the additional damage projectile
+		Set(%AMER_RemoteEffectProjectile, AMER_SCRIPTSKILL_HorridWiltingWater)
+		Set(%AMER_RemoteEffectSource, %AMER_SkillSource)
+		CallFunction("AMER_DoRemoteEffect")
+	ENDIF
+	
+	CharacterPlayEffect(__Me, "FX_Skills_Earth_NaturesCurse_Cast_A")
+	CharacterPlayEffect(__Me, "FX_Skills_Water_MassDisease_Prepare_A")
+	
+	//Set second saving throw to be displayed when function stack returns.
+	Set(%AMER_STATUS_ExtraString, %AMER_STATUS_DisplayChance)
+	
+	
+	
+EVENT BalanceInitial
+//          B A L A N C E   I N I T I A L
+//Special initial application routine for Balance.
+ON
+	OnFunction("AMER_STATUS_BalanceInitial")
+ACTIONS
+	//Allow Balance to trigger while out of combat.
+	StartTimer("AMER_BalanceOutOfCombat", 5.75, -1)
+	
+	Set(%AMER_STATUS_Override = INT:0)	//Still need default behavior
+	
+	
+	
+EVENT AmberPrisonInitialSave
+//     A M B E R   P R I S O N   I N I T I A L   S A V E
+//Special initial application routine for Balance.
+ON
+	OnFunction("AMER_STATUS_AmberPrisonInitialSave")
+ACTIONS
+	//Deal the final tick regardless when a successful save is made.
+	Set(%AMER_RemoteEffectProjectile, "AMER_SCRIPTSKILL_AmberPrisonDoTFinalTick")
+	Set(%AMER_RemoteEffectSource, %AMER_STATUS_AMBERPRISON_Source)
+	CallFunction("AMER_DoRemoteEffect")
+	
+	Set(%AMER_STATUS_Override = INT:0)	//Still need default behavior
+	
+	
+	
+EVENT EnervateStatus
+//               E N E R V A T E
+//Special initial application routine for Enervate.
+VARS
+	INT:_BorrowedTimeTargets
+	CHARACTER:_CharSource
+ON
+	OnFunction("AMER_STATUS_Enervate")
+ACTIONS
+	Set(_CharSource, %AMER_SkillSource)
+	//Enervate needs to know how many targets it affected. Reuse the
+	//the variable that Borrowed Time uses because why not.
+	IF "c1"
+		GetVar(_BorrowedTimeTargets, _CharSource, "AMER_BorrowedTimeTargets")
+	THEN
+		Add(_BorrowedTimeTargets, INT:1)
+		SetVar(_CharSource, "AMER_BorrowedTimeTargets", _BorrowedTimeTargets)
+	ENDIF
+	CharacterPlayEffect(__Me, "FX_Skills_WitchCraft_DrainWillpower_Impact_B")
+	CharacterPlayEffect(__Me, "FX_Skills_WitchCraft_DrainWillpower_Impact_A")
+	
+	//Let the parent function know we still need the default behavior.
+	Set(%AMER_STATUS_Override = INT:0)
+	
+	
+	
+EVENT RuinInitialSave
+//     R U I N   I N I T I A L   S A V E
+//Special initial application routine for Ruin.
+ON
+	OnFunction("AMER_STATUS_RuinInitialSave")
+ACTIONS
+	Set(%AMER_STATUS_ChanceModifier, 0.0)
+	CallFunction("AMER_STATUS_RuinDebuff")
+	StatusText(__Me, %AMER_STATUS_FloatingText)
+	Set(%AMER_STATUS_Override = INT:0)	//Still need default behavior
+	
+EVENT RuinInitial
+//        R U I N   I N I T I A L
+//Special initial application routine for Ruin.
+ON
+	OnFunction("AMER_STATUS_RuinInitial")
+ACTIONS
+	Set(%AMER_STATUS_ChanceModifier, 1.0)
+	CallFunction("AMER_STATUS_RuinDebuff")
+	Set(%AMER_STATUS_Override = INT:0)	//Still need default behavior
+	
+EVENT RuinDebuff
+//         R U I N   D E B U F F
+//Ruin's initial application routines link to this to apply the debuff.
+VARS
+	POTION:_WhichEffect
+	FLOAT:_Roll
+	INT:_Index
+ON
+	OnFunction("AMER_STATUS_RuinDebuff")
+ACTIONS
+	//Ruin offers a Willpower and Grit save, inflicting variable
+	//effect magnitude depending on the success of both, one, or none.
+	Cast(_Index, %AMER_STATUS_ChanceModifier)
+	Set(%AMER_STATUS_ChanceModifier, 0.0)
+	
+	//Perform the second saving throw, on Grit.
+	Set(%AMER_STATUS_SaveType, BodyBuilding)
+	CallFunction("AMER_STATUS_GetRawChance")
+	CallFunction("AMER_STATUS_GetChanceDisplay")
+		
+	//Make the roll for save, add 1  to effect index on a failed save.
+	GetRandomBetween(_Roll, FLOAT:1, FLOAT:100)
+	IF "!c1"
+		IsGreaterThen(_Roll, %AMER_STATUS_RawChance)
+	THEN
+		Add(_Index, INT:1)
+	ENDIF
+	
+	//Apply the derived effect and figure out the save/fail display string.
+	//The display string will be shown when the function stack returns
+	//to the default initial status application behavior.
+	GetElement(_WhichEffect, _Index, "AMER_STATUS_Ruin1", "AMER_STATUS_Ruin2", "AMER_STATUS_Ruin3")
+	GetElement(%AMER_STATUS_AfflictedString, _Index, "AMER_STATUS_RuinSave2", "AMER_STATUS_RuinSave1", "AMER_STATUS_RuinFail")
+	GetElement(%AMER_STATUS_SavedString, _Index, "AMER_STATUS_RuinSave2", "AMER_STATUS_RuinSave1", "AMER_STATUS_RuinFail")
+	GetElement(%AMER_STATUS_FloatingText, _Index, "AMER_STATUS_Ruin1", "AMER_STATUS_Ruin2", "AMER_STATUS_Ruin3")
+	CharacterConsume(__Me, _WhichEffect)
+	
+	Set(%AMER_RuinMagnitude, _Index)
+	//Apply the actual resistance reduction.
+	CallFunction("AMER_STATUS_RuinEffectControl")
+	//Start a timer to check when the resistance reduction should be removed.
+	StartTimer("AMER_STATUS_RuinCheckToRemoveEffect", 1.0, -1)
+	
+	//Special Effect
+	CharacterPlayEffect(__Me, "FX_Skills_Fire_ExplodeSelf_Cast_A")
+	
+	//Set second saving throw to be displayed when function stack returns.
+	Set(%AMER_STATUS_ExtraString, %AMER_STATUS_DisplayChance)
+	
+EVENT RuinEffectControl
+VARS
+	INT:_Count
+ON
+	OnFunction("AMER_STATUS_RuinEffectControl")
+ACTIONS
+	Set(_Count, INT:0)
+	WHILE "c1"
+		IsLessThen(_Count, 6)
+	DO
+		Set(%AMER_RuinResIndex, _Count)
+		CallFunction("AMER_STATUS_RuinResistReduction")
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+
+EVENT RuinResistReduction
+VARS
+	INT:_Count
+	INT:_Value
+	INT:_ResToRemove
+	FLOAT:_Magnitude
+	FLOAT:_TargetRes
+	STRING:_ResStr
+	STRING:_Str
+	CHARACTERSTAT:_WhichResist
+	FIXEDSTRING:_WhichEffect
+ON
+	OnFunction("AMER_STATUS_RuinResistReduction")
+ACTIONS
+	GetElement(_WhichResist, %AMER_RuinResIndex, FireResistance, WaterResistance, AirResistance, EarthResistance, PoisonResistance, ShadowResistance)
+	IF "c1"
+		CharacterGetStat(_TargetRes, __Me, _WhichResist)
+	THEN
+		//Magnitude is the percentage of resist to remove, derived
+		//from how many saving throws were successful.
+		GetElement(_Magnitude, %AMER_RuinMagnitude, 0.25, 0.50, 0.80)
+		Multiply(_TargetRes, _Magnitude)
+		
+		IF "c1"
+			IsGreaterThen(_TargetRes, 0.0)
+		THEN
+			Cast(_ResToRemove, _TargetRes)
+			GetElement(_ResStr, %AMER_RuinResIndex, "Fire", "Water", "Air", "Earth", "Poison", "Shadow")
+			
+			Set(_Count, INT:0)
+			WHILE "c1&c2"
+				IsLessThen(_Count, 8)
+				IsGreaterThen(_ResToRemove, INT:0)
+			DO
+				GetElement(_Value, _Count, INT:128, INT:64, INT:32, INT:16, INT:8, INT:4, INT:2, INT:1)
+				IF "!c1"
+					IsGreaterThen(_Value, _ResToRemove)
+				THEN
+					Print(_Str, "AMER_STATUS_Ruin[1][2]", _ResStr, _Value)
+					Cast(_WhichEffect, _Str)
+					AddStatusInfluence(__Me, CONSUME, 1, _WhichEffect, 0)
+					Subtract(_ResToRemove, _Value)
+				ENDIF
+				Add(_Count, INT:1)
+			ENDWHILE
+		ENDIF
+	ENDIF
+	
+EVENT RuinCheckToRemoveEffect
+//Check if Ruin has faded using a timer, because the resistance
+//effects will not remove themselves. We cannot risk leaving
+//the resistance reduction behind.
+ON
+	OnTimer("AMER_STATUS_RuinCheckToRemoveEffect")
+ACTIONS
+	IF "!c1&!c2&!c3"
+		CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_Ruin1")
+		CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_Ruin2")
+		CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_Ruin3")
+	THEN
+		StopTimer("AMER_STATUS_RuinCheckToRemoveEffect")
+		CallFunction("AMER_STATUS_RuinRemoveEffectControl")
+	ENDIF
+	
+EVENT RuinRemoveEffectControl
+VARS
+	INT:_Count
+ON
+	OnFunction("AMER_STATUS_RuinRemoveEffectControl")
+ACTIONS
+	Set(_Count, INT:0)
+	WHILE "c1"
+		IsLessThen(_Count, 6)
+	DO
+		Set(%AMER_RuinResIndex, _Count)
+		CallFunction("AMER_STATUS_RuinRemoveResistReduction")
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+EVENT RuinRemoveResistReduction
+VARS
+	INT:_Count
+	INT:_Value
+	INT:_ResToRemove
+	FLOAT:_Magnitude
+	FLOAT:_TargetRes
+	STRING:_ResStr
+	STRING:_Str
+	CHARACTERSTAT:_WhichResist
+	FIXEDSTRING:_WhichEffect
+ON
+	OnFunction("AMER_STATUS_RuinRemoveResistReduction")
+ACTIONS
+	GetElement(_WhichResist, %AMER_RuinResIndex, FireResistance, WaterResistance, AirResistance, EarthResistance, PoisonResistance, ShadowResistance)
+	IF "c1"
+		CharacterGetStat(_TargetRes, __Me, _WhichResist)
+	THEN
+		Cast(_ResToRemove, _TargetRes)
+		GetElement(_ResStr, %AMER_RuinResIndex, "Fire", "Water", "Air", "Earth", "Poison", "Shadow")
+			
+		Set(_Count, INT:0)
+		WHILE "c1"
+			IsLessThen(_Count, 8)
+		DO
+			GetElement(_Value, _Count, INT:128, INT:64, INT:32, INT:16, INT:8, INT:4, INT:2, INT:1)
+			Print(_Str, "AMER_STATUS_Ruin[1][2]", _ResStr, _Value)
+			Cast(_WhichEffect, _Str)
+			IF "c1"
+				CharacterHasStatus(__Me, CONSUME, _WhichEffect)
+			THEN
+				RemoveStatusInfluence(__Me, CONSUME, 1, _WhichEffect, 0)
+			ENDIF
+			Add(_Count, INT:1)
+		ENDWHILE
+	ENDIF
+	
+	
+	
+EVENT SoulsapInitialSave
+//     S O U L S A P   I N I T I A L   S A V E
+//Special initial application routine for Soulsap.
+ON
+	OnFunction("AMER_STATUS_SoulsapInitialSave")
+ACTIONS
+	Set(%AMER_STATUS_ChanceModifier, 0.0)
+	CallFunction("AMER_STATUS_SoulsapDebuff")
+	StatusText(__Me, %AMER_STATUS_FloatingText)
+	Set(%AMER_STATUS_Override = INT:0)	//Still need default behavior
+	
+EVENT SoulsapInitial
+//          S O U L S A P   I N I T I A L
+//Special initial application routine for Soulsap.
+ON
+	OnFunction("AMER_STATUS_SoulsapInitial")
+ACTIONS
+	Set(%AMER_STATUS_ChanceModifier, 1.0)
+	CallFunction("AMER_STATUS_SoulsapDebuff")
+	Set(%AMER_STATUS_Override = INT:0)	//Still need default behavior
+	
+EVENT SoulsapDebuff
+//          S O U L S A P   D E B U F F
+//Soulsap's initial application routines link to this to apply the debuff.
+VARS
+	POTION:_WhichEffect
+	FLOAT:_Roll
+	INT:_Index
+ON
+	OnFunction("AMER_STATUS_SoulsapDebuff")
+ACTIONS
+	//Soulsap offers a Willpower and Grit save, inflicting variable
+	//effect magnitude depending on the success of both, one, or none.
+	Cast(_Index, %AMER_STATUS_ChanceModifier)
+	Set(%AMER_STATUS_ChanceModifier, 0.0)
+	
+	//Perform the second saving throw, on Grit.
+	Set(%AMER_STATUS_SaveType, BodyBuilding)
+	CallFunction("AMER_STATUS_GetRawChance")
+	CallFunction("AMER_STATUS_GetChanceDisplay")
+		
+	//Make the roll for save, add 1  to effect index on a failed save.
+	GetRandomBetween(_Roll, FLOAT:1, FLOAT:100)
+	IF "!c1"
+		IsGreaterThen(_Roll, %AMER_STATUS_RawChance)
+	THEN
+		Add(_Index, INT:1)
+	ENDIF
+	
+	//Apply the derived effect and figure out the save/fail display string.
+	//The display string will be shown when the function stack returns
+	//to the default initial status application behavior.
+	GetElement(_WhichEffect, _Index, "AMER_STATUS_Soulsap1", "AMER_STATUS_Soulsap2", "AMER_STATUS_Soulsap3")
+	GetElement(%AMER_STATUS_AfflictedString, _Index, "AMER_STATUS_SoulsapSave2", "AMER_STATUS_SoulsapSave1", "AMER_STATUS_SoulsapFail")
+	GetElement(%AMER_STATUS_SavedString, _Index, "AMER_STATUS_SoulsapSave2", "AMER_STATUS_SoulsapSave1", "AMER_STATUS_SoulsapFail")
+	GetElement(%AMER_STATUS_FloatingText, _Index, "AMER_STATUS_Soulsap1", "AMER_STATUS_Soulsap2", "AMER_STATUS_Soulsap3")
+	CharacterConsume(__Me, _WhichEffect)
+	
+	//Set second saving throw to be displayed when function stack returns.
+	Set(%AMER_STATUS_ExtraString, %AMER_STATUS_DisplayChance)
+	
+	//Set(%AMER_STATUS_Override = INT:1)	//Don't need default behavior
+	
+	
+	
+EVENT DrainWillpowerInitialSave
+//		D R A I N   W I L L P O W E R   S A V E
+//Special initial application routine for Drain Willpower.
+ON
+	OnFunction("AMER_STATUS_DrainWillpowerInitialSave")
+ACTIONS
+	//Drain Willpower still inflicts a reduced effect on a successul save.
+	CharacterConsume(__Me, "AMER_STATUS_DrainWillpower1")
+	StatusText(__Me, "AMER_STATUS_DrainWillpower1")
+	Set(%AMER_STATUS_Override = INT:0)	//Still need default behavior
+	
+	
+	
+EVENT InsectPlagueInitialSave
+//          I N S E C T   P L A G U E   S A V E
+//Special initial application routine for Insect Plague.
+VARS
+	SKILL:_Projectile = "AMER_SCRIPTSKILL_InsectPlagueDoT"
+ON
+	OnFunction("AMER_STATUS_InsectPlagueInitialSave")
+ACTIONS
+
+	//Insect Plague is only fully avoided if the target is Burning.
+	IF "c1"
+		CharacterHasStatus(__Me, BURNING)
+	THEN
+		Set(%AMER_STATUS_Override = INT:0)	//Still need default behavior
+	ELSE
+		
+		//Sound effect.
+		PlaySound(__Me, "Skill_Firefly_Impact")
+	
+		//Extra flies effects.
+		CharacterConsume(__Me, "AMER_STATUS_InsectPlagueExtraFX1")
+		CharacterConsume(__Me, "AMER_STATUS_InsectPlagueExtraFX2")
+		CharacterConsume(__Me, "AMER_STATUS_InsectPlagueExtraFX3")
+		
+		//Initial DoT tick.
+		Set(%AMER_RemoteEffectSource, %AMER_SkillSource)
+		Set(%AMER_RemoteEffectProjectile, _Projectile)
+		CallFunction("AMER_DoRemoteEffect")
+		
+		//Apply the status effect anyway.
+		CharacterConsume(__Me, %AMER_STATUS_Effect)
+		
+		//Change the successful save string.
+		Set(%AMER_STATUS_SavedString = "AMER_STATUS_InsectPlagueSaveNoFire")
+		
+		//Display abnormal strings.
+		DisplayCombatInfoText(__Me, "AMER_STATUS_InsectPlagueSaveNoFire", 1)	//Save string
+		DisplayCombatInfoText(__Me, %AMER_STATUS_DisplayChance, 1)		//Percentage of success
+		DisplayText(__Me, "AMER_BLANK", 1)					//Prevent text from floating above character heads.
+		Set(%AMER_CheckStatusUpkeep, INT:1)			//Let upkeep event handler know to check this character.
+		//Insect Plague needs to remember the skill source.
+		Set(%AMER_STATUS_INSECTPLAGUE_Source, %AMER_SkillSource)
+		
+		Set(%AMER_STATUS_Override = INT:1)	//Don't need default behavior
+	ENDIF
+	
+	
+	
+EVENT InsectPlagueInitial
+//          I N S E C T   P L A G U E 
+//Special initial application routine for Insect Plague.
+VARS
+	SKILL:_Projectile = "AMER_SCRIPTSKILL_InsectPlagueDoT"
+ON
+	OnFunction("AMER_STATUS_InsectPlagueInitial")
+ACTIONS
+	//Apply silence without saving throw if target is not immune to silence.
+	IF "!c1"
+		CharacterHasTalent(__Me, GoldenMage)
+	THEN
+		CharacterApplyStatus(__Me, MUTED, 1, 1)
+	ENDIF
+		
+	//Sound effect.
+	PlaySound(__Me, "Skill_Firefly_Impact")
+	
+	//Extra flies effects.
+	CharacterConsume(__Me, "AMER_STATUS_InsectPlagueExtraFX1")
+	CharacterConsume(__Me, "AMER_STATUS_InsectPlagueExtraFX2")
+	CharacterConsume(__Me, "AMER_STATUS_InsectPlagueExtraFX3")
+	
+	//Initial DoT tick.
+	Set(%AMER_RemoteEffectSource, %AMER_SkillSource)
+	Set(%AMER_RemoteEffectProjectile, _Projectile)
+	CallFunction("AMER_DoRemoteEffect")
+	
+	Set(%AMER_STATUS_Override = INT:0)	//Still need default behavior
+	
+	
+	
+EVENT FingerOfDeathInitialSave
+//		F I N G E R   O F   D E A T H   S A V E
+//Special initial application routine for Finger of Death.
+VARS
+	FLOAT:_Constitution
+ON
+	OnFunction("AMER_STATUS_FingerOfDeathInitialSave")
+ACTIONS
+	//Unmapped Constitution will still be in here from chance modifier calculation
+	Set(_Constitution, %AMER_UnmapAttributeValue)
+	
+	//Finger of Death has different effects on a successful save depending on the
+	//target's unmapped constitution
+	IF "!c1"
+		IsGreaterThen(_Constitution, 6.0)
+	THEN
+		CharacterConsume(__Me, "AMER_STATUS_FingerOfDeathSave1")
+	ELIF "!c1"
+		IsGreaterThen(_Constitution, 7.0)
+	THEN
+		CharacterConsume(__Me, "AMER_STATUS_FingerOfDeathSave2")
+	ENDIF
+	Set(%AMER_STATUS_Override = INT:0)	//Still need default behavior
+	
+	
+	
+EVENT FingerOfDeathInitial
+//          F I N G E R   O F   D E A T H
+//Special initial application routine for Finger of Death.
+ON
+	OnFunction("AMER_STATUS_FingerOfDeathInitial")
+ACTIONS
+	CharacterDie(__Me, Acid)
+	Set(%AMER_STATUS_Override = INT:0)	//Still need default behavior
+	
+	
+	
+EVENT BorrowedTimeStatus
+//           B O R R O W E D   T I M E
+//Special initial application routine for Borrowed Time.
+VARS
+	INT:_BorrowedTimeTargets
+	CHARACTER:_CharSource
+ON
+	OnFunction("AMER_STATUS_BorrowedTime")
+ACTIONS
+	Set(_CharSource, %AMER_SkillSource)
+	//Borrowed Time needs to know how many targets it affected.
+	IF "c1"
+		GetVar(_BorrowedTimeTargets, _CharSource, "AMER_BorrowedTimeTargets")
+	THEN
+		Add(_BorrowedTimeTargets, INT:1)
+		SetVar(_CharSource, "AMER_BorrowedTimeTargets", _BorrowedTimeTargets)
+	ENDIF
+	
+	//Let the parent function know we still need the default behavior.
+	Set(%AMER_STATUS_Override = INT:0)
+	
+	
+	
+EVENT ShockedStatus
+//                S H O C K E D
+//Special initial application routine for Shocked.
+VARS
+	FLOAT:_Roll
+	FIXEDSTRING:_CombatLogStr
+ON
+	OnFunction("AMER_STATUS_Shocked")
+ACTIONS
+	
+	//Shocked turns into Stunned if Shocked or Stunned is already there.
+	IF "c1"
+		CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_Shocked")
+	THEN
+		Set(%AMER_STATUS_Override = INT:1)	//Set override flag so parent function doesn't do this by default.
+		DisplayCombatInfoText(__Me, "AMER_STATUS_ShockedNoLonger", 1)	//Display that shocked is removed.
+		DisplayText(__Me, "AMER_BLANK", 1)								//Prevent text from floating above character heads.
+		CharacterConsume(__Me, "AMER_STATUS_RemoveShocked")				//Remove Shocked
+		CharacterApplyStatus(__Me, STUNNED, 2, 0)						//Apply Stunned
+	ELIF "c1"
+		CharacterHasStatus(__Me, STUNNED)
+	THEN
+		CharacterApplyStatus(__Me, STUNNED, 2, 0)	//Refresh Stunned if already Stunned.
+	ELSE
+		Set(%AMER_STATUS_Override = INT:0)	//If we didn't do any special behavior then parent function needs to do default.
+	ENDIF
+	
+	
+	
+EVENT TormentInitial
+//       		    T O R M E N T
+//Special initial application routine for Torment.
+VARS
+	FLOAT3:_Position
+ON
+	OnFunction("AMER_STATUS_TormentInitial")
+ACTIONS
+	//Torment needs to initialize the movment detection timer
+	//if it isn't already running.
+	IF "c1"
+		IsEqual(%AMER_DistanceMoved, FLOAT:-1)
+	THEN
+		//Initialize my position, start movement detection.
+		IF "c1"
+			GetPosition(__Me, _Position)
+		THEN
+			Set(%AMER_Position, _Position)
+			StartTimer("AMER_DetectMovement", 0.05, -1)
+		ENDIF
+	ENDIF
+	
+	Set(%AMER_STATUS_Override, INT:0)	//Still need default behavior
+	
+	
+	
+//===================================================//
+//   U P K E E P   S P E C I A L   R O U T I N E S   //
+//===================================================//
+	
+	
+	
+EVENT CurseOfCutsUpkeep
+//   C U R S E   O F   C U T S
+//Special upkeep routine for Curse of Cuts.
+VARS
+	FLOAT:_SourceLevel
+	INT:_Level
+ON
+	OnFunction("AMER_STATUS_CurseOfCutsUpkeep")
+ACTIONS
+	//Do DoT effect.
+	Set(%AMER_RemoteEffectSource, %AMER_STATUS_CURSEOFCUTS_Source)
+	Set(%AMER_RemoteEffectProjectile, "AMER_SCRIPTSKILL_CurseOfCutsDoT")
+	CallFunction("AMER_DoRemoteEffect")
+	
+	//Special effect.
+	CharacterPlayEffect(__Me, "FX_Skills_Ranger_Vampiric_Impact_A")
+	
+	Set(%AMER_STATUS_Override, INT:0)	//still need default behavior
+	
+	
+	
+EVENT InfectiousFlameUpkeep
+//   I N F E C T I O U S   F L A M E
+//Special upkeep routine for Infectious Flame.
+VARS
+	FLOAT:_SourceLevel
+	INT:_Level
+ON
+	OnFunction("AMER_STATUS_InfectiousFlameUpkeep")
+ACTIONS
+	//Do DoT effect.
+	IF "c1"
+		CharacterGetStat(_SourceLevel, %AMER_STATUS_INFECTIOUSFLAME_Source, Level)
+	THEN
+		Cast(_Level, _SourceLevel)
+		ExplodeAt(__Me, AMER_SCRIPTSKILL_InfectiousFlameDoT, _Level, %AMER_STATUS_INFECTIOUSFLAME_Source)
+	ENDIF
+	Set(%AMER_STATUS_Override, INT:0)	//still need default behavior
+	
+	
+	
+EVENT BalanceUpkeep
+//       B A L A N C E
+//Special upkeep routine for Balance.
+VARS
+	FLOAT:_SourceLevel
+	FLOAT:_Heal
+	FLOAT:_Bonus
+	INT:_Level
+ON
+	OnFunction("AMER_STATUS_BalanceUpkeep")
+ACTIONS
+	//Do DoT effect.
+	Set(%AMER_RemoteEffectSource, %AMER_STATUS_BALANCE_Source)
+	Set(%AMER_RemoteEffectProjectile, "AMER_SCRIPTSKILL_BalanceDoT")
+	CallFunction("AMER_DoRemoteEffect")
+	
+	//Calculate scaling percentage heal as derived from the source's stats.
+	Set(_Heal, 0.03)
+	IF "c1&c2"
+		CharacterGetStat(_Bonus, %AMER_STATUS_BALANCE_Source, Intelligence)
+		IsGreaterThen(_Bonus, 11)
+	THEN
+		Subtract(_Bonus, 11)
+		Multiply(_Bonus, 0.01)
+		Add(_Heal, _Bonus)
+	ENDIF
+	SetVar(__Me, "AMER_ScalingHealAmount", _Heal)
+	
+	//Do Heal effect.
+	IF "c1"
+		CharacterGetStat(_SourceLevel, __Me, Level)
+	THEN
+		Cast(_Level, _SourceLevel)
+		ExplodeAt(__Me, "AMER_SCRIPTSKILL_BalanceHeal", _Level, %AMER_STATUS_BALANCE_Source)
+	ENDIF
+	
+	//Apply scaling percentage heal to those affected.
+	IterateCharactersNear(__Me, 3.0, "AMER_STATUS_BalanceHealIterator")
+	SetVar(__Me, "AMER_ScalingHealTargetOverride", CHARACTER:null)
+	
+	Set(%AMER_STATUS_Override, INT:0)	//still need default behavior
+	
+EVENT BalanceHealIterator
+VARS
+	CHARACTER:_Char
+ON
+	OnIterateCharacter(_Char, "AMER_STATUS_BalanceHealIterator")
+ACTIONS
+	IF "c1"
+		CharacterIsAlly(%AMER_STATUS_BALANCE_Source, _Char)
+	THEN
+		IF "!c1"
+			CharacterIsDead(_Char)
+		THEN
+			SetVar(__Me, "AMER_ScalingHealTargetOverride", _Char)
+			CallFunction("AMER_ScalingPercentageHeal")
+		ENDIF
+	ENDIF
+	
+	
+	
+EVENT InsectPlagueUpkeep
+//       I N S E C T   P L A G U E
+//Special upkeep routine for Insect Plague.
+ON
+	OnFunction("AMER_STATUS_InsectPlagueUpkeep")
+ACTIONS
+	//Insect Plague applies silence on failure. Only apply the silence
+	//if the target is not immune to silence.
+	IF "!c1"
+		CharacterHasTalent(__Me, GoldenMage)
+	THEN
+		CharacterApplyStatus(__Me, MUTED, 1, 1)
+	ENDIF
+	//Extra flies effects.
+	CharacterConsume(__Me, "AMER_STATUS_InsectPlagueExtraFX1")
+	CharacterConsume(__Me, "AMER_STATUS_InsectPlagueExtraFX2")
+	CharacterConsume(__Me, "AMER_STATUS_InsectPlagueExtraFX3")
+	
+	//Sound effect.
+	PlaySound(__Me, "Skill_SummonBloodSwarm_Cast")
+	
+	//Do DoT effect.
+	Set(%AMER_RemoteEffectSource, %AMER_STATUS_INSECTPLAGUE_Source)
+	Set(%AMER_RemoteEffectProjectile, "AMER_SCRIPTSKILL_InsectPlagueDoT")
+	CallFunction("AMER_DoRemoteEffect")
+	
+	Set(%AMER_STATUS_Override, INT:0)	//still need default behavior
+	
+	
+	
+EVENT InsectPlagueUpkeepSave
+//       I N S E C T   P L A G U E   S A V E
+//Special upkeep routine for Insect Plague.
+ON
+	OnFunction("AMER_STATUS_InsectPlagueUpkeepSave")
+ACTIONS
+	//Insect Plague only goes away when you save on upkeep
+	//if you are Burning. Otherwise only the silence is avoided.
+	IF "c1"
+		CharacterHasStatus(__Me, BURNING)
+	THEN
+		Set(%AMER_STATUS_Override, INT:0)
+	ELSE
+		//Extra flies effects.
+		CharacterConsume(__Me, "AMER_STATUS_InsectPlagueExtraFX1")
+		CharacterConsume(__Me, "AMER_STATUS_InsectPlagueExtraFX2")
+		CharacterConsume(__Me, "AMER_STATUS_InsectPlagueExtraFX3")
+		
+		//Sound effect.
+		PlaySound(__Me, "Skill_SummonBloodSwarm_Cast")
+		
+		//DoT effect still occurs on save without burning.
+		Set(%AMER_RemoteEffectSource, %AMER_STATUS_INSECTPLAGUE_Source)
+		Set(%AMER_RemoteEffectProjectile, AMER_SCRIPTSKILL_InsectPlagueDoT)
+		CallFunction("AMER_DoRemoteEffect")
+		
+		DisplayCombatInfoText(__Me, "AMER_STATUS_InsectPlagueNoLongerNoFire", 1)		//Save string
+		DisplayCombatInfoText(__Me, %AMER_STATUS_DisplayChance, 1)		//Percentage of success
+		DisplayText(__Me, "AMER_BLANK", 1)	//Prevent text from floating above character heads.
+		
+		Set(%AMER_STATUS_Override, INT:1)
+	ENDIF
+	
+	
+	
+EVENT AttenuateUpkeep
+//          A T T E N U A T E
+//Special upkeep routine for Attenuate.
+VARS
+	CHARACTER:_CharSource
+	POTION:_WhichEffect
+	INT:_Index
+ON
+	OnFunction("AMER_STATUS_AttenuateUpkeep")
+ACTIONS
+	Set(_CharSource, %AMER_STATUS_ATTENUATE_Source)
+	
+	//Figure out which turn of the effect we're on.
+	IF "c1"
+		CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_Attenuate")
+	THEN
+		Set(_Index, INT:0)
+	ELIF "c1"
+		CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_Attenuate2")
+	THEN
+		Set(_Index, INT:1)
+	ELIF "c1"
+		CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_Attenuate3")
+	THEN
+		Set(_Index, INT:2)
+	ENDIF
+	
+	//Apply the next debuff effect.
+	GetElement(_WhichEffect, _Index, "AMER_STATUS_Attenuate2", "AMER_STATUS_Attenuate3", "AMER_STATUS_Attenuate4")
+	CharacterConsume(__Me, _WhichEffect)
+		
+	//Fire the DoT projectile
+	Set(%AMER_RemoteEffectProjectile, AMER_SCRIPTSKILL_AttenuateDoT)
+	Set(%AMER_RemoteEffectSource, _CharSource)
+	CallFunction("AMER_DoRemoteEffect")
+	
+	//Flag that we still want the behavior of the parent function.
+	Set(%AMER_STATUS_Override, INT:0)
+	
+	
+	
+EVENT NaturalOrderUpkeepSave
+//       N A T U R A L   O R D E R   S A V E
+//Special upkeep routine for Natural Order.
+ON
+	OnFunction("AMER_STATUS_NaturalOrderUpkeepSave")
+ACTIONS
+	//Natural Order doesn't go away when you save against
+	//it on upkeep, it just doesn't do damage. 
+			
+	DisplayCombatInfoText(__Me, %AMER_STATUS_NoLongerString, 1)		//Save string
+	DisplayCombatInfoText(__Me, %AMER_STATUS_DisplayChance, 1)		//Percentage of success
+	DisplayText(__Me, "AMER_BLANK", 1)	//Prevent text from floating above character heads.
+	
+	//Let the parent function know we don't want default behavior.
+	Set(%AMER_STATUS_Override, INT:1)
+	
+	
+	
+EVENT NaturalOrderUpkeep
+//             N A T U R A L   O R D E R
+//Special upkeep routine for Natural Order.
+VARS
+	CHARACTER:_CharSource
+	CHARACTER:_Spawn1
+	CHARACTER:_Spawn2
+	CHARACTER:_Spawn3
+	POTION:_WhichEffect
+	INT:_Index
+	INT:_Level
+	FLOAT:_SourceLevel
+	SKILL:_Projectile
+	FIXEDSTRING:_Faction
+ON
+	OnFunction("AMER_STATUS_NaturalOrderUpkeep")
+ACTIONS
+	Set(_CharSource, %AMER_STATUS_NATURALORDER_Source)
+	
+	//Figure out which turn of the effect we're on.
+	IF "c1"
+		CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_NaturalOrder")
+	THEN
+		Set(_Index, INT:0)
+	ELIF "c1"
+		CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_NaturalOrder2")
+	THEN
+		Set(_Index, INT:1)
+	ELIF "c1"
+		CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_NaturalOrder3")
+	THEN
+		Set(_Index, INT:2)
+	ENDIF
+	
+	//Apply the next debuff effect, if it's the final tick do extra effects.
+	IF "!c1"
+		IsEqual(_Index, INT:2)
+	THEN
+		GetElement(_WhichEffect, _Index, "AMER_STATUS_NaturalOrder2", "AMER_STATUS_NaturalOrder3")
+		Set(_Projectile, "AMER_SCRIPTSKILL_NaturalOrderDamage")
+		CharacterConsume(__Me, _WhichEffect)
+	ELSE
+		Set(_Projectile, "AMER_SCRIPTSKILL_NaturalOrderFinalDamage")
+		CharacterConsume(__Me,  "AMER_STATUS_RemoveNaturalOrder")
+		
+		IF "c1&c2"
+			CharacterGetFaction(_Faction, _CharSource)
+			CharacterGetStat(_SourceLevel, _CharSource, Level)
+		THEN
+			Cast(_Level, _SourceLevel)
+			SpawnCharacter(_Spawn1,Animals_CrawlingInfestation_Small_bd199826-f818-49c7-91ae-29327b4c8cb7,__Me,0,0,null,_Level)
+			SpawnCharacter(_Spawn2,Animals_CrawlingInfestation_Big_6f8e29f8-706f-46eb-8f1d-af3bdf2c5d26,__Me,0,0,null,_Level)
+			SpawnCharacter(_Spawn3,Animals_CrawlingInfestation_Big_6f8e29f8-706f-46eb-8f1d-af3bdf2c5d26,__Me,0,0,null,_Level)
+			CharacterSetFaction(_Spawn1,_Faction)
+			CharacterSetFaction(_Spawn2,_Faction)
+			CharacterSetFaction(_Spawn3,_Faction)
+		ENDIF
+	ENDIF
+		
+	//Fire the DoT projectile
+	Set(%AMER_RemoteEffectProjectile, _Projectile)
+	Set(%AMER_RemoteEffectSource, _CharSource)
+	CallFunction("AMER_DoRemoteEffect")
+	
+	//Flag that we still want the behavior of the parent function.
+	Set(%AMER_STATUS_Override, INT:0)
+	
+	
+	
+EVENT AmberPrisonUpkeep
+//             A M B E R   P R I S O N
+//Special upkeep routine for Amber Prison.
+VARS
+	POTION:_WhichEffect
+	INT:_Index
+	INT:_Level
+	FLOAT:_FloatLevel
+	SKILL:_Projectile
+ON
+	OnFunction("AMER_STATUS_AmberPrisonUpkeep")
+ACTIONS
+	//Figure out which stage of the effect we're on.
+	IF "c1"
+		CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_AmberPrisonSlow")
+	THEN
+		Set(_Index, INT:0)
+	ELIF "c1"
+		CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_AmberPrisonSlow2")
+	THEN
+		Set(_Index, INT:1)
+	ELIF "c1"
+		CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_AmberPrisonSlow3")
+	THEN
+		Set(_Index, INT:2)
+	ENDIF
+	
+	//Apply the next stage of slow and load the projectile to fire.
+	IF "!c1"
+		IsEqual(_Index, INT:2)
+	THEN
+		GetElement(_WhichEffect, _Index, "AMER_STATUS_AmberPrisonSlow2", "AMER_STATUS_AmberPrisonSlow3")
+		Set(_Projectile, "AMER_SCRIPTSKILL_AmberPrisonDoT")
+		CharacterConsume(__Me, _WhichEffect)
+	ELSE
+		Set(_Projectile, "AMER_SCRIPTSKILL_AmberPrisonDoTFinalTick")
+	ENDIF
+		
+	Set(%AMER_RemoteEffectProjectile, _Projectile)
+	Set(%AMER_RemoteEffectSource, %AMER_STATUS_AMBERPRISON_Source)
+	CallFunction("AMER_DoRemoteEffect")
+	
+	//Flag that we still need the default behavior of the parent function.
+	Set(%AMER_STATUS_Override, INT:0)
+	
+	
+	
+EVENT AmberPrisonUpkeepSave
+//      A M B E R   P R I S O N   S A V E
+//Special upkeep routine for Amber Prison.
+ON
+	OnFunction("AMER_STATUS_AmberPrisonUpkeepSave")
+ACTIONS
+	//Deal the final tick regardless when a successful save is made.
+	Set(%AMER_RemoteEffectProjectile, "AMER_SCRIPTSKILL_AmberPrisonDoTFinalTick")
+	Set(%AMER_RemoteEffectSource, %AMER_STATUS_AMBERPRISON_Source)
+	CallFunction("AMER_DoRemoteEffect")
+	
+	//Flag that we still need the default behavior of the parent function.
+	Set(%AMER_STATUS_Override, INT:0)
+	
+	
+		
+//===============================================//
+//      I N I T I A L I Z E   S T A T U S        //
+//===============================================//
+EVENT InitializeStatus
+VARS
+	ABILITY:_SaveType
+	FLOAT:_HandledResetTime
+	POTION:_StatusEffect
+	FIXEDSTRING:_InitialFunction
+	FIXEDSTRING:_InitialFunctionSave
+	FLOAT:_Roll
+	FLOAT:_StatusChance
+	FLOAT:_ChanceModifier
+	INT:_Override
+	CHARACTER:_CharSource
+	FIXEDSTRING:_CombatLogStr
+ON
+	OnFunction("AMER_STATUS_InitializeStatus")
+ACTIONS
+	//Get the status' unique parameters.
+	Set(_SaveType = %AMER_STATUS_SaveType)
+	Set(_HandledResetTime = %AMER_STATUS_HandledWait)
+	Set(_ChanceModifier = %AMER_STATUS_ChanceModifier)
+	Set(_StatusEffect = %AMER_STATUS_Effect)
+	Set(_InitialFunction = %AMER_STATUS_InitialFunction)
+	Set(_InitialFunctionSave = %AMER_STATUS_InitialFunctionSave)
+	
+	//Get the caster, returned into %AMER_SkillSource
+	//IterateCharactersNear(__Me, FLOAT:50, "AMER_GetRecentConsumeSource")
+	//Caster should already be in %AMER_SkillSource due to new system design.
+	Set(_CharSource, %AMER_SkillSource)
+		
+	//Prevent the status script from being handled too many times. This could
+	//happen because we can only tell when *any* consume is applied due to bugs.
+	//This timer now also removes the status applicator consume, because apparently
+	//a delay is needed or the game will just randomly decide whether or not
+	//the applicator consume will be removed (not surprised, at all, at this point).
+	Set(%AMER_STATUS_Handled, INT:1)
+	StartTimer("AMER_STATUS_ResetHandled",  _HandledResetTime, 0)
+		
+	//Get the calculated success chance and corresponding display string.
+	Set(%AMER_STATUS_SaveType, _SaveType)
+	CallFunction("AMER_STATUS_GetRawChance")
+	CallFunction("AMER_STATUS_GetChanceDisplay")
+	Set(_StatusChance = %AMER_STATUS_RawChance)
+	Set(_CombatLogStr = %AMER_STATUS_DisplayChance)
+		
+	//Make the roll for save
+	GetRandomBetween(_Roll, FLOAT:1, FLOAT:100)
+	IF "!c1"
+		IsGreaterThen(_Roll, _StatusChance)
+	THEN
+		//Check if there is a special function to run.
+		IF "!c1"
+			IsEqual(_InitialFunction, "NONE")
+		THEN
+			CallFunction(_InitialFunction)
+			Set(_Override = %AMER_STATUS_Override)
+		ELSE
+			Set(_Override = INT:0)
+		ENDIF
+		
+		//If _Override was not zero, then we assume the _InitialFunction
+		//already handled this in a special way.
+		IF "c1"
+			IsEqual(_Override = INT:0)
+		THEN
+			//I failed my saving throw, apply status and report to log.
+			IF "!c1"
+				IsEqual(_StatusEffect, "NONE")
+			THEN
+				CharacterConsume(__Me, _StatusEffect)
+			ENDIF
+			DisplayCombatInfoText(__Me, %AMER_STATUS_AfflictedString, 1)	//Fail string
+			DisplayCombatInfoText(__Me, _CombatLogStr, 1)		//Percentage of success
+			IF "!c1"
+				//Display the extra string if it's used.
+				IsEqual(%AMER_STATUS_ExtraString, null)
+			THEN
+				DisplayCombatInfoText(__Me, %AMER_STATUS_ExtraString, 1)
+				Set(%AMER_STATUS_ExtraString, null)
+			ENDIF
+			DisplayText(__Me, "AMER_BLANK", 1)					//Prevent text from floating above character heads.
+			StatusText(__Me, %AMER_STATUS_FloatingText)			//Display text overhead.
+			Set(%AMER_CheckStatusUpkeep, INT:1)			//Let upkeep event handler know to check this character.
+			IF "!c1"
+				IsEqual(%AMER_STATUS_SourceVariable, "NONE")
+			THEN
+				SetVar(__Me, %AMER_STATUS_SourceVariable, _CharSource)	//Record the source character if necessary.
+			ENDIF
+		ENDIF
+	ELSE
+		//Check if there is a special function to run.
+		IF "!c1"
+			IsEqual(_InitialFunctionSave, "NONE")
+		THEN
+			CallFunction(_InitialFunctionSave)
+			Set(_Override = %AMER_STATUS_Override)
+		ELSE
+			Set(_Override = INT:0)
+		ENDIF
+		
+		//If _Override was not zero, then we assume the _InitialFunctionSave
+		//already handled this in a special way.
+		IF "c1"
+			IsEqual(_Override = INT:0)
+		THEN
+			//I succeeded my saving throw, report to log.
+			DisplayCombatInfoText(__Me, %AMER_STATUS_SavedString, 1)		//Save string
+			DisplayCombatInfoText(__Me, _CombatLogStr, 1)		//Percentage of success
+			IF "!c1"
+				//Display the extra string if it's used.
+				IsEqual(%AMER_STATUS_ExtraString, null)
+			THEN
+				DisplayCombatInfoText(__Me, %AMER_STATUS_ExtraString, 1)
+				Set(%AMER_STATUS_ExtraString, null)
+			ENDIF
+			DisplayText(__Me, "AMER_BLANK", 1)					//Prevent text from floating above character heads.
+		ENDIF
+	ENDIF
+	
+	
+	
+//===============================================//
+//           S T A T U S   U P K E E P           //
+//===============================================//
+EVENT StatusUpkeep
+VARS
+	ABILITY:_SaveType
+	POTION:_RemoveStatus
+	FIXEDSTRING:_StatusVariable
+	FIXEDSTRING:_StatusText
+	FIXEDSTRING:_UpkeepFunction
+	FIXEDSTRING:_UpkeepFunctionSave
+	FIXEDSTRING:_CombatLogStr
+	INT:_SaveBonus
+	INT:_Override
+	INT:_IntSaveModifier
+	FLOAT:_SaveModifier
+	FLOAT:_ChanceModifier
+	FLOAT:_StatusChance
+	FLOAT:_Roll
+ON
+	OnFunction("AMER_STATUS_Upkeep")
+ACTIONS
+	//Get the status' unique parameters.
+	Set(_SaveType, %AMER_STATUS_SaveType)
+	Set(_ChanceModifier, %AMER_STATUS_ChanceModifier)
+	Set(_RemoveStatus, %AMER_STATUS_RemoveEffect)
+	Set(_StatusText, %AMER_STATUS_FloatingText)
+	Set(_StatusVariable, %AMER_STATUS_Variable)
+	Set(_UpkeepFunction, %AMER_STATUS_UpkeepFunction)
+	Set(_UpkeepFunctionSave, %AMER_STATUS_UpkeepFunctionSave)
+	
+	IF "c1"
+		GetVar(_StatusChance, __Me, _StatusVariable)
+	THEN
+		//Some statuses may have no ability associated with a save.
+		IF "!c1"
+			IsEqual(_SaveType, null)
+		THEN
+			IF "c1"
+				CharacterGetAbility(_SaveBonus, __Me, _SaveType)
+			THEN
+				//Calculate how effective the Grit/Willpower is. Divinity
+				//multiplies the 15% per Grit/Willpower by the spell's
+				//listed success chance before applying it to the save.
+				Set(_SaveModifier, _StatusChance)
+				Divide(_SaveModifier, 100.0)
+				Multiply(_SaveModifier, 15.0)
+				Cast(_IntSaveModifier, _SaveModifier)
+				
+				Multiply(_SaveBonus, _IntSaveModifier)	//Willpower/Bodybuilding x 15%.
+				Subtract(_StatusChance, _SaveBonus)
+			ENDIF
+		ENDIF
+	ENDIF
+	
+	//Add in any special modifiers.
+	Add(_StatusChance, _ChanceModifier)
+	
+	//Get the %chance display string by sending the correct success chance,
+	//it will return with the correct display string.
+	Cast(%AMER_STATUS_DisplayIndex, _StatusChance)
+	CallFunction("AMER_STATUS_GetChanceDisplay")
+	Set(_CombatLogStr, %AMER_STATUS_DisplayChance)
+	
+	//Make the roll for save
+	GetRandomBetween(_Roll, FLOAT:1, FLOAT:100)
+	IF "!c1"
+		IsGreaterThen(_Roll, _StatusChance)
+	THEN
+		//Check if there is a special function to run.
+		IF "!c1"
+			IsEqual(_UpkeepFunction, "NONE")
+		THEN
+			CallFunction(_UpkeepFunction)
+			Set(_Override = %AMER_STATUS_Override)
+		ELSE
+			Set(_Override = INT:0)
+		ENDIF
+		
+		//If _Override was not zero, then we assume the _UpkeepFunction
+		//already handled this in a special way.
+		IF "c1"
+			IsEqual(_Override = INT:0)
+		THEN
+			//I failed my saving throw, the status presists, report to log.
+			DisplayCombatInfoText(__Me, %AMER_STATUS_StillString, 1)		//Fail string
+			DisplayCombatInfoText(__Me, _CombatLogStr, 1)		//Percentage of success
+			IF "!c1"
+				//Display the extra string if it's used.
+				IsEqual(%AMER_STATUS_ExtraString, null)
+			THEN
+				DisplayCombatInfoText(__Me, %AMER_STATUS_ExtraString, 1)
+				Set(%AMER_STATUS_ExtraString, null)
+			ENDIF
+			DisplayText(__Me, "AMER_BLANK", 1)					//Prevent text from floating above character heads.
+			StatusText(__Me, _StatusText)						//Display text overhead.
+		ENDIF
+	ELSE
+		//Check if there is a special function to run.
+		IF "!c1"
+			IsEqual(_UpkeepFunctionSave, "NONE")
+		THEN
+			CallFunction(_UpkeepFunctionSave)
+			Set(_Override = %AMER_STATUS_Override)
+		ELSE
+			Set(_Override = INT:0)
+		ENDIF
+		
+		//If _Override was not zero, then we assume the _UpkeepFunctionSave
+		//already handled this in a special way.
+		IF "c1"
+			IsEqual(_Override = INT:0)
+		THEN
+			//I succeeded my saving throw, remove the status, report to log.
+			CharacterConsume(__Me, _RemoveStatus)
+			
+			DisplayCombatInfoText(__Me, %AMER_STATUS_NoLongerString, 1)		//Save string
+			DisplayCombatInfoText(__Me, _CombatLogStr, 1)		//Percentage of success
+			IF "!c1"
+				//Display the extra string if it's used.
+				IsEqual(%AMER_STATUS_ExtraString, null)
+			THEN
+				DisplayCombatInfoText(__Me, %AMER_STATUS_ExtraString, 1)
+				Set(%AMER_STATUS_ExtraString, null)
+			ENDIF
+			DisplayText(__Me, "AMER_BLANK", 1)					//Prevent text from floating above character heads.
+		ENDIF
+	ENDIF
+	
+	
+	
+//=====================================================//
+//        O T H E R   S T A T U S   C A L L S          //
+//=====================================================//
+EVENT TormentMovementDamage
+//				Torment Damage From Movement
+// Torment features damage when moving, the damage is reduced
+// by 10% per point of bodybuilding on the target, up to a
+// maximum reduction of 50% damage (at the time of writing).
+VARS
+	CHARACTER:_CharSource
+	INT:_BodyBuilding
+	FLOAT:_SourceLevel
+	FLOAT:_Y
+	FLOAT3:_Position
+	INT:_Level
+	INT:_Index
+	SKILL:_Projectile
+ON
+	OnFunction("AMER_STATUS_TormentMovementDamage")
+ACTIONS
+	Set(_CharSource, %AMER_STATUS_TORMENT_Source)
+	IF "c1&c2&c3&c4"
+		CharacterGetAbility(_BodyBuilding, __Me, BodyBuilding)
+		CharacterGetStat(_SourceLevel, _CharSource, Level)
+		GetPosition(__Me, _Position)
+		GetY(_Position, _Y)
+	THEN
+		Cast(_Level, _SourceLevel)
+		Set(_Index, _BodyBuilding)
+		
+		//Don't go out of bounds.
+		IF "c1"
+			IsGreaterThen(_Index, 5)
+		THEN
+			Set(_Index, 5)
+		ENDIF
+		
+		Add(_Y, -1.0)
+		SetY(_Position, _Y)
+		
+		GetElement(_Projectile, _Index, "AMER_SCRIPTSKILL_TormentDoT", "AMER_SCRIPTSKILL_TormentDoT2", "AMER_SCRIPTSKILL_TormentDoT3", "AMER_SCRIPTSKILL_TormentDoT4", "AMER_SCRIPTSKILL_TormentDoT5", "AMER_SCRIPTSKILL_TormentDoT6")
+		ExplodeAt(_Position, _Projectile, _Level, _CharSource)
+	ENDIF
+	
+	
+	
+//===============================================//
+//                                               //
+//           F A K E   S T A T U S E S           //
+//                                               //
+//===============================================//

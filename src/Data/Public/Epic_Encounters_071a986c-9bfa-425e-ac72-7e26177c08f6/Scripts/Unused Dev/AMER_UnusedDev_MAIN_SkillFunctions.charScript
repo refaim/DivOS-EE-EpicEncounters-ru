@@ -1,0 +1,2040 @@
+//===============================================//
+//                                               //
+//         S K I L L   F U N C T I O N S         //
+//                                               //
+//     Written by Matteo "Ameranth" T. (2017)    //
+//===============================================//
+	
+INIT
+CHARACTER:__Me
+	
+//Used as a lock for critical code in cases where dual wielding's
+//animation that hits twice simultaneously can cause problems.
+INT:%AMER_DualStrikeLock = 0
+	
+//Used to track the source caster and heal strength of Mass Heal.
+CHARACTER:%AMER_MassHealSource
+FLOAT:%AMER_MassHealAmount
+
+//Used to track Maze's caster's level.
+FLOAT:%AMER_MazeSourceLevel
+	
+//Used to track the source caster and heal strength of Regenerate.
+CHARACTER:%AMER_RegenerateSource
+FLOAT:%AMER_RegenerateAmount
+	
+//Used to track the source caster of Vitality Link.
+CHARACTER:%AMER_VitalityLinkSource
+
+//Used to make the AMER_ScalingPercentageHeal function heal
+//this character instead of __Me. Variables used for calculating
+//the heal are still derived from __Me.
+CHARACTER:%AMER_ScalingHealTargetOverride = null
+	
+//Used to track how much armor is currently lost due to Cruelty.
+INT:%AMER_CrueltyArmorLost = 0
+	
+//Used to track if a target has recently spread Creeping Ooze.
+INT:%AMER_CreepingOozed = 0
+	
+//Used to track if a damage source is execute, and how much damage
+//over multiple damage instances is coming from an execute.
+INT:%AMER_ExecuteCasted = 0
+FLOAT:%AMER_ExecuteDamage = 0
+	
+//Used to pass data between functions that pose no risk of
+//requesting its use at the same time.
+INT:%AMER_GenericInt
+CHARACTER:%AMER_GenericChar
+	
+//Used to track when a character should resurrect via Rebirth.
+INT:%AMER_RebirthCountdown = -1
+	
+//Used to track how many targets Borrowed Time successfully 
+//afflicted.
+INT:%AMER_BorrowedTimeTargets = 0
+	
+//Used to track if Bolster can remove disable.
+INT:%AMER_BolsterRemoval = 0
+
+//Used to flag whether scaling percentage healing should
+//ignore healing-to-damage mechanic of targeting a Zombie.
+INT:%AMER_ScalingHealIgnoreZombie = 0
+	
+EVENTS
+//=======================================================//
+//                  F U N C T I O N S                    //
+//=======================================================//
+EVENT CreepingOozeInitial
+ON
+	OnFunction("AMER_CreepingOozeInitial")
+ACTIONS
+	IF "c1"
+		CharacterHasStatus(__Me, CONSUME, "AMER_ApplyCreepingOoze")
+	THEN
+		CharacterConsume(__Me, "AMER_RemoveApplyCreepingOoze")
+		Set(%AMER_GenericChar, __Me)
+		StartTimer("AMER_CreepingOoze_Delay", 0.25, 0)
+		StartTimer("AMER_CreepingOoze_ResetFlags", 2.5, 0)
+	ENDIF
+	
+EVENT CreepingOoze
+VARS
+	CHARACTER:_Char
+	INT:_Oozed
+	SURFACE:_Surface = Ooze
+ON
+	OnIterateCharacter(_Char, "AMER_CreepingOoze")
+ACTIONS
+	IF "c1"
+		IsEqual(%AMER_GenericChar, null)
+	THEN
+		IF "c1&c2"
+			GetVar(_Oozed, _Char, "AMER_CreepingOozed")
+			IsEqual(_Oozed, INT:0)
+		THEN
+			IF "!c1"
+				CharacterIsDead(_Char)
+			THEN
+				//CharacterConsume(_Char, "AMER_ApplyCreepingOoze")
+				SetVar(_Char, "AMER_CreepingOozed", INT:1)
+				CreateSurfaceAt(_Char, _Surface, 2.0, INT:3)
+				Set(%AMER_GenericChar, _Char)
+				StartTimer("AMER_CreepingOoze_Delay", 0.25, 0)
+				//IterateCharactersNear(_Char, 2.5, "AMER_CreepingOoze")
+			ENDIF
+		ENDIF
+	ENDIF
+	
+EVENT CreepingOozeDelay
+VARS
+	CHARACTER:_Char
+ON
+	OnTimer("AMER_CreepingOoze_Delay")
+ACTIONS
+	Set(_Char, %AMER_GenericChar)
+	Set(%AMER_GenericChar, null)
+	IterateCharactersNear(_Char, 2.5, "AMER_CreepingOoze")
+	
+EVENT CreepingOozeResetFlag
+ON
+	OnTimer("AMER_CreepingOoze_ResetFlags")
+ACTIONS
+	IterateCharactersNear(__Me, 20.0, "AMER_CreepingOoze_ResetFlagsIterator")
+	
+EVENT CreepingOozeResetFlagsIterator
+VARS
+	CHARACTER:_Char
+ON
+	OnIterateCharacter(_Char, "AMER_CreepingOoze_ResetFlagsIterator")
+ACTIONS
+	SetVar(_Char, "AMER_CreepingOozed", INT:0)
+	
+	
+	
+EVENT ErosionStatus
+//Make Erosion display status text, it has no saving throw.
+ON
+	OnFunction("AMER_Erosion")
+ACTIONS
+	IF "c1|c2"
+		CharacterHasStatus(__Me, CONSUME, "AMER_ApplyErosion")
+		CharacterHasStatus(__Me, CONSUME, "AMER_ApplyErosion1Turn")
+	THEN
+		CharacterConsume(__Me, "AMER_RemoveApplyErosion")
+		StatusText(__Me, "AMER_Erosion")
+		DisplayCombatInfoText(__Me, "AMER_Erosion", 1)	//Display that Erosion is applied.
+		DisplayText(__Me, "AMER_BLANK", 1)				//Prevent text from floating above character heads.
+	ENDIF
+	
+	
+	
+EVENT AwesomePresence
+//Awesome Presence applies variable effects to allies or enemies
+//depending on how many corpses were in range when cast.
+VARS
+	CHARACTER:_CharSource
+	INT:_Index
+	POTION:_WhichEffect
+ON
+	OnFunction("AMER_AwesomePresence")
+ACTIONS
+	IF "c1"
+		CharacterHasStatus(__Me, CONSUME, "AMER_ApplyAwesomePresence")
+	THEN
+		CharacterConsume(__Me, "AMER_RemoveApplyAwesomePresence")
+		
+		IF "c1"
+			GetVar(_CharSource, __Me, "AMER_SkillSource")
+		THEN
+			//Always remove Fear and Charm from allies.
+			IF "(c1&!c2)|(c3&c4)"
+				CharacterIsAlly(__Me, _CharSource)
+				CharacterHasStatus(__Me, CHARMED)
+				CharacterIsEnemy(__Me, _CharSource)
+				CharacterHasStatus(__Me, CHARMED)
+			THEN
+				CharacterRemoveStatus(__Me, FEAR)
+				CharacterRemoveStatus(__Me, CHARMED)
+			ENDIF
+			
+			//Find out how many corpses the caster was near, and what
+			//bonus should be applied as a result.
+			IF "c1"
+				GetVar(_Index, _CharSource, "AMER_GenericInt")
+			THEN
+				IF "c1"
+					IsGreaterThen(_Index, INT:0)
+				THEN
+					Subtract(_Index, INT:1)	//Index starts at zero.
+					IF "(c1&!c2)|(c3&c4)"
+						CharacterIsAlly(__Me, _CharSource)
+						CharacterHasStatus(__Me, CHARMED)
+						CharacterIsEnemy(__Me, _CharSource)
+						CharacterHasStatus(__Me, CHARMED)
+					THEN
+						//I know at least one corpse was found
+						CharacterRemoveStatus(__Me, CURSED)
+						CharacterConsume(__Me, "SKILLBOOST_InspireStart")
+						
+						IF "!c1"
+							IsLessThen(_Index, INT:1)
+						THEN
+							CharacterRemoveStatus(__Me, WEAK)
+							CharacterRemoveStatus(__Me, SLOWED)
+							CharacterApplyStatus(__Me, FORTIFIED, 3)
+						ENDIF
+						IF "!c1"
+							IsLessThen(_Index, INT:2)
+						THEN
+							IF "c1"
+								CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_Enervate")
+							THEN
+								CharacterConsume(__Me, "AMER_STATUS_RemoveEnervate")
+							ENDIF
+							IF "c1"
+								CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_BorrowedTimeSlow")
+							THEN
+								CharacterConsume(__Me, "AMER_STATUS_RemoveBorrowedTimeSlow")
+							ENDIF
+							IF "c1"
+								CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_Balance")
+							THEN
+								CharacterConsume(__Me, "AMER_STATUS_RemoveBalance")
+							ENDIF
+							CharacterApplyStatus(__Me, BLESSED, 3)
+							CharacterApplyStatus(__Me, HASTED, 3)
+							CharacterApplyStatus(__Me, RAGED, 3)
+						ENDIF
+					ELSE
+						GetElement(_WhichEffect, _Index, "AMER_AwesomePresence1", "AMER_AwesomePresence2", "AMER_AwesomePresence3")
+						CharacterConsume(__Me, _WhichEffect)
+					ENDIF
+				ENDIF
+			ENDIF
+		ENDIF
+	ENDIF
+	
+EVENT AwesomePresenceCorpses
+//Find how many corpses are around the caster of Awesome Presence,
+//play a special effect on them.
+VARS
+	CHARACTER:_Char
+	INT:_Corpses
+ON
+	OnIterateCharacter(_Char, "AMER_AwesomePresenceCorpses")
+ACTIONS
+	IF "c1"
+		CharacterIsDead(_Char)
+	THEN
+		IF "c1"
+			GetVar(_Corpses, __Me, "AMER_GenericInt")
+		THEN
+			Add(_Corpses, INT:1)
+			Set(%AMER_GenericInt, _Corpses)
+			CharacterPlayEffect(_Char, "FX_GP_Status_Rage_A_Effect1")
+			CharacterPlayEffect(_Char, "FX_Skills_Warrior_PowerStance_Cast_A")
+		ENDIF
+	ENDIF
+	
+	
+	
+EVENT ColdSnapExtraDamage
+//Figured out how much extra damage Cold Snap should do based on
+//target having Frozen, Chilled, or Wet.
+VARS
+	CHARACTER:_CharSource
+	FLOAT:_Level
+	INT:_BonusIndex
+	SKILL:_Projectile
+ON
+	OnFunction("AMER_ColdSnap")
+ACTIONS
+	IF "c1"
+		CharacterHasStatus(__Me, CONSUME, "AMER_ApplyColdSnap")
+	THEN
+		CharacterConsume(__Me, "AMER_RemoveApplyColdSnap")
+		
+		Set(_BonusIndex, INT:-1)
+		IF "c1"
+			CharacterHasStatus(__Me, WET)
+		THEN
+			Add(_BonusIndex, INT:1)
+			CharacterRemoveStatus(__Me, WET)
+		ENDIF
+		IF "c1"
+			CharacterHasStatus(__Me, CHILLED)
+		THEN
+			Add(_BonusIndex, INT:1)
+			CharacterRemoveStatus(__Me, CHILLED)
+		ENDIF
+		IF "c1"
+			CharacterHasStatus(__Me, FROZEN)
+		THEN
+			Add(_BonusIndex, INT:2)
+			CharacterRemoveStatus(__Me, FROZEN)
+		ENDIF
+			
+		IF "c1"
+			IsGreaterThen(_BonusIndex, INT:-1)
+		THEN
+			IF "c1"
+				GetVar(_CharSource, __Me, "AMER_SkillSource")
+			THEN
+				//Get which bonus damage projectile should be used and fire it.
+				GetElement(_Projectile, _BonusIndex, "AMER_SCRIPTSKILL_ColdSnap1", "AMER_SCRIPTSKILL_ColdSnap2", "AMER_SCRIPTSKILL_ColdSnap3", "AMER_SCRIPTSKILL_ColdSnap4")
+				SetVar(__Me, "AMER_RemoteEffectProjectile", _Projectile)
+				SetVar(__Me, "AMER_RemoteEffectSource", _CharSource)
+				CallFunction("AMER_DoRemoteEffect")
+			ENDIF
+		ENDIF
+	ENDIF
+	
+	
+	
+EVENT MistyStepFXDelay
+ON
+	OnTimer("AMER_MistyStepFXDelay")
+ACTIONS
+	CharacterPlayEffect(__Me, "FX_GP_TeleportSmoke_A")
+	
+	
+	
+EVENT FallowExtraHeal
+//Fallow drains AP from allies in exchange for healing.
+//When used on enemies, Fallow simply removes all stored AP.
+VARS
+	CHARACTER:_CharSource
+	FLOAT:_AP
+	FLOAT:_Heal
+	FLOAT:_Vitality
+ON
+	OnFunction("AMER_FallowExtraHeal")
+ACTIONS
+	IF "c1"
+		CharacterHasStatus(__Me, CONSUME, "AMER_ApplyFallow")
+	THEN
+		CharacterConsume(__Me, "AMER_RemoveApplyFallow")
+		
+		//The amount to heal per AP should have been established on skill cast.
+		IF "c1"
+			GetVar(_Heal, __Me, "AMER_ScalingHealAmount")
+		THEN
+			//Fallow always heals for the maximum amount if cast on
+			//a character that is out of combat.
+			IF "!c1"
+				IsInCombat(__Me)
+			THEN
+				Multiply(_Heal, 4.0)
+				CharacterHeal(__Me, _Heal)
+			ENDIF
+				
+			IF "c1&c2"
+				CharacterGetStat(_AP, __Me, ActionPoints)
+				IsGreaterThen(_AP, 0.0)
+			THEN
+				IF "c1&c2"
+					GetVar(_CharSource, __Me, "AMER_SkillSource")
+					CharacterIsAlly(_CharSource, __Me)
+				THEN
+					//Don't drain more than maximum.
+					IF "c1"
+						IsGreaterThen(_AP, 4.0)
+					THEN
+						Set(_AP, 4.0)
+					ENDIF
+						
+					//Don't drain more than is necessary.
+					IF "c1"
+						CharacterGetStat(_Vitality, __Me, Vitality)
+					THEN
+						Subtract(_Vitality, 1.0)
+						Multiply(_Vitality, -1.0)
+						Divide(_Vitality, _Heal)
+						IF "c1"
+							IsLessThen(_Vitality, _AP)
+						THEN
+							Set(_AP, _Vitality)
+							//The remove AP function converts from float to int,
+							//this always rounds down. So add 0.99 to ensure it
+							//will round up.
+							Add(_AP, 0.99)
+						ENDIF
+					ENDIF
+						
+					//Calculate and apply appropriate heal.
+					Multiply(_Heal, _AP)
+					SetVar(__Me, "AMER_ScalingHealAmount", _Heal)
+					CallFunction("AMER_ScalingPercentageHeal")
+				ENDIF
+								
+				//Remove the AP.
+				SetVar(__Me, "AMER_RemoveCurrentAPAmount", _AP)
+				SetVar(__Me, "AMER_RemoveCurrentAPTarget", __Me)
+				CallFunction("AMER_RemoveCurrentAP")
+			ENDIF
+		ENDIF
+	ENDIF
+	
+	
+	
+EVENT BoilExtraDamage
+//Figured out how much extra damage Boil should do based on
+//target having Wet or being positioned in a water/blood puddle.
+VARS
+	CHARACTER:_CharSource
+	FLOAT:_Level
+	INT:_BonusIndex
+	SKILL:_Projectile
+ON
+	OnFunction("AMER_Boil")
+ACTIONS
+	IF "c1"
+		CharacterHasStatus(__Me, CONSUME, "AMER_ApplyBoil")
+	THEN
+		CharacterConsume(__Me, "AMER_RemoveApplyBoil")
+		
+		Set(_BonusIndex, INT:-1)
+		IF "c1"
+			CharacterHasStatus(__Me, WET)
+		THEN
+			Add(_BonusIndex, INT:1)
+			CharacterRemoveStatus(__Me, WET)
+		ENDIF
+		IF "c1"
+			IsInSurface(__Me, Water)
+		THEN
+			Add(_BonusIndex, INT:1)
+			CreateSurfaceAt(__Me, CloudSteam, 1.0, 3)
+		ELIF "c1"
+			IsInSurface(__Me, Electrified)
+		THEN
+			Add(_BonusIndex, INT:1)
+			CreateSurfaceAt(__Me, CloudStatic, 1.0, 3)
+		ELIF "c1"
+			IsInSurface(__Me, Blood)
+		THEN
+			Add(_BonusIndex, INT:1)
+			CreateSurfaceAt(__Me, CloudSteam, 1.0, 3)
+		ELIF "c1"
+			IsInSurface(__Me, BloodElectrified)
+		THEN
+			Add(_BonusIndex, INT:1)
+			CreateSurfaceAt(__Me, CloudStatic, 1.0, 3)
+		ENDIF
+			
+		IF "c1"
+			IsGreaterThen(_BonusIndex, INT:-1)
+		THEN
+			IF "c1"
+				GetVar(_CharSource, __Me, "AMER_SkillSource")
+			THEN
+				//Get which bonus damage projectile should be used and fire it.
+				GetElement(_Projectile, _BonusIndex, "AMER_SCRIPTSKILL_Boil1", "AMER_SCRIPTSKILL_Boil2")
+				SetVar(__Me, "AMER_RemoteEffectProjectile", _Projectile)
+				SetVar(__Me, "AMER_RemoteEffectSource", _CharSource)
+				CallFunction("AMER_DoRemoteEffect")
+			ENDIF
+		ENDIF
+	ENDIF
+	
+	
+	
+EVENT HeatMetalExtraDamage
+//Figured out how much extra damage Heat Metal should do based
+//on the target's unmapped armor value.
+VARS
+	CHARACTER:_CharSource
+	FLOAT:_Armor
+	FLOAT:_Level
+	INT:_Unmapped
+	SKILL:_Projectile
+ON
+	OnFunction("AMER_HeatMetal")
+ACTIONS
+	IF "c1"
+		CharacterHasStatus(__Me, CONSUME, "AMER_ApplyHeatMetal")
+	THEN
+		CharacterConsume(__Me, "AMER_RemoveApplyHeatMetal")
+		
+		IF "c1&c2"
+			CharacterGetStat(_Armor, __Me, Armor)
+			CharacterGetStat(_Level, __Me, Level)
+		THEN
+			IF "c1"
+				GetVar(_CharSource, __Me, "AMER_SkillSource")
+			THEN
+				//Get the unmapped armor value, returned into %AMER_UnmapAttributeValue
+				SetVar(__Me, "AMER_UnmapAttributeLevel", _Level)
+				SetVar(__Me, "AMER_UnmapAttributeValue", _Armor)
+				CallFunction("AMER_UnmapArmor")
+				IF "c1"
+					GetVar(_Armor, __Me, "AMER_UnmapAttributeValue")
+				THEN
+					Cast(_Unmapped, _Armor)
+					
+					IF "c1"
+						IsGreaterThen(_Unmapped, INT:0)
+					THEN
+						//Get which bonus damage projectile should be used and fire it.
+						Subtract(_Unmapped, INT:1)	//Index starts at zero.
+						GetElement(_Projectile, _Unmapped, "AMER_SCRIPTSKILL_HeatMetal1", "AMER_SCRIPTSKILL_HeatMetal2", "AMER_SCRIPTSKILL_HeatMetal3", "AMER_SCRIPTSKILL_HeatMetal4", "AMER_SCRIPTSKILL_HeatMetal5", "AMER_SCRIPTSKILL_HeatMetal6", "AMER_SCRIPTSKILL_HeatMetal7", "AMER_SCRIPTSKILL_HeatMetal8", "AMER_SCRIPTSKILL_HeatMetal9", "AMER_SCRIPTSKILL_HeatMetal10")
+						SetVar(__Me, "AMER_RemoteEffectProjectile", _Projectile)
+						SetVar(__Me, "AMER_RemoteEffectSource", _CharSource)
+						CallFunction("AMER_DoRemoteEffect")
+					ENDIF
+				ENDIF
+			ENDIF
+		ENDIF
+	ENDIF
+	
+	
+	
+EVENT ResetExecuteTimer
+//Unflag a character who was performing Execute
+ON
+	OnTimer("AMER_ResetExecute")
+ACTIONS
+	SetVar(__Me, "AMER_ExecuteCasted", INT:0)
+	
+EVENT ExecuteKillDetectTimer
+//A character who was being Executed needs to detect whether the
+//Execute did enough to kill them or not.
+VARS
+	FLOAT:_Vitality
+ON
+	OnTimer("AMER_ExecuteKillDetect")
+ACTIONS
+	IF "c1"
+		CharacterGetStat(_Vitality, __Me, Vitality)
+	THEN
+		Divide(_Vitality, 2.0)	//Execute checks against half remaining vitality.
+		IF "c1"
+			IsLessThen(_Vitality, %AMER_ExecuteDamage)
+		THEN
+			StatusText(__Me, "AMER_ExecuteKill")
+			CharacterDie(__Me, Explode)
+		ENDIF
+	ENDIF
+	Set(%AMER_ExecuteDamage, FLOAT:0)
+	
+	
+	
+EVENT RimeDifferentiate
+//Check if Rime is dealing with an enemy or an ally. If it's an enemy,
+//the fake status system needs to handle saving throw functionality.
+VARS
+	CHARACTER:_CharSource
+	FIXEDSTRING:_Function = "AMER_STATUS_RimeParameters"
+ON
+	OnFunction("AMER_RimeDifferentiate")
+ACTIONS
+	IF "c1"
+		CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_ApplyRime")
+	THEN
+		CharacterConsume(__Me, "AMER_STATUS_RemoveApplyRime")
+		
+		IF "c1"
+			GetVar(_CharSource, __Me, "AMER_SkillSource")
+		THEN
+			IF "c1"
+				CharacterIsAlly(__Me, _CharSource)
+			THEN
+				StatusText(__Me, "AMER_STATUS_FriendRime")
+				CharacterConsume(__Me, "AMER_STATUS_FriendRime")
+				StartTimer("AMER_STATUS_RimeIce", 0.25, -1)
+			ELSE
+				SetVar(__Me, "AMER_ExpectApplicator", INT:1)
+				SetVar(__Me, "AMER_ApplicatorIsStatus", INT:1)
+				SetVar(__Me, "AMER_ApplicatorFunction", _Function)
+				CharacterConsume(__Me, "AMER_STATUS_ApplyEnemyRime")
+			ENDIF
+		ENDIF
+	ENDIF
+	
+EVENT RimeMakeIce
+//Make Rime create ice surfaces under me when it is my turn. If I am
+//not in combat, do it all the time.
+ON
+	OnTimer("AMER_STATUS_RimeIce")
+ACTIONS
+	IF "(c1|!c2)&(c3|c4)"
+		CharacterIsInActiveTurn(__Me)
+		IsInCombat(__Me)
+		CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_FriendRime")
+		CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_EnemyRime")
+	THEN
+		CreateSurfaceAt(__Me, Ice, 1.0, 3)
+	ELSE
+		StopTimer("AMER_STATUS_RimeIce")
+	ENDIF
+	
+EVENT CrueltyArmorReduction
+//This functions as a critical code lock for Cruelty Armor Reduction.
+//Because dual-wielding can hit twice simultaneously, it is possible
+//to have two instances of this function trying to run together. With
+//this method, each instance can update the reduced armor value as
+//is necessary while only one instance will actually apply the debuffs.
+//The timer delay ensures that the critical code has the correct value
+//for armor reduction.
+//There is technically a chance for context switch between incrementing
+//the lock and checking the lock, but it is a very small chance and
+//I don't believe there is support for a proper set-and-check action.
+ON
+	OnFunction("AMER_CrueltyArmorReduction")
+ACTIONS
+	//If this is the first application of armor reduction from
+	//Cruelty, reset the tracking variable.
+	IF "!c1"
+		CharacterHasStatus(__Me, CONSUME, "AMER_CrueltyDebuff")
+	THEN
+		Set(%AMER_CrueltyArmorLost, INT:0)
+	ENDIF
+	
+	//Apply the visible debuff.
+	CharacterConsume(__Me, "AMER_CrueltyDebuff")
+	
+	//Apply the bleed chance.
+	CharacterConsume(__Me, "AMER_CrueltyBleed")
+	
+	//Increment the reduction, make sure it doesn't exceed the maximum.
+	IF "c1"
+		IsLessThen(%AMER_CrueltyArmorLost, 60)
+	THEN
+		Add(%AMER_CrueltyArmorLost, 4)
+	ENDIF
+	
+	//Cruelty SFX
+	ExplodeAt(__Me, "AMER_SCRIPTSKILL_CrueltyFX")
+	
+	//Increment and check the lock, start a short wait to assure the
+	//correct value is present within the critical code.
+	Add(%AMER_DualStrikeLock, INT:1)
+	IF "c1"
+		IsGreaterThen(%AMER_DualStrikeLock, INT:1)
+	THEN
+		StartTimer("AMER_CrueltyArmorReductionCriticalCode", 0.1, 0)
+	ENDIF
+	
+	
+EVENT CrueltyArmorReductionCriticalCode
+//Make Cruelty apply a stacking armor reduction
+VARS
+	CHARACTER:_CharSource
+	INT:_ArmorToReduce
+	INT:_Count
+	INT:_Amount
+	POTION:_WhichEffect
+	FIXEDSTRING:_WhichString
+ON
+	OnTimer("AMER_CrueltyArmorReductionCriticalCode")
+ACTIONS
+	Set(_ArmorToReduce, %AMER_CrueltyArmorLost)
+	Set(_Count, INT:0)
+	WHILE "c1"
+		IsLessThen(_Count, 6)
+	DO
+		//Apply required armor reductions, remove others.
+		GetElement(_Amount, _Count, INT:20, INT:20, INT:20, INT:16, INT:8, INT:4)
+		IF "!c1"
+			IsLessThen(_ArmorToReduce, _Amount)
+		THEN
+			Subtract(_ArmorToReduce, _Amount)
+			GetElement(_WhichEffect, _Count, "AMER_CrueltyArmorPen60", "AMER_CrueltyArmorPen40", "AMER_CrueltyArmorPen20", "AMER_CrueltyArmorPen16", "AMER_CrueltyArmorPen8", "AMER_CrueltyArmorPen4")
+			CharacterConsume(__Me, _WhichEffect)
+		ELSE
+			GetElement(_WhichEffect, _Count, "AMER_RemoveCrueltyArmorPen60", "AMER_RemoveCrueltyArmorPen40", "AMER_RemoveCrueltyArmorPen20", "AMER_RemoveCrueltyArmorPen16", "AMER_RemoveCrueltyArmorPen8", "AMER_RemoveCrueltyArmorPen4")
+			CharacterConsume(__Me, _WhichEffect)
+		ENDIF
+				
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+	//Reset the lock, exiting critical code.
+	Set(%AMER_DualStrikeLock, INT:0)
+	
+	
+	
+EVENT CrushDebuff
+//Make Crush reduce physical resistances/armor based off of caster strength.
+VARS
+	CHARACTER:_CharSource
+	FLOAT:_SourceStrength
+	INT:_Strength
+	INT:_ResToReduce
+	INT:_ArmorToReduce
+	INT:_Count
+	INT:_Amount
+	POTION:_WhichEffect
+ON
+	OnFunction("AMER_CrushDebuff")
+ACTIONS
+	IF "c1"
+		CharacterHasStatus(__Me, CONSUME, "AMER_ApplyCrush")
+	THEN
+		CharacterConsume(__Me, "AMER_RemoveApplyCrush")
+		
+		IF "c1"
+			GetVar(_CharSource, __Me, "AMER_SkillSource")
+		THEN
+			//Crush SFX
+			ExplodeAt(__Me, "AMER_SCRIPTSKILL_CrushFX")
+			
+			IF "c1"
+				CharacterGetStat(_SourceStrength, _CharSource, Strength)
+			THEN
+				Cast(_Strength, _SourceStrength)
+				Subtract(_Strength, 10)
+				IF "c1"
+					IsGreaterThen(_Strength, INT:0)
+				THEN
+					//Apply the visible debuff only if reduction will occur.
+					StatusText(__Me, "AMER_Crush")
+					CharacterConsume(__Me, "AMER_Crush")
+					
+					//Calculate and apply physical resistance reduction.
+					Set(_ResToReduce, _Strength)
+					Multiply(_ResToReduce, 4)
+					//Calculate and apply armor reduction.
+					Set(_ArmorToReduce, _Strength)
+					Multiply(_ArmorToReduce, 4)
+					
+					Set(_Count, INT:0)
+					WHILE "(c1|c2)&(c3|c4)"
+						IsLessThen(_Count, 8)
+						IsLessThen(_Count, 9)
+						IsGreaterThen(_ResToReduce, INT:0)
+						IsGreaterThen(_ArmorToReduce, INT:0)
+					DO
+						GetElement(_Amount, _Count, INT:128, INT:64, INT:32, INT:16, INT:8, INT:4, INT:2, INT:1)
+						IF "!c1&c2"
+							IsLessThen(_ResToReduce, _Amount)
+							IsLessThen(_Count, 8)
+						THEN
+							GetElement(_WhichEffect, _Count, "AMER_Crush_PhysRes128", "AMER_Crush_PhysRes64", "AMER_Crush_PhysRes32", "AMER_Crush_PhysRes16", "AMER_Crush_PhysRes8", "AMER_Crush_PhysRes4", "AMER_Crush_PhysRes2", "AMER_Crush_PhysRes1")
+							Subtract(_ResToReduce, _Amount)
+							CharacterConsume(__Me, _WhichEffect)
+						ENDIF
+						
+						GetElement(_Amount, _Count, INT:20, INT:20, INT:20, INT:20, INT:20, INT:16, INT:8, INT:4, INT:2)
+						IF "!c1&c2"
+							IsLessThen(_ArmorToReduce, _Amount)
+							IsLessThen(_Count, 9)
+						THEN
+							GetElement(_WhichEffect, _Count, "AMER_Crush_Armor100", "AMER_Crush_Armor80", "AMER_Crush_Armor60", "AMER_Crush_Armor40", "AMER_Crush_Armor20", "AMER_Crush_Armor16", "AMER_Crush_Armor8", "AMER_Crush_Armor4", "AMER_Crush_Armor2")
+							Subtract(_ArmorToReduce, _Amount)
+							CharacterConsume(__Me, _WhichEffect)
+						ENDIF
+						Add(_Count, INT:1)
+					ENDWHILE
+				ENDIF
+			ENDIF
+		ENDIF
+	ENDIF
+	
+	
+EVENT MazeDisable
+VARS
+	FLOAT:_SourceLevel
+	CHARACTER:_Caster
+ON
+	OnFunction("AMER_MazeDisable")
+ACTIONS
+	IF "c1"
+		CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_ApplyMaze")
+	THEN
+		CharacterConsume(__Me, "AMER_STATUS_RemoveApplyMaze")
+		
+		CharacterConsume(__Me, "AMER_STATUS_Maze")
+		SetVar(__Me, "AMER_STATUS_MAZE_Chance", FLOAT:100.0)
+		
+		CharacterPlayEffect(__Me, "FX_Skills_Air_Teleport_Disappear_A")
+		
+		//Store the caster's level for calculating unmapped attribute score.
+		IF "!c1"
+			GetVar(_Caster, __Me, "AMER_SkillSource")
+		THEN
+			//If something went wrong, use my level instead.
+			Set(_Caster, __Me)
+		ENDIF
+		IF "c1"
+			CharacterGetStat(_SourceLevel, _Caster, Level)
+		THEN
+			Set(%AMER_MazeSourceLevel, _SourceLevel)
+		ENDIF
+		
+		//Handle saving throw on caster's turn so need to flag me for status upkeep
+		SetVar(__Me, "AMER_CheckStatusUpkeep", INT:1)
+		
+		IF "c1"
+			CharacterHasTalent(__Me, AttackOfOpportunity)
+		THEN
+			CharacterSetAttackOfOpportunity(__Me, 0)
+		ENDIF
+		CharacterSetInvulnerable(__Me, 1)
+		StartTimer("AMER_MazeInvisibleDelay", 1.0, 0)
+		StartTimer("AMER_CheckMaze", 1.0, -1)
+	ENDIF
+	
+EVENT MazeInvisibleDelay
+//Short delay on making Maze target invisible to fit the animation better.
+ON
+	OnTimer("AMER_MazeInvisibleDelay")
+ACTIONS
+	SetVisible(__Me, 0)
+	
+EVENT CheckMaze
+//Undo maze's effects if the maze debuff is no longer present, play animation.
+ON
+	OnTimer("AMER_CheckMaze")
+ACTIONS
+	IF "!c1|!c2"
+		CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_Maze")
+		IsInCombat(__Me)
+	THEN
+		CharacterSetInvulnerable(__Me, 0)
+		SetVisible(__Me, 1)
+		IF "c1"
+			CharacterHasTalent(__Me, AttackOfOpportunity)
+		THEN
+			CharacterSetAttackOfOpportunity(__Me, 1)
+		ENDIF
+		StopTimer("AMER_CheckMaze")
+		PlayEffectAt(__Me, "FX_Skills_Air_Teleport_Reappear_A")
+		PlayEffectAt(__Me, "FX_Skills_Air_Teleport_Impact_A")
+		
+		//Clear any stored AP.
+		SetVar(__Me, "AMER_RemoveCurrentAPAmount", FLOAT:-1.0)
+		SetVar(__Me, "AMER_RemoveCurrentAPTarget", __Me)
+		CallFunction("AMER_RemoveCurrentAP")
+		
+		IF "c1"
+			CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_Maze")
+		THEN
+			CharacterConsume(__Me, "AMER_STATUS_RemoveMaze")
+		ENDIF
+	ENDIF
+	
+	
+	
+EVENT StartVengeance
+//Call the Vengeance iterator, limited by this radius.
+ON
+	OnFunction("AMER_StartVengeance")
+ACTIONS
+	IterateCharactersNear(__Me, 10.0, "AMER_VengeanceDamage")
+	
+EVENT VengeanceDamage
+//Do Vengeance damage to valid iterated characters.
+VARS
+	CHARACTER:_CharTarget
+ON
+	OnIterateCharacter(_CharTarget, "AMER_VengeanceDamage")
+ACTIONS
+	//spread out the conditionals for the sake of performance, as this routine
+	//will check everyone in a large radius each round while Vengeance is on.
+	IF "!c1"
+		CharacterIsDead(_CharTarget)
+	THEN
+		IF "c1"
+			CharacterIsEnemy(__Me, _CharTarget)
+		THEN
+			IF "c1"
+				CanSee(__Me, _CharTarget)
+			THEN
+				IF "!c1&!c2&!c3"
+					CharacterHasStatus(_CharTarget, CONSUME, "AMER_STATUS_Maze")
+					CharacterHasStatus(_CharTarget, INVISIBLE)
+					CharacterHasStatus(_CharTarget, SNEAKING)
+				THEN
+					//Set reverse logic flag for AMER_DoRemoteEffect.
+					SetVar(__Me, "AMER_RemoteEffectSourceAsTarget", INT:1)
+					SetVar(__Me, "AMER_RemoteEffectSource", _CharTarget)
+					SetVar(__Me, "AMER_RemoteEffectProjectile", SKILL:AMER_SCRIPTSKILL_VengeanceDamage)
+					CallFunction("AMER_DoRemoteEffect")
+				ENDIF
+			ENDIF
+		ENDIF
+	ENDIF
+	
+	
+	
+EVENT CheckInvulnerability
+//Check if Invulnerability has expired, remove its buff if it did.
+ON
+	OnTimer("AMER_CheckInvulnerability")
+ACTIONS
+	IF "!c1"
+		CharacterHasStatus(__Me, CONSUME, "AMER_Invulnerability")
+	THEN
+		SetVar(__Me, "AMER_AllResOverride", FLOAT:0)
+		StopTimer("AMER_CheckInvulnerability")
+	ENDIF
+	
+	
+	
+EVENT CheckFossilize
+//Check if Fossilize has expired, remove its buff if it did.
+ON
+	OnTimer("AMER_CheckFossilize")
+ACTIONS
+	IF "!c1"
+		CharacterHasStatus(__Me, CONSUME, "AMER_Fossilize")
+	THEN
+		SetVar(__Me, "AMER_FossilizeAbsorb", FLOAT:-1)
+		SetVar(__Me, "AMER_AllResOverride", FLOAT:0)
+		StopTimer("AMER_CheckFossilize")
+	ENDIF
+	
+	
+	
+EVENT EmpoweredSootheHeal
+//Determine whether or not Empowered Soothe should heal me. If
+//I am an enemy to the caster, Empowered Soothe only tries to "heal"
+//me if I am a Zombie or I have Decaying Touch.
+VARS
+	CHARACTER:_CharSource
+ON
+	OnFunction("AMER_EmpoweredSootheHeal")
+ACTIONS
+	IF "c1"
+		CharacterHasStatus(__Me, CONSUME, "AMER_ApplyEmpoweredSoothe")
+	THEN
+		CharacterConsume(__Me, "AMER_RemoveApplyEmpoweredSoothe")
+		
+		IF "c1"
+			GetVar(_CharSource, __Me, "AMER_SkillSource")
+		THEN
+			IF "c1"
+				CharacterIsAlly(__Me, _CharSource)
+			THEN
+				CallFunction("AMER_ScalingPercentageHeal")
+			ELIF "c1|c2"
+				CharacterHasStatus(__Me, DECAYING_TOUCH)
+				CharacterHasTalent(__Me, Zombie)
+			THEN
+				CallFunction("AMER_ScalingPercentageHeal")
+			ENDIF
+		ENDIF
+	ENDIF
+	
+	
+	
+EVENT RegenerateInitial
+VARS
+	CHARACTER:_CharSource
+ON
+	OnFunction("AMER_RegenerateInitial")
+ACTIONS
+	IF "c1"
+		CharacterHasStatus(__Me, CONSUME, "AMER_ApplyRegenerate")
+	THEN
+		CharacterConsume(__Me, "AMER_RemoveApplyRegenerate")
+		
+		//Regenerate needs to remember source caster and percentage heal amount.
+		IF "c1&c2"
+			GetVar(_CharSource, __Me, "AMER_SkillSource")
+			GetVar(%AMER_RegenerateAmount, __Me, "AMER_ScalingHealAmount")
+		THEN
+			CharacterConsume(__Me, "AMER_Regenerate")
+			Set(%AMER_RegenerateSource, _CharSource)
+			
+			//Handle healing on caster's turn so need to flag me for status upkeep
+			SetVar(__Me, "AMER_CheckStatusUpkeep", INT:1)
+				
+			CallFunction("AMER_RegenerateHealing")	//Regenerate needs to heal targets on application.
+			StartTimer("AMER_RegenerateOutOfCombat", 5.75, -1)	//Regenerate needs to heal when out of combat too.
+		ENDIF
+	ENDIF
+	
+EVENT RegenerateHealing
+//Trigger the healing effect of Regenerate.
+ON
+	OnFunction("AMER_RegenerateHealing")
+ACTIONS
+	IF "!c1"
+		CharacterHasStatus(__Me, UNHEALABLE)
+	THEN
+		SetVar(__Me, "AMER_RemoteEffectSource", %AMER_RegenerateSource)
+		SetVar(__Me, "AMER_RemoteEffectProjectile", SKILL:AMER_SCRIPTSKILL_Regenerate)
+		CallFunction("AMER_DoRemoteEffect")
+		
+		SetVar(__Me, "AMER_ScalingHealAmount", %AMER_RegenerateAmount)
+		CallFunction("AMER_ScalingPercentageHeal")
+	ENDIF
+	
+EVENT RegenerateOutOfCombat
+//Timer to trigger Regenerate's ticks while out of combat.
+VARS
+	FLOAT:_Vitality
+ON
+	OnTimer("AMER_RegenerateOutOfCombat")
+ACTIONS
+	IF "c1"
+		CharacterHasStatus(__Me, CONSUME, "AMER_Regenerate")
+	THEN
+		IF "!c1"
+			IsInCombat(__Me)
+		THEN
+			IF "!c1|c2|c3|c4"
+				//When out of combat, prevent healing ticks that would
+				//have no effect, because it gets annoying and loud.
+				CharacterGetStat(_Vitality, __Me, Vitality)
+				IsLessThen(_Vitality, 1.0)
+				CharacterHasStatus(__Me, DECAYING_TOUCH)
+				CharacterHasTalent(__Me, Zombie)
+			THEN
+				CallFunction("AMER_RegenerateHealing")
+			ENDIF
+		ENDIF
+	ELSE
+		StopTimer("AMER_RegenerateOutOfCombat")
+	ENDIF
+	
+	
+	
+EVENT MassHealInitial
+VARS
+	CHARACTER:_CharSource
+ON
+	OnFunction("AMER_MassHealInitial")
+ACTIONS
+	IF "c1"
+		CharacterHasStatus(__Me, CONSUME, "AMER_ApplyMassHeal")
+	THEN
+		CharacterConsume(__Me, "AMER_RemoveApplyMassHeal")
+		
+		//Mass Heal needs to remember source caster and percentage heal amount.
+		IF "c1&c2"
+			GetVar(_CharSource, __Me, "AMER_SkillSource")
+			GetVar(%AMER_MassHealAmount, __Me, "AMER_ScalingHealAmount")
+		THEN
+			CharacterConsume(__Me, "AMER_MassHeal")
+			Set(%AMER_MassHealSource, _CharSource)
+			
+			//Handle healing on caster's turn so need to flag me for status upkeep
+			SetVar(__Me, "AMER_CheckStatusUpkeep", INT:1)
+					
+			CallFunction("AMER_MassHealHealing")	//Mass Heal needs to heal targets on application.
+			StartTimer("AMER_MassHealOutOfCombat", 5.75, -1)	//Mas heal needs to heal when out of combat too.
+		ENDIF
+	ENDIF
+	
+EVENT MassHealHealing
+//Trigger the healing effect of Mass Healing.
+ON
+	OnFunction("AMER_MassHealHealing")
+ACTIONS
+	IF "!c1"
+		CharacterHasStatus(__Me, UNHEALABLE)
+	THEN
+		SetVar(__Me, "AMER_RemoteEffectSource", %AMER_MassHealSource)
+		SetVar(__Me, "AMER_RemoteEffectProjectile", SKILL:AMER_SCRIPTSKILL_MassHeal)
+		CallFunction("AMER_DoRemoteEffect")
+		
+		SetVar(__Me, "AMER_ScalingHealAmount", %AMER_MassHealAmount)
+		CallFunction("AMER_ScalingPercentageHeal")
+	ENDIF
+	
+EVENT MassHealOutOfCombat
+//Timer to trigger Mass Heal's ticks while out of combat.
+VARS
+	FLOAT:_Vitality
+ON
+	OnTimer("AMER_MassHealOutOfCombat")
+ACTIONS
+	IF "c1"
+		CharacterHasStatus(__Me, CONSUME, "AMER_MassHeal")
+	THEN
+		IF "!c1"
+			IsInCombat(__Me)
+		THEN
+			IF "!c1|c2|c3|c4"
+				//When out of combat, prevent healing ticks that would
+				//have no effect, because it gets annoying and loud.
+				CharacterGetStat(_Vitality, __Me, Vitality)
+				IsLessThen(_Vitality, 1.0)
+				CharacterHasStatus(__Me, DECAYING_TOUCH)
+				CharacterHasTalent(__Me, Zombie)
+			THEN
+				CallFunction("AMER_MassHealHealing")
+			ENDIF
+		ENDIF
+	ELSE
+		StopTimer("AMER_MassHealOutOfCombat")
+	ENDIF
+	
+	
+	
+EVENT BalanceOutOfCombat
+//Timer to trigger Balance's ticks while out of combat.
+ON
+	OnTimer("AMER_BalanceOutOfCombat")
+ACTIONS
+	IF "c1"
+		CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_Balance")
+	THEN
+		IF "!c1"
+			IsInCombat(__Me)
+		THEN
+			CallFunction("AMER_STATUS_BalanceUpkeep")
+		ENDIF
+	ELSE
+		StopTimer("AMER_BalanceOutOfCombat")
+	ENDIF
+	
+	
+	
+EVENT CleansingWaterInitial
+//Cleansing Water removes Attenuate, Borrowed Time's slow, Curse
+//of Cuts, and Balance.
+ON
+	OnFunction("AMER_CleansingWaterInitial")
+ACTIONS
+	IF "c1"
+		CharacterHasStatus(__Me, CONSUME, "AMER_ApplyCleansingWater")
+	THEN
+		CharacterConsume(__Me, "AMER_RemoveApplyCleansingWater")
+		
+		IF "c1|c2|c3|c4"
+			CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_Attenuate")
+			CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_Attenuate2")
+			CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_Attenuate3")
+			CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_Attenuate4")
+		THEN
+			CharacterConsume(__Me, "AMER_STATUS_RemoveAttenuate")
+		ENDIF
+		
+		IF "c1"
+			CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_BorrowedTimeSlow")
+		THEN
+			CharacterConsume(__Me, "AMER_STATUS_RemoveBorrowedTimeSlow")
+		ENDIF
+		
+		IF "c1"
+			CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_CurseOfCuts")
+		THEN
+			CharacterConsume(__Me, "AMER_STATUS_RemoveCurseOfCuts")
+		ENDIF
+		
+		IF "c1"
+			CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_Balance")
+		THEN
+			CharacterConsume(__Me, "AMER_STATUS_RemoveBalance")
+		ENDIF
+	ENDIF
+	
+	
+	
+EVENT PurifyingFireInitial
+//Purifying Fire removes Regenerate/Mass Heal, Rime, Curse of Cuts,
+//and Enervate
+ON
+	OnFunction("AMER_PurifyingFireInitial")
+ACTIONS
+	IF "c1"
+		CharacterHasStatus(__Me, CONSUME, "AMER_ApplyPurifyingFire")
+	THEN
+		CharacterConsume(__Me, "AMER_RemoveApplyPurifyingFire")
+		
+		IF "c1"
+			CharacterHasStatus(__Me, CONSUME, "AMER_MassHeal")
+		THEN
+			CharacterConsume(__Me, "AMER_RemoveMassHeal")
+		ENDIF
+		
+		IF "c1"
+			CharacterHasStatus(__Me, CONSUME, "AMER_Regenerate")
+		THEN
+			CharacterConsume(__Me, "AMER_RemoveRegenerate")
+		ENDIF
+		
+		IF "c1"
+			CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_EnemyRime")
+		THEN
+			CharacterConsume(__Me, "AMER_STATUS_RemoveEnemyRime")
+		ENDIF
+		
+		IF "c1"
+			CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_CurseOfCuts")
+		THEN
+			CharacterConsume(__Me, "AMER_STATUS_RemoveCurseOfCuts")
+		ENDIF
+		
+		IF "c1"
+			CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_Enervate")
+		THEN
+			CharacterConsume(__Me, "AMER_STATUS_RemoveEnervate")
+		ENDIF
+	ENDIF
+	
+	
+	
+EVENT AttonementDamage
+//Attonement was cast on someone, trigger the damaging explosion.
+VARS
+	CHARACTER:_CharSource
+	FLOAT:_SourceLevel
+	INT:_Level
+ON
+	OnFunction("AMER_AttonementDamage")
+ACTIONS
+	IF "c1"
+		CharacterHasStatus(__Me, CONSUME, "AMER_ApplyAttonement")
+	THEN
+		CharacterConsume(__Me, "AMER_RemoveApplyAttonement")
+		
+		CallFunction("AMER_ScalingPercentageHeal")
+		
+		IF "c1"
+			GetVar(_CharSource, __Me, "AMER_SkillSource")	
+		THEN
+			IF "c1"
+				CharacterGetStat(_SourceLevel, _CharSource, Level)
+			THEN
+				Cast(_Level, _SourceLevel)
+				ExplodeAt(__Me, SKILL:AMER_SCRIPTSKILL_AttonementDamage, _Level, _CharSource)
+			ENDIF
+		ENDIF
+	ENDIF
+	
+	
+	
+EVENT VitalityLinkInitial
+//Vitality Link needs to remember the source character.
+VARS
+	CHARACTER:_CharSource
+ON
+	OnFunction("AMER_VitalityLinkInitial")
+ACTIONS
+	IF "c1"
+		CharacterHasStatus(__Me, CONSUME, "AMER_ApplyVitalityLink")
+	THEN
+		CharacterConsume(__Me, "AMER_RemoveApplyVitalityLink")
+		IF "c1"
+			GetVar(_CharSource, __Me, "AMER_SkillSource")
+		THEN
+			Set(%AMER_VitalityLinkSource, _CharSource)
+			CharacterConsume(__Me, "AMER_VitalityLink")
+			StatusText(__Me, "AMER_VitalityLink")
+			StatusText(_CharSource, "AMER_VitalityLink")
+		ENDIF
+	ENDIF
+	
+EVENT VitalityLinkSplitDamage
+VARS
+	FLOAT:_MyRealVitality
+	FLOAT:_SourceRealVitality
+	FLOAT:_MyVitality
+	FLOAT:_NewVitality
+	FLOAT:_SplitAmount
+	FLOAT:_Damage
+	FLOAT:_Strength
+ON
+	OnFunction("AMER_VitalityLinkSplitDamage")
+ACTIONS
+	IF "c1&c2&c3&c4&c5&c6"
+		GetVar(_Damage, __Me, "AMER_DamageTaken")
+		CharacterGetStat(_Strength, %AMER_VitalityLinkSource, Strength)
+		CharacterGetStat(_NewVitality, %AMER_VitalityLinkSource, Vitality)
+		CharacterGetStat(_MyVitality, __Me, Vitality)
+		CharacterGetStat(_MyRealVitality, __Me, VitalityPoints)
+		CharacterGetStat(_SourceRealVitality, %AMER_VitalityLinkSource, VitalityPoints)
+	THEN
+		IF "c1&c2"
+			IsGreaterThen(_NewVitality, 0.00)
+			IsGreaterThen(_MyVitality, 0.00)
+		THEN
+			//Calculate how much damage should be split based
+			//on caster strength.
+			Set(_SplitAmount, 0.35)
+			IF "c1"
+				IsGreaterThen(_Strength, 13.0)
+			THEN
+				Subtract(_Strength, 13.0)
+				Multiply(_Strength, 0.03)
+				Add(_SplitAmount, _Strength)
+				IF "c1"
+					IsGreaterThen(_SplitAmount, 0.6)
+				THEN
+					Set(_SplitAmount, 0.6)
+				ENDIF
+			ENDIF
+				
+			//Heal me for the percentage of taken damage that
+			//the caster will take instead.
+			Multiply(_SplitAmount, _Damage)
+			CharacterHeal(__Me, _SplitAmount)
+			
+			//Since the damage taken is reported as a percentage of my vitality,
+			//we need to calculate what that percentage is relative to the vitality
+			//maximum of the caster. This number is the damage the caster suffers.
+			Divide(_MyRealVitality, _MyVitality)			//My maximum vitality.
+			Divide(_SourceRealVitality, _NewVitality)		//Caster maximum vitality.
+			Divide(_MyRealVitality, _SourceRealVitality)	//Percentage that my maximum vitality is of caster's maximum vitality.
+			Multiply(_SplitAmount, _MyRealVitality)			//Percentage that redirect amount is of caster's maximum vitality.
+			
+			
+			Subtract(_NewVitality, _SplitAmount)
+			IF "c1"
+				IsLessThen(_NewVitality, 0.00)
+			THEN
+				//Do not kill the caster if too much damage is suffered, just
+				//set vitality to 1% and remove Vitality Link.
+				CharacterConsume(__Me, "AMER_RemoveVitalityLink")
+				SetHealth(%AMER_VitalityLinkSource, 0.01)
+			ELSE
+				SetHealth(%AMER_VitalityLinkSource, _NewVitality)
+			ENDIF
+			
+			CharacterPlayEffect(%AMER_VitalityLinkSource, "FX_Skills_Warrior_ShacklesOfPain_Impact_A")
+		ELSE
+			CharacterConsume(__Me, "AMER_RemoveVitalityLink")
+		ENDIF
+	ENDIF
+	
+	
+	
+EVENT CauterizeHeal
+//Check if Cauterize targeted an enemy or an ally, and whether
+//or not the target has Decaying Touch. Heal accordingly.
+//Cauterize removes Decaying Touch from allies before applying
+//a heal.
+VARS
+	CHARACTER:_CharSource
+	FLOAT3:_Position
+	FLOAT:_SourceLevel
+	INT:_Level
+ON
+	OnFunction("AMER_CauterizeHeal")
+ACTIONS
+	IF "c1"
+		CharacterHasStatus(__Me, CONSUME, "AMER_ApplyCauterize")
+	THEN
+		CharacterConsume(__Me, "AMER_RemoveApplyCauterize")
+		
+		IF "c1"
+			GetVar(_CharSource, __Me, "AMER_SkillSource")
+		THEN
+			IF "c1"
+				CharacterGetStat(_SourceLevel, _CharSource, Level)
+			THEN
+				IF "!c1"
+					CharacterHasStatus(__Me, UNHEALABLE)
+				THEN
+					Cast(_Level, _SourceLevel)
+					SetVar(__Me, "AMER_RemoteEffectSource", _CharSource)
+					SetVar(__Me, "AMER_RemoteEffectProjectile", SKILL:AMER_SCRIPTSKILL_CauterizeHeal)
+					
+					IF "c1&c2"
+						CharacterIsAlly(_CharSource, __Me)
+						GetPosition(__Me, _Position)
+					THEN
+						CharacterRemoveStatus(__Me, DECAYING_TOUCH)
+						CallFunction("AMER_DoRemoteEffect")
+						CallFunction("AMER_ScalingPercentageHeal")
+					ELIF "c1|c2"
+						CharacterHasStatus(__Me, DECAYING_TOUCH)
+						CharacterHasTalent(__Me, Zombie)
+					THEN
+						CallFunction("AMER_DoRemoteEffect")
+						CallFunction("AMER_ScalingPercentageHeal")
+					ENDIF
+				ENDIF
+			ENDIF
+		ENDIF
+	ENDIF
+	
+	
+	
+EVENT RebirthRez
+//Check if it's time to resurrect the caster of Rebirth. If it is,
+//flag for ignoring rez sickness, create explosion, and start the
+//timer for applying the buff. _RebirthBuffFrequency is how often
+//the timer will check if the player is alive and ready to be buffed.
+//This is necessary to do because a player is not alive immediately
+//after they are resurrected.
+VARS
+	FLOAT:_SourceLevel
+	INT:_Level
+	INT:_Flag
+ON
+	OnFunction("AMER_RebirthRez")
+ACTIONS
+	IF "c1"
+		CharacterIsDead(__Me)
+	THEN
+		IF "c1"
+			IsInCombat(__Me)
+		THEN
+			Subtract(%AMER_RebirthCountdown, INT:6)
+		ELSE
+			Subtract(%AMER_RebirthCountdown, INT:1)
+		ENDIF
+		IF "!c1&c2"
+			IsGreaterThen(%AMER_RebirthCountdown, INT:0)
+			CharacterGetStat(_SourceLevel, __Me, Level)
+		THEN
+			Cast(_Level, _SourceLevel)
+			ExplodeAt(__Me, AMER_SCRIPTSKILL_RageOfThePhoenix, _Level, __Me)
+				
+			//Check if the character already ignores res sickness so we don't remove
+			//res sickness immunity from a character that should have it.
+			IF "c1&c2"
+				GetVar(_Flag, __Me, "AMER_IgnoreResSickness")
+				IsEqual(_Flag, INT:0)
+			THEN
+				SetVar(__Me, "AMER_IgnoreResSickness", INT:2)
+				CharacterResurrect(__Me)
+			ELSE
+				CharacterResurrect(__Me)
+			ENDIF
+				
+			StatusText(__Me, "AMER_RageOfThePhoenix")
+			//Timer checks until the caster "counts" as alive. Else consumes don't work.
+			StartTimer("AMER_RebirthBuffDelay", 0.2, -1)
+			Set(%AMER_RebirthCountdown, INT:-1)
+		ENDIF
+	ELSE
+		//If the character isn't dead anymore, then they were
+		//resurrected in another way, so Rebirth fizzles.
+		Set(%AMER_RebirthCountdown, INT:-1)
+	ENDIF
+	
+EVENT RebirthBuff
+//Use this timer to apply rebirth's buffs, since applying immediately
+//after resurrection is called is apparently too fast and doesn't work.
+VARS
+	FLOAT:_Res
+ON
+	OnTimer("AMER_RebirthBuffDelay")
+ACTIONS
+	//If it's a player, give them maximum resistance, if it's not
+	//just give them fire immunity consume.
+	IF "!c1"
+		CharacterIsDead(__Me)
+	THEN
+		StopTimer("AMER_RebirthBuffDelay")	//This was a recurring timer, stop it.
+		IF "c1"
+			CharacterIsPlayer(__Me)
+		THEN
+			IF "c1"
+				GetVar(_Res, __Me, "AMER_MaxFireRes")
+			THEN
+				CharacterConsume(__Me, "AMER_RageOfThePhoenix")
+				Add(_Res, FLOAT:25)
+				SetVar(__Me, "AMER_MaxFireRes", _Res)
+				StartTimer("AMER_RebirthMaxRes", 2.0, -1)
+			ENDIF
+		ELSE
+			CharacterConsume(__Me, "Stats_FireImmunity")
+		ENDIF
+		//Display text, apply raged.
+		DisplayCombatInfoText(__Me, "AMER_RebirthString", 1)
+		DisplayText(__Me, "AMER_BLANK", 1)
+		CharacterApplyStatus(__Me, RAGED, 3, 1)
+	ENDIF
+	
+EVENT RebirthMaxRes
+//Remove Rebirth's maximum fire resistance bonus when it fades.
+VARS
+	FLOAT:_Res
+ON
+	OnTimer("AMER_RebirthMaxRes")
+ACTIONS
+	IF "!c1&c2"
+		CharacterHasStatus(__Me, CONSUME, "AMER_RageOfThePhoenix")
+		GetVar(_Res, __Me, "AMER_MaxFireRes")
+	THEN
+		StopTimer("AMER_RebirthMaxRes")	//This was a recurring timer, stop it.
+		Subtract(_Res, FLOAT:25)
+		SetVar(__Me, "AMER_MaxFireRes", _Res)
+	ENDIF
+	
+EVENT RebirthOutOfCombat
+VARS
+	INT:_Countdown
+ON
+	OnTimer("AMER_RebirthOutOfCombat")
+ACTIONS
+	IF "!c1"
+		IsInCombat(__Me)
+	THEN
+		IF "c1"
+			IsGreaterThen(%AMER_RebirthCountdown, INT:0)
+		THEN
+			//Check if there are living party members, if there aren't
+			//the game has ended, so don't resurrect.
+			Set(%AMER_GenericInt, INT:0)
+			IterateParty("AMER_RebirthGameOver", Highest, Vitality, __Me)
+			
+			IF "c1"
+				IsEqual(%AMER_GenericInt, INT:1)
+			THEN
+				CallFunction("AMER_RebirthRez")
+			ENDIF
+		ELSE
+			StopTimer("AMER_RebirthOutOfCombat")
+		ENDIF
+	ENDIF
+	
+EVENT RebirthGameOver
+//Find whether or not the game is over by checking for living
+//party members. Rebirth won't work if the game is over.
+VARS
+	CHARACTER:_Char
+ON
+	OnIterateCharacter(_Char, "AMER_RebirthGameOver")
+ACTIONS
+	IF "!c1"
+		CharacterIsDead(_Char)
+	THEN
+		Set(%AMER_GenericInt, INT:1)
+	ENDIF
+	
+	
+	
+EVENT EnervateBuff
+//Apply Enervate's buff after getting how many targets
+//were afflicted by it.
+VARS
+	POTION:_WhichEffect
+ON
+	OnTimer("AMER_EnervateBuff")
+ACTIONS
+	IF "c1"
+		IsGreaterThen(%AMER_BorrowedTimeTargets, INT:0)
+	THEN
+		//Don't go out of bounds.
+		IF "c1"
+			IsGreaterThen(%AMER_BorrowedTimeTargets, 3)
+		THEN
+			Set(%AMER_BorrowedTimeTargets, 3)
+		ENDIF
+		
+		Subtract(%AMER_BorrowedTimeTargets, INT:1)	//Index starts at zero.
+		GetElement(_WhichEffect, %AMER_BorrowedTimeTargets, "AMER_STATUS_EnervateSelf1", "AMER_STATUS_EnervateSelf2", "AMER_STATUS_EnervateSelf3")
+		CharacterConsume(__Me, _WhichEffect)
+	ENDIF
+	
+	
+	
+EVENT BorrowedTimeHaste
+//Apply Borrowed Time's haste after getting amount of targets
+//that were affected.
+VARS
+	POTION:_WhichEffect
+ON
+	OnTimer("AMER_BorrowedTimeHaste")
+ACTIONS
+	IF "c1"
+		IsGreaterThen(%AMER_BorrowedTimeTargets, INT:0)
+	THEN
+		//Don't go out of bounds.
+		IF "c1"
+			IsGreaterThen(%AMER_BorrowedTimeTargets, 5)
+		THEN
+			Set(%AMER_BorrowedTimeTargets, 5)
+		ENDIF
+		
+		Subtract(%AMER_BorrowedTimeTargets, INT:1)	//Index starts at zero.
+		GetElement(_WhichEffect, %AMER_BorrowedTimeTargets, "AMER_STATUS_BorrowedTime1", "AMER_STATUS_BorrowedTime2", "AMER_STATUS_BorrowedTime3", "AMER_STATUS_BorrowedTime4", "AMER_STATUS_BorrowedTime5")
+		CharacterConsume(__Me, _WhichEffect)
+	ENDIF
+	
+EVENT BorrowedTimeAnimation
+//Make the slurpee slurpee animation for Burrowed Time.
+VARS
+	CHARACTER:_Char
+ON
+	OnIterateCharacter(_Char, "AMER_BorrowedTimeAnimation")
+ACTIONS
+	IF "!c1"
+		IsEqual(_Char, __Me)
+	THEN
+		IF "!c1"
+			CharacterIsDead(_Char)
+		THEN
+			ShootLocalProjectileAt("AMER_SCRIPTSKILL_BorrowedTimeAnimation", _Char, null, __Me)
+		ENDIF
+	ENDIF
+	
+	
+	
+EVENT GreaterInvisInitial
+//Greater Invis needs to start working when first cast
+//as well as on subsequent turns. This handles being used
+//out of combat and on yourself, for the turn it is cast.
+ON
+	OnFunction("AMER_GreaterInvisInitial")
+ACTIONS
+	IF "c1"
+		CharacterHasStatus(__Me, CONSUME, "AMER_ApplyGreaterInvisibility")
+	THEN
+		CharacterConsume(__Me, "AMER_RemoveApplyGreaterInvisibility")
+		
+		CharacterConsume(__Me, "AMER_GreaterInvisibility")
+		StartTimer("AMER_GreaterInvisReapply", 0.2, -1)
+	ENDIF
+	
+EVENT GreaterInvisReapply
+//Greater Invisibility reapplies invisibility during the
+//character's turn. If not in combat, just do it all the
+//time.
+ON
+	OnTimer("AMER_GreaterInvisReapply")
+ACTIONS
+	IF "(c1|!c2)&c3"
+		CharacterIsInActiveTurn(__Me)
+		IsInCombat(__Me)
+		CharacterHasStatus(__Me, CONSUME, "AMER_GreaterInvisibility")
+	THEN
+		IF "!c1"
+			CharacterHasStatus(__Me, INVISIBLE)
+		THEN
+			CharacterApplyStatus(__Me, INVISIBLE, 2, 0)
+		ENDIF
+	ELSE
+		StopTimer("AMER_GreaterInvisReapply")
+	ENDIF
+	
+	
+	
+EVENT EmpoweredBlessedEarth
+//Allow Blessed Earth to refresh Bless and heal.
+ON
+	OnFunction("AMER_EmpoweredBlessedEarth")
+ACTIONS
+	IF "c1"
+		CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_ApplyBless")
+	THEN
+		CharacterConsume(__Me, "AMER_STATUS_RemoveApplyBless")
+		
+		CharacterRemoveStatus(__Me, BLESSED)
+		CharacterApplyStatus(__Me, BLESSED, 5)
+		CallFunction("AMER_ScalingPercentageHeal")
+	ENDIF
+	
+	
+	
+EVENT BlessInitial
+//Allow Bless to refresh itself.
+ON
+	OnFunction("AMER_BlessInitial")
+ACTIONS
+	IF "c1"
+		CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_ApplyBless")
+	THEN
+		CharacterConsume(__Me, "AMER_STATUS_RemoveApplyBless")
+		
+		CharacterRemoveStatus(__Me, BLESSED)
+		CharacterApplyStatus(__Me, BLESSED, 5)
+	ENDIF
+	
+	
+	
+EVENT SoulburnInitial
+//Soulburn debuffs with no saving throw, cannot affect those
+//who are already Soulsapped.
+ON
+	OnFunction("AMER_SoulburnInitial")
+ACTIONS
+	IF "c1"
+		CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_ApplySoulburn")
+	THEN
+		CharacterConsume(__Me, "AMER_STATUS_RemoveApplySoulburn")
+		IF "!c1&!c2&!c3"
+			CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_Soulsap1")
+			CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_Soulsap2")
+			CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_Soulsap3")
+		THEN
+			StatusText(__Me, "AMER_STATUS_Soulburn")
+			CharacterConsume(__Me, "AMER_STATUS_Soulburn")
+		ENDIF
+	ENDIF
+	
+	
+	
+EVENT AnticipateAttack
+//Anticipate can retaliate against damaging attackers.
+VARS
+	CHARACTER:_CharSource
+	FLOAT:_Distance
+	FLOAT:_Range
+ON
+	OnFunction("AMER_AnticipateAttack")
+ACTIONS
+	IF "c1"
+		GetVar(_CharSource, __Me, "AMER_CharSource")
+	THEN
+		IF "c1&c2&(!c3|!c4)&c5"
+			CharacterGetWeaponRange(_, _Range, __Me)
+			GetInnerDistance(_Distance, __Me, _CharSource)
+			IsGreaterThen(_Distance, 3.0)	//Some weapons have silly-small range.
+			IsGreaterThen(_Distance, _Range)
+			CanSee(__Me, _CharSource)
+		THEN
+			StopTimer("AMER_ResetFreeAttack")
+			StartTimer("AMER_ResetFreeAttack", 1.0, 0)
+			SetVar(__Me, "AMER_PlayAnimation", FIXEDSTRING:STOP)
+			SetVar(__Me, "AMER_FreeAttackTarget", _CharSource)
+			SetVar(__Me, "AMER_FreeAttackText", FIXEDSTRING:AMER_AnticipateText)
+			SetVar(__Me, "AMER_AnticipateRetaliation", INT:0)
+		ENDIF
+	ENDIF
+	
+	
+	
+EVENT BolsterRemoval
+//Bolster can remove the first disable.
+ON
+	//This needs to be on a timer because removing statuses from
+	//the same event stack that applied them can cause a crash.
+	OnFunction("AMER_BolsterRemoval")
+ACTIONS
+	IF "c1"
+		IsGreaterThen(%AMER_BolsterRemoval, INT:0)
+	THEN
+		IF "c1"
+			CharacterHasStatus(__Me, CONSUME, AMER_Bolster)
+		THEN
+			StartTimer("AMER_BolsterRemovalDelay", 0.3, 0)
+		ENDIF
+		Subtract(%AMER_BolsterRemoval, 1)
+	ENDIF
+	
+EVENT BolsterRemovalDelay
+//This needs to be on a timer because removing statuses from
+//the same event stack that applied them can cause a crash.
+ON
+	OnTimer("AMER_BolsterRemovalDelay")
+ACTIONS
+	StatusText(__Me, "AMER_Bolster")
+	CharacterRemoveStatus(__Me FROZEN)
+	CharacterRemoveStatus(__Me STUNNED)
+	CharacterRemoveStatus(__Me KNOCKED_DOWN)
+	CharacterRemoveStatus(__Me PETRIFIED)
+	CharacterRemoveStatus(__Me FEAR)
+	CharacterRemoveStatus(__Me CHARMED)
+	
+	
+	
+EVENT JustScalingHeal
+//Generic function for healing magic to use as a special applicator
+//function call if they need to perform percentage healing only.
+ON
+	OnFunction("AMER_JustScalingHeal")
+ACTIONS
+	IF "c1"
+		CharacterHasStatus(__Me, CONSUME, "AMER_ApplyJustScalingHeal")
+	THEN
+		CharacterConsume(__Me, "AMER_RemoveApplyJustScalingHeal")
+		
+		CallFunction("AMER_ScalingPercentageHeal")
+	ENDIF
+	
+	
+	
+EVENT ScalingPercentageHeal
+//Assumes that the correct amount has been calculated and provided in
+//%AMER_ScalingHealAmount; probably passed to the function caller
+//by a broadcasted skill cast event. Handling Decaying Touch and
+//Zombie for these percentage-based heals happens here.
+//
+//Scripted healing is not affected by Zombie/Decaying Touch, so applying
+//a healing consume is necessary to achieve the damage when dealing
+//with these cases. Most instances should be handled by one consume
+//healing 1% to _SupportedDamagePercent Vitality; in the odd case that
+//even more is required, the while loop will cycle through until all
+//healing is handled.
+VARS
+	CHARACTER:_Char
+	FLOAT:_Vitality
+	FLOAT:_Heal
+	FLOAT:_DamageModifier
+	INT:_CycleMaximum
+	INT:_Index
+	INT:_Count
+	STRING:_Str
+	FIXEDSTRING:_WhichEffect
+ON
+	OnFunction("AMER_ScalingPercentageHeal")
+ACTIONS
+	IF "c1"
+		GetVar(_Heal, __Me, "AMER_ScalingHealAmount")
+	THEN
+		IF "c1"
+			IsEqual(%AMER_ScalingHealTargetOverride, null)
+		THEN
+			Set(_Char, __Me)
+		ELSE
+			Set(_Char, %AMER_ScalingHealTargetOverride)
+		ENDIF
+		//Boss creatures only benefit from 50% of percentage healing.
+		IF "c1"
+			CharacterIsBoss(_Char)
+		THEN
+			Divide(_Heal, 2.0)
+		ENDIF
+		
+		IF "!c1"
+			CharacterHasStatus(_Char, UNHEALABLE)
+		THEN
+			IF "c1|(c2&c3)"
+				CharacterHasStatus(_Char, DECAYING_TOUCH)
+				CharacterHasTalent(_Char, Zombie)
+				IsEqual(%AMER_ScalingHealIgnoreZombie, INT:0)
+			THEN
+				//Bosses suffer only 12.5% of percentage healing
+				//converted to damage, others suffer 50%.
+				IF "c1"
+					CharacterIsBoss(_Char)
+				THEN
+					Divide(_Heal, 4.0)
+				ELSE
+					Divide(_Heal, 2.0)
+				ENDIF
+				
+				//_Heal is a float, multiply by 100 so the value
+				//makes sense for our while loop.
+				Multiply(_Heal, 100.0)
+				//Round the healing amount.
+				Cast(_Index, _Heal)
+				Cast(_Heal, _Index)
+				Set(_CycleMaximum, 30)
+				WHILE "c1"
+					IsGreaterThen(_Heal, 0.0)
+				DO
+					Cast(_Index, _Heal)
+					
+					IF "c1"
+						IsGreaterThen(_Index, _CycleMaximum)
+					THEN
+						Set(_Index, _CycleMaximum)
+					ENDIF
+					
+					Print(_Str, "AMER_[1]PercentHeal", _Index)
+					Cast(_WhichEffect, _Str)
+					//The healing won't happen if the same consume was already used recently. In
+					//this case, check again using the next weakest consume.
+					IF "!c1"
+						CharacterHasStatus(_Char, CONSUME, _WhichEffect)
+					THEN
+						Subtract(_Heal, _Index)
+						AddTemporaryStatusInfluence(_Char, CONSUME, 1, _WhichEffect, 0)
+						Subtract(_CycleMaximum, INT:1)
+					ELSE
+						Subtract(_CycleMaximum, INT:1)
+					ENDIF
+				ENDWHILE
+			ELSE
+				CharacterHeal(_Char, _Heal)
+			ENDIF
+		ENDIF
+	ENDIF
+		
+		
+		
+//=====================================================//
+//          C H A I N   F I N I S H E R S              //
+//=====================================================//
+//Functions related specifically to chain finishers
+//(It's been a while since I've revisited these).
+EVENT FinisherPreciseIncision
+// P R E C I S E   I N C I S I O N
+VARS
+	SKILL:_Cone
+	CHARACTER:_CharSource
+	INT:_AttackerChain
+	INT:_Level
+	INT:_Index
+	FLOAT:_SourceLevel
+	FIXEDSTRING:_Text
+ON
+	OnFunction("AMER_FinisherPreciseIncision")
+ACTIONS
+	IF "c1"
+		CharacterHasStatus(__Me, CONSUME, "AMER_ApplyPreciseIncision")
+	THEN
+		IF "c1"
+			GetVar(_CharSource, __Me, "AMER_SkillSource")
+		THEN
+			IF "c1&c2&c3"
+				GetVar(_AttackerChain, _CharSource, "AMER_Chain")
+				IsGreaterThen(_AttackerChain, INT:0)
+				CharacterGetStat(_SourceLevel, _CharSource, Level)
+			THEN
+				Cast(_Level, _SourceLevel)
+				Set(_Index, _AttackerChain)
+				Subtract(_Index, INT:1)	//Index starts at zero.
+				
+				GetElement(_Cone, _Index, "AMER_SCRIPTSKILL_FinisherPreciseIncision1", "AMER_SCRIPTSKILL_FinisherPreciseIncision2", "AMER_SCRIPTSKILL_FinisherPreciseIncision3", "AMER_SCRIPTSKILL_FinisherPreciseIncision4", "AMER_SCRIPTSKILL_FinisherPreciseIncision5")
+				GetElement(_Text, _Index, "AMER_ChainOne", "AMER_ChainTwo", "AMER_ChainThree", "AMER_ChainFour", "AMER_ChainFive")
+				
+				ShootLocalConeAt(_Cone, _CharSource, null,__Me, _Level)
+				StatusText(_CharSource, _Text)
+				DisplayCombatInfoText(_CharSource, _Text, 1)
+				DisplayText(_CharSource, "AMER_BLANK", 1)
+			ENDIF
+		ENDIF
+	ENDIF
+	
+	
+	
+EVENT FinisherLacerate
+// L A C E R A T E
+VARS
+	CHARACTER:_CharSource
+	INT:_AttackerChain
+	INT:_Level
+	INT:_Index
+	FLOAT:_SourceLevel
+	FLOAT:_HealAmount
+	POTION:_Heal
+	FIXEDSTRING:_Text
+	SKILL:_Projectile
+ON
+	OnFunction("AMER_FinisherLacerate")
+ACTIONS
+	IF "c1"
+		CharacterHasStatus(__Me, CONSUME, "AMER_ApplyLacerate")
+	THEN
+		IF "c1"
+			GetVar(_CharSource, __Me, "AMER_SkillSource")
+		THEN
+			IF "c1&c2&c3"
+				GetVar(_AttackerChain, _CharSource, "AMER_Chain")
+				IsGreaterThen(_AttackerChain, INT:0)
+				CharacterGetStat(_SourceLevel, _CharSource, Level)
+			THEN
+				Cast(_Level, _SourceLevel)
+				Set(_Index, _AttackerChain)
+				Subtract(_Index, INT:1)	//Index starts at zero.
+				
+				GetElement(_Text, _Index, "AMER_ChainOne", "AMER_ChainTwo", "AMER_ChainThree", "AMER_ChainFour", "AMER_ChainFive")
+					
+				//Prepare %AMER_RemoteEffectSource for using AMER_DoRemoteEffect
+				SetVar(__Me, "AMER_RemoteEffectSource", _CharSource)
+					
+				IF "c1"
+					IsEqual(_AttackerChain, 1)
+				THEN
+					Set(_Heal, AMER_8PercentHeal)
+					Set(_HealAmount, 0.08)
+				ELIF "c1"
+					IsEqual(_AttackerChain, 2)
+				THEN
+					Set(_Heal, AMER_20PercentHeal)
+					Set(_HealAmount, 0.20)
+				ELIF "c1"
+					IsEqual(_AttackerChain, 3)
+				THEN
+					Set(_Heal, AMER_20PercentHeal)
+					Set(_HealAmount, 0.20)
+					Set(_Projectile, "AMER_SCRIPTSKILL_FinisherLacerate3")
+					SetVar(__Me, "AMER_RemoteEffectProjectile", _Projectile)
+					CallFunction("AMER_DoRemoteEffect")
+				ELIF "c1"
+					IsEqual(_AttackerChain, 4)
+				THEN
+					Set(_Heal, AMER_20PercentHeal)
+					Set(_HealAmount, 0.20)
+					Set(_Projectile, "AMER_SCRIPTSKILL_FinisherLacerate4")
+					SetVar(__Me, "AMER_RemoteEffectProjectile", _Projectile)
+					CallFunction("AMER_DoRemoteEffect")
+				ELIF "c1"
+					IsEqual(_AttackerChain, 5)
+				THEN
+					Set(_Heal, AMER_20PercentHeal)
+					Set(_HealAmount, 0.20)
+					CharacterConsume(_CharSource, AMER_LacerateHeal)
+					Set(_Projectile, "AMER_SCRIPTSKILL_FinisherLacerate5")
+					SetVar(__Me, "AMER_RemoteEffectProjectile", _Projectile)
+					CallFunction("AMER_DoRemoteEffect")
+				ENDIF
+				
+				//Heal damages caster if Decaying Touch is present,
+				//but let the heal work anyway if user is a Zombie.
+				IF "c1"
+					CharacterHasStatus(_CharSource, DECAYING_TOUCH)
+				THEN
+					CharacterConsume(_CharSource, _Heal)
+				ELSE
+					CharacterHeal(_CharSource, _HealAmount)
+				ENDIF
+				
+				StatusText(_CharSource, _Text)
+				DisplayCombatInfoText(_CharSource, _Text, 1)
+				DisplayText(_CharSource, "AMER_BLANK", 1)
+			ENDIF
+		ENDIF
+	ENDIF
+	
+	
+	
+EVENT FinisherVenomousStrike
+// V E N O M O U S   S T R I K E
+VARS
+	SKILL:_Projectile
+	CHARACTER:_CharSource
+	INT:_AttackerChain
+	INT:_Level
+	INT:_Index
+	FLOAT:_SourceLevel
+	FIXEDSTRING:_Text
+ON
+	OnFunction("AMER_FinisherVenomousStrike")
+ACTIONS
+	IF "c1"
+		CharacterHasStatus(__Me, CONSUME, "AMER_ApplyVenomousStrike")
+	THEN
+		IF "c1"
+			GetVar(_CharSource, __Me, "AMER_SkillSource")
+		THEN
+			IF "c1&c2&c3"
+				GetVar(_AttackerChain, _CharSource, "AMER_Chain")
+				IsGreaterThen(_AttackerChain, INT:0)
+				CharacterGetStat(_SourceLevel, _CharSource, Level)
+			THEN
+				Cast(_Level, _SourceLevel)
+				Set(_Index, _AttackerChain)
+				Subtract(_Index, INT:1)	//Index starts at zero.
+				
+				GetElement(_Projectile, _Index, "AMER_SCRIPTSKILL_FinisherVenomousStrike1", "AMER_SCRIPTSKILL_FinisherVenomousStrike2", "AMER_SCRIPTSKILL_FinisherVenomousStrike3", "AMER_SCRIPTSKILL_FinisherVenomousStrike4", "AMER_SCRIPTSKILL_FinisherVenomousStrike5")
+				GetElement(_Text, _Index, "AMER_ChainOne", "AMER_ChainTwo", "AMER_ChainThree", "AMER_ChainFour", "AMER_ChainFive")
+				
+				SetVar(__Me, "AMER_RemoteEffectSource", _CharSource)
+				SetVar(__Me, "AMER_RemoteEffectProjectile", _Projectile)
+				CallFunction("AMER_DoRemoteEffect")
+				
+				StatusText(_CharSource, _Text)
+				DisplayCombatInfoText(_CharSource, _Text, 1)
+				DisplayText(_CharSource, "AMER_BLANK", 1)
+			ENDIF
+		ENDIF
+	ENDIF
+//===============================================//
+//                                               //
+//         S K I L L   F U N C T I O N S         //
+//                                               //
+//===============================================//

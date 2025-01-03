@@ -1,0 +1,420 @@
+#TEMPLATE "_SKILL_Base" : ProjectileStrike_EnemyMeteorShower
+	
+INIT
+CHARACTER:__Me
+FLOAT:%SkillTargetScore_ProjectileStrike_EnemyMeteorShower=-1000000
+// [GLOBAL_VARS]
+EXTERN FLOAT:%ProjectileStrike_EnemyMeteorShower_ResistanceLimit = 90
+FLOAT:%ProjectileStrike_EnemyMeteorShower_SplashScore
+// [~GLOBAL_VARS]
+	
+EVENTS
+	
+// [EVENTS]
+// [~EVENTS]
+	
+// Calculate the priority of the skill
+EVENT CalculateScore_ProjectileStrike_EnemyMeteorShower
+VARS
+	// [CALC_VARS]
+	FLOAT:_SkillRangeMin
+	FLOAT:_SkillRangeMax
+	FLOAT:_SkillImpactRange
+	FLOAT3:_TargetPos
+	// [~CALC_VARS]
+ON
+	OnFunction("CalculateScore_ProjectileStrike_EnemyMeteorShower")
+ACTIONS
+	//Skill will not be used if it cannot find a use with more than 0.0 score.
+	Set(%SkillTargetScore_ProjectileStrike_EnemyMeteorShower, 0.0)
+
+	// [CALC_ACTIONS_PRE]
+	// [~CALC_ACTIONS_PRE]
+	// [CALC_ACTIONS]
+	IF "c1&c2"
+	    CharacterGetSkillRange(_SkillRangeMin, _SkillRangeMax, __Me, ProjectileStrike_EnemyMeteorShower)
+	    CharacterGetSkillImpactRange(_SkillImpactRange, __Me, ProjectileStrike_EnemyMeteorShower)
+	THEN
+		//Add some extra impact range due to the explosion raidus of
+		//the individual strikes.
+		Add(_SkillImpactRange, 1.0)
+		
+		IF "c1"
+			FindPosition(_TargetPos, __Me, _SkillRangeMax, _SkillImpactRange, __Me, -1, 0, 5, -1)
+		THEN
+			Set(%SkillTargetPos_ProjectileStrike_EnemyMeteorShower, _TargetPos)
+			Add(%ActionScore_ProjectileStrike_EnemyMeteorShower, 20.0)
+		ELIF "c1"
+			FindPosition(_TargetPos, __Me, _SkillRangeMax, _SkillImpactRange, __Me, -1, 0, 4, -1)
+		THEN
+			Set(%SkillTargetPos_ProjectileStrike_EnemyMeteorShower, _TargetPos)
+			Add(%ActionScore_ProjectileStrike_EnemyMeteorShower, 20.0)
+		ELIF "c1"
+			FindPosition(_TargetPos, __Me, _SkillRangeMax, _SkillImpactRange, __Me, -1, 0, 3, -1)
+		THEN
+			Set(%SkillTargetPos_ProjectileStrike_EnemyMeteorShower, _TargetPos)
+			Add(%ActionScore_ProjectileStrike_EnemyMeteorShower, 20.0)
+		ELSE
+		    IterateCharactersInCombat(__Me, "CalculateTarget_ProjectileStrike_EnemyMeteorShower", Lowest, Vitality)
+		    IF "!c1"
+				IsEqual(%SkillTargetChar_ProjectileStrike_EnemyMeteorShower, null)
+		    THEN
+				Add(%ActionScore_ProjectileStrike_EnemyMeteorShower, %SkillTargetScore_ProjectileStrike_EnemyMeteorShower)
+		    ENDIF
+		ENDIF
+	ENDIF
+	// [~CALC_ACTIONS]
+	
+	
+	
+EVENT SplashScore_ProjectileStrike_EnemyMeteorShower
+VARS
+	CHARACTER:_Char
+	FLOAT:_Score
+	FLOAT:_Resistance
+	FLOAT:_ResWeight
+	FLOAT:_PseudoRes
+ON
+	OnIterateCharacter(_Char, "SplashScore_ProjectileStrike_EnemyMeteorShower")
+ACTIONS
+	IF "!c1"
+		CharacterIsDead(_Char)
+	THEN
+		IF "!c1"
+			CharacterIsSummon(_Char)
+		THEN
+			IF "c1"
+				CharacterIsEnemy(__Me, _Char)
+			THEN
+				Set(_Score, 5.0)
+				Set(_ResWeight, -5.0)
+			ELSE
+				Set(_Score, -5.0)
+				Set(_ResWeight, 5.0)
+			ENDIF
+			
+			Set(_PseudoRes, 0.0)
+			IF "c1"
+				CharacterHasStatus(_Char, FROZEN)
+			THEN
+				Divide(_Score, 1.25)
+				Add(_PseudoRes, 30.0)
+			ENDIF
+			IF "c1"
+				CharacterHasStatus(_Char, CHILLED)
+			THEN
+				Add(_PseudoRes, 20.0)
+			ENDIF
+			IF "c1"
+				CharacterHasStatus(_Char, WET)
+			THEN
+				Add(_PseudoRes, 10.0)
+			ENDIF
+			
+			IF "c1"
+				CharacterHasStatus(_Char, CHARMED)
+			THEN
+				Multiply(_ResWeight, -1.0)
+				Multiply(_Score, -1.0)
+			ENDIF
+			
+			IF "c1"
+				CharacterGetStat(_Resistance, _Char, FireResistance)
+			THEN
+				Subtract(_Resistance, PseudoRes)	//Resistance from Wet, Chilled, and Frozen will go away very quickly.
+				Divide(_Resistance, 100.0)
+				Multiply(_Resistance, _ResWeight)
+				
+				Add(_Score, _Resistance)
+			ENDIF
+			
+			Add(%ProjectileStrike_EnemyMeteorShower_SplashScore, _Score)
+		ENDIF
+	ENDIF
+	
+	
+	
+	
+// Calculate the character we should attack
+EVENT CalculateTarget_ProjectileStrike_EnemyMeteorShower
+VARS	
+	CHARACTER:_Char
+	// [CALC_TARGET_VARS]
+	INT:_ClassScore_ProjectileStrike_EnemyMeteorShower
+	FLOAT:_StatResistance
+	FLOAT:_Score
+	FLOAT:_SkillRangeMin
+	FLOAT:_SkillRangeMax
+	FLOAT:_DistanceToChar
+	FLOAT:_DistanceScore
+	FLOAT:_Radius
+	FLOAT:_SplashScore
+	FLOAT:_Vitality
+	FLOAT:_PseudoRes
+	INT:_AllyCount
+	INT:_AllyFrozenCount
+	INT:_EnemyCount
+	INT:_EnemyFrozenCount
+	CHARACTERSTAT:_ResistType = FireResistance
+	FIXEDSTRING:_ShieldType = "SKILLBOOST_Shield_Fire"
+	// [~CALC_TARGET_VARS]
+ON
+	OnIterateCharacter(_Char, "CalculateTarget_ProjectileStrike_EnemyMeteorShower")	
+ACTIONS
+	// [CALC_CHAR_TARGET_ACTIONS_PRE]
+	Set(_Score, 0.0)
+	// [~CALC_CHAR_TARGET_ACTIONS_PRE]
+	// [CALC_CHAR_TARGET_ACTIONS]
+	IF "c1"
+	    CharacterIsEnemy(__Me, _Char)
+	THEN
+		IF "!c1"
+			CharacterIsDead(_Char)
+		THEN
+			IF "!c1&!c2"
+			    CharacterHasStatus(_Char, INVISIBLE)
+			    CharacterHasStatus(_Char, SNEAKING)
+			THEN
+				IF "!c1|!c2"
+				    CharacterGetStat(_StatResistance, _Char, _ResistType)
+				    IsGreaterThen(_StatResistance, %ProjectileStrike_EnemyMeteorShower_ResistanceLimit)
+				THEN
+					IF "!c1"
+						CharacterHasStatus(_Char, CHARMED)
+					THEN
+						IF "!c1"
+							CharacterHasStatus(_Char, INVULNERABLE)
+						THEN
+							//Kill range calculation
+							IF "c1"
+								CharacterGetStat(_Vitality,  _Char, Vitality)
+							THEN
+								//Favor low vitality targets.
+								Multiply(_Vitality, -2.0)
+								Add(_Vitality, 2.0)
+								Add(_Score, _Vitality)
+							ENDIF
+							
+							//Marked.
+						    IF "c1"
+								CharacterHasStatus(_Char, AGGRO_MARKED)
+						    THEN
+								Add(_Score, 1.0)
+						    ENDIF
+			
+							//Resistance from these statuses won't affect much of the damage.
+							Set(_PseudoRes, 0.0)
+							IF "c1"
+								CharacterHasStatus(_Char, FROZEN)
+							THEN
+								Add(_PseudoRes, 30.0)
+							ENDIF
+							IF "c1"
+								CharacterHasStatus(_Char, CHILLED)
+							THEN
+								Add(_PseudoRes, 20.0)
+							ENDIF
+							IF "c1"
+								CharacterHasStatus(_Char, WET)
+							THEN
+								Add(_PseudoRes, 10.0)
+							ENDIF
+							
+							//Resistance calculation
+							Subtract(_StatResistance, _PseudoRes)
+							Divide(_StatResistance, -100.0)
+							Multiply(_StatResistance, 5.0)
+							Add(_Score, _StatResistance)
+						
+							//Splash score calc.
+							IF "c1"
+								CharacterGetSkillImpactRange(_Radius, __Me, ProjectileStrike_EnemyMeteorShower)
+							THEN
+								Set(%ProjectileStrike_EnemyMeteorShower_SplashScore, 0.0)
+								IterateCharactersNear(_Char, _Radius, "SplashScore_ProjectileStrike_EnemyMeteorShower")
+								Add(_Score, %ProjectileStrike_EnemyMeteorShower_SplashScore)
+							ENDIF
+							
+							//Shield calculation
+							IF "c1"
+								CharacterHasStatus(_Char, SHIELD, _ShieldType)
+							THEN
+								Add(_Score, -2.0)
+							ENDIF
+								
+							//Summons are worth less.
+							IF "c1"
+								CharacterIsSummon(_Char)
+							THEN
+								Add(_Score, -5.0)
+							ENDIF
+							
+						    // Range score calculation
+							IF "c1&c2"
+							    CharacterGetSkillRange(_SkillRangeMin, _SkillRangeMax, __Me, ProjectileStrike_EnemyMeteorShower)
+							    GetDistance(_DistanceToChar, __Me, _Char)
+							THEN
+							    Set(_DistanceScore, _DistanceToChar)
+							    IF "c1"
+									IsGreaterThen(_DistanceScore, _SkillRangeMax)
+							    THEN
+									Subtract(_DistanceScore, _SkillRangeMax)
+									Multiply(_DistanceScore, -1.0)
+							    ELIF "c1"
+									IsLessThen(_DistanceScore, _SkillRangeMin)
+							    THEN
+									Subtract(_DistanceScore, _SkillRangeMin)
+									Multiply(_DistanceScore, 1.0)
+							    ELSE 
+									Set(_DistanceScore, 0.0)
+							    ENDIF
+								Add(_Score, _DistanceScore)
+							ENDIF
+						    
+						    // Can see score calculation
+						    IF "!c1"
+								CharacterCanSee(__Me, _Char)
+						    THEN
+								Add(_Score, -10.0)
+						    ENDIF
+						    
+							IF "c1"
+								IsGreaterThen(_Score, %SkillTargetScore_ProjectileStrike_EnemyMeteorShower)
+							THEN
+								Set(%SkillTargetChar_ProjectileStrike_EnemyMeteorShower, _Char)
+								Set(%SkillTargetScore_ProjectileStrike_EnemyMeteorShower, _Score)
+							ENDIF
+						ENDIF
+					ENDIF
+				ENDIF
+			ENDIF
+		ENDIF
+	//Attempt to use damaging skill to heal allies with
+	//>100% resistance to the damage type.
+	ELIF "!c1"
+		CharacterIsDead(_Char)
+	THEN
+		IF "!c1"
+			CharacterHasStatus(_Char, CHARMED)
+		THEN
+			IF "!c1"
+				CharacterHasStatus(_Char, INVULNERABLE)
+			THEN
+				IF "!c1"
+					CharacterIsSummon(_Char)
+				THEN
+					IF "c1"
+					    CharacterGetStat(_StatResistance, _Char, _ResistType)
+					THEN
+						//Resistance from these statuses won't affect much of the damage.
+						Set(_PseudoRes, 0.0)
+						IF "c1"
+							CharacterHasStatus(_Char, FROZEN)
+						THEN
+							Add(_PseudoRes, 30.0)
+						ENDIF
+						IF "c1"
+							CharacterHasStatus(_Char, CHILLED)
+						THEN
+							Add(_PseudoRes, 20.0)
+						ENDIF
+						IF "c1"
+							CharacterHasStatus(_Char, WET)
+						THEN
+							Add(_PseudoRes, 10.0)
+						ENDIF
+						
+						Subtract(_StatResistance, _PseudoRes)
+						
+						IF "c1"
+							IsGreaterThen(_StatResistance, 150.0)
+						THEN
+							IF "c1&c2"
+								CharacterGetStat(_Vitality,  _Char, Vitality)
+								IsLessThen(_Vitality, 0.8)
+							THEN
+								//Vitality-Resistance calculation: favor low-
+								//vitality targets with high resistance.
+								Multiply(_Vitality, -1.0)
+								Add(_Vitality, 1.0)
+								
+								//consider resistance above 100
+								Subtract(_StatResistance, 100.0)
+								Divide(_StatResistance, 100.0)
+								Multiply(_StatResistance, 4.0)
+								
+								Multiply(_Vitality, _StatResistance)
+								Add(_Score, _Vitality)
+							
+								//Splash score calc.
+								IF "c1"
+									CharacterGetSkillImpactRange(_Radius, __Me, ProjectileStrike_EnemyMeteorShower)
+								THEN
+									Set(%ProjectileStrike_EnemyMeteorShower_SplashScore, 0.0)
+									IterateCharactersNear(_Char, _Radius, "SplashScore_ProjectileStrike_EnemyMeteorShower")
+									Add(_Score, %ProjectileStrike_EnemyMeteorShower_SplashScore)
+								ENDIF
+										
+								//Status Calculation
+								IF "c1"
+									CharacterHasStatus(_Char, FROZEN)
+								THEN
+									Add(_Score, 2.5)
+								ENDIF
+								IF "c1"
+									CharacterHasStatus(_Char, CONSUME, AMER_STATUS_InsectPlague)
+								THEN
+									Add(_Score, 2.0)
+								ENDIF
+								
+								// Range score calculation
+								IF "c1&c2"
+									CharacterGetSkillRange(_SkillRangeMin, _SkillRangeMax, __Me, ProjectileStrike_EnemyMeteorShower)
+									GetDistance(_DistanceToChar, __Me, _Char)
+								THEN
+									Set(_DistanceScore, _DistanceToChar)
+									IF "c1"
+										IsGreaterThen(_DistanceScore, _SkillRangeMax)
+									THEN
+										Subtract(_DistanceScore, _SkillRangeMax)
+										Multiply(_DistanceScore, -1.0)
+									ELIF "c1"
+										IsLessThen(_DistanceScore, _SkillRangeMin)
+									THEN
+										Subtract(_DistanceScore, _SkillRangeMin)
+										Multiply(_DistanceScore, 1.0)
+									ELSE 
+										Set(_DistanceScore, 0.0)
+									ENDIF
+									Add(_Score, _DistanceScore)
+								ENDIF
+								
+								// Can see score calculation
+								IF "!c1"
+									CharacterCanSee(__Me, _Char)
+								THEN
+									Add(_Score, -10.0)
+								ENDIF
+								
+								IF "c1"
+									IsGreaterThen(_Score, %SkillTargetScore_ProjectileStrike_EnemyMeteorShower)
+								THEN
+									Set(%SkillTargetChar_ProjectileStrike_EnemyMeteorShower, _Char)
+									Set(%SkillTargetScore_ProjectileStrike_EnemyMeteorShower, _Score)
+								ENDIF
+							ENDIF
+						ENDIF
+					ENDIF
+				ENDIF
+			ENDIF
+		ENDIF
+	ENDIF
+	// [~CALC_CHAR_TARGET_ACTIONS]
+	
+	
+	
+	
+	
+	
+	
+	

@@ -1,0 +1,72 @@
+//===============================================//
+//                                               //
+//            S E T   M A T E R I A L            //
+//                                               //
+//     Written by Matteo "Ameranth" T. (2016)    //
+//===============================================//
+INIT
+CHARACTER:__Me
+EXTERN FIXEDSTRING:%AMER_SetMaterial_Material = "NONE"
+EXTERN INT:%AMER_SetMaterial_ApplyToBody = 1
+EXTERN INT:%AMER_SetMaterial_ApplyToWeapon = 1
+EXTERN INT:%AMER_SetMaterial_ApplyToArmor = 1
+EXTERN INT:%AMER_SetMaterial_UseNormalMap = 0
+EXTERN INT:%AMER_SetMaterial_Overlay = 0
+EXTERN INT:%AMER_SetMaterial_Fading = 0
+
+EVENTS
+EVENT SetMaterialOnInit
+ON
+	OnInit()
+ACTIONS
+	SetMaterial(__Me, %AMER_SetMaterial_Material, -1, %AMER_SetMaterial_ApplyToBody, %AMER_SetMaterial_ApplyToArmor, %AMER_SetMaterial_ApplyToWeapon, %AMER_SetMaterial_UseNormalMap, %AMER_SetMaterial_Overlay, %AMER_SetMaterial_Fading)
+	
+	
+	
+//Provide other scripts a way to trigger a reapply.
+EVENT SetMaterialManually
+ON
+	OnFunction("AMER_SetMaterial_ManualApply")
+ACTIONS
+	SetMaterial(__Me, %AMER_SetMaterial_Material, -1, %AMER_SetMaterial_ApplyToBody, %AMER_SetMaterial_ApplyToArmor, %AMER_SetMaterial_ApplyToWeapon, %AMER_SetMaterial_UseNormalMap, %AMER_SetMaterial_Overlay, %AMER_SetMaterial_Fading)
+	
+	
+	
+//Handle the case that a character's material reverts to the
+//original material after having lost a material-altering
+//status.
+EVENT SetMaterialAfterInvis
+ON
+	OnCharacterStatusRemoved(__Me, INVISIBLE)
+ACTIONS
+	SetMaterial(__Me, %AMER_SetMaterial_Material, -1, %AMER_SetMaterial_ApplyToBody, %AMER_SetMaterial_ApplyToArmor, %AMER_SetMaterial_ApplyToWeapon, %AMER_SetMaterial_UseNormalMap, %AMER_SetMaterial_Overlay, %AMER_SetMaterial_Fading)
+
+EVENT SetMaterialAfterPetrify
+ON
+	OnCharacterStatusRemoved(__Me, PETRIFIED)
+ACTIONS
+	SetMaterial(__Me, %AMER_SetMaterial_Material, -1, %AMER_SetMaterial_ApplyToBody, %AMER_SetMaterial_ApplyToArmor, %AMER_SetMaterial_ApplyToWeapon, %AMER_SetMaterial_UseNormalMap, %AMER_SetMaterial_Overlay, %AMER_SetMaterial_Fading)
+	
+EVENT SetMaterialAfterFrozen
+ON
+	OnCharacterStatusRemoved(__Me, FROZEN)
+ACTIONS
+	SetMaterial(__Me, %AMER_SetMaterial_Material, -1, %AMER_SetMaterial_ApplyToBody, %AMER_SetMaterial_ApplyToArmor, %AMER_SetMaterial_ApplyToWeapon, %AMER_SetMaterial_UseNormalMap, %AMER_SetMaterial_Overlay, %AMER_SetMaterial_Fading)
+	
+EVENT SetMaterialAfterFortify
+ON
+	OnCharacterStatusRemoved(__Me, FORTIFIED)
+ACTIONS
+	SetMaterial(__Me, %AMER_SetMaterial_Material, -1, %AMER_SetMaterial_ApplyToBody, %AMER_SetMaterial_ApplyToArmor, %AMER_SetMaterial_ApplyToWeapon, %AMER_SetMaterial_UseNormalMap, %AMER_SetMaterial_Overlay, %AMER_SetMaterial_Fading)
+
+//idk if this works.
+EVENT SetMaterialAfterDeath
+ON
+	OnCharacterStatusRemoved(__Me, DYING)
+ACTIONS
+	SetMaterial(__Me, %AMER_SetMaterial_Material, -1, %AMER_SetMaterial_ApplyToBody, %AMER_SetMaterial_ApplyToArmor, %AMER_SetMaterial_ApplyToWeapon, %AMER_SetMaterial_UseNormalMap, %AMER_SetMaterial_Overlay, %AMER_SetMaterial_Fading)
+//===============================================//
+//                                               //
+//            S E T   M A T E R I A L            //
+//                                               //
+//===============================================//

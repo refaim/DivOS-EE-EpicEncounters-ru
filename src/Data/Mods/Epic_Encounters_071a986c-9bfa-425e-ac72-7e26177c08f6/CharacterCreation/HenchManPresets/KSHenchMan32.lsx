@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<save>
+    <header version="2" time="1427201041" />
+    <version major="1" minor="3" revision="1" build="3" />
+    <region id="CharacterCreationClass">
+        <node id="root">
+            <attribute id="Armour" value="" type="22" />
+            <attribute id="Boots" value="" type="22" />
+            <attribute id="ClassDescription" value="A small, swift scoundrel" handle="h49c68e89g1a4cg4b0fgb015g10aa3f834132" type="28" />
+            <attribute id="ClassLongDescription" value="Thane is a slippery devil.  Every time you think you&apos;ve begun learning something about him, you realise it&apos;s all been a deflection and you are back where you started. One thing is true, though: he&apos;s as sly and sneaky as they come.  If you need someone to help you in the shadows, he&apos;s your man." handle="haa87ee16gac09g42d5gb0c4g5c813512d9d8" type="28" />
+            <attribute id="ClassName" value="Shadowblade" handle="hb6eb0f87gcc24g447fg82f2g959446e5edec" type="28" />
+            <attribute id="ClassType" value="Shadowblade" type="22" />
+            <attribute id="ExtraEquipmentSet" value="" type="22" />
+            <attribute id="Gloves" value="" type="22" />
+            <attribute id="Leggings" value="" type="22" />
+            <attribute id="SkillSet" value="" type="22" />
+            <attribute id="Voice" value="0" type="5" />
+            <children>
+                <node id="AbilityChanges">
+                    <children>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="RogueLore" type="23" />
+                            <attribute id="AmountIncreased" value="2" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="Sneaking" type="23" />
+                            <attribute id="AmountIncreased" value="2" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="Lockpicking" type="23" />
+                            <attribute id="AmountIncreased" value="2" type="4" />
+                        </node>
+                    </children>
+                </node>
+                <node id="AttributeChanges">
+                    <children>
+                        <node id="AttributeChange">
+                            <attribute id="AmountIncreased" value="2" type="4" />
+                            <attribute id="Attribute" value="DEX" type="23" />
+                        </node>
+                        <node id="AttributeChange">
+                            <attribute id="AmountIncreased" value="2" type="4" />
+                            <attribute id="Attribute" value="SPD" type="23" />
+                        </node>
+                        <node id="AttributeChange">
+                            <attribute id="AmountIncreased" value="3" type="4" />
+                            <attribute id="Attribute" value="PER" type="23" />
+                        </node>
+                    </children>
+                </node>
+                <node id="HenchManData">
+                    <attribute id="HairColor" value="1" type="5" />
+                    <attribute id="HairType" value="5" type="5" />
+                    <attribute id="HeadType" value="5" type="5" />
+                    <attribute id="ID" value="c2c39015-b8b4-464d-adee-0956f7a440a8" type="22" />
+                    <attribute id="Icon" value="11" type="5" />
+                    <attribute id="IsMale" value="1" type="19" />
+                    <attribute id="Level" value="5" type="4" />
+                    <attribute id="Name" value="Thane Aldus" type="30" />
+                    <attribute id="Race" value="0" type="5" />
+                    <attribute id="SkinColor" value="1" type="5" />
+                    <children>
+                        <node id="Skills">
+                            <attribute id="Object" value="Shout_InvisibilitySelfRogue" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="Target_Trip" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="Target_Lacerate" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="Target_Poison" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="Shout_FastTrack" type="22" />
+                        </node>
+                    </children>
+                </node>
+                <node id="TalentsAdded">
+                    <children>
+                        <node id="TalentAdded">
+                            <attribute id="Talent" value="LightStep" type="23" />
+                        </node>
+                        <node id="TalentAdded">
+                            <attribute id="Talent" value="Leech" type="23" />
+                        </node>
+                        <node id="TalentAdded">
+                            <attribute id="Talent" value="Bully" type="23" />
+                        </node>
+                    </children>
+                </node>
+            </children>
+        </node>
+    </region>
+</save>

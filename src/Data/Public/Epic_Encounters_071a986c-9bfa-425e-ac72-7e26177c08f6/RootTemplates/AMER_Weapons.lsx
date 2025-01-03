@@ -1,0 +1,226 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="2" minor="0" revision="0" build="0" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="root">
+			<children>
+				<node id="GameObjects">
+					<attribute id="CanBeMoved" type="19" value="True" />
+					<attribute id="CanBePickedUp" type="19" value="True" />
+					<attribute id="CanSeeThrough" type="19" value="True" />
+					<attribute id="CanShootThrough" type="19" value="True" />
+					<attribute id="DropSound" type="22" value="dea27d29-65a0-4bf1-b563-9dde8d32daf5" />
+					<attribute id="FadeIn" type="19" value="True" />
+					<attribute id="Flag" type="4" value="0" />
+					<attribute id="GroupID" type="5" value="0" />
+					<attribute id="Icon" type="22" value="Item_WPN_Undead_2H_Axe_Braccus_A" />
+					<attribute id="IsHuge" type="19" value="True" />
+					<attribute id="IsSurfaceCloudInteractable" type="19" value="True" />
+					<attribute id="IsSurfaceInteractable" type="19" value="True" />
+					<attribute id="LevelName" type="22" value="" />
+					<attribute id="MapKey" type="22" value="1708db7d-0b00-42c7-92e4-594056a66832" />
+					<attribute id="Name" type="23" value="AMER_WEAPON_Shadow_Nightwalker" />
+					<attribute id="PhysicsTemplate" type="22" value="5642a267-0c44-4d50-8453-9bfb65327015" />
+					<attribute id="PickupSound" type="22" value="dbf85d5f-4c1e-43e0-a749-0b3f30e9b1ba" />
+					<attribute id="Scale" type="6" value="1" />
+					<attribute id="Stats" type="22" value="WPN_Undead_2H_Axe_Braccus_A" />
+					<attribute id="Tooltip" type="1" value="2" />
+					<attribute id="Type" type="22" value="item" />
+					<attribute id="VisualTemplate" type="22" value="7118de7b-e0de-4681-82b3-56dd877cb6e1" />
+					<attribute id="WalkThrough" type="19" value="True" />
+					<children>
+						<node id="AIBounds">
+							<attribute id="AIType" type="1" value="1" />
+							<attribute id="Height" type="6" value="0.200984" />
+							<attribute id="Max" type="12" value="0.350883 0.100492 0.96583" />
+							<attribute id="Min" type="12" value="-0.350883 -0.100492 -1.35269" />
+							<attribute id="Radius" type="6" value="0.607681" />
+						</node>
+						<node id="Equipment">
+							<children>
+								<node id="CustomBodyMaterials">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="CustomBodyMaterials">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="CustomBodyMaterials">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" type="22" value="" />
+								</node>
+							</children>
+						</node>
+						<node id="InventoryList" />
+						<node id="OnDestroyActions" />
+						<node id="OnUsePeaceActions" />
+						<node id="Scripts" />
+					</children>
+				</node>
+				<node id="GameObjects">
+					<attribute id="CanBeMoved" type="19" value="True" />
+					<attribute id="CanBePickedUp" type="19" value="True" />
+					<attribute id="CanSeeThrough" type="19" value="True" />
+					<attribute id="CanShootThrough" type="19" value="True" />
+					<attribute id="Description" type="28" handle="hca38cdd2g34bdg42cdg8f79g167ee90ea052" value="A dark and menacing axe; one blade is mysteriously much better tended than the other." />
+					<attribute id="DropSound" type="22" value="dea27d29-65a0-4bf1-b563-9dde8d32daf5" />
+					<attribute id="Flag" type="4" value="0" />
+					<attribute id="GroupID" type="5" value="0" />
+					<attribute id="Icon" type="22" value="Item_WPN_DarkMinions_DoubleAxe" />
+					<attribute id="IsSurfaceCloudInteractable" type="19" value="True" />
+					<attribute id="IsSurfaceInteractable" type="19" value="True" />
+					<attribute id="LevelName" type="22" value="" />
+					<attribute id="MapKey" type="22" value="8e27f4b1-1098-4738-b318-8b4eed73182f" />
+					<attribute id="Name" type="23" value="AMER_WEAPON_Titan_Stone" />
+					<attribute id="PhysicsTemplate" type="22" value="ef251cfb-cccf-4437-9d31-891872e43354" />
+					<attribute id="PickupSound" type="22" value="dbf85d5f-4c1e-43e0-a749-0b3f30e9b1ba" />
+					<attribute id="Scale" type="6" value="1" />
+					<attribute id="Stats" type="22" value="WPN_DarkMinions_DoubleAxe" />
+					<attribute id="Tooltip" type="1" value="2" />
+					<attribute id="Type" type="22" value="item" />
+					<attribute id="VisualTemplate" type="22" value="72e4757d-4bb0-43e7-ae33-b18e0e7a39cb" />
+					<attribute id="WalkThrough" type="19" value="True" />
+					<children>
+						<node id="AIBounds">
+							<attribute id="AIType" type="1" value="1" />
+							<attribute id="Height" type="6" value="0.179808" />
+							<attribute id="Max" type="12" value="0.666823 0.0988609 0.349208" />
+							<attribute id="Min" type="12" value="-0.666823 -0.0809474 -1.90867" />
+							<attribute id="Radius" type="6" value="0.657122" />
+						</node>
+						<node id="Equipment">
+							<children>
+								<node id="CustomBodyMaterials">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="CustomBodyMaterials">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="CustomBodyMaterials">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" type="22" value="" />
+								</node>
+							</children>
+						</node>
+						<node id="InventoryList" />
+						<node id="OnDestroyActions" />
+						<node id="OnUsePeaceActions" />
+						<node id="Scripts" />
+					</children>
+				</node>
+				<node id="GameObjects">
+					<attribute id="CanBeMoved" type="19" value="True" />
+					<attribute id="CanBePickedUp" type="19" value="True" />
+					<attribute id="CanSeeThrough" type="19" value="True" />
+					<attribute id="CanShootThrough" type="19" value="True" />
+					<attribute id="Description" type="28" handle="h13e9ad7agb188g4dffgbbeeg5a94e6928bab" value="Huge and unwieldy, the circumference of this staff seems greater than a human hand could comfortably hold, not to mention fight with." />
+					<attribute id="DropSound" type="22" value="dea27d29-65a0-4bf1-b563-9dde8d32daf5" />
+					<attribute id="Flag" type="4" value="0" />
+					<attribute id="GroupID" type="5" value="0" />
+					<attribute id="Icon" type="22" value="Item_WPN_Cyclops_Staff_A" />
+					<attribute id="IsSurfaceCloudInteractable" type="19" value="True" />
+					<attribute id="IsSurfaceInteractable" type="19" value="True" />
+					<attribute id="LevelName" type="22" value="" />
+					<attribute id="MapKey" type="22" value="af2339cf-527e-47bf-9ff7-c7dd878817bd" />
+					<attribute id="Name" type="23" value="AMER_WPN_CyclopsScythe_Big" />
+					<attribute id="PhysicsTemplate" type="22" value="541bd744-b4f0-4a16-84e6-e5458238d1b5" />
+					<attribute id="PickupSound" type="22" value="dbf85d5f-4c1e-43e0-a749-0b3f30e9b1ba" />
+					<attribute id="Scale" type="6" value="1.25" />
+					<attribute id="Stats" type="22" value="WPN_Cyclops_Staff_A_Scythe" />
+					<attribute id="Tooltip" type="1" value="2" />
+					<attribute id="Type" type="22" value="item" />
+					<attribute id="VisualTemplate" type="22" value="8b999850-52be-4f97-94a6-6bc5b5dcf75f" />
+					<attribute id="WalkThrough" type="19" value="True" />
+					<children>
+						<node id="AIBounds">
+							<attribute id="AIType" type="1" value="1" />
+							<attribute id="Height" type="6" value="0.175958" />
+							<attribute id="Max" type="12" value="0.161106 0.0904873 0.324262" />
+							<attribute id="Min" type="12" value="-0.864921 -0.0854708 -1.67066" />
+							<attribute id="Radius" type="6" value="0.56255" />
+						</node>
+						<node id="Equipment">
+							<children>
+								<node id="CustomBodyMaterials">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="CustomBodyMaterials">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="CustomBodyMaterials">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" type="22" value="" />
+								</node>
+							</children>
+						</node>
+						<node id="InventoryList" />
+						<node id="OnDestroyActions" />
+						<node id="OnUsePeaceActions" />
+						<node id="Scripts" />
+					</children>
+				</node>
+				<node id="GameObjects">
+					<attribute id="CanBeMoved" type="19" value="True" />
+					<attribute id="CanBePickedUp" type="19" value="True" />
+					<attribute id="CanSeeThrough" type="19" value="True" />
+					<attribute id="CanShootThrough" type="19" value="True" />
+					<attribute id="Description" type="28" handle="h2922e716gc37cg40adga8f9g7c9e5efee699" value="The realistic eyeballs engraved into the head of this warhammer are unsettling in the extreme. You could swear they blink whenever you look away." />
+					<attribute id="DropSound" type="22" value="dea27d29-65a0-4bf1-b563-9dde8d32daf5" />
+					<attribute id="Flag" type="4" value="0" />
+					<attribute id="GroupID" type="5" value="0" />
+					<attribute id="Icon" type="22" value="Item_WPN_Human_Normal_WarHammer_B" />
+					<attribute id="IsSurfaceCloudInteractable" type="19" value="True" />
+					<attribute id="IsSurfaceInteractable" type="19" value="True" />
+					<attribute id="LevelName" type="22" value="" />
+					<attribute id="MapKey" type="22" value="cea1821f-76f1-4dcd-83cb-748f61063466" />
+					<attribute id="Name" type="23" value="AMER_WPN_2hMace_F" />
+					<attribute id="PhysicsTemplate" type="22" value="4e14f2e2-3b86-4c7b-bb86-e93da4c66282" />
+					<attribute id="PickupSound" type="22" value="dbf85d5f-4c1e-43e0-a749-0b3f30e9b1ba" />
+					<attribute id="Scale" type="6" value="1.5" />
+					<attribute id="Stats" type="22" value="WPN_Human_Normal_WarHammer_B_A" />
+					<attribute id="Tooltip" type="1" value="2" />
+					<attribute id="Type" type="22" value="item" />
+					<attribute id="VisualTemplate" type="22" value="51c7c281-6ce9-43da-b568-6e0ed5a55f23" />
+					<attribute id="WalkThrough" type="19" value="True" />
+					<children>
+						<node id="AIBounds">
+							<attribute id="AIType" type="1" value="1" />
+							<attribute id="Height" type="6" value="0.0483273" />
+							<attribute id="Max" type="12" value="0.102357 0.0241636 0.165694" />
+							<attribute id="Min" type="12" value="-0.204227 -0.0241637 -0.493897" />
+							<attribute id="Radius" type="6" value="0.182241" />
+						</node>
+						<node id="Equipment" />
+						<node id="InventoryList" />
+						<node id="OnDestroyActions" />
+						<node id="OnUsePeaceActions" />
+						<node id="Scripts" />
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

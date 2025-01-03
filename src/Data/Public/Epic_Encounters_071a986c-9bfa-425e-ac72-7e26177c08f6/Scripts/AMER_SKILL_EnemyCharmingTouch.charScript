@@ -1,0 +1,201 @@
+#TEMPLATE "_SKILL_Base" : Target_EnemyCharmingTouch
+	
+INIT
+CHARACTER:__Me
+FLOAT:%SkillTargetScore_Target_EnemyCharmingTouch=-1000000
+// [GLOBAL_VARS]
+// [~GLOBAL_VARS]
+	
+EVENTS
+	
+// [EVENTS]
+// [~EVENTS]
+	
+// Calculate the priority of the skill
+EVENT CalculateScore_Target_EnemyCharmingTouch
+VARS
+	// [CALC_VARS]
+	FLOAT:_SkillRangeMin
+	FLOAT:_SkillRangeMax
+	FLOAT3:_TargetPos
+	// [~CALC_VARS]
+ON
+	OnFunction("CalculateScore_Target_EnemyCharmingTouch")
+ACTIONS
+	Set(%SkillTargetScore_Target_EnemyCharmingTouch, -1000000)
+
+	// [CALC_ACTIONS_PRE]
+	// [~CALC_ACTIONS_PRE]
+	// [CALC_ACTIONS]
+	IterateCharactersInCombat(__Me, "CalculateTarget_Target_EnemyCharmingTouch", Highest, Vitality)
+	IF "!c1"
+		IsEqual(%SkillTargetChar_Target_EnemyCharmingTouch, null)
+	THEN
+		Add(%ActionScore_Target_EnemyCharmingTouch, %SkillTargetScore_Target_EnemyCharmingTouch)
+	ENDIF
+	// [~CALC_ACTIONS]
+	
+	
+	
+	
+// Calculate the character we should attack
+EVENT CalculateTarget_Target_EnemyCharmingTouch
+VARS	
+	CHARACTER:_Char
+	// [CALC_TARGET_VARS]
+	INT:_ClassScore_Target_EnemyCharmingTouch
+	FLOAT:_Score
+	FLOAT:_SkillRangeMin
+	FLOAT:_SkillRangeMax
+	FLOAT:_DistanceToChar
+	FLOAT:_DistanceScore
+	FLOAT:_SaveScore
+	FLOAT:_Vitality
+	INT:_SaveAmount
+	ABILITY:_SaveType = Willpower
+	// [~CALC_TARGET_VARS]
+ON
+	OnIterateCharacter(_Char, "CalculateTarget_Target_EnemyCharmingTouch")	
+ACTIONS
+	// [CALC_CHAR_TARGET_ACTIONS_PRE]
+	Set(_Score, 0.0)
+	// [~CALC_CHAR_TARGET_ACTIONS_PRE]
+	// [CALC_CHAR_TARGET_ACTIONS]
+	IF "c1"
+	    CharacterIsEnemy(__Me, _Char)
+	THEN
+		IF "!c1"
+			CharacterIsDead(_Char)
+		THEN
+			//Don't charm summons.
+			IF "!c1"
+				CharacterIsSummon(_Char)
+			THEN
+				IF "!c1&!c2"
+				    CharacterHasStatus(_Char, INVISIBLE)
+				    CharacterHasStatus(_Char, SNEAKING)
+				THEN
+					IF "!c1"
+						//Rage gives immunity to Charm.
+						CharacterHasStatus(_Char, RAGED)
+					THEN
+						IF "c1&c2"
+							//don't bother charming near-dead characters.
+							CharacterGetStat(_Vitality,  _Char, Vitality)
+							IsGreaterThen(_Vitality, 0.20)
+						THEN
+							IF "!c1&!c2&!c3&!c4&!c5&!c6&!c7"
+								//Don't charm disabled characters.
+								CharacterHasStatus(_Char, FEAR)
+								CharacterHasStatus(_Char, STUNNED)
+								CharacterHasStatus(_Char, FROZEN)
+								CharacterHasStatus(_Char, PETRIFIED)
+								CharacterHasStatus(_Char, KNOCKED_DOWN)
+								CharacterHasStatus(_Char, BLIND)
+								CharacterHasStatus(_Char, MUTED)
+							THEN
+								//Favor high vitality targets.
+								Multiply(_Vitality, 2.0)
+								Add(_Score, _Vitality)
+								
+								//Marked.
+							    IF "c1"
+									CharacterHasStatus(_Char, AGGRO_MARKED)
+							    THEN
+									Add(_Score, 1.0)
+							    ENDIF
+								
+								//Counter-charm score calculation
+								IF "c1"
+									CharacterHasStatus(_Char, CHARMED)
+								THEN
+									Add(_Score, 2.0)
+								ENDIF
+								
+								//Saving Throw score calculation
+								IF "c1"
+									CharacterGetAbility(_SaveAmount, _Char, _SaveType)
+								THEN
+									Cast(_SaveScore, _SaveAmount)
+									Multiply(_SaveScore, -1.0)
+									Add(_Score, _SaveScore)
+								ENDIF
+								
+								//Status consideration calculation.
+								IF "c1"
+									CharacterHasStatus(_Char, SLOWED)
+								THEN
+									Add(_Score, -1.0)
+								ENDIF
+								IF "c1"
+									CharacterHasStatus(_Char, WEAK)
+								THEN
+									Add(_Score, -1.0)
+								ENDIF
+								IF "c1"
+									CharacterHasStatus(_Char, CRIPPLED)
+								THEN
+									Add(_Score, -1.0)
+								ENDIF
+								IF "c1"
+									CharacterHasStatus(_Char, HASTED)
+								THEN
+									Add(_Score, 1.0)
+								ENDIF
+								IF "c1"
+									CharacterHasStatus(_Char, CONSUME, SKILLBOOST_TargetedDamageBoost)
+								THEN
+									Add(_Score, 1.0)
+								ENDIF
+								
+							    // Range score calculation
+								IF "c1&c2"
+								    CharacterGetSkillRange(_SkillRangeMin, _SkillRangeMax, __Me, Target_EnemyCharmingTouch)
+								    GetDistance(_DistanceToChar, __Me, _Char)
+								THEN
+								    Set(_DistanceScore, _DistanceToChar)
+								    IF "(c1)"
+										IsGreaterThen(_DistanceScore, _SkillRangeMax)
+								    THEN
+										Subtract(_DistanceScore, _SkillRangeMax)
+										Multiply(_DistanceScore, -1.0)
+								    ELIF "(c1)"
+										IsLessThen(_DistanceScore, _SkillRangeMin)
+								    THEN
+										Subtract(_DistanceScore, _SkillRangeMin)
+										Multiply(_DistanceScore, 1.0)
+								    ELSE 
+										Set(_DistanceScore, 0.0)
+								    ENDIF
+									Add(_Score, _DistanceScore)
+								ENDIF
+							    
+							    // Can see score calculation
+							    IF "!c1"
+									CharacterCanSee(__Me, _Char)
+							    THEN
+									Add(_Score, -10.0)
+							    ENDIF
+							    
+								IF "c1"
+									IsGreaterThen(_Score, %SkillTargetScore_Target_EnemyCharmingTouch)
+								THEN
+									Set(%SkillTargetChar_Target_EnemyCharmingTouch, _Char)
+									Set(%SkillTargetScore_Target_EnemyCharmingTouch, _Score)
+								ENDIF
+							ENDIF
+						ENDIF
+					ENDIF
+				ENDIF
+			ENDIF
+		ENDIF
+	ENDIF
+	// [~CALC_CHAR_TARGET_ACTIONS]
+	
+	
+	
+	
+	
+	
+	
+	

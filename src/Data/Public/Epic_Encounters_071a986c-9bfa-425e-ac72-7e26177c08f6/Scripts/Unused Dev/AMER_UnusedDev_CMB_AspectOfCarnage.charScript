@@ -1,0 +1,181 @@
+//===============================================//
+//                                               //
+//        A S P E C T   O F   C A R N A G E      //
+//                                               //
+//     Written by Matteo "Ameranth" T. (2016)    //
+//===============================================//
+INIT
+CHARACTER:__Me
+EXTERN INT:%AMER_AspectOfCarnage_Priority_Teleport = 900
+EXTERN ITEM:%AMER_AspectOfCarnage_TriggerCandle1 = "NONE"
+EXTERN ITEM:%AMER_AspectOfCarnage_TriggerCandle2 = "NONE"
+EXTERN FIXEDSTRING:%AMER_AspectOfCarnage_CombatAtmosphere = "NONE"
+EXTERN FIXEDSTRING:%AMER_AspectOfCarnage_AtmosphereTriggerUUID = "NONE"
+INT:%AMER_AspectOfCarnage_Candle1IsOn = 0
+INT:%AMER_AspectOfCarnage_Candle2IsOn = 0
+CHARACTER:%AMER_AspectOfCarnage_Target
+	
+	
+	
+EVENTS
+EVENT AspectOfCarnageCombatStarted
+ON
+	OnCombatStarted()
+ACTIONS
+	IF "!c1&!c2"
+		IsEqual(%AMER_AspectOfCarnage_CombatAtmosphere, "NONE")
+		IsEqual(%AMER_AspectOfCarnage_AtmosphereTriggerUUID, "NONE")
+	THEN
+		SetAtmosphere(%AMER_AspectOfCarnage_AtmosphereTriggerUUID, %AMER_AspectOfCarnage_CombatAtmosphere)
+	ENDIF
+	
+	
+	
+EVENT AspectOfCarnageCombatEnded
+ON
+	OnCombatEnded()
+ACTIONS
+	IF "!c1&!c2"
+		IsEqual(%AMER_AspectOfCarnage_CombatAtmosphere, "NONE")
+		IsEqual(%AMER_AspectOfCarnage_AtmosphereTriggerUUID, "NONE")
+	THEN
+		ResetAtmosphere(%AMER_AspectOfCarnage_AtmosphereTriggerUUID)
+	ENDIF
+	
+	
+	
+	
+EVENT AspectOfCarnageInitialize
+ON
+	OnInit()
+ACTIONS
+	CharacterAddSkill(Jump_EnemyPhoenixDive)
+	CharacterAddSkill(Teleportation_EnemyFreeFall)
+	IF "!c1|!c2"
+		IsEqual(%AMER_AspectOfCarnage_TriggerCandle1, "NONE")
+		IsEqual(%AMER_AspectOfCarnage_TriggerCandle2, "NONE")
+	THEN
+		CharacterSetOffStage()
+	ENDIF
+	
+	
+	
+EVENT AspectOfCarnageOnTurn
+VARS
+	FLOAT:_Distance
+ON
+	OnTurn()
+ACTIONS
+	SetPriority(AspectOfCarnageTeleport, %AMER_AspectOfCarnage_Priority_Teleport)
+	
+	
+	
+EVENT AspectOfCarnageActivate1
+ON
+	OnUseItem(_, %AMER_AspectOfCarnage_TriggerCandle1)
+ACTIONS
+	Set(%AMER_AspectOfCarnage_Candle1IsOn, INT:1)
+	IF "c1|c2"
+		IsEqual(%AMER_AspectOfCarnage_Candle2IsOn, INT:1)
+		IsEqual(%AMER_AspectOfCarnage_TriggerCandle2, "NONE")
+	THEN
+		CharacterSetOnStage()
+	ENDIF
+	
+	
+	
+EVENT AspectOfCarnageActivate2
+ON
+	OnUseItem(_, %AMER_AspectOfCarnage_TriggerCandle2)
+ACTIONS
+	Set(%AMER_AspectOfCarnage_Candle2IsOn, INT:1)
+	IF "c1|c2"
+		IsEqual(%AMER_AspectOfCarnage_Candle1IsOn, INT:1)
+		IsEqual(%AMER_AspectOfCarnage_TriggerCandle1, "NONE")
+	THEN
+		CharacterSetOnStage()
+	ENDIF
+	
+	
+	
+EVENT AspectOfCarnageFindTeleportTarget
+VARS
+	CHARACTER:_Char
+	FLOAT:_MaxRange
+	FLOAT:_Distance
+ON
+	OnIterateCharacter(_Char, "AMER_AspectOfCarnage_FindTeleportTarget")
+ACTIONS
+	IF "c1"
+		IsEqual(%AMER_AspectOfCarnage_Target, null)
+	THEN
+		IF "c1"
+			CharacterIsEnemy(__Me, _Char)
+		THEN
+			IF "c1"
+				CanSee(__Me, _Char)
+			THEN
+				IF "!c1"
+					CharacterIsDead(_Char)
+				THEN
+					IF "!c1&!c2&!c3"
+						CharacterHasStatus(_Char, INVISIBLE)
+						CharacterHasStatus(_Char, SNEAKING)
+						CharacterHasStatus(_Char, INVULNERABLE)
+					THEN
+						IF "c1&c2&c3"
+							CharacterGetSkillRange(_, _MaxRange, __Me, Teleportation_EnemyFreeFall)
+							GetDistance(_Distance, __Me, _Char)
+							IsLessThen(_Distance, _MaxRange)
+						THEN
+							Set(%AMER_AspectOfCarnage_Target, _Char)
+						ENDIF
+					ENDIF
+				ENDIF
+			ENDIF
+		ENDIF
+	ENDIF
+	
+	
+	
+//===================BEHAVIOR====================//
+BEHAVIOUR
+REACTION AspectOfCarnageTeleport, 0
+USAGE COMBAT
+VARS
+//=============================//
+	FLOAT:_MeleeRangeCheck = 4.0
+//=============================//
+	CHARACTER:_Char
+	FLOAT3:_Position
+CHECK "c1&!c2"
+	CharacterCanCast(__Me, Teleportation_EnemyFreeFall)
+	CharacterGet(_Char, __Me, _MeleeRangeCheck, Lowest, Distance, Enemy)
+ACTIONS
+	Set(%AMER_AspectOfCarnage_Target, null)
+	IterateCharacters("AMER_AspectOfCarnage_FindTeleportTarget", Lowest, Vitality)
+	IF "!c1"
+		IsEqual(%AMER_AspectOfCarnage_Target, null)
+	THEN
+		GetPosition(__Me, _Position)
+		IF "c1"
+			FindValidPosition(_Position, 4.0, %AMER_AspectOfCarnage_Target)
+		THEN
+			CharacterUseSkill(Teleportation_EnemyFreeFall, %AMER_AspectOfCarnage_Target, _Position)
+			CharacterSetEnemy(__Me, %AMER_AspectOfCarnage_Target)
+		ENDIF
+	ENDIF
+	SetPriority(AspectOfCarnageTeleport, 0)
+INTERRUPT
+ON
+	OnNoReactionFound()
+ACTIONS
+	DelayReaction(AspectOfCarnageTeleport, 2)
+	
+	
+	
+//===============================================//
+//                                               //
+//        A S P E C T   O F   C A R N A G E      //
+//                                               //
+//===============================================//

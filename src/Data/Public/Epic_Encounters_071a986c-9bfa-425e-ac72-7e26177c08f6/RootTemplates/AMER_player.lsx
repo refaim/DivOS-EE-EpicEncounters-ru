@@ -1,0 +1,1398 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="2" minor="0" revision="0" build="0" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="root">
+			<children>
+				<node id="GameObjects">
+					<attribute id="Equipment" type="22" value="DarkMinions_DeathKnight" />
+					<attribute id="ExplodedResourceID" type="22" value="8b68fa1b-ce49-413d-87a8-760abd0b39db" />
+					<attribute id="ExplosionFX" type="22" value="FX_GP_CorpseExplosion_Mechanical_A" />
+					<attribute id="Flag" type="4" value="0" />
+					<attribute id="GroupID" type="5" value="0" />
+					<attribute id="HitFX" type="22" value="FX_GP_Hit_Blood_A_Medium" />
+					<attribute id="Icon" type="22" value="Portrait_DarkMinions_DeathKnight_A" />
+					<attribute id="LevelName" type="22" value="" />
+					<attribute id="MapKey" type="22" value="00f69c10-06e1-4ce8-b594-16b44815477a" />
+					<attribute id="Name" type="23" value="DeathKnightPlayer" />
+					<attribute id="PhysicsTemplate" type="22" value="c8bd045f-3c9f-4809-b80e-59c350fb8562" />
+					<attribute id="Random" type="24" value="18446462598732840960" />
+					<attribute id="RunSpeed" type="6" value="3.75" />
+					<attribute id="Scale" type="6" value="1" />
+					<attribute id="Speaker" type="22" value="GEN_DemonRobot_Guard_DeathKnight_M" />
+					<attribute id="Stats" type="22" value="MaleHero" />
+					<attribute id="Type" type="22" value="character" />
+					<attribute id="VisualTemplate" type="22" value="d9fdc6d7-7de7-4d71-b958-688382a33763" />
+					<attribute id="WalkSpeed" type="6" value="2" />
+					<children>
+						<node id="AIBounds">
+							<attribute id="AIType" type="1" value="2" />
+							<attribute id="Height" type="6" value="2" />
+							<attribute id="Radius" type="6" value="0.5" />
+						</node>
+						<node id="Bodies">
+							<attribute id="Object" type="22" value="b42a9bc7-bb6e-4d65-b1ec-fa5cf410a33c" />
+						</node>
+						<node id="OnDeathActions">
+							<children>
+								<node id="Action">
+									<attribute id="ActionType" type="4" value="5" />
+									<children>
+										<node id="Attributes">
+											<attribute id="templateAfterDestruction" type="22" value="" />
+											<attribute id="visualDestruction" type="22" value="31262006-5370-4b8d-b0b7-459b08e17e91" />
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+						<node id="Scripts">
+							<children>
+								<node id="Script">
+									<attribute id="UUID" type="22" value="5bc80992-a7f6-4da6-83e2-3d276384d8f7" />
+									<children>
+										<node id="Parameters">
+											<children>
+												<node id="Parameter">
+													<attribute id="MapKey" type="22" value="SayBlindedText" />
+													<attribute id="Type" type="4" value="1" />
+													<attribute id="Value" type="23" value="1" />
+												</node>
+											</children>
+										</node>
+									</children>
+								</node>
+								<node id="Script">
+									<attribute id="UUID" type="22" value="dafb6d26-8fd1-48e9-8990-4d3c4ee4cbc0" />
+									<children>
+										<node id="Parameters">
+											<children>
+												<node id="Parameter">
+													<attribute id="MapKey" type="22" value="SayBlindedText" />
+													<attribute id="Type" type="4" value="1" />
+													<attribute id="Value" type="23" value="1" />
+												</node>
+											</children>
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+					</children>
+				</node>
+				<node id="GameObjects">
+					<attribute id="Alignment" type="22" value="Hero NPC" />
+					<attribute id="DisplayName" type="28" handle="h7bac5649g0d8bg483cgbba5g751ec5df35a2" value="Henchman" />
+					<attribute id="Equipment" type="22" value="MaleHero" />
+					<attribute id="ExplodedResourceID" type="22" value="fed27733-292d-465c-b6cf-9a6b9126307c" />
+					<attribute id="ExplosionFX" type="22" value="FX_GP_CorpseExplosion_Human_A" />
+					<attribute id="Flag" type="4" value="0" />
+					<attribute id="GroupID" type="5" value="0" />
+					<attribute id="HitFX" type="22" value="FX_GP_Blood_A" />
+					<attribute id="LevelName" type="22" value="" />
+					<attribute id="MapKey" type="22" value="0f0a1415-e88e-47b3-8434-d98abc1ded02" />
+					<attribute id="Name" type="23" value="NPC_Henchman" />
+					<attribute id="PhysicsTemplate" type="22" value="78b438db-e742-4301-aa71-79508187c581" />
+					<attribute id="Random" type="24" value="18446462598732840960" />
+					<attribute id="RunSpeed" type="6" value="3.75" />
+					<attribute id="Scale" type="6" value="1" />
+					<attribute id="Speaker" type="22" value="GEN_Human_Henchmen_Various_M" />
+					<attribute id="Stats" type="22" value="MaleHero" />
+					<attribute id="Type" type="22" value="character" />
+					<attribute id="VisualTemplate" type="22" value="680fc263-8144-4eb7-82c5-1ef11a8a689e" />
+					<attribute id="WalkSpeed" type="6" value="2" />
+					<children>
+						<node id="AIBounds">
+							<attribute id="AIType" type="1" value="2" />
+							<attribute id="Height" type="6" value="2" />
+							<attribute id="Radius" type="6" value="0.25" />
+						</node>
+						<node id="ClothColors">
+							<attribute id="Object" type="5" value="4278223040" />
+						</node>
+						<node id="ClothColors">
+							<attribute id="Object" type="5" value="4285965854" />
+						</node>
+						<node id="HairColors">
+							<attribute id="Object" type="5" value="4282384384" />
+						</node>
+						<node id="OnDeathActions">
+							<children>
+								<node id="Action">
+									<attribute id="ActionType" type="4" value="10" />
+									<children>
+										<node id="Attributes">
+											<attribute id="CellAtGrow" type="4" value="2" />
+											<attribute id="ExternalCauseAsSurfaceOwner" type="19" value="True" />
+											<attribute id="GrowTimer" type="6" value="0.5" />
+											<attribute id="LifeTime" type="6" value="60" />
+											<attribute id="SurfaceType" type="4" value="9" />
+											<attribute id="Timeout" type="6" value="0" />
+											<attribute id="TotalCells" type="4" value="20" />
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+						<node id="Scripts">
+							<children>
+								<node id="Script">
+									<attribute id="UUID" type="22" value="5bc80992-a7f6-4da6-83e2-3d276384d8f7" />
+									<children>
+										<node id="Parameters" />
+									</children>
+								</node>
+							</children>
+						</node>
+						<node id="SkinColors">
+							<attribute id="Object" type="5" value="4290822048" />
+						</node>
+						<node id="Treasures">
+							<attribute id="TreasureItem" type="22" value="GenericNpc" />
+						</node>
+					</children>
+				</node>
+				<node id="GameObjects">
+					<attribute id="Alignment" type="22" value="Companion14" />
+					<attribute id="DisplayName" type="28" handle="hf61b05d8gffc4g424egbdb5gf519637903a2" value="Wolgraff" />
+					<attribute id="Equipment" type="22" value="Henchman_Wolgraff_Rogue" />
+					<attribute id="EquipmentClass" type="1" value="0" />
+					<attribute id="ExplodedResourceID" type="22" value="fed27733-292d-465c-b6cf-9a6b9126307c" />
+					<attribute id="ExplosionFX" type="22" value="FX_GP_CorpseExplosion_Human_A" />
+					<attribute id="Flag" type="4" value="0" />
+					<attribute id="GroupID" type="5" value="0" />
+					<attribute id="HitFX" type="22" value="FX_GP_Blood_A" />
+					<attribute id="Icon" type="22" value="Portrait_CP_Wolgraff" />
+					<attribute id="LevelName" type="22" value="" />
+					<attribute id="LightID" type="22" value="3faa1c66-5d35-4e87-868e-d124168b660f" />
+					<attribute id="MapKey" type="22" value="124626c2-e7ed-4c20-a7e5-850af163ab27" />
+					<attribute id="Name" type="23" value="Companion_Wolgraff" />
+					<attribute id="PhysicsTemplate" type="22" value="a465845b-908e-4c19-9ee9-643c5f2fbfa1" />
+					<attribute id="Random" type="24" value="9223372036854775808" />
+					<attribute id="RunSpeed" type="6" value="3.75" />
+					<attribute id="Scale" type="6" value="1" />
+					<attribute id="SkillSet" type="22" value="Henchman_Wolgraff" />
+					<attribute id="Speaker" type="22" value="GEN_Human_Rogue_Wolgraff_M" />
+					<attribute id="Stats" type="22" value="Henchman_Wolgraff_Rogue" />
+					<attribute id="Type" type="22" value="character" />
+					<attribute id="VisualTemplate" type="22" value="ff63ae86-d28a-4132-bbd3-dee014dd81b4" />
+					<attribute id="WalkSpeed" type="6" value="2" />
+					<children>
+						<node id="AIBounds">
+							<attribute id="AIType" type="1" value="2" />
+							<attribute id="Height" type="6" value="1.7" />
+							<attribute id="Radius" type="6" value="0.25" />
+						</node>
+						<node id="Arms">
+							<attribute id="Object" type="22" value="1f5d3ddc-fb90-4d4c-9013-d93d1e00cc09" />
+						</node>
+						<node id="Bodies">
+							<attribute id="Object" type="22" value="85e0e033-be5a-4d36-b515-a272e1f36165" />
+						</node>
+						<node id="ClothColors">
+							<attribute id="Object" type="5" value="4280558382" />
+						</node>
+						<node id="HairColors">
+							<attribute id="Object" type="5" value="4282336856" />
+						</node>
+						<node id="Heads">
+							<attribute id="Object" type="22" value="c85c9691-5cb3-46f5-81d4-882975b284a4" />
+						</node>
+						<node id="OnDeathActions" />
+						<node id="Scripts">
+							<children>
+								<node id="Script">
+									<attribute id="UUID" type="22" value="dafb6d26-8fd1-48e9-8990-4d3c4ee4cbc0" />
+									<children>
+										<node id="Parameters">
+											<children>
+												<node id="Parameter">
+													<attribute id="MapKey" type="22" value="SayBlindedText" />
+													<attribute id="Type" type="4" value="1" />
+													<attribute id="Value" type="23" value="1" />
+												</node>
+											</children>
+										</node>
+									</children>
+								</node>
+								<node id="Script">
+									<attribute id="UUID" type="22" value="5bc80992-a7f6-4da6-83e2-3d276384d8f7" />
+									<children>
+										<node id="Parameters">
+											<children>
+												<node id="Parameter">
+													<attribute id="MapKey" type="22" value="SayBlindedText" />
+													<attribute id="Type" type="4" value="1" />
+													<attribute id="Value" type="23" value="1" />
+												</node>
+											</children>
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+						<node id="SkinColors">
+							<attribute id="Object" type="5" value="4291340424" />
+						</node>
+						<node id="Treasures">
+							<attribute id="TreasureItem" type="22" value="Ranger" />
+						</node>
+					</children>
+				</node>
+				<node id="GameObjects">
+					<attribute id="Equipment" type="22" value="Henchman_Jahan_Mage" />
+					<attribute id="EquipmentClass" type="1" value="0" />
+					<attribute id="ExplodedResourceID" type="22" value="fed27733-292d-465c-b6cf-9a6b9126307c" />
+					<attribute id="ExplosionFX" type="22" value="FX_GP_CorpseExplosion_Human_A" />
+					<attribute id="Flag" type="4" value="0" />
+					<attribute id="GroupID" type="5" value="0" />
+					<attribute id="HitFX" type="22" value="FX_GP_Blood_A" />
+					<attribute id="Icon" type="22" value="Portrait_CP_Jahan" />
+					<attribute id="LevelName" type="22" value="" />
+					<attribute id="LightID" type="22" value="3faa1c66-5d35-4e87-868e-d124168b660f" />
+					<attribute id="MapKey" type="22" value="23f3af72-437c-4aff-91ca-914ef6e6ebb7" />
+					<attribute id="Name" type="23" value="Companion_M_Kickstarter" />
+					<attribute id="PhysicsTemplate" type="22" value="a465845b-908e-4c19-9ee9-643c5f2fbfa1" />
+					<attribute id="Random" type="24" value="18446462598732840960" />
+					<attribute id="RunSpeed" type="6" value="3.75" />
+					<attribute id="Scale" type="6" value="1" />
+					<attribute id="SkillSet" type="22" value="Henchman_Jahan" />
+					<attribute id="Speaker" type="22" value="NOTUSED" />
+					<attribute id="Stats" type="22" value="Henchman_Jahan_Mage" />
+					<attribute id="Type" type="22" value="character" />
+					<attribute id="VisualTemplate" type="22" value="e52123e5-9d8d-4e1d-a264-d964fa7723dd" />
+					<attribute id="WalkSpeed" type="6" value="2" />
+					<children>
+						<node id="AIBounds">
+							<attribute id="AIType" type="1" value="2" />
+							<attribute id="Height" type="6" value="1.7" />
+							<attribute id="Radius" type="6" value="0.25" />
+						</node>
+						<node id="Arms">
+							<attribute id="Object" type="22" value="f05409df-4d8a-4924-b053-cbee07e2491d" />
+						</node>
+						<node id="Arms">
+							<attribute id="Object" type="22" value="bb46a5e3-c2f4-42ac-8246-d8c6d811a422" />
+						</node>
+						<node id="Arms">
+							<attribute id="Object" type="22" value="fd8fa707-76d1-4698-b684-efd04ec3a2c2" />
+						</node>
+						<node id="Arms">
+							<attribute id="Object" type="22" value="71900578-6e10-4677-9968-16a3b78c9eca" />
+						</node>
+						<node id="Arms">
+							<attribute id="Object" type="22" value="1f5d3ddc-fb90-4d4c-9013-d93d1e00cc09" />
+						</node>
+						<node id="Arms">
+							<attribute id="Object" type="22" value="feccf8d4-7b2b-41fe-8085-8a3710f71cc4" />
+						</node>
+						<node id="Arms">
+							<attribute id="Object" type="22" value="dc260eb8-22dc-4297-86a7-e00ad7599e18" />
+						</node>
+						<node id="Bodies">
+							<attribute id="Object" type="22" value="d6ed6f4d-1835-46fa-b16b-4528c302d095" />
+						</node>
+						<node id="ClothColors">
+							<attribute id="Object" type="5" value="4280558382" />
+						</node>
+						<node id="HairColors">
+							<attribute id="Object" type="5" value="4281542173" />
+						</node>
+						<node id="HairColors">
+							<attribute id="Object" type="5" value="4285746750" />
+						</node>
+						<node id="HairColors">
+							<attribute id="Object" type="5" value="4288246347" />
+						</node>
+						<node id="HairColors">
+							<attribute id="Object" type="5" value="4292916844" />
+						</node>
+						<node id="HairColors">
+							<attribute id="Object" type="5" value="4289283633" />
+						</node>
+						<node id="HairColors">
+							<attribute id="Object" type="5" value="4294963658" />
+						</node>
+						<node id="HairColors">
+							<attribute id="Object" type="5" value="4289511102" />
+						</node>
+						<node id="Heads">
+							<attribute id="Object" type="22" value="c5dcacfc-d17a-467c-930c-8b548cd7b72d" />
+						</node>
+						<node id="Heads">
+							<attribute id="Object" type="22" value="bf3989e7-b55e-4030-9722-e129b01240b9" />
+						</node>
+						<node id="Heads">
+							<attribute id="Object" type="22" value="7d7f9c4f-3ec6-48ad-916b-c1fdbe2e3fd2" />
+						</node>
+						<node id="Heads">
+							<attribute id="Object" type="22" value="6536e94f-7085-42ea-ae9b-89ded17422ee" />
+						</node>
+						<node id="Heads">
+							<attribute id="Object" type="22" value="7f532d91-5b3c-4e89-8fcd-86d9adf1064b" />
+						</node>
+						<node id="Heads">
+							<attribute id="Object" type="22" value="629f6adc-3396-42c7-a6d0-c2e35fdf95a2" />
+						</node>
+						<node id="Heads">
+							<attribute id="Object" type="22" value="47feb664-cac3-4390-98d5-1250e5dd5613" />
+						</node>
+						<node id="OnDeathActions" />
+						<node id="Scripts">
+							<children>
+								<node id="Script">
+									<attribute id="UUID" type="22" value="dafb6d26-8fd1-48e9-8990-4d3c4ee4cbc0" />
+									<children>
+										<node id="Parameters">
+											<children>
+												<node id="Parameter">
+													<attribute id="MapKey" type="22" value="SayBlindedText" />
+													<attribute id="Type" type="4" value="1" />
+													<attribute id="Value" type="23" value="1" />
+												</node>
+											</children>
+										</node>
+									</children>
+								</node>
+								<node id="Script">
+									<attribute id="UUID" type="22" value="5bc80992-a7f6-4da6-83e2-3d276384d8f7" />
+									<children>
+										<node id="Parameters">
+											<children>
+												<node id="Parameter">
+													<attribute id="MapKey" type="22" value="SayBlindedText" />
+													<attribute id="Type" type="4" value="1" />
+													<attribute id="Value" type="23" value="1" />
+												</node>
+											</children>
+										</node>
+									</children>
+								</node>
+								<node id="Script">
+									<attribute id="UUID" type="22" value="4c19e849-b0d6-40fe-9dc0-05517d6a50b5" />
+									<children>
+										<node id="Parameters" />
+									</children>
+								</node>
+							</children>
+						</node>
+						<node id="SkinColors">
+							<attribute id="Object" type="5" value="4294170561" />
+						</node>
+						<node id="SkinColors">
+							<attribute id="Object" type="5" value="4292127352" />
+						</node>
+						<node id="SkinColors">
+							<attribute id="Object" type="5" value="4289099092" />
+						</node>
+						<node id="SkinColors">
+							<attribute id="Object" type="5" value="4285286710" />
+						</node>
+						<node id="SkinColors">
+							<attribute id="Object" type="5" value="4293772742" />
+						</node>
+						<node id="SkinColors">
+							<attribute id="Object" type="5" value="4289095769" />
+						</node>
+						<node id="SkinColors">
+							<attribute id="Object" type="5" value="4293780701" />
+						</node>
+						<node id="Treasures">
+							<attribute id="TreasureItem" type="22" value="Wizard" />
+						</node>
+					</children>
+				</node>
+				<node id="GameObjects">
+					<attribute id="ExplodedResourceID" type="22" value="fed27733-292d-465c-b6cf-9a6b9126307c" />
+					<attribute id="ExplosionFX" type="22" value="FX_GP_CorpseExplosion_Human_A" />
+					<attribute id="Flag" type="4" value="0" />
+					<attribute id="GroupID" type="5" value="0" />
+					<attribute id="HitFX" type="22" value="FX_GP_Blood_A" />
+					<attribute id="Icon" type="22" value="Portrait_NPC_Imp_Historian_A" />
+					<attribute id="LevelName" type="22" value="" />
+					<attribute id="MapKey" type="22" value="271614ef-7715-4386-9723-2cecaeda0f81" />
+					<attribute id="Name" type="23" value="ImpPlayer" />
+					<attribute id="PhysicsTemplate" type="22" value="a465845b-908e-4c19-9ee9-643c5f2fbfa1" />
+					<attribute id="Random" type="24" value="18446462598732840960" />
+					<attribute id="RunSpeed" type="6" value="6" />
+					<attribute id="Scale" type="6" value="1" />
+					<attribute id="Speaker" type="22" value="GEN_Imp_Grunt_M" />
+					<attribute id="Stats" type="22" value="Henchman_Imp" />
+					<attribute id="Type" type="22" value="character" />
+					<attribute id="VisualTemplate" type="22" value="402c669b-73ee-41ee-a6d5-afd91a451347" />
+					<attribute id="WalkSpeed" type="6" value="4" />
+					<children>
+						<node id="AIBounds">
+							<attribute id="AIType" type="1" value="2" />
+							<attribute id="Height" type="6" value="1.49491" />
+							<attribute id="Max" type="12" value="1.29547 1.49608 0.645619" />
+							<attribute id="Min" type="12" value="-0.999147 0.00116912 -1.28577" />
+							<attribute id="Radius" type="6" value="0.25" />
+						</node>
+						<node id="OnDeathActions" />
+						<node id="Scripts">
+							<children>
+								<node id="Script">
+									<attribute id="UUID" type="22" value="5bc80992-a7f6-4da6-83e2-3d276384d8f7" />
+									<children>
+										<node id="Parameters" />
+									</children>
+								</node>
+							</children>
+						</node>
+					</children>
+				</node>
+				<node id="GameObjects">
+					<attribute id="Equipment" type="22" value="Henchman_Madoc_Paladin" />
+					<attribute id="EquipmentClass" type="1" value="1" />
+					<attribute id="ExplodedResourceID" type="22" value="fed27733-292d-465c-b6cf-9a6b9126307c" />
+					<attribute id="ExplosionFX" type="22" value="FX_GP_CorpseExplosion_Human_A" />
+					<attribute id="Flag" type="4" value="0" />
+					<attribute id="GroupID" type="5" value="0" />
+					<attribute id="HitFX" type="22" value="FX_GP_Blood_A" />
+					<attribute id="Icon" type="22" value="Portrait_CP_Madora" />
+					<attribute id="LevelName" type="22" value="" />
+					<attribute id="LightID" type="22" value="3faa1c66-5d35-4e87-868e-d124168b660f" />
+					<attribute id="MapKey" type="22" value="3ec36a84-93a1-409f-83d6-4b7b17745df6" />
+					<attribute id="Name" type="23" value="Companion_F_Kickstarter" />
+					<attribute id="PhysicsTemplate" type="22" value="a465845b-908e-4c19-9ee9-643c5f2fbfa1" />
+					<attribute id="Random" type="24" value="18446462598732840960" />
+					<attribute id="RunSpeed" type="6" value="3.75" />
+					<attribute id="Scale" type="6" value="1" />
+					<attribute id="SkillSet" type="22" value="Henchman_Madoc" />
+					<attribute id="Speaker" type="22" value="NOTUSED" />
+					<attribute id="Stats" type="22" value="Henchman_Madoc_Paladin" />
+					<attribute id="Type" type="22" value="character" />
+					<attribute id="VisualTemplate" type="22" value="3ee90f81-a627-4701-b27c-d6015d15b4cb" />
+					<attribute id="WalkSpeed" type="6" value="2" />
+					<children>
+						<node id="AIBounds">
+							<attribute id="AIType" type="1" value="2" />
+							<attribute id="Height" type="6" value="1.7" />
+							<attribute id="Radius" type="6" value="0.25" />
+						</node>
+						<node id="Arms">
+							<attribute id="Object" type="22" value="c9dde82d-f599-4d9a-9aeb-88852a35bae1" />
+						</node>
+						<node id="Arms">
+							<attribute id="Object" type="22" value="cdf1ee88-367d-49b0-8a64-506287b158d9" />
+						</node>
+						<node id="Arms">
+							<attribute id="Object" type="22" value="3b3d99b6-2e6e-4f55-ad04-7806c4d42f5b" />
+						</node>
+						<node id="Arms">
+							<attribute id="Object" type="22" value="6fc0d410-6de7-4e11-903e-7f315644f68f" />
+						</node>
+						<node id="Arms">
+							<attribute id="Object" type="22" value="4e655b27-1829-4a3b-8171-8399fcc5b97d" />
+						</node>
+						<node id="Arms">
+							<attribute id="Object" type="22" value="0bbbb99a-9004-4f63-a723-184f262e6e9f" />
+						</node>
+						<node id="Arms">
+							<attribute id="Object" type="22" value="eca5f24e-b549-4e0e-9201-7f7dde019daa" />
+						</node>
+						<node id="Arms">
+							<attribute id="Object" type="22" value="15d60fec-c317-4f7e-9018-8ba5ddea8fce" />
+						</node>
+						<node id="Bodies">
+							<attribute id="Object" type="22" value="b074c3ce-ffdc-4c30-9514-891cf85ae543" />
+						</node>
+						<node id="ClothColors">
+							<attribute id="Object" type="5" value="4278190080" />
+						</node>
+						<node id="HairColors">
+							<attribute id="Object" type="5" value="4294963658" />
+						</node>
+						<node id="HairColors">
+							<attribute id="Object" type="5" value="4288246347" />
+						</node>
+						<node id="HairColors">
+							<attribute id="Object" type="5" value="4292916844" />
+						</node>
+						<node id="HairColors">
+							<attribute id="Object" type="5" value="4289283633" />
+						</node>
+						<node id="HairColors">
+							<attribute id="Object" type="5" value="4285297801" />
+						</node>
+						<node id="HairColors">
+							<attribute id="Object" type="5" value="4281542173" />
+						</node>
+						<node id="HairColors">
+							<attribute id="Object" type="5" value="4285746750" />
+						</node>
+						<node id="Heads">
+							<attribute id="Object" type="22" value="2780adab-be92-43a3-9a37-3202241945a6" />
+						</node>
+						<node id="Heads">
+							<attribute id="Object" type="22" value="bdb54eed-588e-47b4-8c79-bf85ebc4e0dc" />
+						</node>
+						<node id="Heads">
+							<attribute id="Object" type="22" value="2e01ba8f-f9b1-4016-9c85-6d1de2617acc" />
+						</node>
+						<node id="Heads">
+							<attribute id="Object" type="22" value="7439b255-00e3-4098-b317-71d318585abd" />
+						</node>
+						<node id="Heads">
+							<attribute id="Object" type="22" value="b692a52e-c763-46ac-918e-0a8906b1b992" />
+						</node>
+						<node id="Heads">
+							<attribute id="Object" type="22" value="ade675a8-96de-4887-9f34-8e2e7df607af" />
+						</node>
+						<node id="Heads">
+							<attribute id="Object" type="22" value="a0f41ab5-f3f8-4759-9f10-f882f50a10b7" />
+						</node>
+						<node id="Heads">
+							<attribute id="Object" type="22" value="45d1d47a-d510-4cb1-aba5-6c69be412fb7" />
+						</node>
+						<node id="OnDeathActions" />
+						<node id="Scripts">
+							<children>
+								<node id="Script">
+									<attribute id="UUID" type="22" value="dafb6d26-8fd1-48e9-8990-4d3c4ee4cbc0" />
+									<children>
+										<node id="Parameters">
+											<children>
+												<node id="Parameter">
+													<attribute id="MapKey" type="22" value="SayBlindedText" />
+													<attribute id="Type" type="4" value="1" />
+													<attribute id="Value" type="23" value="1" />
+												</node>
+											</children>
+										</node>
+									</children>
+								</node>
+								<node id="Script">
+									<attribute id="UUID" type="22" value="5bc80992-a7f6-4da6-83e2-3d276384d8f7" />
+									<children>
+										<node id="Parameters">
+											<children>
+												<node id="Parameter">
+													<attribute id="MapKey" type="22" value="SayBlindedText" />
+													<attribute id="Type" type="4" value="1" />
+													<attribute id="Value" type="23" value="1" />
+												</node>
+											</children>
+										</node>
+									</children>
+								</node>
+								<node id="Script">
+									<attribute id="UUID" type="22" value="4c19e849-b0d6-40fe-9dc0-05517d6a50b5" />
+									<children>
+										<node id="Parameters" />
+									</children>
+								</node>
+							</children>
+						</node>
+						<node id="SkinColors">
+							<attribute id="Object" type="5" value="4294170561" />
+						</node>
+						<node id="SkinColors">
+							<attribute id="Object" type="5" value="4292127352" />
+						</node>
+						<node id="SkinColors">
+							<attribute id="Object" type="5" value="4289099092" />
+						</node>
+						<node id="SkinColors">
+							<attribute id="Object" type="5" value="4285286710" />
+						</node>
+						<node id="SkinColors">
+							<attribute id="Object" type="5" value="4293772742" />
+						</node>
+						<node id="SkinColors">
+							<attribute id="Object" type="5" value="4293780701" />
+						</node>
+						<node id="SkinColors">
+							<attribute id="Object" type="5" value="4289095769" />
+						</node>
+						<node id="Treasures">
+							<attribute id="TreasureItem" type="22" value="Warrior" />
+						</node>
+					</children>
+				</node>
+				<node id="GameObjects">
+					<attribute id="ExplodedResourceID" type="22" value="fed27733-292d-465c-b6cf-9a6b9126307c" />
+					<attribute id="ExplosionFX" type="22" value="FX_GP_CorpseExplosion_Human_A" />
+					<attribute id="Flag" type="4" value="0" />
+					<attribute id="GroupID" type="5" value="0" />
+					<attribute id="HitFX" type="22" value="FX_GP_Blood_A" />
+					<attribute id="Icon" type="22" value="Portrait_Cyclops_Floater_A" />
+					<attribute id="LevelName" type="22" value="" />
+					<attribute id="MapKey" type="22" value="7993a815-d277-460d-9a33-f88a6ff86fba" />
+					<attribute id="Name" type="23" value="FloaterPlayer" />
+					<attribute id="PhysicsTemplate" type="22" value="f56af52f-298a-4a03-b09a-3a0490496fc2" />
+					<attribute id="Random" type="24" value="18446462598732840960" />
+					<attribute id="RunSpeed" type="6" value="6" />
+					<attribute id="Scale" type="6" value="1" />
+					<attribute id="Speaker" type="22" value="NOTUSED" />
+					<attribute id="Stats" type="22" value="Henchman_Floater" />
+					<attribute id="Type" type="22" value="character" />
+					<attribute id="VisualTemplate" type="22" value="8d79bb3d-1c33-4cc6-a91e-57ccb03ff4d4" />
+					<attribute id="WalkSpeed" type="6" value="4" />
+					<children>
+						<node id="AIBounds">
+							<attribute id="AIType" type="1" value="2" />
+							<attribute id="Height" type="6" value="0.62736" />
+							<attribute id="Max" type="12" value="0.254625 1.11766 0.348919" />
+							<attribute id="Min" type="12" value="-0.254625 0.490297 -0.245424" />
+							<attribute id="Radius" type="6" value="0.25" />
+						</node>
+						<node id="OnDeathActions" />
+						<node id="Scripts">
+							<children>
+								<node id="Script">
+									<attribute id="UUID" type="22" value="5bc80992-a7f6-4da6-83e2-3d276384d8f7" />
+									<children>
+										<node id="Parameters" />
+									</children>
+								</node>
+							</children>
+						</node>
+					</children>
+				</node>
+				<node id="GameObjects">
+					<attribute id="Equipment" type="22" value="FemaleHero" />
+					<attribute id="EquipmentClass" type="1" value="1" />
+					<attribute id="ExplodedResourceID" type="22" value="fed27733-292d-465c-b6cf-9a6b9126307c" />
+					<attribute id="ExplosionFX" type="22" value="FX_GP_CorpseExplosion_Human_A" />
+					<attribute id="Flag" type="4" value="0" />
+					<attribute id="Gender" type="1" value="1" />
+					<attribute id="GroupID" type="5" value="0" />
+					<attribute id="HitFX" type="22" value="FX_GP_Blood_A" />
+					<attribute id="Icon" type="22" value="female_CharIcon" />
+					<attribute id="LevelName" type="22" value="" />
+					<attribute id="LightID" type="22" value="3faa1c66-5d35-4e87-868e-d124168b660f" />
+					<attribute id="MapKey" type="22" value="878372b3-9280-4819-b8b0-4ca76dea8ad1" />
+					<attribute id="Name" type="23" value="FemalePlayer" />
+					<attribute id="PhysicsTemplate" type="22" value="a465845b-908e-4c19-9ee9-643c5f2fbfa1" />
+					<attribute id="Random" type="24" value="9223372036854775808" />
+					<attribute id="RunSpeed" type="6" value="5" />
+					<attribute id="Scale" type="6" value="1" />
+					<attribute id="Speaker" type="22" value="NOTUSED" />
+					<attribute id="Stats" type="22" value="FemaleHero" />
+					<attribute id="Type" type="22" value="character" />
+					<attribute id="VisualTemplate" type="22" value="3ee90f81-a627-4701-b27c-d6015d15b4cb" />
+					<attribute id="WalkSpeed" type="6" value="2.66" />
+					<children>
+						<node id="AIBounds">
+							<attribute id="AIType" type="1" value="2" />
+							<attribute id="Height" type="6" value="1.7" />
+							<attribute id="Radius" type="6" value="0.25" />
+						</node>
+						<node id="Arms">
+							<attribute id="Object" type="22" value="d704d0eb-324d-45fd-850a-01af08325877" />
+						</node>
+						<node id="Arms">
+							<attribute id="Object" type="22" value="9f1e3121-2c6d-43f7-a6bd-7d631df94f11" />
+						</node>
+						<node id="Arms">
+							<attribute id="Object" type="22" value="f9b95a94-bd1c-4f93-8fe5-d1dd76f2d280" />
+						</node>
+						<node id="Arms">
+							<attribute id="Object" type="22" value="9bdeb0ab-2dc3-4d0a-a79f-d7544965d847" />
+						</node>
+						<node id="Arms">
+							<attribute id="Object" type="22" value="dddb5fed-7dd4-4d55-a25b-9c92747e90d9" />
+						</node>
+						<node id="Arms">
+							<attribute id="Object" type="22" value="801dc265-a8b7-4b26-bb0a-feb047008e1c" />
+						</node>
+						<node id="Arms">
+							<attribute id="Object" type="22" value="f160ff3d-0df9-4e33-bf93-89ca82528c69" />
+						</node>
+						<node id="Arms">
+							<attribute id="Object" type="22" value="3faf5e26-28b5-4f62-bb56-51c4a4712f47" />
+						</node>
+						<node id="Arms">
+							<attribute id="Object" type="22" value="c36efadc-1e3a-483d-b542-e2ce2d5aaa22" />
+						</node>
+						<node id="Arms">
+							<attribute id="Object" type="22" value="899ce000-a8b9-45be-a37e-b34b6083ed7f" />
+						</node>
+						<node id="Arms">
+							<attribute id="Object" type="22" value="4ec0bc8c-727c-4106-8737-7c07200f430f" />
+						</node>
+						<node id="Arms">
+							<attribute id="Object" type="22" value="46f228e6-e1b7-4049-bf3b-4687bb691911" />
+						</node>
+						<node id="Arms">
+							<attribute id="Object" type="22" value="0ba1eed1-33fe-4e5d-888f-67b254c12018" />
+						</node>
+						<node id="Arms">
+							<attribute id="Object" type="22" value="134cf5d5-8fbf-4c5c-911b-e012dad2f036" />
+						</node>
+						<node id="Arms">
+							<attribute id="Object" type="22" value="5c4a4f0a-d856-4e76-bfbc-6db9bd7650c7" />
+						</node>
+						<node id="Bodies">
+							<attribute id="Object" type="22" value="fdd195c1-92ac-4faf-b8df-c9b847cfd6a8" />
+						</node>
+						<node id="Bodies">
+							<attribute id="Object" type="22" value="3670a380-95a7-4887-9e5f-95ab43a6f252" />
+						</node>
+						<node id="Bodies">
+							<attribute id="Object" type="22" value="2bc6566c-2ef6-497a-acc0-25ba182af17e" />
+						</node>
+						<node id="ClothColors">
+							<attribute id="Object" type="5" value="4289331200" />
+						</node>
+						<node id="HairColors">
+							<attribute id="Object" type="5" value="4294936346" />
+						</node>
+						<node id="Heads">
+							<attribute id="Object" type="22" value="fe6204f5-a93f-465c-9e19-38e9f791189b" />
+						</node>
+						<node id="Heads">
+							<attribute id="Object" type="22" value="36b13310-6ec8-40db-9916-99db97c34281" />
+						</node>
+						<node id="Heads">
+							<attribute id="Object" type="22" value="9e06fcad-759d-42b2-ad94-eab5d58323ad" />
+						</node>
+						<node id="Heads">
+							<attribute id="Object" type="22" value="3507c699-c706-4e6f-b644-c57571331cdb" />
+						</node>
+						<node id="Heads">
+							<attribute id="Object" type="22" value="11d4fd0d-4adb-4615-8184-889a2a20da2d" />
+						</node>
+						<node id="Heads">
+							<attribute id="Object" type="22" value="dc821ad5-e87b-48d6-9cbf-1315a22d2f3d" />
+						</node>
+						<node id="Heads">
+							<attribute id="Object" type="22" value="5fe8fdc7-3735-44a0-9c8a-b1ac84e5c352" />
+						</node>
+						<node id="Heads">
+							<attribute id="Object" type="22" value="e71360e8-3e56-485c-ace0-5331024e0b11" />
+						</node>
+						<node id="Heads">
+							<attribute id="Object" type="22" value="b1d05d6d-774a-4865-a6dd-ff0e0838273d" />
+						</node>
+						<node id="Heads">
+							<attribute id="Object" type="22" value="8e305c6f-6e45-4b76-80a9-eea12703e324" />
+						</node>
+						<node id="Heads">
+							<attribute id="Object" type="22" value="14191322-a1bd-4334-91d7-0393b36334f1" />
+						</node>
+						<node id="Heads">
+							<attribute id="Object" type="22" value="f20c8dbf-77d4-4527-82f1-1f0b34a3450e" />
+						</node>
+						<node id="Heads">
+							<attribute id="Object" type="22" value="07ad0a19-f3be-4712-85c3-ab877d1efc62" />
+						</node>
+						<node id="Heads">
+							<attribute id="Object" type="22" value="dc52ef6f-338a-4838-acf2-3abd4572d0e9" />
+						</node>
+						<node id="Heads">
+							<attribute id="Object" type="22" value="ae21deb6-17dc-4f76-bf04-50ef734bad2c" />
+						</node>
+						<node id="OnDeathActions" />
+						<node id="Scripts">
+							<children>
+								<node id="Script">
+									<attribute id="UUID" type="22" value="dafb6d26-8fd1-48e9-8990-4d3c4ee4cbc0" />
+									<children>
+										<node id="Parameters">
+											<children>
+												<node id="Parameter">
+													<attribute id="MapKey" type="22" value="HardcoreOnly" />
+													<attribute id="Type" type="4" value="1" />
+													<attribute id="Value" type="23" value="0" />
+												</node>
+												<node id="Parameter">
+													<attribute id="MapKey" type="22" value="SayBlindedText" />
+													<attribute id="Type" type="4" value="1" />
+													<attribute id="Value" type="23" value="1" />
+												</node>
+											</children>
+										</node>
+									</children>
+								</node>
+								<node id="Script">
+									<attribute id="UUID" type="22" value="5bc80992-a7f6-4da6-83e2-3d276384d8f7" />
+									<children>
+										<node id="Parameters">
+											<children>
+												<node id="Parameter">
+													<attribute id="MapKey" type="22" value="HardcoreOnly" />
+													<attribute id="Type" type="4" value="1" />
+													<attribute id="Value" type="23" value="0" />
+												</node>
+												<node id="Parameter">
+													<attribute id="MapKey" type="22" value="SayBlindedText" />
+													<attribute id="Type" type="4" value="1" />
+													<attribute id="Value" type="23" value="1" />
+												</node>
+											</children>
+										</node>
+									</children>
+								</node>
+								<node id="Script">
+									<attribute id="UUID" type="22" value="2c23ce6e-6807-4743-ac1d-54ebd9bf786f" />
+									<children>
+										<node id="Parameters">
+											<children>
+												<node id="Parameter">
+													<attribute id="MapKey" type="22" value="BlockCommentFrequency" />
+													<attribute id="Type" type="4" value="2" />
+													<attribute id="Value" type="23" value="0.8" />
+												</node>
+												<node id="Parameter">
+													<attribute id="MapKey" type="22" value="CanSpeak" />
+													<attribute id="Type" type="4" value="1" />
+													<attribute id="Value" type="23" value="1" />
+												</node>
+												<node id="Parameter">
+													<attribute id="MapKey" type="22" value="CriticalCommentFrequency" />
+													<attribute id="Type" type="4" value="2" />
+													<attribute id="Value" type="23" value="0.2" />
+												</node>
+												<node id="Parameter">
+													<attribute id="MapKey" type="22" value="DeathCommentFrequency" />
+													<attribute id="Type" type="4" value="2" />
+													<attribute id="Value" type="23" value="0.5" />
+												</node>
+												<node id="Parameter">
+													<attribute id="MapKey" type="22" value="HardcoreOnly" />
+													<attribute id="Type" type="4" value="1" />
+													<attribute id="Value" type="23" value="0" />
+												</node>
+												<node id="Parameter">
+													<attribute id="MapKey" type="22" value="JunkCommentFrequency" />
+													<attribute id="Type" type="4" value="2" />
+													<attribute id="Value" type="23" value="0.2" />
+												</node>
+												<node id="Parameter">
+													<attribute id="MapKey" type="22" value="LockCommentFrequency" />
+													<attribute id="Type" type="4" value="2" />
+													<attribute id="Value" type="23" value="0.2" />
+												</node>
+												<node id="Parameter">
+													<attribute id="MapKey" type="22" value="LowHealthCommentThreshold" />
+													<attribute id="Type" type="4" value="2" />
+													<attribute id="Value" type="23" value="0.2" />
+												</node>
+												<node id="Parameter">
+													<attribute id="MapKey" type="22" value="MasterTimer" />
+													<attribute id="Type" type="4" value="2" />
+													<attribute id="Value" type="23" value="5" />
+												</node>
+												<node id="Parameter">
+													<attribute id="MapKey" type="22" value="MissCommentFrequency" />
+													<attribute id="Type" type="4" value="2" />
+													<attribute id="Value" type="23" value="0.7" />
+												</node>
+												<node id="Parameter">
+													<attribute id="MapKey" type="22" value="RareCommentFrequency" />
+													<attribute id="Type" type="4" value="2" />
+													<attribute id="Value" type="23" value="0.2" />
+												</node>
+												<node id="Parameter">
+													<attribute id="MapKey" type="22" value="SkillCommentFrequency" />
+													<attribute id="Type" type="4" value="2" />
+													<attribute id="Value" type="23" value="0.4" />
+												</node>
+												<node id="Parameter">
+													<attribute id="MapKey" type="22" value="StatusCommentFrequency" />
+													<attribute id="Type" type="4" value="2" />
+													<attribute id="Value" type="23" value="0.71" />
+												</node>
+											</children>
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+						<node id="SkinColors">
+							<attribute id="Object" type="5" value="4293115563" />
+						</node>
+					</children>
+				</node>
+				<node id="GameObjects">
+					<attribute id="Equipment" type="22" value="MaleHero" />
+					<attribute id="EquipmentClass" type="1" value="0" />
+					<attribute id="ExplodedResourceID" type="22" value="fed27733-292d-465c-b6cf-9a6b9126307c" />
+					<attribute id="ExplosionFX" type="22" value="FX_GP_CorpseExplosion_Human_A" />
+					<attribute id="Flag" type="4" value="0" />
+					<attribute id="GroupID" type="5" value="0" />
+					<attribute id="HitFX" type="22" value="FX_GP_Blood_A" />
+					<attribute id="Icon" type="22" value="male_CharIcon" />
+					<attribute id="LevelName" type="22" value="" />
+					<attribute id="LightID" type="22" value="3faa1c66-5d35-4e87-868e-d124168b660f" />
+					<attribute id="MapKey" type="22" value="878372b3-9280-4819-b8b0-4ca76dea8ad2" />
+					<attribute id="Name" type="23" value="MalePlayer" />
+					<attribute id="PhysicsTemplate" type="22" value="a465845b-908e-4c19-9ee9-643c5f2fbfa1" />
+					<attribute id="Random" type="24" value="9223372036854775808" />
+					<attribute id="RunSpeed" type="6" value="5" />
+					<attribute id="Scale" type="6" value="1" />
+					<attribute id="Speaker" type="22" value="Player" />
+					<attribute id="Stats" type="22" value="MaleHero" />
+					<attribute id="Type" type="22" value="character" />
+					<attribute id="VisualTemplate" type="22" value="e52123e5-9d8d-4e1d-a264-d964fa7723dd" />
+					<attribute id="WalkSpeed" type="6" value="2.66" />
+					<children>
+						<node id="AIBounds">
+							<attribute id="AIType" type="1" value="2" />
+							<attribute id="Height" type="6" value="1.7" />
+							<attribute id="Radius" type="6" value="0.25" />
+						</node>
+						<node id="Arms">
+							<attribute id="Object" type="22" value="73a2473f-3f15-40dc-ac5c-7f6d301cbef1" />
+						</node>
+						<node id="Arms">
+							<attribute id="Object" type="22" value="7b92cc0a-7f6a-4c06-a728-53373a72b0d7" />
+						</node>
+						<node id="Arms">
+							<attribute id="Object" type="22" value="f59eca34-12ee-452d-8806-2c19096436b2" />
+						</node>
+						<node id="Arms">
+							<attribute id="Object" type="22" value="85c840b0-ba65-4652-83e9-8be644c3b34b" />
+						</node>
+						<node id="Arms">
+							<attribute id="Object" type="22" value="5ec7fdfd-7964-438e-b921-9029bc36cd14" />
+						</node>
+						<node id="Arms">
+							<attribute id="Object" type="22" value="03c82113-d821-45a8-a05a-0590716d1736" />
+						</node>
+						<node id="Arms">
+							<attribute id="Object" type="22" value="05a6cf40-5201-4139-bc9d-93c85978d8c4" />
+						</node>
+						<node id="Arms">
+							<attribute id="Object" type="22" value="46b70848-b4b0-4c69-b150-02fe3c9f54c9" />
+						</node>
+						<node id="Arms">
+							<attribute id="Object" type="22" value="1204bfd4-ed43-499d-90be-021602176064" />
+						</node>
+						<node id="Arms">
+							<attribute id="Object" type="22" value="4bcd899f-730b-40b8-848d-60c787565f00" />
+						</node>
+						<node id="Arms">
+							<attribute id="Object" type="22" value="16853d27-5233-4569-bf95-aa45d086b8da" />
+						</node>
+						<node id="Arms">
+							<attribute id="Object" type="22" value="ecf0ad81-c20e-48d6-a1e3-357ae89fc7b3" />
+						</node>
+						<node id="Arms">
+							<attribute id="Object" type="22" value="d1046f39-345e-484f-8c5e-4badaf49f2ab" />
+						</node>
+						<node id="Arms">
+							<attribute id="Object" type="22" value="68bdec94-c7ac-4677-b12b-f16925e72ca9" />
+						</node>
+						<node id="Arms">
+							<attribute id="Object" type="22" value="3f15b2c9-94ab-40b8-b0fb-133ff85a3de0" />
+						</node>
+						<node id="Bodies">
+							<attribute id="Object" type="22" value="7b2edc8e-10fa-4605-884b-5b468c9edd1b" />
+						</node>
+						<node id="Bodies">
+							<attribute id="Object" type="22" value="73e106fa-c0bf-4c5c-9d2a-482d4c4a5169" />
+						</node>
+						<node id="Bodies">
+							<attribute id="Object" type="22" value="599fe3ee-e29d-4028-b144-833e2e147918" />
+						</node>
+						<node id="ClothColors">
+							<attribute id="Object" type="5" value="4289331200" />
+						</node>
+						<node id="HairColors">
+							<attribute id="Object" type="5" value="4281611339" />
+						</node>
+						<node id="Heads">
+							<attribute id="Object" type="22" value="e89dad9d-4a1e-4a4b-8a64-4da544ae5096" />
+						</node>
+						<node id="Heads">
+							<attribute id="Object" type="22" value="84602eff-309f-47df-a022-53bb4016469f" />
+						</node>
+						<node id="Heads">
+							<attribute id="Object" type="22" value="fd59fcc1-03d1-426e-9284-fdfbd7db7cbb" />
+						</node>
+						<node id="Heads">
+							<attribute id="Object" type="22" value="292b0328-1cc9-466d-b2c3-02e6961110d4" />
+						</node>
+						<node id="Heads">
+							<attribute id="Object" type="22" value="cf820aad-9988-4ef0-8594-e57850da5c6b" />
+						</node>
+						<node id="Heads">
+							<attribute id="Object" type="22" value="a6deaf7d-f2c5-4ecc-bbc3-0186f1259439" />
+						</node>
+						<node id="Heads">
+							<attribute id="Object" type="22" value="700d5e9e-dd0e-4cc7-95e9-0861b80cca72" />
+						</node>
+						<node id="Heads">
+							<attribute id="Object" type="22" value="8a29c214-882d-44b6-aa38-67be8a082882" />
+						</node>
+						<node id="Heads">
+							<attribute id="Object" type="22" value="0147d627-e151-4828-b2d2-d6d66bc970e0" />
+						</node>
+						<node id="Heads">
+							<attribute id="Object" type="22" value="e35af3ba-31e2-43e1-83d9-ed808f4aeba6" />
+						</node>
+						<node id="Heads">
+							<attribute id="Object" type="22" value="841b8d52-76ce-4ef9-baf5-963fd9488b76" />
+						</node>
+						<node id="Heads">
+							<attribute id="Object" type="22" value="c82d5460-fdee-40f8-a032-cab8325ef21e" />
+						</node>
+						<node id="Heads">
+							<attribute id="Object" type="22" value="f3d429a1-c2b7-44e1-828f-8efb4297d853" />
+						</node>
+						<node id="Heads">
+							<attribute id="Object" type="22" value="b853a4cb-bcdb-463a-a76b-ca1621544950" />
+						</node>
+						<node id="Heads">
+							<attribute id="Object" type="22" value="9a79d5f4-c69e-49d0-b5b4-b0f963f26398" />
+						</node>
+						<node id="OnDeathActions" />
+						<node id="Scripts">
+							<children>
+								<node id="Script">
+									<attribute id="UUID" type="22" value="dafb6d26-8fd1-48e9-8990-4d3c4ee4cbc0" />
+									<children>
+										<node id="Parameters">
+											<children>
+												<node id="Parameter">
+													<attribute id="MapKey" type="22" value="HardcoreOnly" />
+													<attribute id="Type" type="4" value="1" />
+													<attribute id="Value" type="23" value="0" />
+												</node>
+												<node id="Parameter">
+													<attribute id="MapKey" type="22" value="SayBlindedText" />
+													<attribute id="Type" type="4" value="1" />
+													<attribute id="Value" type="23" value="1" />
+												</node>
+											</children>
+										</node>
+									</children>
+								</node>
+								<node id="Script">
+									<attribute id="UUID" type="22" value="5bc80992-a7f6-4da6-83e2-3d276384d8f7" />
+									<children>
+										<node id="Parameters">
+											<children>
+												<node id="Parameter">
+													<attribute id="MapKey" type="22" value="HardcoreOnly" />
+													<attribute id="Type" type="4" value="1" />
+													<attribute id="Value" type="23" value="0" />
+												</node>
+												<node id="Parameter">
+													<attribute id="MapKey" type="22" value="SayBlindedText" />
+													<attribute id="Type" type="4" value="1" />
+													<attribute id="Value" type="23" value="1" />
+												</node>
+											</children>
+										</node>
+									</children>
+								</node>
+								<node id="Script">
+									<attribute id="UUID" type="22" value="2c23ce6e-6807-4743-ac1d-54ebd9bf786f" />
+									<children>
+										<node id="Parameters">
+											<children>
+												<node id="Parameter">
+													<attribute id="MapKey" type="22" value="BlockCommentFrequency" />
+													<attribute id="Type" type="4" value="2" />
+													<attribute id="Value" type="23" value="0.8" />
+												</node>
+												<node id="Parameter">
+													<attribute id="MapKey" type="22" value="CanSpeak" />
+													<attribute id="Type" type="4" value="1" />
+													<attribute id="Value" type="23" value="1" />
+												</node>
+												<node id="Parameter">
+													<attribute id="MapKey" type="22" value="CriticalCommentFrequency" />
+													<attribute id="Type" type="4" value="2" />
+													<attribute id="Value" type="23" value="0.2" />
+												</node>
+												<node id="Parameter">
+													<attribute id="MapKey" type="22" value="DeathCommentFrequency" />
+													<attribute id="Type" type="4" value="2" />
+													<attribute id="Value" type="23" value="0.5" />
+												</node>
+												<node id="Parameter">
+													<attribute id="MapKey" type="22" value="HardcoreOnly" />
+													<attribute id="Type" type="4" value="1" />
+													<attribute id="Value" type="23" value="0" />
+												</node>
+												<node id="Parameter">
+													<attribute id="MapKey" type="22" value="JunkCommentFrequency" />
+													<attribute id="Type" type="4" value="2" />
+													<attribute id="Value" type="23" value="0.2" />
+												</node>
+												<node id="Parameter">
+													<attribute id="MapKey" type="22" value="LockCommentFrequency" />
+													<attribute id="Type" type="4" value="2" />
+													<attribute id="Value" type="23" value="0.2" />
+												</node>
+												<node id="Parameter">
+													<attribute id="MapKey" type="22" value="LowHealthCommentThreshold" />
+													<attribute id="Type" type="4" value="2" />
+													<attribute id="Value" type="23" value="0.2" />
+												</node>
+												<node id="Parameter">
+													<attribute id="MapKey" type="22" value="MasterTimer" />
+													<attribute id="Type" type="4" value="2" />
+													<attribute id="Value" type="23" value="5" />
+												</node>
+												<node id="Parameter">
+													<attribute id="MapKey" type="22" value="MissCommentFrequency" />
+													<attribute id="Type" type="4" value="2" />
+													<attribute id="Value" type="23" value="0.7" />
+												</node>
+												<node id="Parameter">
+													<attribute id="MapKey" type="22" value="RareCommentFrequency" />
+													<attribute id="Type" type="4" value="2" />
+													<attribute id="Value" type="23" value="0.2" />
+												</node>
+												<node id="Parameter">
+													<attribute id="MapKey" type="22" value="SkillCommentFrequency" />
+													<attribute id="Type" type="4" value="2" />
+													<attribute id="Value" type="23" value="0.4" />
+												</node>
+												<node id="Parameter">
+													<attribute id="MapKey" type="22" value="StatusCommentFrequency" />
+													<attribute id="Type" type="4" value="2" />
+													<attribute id="Value" type="23" value="0.71" />
+												</node>
+											</children>
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+						<node id="SkinColors">
+							<attribute id="Object" type="5" value="4290021244" />
+						</node>
+					</children>
+				</node>
+				<node id="GameObjects">
+					<attribute id="Equipment" type="22" value="Henchman_Madoc_Paladin" />
+					<attribute id="EquipmentClass" type="1" value="1" />
+					<attribute id="ExplodedResourceID" type="22" value="fed27733-292d-465c-b6cf-9a6b9126307c" />
+					<attribute id="ExplosionFX" type="22" value="FX_GP_CorpseExplosion_Human_A" />
+					<attribute id="Flag" type="4" value="0" />
+					<attribute id="Gender" type="1" value="1" />
+					<attribute id="GroupID" type="5" value="0" />
+					<attribute id="HitFX" type="22" value="FX_GP_Blood_A" />
+					<attribute id="Icon" type="22" value="Portrait_CP_Madora" />
+					<attribute id="LevelName" type="22" value="" />
+					<attribute id="LightID" type="22" value="3faa1c66-5d35-4e87-868e-d124168b660f" />
+					<attribute id="MapKey" type="22" value="bf613dcd-8f76-4475-b834-509ef9da2e86" />
+					<attribute id="Name" type="23" value="Companion_Madora" />
+					<attribute id="PhysicsTemplate" type="22" value="a465845b-908e-4c19-9ee9-643c5f2fbfa1" />
+					<attribute id="Random" type="24" value="18446462598732840960" />
+					<attribute id="RunSpeed" type="6" value="3.75" />
+					<attribute id="Scale" type="6" value="1" />
+					<attribute id="SkillSet" type="22" value="Henchman_Madoc" />
+					<attribute id="Speaker" type="22" value="GEN_Human_SourceHunterCompanion_Madora_F" />
+					<attribute id="Stats" type="22" value="Henchman_Madoc_Paladin" />
+					<attribute id="Type" type="22" value="character" />
+					<attribute id="VisualTemplate" type="22" value="3ee90f81-a627-4701-b27c-d6015d15b4cb" />
+					<attribute id="WalkSpeed" type="6" value="2" />
+					<children>
+						<node id="AIBounds">
+							<attribute id="AIType" type="1" value="2" />
+							<attribute id="Height" type="6" value="1.7" />
+							<attribute id="Radius" type="6" value="0.25" />
+						</node>
+						<node id="Arms">
+							<attribute id="Object" type="22" value="c9dde82d-f599-4d9a-9aeb-88852a35bae1" />
+						</node>
+						<node id="Bodies">
+							<attribute id="Object" type="22" value="b074c3ce-ffdc-4c30-9514-891cf85ae543" />
+						</node>
+						<node id="ClothColors">
+							<attribute id="Object" type="5" value="4288086016" />
+						</node>
+						<node id="ClothColors">
+							<attribute id="Object" type="5" value="4280427055" />
+						</node>
+						<node id="HairColors">
+							<attribute id="Object" type="5" value="4289834659" />
+						</node>
+						<node id="Heads">
+							<attribute id="Object" type="22" value="2780adab-be92-43a3-9a37-3202241945a6" />
+						</node>
+						<node id="OnDeathActions" />
+						<node id="Scripts">
+							<children>
+								<node id="Script">
+									<attribute id="UUID" type="22" value="dafb6d26-8fd1-48e9-8990-4d3c4ee4cbc0" />
+									<children>
+										<node id="Parameters" />
+									</children>
+								</node>
+								<node id="Script">
+									<attribute id="UUID" type="22" value="5bc80992-a7f6-4da6-83e2-3d276384d8f7" />
+									<children>
+										<node id="Parameters" />
+									</children>
+								</node>
+							</children>
+						</node>
+						<node id="SkinColors">
+							<attribute id="Object" type="5" value="4291603613" />
+						</node>
+						<node id="Treasures">
+							<attribute id="TreasureItem" type="22" value="Warrior" />
+						</node>
+					</children>
+				</node>
+				<node id="GameObjects">
+					<attribute id="Alignment" type="22" value="Companion13" />
+					<attribute id="DisplayName" type="28" handle="heb6bf6e6gfe72g4b69g934fg679c99f45a72" value="Bairdotr" />
+					<attribute id="Equipment" type="22" value="Henchman_Bairdotr_Ranger" />
+					<attribute id="EquipmentClass" type="1" value="1" />
+					<attribute id="ExplodedResourceID" type="22" value="fed27733-292d-465c-b6cf-9a6b9126307c" />
+					<attribute id="ExplosionFX" type="22" value="FX_GP_CorpseExplosion_Human_A" />
+					<attribute id="Flag" type="4" value="0" />
+					<attribute id="Gender" type="1" value="1" />
+					<attribute id="GroupID" type="5" value="0" />
+					<attribute id="HitFX" type="22" value="FX_GP_Blood_A" />
+					<attribute id="Icon" type="22" value="Portrait_CP_Bairdotr" />
+					<attribute id="LevelName" type="22" value="" />
+					<attribute id="LightID" type="22" value="3faa1c66-5d35-4e87-868e-d124168b660f" />
+					<attribute id="MapKey" type="22" value="e02a6b13-40c5-4bcc-aece-3e74bea77ec2" />
+					<attribute id="Name" type="23" value="Companion_Bairdotr" />
+					<attribute id="PhysicsTemplate" type="22" value="a465845b-908e-4c19-9ee9-643c5f2fbfa1" />
+					<attribute id="Random" type="24" value="18446462598732840960" />
+					<attribute id="RunSpeed" type="6" value="3.75" />
+					<attribute id="Scale" type="6" value="1" />
+					<attribute id="SkillSet" type="22" value="Henchman_Bairdotr" />
+					<attribute id="Speaker" type="22" value="CYS_Human_RangerCompanion_Bairdotr_F" />
+					<attribute id="Stats" type="22" value="Henchman_Bairdotr_Ranger" />
+					<attribute id="Type" type="22" value="character" />
+					<attribute id="VisualTemplate" type="22" value="3ee90f81-a627-4701-b27c-d6015d15b4cb" />
+					<attribute id="WalkSpeed" type="6" value="2" />
+					<children>
+						<node id="AIBounds">
+							<attribute id="AIType" type="1" value="2" />
+							<attribute id="Height" type="6" value="1.7" />
+							<attribute id="Radius" type="6" value="0.25" />
+						</node>
+						<node id="Arms">
+							<attribute id="Object" type="22" value="835e8c9c-daca-47e1-bf70-89ee4362cb65" />
+						</node>
+						<node id="Bodies">
+							<attribute id="Object" type="22" value="85f638c8-a987-4d65-8e99-2a93a57dd0ab" />
+						</node>
+						<node id="ClothColors">
+							<attribute id="Object" type="5" value="4279198389" />
+						</node>
+						<node id="HairColors">
+							<attribute id="Object" type="5" value="4294244774" />
+						</node>
+						<node id="Heads">
+							<attribute id="Object" type="22" value="3f4b2535-fdd0-44b9-a9bb-bc58b7dd5fc5" />
+						</node>
+						<node id="OnDeathActions" />
+						<node id="Scripts">
+							<children>
+								<node id="Script">
+									<attribute id="UUID" type="22" value="dafb6d26-8fd1-48e9-8990-4d3c4ee4cbc0" />
+									<children>
+										<node id="Parameters">
+											<children>
+												<node id="Parameter">
+													<attribute id="MapKey" type="22" value="SayBlindedText" />
+													<attribute id="Type" type="4" value="1" />
+													<attribute id="Value" type="23" value="1" />
+												</node>
+											</children>
+										</node>
+									</children>
+								</node>
+								<node id="Script">
+									<attribute id="UUID" type="22" value="5bc80992-a7f6-4da6-83e2-3d276384d8f7" />
+									<children>
+										<node id="Parameters">
+											<children>
+												<node id="Parameter">
+													<attribute id="MapKey" type="22" value="SayBlindedText" />
+													<attribute id="Type" type="4" value="1" />
+													<attribute id="Value" type="23" value="1" />
+												</node>
+											</children>
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+						<node id="SkinColors">
+							<attribute id="Object" type="5" value="4291270539" />
+						</node>
+						<node id="Treasures">
+							<attribute id="TreasureItem" type="22" value="Ranger" />
+						</node>
+					</children>
+				</node>
+				<node id="GameObjects">
+					<attribute id="Equipment" type="22" value="Henchman_Jahan_Mage" />
+					<attribute id="EquipmentClass" type="1" value="0" />
+					<attribute id="ExplodedResourceID" type="22" value="fed27733-292d-465c-b6cf-9a6b9126307c" />
+					<attribute id="ExplosionFX" type="22" value="FX_GP_CorpseExplosion_Human_A" />
+					<attribute id="Flag" type="4" value="0" />
+					<attribute id="GroupID" type="5" value="0" />
+					<attribute id="HitFX" type="22" value="FX_GP_Blood_A" />
+					<attribute id="Icon" type="22" value="Portrait_CP_Jahan" />
+					<attribute id="LevelName" type="22" value="" />
+					<attribute id="LightID" type="22" value="3faa1c66-5d35-4e87-868e-d124168b660f" />
+					<attribute id="MapKey" type="22" value="e7f940c6-3d22-40b8-821b-7f2a6b35aebd" />
+					<attribute id="Name" type="23" value="Companion_Jahan" />
+					<attribute id="PhysicsTemplate" type="22" value="a465845b-908e-4c19-9ee9-643c5f2fbfa1" />
+					<attribute id="Random" type="24" value="18446462598732840960" />
+					<attribute id="RunSpeed" type="6" value="3.75" />
+					<attribute id="Scale" type="6" value="1" />
+					<attribute id="SkillSet" type="22" value="Henchman_Jahan" />
+					<attribute id="Speaker" type="22" value="GEN_Human_DemonHunterCompanion_Jahan_M" />
+					<attribute id="Stats" type="22" value="Henchman_Jahan_Mage" />
+					<attribute id="Type" type="22" value="character" />
+					<attribute id="VisualTemplate" type="22" value="e52123e5-9d8d-4e1d-a264-d964fa7723dd" />
+					<attribute id="WalkSpeed" type="6" value="2" />
+					<children>
+						<node id="AIBounds">
+							<attribute id="AIType" type="1" value="2" />
+							<attribute id="Height" type="6" value="1.7" />
+							<attribute id="Radius" type="6" value="0.25" />
+						</node>
+						<node id="Arms">
+							<attribute id="Object" type="22" value="f05409df-4d8a-4924-b053-cbee07e2491d" />
+						</node>
+						<node id="Bodies">
+							<attribute id="Object" type="22" value="d6ed6f4d-1835-46fa-b16b-4528c302d095" />
+						</node>
+						<node id="ClothColors">
+							<attribute id="Object" type="5" value="4280558382" />
+						</node>
+						<node id="HairColors">
+							<attribute id="Object" type="5" value="4282336856" />
+						</node>
+						<node id="Heads">
+							<attribute id="Object" type="22" value="c5dcacfc-d17a-467c-930c-8b548cd7b72d" />
+						</node>
+						<node id="OnDeathActions" />
+						<node id="Scripts">
+							<children>
+								<node id="Script">
+									<attribute id="UUID" type="22" value="dafb6d26-8fd1-48e9-8990-4d3c4ee4cbc0" />
+									<children>
+										<node id="Parameters" />
+									</children>
+								</node>
+								<node id="Script">
+									<attribute id="UUID" type="22" value="5bc80992-a7f6-4da6-83e2-3d276384d8f7" />
+									<children>
+										<node id="Parameters" />
+									</children>
+								</node>
+							</children>
+						</node>
+						<node id="SkinColors">
+							<attribute id="Object" type="5" value="4284630846" />
+						</node>
+						<node id="Treasures">
+							<attribute id="TreasureItem" type="22" value="Wizard" />
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

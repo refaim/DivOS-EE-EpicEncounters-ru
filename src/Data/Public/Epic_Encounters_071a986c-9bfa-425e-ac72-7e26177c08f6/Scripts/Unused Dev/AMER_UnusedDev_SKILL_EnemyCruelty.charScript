@@ -1,0 +1,39 @@
+#TEMPLATE "_SKILL_Base" : AMER_SKILL_Cruelty
+
+INIT
+CHARACTER:__Me
+// [GLOBAL_VARS]
+// [~GLOBAL_VARS]
+
+EVENTS
+
+// [EVENTS]
+// [~EVENTS]
+
+// Calculate the priority of the skill
+EVENT CalculateScore_AMER_SKILL_Cruelty
+VARS
+	// [CALC_VARS]
+	FLOAT:_Score
+	// [~CALC_VARS]
+ON
+	OnFunction("CalculateScore_AMER_SKILL_Cruelty")
+ACTIONS	
+	// [CALC_ACTIONS_PRE]
+	Set(_Score, 0.0)
+	// [~CALC_ACTIONS_PRE]
+	// [CALC_ACTIONS]
+	IF "!c1"
+	    CharacterHasStatus(__Me, CONSUME, "AMER_Cruelty")
+	THEN
+	    // Hostile count score calculation
+	    Add(_Score, 10.0) // HostileWeight
+	    
+	    Set(%SkillTargetChar_AMER_SKILL_Cruelty, __Me)
+	    Add(%ActionScore_AMER_SKILL_Cruelty, _Score)
+	ENDIF
+	// [~CALC_ACTIONS]
+
+	
+
+	

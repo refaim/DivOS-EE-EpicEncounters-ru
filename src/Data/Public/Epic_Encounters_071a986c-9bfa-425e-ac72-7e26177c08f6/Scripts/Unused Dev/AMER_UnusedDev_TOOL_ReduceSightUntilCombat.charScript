@@ -1,0 +1,80 @@
+//=====================================================//
+//                                                     //
+//  R E D U C E   S I G H T   U N T I L   C O M B A T  //
+//                                                     //
+//       Written by Matteo "Ameranth" T. (2016)        //
+//=====================================================//
+INIT
+CHARACTER:__Me
+EXTERN INT:%AMER_ReduceSightUntilCombat_Sight = -2
+INT:%AMER_ReduceSightUntilCombat_Remove
+	
+EVENTS
+EVENT ReduceSightUntilCombatInit
+ON
+	OnInit()
+ACTIONS
+	//Script loaded, take sight away.
+	Set(%AMER_ReduceSightUntilCombat_Remove, INT:1)
+	CallFunction("AMER_ReduceSightUntilCombat_ModifySight")
+	
+EVENT ReduceSightUntilCombatOnCombatEnd
+ON
+	OnCombatEnded()
+ACTIONS
+	//Combat ended, take sight away again.
+	Set(%AMER_ReduceSightUntilCombat_Remove, INT:1)
+	CallFunction("AMER_ReduceSightUntilCombat_ModifySight")
+	
+EVENT ReduceSightUntilCombatOnCombatStart
+ON
+	OnCombatStarted()
+ACTIONS
+	//Combat started, give sight back.
+	Set(%AMER_ReduceSightUntilCombat_Remove, INT:0)
+	CallFunction("AMER_ReduceSightUntilCombat_ModifySight")
+	
+	
+EVENT ReduceSightUntilCombatModifySight
+VARS
+//==========================//
+	INT:_MaxSightIndex = 5
+//==========================//
+	INT:_Count
+	INT:_StatToAdd
+	INT:_Amount
+	STRING:_Str
+	FIXEDSTRING:_WhichEffect
+ON
+	OnFunction("AMER_ReduceSightUntilCombat_ModifySight")
+ACTIONS
+	Set(_Count, INT:0)
+	Set(_StatToAdd, %AMER_ReduceSightUntilCombat_Sight)
+	WHILE "c1&!c2"
+		IsLessThen(_Count, _MaxSightIndex)
+		IsEqual(_StatToAdd, INT:0)
+	DO
+		GetElement(_Amount, _Count, INT:10, INT:8, INT:4, INT:2, INT:1)
+		Print(_Str, "AMER_DIFFICULTY_SightN[1]", _Amount)
+		Multiply(_Amount, INT:-1)
+		
+		IF "!c1"
+			IsGreaterThen(_StatToAdd, _Amount)
+		THEN
+			Cast(_WhichEffect, _Str)
+			IF "c1"
+				IsEqual(%AMER_ReduceSightUntilCombat_Remove, INT:1)
+			THEN
+				AddStatusInfluence(__Me, CONSUME, 1, _WhichEffect, 0)
+			ELSE
+				RemoveStatusInfluence(__Me, CONSUME, 1, _WhichEffect, 0)
+			ENDIF
+			Subtract(_StatToAdd, _Amount)
+		ENDIF
+		Add(_Count, INT:1)
+	ENDWHILE
+//=====================================================//
+//                                                     //
+//  R E D U C E   S I G H T   U N T I L   C O M B A T  //
+//                                                     //
+//=====================================================//

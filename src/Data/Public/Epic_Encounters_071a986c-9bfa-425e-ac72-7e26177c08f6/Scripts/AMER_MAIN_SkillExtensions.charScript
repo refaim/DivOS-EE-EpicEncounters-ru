@@ -1,0 +1,343 @@
+//===============================================//
+//                                               //
+//       S K I L L   E X T E N S I O N S         //
+//                                               //
+//     Written by Matteo "Ameranth" T. (2017)    //
+//===============================================//
+//Applicator triggers are consumes applied by a skill which serves only
+//as a means of understanding when a skill has struck a target. This is
+//necessary to do when trying to attach unique mechanics to a skill.
+//Unfortunately, the function CharacterGetStatusSourceCharacter() does
+//not work reliably, as with CONSUME it will return the source of any
+//consume, regardless of the string provided. As a result, this system
+//makes use of character events to declare a character as a source when
+//casting a skill that would have used this functionality, had it worked.
+//All characters with AMER_MAIN_CharacterMechanics loaded will catch this
+//event, and pre-load the relevant data, using it if they detect the
+//applicator consume within an alotted timeframe. Thankfully, character
+//scripts are only loaded when the character is within a reasonable range,
+//so this method does not adversely effect performance, and allows for
+//a laughable ~6 actions of overhead when the applicator is handled--a
+//vast improvement over previous logic, which averaged X*Y actions of
+//overhead, where X was the number of skills supported and Y was characters
+//within 30 meters.
+#INCLUDE AMER_MAIN_Statuses
+#INCLUDE AMER_MAIN_SkillCasts
+#INCLUDE AMER_MAIN_SkillFunctions
+	
+INIT
+CHARACTER:__Me
+	
+//Used to block applicator triggers from firing too many times.
+INT:%AMER_ApplicatorHandled = 0
+	
+USING AMER_MAIN_Statuses
+USING AMER_MAIN_SkillCasts
+USING AMER_MAIN_SkillFunctions
+	
+EVENTS
+//===========================================//
+//   A P P L I C A T O R   T R I G G E R S   //
+//===========================================//
+EVENT ConsumeTriggers
+//Control block for effects occuring with an applicator consume. Skills
+//that need special scripted functionality declare their specifications
+//when casted in AMER_MAIN_SkillCasts. The function called here refers
+//to a function listed in AMER_MAIN_SkillFunctions, which carries out
+//the skill's specifics.
+VARS
+	CHARACTER:_CharSource
+	FLOAT:_SourceLevel
+	INT:_AttackerChain
+ON
+	OnFunction("AMER_SkillTriggers")
+ACTIONS
+	IF "c1"
+		IsEqual(%AMER_ApplicatorHandled, INT:0)
+	THEN
+		CallFunction(%AMER_ApplicatorFunction)
+		
+		//Start the handled reset timer if an applicator was handled.
+		IF "c1"
+			IsEqual(%AMER_ApplicatorHandled, INT:1)
+		THEN
+			StartTimer("AMER_ApplicatorResetHandled", 0.25, 0)
+		ENDIF
+	ENDIF
+	
+EVENT ApplicatorResetHandled
+ON
+	OnTimer("AMER_ApplicatorResetHandled")
+ACTIONS
+	Set(%AMER_ApplicatorHandled, INT:0)
+	
+	
+	
+//===========================================//
+//       O N   T U R N   E F F E C T S       //
+//===========================================//
+EVENT SkillUpkeep
+//Control block for effects occuring on turn that do not require saving
+//throws--those that do are handled by the fake status upkeep system,
+//in AMER_MAIN_Statuses.
+ON
+	OnFunction("AMER_SkillOnTurn")
+ACTIONS
+	//Update skill-related items, this is probably for Freezing Trap.
+	CharacterEvent(__Me, "AMER_UpdateSkillItems")
+	
+	//Lacerate chain bonus heal
+	IF "c1"
+		CharacterHasStatus(__Me, CONSUME, AMER_LacerateHeal)
+	THEN
+		//Heal damages self if Decaying Touch is present,
+		//but let the heal work anyway if user is a Zombie.
+		IF "c1"
+			CharacterHasStatus(__Me, DECAYING_TOUCH)
+		THEN
+			CharacterConsume(__Me, AMER_20PercentHeal)
+		ELSE
+			CharacterHeal(__Me, 0.20)
+		ENDIF
+	ENDIF
+	
+	//Greater Invisibility Check
+	IF "c1"
+		CharacterHasStatus(__Me, CONSUME, "AMER_GreaterInvisibility")
+	THEN
+		StartTimer("AMER_GreaterInvisReapply", 0.2, -1)
+	ENDIF
+	
+	//Rebirth
+	IF "!c1"
+		IsEqual(%AMER_RebirthCountdown, INT:-1)
+	THEN
+		CallFunction("AMER_RebirthRez")
+	ENDIF
+	
+	//Vengeance Check
+	IF "c1"
+		CharacterHasStatus(__Me, CONSUME, "AMER_Vengeance")
+	THEN
+		CallFunction("AMER_StartVengeance")
+	ENDIF
+	
+	//Maze Check
+	//Also doing this with a behavior in Base.charScript now.
+	IF "c1"
+		CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_Maze")
+	THEN
+		CharacterEndTurn()
+	ENDIF
+	
+	//Rime Check
+	IF "c1|c2"
+		CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_FriendRime")
+		CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_EnemyRime")
+	THEN
+		StartTimer("AMER_STATUS_RimeIce", 0.25. -1)
+	ENDIF
+	
+	//Time Stop Check
+	IF "c1"
+		CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_TimeStop")
+	THEN
+		CharacterEndTurn()
+	ENDIF
+	
+	
+	
+//===========================================//
+//        S T A T U S   R E F R E S H        //
+//===========================================//
+//This was a disappointing endeavor. It didn't work because
+//the OnCharacterApplyStatus() Event is thrown even when
+//the status isn't being successfully applied. This meant
+//that unsuccessful status applications essentially became
+//removals for that particular status.
+/*
+EVENT RefreshFortified
+ON
+	OnCharacterApplyStatus(__Me, FORTIFIED)
+ACTIONS
+	IF "c1"
+		CharacterHasStatus(__Me, FORTIFIED)
+	THEN
+		//CharacterRemoveStatus(__Me, FORTIFIED)
+	ENDIF
+RETURN(1)
+	
+	
+	
+EVENT RefreshHasted
+ON
+	OnCharacterApplyStatus(__Me, HASTED)
+ACTIONS
+	IF "c1"
+		CharacterHasStatus(__Me, HASTED)
+	THEN
+		CharacterRemoveStatus(__Me, HASTED)
+	ENDIF
+RETURN(1)
+	
+	
+	
+EVENT RefreshCursed
+ON
+	OnCharacterApplyStatus(__Me, CURSED)
+ACTIONS
+	IF "c1"
+		CharacterHasStatus(__Me, CURSED)
+	THEN
+		CharacterRemoveStatus(__Me, CURSED)
+	ENDIF
+RETURN(1)
+	
+	
+	
+EVENT RefreshWeak
+ON
+	OnCharacterApplyStatus(__Me, WEAK)
+ACTIONS
+	IF "c1"
+		CharacterHasStatus(__Me, WEAK)
+	THEN
+		CharacterRemoveStatus(__Me, WEAK)
+	ENDIF
+RETURN(1)
+	
+	
+	
+EVENT RefreshSlowed
+ON
+	OnCharacterApplyStatus(__Me, SLOWED)
+ACTIONS
+	IF "c1"
+		CharacterHasStatus(__Me, SLOWED)
+	THEN
+		CharacterRemoveStatus(__Me, SLOWED)
+	ENDIF
+RETURN(1)
+	
+	
+	
+EVENT RefreshCrippled
+ON
+	OnCharacterApplyStatus(__Me, CRIPPLED)
+ACTIONS
+	IF "c1"
+		CharacterHasStatus(__Me, CRIPPLED)
+	THEN
+		CharacterRemoveStatus(__Me, CRIPPLED)
+	ENDIF
+RETURN(1)
+	
+	
+	
+EVENT RefreshMuted
+ON
+	OnCharacterApplyStatus(__Me, MUTED)
+ACTIONS
+	IF "c1"
+		CharacterHasStatus(__Me, MUTED)
+	THEN
+		CharacterRemoveStatus(__Me, MUTED)
+	ENDIF
+RETURN(1)
+	
+	
+	
+EVENT RefreshBleeding
+ON
+	OnCharacterApplyStatus(__Me, BLEEDING)
+ACTIONS
+	IF "c1"
+		CharacterHasStatus(__Me, BLEEDING)
+	THEN
+		CharacterRemoveStatus(__Me, BLEEDING)
+	ENDIF
+RETURN(1)
+	
+	
+	
+EVENT RefreshStunned
+ON
+	OnCharacterApplyStatus(__Me, STUNNED)
+ACTIONS
+	IF "c1"
+		CharacterHasStatus(__Me, STUNNED)
+	THEN
+		CharacterRemoveStatus(__Me, STUNNED)
+	ENDIF
+RETURN(1)
+	
+	
+	
+EVENT RefreshFear
+ON
+	OnCharacterApplyStatus(__Me, FEAR)
+ACTIONS
+	IF "c1"
+		CharacterHasStatus(__Me, FEAR)
+	THEN
+		CharacterRemoveStatus(__Me, FEAR)
+	ENDIF
+RETURN(1)
+	
+	
+	
+EVENT RefreshBlind
+ON
+	OnCharacterApplyStatus(__Me, BLIND)
+ACTIONS
+	IF "c1"
+		CharacterHasStatus(__Me, BLIND)
+	THEN
+		CharacterRemoveStatus(__Me, BLIND)
+	ENDIF
+RETURN(1)
+	
+	
+	
+EVENT RefreshKnockdown
+ON
+	OnCharacterApplyStatus(__Me, KNOCKED_DOWN)
+ACTIONS
+	IF "c1"
+		CharacterHasStatus(__Me, KNOCKED_DOWN)
+	THEN
+		CharacterRemoveStatus(__Me, KNOCKED_DOWN)
+	ENDIF
+RETURN(1)
+	
+	
+	
+EVENT RefreshFrozen
+ON
+	OnCharacterApplyStatus(__Me, FROZEN)
+ACTIONS
+	IF "c1"
+		CharacterHasStatus(__Me, FROZEN)
+	THEN
+		CharacterRemoveStatus(__Me, FROZEN)
+	ENDIF
+RETURN(1)
+	
+	
+	
+EVENT RefreshPetrified
+ON
+	OnCharacterApplyStatus(__Me, PETRIFIED)
+ACTIONS
+	IF "c1"
+		CharacterHasStatus(__Me, PETRIFIED)
+	THEN
+		CharacterRemoveStatus(__Me, PETRIFIED)
+	ENDIF
+RETURN(1)
+*/
+//===============================================//
+//                                               //
+//       S K I L L   E X T E N S I O N S         //
+//                                               //
+//===============================================//

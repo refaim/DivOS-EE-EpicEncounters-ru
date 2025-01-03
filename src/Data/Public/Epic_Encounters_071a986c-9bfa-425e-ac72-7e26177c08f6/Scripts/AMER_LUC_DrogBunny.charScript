@@ -1,0 +1,34 @@
+//===============================================//
+//                                               //
+//              D R O G   B U N N Y              //
+//                                               //
+//     Created by Matteo "Ameranth" T. (2017)    //
+//===============================================//
+INIT
+	CHARACTER:__Me
+	
+	
+//==============EVENTS=============//
+EVENTS
+EVENT DrogBunnyOnDeath
+VARS
+	CHARACTER:_Spawn
+	CHARACTER:_CharSource
+	DAMAGE:_Type
+ON
+	OnDie(__Me, _Type, _CharSource, _)
+ACTIONS
+	PlayEffectAt(__Me, "FX_Skills_Fire_GrenadeMolotov_Impact_A")
+	PlayEffectAt(__Me, "FX_Skills_Fire_PhoenixDive_Prepare_A")
+	CreateSurfaceAt(__Me, Fire, 18.0, 6)
+	SpawnCharacter(_Spawn, "AMER_CHAR_Dragon_Drog_8cf75b40-02b2-42e6-a6e4-6a97da023d79", __Me, 1, 0, null, 25)
+	DisplayText(__Me, "AMER_CMB_Drog_Appear", 3.5)
+	
+	
+	
+//======================B E H A V I O R======================//
+//===============================================//
+//                                               //
+//              D R O G   B U N N Y              //
+//                                               //
+//===============================================//

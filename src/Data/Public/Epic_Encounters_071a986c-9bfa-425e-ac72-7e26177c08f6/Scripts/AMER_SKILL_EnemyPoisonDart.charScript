@@ -1,0 +1,242 @@
+#TEMPLATE "_SKILL_Base" : Projectile_EnemyPoisonDart
+	
+INIT
+CHARACTER:__Me
+FLOAT:%SkillTargetScore_Projectile_EnemyPoisonDart=-1000000
+// [GLOBAL_VARS]
+EXTERN FLOAT:%Projectile_EnemyPoisonDart_ResistanceLimit = 90
+// [~GLOBAL_VARS]
+	
+EVENTS
+	
+// [EVENTS]
+// [~EVENTS]
+	
+// Calculate the priority of the skill
+EVENT CalculateScore_Projectile_EnemyPoisonDart
+VARS
+	// [CALC_VARS]
+	FLOAT:_SkillRangeMin
+	FLOAT:_SkillRangeMax
+	FLOAT3:_TargetPos
+	// [~CALC_VARS]
+ON
+	OnFunction("CalculateScore_Projectile_EnemyPoisonDart")
+ACTIONS
+	Set(%SkillTargetScore_Projectile_EnemyPoisonDart, -1000000)
+
+	// [CALC_ACTIONS_PRE]
+	// [~CALC_ACTIONS_PRE]
+	// [CALC_ACTIONS]
+	IterateCharactersInCombat(__Me, "CalculateTarget_Projectile_EnemyPoisonDart", Lowest, Vitality)
+	IF "!c1"
+		IsEqual(%SkillTargetChar_Projectile_EnemyPoisonDart, null)
+	THEN
+		Add(%ActionScore_Projectile_EnemyPoisonDart, %SkillTargetScore_Projectile_EnemyPoisonDart)
+	ENDIF
+	// [~CALC_ACTIONS]
+	
+	
+	
+	
+// Calculate the character we should attack
+EVENT CalculateTarget_Projectile_EnemyPoisonDart
+VARS	
+	CHARACTER:_Char
+	// [CALC_TARGET_VARS]
+	INT:_ClassScore_Projectile_EnemyPoisonDart
+	FLOAT:_StatResistance
+	FLOAT:_Score
+	FLOAT:_SkillRangeMin
+	FLOAT:_SkillRangeMax
+	FLOAT:_DistanceToChar
+	FLOAT:_DistanceScore
+	FLOAT:_Vitality
+	CHARACTERSTAT:_ResistType = PoisonResistance
+	// [~CALC_TARGET_VARS]
+ON
+	OnIterateCharacter(_Char, "CalculateTarget_Projectile_EnemyPoisonDart")	
+ACTIONS
+	// [CALC_CHAR_TARGET_ACTIONS_PRE]
+	Set(_Score, 0.0)
+	// [~CALC_CHAR_TARGET_ACTIONS_PRE]
+	// [CALC_CHAR_TARGET_ACTIONS]
+	IF "c1"
+	    CharacterIsEnemy(__Me, _Char)
+	THEN
+		IF "!c1"
+			CharacterIsDead(_Char)
+		THEN
+			IF "!c1&!c2"
+			    CharacterHasStatus(_Char, INVISIBLE)
+			    CharacterHasStatus(_Char, SNEAKING)
+			THEN
+				IF "!c1|!c2"
+					CharacterGetStat(_StatResistance, _Char, _ResistType)
+					IsGreaterThen(_StatResistance, %Projectile_EnemyPoisonDart_ResistanceLimit)
+				THEN
+					IF "!c1"
+						CharacterHasStatus(_Char, CHARMED)
+					THEN
+						IF "!c1"
+							CharacterHasStatus(_Char, INVULNERABLE)
+						THEN
+							//Kill range calculation
+							IF "c1"
+								CharacterGetStat(_Vitality,  _Char, Vitality)
+							THEN
+								//Favor low vitality targets.
+								Multiply(_Vitality, -1.0)
+								Add(_Vitality, 1.0)
+								Multiply(_Vitality, 5.0)
+								Add(_Score, _Vitality)
+							ENDIF
+							
+							//Resistance calculation
+							Divide(_StatResistance, -100.0)
+							Multiply(_StatResistance, 5.0)
+							Add(_Score, _StatResistance)
+							
+							//Marked.
+							IF "c1"
+								CharacterHasStatus(_Char, AGGRO_MARKED)
+							THEN
+								Add(_Score, 1.0)
+							ENDIF
+							
+							//Summons are worth less.
+							IF "c1"
+								CharacterIsSummon(_Char)
+							THEN
+								Add(_Score, -5.0)
+							ENDIF
+							
+							// Range score calculation
+							IF "c1&c2"
+								CharacterGetSkillRange(_SkillRangeMin, _SkillRangeMax, __Me, Projectile_EnemyPoisonDart)
+								GetDistance(_DistanceToChar, __Me, _Char)
+							THEN
+								Set(_DistanceScore, _DistanceToChar)
+								IF "c1"
+									IsGreaterThen(_DistanceScore, _SkillRangeMax)
+								THEN
+									Subtract(_DistanceScore, _SkillRangeMax)
+									Multiply(_DistanceScore, -1.0)
+								ELIF "c1"
+									IsLessThen(_DistanceScore, _SkillRangeMin)
+								THEN
+									Subtract(_DistanceScore, _SkillRangeMin)
+									Multiply(_DistanceScore, 1.0)
+								ELSE 
+									Set(_DistanceScore, 0.0)
+								ENDIF
+								Add(_Score, _DistanceScore)
+							ENDIF
+							
+							// Can see score calculation
+							IF "!c1"
+								CharacterCanSee(__Me, _Char)
+							THEN
+								Add(_Score, -10.0)
+							ENDIF
+							
+							IF "c1"
+								IsGreaterThen(_Score, %SkillTargetScore_Projectile_EnemyPoisonDart)
+							THEN
+								Set(%SkillTargetChar_Projectile_EnemyPoisonDart, _Char)
+								Set(%SkillTargetScore_Projectile_EnemyPoisonDart, _Score)
+							ENDIF
+						ENDIF
+					ENDIF
+				ENDIF
+			ENDIF
+		ENDIF
+	//Attempt to use damaging skill to heal allies with
+	//>100% resistance to the damage type.
+	ELIF "!c1"
+		CharacterIsDead(_Char)
+	THEN
+		IF "!c1"
+			CharacterHasStatus(_Char, CHARMED)
+		THEN
+			IF "!c1"
+				CharacterIsSummon(_Char)
+			THEN
+				IF "!c1"
+					IsEqual(_Char, __Me)
+				THEN
+					IF "!c1"
+						CharacterHasStatus(_Char, INVULNERABLE)
+					THEN
+						IF "!c1|c2"
+							CharacterGetStat(_StatResistance, _Char, _ResistType)
+							IsGreaterThen(_StatResistance, 150.0)
+						THEN
+							IF "c1&c2"
+								CharacterGetStat(_Vitality,  _Char, Vitality)
+								IsLessThen(_Vitality, 0.8)
+							THEN
+								//Vitality-Resistance calculation: favor low-
+								//vitality targets with high resistance.
+								Multiply(_Vitality, -1.0)
+								Add(_Vitality, 1.0)
+								
+								//consider resistance above 100
+								Subtract(_StatResistance, 100.0)
+								Divide(_StatResistance, 100.0)
+								Multiply(_StatResistance, 4.0)
+								
+								Multiply(_Vitality, _StatResistance)
+								Add(_Score, _Vitality)
+							
+								// Range score calculation
+								IF "c1&c2"
+									CharacterGetSkillRange(_SkillRangeMin, _SkillRangeMax, __Me, Projectile_EnemyPoisonDart)
+									GetDistance(_DistanceToChar, __Me, _Char)
+								THEN
+									Set(_DistanceScore, _DistanceToChar)
+									IF "c1"
+										IsGreaterThen(_DistanceScore, _SkillRangeMax)
+									THEN
+										Subtract(_DistanceScore, _SkillRangeMax)
+										Multiply(_DistanceScore, -1.0)
+									ELIF "c1"
+										IsLessThen(_DistanceScore, _SkillRangeMin)
+									THEN
+										Subtract(_DistanceScore, _SkillRangeMin)
+										Multiply(_DistanceScore, 1.0)
+									ELSE 
+										Set(_DistanceScore, 0.0)
+									ENDIF
+									Add(_Score, _DistanceScore)
+								ENDIF
+								
+								// Can see score calculation
+								IF "!c1"
+									CharacterCanSee(__Me, _Char)
+								THEN
+									Add(_Score, -10.0)
+								ENDIF
+								
+								IF "c1"
+									IsGreaterThen(_Score, %SkillTargetScore_Projectile_EnemyPoisonDart)
+								THEN
+									Set(%SkillTargetChar_Projectile_EnemyPoisonDart, _Char)
+									Set(%SkillTargetScore_Projectile_EnemyPoisonDart, _Score)
+								ENDIF
+							ENDIF
+						ENDIF
+					ENDIF
+				ENDIF
+			ENDIF
+		ENDIF
+	ENDIF
+	// [~CALC_CHAR_TARGET_ACTIONS]
+	
+	
+	
+	
+	
+	
+	
+	

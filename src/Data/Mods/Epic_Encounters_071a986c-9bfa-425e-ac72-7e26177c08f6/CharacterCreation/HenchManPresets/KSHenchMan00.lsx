@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<save>
+    <header version="2" time="1427201041" />
+    <version major="1" minor="3" revision="1" build="3" />
+    <region id="CharacterCreationClass">
+        <node id="root">
+            <attribute id="Armour" value="" type="22" />
+            <attribute id="Boots" value="" type="22" />
+            <attribute id="ClassDescription" value="An enchanter adept in manipulation of air and water" handle="h8f454fcbgcb95g41c3g92d9g429293267a27" type="28" />
+            <attribute id="ClassLongDescription" value="Sondre grew up with his mother and father in the green woods of Rivellon.  He soon began exploring the limits of his surroundings, experimenting with the manipulation of the environment around him. " handle="ha8f6728bg5d63g4045gaeacgbdb9b9e1d102" type="28" />
+            <attribute id="ClassName" value="Enchanter" handle="hd72bd5c7ge1fcg4d54ga913gac8f544a56ee" type="28" />
+            <attribute id="ClassType" value="Enchanter" type="22" />
+            <attribute id="ExtraEquipmentSet" value="" type="22" />
+            <attribute id="Gloves" value="" type="22" />
+            <attribute id="Leggings" value="" type="22" />
+            <attribute id="SkillSet" value="" type="22" />
+            <attribute id="Voice" value="0" type="5" />
+            <children>
+                <node id="AbilityChanges">
+                    <children>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="FireSpecialist" type="23" />
+                            <attribute id="AmountIncreased" value="1" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="WaterSpecialist" type="23" />
+                            <attribute id="AmountIncreased" value="2" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="AirSpecialist" type="23" />
+                            <attribute id="AmountIncreased" value="2" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="EarthSpecialist" type="23" />
+                            <attribute id="AmountIncreased" value="1" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="Loremaster" type="23" />
+                            <attribute id="AmountIncreased" value="1" type="4" />
+                        </node>
+                    </children>
+                </node>
+                <node id="AttributeChanges">
+                    <children>
+                        <node id="AttributeChange">
+                            <attribute id="AmountIncreased" value="7" type="4" />
+                            <attribute id="Attribute" value="INT" type="23" />
+                        </node>
+                    </children>
+                </node>
+                <node id="HenchManData">
+                    <attribute id="HairColor" value="1" type="5" />
+                    <attribute id="HairType" value="2" type="5" />
+                    <attribute id="HeadType" value="1" type="5" />
+                    <attribute id="ID" value="34f65c1b-d35c-4a18-8263-cd3dd58835e1" type="22" />
+                    <attribute id="Icon" value="0" type="5" />
+                    <attribute id="IsMale" value="1" type="19" />
+                    <attribute id="Level" value="5" type="4" />
+                    <attribute id="Name" value="Sondre" type="30" />
+                    <attribute id="Race" value="0" type="5" />
+                    <attribute id="SkinColor" value="4" type="5" />
+                    <children>
+                        <node id="Skills">
+                            <attribute id="Object" value="Target_TargetedOilSurface" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="Projectile_BlitzBoltStart" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="Rain_Water" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="Target_Slow" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="Target_RemovePetrification" type="22" />
+                        </node>
+                    </children>
+                </node>
+                <node id="TalentsAdded">
+                    <children>
+                        <node id="TalentAdded">
+                            <attribute id="Talent" value="WhatARush" type="23" />
+                        </node>
+                        <node id="TalentAdded">
+                            <attribute id="Talent" value="FaroutDude" type="23" />
+                        </node>
+                        <node id="TalentAdded">
+                            <attribute id="Talent" value="Bully" type="23" />
+                        </node>
+                    </children>
+                </node>
+            </children>
+        </node>
+    </region>
+</save>

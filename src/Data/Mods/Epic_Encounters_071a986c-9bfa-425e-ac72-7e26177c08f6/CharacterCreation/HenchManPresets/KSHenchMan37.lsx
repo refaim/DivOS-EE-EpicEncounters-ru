@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<save>
+    <header version="2" time="1427201041" />
+    <version major="1" minor="3" revision="1" build="3" />
+    <region id="CharacterCreationClass">
+        <node id="root">
+            <attribute id="Armour" value="" type="22" />
+            <attribute id="Boots" value="" type="22" />
+            <attribute id="ClassDescription" value="A mysterious man, wise and powerful" handle="hc39541c6gb2e3g46abg94a7g7f82a686fca1" type="28" />
+            <attribute id="ClassLongDescription" value="Trethon seems to have been around much longer than anyone could remember, yet his appearance does not reflect his age. Capable and wise, Trethon appears disinterested in his surroundings, yet never misses a thing; perhaps he&apos;ll take his stories to the grave. Some say he doesn&apos;t age, that he&apos;s evil, even! Others still claim he used to be a great hero, but nothing is certain and he won&apos;t talk about his past and origins." handle="h5e8d8bfdgebd3g4336g915eg1109a93ba5be" type="28" />
+            <attribute id="ClassName" value="Wizard" handle="h6ed659b3g1890g402bg848cg3a960d04efe2" type="28" />
+            <attribute id="ClassType" value="Wizard" type="22" />
+            <attribute id="ExtraEquipmentSet" value="" type="22" />
+            <attribute id="Gloves" value="" type="22" />
+            <attribute id="Leggings" value="" type="22" />
+            <attribute id="SkillSet" value="" type="22" />
+            <attribute id="Voice" value="0" type="5" />
+            <children>
+                <node id="AbilityChanges">
+                    <children>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="Telekinesis" type="23" />
+                            <attribute id="AmountIncreased" value="3" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="Willpower" type="23" />
+                            <attribute id="AmountIncreased" value="3" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="FireSpecialist" type="23" />
+                            <attribute id="AmountIncreased" value="2" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="EarthSpecialist" type="23" />
+                            <attribute id="AmountIncreased" value="3" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="Repair" type="23" />
+                            <attribute id="AmountIncreased" value="3" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="Lockpicking" type="23" />
+                            <attribute id="AmountIncreased" value="2" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="Loremaster" type="23" />
+                            <attribute id="AmountIncreased" value="3" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="Crafting" type="23" />
+                            <attribute id="AmountIncreased" value="3" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="Charisma" type="23" />
+                            <attribute id="AmountIncreased" value="2" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="Leadership" type="23" />
+                            <attribute id="AmountIncreased" value="2" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="BodyBuilding" type="23" />
+                            <attribute id="AmountIncreased" value="1" type="4" />
+                        </node>
+                    </children>
+                </node>
+                <node id="AttributeChanges">
+                    <children>
+                        <node id="AttributeChange">
+                            <attribute id="AmountIncreased" value="5" type="4" />
+                            <attribute id="Attribute" value="INT" type="23" />
+                        </node>
+                        <node id="AttributeChange">
+                            <attribute id="AmountIncreased" value="5" type="4" />
+                            <attribute id="Attribute" value="CON" type="23" />
+                        </node>
+                        <node id="AttributeChange">
+                            <attribute id="AmountIncreased" value="3" type="4" />
+                            <attribute id="Attribute" value="SPD" type="23" />
+                        </node>
+                        <node id="AttributeChange">
+                            <attribute id="AmountIncreased" value="2" type="4" />
+                            <attribute id="Attribute" value="PER" type="23" />
+                        </node>
+                    </children>
+                </node>
+                <node id="HenchManData">
+                    <attribute id="HairColor" value="0" type="5" />
+                    <attribute id="HairType" value="5" type="5" />
+                    <attribute id="HeadType" value="5" type="5" />
+                    <attribute id="ID" value="c6506498-0181-45bf-a00f-99cffbb7c9d4" type="22" />
+                    <attribute id="Icon" value="1" type="5" />
+                    <attribute id="IsMale" value="1" type="19" />
+                    <attribute id="Level" value="20" type="4" />
+                    <attribute id="Name" value="Trethon" type="30" />
+                    <attribute id="Race" value="0" type="5" />
+                    <attribute id="SkinColor" value="2" type="5" />
+                    <children>
+                        <node id="Skills">
+                            <attribute id="Object" value="Shield_Fire" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="Target_TargetedOilSurface" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="Shout_BlessedEarth" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="Projectile_FlareStart" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="Path_CreateSmokescreen" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="Shield_Earth" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="Target_ImmuneToBurning" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="Target_TargetedPerception" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="Path_FireFly" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="Shout_FireSurfaceSelf" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="Projectile_PoisonDartStart" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="ProjectileStrike_BoulderBash" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="Target_ImmuneToPoisoning" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="Cone_OozeSpray" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="Summon_Spider" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="Target_Fortify" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="Target_Resurrect" type="22" />
+                        </node>
+                    </children>
+                </node>
+                <node id="TalentsAdded">
+                    <children>
+                        <node id="TalentAdded">
+                            <attribute id="Talent" value="Carry" type="23" />
+                        </node>
+                        <node id="TalentAdded">
+                            <attribute id="Talent" value="Durability" type="23" />
+                        </node>
+                        <node id="TalentAdded">
+                            <attribute id="Talent" value="LightStep" type="23" />
+                        </node>
+                        <node id="TalentAdded">
+                            <attribute id="Talent" value="Scientist" type="23" />
+                        </node>
+                        <node id="TalentAdded">
+                            <attribute id="Talent" value="FaroutDude" type="23" />
+                        </node>
+                        <node id="TalentAdded">
+                            <attribute id="Talent" value="ElementalAffinity" type="23" />
+                        </node>
+                        <node id="TalentAdded">
+                            <attribute id="Talent" value="Bully" type="23" />
+                        </node>
+                    </children>
+                </node>
+            </children>
+        </node>
+    </region>
+</save>

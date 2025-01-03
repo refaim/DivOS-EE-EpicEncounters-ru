@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<save>
+    <header version="2" time="1427201041" />
+    <version major="1" minor="3" revision="1" build="3" />
+    <region id="CharacterCreationClass">
+        <node id="root">
+            <attribute id="Armour" value="" type="22" />
+            <attribute id="Boots" value="" type="22" />
+            <attribute id="ClassDescription" value="The unhealable cleric" handle="h3eb40d4ag8b63g4c00g904ag35ac392342a0" type="28" />
+            <attribute id="ClassLongDescription" value="A female warrior priest for the gods of Rivellon, Lady Elmogara has been stricken by a strange illness. From time to time she grows faint and nauseous; her skin seems alternately to swell and to glow rose-red. What mystery malady plagues Lady Elmogara is uncertain, but her determination to do right despite her suffering never waivers." handle="h024d1419gc674g4a9cga198g993909afd4bb" type="28" />
+            <attribute id="ClassName" value="Cleric" handle="h8539ffc3g85a9g4240gb927g2250e05d3d79" type="28" />
+            <attribute id="ClassType" value="Cleric" type="22" />
+            <attribute id="ExtraEquipmentSet" value="" type="22" />
+            <attribute id="Gloves" value="" type="22" />
+            <attribute id="Leggings" value="" type="22" />
+            <attribute id="SkillSet" value="" type="22" />
+            <attribute id="Voice" value="0" type="5" />
+            <children>
+                <node id="AbilityChanges">
+                    <children>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="WarriorLore" type="23" />
+                            <attribute id="AmountIncreased" value="2" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="SingleHanded" type="23" />
+                            <attribute id="AmountIncreased" value="2" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="Shield" type="23" />
+                            <attribute id="AmountIncreased" value="2" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="Repair" type="23" />
+                            <attribute id="AmountIncreased" value="2" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="Loremaster" type="23" />
+                            <attribute id="AmountIncreased" value="1" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="Charisma" type="23" />
+                            <attribute id="AmountIncreased" value="1" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="Luck" type="23" />
+                            <attribute id="AmountIncreased" value="1" type="4" />
+                        </node>
+                    </children>
+                </node>
+                <node id="AttributeChanges">
+                    <children>
+                        <node id="AttributeChange">
+                            <attribute id="AmountIncreased" value="2" type="4" />
+                            <attribute id="Attribute" value="STR" type="23" />
+                        </node>
+                        <node id="AttributeChange">
+                            <attribute id="AmountIncreased" value="2" type="4" />
+                            <attribute id="Attribute" value="INT" type="23" />
+                        </node>
+                        <node id="AttributeChange">
+                            <attribute id="AmountIncreased" value="2" type="4" />
+                            <attribute id="Attribute" value="CON" type="23" />
+                        </node>
+                        <node id="AttributeChange">
+                            <attribute id="AmountIncreased" value="3" type="4" />
+                            <attribute id="Attribute" value="PER" type="23" />
+                        </node>
+                    </children>
+                </node>
+                <node id="HenchManData">
+                    <attribute id="HairColor" value="3" type="5" />
+                    <attribute id="HairType" value="3" type="5" />
+                    <attribute id="HeadType" value="4" type="5" />
+                    <attribute id="ID" value="0aaf80d3-39f1-40fd-8dbb-34198f151709" type="22" />
+                    <attribute id="Icon" value="6" type="5" />
+                    <attribute id="IsMale" value="0" type="19" />
+                    <attribute id="Level" value="8" type="4" />
+                    <attribute id="Name" value="Lady Elmogara" type="30" />
+                    <attribute id="Race" value="0" type="5" />
+                    <attribute id="SkinColor" value="0" type="5" />
+                    <children>
+                        <node id="Skills">
+                            <attribute id="Object" value="Target_StunStart" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="Rush_RushStart" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="Shout_MeleePrecisionStance" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="Shout_InspireStart" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="Target_HelpingHand" type="22" />
+                        </node>
+                    </children>
+                </node>
+                <node id="TalentsAdded">
+                    <children>
+                        <node id="TalentAdded">
+                            <attribute id="Talent" value="Scientist" type="23" />
+                        </node>
+                        <node id="TalentAdded">
+                            <attribute id="Talent" value="FiveStarRestaurant" type="23" />
+                        </node>
+                        <node id="TalentAdded">
+                            <attribute id="Talent" value="Politician" type="23" />
+                        </node>
+                        <node id="TalentAdded">
+                            <attribute id="Talent" value="RangerLoreArrowRecover" type="23" />
+                        </node>
+                    </children>
+                </node>
+            </children>
+        </node>
+    </region>
+</save>

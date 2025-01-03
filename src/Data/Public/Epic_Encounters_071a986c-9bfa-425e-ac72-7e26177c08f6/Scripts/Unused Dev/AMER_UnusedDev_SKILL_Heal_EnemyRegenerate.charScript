@@ -1,0 +1,218 @@
+#TEMPLATE "_SKILL_Base" : Heal_RegenerateStart
+	
+INIT
+CHARACTER:__Me
+FLOAT:%SkillTargetScore_Heal_RegenerateStart=-1000000
+// [GLOBAL_VARS]
+// [~GLOBAL_VARS]
+	
+EVENTS
+	
+// [EVENTS]
+// [~EVENTS]
+	
+// Calculate the priority of the skill
+EVENT CalculateScore_Heal_RegenerateStart
+VARS
+	// [CALC_VARS]
+	FLOAT:_SkillRangeMin
+	FLOAT:_SkillRangeMax
+	FLOAT3:_TargetPos
+	// [~CALC_VARS]
+ON
+	OnFunction("CalculateScore_Heal_RegenerateStart")
+ACTIONS
+	Set(%SkillTargetScore_Heal_RegenerateStart, -1000000)
+
+	// [CALC_ACTIONS_PRE]
+	// [~CALC_ACTIONS_PRE]
+	// [CALC_ACTIONS]
+	IterateCharactersInCombat(__Me, "CalculateTarget_Heal_RegenerateStart", Lowest, Vitality)
+	IF "!c1"
+		IsEqual(%SkillTargetChar_Heal_RegenerateStart, null)
+	THEN
+		Add(%ActionScore_Heal_RegenerateStart, %SkillTargetScore_Heal_RegenerateStart)
+	ENDIF
+	// [~CALC_ACTIONS]
+	
+	
+	
+	
+// Calculate the character we should target
+EVENT CalculateTarget_Heal_RegenerateStart
+VARS	
+	CHARACTER:_Char
+	// [CALC_TARGET_VARS]
+	INT:_ClassScore_Heal_RegenerateStart
+	FLOAT:_Score
+	FLOAT:_SkillRangeMin
+	FLOAT:_SkillRangeMax
+	FLOAT:_DistanceToChar
+	FLOAT:_DistanceScore
+	FLOAT:_Vitality
+	FLOAT:_VitalityPercentage = 0.75
+	// [~CALC_TARGET_VARS]
+ON
+	OnIterateCharacter(_Char, "CalculateTarget_Heal_RegenerateStart")	
+ACTIONS
+	// [CALC_CHAR_TARGET_ACTIONS_PRE]
+	Set(_Score, 0.0)
+	// [~CALC_CHAR_TARGET_ACTIONS_PRE]
+	// [CALC_CHAR_TARGET_ACTIONS]
+	IF "!c1"
+		CharacterIsDead(_Char)
+	THEN
+		IF "c1"
+			CharacterIsAlly(__Me, _Char)
+		THEN
+			IF "c1&c2&!c3"
+				CharacterGetStat(_Vitality, _Char, Vitality)
+				IsLessThen(_Vitality, _VitalityPercentage)
+				CharacterHasStatus(_Char, DECAYING_TOUCH)
+			THEN
+				IF "!c1"
+					CharacterHasTalent(_Char, Zombie)
+				THEN
+					IF "!c1"
+						CharacterHasStatus(_Char, CHARMED)
+					THEN
+						IF "!c1"
+							CharacterHasStatus(_Char, UNHEALABLE)
+						THEN
+							//Triage score calculation
+							Multiply(_Vitality, -1.0)
+							Add(_Vitality, 1.0)
+							Multiply(_Vitality, 5.0)
+							Add(_Score, _Vitality)
+								
+							//Summons are worth less.
+							IF "c1"
+								CharacterIsSummon(_Char)
+							THEN
+								Add(_Score, -5.0)
+							ENDIF
+							
+							// Range score calculation
+							IF "c1&c2"
+								CharacterGetSkillRange(_SkillRangeMin, _SkillRangeMax, __Me, Heal_RegenerateStart)
+								GetDistance(_DistanceToChar, __Me, _Char)
+							THEN
+								Set(_DistanceScore, _DistanceToChar)
+								IF "c1"
+									IsGreaterThen(_DistanceScore, _SkillRangeMax)
+								THEN
+									Subtract(_DistanceScore, _SkillRangeMax)
+									Multiply(_DistanceScore, -1.0)
+								ELIF "c1"
+									IsLessThen(_DistanceScore, _SkillRangeMin)
+								THEN
+									Subtract(_DistanceScore, _SkillRangeMin)
+									Multiply(_DistanceScore, 1.0)
+								ELSE 
+									Set(_DistanceScore, 0.0)
+								ENDIF
+								Add(_Score, _DistanceScore)
+							ENDIF
+							
+							// Can see score calculation
+							IF "!c1"
+								CharacterCanSee(__Me, _Char)
+							THEN
+								Add(_Score, -10.0)
+							ENDIF
+							
+							IF "c1"
+								IsGreaterThen(_Score, %SkillTargetScore_Heal_RegenerateStart)
+							THEN
+								Set(%SkillTargetChar_Heal_RegenerateStart, _Char)
+								Set(%SkillTargetScore_Heal_RegenerateStart, _Score)
+							ENDIF
+						ENDIF
+					ENDIF
+				ENDIF
+			ENDIF
+		ELIF "c1|c2"
+			CharacterHasTalent(_Char, Zombie)
+			CharacterHasStatus(_Char, DECAYING_TOUCH)
+		THEN
+			IF "!c1&!c2"
+				CharacterHasStatus(_Char, INVISIBLE)
+				CharacterHasStatus(_Char, SNEAKING)
+			THEN
+				IF "!c1"
+					CharacterHasStatus(_Char, CHARMED)
+				THEN
+					//Offensive Heal Bonus:
+					Add(_Score, 7.0)
+					
+					//Kill range calculation
+					IF "c1"
+						CharacterGetStat(_Vitality,  _Char, Vitality)
+					THEN
+						//Favor low vitality targets.
+						Multiply(_Vitality, -5.0)
+						Add(_Score, _Vitality)
+					ENDIF
+			
+					//Marked
+					IF "c1"
+						CharacterHasStatus(_Char, AGGRO_MARKED)
+					THEN
+						Add(_Score, 1.0)
+					ENDIF
+							
+					//Summons are worth less.
+					IF "c1"
+						CharacterIsSummon(_Char)
+					THEN
+						Add(_Score, -5.0)
+					ENDIF
+							
+					// Range score calculation
+					IF "c1&c2"
+						CharacterGetSkillRange(_SkillRangeMin, _SkillRangeMax, __Me, Heal_RegenerateStart)
+						GetDistance(_DistanceToChar, __Me, _Char)
+					THEN
+						Set(_DistanceScore, _DistanceToChar)
+						IF "c1"
+							IsGreaterThen(_DistanceScore, _SkillRangeMax)
+						THEN
+							Subtract(_DistanceScore, _SkillRangeMax)
+							Multiply(_DistanceScore, -1.0)
+						ELIF "c1"
+							IsLessThen(_DistanceScore, _SkillRangeMin)
+						THEN
+							Subtract(_DistanceScore, _SkillRangeMin)
+							Multiply(_DistanceScore, 1.0)
+						ELSE 
+							Set(_DistanceScore, 0.0)
+						ENDIF
+						Add(_Score, _DistanceScore)
+					ENDIF
+							
+					// Can see score calculation
+					IF "!c1"
+						CharacterCanSee(__Me, _Char)
+					THEN
+						Add(_Score, -10.0)
+					ENDIF
+							
+					IF "c1"
+						IsGreaterThen(_Score, %SkillTargetScore_Heal_RegenerateStart)
+					THEN
+						Set(%SkillTargetChar_Heal_RegenerateStart, _Char)
+						Set(%SkillTargetScore_Heal_RegenerateStart, _Score)
+					ENDIF
+				ENDIF
+			ENDIF
+		ENDIF
+	ENDIF
+	// [~CALC_CHAR_TARGET_ACTIONS]
+	
+	
+	
+	
+	
+	
+	
+	

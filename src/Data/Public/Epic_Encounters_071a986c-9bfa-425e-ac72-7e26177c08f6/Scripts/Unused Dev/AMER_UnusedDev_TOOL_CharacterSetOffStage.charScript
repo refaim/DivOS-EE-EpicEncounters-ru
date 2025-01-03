@@ -1,0 +1,20 @@
+//===============================================//
+//                                               //
+// C H A R A C T E R   S E T   O F F   S T A G E //
+//                                               //
+//     Written by Matteo "Ameranth" T. (2016)    //
+//===============================================//
+INIT
+CHARACTER:__Me
+
+EVENTS
+EVENT CharacterSetOffStageInit
+ON
+	OnInit()
+ACTIONS
+	CharacterSetOffStage()
+//===============================================//
+//                                               //
+// C H A R A C T E R   S E T   O F F   S T A G E //
+//                                               //
+//===============================================//

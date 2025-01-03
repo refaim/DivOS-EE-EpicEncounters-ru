@@ -1,0 +1,39 @@
+//=====================================================//
+//                                                     //
+//            W O L G R A F F   B O N U S              //
+//                                                     //
+//       Written by Matteo "Ameranth" T. (2017)        //
+//=====================================================//
+//It is apparently the case that having a spell-school ability
+//at level 6 or higher renders the character unable to learn
+//spells from that school. Due to this, and the fact that
+//talents require "real" points in abilities, we decided to
+//replace this bonus with a talent (in similar style to Madora)
+//with patch 1.1.9.3. This script remains to remove the bonus
+//for players who have specced into 6 of a school. New games
+//will not have this problem.
+INIT
+CHARACTER:__Me
+	
+EVENTS
+EVENT WolgraffBonusOnLoaded
+VARS
+	INT:_Ability
+ON
+	OnLoaded(_, _, _, _)
+ACTIONS
+	IF "c1&c2"
+		CharacterGetAbility(_Ability, __Me, RogueLore)
+		IsEqual(_Ability, INT:6)
+	THEN
+		IF "c1"
+			CharacterHasStatus(__Me, CONSUME, AMER_WolgraffBuff)
+		THEN
+			RemoveStatusInfluence(__Me, CONSUME, 1, AMER_WolgraffBuff, 0)
+		ENDIF
+	ENDIF
+//=====================================================//
+//                                                     //
+//            W O L G R A F F   B O N U S              //
+//                                                     //
+//=====================================================//

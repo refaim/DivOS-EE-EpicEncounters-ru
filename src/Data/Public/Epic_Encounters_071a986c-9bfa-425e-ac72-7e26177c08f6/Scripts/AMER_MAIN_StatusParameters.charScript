@@ -1,0 +1,1107 @@
+//===============================================//
+//                                               //
+//       S T A T U S   P A R A M E T E R S       //
+//                                               //
+//     Written by Matteo "Ameranth" T. (2016)    //
+//===============================================//
+INIT
+CHARACTER:__Me
+	
+//Used to track which character is currently in the active turn.
+CHARACTER:%AMER_ActiveChar
+	
+//Used to track the type of save when calculating a success chance.
+ABILITY:%AMER_STATUS_SaveType
+	
+//Used to pass a status' unique parameters to the fake status system.
+FLOAT:%AMER_STATUS_HandledWait				//Time before another status event can be handled.
+POTION:%AMER_STATUS_Effect					//The consume to use to apply the status effect
+POTION:%AMER_STATUS_RemoveApplicator		//The consume to use to remove the consume that applies the status effect consume (yo dog).
+POTION:%AMER_STATUS_RemoveEffect			//The consume used to remove the status effect.
+FIXEDSTRING:%AMER_STATUS_FloatingText		//Floating text above target's head when afflicted.
+FIXEDSTRING:%AMER_STATUS_AfflictedString	//String that describes a target failing the save.
+FIXEDSTRING:%AMER_STATUS_SavedString		//String that describes a target succeeding the save.
+FIXEDSTRING:%AMER_STATUS_StillString		//String that describes a target failing the save on a subsequent turn.
+FIXEDSTRING:%AMER_STATUS_NoLongerString		//String that describes a target succeeding the save on a subsequent turn.
+FIXEDSTRING:%AMER_STATUS_Variable			//The variable that stores this status' success chance.
+FIXEDSTRING:%AMER_STATUS_SourceVariable		//The variable that stores this status' source character.
+	
+FIXEDSTRING:%AMER_STATUS_InitialFunction = "NONE"		//The name of a routine that should be run when the status initially afflicts the target. Set to NONE if unused.
+FIXEDSTRING:%AMER_STATUS_InitialFunctionSave = "NONE"	//The name of a routine that should be run when a target saves against the initial application. Set to NONE if unused.
+FIXEDSTRING:%AMER_STATUS_UpkeepFunction = "NONE"		//The name of a routine that should be run when a target fails to save on a subsequent turn. Set to NONE if unused.
+FIXEDSTRING:%AMER_STATUS_UpkeepFunctionSave = "NONE"	//The name of a routine that should be run when a target saves on a subsequent turn. Set to NONE if unused.
+INT:%AMER_STATUS_Override = INT:0						//This flag allows the above functions to bypass default post-save or post-fail behavior.
+	
+//Used to track the bonus to a status' success chance from special modifiers
+//like Wet for Shocked. Set to zero when initializing a status if unused.
+FLOAT:%AMER_STATUS_ChanceModifier
+	
+//Used to prevent status scripts from firing more than intended.
+INT:%AMER_STATUS_Handled = 0
+	
+//The success chance of a status to roll against each turn, if afflicted.
+FLOAT:%AMER_STATUS_SHOCKED_Chance
+FLOAT:%AMER_STATUS_BORROWEDTIME_Chance
+FLOAT:%AMER_STATUS_AMBERPRISON_Chance
+FLOAT:%AMER_STATUS_TORMENT_Chance
+FLOAT:%AMER_STATUS_MAZE_Chance
+FLOAT:%AMER_STATUS_NATURALORDER_Chance
+FLOAT:%AMER_STATUS_ATTENUATE_Chance
+FLOAT:%AMER_STATUS_RIME_Chance
+FLOAT:%AMER_STATUS_INSECTPLAGUE_Chance
+FLOAT:%AMER_STATUS_BALANCE_Chance
+FLOAT:%AMER_STATUS_INFECTIOUSFLAME_Chance
+FLOAT:%AMER_STATUS_CURSEOFCUTS_Chance
+FLOAT:%AMER_STATUS_ENERVATE_Chance
+
+//The stored source character of a status; upkeep for a status occurs
+//on its source character's turn.
+CHARACTER:%AMER_STATUS_SHOCKED_Source = null
+CHARACTER:%AMER_STATUS_BORROWEDTIME_Source = null
+CHARACTER:%AMER_STATUS_AMBERPRISON_Source = null
+CHARACTER:%AMER_STATUS_TORMENT_Source = null
+CHARACTER:%AMER_STATUS_NATURALORDER_Source = null
+CHARACTER:%AMER_STATUS_ATTENUATE_Source = null
+CHARACTER:%AMER_STATUS_INSECTPLAGUE_Source = null
+CHARACTER:%AMER_STATUS_BALANCE_Source = null
+CHARACTER:%AMER_STATUS_INFECTIOUSFLAME_Source = null
+CHARACTER:%AMER_STATUS_CURSEOFCUTS_Source = null
+CHARACTER:%AMER_STATUS_ENERVATE_Source = null
+	
+	
+	
+EVENTS
+EVENT ShockedParameters
+//========================================================================//
+					//SHOCKED STATUS INITIAL PARAMETERS
+//========================================================================//
+VARS
+	FLOAT:_ChanceModifier
+ON
+	OnFunction("AMER_STATUS_ShockedParameters")
+ACTIONS
+	IF "c1"
+		CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_ApplyShocked")
+	THEN
+		//Shocked has bonus chance to succeed with Wet, Shocked, or Stunned.
+		Set(_ChanceModifier, FLOAT:0)
+		IF "c1"
+			CharacterHasStatus(__Me, WET)
+		THEN
+			Add(_ChanceModifier, FLOAT:10)
+		ENDIF
+		IF "c1|c2"
+			CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_Shocked")
+			CharacterHasStatus(__Me, STUNNED)
+		THEN
+			Add(_ChanceModifier, FLOAT:15)
+		ENDIF
+		Set(%AMER_STATUS_SaveType = Willpower)
+		Set(%AMER_STATUS_HandledWait = 0.3)
+		Set(%AMER_STATUS_ChanceModifier = _ChanceModifier)
+		Set(%AMER_STATUS_Effect = "AMER_STATUS_Shocked")
+		Set(%AMER_STATUS_RemoveApplicator = "AMER_STATUS_RemoveShockedApplicator")
+		Set(%AMER_STATUS_FloatingText = "AMER_STATUS_Shocked")
+		Set(%AMER_STATUS_AfflictedString = "AMER_STATUS_ShockedFail")
+		Set(%AMER_STATUS_SavedString = "AMER_STATUS_ShockedSave")
+		Set(%AMER_STATUS_Variable = "AMER_STATUS_SHOCKED_Chance")
+		Set(%AMER_STATUS_SourceVariable = "AMER_STATUS_SHOCKED_Source")
+		Set(%AMER_STATUS_InitialFunction = "AMER_STATUS_Shocked")
+		Set(%AMER_STATUS_InitialFunctionSave = "NONE")
+		
+		CallFunction("AMER_STATUS_InitializeStatus")
+	ENDIF
+			
+			
+			
+EVENT BorrowedTimeParameters
+//========================================================================//
+				//BORROWED TIME STATUS INITIAL PARAMETERS
+//========================================================================//
+ON
+	OnFunction("AMER_STATUS_BorrowedTimeParameters")
+ACTIONS
+	IF "c1"
+		CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_ApplyBorrowedTime")
+	THEN
+		Set(%AMER_STATUS_SaveType = Willpower)
+		Set(%AMER_STATUS_HandledWait = 0.3)
+		Set(%AMER_STATUS_ChanceModifier = FLOAT:0)
+		Set(%AMER_STATUS_Effect = "AMER_STATUS_BorrowedTimeSlow")
+		Set(%AMER_STATUS_RemoveApplicator = "AMER_STATUS_RemoveApplyBorrowedTime")
+		Set(%AMER_STATUS_FloatingText = "AMER_STATUS_BorrowedTimeSlow")
+		Set(%AMER_STATUS_AfflictedString = "AMER_STATUS_BorrowedTimeFail")
+		Set(%AMER_STATUS_SavedString = "AMER_STATUS_BorrowedTimeSave")
+		Set(%AMER_STATUS_Variable = "AMER_STATUS_BORROWEDTIME_Chance")
+		Set(%AMER_STATUS_SourceVariable = "AMER_STATUS_BORROWEDTIME_Source")
+		Set(%AMER_STATUS_InitialFunction = "AMER_STATUS_BorrowedTime")
+		Set(%AMER_STATUS_InitialFunctionSave = "NONE")
+		
+		CallFunction("AMER_STATUS_InitializeStatus")
+	ENDIF
+			
+			
+			
+EVENT AmberPrisonParameters
+//========================================================================//
+				//AMBER PRISON STATUS INITIAL PARAMETERS
+//========================================================================//
+ON
+	OnFunction("AMER_STATUS_AmberPrisonParameters")
+ACTIONS
+	IF "c1"
+		CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_ApplyAmberPrison")
+	THEN
+		Set(%AMER_STATUS_SaveType = Willpower)
+		Set(%AMER_STATUS_HandledWait = 0.3)
+		Set(%AMER_STATUS_ChanceModifier = FLOAT:0)
+		Set(%AMER_STATUS_Effect = "AMER_STATUS_AmberPrisonSlow")
+		Set(%AMER_STATUS_RemoveApplicator = "AMER_STATUS_RemoveApplyAmberPrison")
+		Set(%AMER_STATUS_FloatingText = "AMER_STATUS_AmberPrisonSlow")
+		Set(%AMER_STATUS_AfflictedString = "AMER_STATUS_AmberPrisonFail")
+		Set(%AMER_STATUS_SavedString = "AMER_STATUS_AmberPrisonSave")
+		Set(%AMER_STATUS_Variable = "AMER_STATUS_AMBERPRISON_Chance")
+		Set(%AMER_STATUS_SourceVariable = "AMER_STATUS_AMBERPRISON_Source")
+		Set(%AMER_STATUS_InitialFunction = "NONE")
+		Set(%AMER_STATUS_InitialFunctionSave = "AMER_STATUS_AmberPrisonInitialSave")
+		
+		CallFunction("AMER_STATUS_InitializeStatus")
+	ENDIF
+			
+			
+		
+EVENT TormentParameters
+//========================================================================//
+					//TORMENT STATUS INITIAL PARAMETERS
+//========================================================================//
+ON
+	OnFunction("AMER_STATUS_TormentParameters")
+ACTIONS
+	IF "c1"
+		CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_ApplyTorment")
+	THEN
+		Set(%AMER_STATUS_SaveType = BodyBuilding)
+		Set(%AMER_STATUS_HandledWait = 0.3)
+		Set(%AMER_STATUS_ChanceModifier = FLOAT:0)
+		Set(%AMER_STATUS_Effect = "AMER_STATUS_Torment")
+		Set(%AMER_STATUS_RemoveApplicator = "AMER_STATUS_RemoveApplyTorment")
+		Set(%AMER_STATUS_FloatingText = "AMER_STATUS_Torment")
+		Set(%AMER_STATUS_AfflictedString = "AMER_STATUS_TormentFail")
+		Set(%AMER_STATUS_SavedString = "AMER_STATUS_TormentSave")
+		Set(%AMER_STATUS_Variable = "AMER_STATUS_TORMENT_Chance")
+		Set(%AMER_STATUS_SourceVariable = "AMER_STATUS_TORMENT_Source")
+		Set(%AMER_STATUS_InitialFunction = "AMER_STATUS_TormentInitial")
+		Set(%AMER_STATUS_InitialFunctionSave = "NONE")
+		
+		CallFunction("AMER_STATUS_InitializeStatus")
+	ENDIF
+			
+			
+			
+EVENT NaturalOrderParameters
+//========================================================================//
+					//NATURAL ORDER STATUS INITIAL PARAMETERS
+//========================================================================//
+ON
+	OnFunction("AMER_STATUS_NaturalOrderParameters")
+ACTIONS
+	IF "c1"
+		CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_ApplyNaturalOrder")
+	THEN
+		Set(%AMER_STATUS_SaveType = BodyBuilding)
+		Set(%AMER_STATUS_HandledWait = 0.3)
+		Set(%AMER_STATUS_ChanceModifier = FLOAT:0)
+		Set(%AMER_STATUS_Effect = "AMER_STATUS_NaturalOrder")
+		Set(%AMER_STATUS_RemoveApplicator = "AMER_STATUS_RemoveApplyNaturalOrder")
+		Set(%AMER_STATUS_FloatingText = "AMER_STATUS_NaturalOrder")
+		Set(%AMER_STATUS_AfflictedString = "AMER_STATUS_NaturalOrderFail")
+		Set(%AMER_STATUS_SavedString = "AMER_STATUS_NaturalOrderSave")
+		Set(%AMER_STATUS_Variable = "AMER_STATUS_NATURALORDER_Chance")
+		Set(%AMER_STATUS_SourceVariable = "AMER_STATUS_NATURALORDER_Source")
+		Set(%AMER_STATUS_InitialFunction = "NONE")
+		Set(%AMER_STATUS_InitialFunctionSave = "NONE")
+		
+		CallFunction("AMER_STATUS_InitializeStatus")
+	ENDIF
+			
+			
+			
+EVENT AttenuateParameters
+//========================================================================//
+					//ATTENUATE STATUS INITIAL PARAMETERS
+//========================================================================//
+ON
+	OnFunction("AMER_STATUS_AttenuateParameters")
+ACTIONS
+	IF "c1"
+		CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_ApplyAttenuate")
+	THEN
+		Set(%AMER_STATUS_SaveType = BodyBuilding)
+		Set(%AMER_STATUS_HandledWait = 0.3)
+		Set(%AMER_STATUS_ChanceModifier = FLOAT:0)
+		Set(%AMER_STATUS_Effect = "AMER_STATUS_Attenuate")
+		Set(%AMER_STATUS_RemoveApplicator = "AMER_STATUS_RemoveApplyAttenuate")
+		Set(%AMER_STATUS_FloatingText = "AMER_STATUS_Attenuate")
+		Set(%AMER_STATUS_AfflictedString = "AMER_STATUS_AttenuateFail")
+		Set(%AMER_STATUS_SavedString = "AMER_STATUS_AttenuateSave")
+		Set(%AMER_STATUS_Variable = "AMER_STATUS_ATTENUATE_Chance")
+		Set(%AMER_STATUS_SourceVariable = "AMER_STATUS_ATTENUATE_Source")
+		Set(%AMER_STATUS_InitialFunction = "NONE")
+		Set(%AMER_STATUS_InitialFunctionSave = "NONE")
+		
+		CallFunction("AMER_STATUS_InitializeStatus")
+	ENDIF
+			
+			
+			
+EVENT RimeParameters
+//========================================================================//
+					//RIME STATUS INITIAL PARAMETERS
+//========================================================================//
+ON
+	OnFunction("AMER_STATUS_RimeParameters")
+ACTIONS
+	IF "c1"
+		CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_ApplyEnemyRime")
+	THEN
+		Set(%AMER_STATUS_SaveType = BodyBuilding)
+		Set(%AMER_STATUS_HandledWait = 0.3)
+		Set(%AMER_STATUS_ChanceModifier = FLOAT:0)
+		Set(%AMER_STATUS_Effect = "AMER_STATUS_EnemyRime")
+		Set(%AMER_STATUS_RemoveApplicator = "AMER_STATUS_RemoveApplyEnemyRime")
+		Set(%AMER_STATUS_FloatingText = "AMER_STATUS_EnemyRime")
+		Set(%AMER_STATUS_AfflictedString = "AMER_STATUS_RimeFail")
+		Set(%AMER_STATUS_SavedString = "AMER_STATUS_RimeSave")
+		Set(%AMER_STATUS_Variable = "AMER_STATUS_RIME_Chance")
+		Set(%AMER_STATUS_SourceVariable = "NONE")
+		Set(%AMER_STATUS_InitialFunction = "NONE")
+		Set(%AMER_STATUS_InitialFunctionSave = "NONE")
+		
+		CallFunction("AMER_STATUS_InitializeStatus")
+	ENDIF
+			
+			
+			
+EVENT FingerOfDeathParameters
+//========================================================================//
+				//FINGER OF DEATH STATUS INITIAL PARAMETERS
+//========================================================================//
+VARS
+	CHARACTER:_Caster
+	FLOAT:_ChanceModifier
+	FLOAT:_Attribute
+	FLOAT:_Level
+ON
+	OnFunction("AMER_STATUS_FingerOfDeathParameters")
+ACTIONS
+	IF "c1"
+		CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_ApplyFingerOfDeath")
+	THEN
+		//Finger of Death has bonus success chance based on target CON.
+		//Use the caster's level for unmapped attribute calculation.
+		Set(_ChanceModifier, FLOAT:0)
+		IF "c1&c2&c3"
+			CharacterGetStat(_Attribute, __Me, Constitution)
+			GetVar(_Caster, __Me, "AMER_SkillSource")
+			CharacterGetStat(_Level, _Caster, Level)
+		THEN
+			//Players use their Constitution x 2, Lone Wolves have a 25% bonus applied first.
+			IF "c1"
+				CharacterIsPlayer(__Me)
+			THEN
+				IF "c1"
+					CharacterHasTalent(__Me, LoneWolf)
+				THEN
+					Multiply(_Attribute, 1.25)
+				ENDIF
+				Multiply(_Attribute, 2.0)
+			ENDIF
+			//Get the unmapped constitution, returned into %AMER_UnmapAttributeValue
+			SetVar(__Me, "AMER_UnmapAttributeValue", _Attribute)
+			SetVar(__Me, "AMER_UnmapAttributeLevel", _Level)
+			CallFunction("AMER_UnmapAttribute")
+			IF "c1"
+				GetVar(_ChanceModifier, __Me, "AMER_UnmapAttributeValue")
+			THEN
+				//Finger of Death can never instantly slay bosses or characters with 8
+				//or more pre-map Constitution.
+				IF "c1&!c2"
+					IsLessThen(_ChanceModifier, FLOAT:8)
+					CharacterIsBoss(__Me)
+				THEN
+					//-15% success chance per unmapped Constitution above 1.
+					Subtract(_ChanceModifier, FLOAT:1)
+					Multiply(_ChanceModifier, -15.0)
+				ELSE
+					Set(_ChanceModifier, -300.0)
+				ENDIF
+			ENDIF
+		ENDIF
+		Set(%AMER_STATUS_SaveType = BodyBuilding)
+		Set(%AMER_STATUS_HandledWait = 0.3)
+		Set(%AMER_STATUS_ChanceModifier = _ChanceModifier)
+		Set(%AMER_STATUS_Effect = "NONE")
+		Set(%AMER_STATUS_RemoveApplicator = "AMER_STATUS_RemoveApplyFingerOfDeath")
+		Set(%AMER_STATUS_FloatingText = "AMER_STATUS_FingerOfDeath")
+		Set(%AMER_STATUS_AfflictedString = "AMER_STATUS_FingerOfDeathFail")
+		Set(%AMER_STATUS_SavedString = "AMER_STATUS_FingerOfDeathSave")
+		Set(%AMER_STATUS_Variable = "NONE")
+		Set(%AMER_STATUS_SourceVariable = "NONE")
+		Set(%AMER_STATUS_InitialFunction = "AMER_STATUS_FingerOfDeathInitial")
+		Set(%AMER_STATUS_InitialFunctionSave = "AMER_STATUS_FingerOfDeathInitialSave")
+		
+		CallFunction("AMER_STATUS_InitializeStatus")
+	ENDIF
+			
+			
+			
+EVENT InsectPlagueParameters
+//========================================================================//
+				//INSECT PLAGUE STATUS INITIAL PARAMETERS
+//========================================================================//
+VARS
+	FLOAT:_ChanceModifier
+ON
+	OnFunction("AMER_STATUS_InsectPlagueParameters")
+ACTIONS
+	IF "c1"
+		CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_ApplyInsectPlague")
+	THEN
+		//Insect Plague has a lower success chance on Burning targets.
+		Set(_ChanceModifier, FLOAT:0)
+		IF "c1"
+			CharacterHasStatus(__Me, BURNING)
+		THEN
+			Add(_ChanceModifier, -50.0)
+		ENDIF
+		Set(%AMER_STATUS_SaveType = BodyBuilding)
+		Set(%AMER_STATUS_HandledWait = 1.3)
+		Set(%AMER_STATUS_ChanceModifier = _ChanceModifier)
+		Set(%AMER_STATUS_Effect = "AMER_STATUS_InsectPlague")
+		Set(%AMER_STATUS_RemoveApplicator = "AMER_STATUS_RemoveApplyInsectPlague")
+		Set(%AMER_STATUS_FloatingText = "AMER_STATUS_InsectPlague")
+		Set(%AMER_STATUS_AfflictedString = "AMER_STATUS_InsectPlagueFail")
+		Set(%AMER_STATUS_SavedString = "AMER_STATUS_InsectPlagueSave")
+		Set(%AMER_STATUS_Variable = "AMER_STATUS_INSECTPLAGUE_Chance")
+		Set(%AMER_STATUS_SourceVariable = "AMER_STATUS_INSECTPLAGUE_Source")
+		Set(%AMER_STATUS_InitialFunction = "AMER_STATUS_InsectPlagueInitial")
+		Set(%AMER_STATUS_InitialFunctionSave = "AMER_STATUS_InsectPlagueInitialSave")
+		
+		CallFunction("AMER_STATUS_InitializeStatus")
+	ENDIF
+			
+			
+			
+EVENT BalanceParameters
+//========================================================================//
+					//BALANCE STATUS INITIAL PARAMETERS
+//========================================================================//
+ON
+	OnFunction("AMER_STATUS_BalanceParameters")
+ACTIONS
+	IF "c1"
+		CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_ApplyBalance")
+	THEN
+		Set(%AMER_STATUS_SaveType = BodyBuilding)
+		Set(%AMER_STATUS_HandledWait = 0.3)
+		Set(%AMER_STATUS_ChanceModifier = FLOAT:0)
+		Set(%AMER_STATUS_Effect = "AMER_STATUS_Balance")
+		Set(%AMER_STATUS_RemoveApplicator = "AMER_STATUS_RemoveApplyBalance")
+		Set(%AMER_STATUS_FloatingText = "AMER_STATUS_Balance")
+		Set(%AMER_STATUS_AfflictedString = "AMER_STATUS_BalanceFail")
+		Set(%AMER_STATUS_SavedString = "AMER_STATUS_BalanceSave")
+		Set(%AMER_STATUS_Variable = "AMER_STATUS_BALANCE_Chance")
+		Set(%AMER_STATUS_SourceVariable = "AMER_STATUS_BALANCE_Source")
+		Set(%AMER_STATUS_InitialFunction = "AMER_STATUS_BalanceInitial")
+		Set(%AMER_STATUS_InitialFunctionSave = "NONE")
+		
+		CallFunction("AMER_STATUS_InitializeStatus")
+	ENDIF
+			
+			
+			
+EVENT DrainWillpowerParameters
+//========================================================================//
+				//DRAIN WILLPOWER STATUS INITIAL PARAMETERS
+//========================================================================//
+ON
+	OnFunction("AMER_STATUS_DrainWillpowerParameters")
+ACTIONS
+	IF "c1"
+		CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_ApplyDrainWillpower")
+	THEN
+		Set(%AMER_STATUS_SaveType = Willpower)
+		Set(%AMER_STATUS_HandledWait = 0.3)
+		Set(%AMER_STATUS_ChanceModifier = FLOAT:0)
+		Set(%AMER_STATUS_Effect = "AMER_STATUS_DrainWillpower2")
+		Set(%AMER_STATUS_RemoveApplicator = "AMER_STATUS_RemoveApplyDrainWillpower")
+		Set(%AMER_STATUS_FloatingText = "AMER_STATUS_DrainWillpower2")
+		Set(%AMER_STATUS_AfflictedString = "AMER_STATUS_DrainWillpowerFail")
+		Set(%AMER_STATUS_SavedString = "AMER_STATUS_DrainWillpowerSave")
+		Set(%AMER_STATUS_Variable = "NONE")
+		Set(%AMER_STATUS_SourceVariable = "NONE")
+		Set(%AMER_STATUS_InitialFunction = "NONE")
+		Set(%AMER_STATUS_InitialFunctionSave = "AMER_STATUS_DrainWillpowerInitialSave")
+		
+		CallFunction("AMER_STATUS_InitializeStatus")
+	ENDIF
+			
+			
+			
+EVENT SoulsapParameters
+//========================================================================//
+					//SOULSAP STATUS INITIAL PARAMETERS
+//========================================================================//
+ON
+	OnFunction("AMER_STATUS_SoulsapParameters")
+ACTIONS
+	IF "c1"
+		CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_ApplySoulsap")
+	THEN
+		IF "!c1&!c2&!c3"
+			//Soulsap cannot affect a Soulsapped target.
+			CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_Soulsap1")
+			CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_Soulsap2")
+			CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_Soulsap3")
+		THEN
+			Set(%AMER_STATUS_SaveType = Willpower)
+			Set(%AMER_STATUS_HandledWait = 0.3)
+			Set(%AMER_STATUS_ChanceModifier = FLOAT:0)
+			Set(%AMER_STATUS_Effect = "NONE")
+			Set(%AMER_STATUS_RemoveApplicator = "AMER_STATUS_RemoveApplySoulsap")
+			Set(%AMER_STATUS_FloatingText = "AMER_STATUS_Soulsap1")
+			Set(%AMER_STATUS_AfflictedString = "NONE")
+			Set(%AMER_STATUS_SavedString = "NONE")
+			Set(%AMER_STATUS_Variable = "NONE")
+			Set(%AMER_STATUS_SourceVariable = "NONE")
+			Set(%AMER_STATUS_InitialFunction = "AMER_STATUS_SoulsapInitial")
+			Set(%AMER_STATUS_InitialFunctionSave = "AMER_STATUS_SoulsapInitialSave")
+		
+			CallFunction("AMER_STATUS_InitializeStatus")
+		ENDIF
+	ENDIF
+			
+			
+			
+EVENT InfectiousFlameParameters
+//========================================================================//
+				//INFECTIOUS FLAME STATUS INITIAL PARAMETERS
+//========================================================================//
+ON
+	OnFunction("AMER_STATUS_InfectiousFlameParameters")
+ACTIONS
+	IF "c1"
+		CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_ApplyInfectiousFlame")
+	THEN
+		Set(%AMER_STATUS_SaveType = BodyBuilding)
+		Set(%AMER_STATUS_HandledWait = 0.3)
+		Set(%AMER_STATUS_ChanceModifier = FLOAT:0)
+		Set(%AMER_STATUS_Effect = "AMER_STATUS_InfectiousFlame")
+		Set(%AMER_STATUS_RemoveApplicator = "AMER_STATUS_RemoveApplyInfectiousFlame")
+		Set(%AMER_STATUS_FloatingText = "AMER_STATUS_InfectiousFlame")
+		Set(%AMER_STATUS_AfflictedString = "AMER_STATUS_InfectiousFlameFail")
+		Set(%AMER_STATUS_SavedString = "AMER_STATUS_InfectiousFlameSave")
+		Set(%AMER_STATUS_Variable = "AMER_STATUS_INFECTIOUSFLAME_Chance")
+		Set(%AMER_STATUS_SourceVariable = "AMER_STATUS_INFECTIOUSFLAME_Source")
+		Set(%AMER_STATUS_InitialFunction = "NONE")
+		Set(%AMER_STATUS_InitialFunctionSave = "NONE")
+		
+		CallFunction("AMER_STATUS_InitializeStatus")
+	ENDIF
+			
+			
+			
+EVENT CurseOfCutsParameters
+//========================================================================//
+				//CURSE OF CUTS STATUS INITIAL PARAMETERS
+//========================================================================//
+ON
+	OnFunction("AMER_STATUS_CurseOfCutsParameters")
+ACTIONS
+	IF "c1"
+		CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_ApplyCurseOfCuts")
+	THEN
+		Set(%AMER_STATUS_SaveType = Willpower)
+		Set(%AMER_STATUS_HandledWait = 0.3)
+		Set(%AMER_STATUS_ChanceModifier = FLOAT:0)
+		Set(%AMER_STATUS_Effect = "AMER_STATUS_CurseOfCuts")
+		Set(%AMER_STATUS_RemoveApplicator = "AMER_STATUS_RemoveApplyCurseOfCuts")
+		Set(%AMER_STATUS_FloatingText = "AMER_STATUS_CurseOfCuts")
+		Set(%AMER_STATUS_AfflictedString = "AMER_STATUS_CurseOfCutsFail")
+		Set(%AMER_STATUS_SavedString = "AMER_STATUS_CurseOfCutsSave")
+		Set(%AMER_STATUS_Variable = "AMER_STATUS_CURSEOFCUTS_Chance")
+		Set(%AMER_STATUS_SourceVariable = "AMER_STATUS_CURSEOFCUTS_Source")
+		Set(%AMER_STATUS_InitialFunction = "NONE")
+		Set(%AMER_STATUS_InitialFunctionSave = "NONE")
+			
+		CallFunction("AMER_STATUS_InitializeStatus")
+	ENDIF
+			
+			
+			
+EVENT EnervateParameters
+//========================================================================//
+				//ENERVATE STATUS INITIAL PARAMETERS
+//========================================================================//
+ON
+	OnFunction("AMER_STATUS_EnervateParameters")
+ACTIONS
+	IF "c1"
+		CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_ApplyEnervate")
+	THEN
+		Set(%AMER_STATUS_SaveType = Willpower)
+		Set(%AMER_STATUS_HandledWait = 0.3)
+		Set(%AMER_STATUS_ChanceModifier = FLOAT:0)
+		Set(%AMER_STATUS_Effect = "AMER_STATUS_Enervate")
+		Set(%AMER_STATUS_RemoveApplicator = "AMER_STATUS_RemoveApplyEnervate")
+		Set(%AMER_STATUS_FloatingText = "AMER_STATUS_Enervate")
+		Set(%AMER_STATUS_AfflictedString = "AMER_STATUS_EnervateFail")
+		Set(%AMER_STATUS_SavedString = "AMER_STATUS_EnervateSave")
+		Set(%AMER_STATUS_Variable = "AMER_STATUS_ENERVATE_Chance")
+		Set(%AMER_STATUS_SourceVariable = "AMER_STATUS_ENERVATE_Source")
+		Set(%AMER_STATUS_InitialFunction = "AMER_STATUS_Enervate")
+		Set(%AMER_STATUS_InitialFunctionSave = "NONE")
+		
+		CallFunction("AMER_STATUS_InitializeStatus")
+	ENDIF
+			
+			
+			
+EVENT RuinParameters
+//========================================================================//
+					//RUIN STATUS INITIAL PARAMETERS
+//========================================================================//
+ON
+	OnFunction("AMER_STATUS_RuinParameters")
+ACTIONS
+	IF "c1"
+		CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_ApplyRuin")
+	THEN
+		//Ruin cannot affect characters who are already affected by Ruin.
+		IF "!c1&!c2&!c3"
+			CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_Ruin1")
+			CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_Ruin2")
+			CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_Ruin3")
+		THEN
+			Set(%AMER_STATUS_SaveType = Willpower)
+			Set(%AMER_STATUS_HandledWait = 0.3)
+			Set(%AMER_STATUS_ChanceModifier = FLOAT:0)
+			Set(%AMER_STATUS_Effect = "NONE")
+			Set(%AMER_STATUS_RemoveApplicator = "AMER_STATUS_RemoveApplyRuin")
+			Set(%AMER_STATUS_FloatingText = "AMER_STATUS_Ruin1")
+			Set(%AMER_STATUS_AfflictedString = "NONE")
+			Set(%AMER_STATUS_SavedString = "NONE")
+			Set(%AMER_STATUS_Variable = "NONE")
+			Set(%AMER_STATUS_SourceVariable = "NONE")
+			Set(%AMER_STATUS_InitialFunction = "AMER_STATUS_RuinInitial")
+			Set(%AMER_STATUS_InitialFunctionSave = "AMER_STATUS_RuinInitialSave")
+		
+			CallFunction("AMER_STATUS_InitializeStatus")
+		ENDIF
+	ENDIF
+			
+			
+			
+EVENT HorridWiltingParameters
+//========================================================================//
+				//HORRID WILTING STATUS INITIAL PARAMETERS
+//========================================================================//
+ON
+	OnFunction("AMER_STATUS_HorridWiltingParameters")
+ACTIONS
+	IF "c1"
+		CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_ApplyHorridWilting")
+	THEN
+		Set(%AMER_STATUS_SaveType = Willpower)
+		Set(%AMER_STATUS_HandledWait = 0.3)
+		Set(%AMER_STATUS_ChanceModifier = FLOAT:0)
+		Set(%AMER_STATUS_Effect = "NONE")
+		Set(%AMER_STATUS_RemoveApplicator = "AMER_STATUS_RemoveApplyHorridWilting")
+		Set(%AMER_STATUS_FloatingText = "AMER_STATUS_HorridWilting1")
+		Set(%AMER_STATUS_AfflictedString = "NONE")
+		Set(%AMER_STATUS_SavedString = "NONE")
+		Set(%AMER_STATUS_Variable = "NONE")
+		Set(%AMER_STATUS_SourceVariable = "NONE")
+		Set(%AMER_STATUS_InitialFunction = "AMER_STATUS_HorridWiltingInitial")
+		Set(%AMER_STATUS_InitialFunctionSave = "AMER_STATUS_HorridWiltingInitialSave")
+		
+		CallFunction("AMER_STATUS_InitializeStatus")
+	ENDIF
+	
+	
+	
+EVENT FakeStatusOnTurn
+VARS
+	CHARACTER:_Char
+	CHARACTER:_SourceChar
+	FLOAT:_ChanceModifier
+	FLOAT:_SourceLevel
+	FLOAT:_Attribute
+	INT:_Level
+	INT:_DoCheck
+	INT:_StatusesFound
+	INT:_OncePerRound
+ON
+	//OnFunction("AMER_STATUS_OnTurn")
+	OnCharacterEvent(_Char, "AMER_UpkeepStatuses")
+ACTIONS
+	//Store the character as the owner of the active turn.
+	Set(%AMER_ActiveChar, _Char)
+	
+	//IF "c1&c2"
+	//	GetVar(_OncePerRound, _Char, "AMER_OncePerRound")
+	//	IsEqual(_OncePerRound, INT:1)
+	//THEN
+		//This is for performance; don't bother checking for
+		//statuses if we know there aren't any.
+		Set(_StatusesFound, INT:0)
+		IF "c1&c2"
+			GetVar(_DoCheck, __Me, "AMER_CheckStatusUpkeep")
+			IsEqual(_DoCheck, INT:1)
+		THEN
+			//Don't bother doing this if the target is dying.
+			IF "!c1"
+				CharacterHasStatus(__Me, DYING)
+			THEN
+	
+//========================================================================//
+							//Regenerate
+//========================================================================//
+				IF "c1"
+					CharacterHasStatus(__Me, CONSUME, "AMER_Regenerate")
+				THEN
+					Set(_StatusesFound, INT:1)
+					
+					IF "c1&c2"
+						GetVar(_SourceChar, __Me, "AMER_RegenerateSource")
+						IsEqual(_SourceChar, _Char)
+					THEN
+						CallFunction("AMER_RegenerateHealing")
+					ENDIF
+				ENDIF
+		
+		
+		
+//========================================================================//
+								//MASS HEAL
+//========================================================================//
+				IF "c1"
+					CharacterHasStatus(__Me, CONSUME, "AMER_MassHeal")
+				THEN
+					Set(_StatusesFound, INT:1)
+					
+					IF "c1&c2"
+						GetVar(_SourceChar, __Me, "AMER_MassHealSource")
+						IsEqual(_SourceChar, _Char)
+					THEN
+						CallFunction("AMER_MassHealHealing")
+					ENDIF
+				ENDIF
+				
+				
+				
+//========================================================================//
+					//SHOCKED STATUS UPKEEP PARAMETERS
+//========================================================================//
+				IF "c1"
+					CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_Shocked")
+				THEN
+					Set(_StatusesFound, INT:1)
+					
+					IF "c1"
+						IsEqual(%AMER_STATUS_SHOCKED_Source, _Char)
+					THEN
+						//Shocked has bonus chance to succeed with Wet, Shocked, or Stunned.
+						Set(_ChanceModifier, FLOAT:0)
+						IF "c1"
+							CharacterHasStatus(__Me, WET)
+						THEN
+							Add(_ChanceModifier, FLOAT:10)
+						ENDIF
+						IF "c1|c2"
+							CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_Shocked")
+							CharacterHasStatus(__Me, STUNNED)
+						THEN
+							Add(_ChanceModifier, FLOAT:15)
+						ENDIF
+						Set(%AMER_STATUS_SaveType = Willpower)
+						Set(%AMER_STATUS_ChanceModifier = _ChanceModifier)
+						Set(%AMER_STATUS_RemoveEffect = "AMER_STATUS_RemoveShocked")
+						Set(%AMER_STATUS_FloatingText = "AMER_STATUS_Shocked")
+						Set(%AMER_STATUS_StillString = "AMER_STATUS_ShockedStill")
+						Set(%AMER_STATUS_NoLongerString = "AMER_STATUS_ShockedNoLonger")
+						Set(%AMER_STATUS_Variable = "AMER_STATUS_SHOCKED_Chance")
+						Set(%AMER_STATUS_UpkeepFunction = "NONE")
+						Set(%AMER_STATUS_UpkeepFunctionSave = "NONE")
+						CallFunction("AMER_STATUS_Upkeep")
+					ENDIF
+				ENDIF
+	
+	
+	
+//========================================================================//
+				//BORROWED TIME STATUS UPKEEP PARAMETERS
+//========================================================================//
+				IF "c1"
+					CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_BorrowedTimeSlow")
+				THEN
+					Set(_StatusesFound, INT:1)
+					
+					IF "c1"
+						IsEqual(%AMER_STATUS_BORROWEDTIME_Source, _Char)
+					THEN
+						Set(%AMER_STATUS_SaveType = Willpower)
+						Set(%AMER_STATUS_ChanceModifier = FLOAT:0)
+						Set(%AMER_STATUS_RemoveEffect = "AMER_STATUS_RemoveBorrowedTimeSlow")
+						Set(%AMER_STATUS_FloatingText = "AMER_STATUS_BorrowedTimeSlow")
+						Set(%AMER_STATUS_StillString = "AMER_STATUS_BorrowedTimeStill")
+						Set(%AMER_STATUS_NoLongerString = "AMER_STATUS_BorrowedTimeNoLonger")
+						Set(%AMER_STATUS_Variable = "AMER_STATUS_BORROWEDTIME_Chance")
+						Set(%AMER_STATUS_UpkeepFunction = "NONE")
+						Set(%AMER_STATUS_UpkeepFunctionSave = "NONE")
+						CallFunction("AMER_STATUS_Upkeep")
+					ENDIF
+				ENDIF
+	
+	
+	
+//========================================================================//
+				//AMBER PRISON STATUS UPKEEP PARAMETERS
+//========================================================================//
+				IF "c1|c2|c3"
+					CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_AmberPrisonSlow")
+					CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_AmberPrisonSlow2")
+					CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_AmberPrisonSlow3")
+				THEN
+					Set(_StatusesFound, INT:1)
+					
+					IF "c1"
+						IsEqual(%AMER_STATUS_AMBERPRISON_Source, _Char)
+					THEN
+						Set(%AMER_STATUS_SaveType = Willpower)
+						Set(%AMER_STATUS_ChanceModifier = FLOAT:0)
+						Set(%AMER_STATUS_RemoveEffect = "AMER_STATUS_RemoveAmberPrisonSlow")
+						Set(%AMER_STATUS_FloatingText = "AMER_STATUS_AmberPrisonSlow")
+						Set(%AMER_STATUS_StillString = "AMER_STATUS_AmberPrisonStill")
+						Set(%AMER_STATUS_NoLongerString = "AMER_STATUS_AmberPrisonNoLonger")
+						Set(%AMER_STATUS_Variable = "AMER_STATUS_AMBERPRISON_Chance")
+						Set(%AMER_STATUS_UpkeepFunction = "AMER_STATUS_AmberPrisonUpkeep")
+						Set(%AMER_STATUS_UpkeepFunctionSave = "AMER_STATUS_AmberPrisonUpkeepSave")
+						CallFunction("AMER_STATUS_Upkeep")
+					ENDIF
+				ENDIF
+	
+	
+	
+//========================================================================//
+					//TORMENT STATUS UPKEEP PARAMETERS
+//========================================================================//
+				IF "c1"
+					CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_Torment")
+				THEN
+					Set(_StatusesFound, INT:1)
+					
+					IF "c1"
+						IsEqual(%AMER_STATUS_TORMENT_Source, _Char)
+					THEN
+						Set(%AMER_STATUS_SaveType = BodyBuilding)
+						Set(%AMER_STATUS_ChanceModifier = FLOAT:0)
+						Set(%AMER_STATUS_RemoveEffect = "AMER_STATUS_RemoveTorment")
+						Set(%AMER_STATUS_FloatingText = "AMER_STATUS_Torment")
+						Set(%AMER_STATUS_StillString = "AMER_STATUS_TormentStill")
+						Set(%AMER_STATUS_NoLongerString = "AMER_STATUS_TormentNoLonger")
+						Set(%AMER_STATUS_Variable = "AMER_STATUS_TORMENT_Chance")
+						Set(%AMER_STATUS_UpkeepFunction = "NONE")
+						Set(%AMER_STATUS_UpkeepFunctionSave = "NONE")
+						CallFunction("AMER_STATUS_Upkeep")
+					ENDIF
+				ENDIF
+	
+	
+	
+//========================================================================//
+					//MAZE STATUS UPKEEP PARAMETERS
+//========================================================================//
+				IF "c1"
+					CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_Maze")
+				THEN
+					Set(_StatusesFound, INT:1)
+					
+					IF "c1"
+						IsEqual(__Me, _Char)
+					THEN
+						Set(_ChanceModifier, 0.0)
+						IF "c1&c2"
+							GetVar(_SourceLevel, __Me, "AMER_MazeSourceLevel")
+							CharacterGetStat(_Attribute, __Me, Intelligence)
+						THEN
+							//Get the unmapped intelligence, returned into %AMER_UnmapAttributeValue
+							SetVar(__Me, "AMER_UnmapAttributeValue", _Attribute)
+							SetVar(__Me, "AMER_UnmapAttributeLevel", _SourceLevel)
+							CallFunction("AMER_UnmapAttribute")
+							IF "c1"
+								GetVar(_ChanceModifier, __Me, "AMER_UnmapAttributeValue")
+							THEN
+								//Boss creatures have double chance to escape Maze.
+								IF "c1"
+									CharacterIsBoss(__Me)
+								THEN
+									Multiply(_ChanceModifier, -10.0)
+								ELSE
+									Multiply(_ChanceModifier, -5.0)
+									//Non-boss creatures have a maximum of 50% chance to save.
+									IF "c1"
+										IsLessThen(_ChanceModifier, -50.0)
+									THEN
+										Set(_ChanceModifier, -50.0)
+									ENDIF
+								ENDIF
+							ENDIF
+						ENDIF
+						Set(%AMER_STATUS_SaveType = null)
+						Set(%AMER_STATUS_ChanceModifier = _ChanceModifier)
+						Set(%AMER_STATUS_RemoveEffect = "AMER_STATUS_RemoveMaze")
+						Set(%AMER_STATUS_FloatingText = "AMER_STATUS_Maze")
+						Set(%AMER_STATUS_StillString = "AMER_STATUS_MazeStill")
+						Set(%AMER_STATUS_NoLongerString = "AMER_STATUS_MazeNoLonger")
+						Set(%AMER_STATUS_Variable = "AMER_STATUS_MAZE_Chance")
+						Set(%AMER_STATUS_UpkeepFunction = "NONE")
+						Set(%AMER_STATUS_UpkeepFunctionSave = "NONE")
+						CallFunction("AMER_STATUS_Upkeep")
+					ENDIF
+				ENDIF
+	
+	
+	
+//========================================================================//
+					//NATURAL ORDER UPKEEP PARAMETERS
+//========================================================================//
+				IF "c1|c2|c3"
+					CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_NaturalOrder")
+					CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_NaturalOrder2")
+					CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_NaturalOrder3")
+				THEN
+					Set(_StatusesFound, INT:1)
+					
+					IF "c1"
+						IsEqual(%AMER_STATUS_NATURALORDER_Source, _Char)
+					THEN
+						Set(%AMER_STATUS_SaveType = BodyBuilding)
+						Set(%AMER_STATUS_ChanceModifier = FLOAT:0)
+						Set(%AMER_STATUS_RemoveEffect = "AMER_STATUS_RemoveNaturalOrder")
+						Set(%AMER_STATUS_FloatingText = "AMER_STATUS_NaturalOrder")
+						Set(%AMER_STATUS_StillString = "AMER_STATUS_NaturalOrderStill")
+						Set(%AMER_STATUS_NoLongerString = "AMER_STATUS_NaturalOrderSave")
+						Set(%AMER_STATUS_Variable = "AMER_STATUS_NATURALORDER_Chance")
+						Set(%AMER_STATUS_UpkeepFunction = "AMER_STATUS_NaturalOrderUpkeep")
+						Set(%AMER_STATUS_UpkeepFunctionSave = "AMER_STATUS_NaturalOrderUpkeepSave")
+						CallFunction("AMER_STATUS_Upkeep")
+					ENDIF
+				ENDIF
+	
+	
+	
+//========================================================================//
+					//ATTENUATE UPKEEP PARAMETERS
+//========================================================================//
+				IF "c1|c2|c3|c4"
+					CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_Attenuate")
+					CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_Attenuate2")
+					CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_Attenuate3")
+					CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_Attenuate4")
+				THEN
+					Set(_StatusesFound, INT:1)
+					
+					IF "c1"
+						IsEqual(%AMER_STATUS_ATTENUATE_Source, _Char)
+					THEN
+						Set(%AMER_STATUS_SaveType = BodyBuilding)
+						Set(%AMER_STATUS_ChanceModifier = FLOAT:0)
+						Set(%AMER_STATUS_RemoveEffect = "AMER_STATUS_RemoveAttenuate")
+						Set(%AMER_STATUS_FloatingText = "AMER_STATUS_Attenuate")
+						Set(%AMER_STATUS_StillString = "AMER_STATUS_AttenuateStill")
+						Set(%AMER_STATUS_NoLongerString = "AMER_STATUS_AttenuateNoLonger")
+						Set(%AMER_STATUS_Variable = "AMER_STATUS_ATTENUATE_Chance")
+						Set(%AMER_STATUS_UpkeepFunction = "AMER_STATUS_AttenuateUpkeep")
+						Set(%AMER_STATUS_UpkeepFunctionSave = "NONE")
+						CallFunction("AMER_STATUS_Upkeep")
+					ENDIF
+				ENDIF
+	
+	
+	
+//========================================================================//
+					//RIME UPKEEP PARAMETERS
+//========================================================================//
+				IF "c1"
+					CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_EnemyRime")
+				THEN
+					Set(_StatusesFound, INT:1)
+					
+					IF "c1"
+						IsEqual(__Me, _Char)
+					THEN
+						Set(%AMER_STATUS_SaveType = BodyBuilding)
+						Set(%AMER_STATUS_ChanceModifier = FLOAT:0)
+						Set(%AMER_STATUS_RemoveEffect = "AMER_STATUS_RemoveEnemyRime")
+						Set(%AMER_STATUS_FloatingText = "AMER_STATUS_EnemyRime")
+						Set(%AMER_STATUS_StillString = "AMER_STATUS_RimeStill")
+						Set(%AMER_STATUS_NoLongerString = "AMER_STATUS_RimeNoLonger")
+						Set(%AMER_STATUS_Variable = "AMER_STATUS_RIME_Chance")
+						Set(%AMER_STATUS_UpkeepFunction = "NONE")
+						Set(%AMER_STATUS_UpkeepFunctionSave = "NONE")
+						CallFunction("AMER_STATUS_Upkeep")
+					ENDIF
+				ENDIF
+	
+	
+	
+//========================================================================//
+					//INSECT PLAGUE UPKEEP PARAMETERS
+//========================================================================//
+				IF "c1"
+					CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_InsectPlague")
+				THEN
+					Set(_StatusesFound, INT:1)
+					
+					IF "c1"
+						IsEqual(%AMER_STATUS_INSECTPLAGUE_Source, _Char)
+					THEN
+						//Insect Plague has a lower success chance on Burning targets.
+						Set(_ChanceModifier, FLOAT:0)
+						IF "c1"
+							CharacterHasStatus(__Me, BURNING)
+						THEN
+							Add(_ChanceModifier, -50.0)
+						ENDIF
+						Set(%AMER_STATUS_SaveType = BodyBuilding)
+						Set(%AMER_STATUS_ChanceModifier = _ChanceModifier)
+						Set(%AMER_STATUS_RemoveEffect = "AMER_STATUS_RemoveInsectPlague")
+						Set(%AMER_STATUS_FloatingText = "AMER_STATUS_InsectPlague")
+						Set(%AMER_STATUS_StillString = "AMER_STATUS_InsectPlagueStill")
+						Set(%AMER_STATUS_NoLongerString = "AMER_STATUS_InsectPlagueNoLonger")
+						Set(%AMER_STATUS_Variable = "AMER_STATUS_INSECTPLAGUE_Chance")
+						Set(%AMER_STATUS_UpkeepFunction = "AMER_STATUS_InsectPlagueUpkeep")
+						Set(%AMER_STATUS_UpkeepFunctionSave = "AMER_STATUS_InsectPlagueUpkeepSave")
+						CallFunction("AMER_STATUS_Upkeep")
+					ENDIF
+				ENDIF
+	
+	
+	
+//========================================================================//
+						//BALANCE UPKEEP PARAMETERS
+//========================================================================//
+				IF "c1"
+					CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_Balance")
+				THEN
+					Set(_StatusesFound, INT:1)
+					IF "c1"
+						IsEqual(%AMER_STATUS_BALANCE_Source, _Char)
+					THEN
+						Set(%AMER_STATUS_SaveType = BodyBuilding)
+						Set(%AMER_STATUS_ChanceModifier = FLOAT:0)
+						Set(%AMER_STATUS_RemoveEffect = "AMER_STATUS_RemoveBalance")
+						Set(%AMER_STATUS_FloatingText = "AMER_STATUS_Balance")
+						Set(%AMER_STATUS_StillString = "AMER_STATUS_BalanceStill")
+						Set(%AMER_STATUS_NoLongerString = "AMER_STATUS_BalanceNoLonger")
+						Set(%AMER_STATUS_Variable = "AMER_STATUS_BALANCE_Chance")
+						Set(%AMER_STATUS_UpkeepFunction = "AMER_STATUS_BalanceUpkeep")
+						Set(%AMER_STATUS_UpkeepFunctionSave = "NONE")
+						CallFunction("AMER_STATUS_Upkeep")
+					ENDIF
+				ENDIF
+	
+	
+	
+//========================================================================//
+					//INFECTIOUS FLAME UPKEEP PARAMETERS
+//========================================================================//
+				IF "c1"
+					CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_InfectiousFlame")
+				THEN
+					Set(_StatusesFound, INT:1)
+					IF "c1"
+						IsEqual(%AMER_STATUS_INFECTIOUSFLAME_Source, _Char)
+					THEN
+						Set(%AMER_STATUS_SaveType = BodyBuilding)
+						Set(%AMER_STATUS_ChanceModifier = FLOAT:0)
+						Set(%AMER_STATUS_RemoveEffect = "AMER_STATUS_RemoveInfectiousFlame")
+						Set(%AMER_STATUS_FloatingText = "AMER_STATUS_InfectiousFlame")
+						Set(%AMER_STATUS_StillString = "AMER_STATUS_InfectiousFlameStill")
+						Set(%AMER_STATUS_NoLongerString = "AMER_STATUS_InfectiousFlameNoLonger")
+						Set(%AMER_STATUS_Variable = "AMER_STATUS_INFECTIOUSFLAME_Chance")
+						Set(%AMER_STATUS_UpkeepFunction = "AMER_STATUS_InfectiousFlameUpkeep")
+						Set(%AMER_STATUS_UpkeepFunctionSave = "NONE")
+						CallFunction("AMER_STATUS_Upkeep")
+					ENDIF
+				ENDIF
+	
+	
+	
+//========================================================================//
+					//CURSE OF CUTS UPKEEP PARAMETERS
+//========================================================================//
+				IF "c1"
+					CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_CurseOfCuts")
+				THEN
+					Set(_StatusesFound, INT:1)
+					IF "c1"
+						IsEqual(%AMER_STATUS_CURSEOFCUTS_Source, _Char)
+					THEN
+						Set(%AMER_STATUS_SaveType = Willpower)
+						Set(%AMER_STATUS_ChanceModifier = FLOAT:0)
+						Set(%AMER_STATUS_RemoveEffect = "AMER_STATUS_RemoveCurseOfCuts")
+						Set(%AMER_STATUS_FloatingText = "AMER_STATUS_CurseOfCuts")
+						Set(%AMER_STATUS_StillString = "AMER_STATUS_CurseOfCutsStill")
+						Set(%AMER_STATUS_NoLongerString = "AMER_STATUS_CurseOfCutsNoLonger")
+						Set(%AMER_STATUS_Variable = "AMER_STATUS_CURSEOFCUTS_Chance")
+						Set(%AMER_STATUS_UpkeepFunction = "AMER_STATUS_CurseOfCutsUpkeep")
+						Set(%AMER_STATUS_UpkeepFunctionSave = "NONE")
+						CallFunction("AMER_STATUS_Upkeep")
+					ENDIF
+				ENDIF
+	
+	
+	
+//========================================================================//
+					//ENERVATE STATUS UPKEEP PARAMETERS
+//========================================================================//
+				IF "c1"
+					CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_Enervate")
+				THEN
+					Set(_StatusesFound, INT:1)
+					
+					IF "c1"
+						IsEqual(%AMER_STATUS_ENERVATE_Source, _Char)
+					THEN
+						Set(%AMER_STATUS_SaveType = Willpower)
+						Set(%AMER_STATUS_ChanceModifier = FLOAT:0)
+						Set(%AMER_STATUS_RemoveEffect = "AMER_STATUS_RemoveEnervate")
+						Set(%AMER_STATUS_FloatingText = "AMER_STATUS_Enervate")
+						Set(%AMER_STATUS_StillString = "AMER_STATUS_EnervateStill")
+						Set(%AMER_STATUS_NoLongerString = "AMER_STATUS_EnervateNoLonger")
+						Set(%AMER_STATUS_Variable = "AMER_STATUS_ENERVATE_Chance")
+						Set(%AMER_STATUS_UpkeepFunction = "NONE")
+						Set(%AMER_STATUS_UpkeepFunctionSave = "NONE")
+						CallFunction("AMER_STATUS_Upkeep")
+					ENDIF
+				ENDIF
+			ENDIF
+		
+		
+		
+			//If no statuses were found, don't accept any events to handle
+			//status upkeep until such a time that I am affected by a new one.
+			IF "c1"
+				IsEqual(_StatusesFound, INT:0)
+			THEN
+				SetVar(__Me, "AMER_CheckStatusUpkeep", INT:0)
+			ENDIF
+		//ENDIF
+	ENDIF
+//===============================================//
+//                                               //
+//       S T A T U S   P A R A M E T E R S       //
+//                                               //
+//===============================================//

@@ -1,0 +1,20 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+TriggerRegisterForPlayers(TRIGGER_AMER_ASC_SpeechZone_EnterCourt);
+TriggerRegisterForPlayers(TRIGGER_AMER_ASC_SpeechZone_TheAscension);
+
+DB_AMER_SpeechZones(TRIGGER_AMER_ASC_SpeechZone_EnterCourt, "AMER_ASC_EnterCourt");
+DB_AMER_SpeechZones(TRIGGER_AMER_ASC_SpeechZone_TheAscension, "AMER_ASC_TheAscension");
+KBSECTION
+IF
+CharacterEnteredTrigger(_Char, _Trigger)
+AND
+DB_AMER_SpeechZones(_Trigger, _Text)
+THEN
+TriggerUnregisterForPlayers(_Trigger);
+CharacterDisplayText(_Char, _Text);
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "__Start"

@@ -1,0 +1,152 @@
+//================================================//
+//                                                //
+// P L A Y E R   S U M M O N   B L I N D N E S S  //
+//                                                //
+//     Written by Matteo "Ameranth" T. (2016)     //
+//================================================//
+INIT
+CHARACTER:__Me
+	
+EVENTS
+	
+EVENT PlayerSummonBlindness_OnTurn
+VARS
+	CHARACTER:_Char
+ON
+	OnTurn()
+ACTIONS
+	//Only do any of this stuff if I am owned by a player.
+	IF "c1&c2"
+		CharacterGetOwner(_Char, __Me)
+		CharacterIsPlayer(_Char)
+	THEN
+		StartTimer("AMER_PlayerSummonBlindness_CheckBlind", 1.0, -1)
+		//Display status text if blind on their turn.
+		IF "c1"
+			CharacterHasStatus(__Me, BLIND)
+		THEN
+			StatusText(__Me, "AMER_Blind")
+		ELSE
+			//Solve the bug where a blind character making a summon ends turn
+			//after spending all AP summoning, the summon gets next turn but
+			//everything is still invisible.
+			IterateCharactersInCombat(__Me, "AMER_RemoveSimulatedBlindness")
+		ENDIF
+	ENDIF
+	
+	
+	
+EVENT PlayerSummonBlindness_Die
+ON
+	OnDie(__Me, _, _, _)
+ACTIONS
+	StopTimer("AMER_PlayerSummonBlindness_CheckBlind")
+	
+	
+	
+EVENT PlayerSummonBlindness_TurnEnd
+ON
+	OnTurnEnded()
+ACTIONS
+	StopTimer("AMER_PlayerSummonBlindness_CheckBlind")
+	//Make characters visible again when a blind character passes turn.
+	IF "c1"
+		CharacterHasStatus(__Me, BLIND)
+	THEN
+		IterateCharactersInCombat(__Me, "AMER_RemoveSimulatedBlindness")
+	ENDIF
+	
+	
+	
+//If blindness is removed from the player during her turn, then
+//run the iterator to set characters to visible
+EVENT PlayerSummonBlindness_BlindRemoved
+ON
+	OnCharacterStatusRemoved(__Me, BLIND)
+ACTIONS
+	IF "c1"
+		CharacterIsInActiveTurn(__Me)
+	THEN
+		IterateCharactersInCombat(__Me, "AMER_RemoveSimulatedBlindness")
+	ENDIF
+	
+	
+	
+EVENT CheckBlind
+VARS
+	CHARACTER:_Char
+ON
+	OnTimer("AMER_PlayerSummonBlindness_CheckBlind")
+ACTIONS
+	IF "c1&c2"
+		CharacterIsInActiveTurn(__Me)
+		CharacterHasStatus(__Me, BLIND)
+	THEN
+		IterateCharactersInCombat(__Me, "AMER_SimulateBlindness")
+	ENDIF
+	
+	
+	
+//Iterator which sets characters to be invisible if they are too
+//far away during the blind player's turn. _BlindVision is the
+//maximum "inner distance" allowed between the blind player and
+//another character before they become invisible.
+EVENT SimulateBlindness
+VARS
+//============================//
+	FLOAT:_BlindVision = 1.35
+//============================//
+	CHARACTER:_Char
+	FLOAT:_Distance
+	INT:_InvisibleFromBlind
+ON
+	OnIterateCharacter(_Char, "AMER_SimulateBlindness")
+ACTIONS
+	IF "c1&c2"
+		GetInnerDistance(_Distance, __Me, _Char)
+		IsGreaterThen(_Distance, _BlindVision)
+	THEN
+		IF "c1"
+			IsVisible(_Char)
+		THEN
+			SetVar(_Char, "AMER_InvisibleFromBlind", INT:1)
+			SetVisible(_Char, INT:0)
+		ENDIF
+	ELIF "!c1"
+		IsVisible(_Char)
+	THEN
+		IF "c1&c2"
+			GetVar(_InvisibleFromBlind, _Char, "AMER_InvisibleFromBlind")
+			IsEqual(_InvisibleFromBlind, INT:1)
+		THEN
+			SetVar(_Char, "AMER_InvisibleFromBlind", INT:0)
+			SetVisible(_Char, INT:1)
+		ENDIF
+	ENDIF
+	
+	
+	
+//Iterator that sets characters to be visible.
+EVENT RemoveSimulatedBlindness
+VARS
+	CHARACTER:_Char
+	INT:_InvisibleFromBlind
+ON
+	OnIterateCharacter(_Char, "AMER_RemoveSimulatedBlindness")
+ACTIONS
+	IF "!c1"
+		IsVisible(_Char)
+	THEN
+		IF "c1&c2"
+			GetVar(_InvisibleFromBlind, _Char, "AMER_InvisibleFromBlind")
+			IsEqual(_InvisibleFromBlind, INT:1)
+		THEN
+			SetVar(_Char, "AMER_InvisibleFromBlind", INT:0)
+			SetVisible(_Char, INT:1)
+		ENDIF
+	ENDIF
+//================================================//
+//                                                //
+// P L A Y E R   S U M M O N   B L I N D N E S S  //
+//                                                //
+//================================================//

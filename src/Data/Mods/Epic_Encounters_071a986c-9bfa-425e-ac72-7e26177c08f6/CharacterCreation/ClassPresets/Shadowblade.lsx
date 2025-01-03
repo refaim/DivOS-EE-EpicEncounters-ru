@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<save>
+    <header version="2" time="1387205254" />
+    <version major="1" minor="3" revision="0" build="0" />
+    <region id="CharacterCreationClass">
+        <node id="root">
+            <attribute id="Armour" value="ARM_SourceHunterClothAmor" type="22" />
+			<attribute id="Leggings" value="ARM_Garment_Sourcehunter" type="22" />
+            <attribute id="Boots" value="ARM_SourceHunter_Boots" type="22" />
+            <attribute id="ClassDescription" value="A powerful assassin whose arsenal of both daggers and magic would terrify any enemy, if they ever saw it coming" handle="hcacf5429g0c27g40b4ga41bgf1e46a309d32" type="28" />
+			<attribute id="ClassLongDescription" value="When the Sourcerer went mad, only those who could flee were spared a terrible death. The fleet-footed Shadowblade escaped, but the rest of the village did not. <br><br>As a wandering orphan, thieves, beggars, pirates, and murderers taught the Shadowblade that man was no more than a beast, and the laws of nature were simple: Kill or be killed; eat or go hungry. <br><br>But a survivor among survivors needed an advantage. Posing as the child of nobleman, it was almost easy to gain access to the Academy of the Source Hunters. Here the most elite secrets of magic were offered freely, and the Shadowblade perfected them all.<br><br>By the time the ruse was discovered, it was too late. The academy had a prized pupil, and the Shadowblade had found that hunting Sourcerers satisfied the soul better than picking pockets. Usually." handle="h84a28459g9f0cg4aacgbb71gbf2f2baa67f3" type="28" />
+            <attribute id="ClassName" value="Shadowblade" handle="hbd329bf3g1418g473fg92d6gc5829083e49c" type="28" />
+            <attribute id="ClassType" value="Shadowblade" type="22" />
+            <attribute id="ExtraEquipmentSet" value="Class_Shadowblade" type="22" />
+            <attribute id="Gloves" value="ARM_SourceHunter_Bracers" type="22" />
+            <attribute id="SkillSet" value="Class_Shadowblade" type="22" />
+            <attribute id="Voice" value="0" type="5" />
+			<attribute id="Icon" value="8" type="5" />
+            <children>
+                <node id="AbilityChanges">
+                    <children>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="AirSpecialist" type="23" />
+                            <attribute id="AmountIncreased" value="1" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="Sourcery" type="23" />
+                            <attribute id="AmountIncreased" value="1" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="RogueLore" type="23" />
+                            <attribute id="AmountIncreased" value="1" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="DualWielding" type="23" />
+                            <attribute id="AmountIncreased" value="1" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="Sneaking" type="23" />
+                            <attribute id="AmountIncreased" value="1" type="4" />
+                        </node>
+                    </children>
+                </node>
+                <node id="AttributeChanges">
+                    <children>
+                        <node id="AttributeChange">
+                            <attribute id="AmountIncreased" value="2" type="4" />
+                            <attribute id="Attribute" value="INT" type="23" />
+                        </node>
+                        <node id="AttributeChange">
+                            <attribute id="AmountIncreased" value="2" type="4" />
+                            <attribute id="Attribute" value="SPD" type="23" />
+                        </node>
+                        <node id="AttributeChange">
+                            <attribute id="AmountIncreased" value="1" type="4" />
+                            <attribute id="Attribute" value="DEX" type="23" />
+                        </node>
+                    </children>
+                </node>
+                <node id="TalentsAdded">
+                    <children>
+                        <node id="TalentAdded">
+                            <attribute id="Talent" value="Leech" type="23" />
+                        </node>
+                        <node id="TalentAdded">
+                            <attribute id="Talent" value="RogueLoreDaggerBackStab" type="23" />
+                        </node>
+                    </children>
+                </node>
+            </children>
+        </node>
+    </region>
+</save>

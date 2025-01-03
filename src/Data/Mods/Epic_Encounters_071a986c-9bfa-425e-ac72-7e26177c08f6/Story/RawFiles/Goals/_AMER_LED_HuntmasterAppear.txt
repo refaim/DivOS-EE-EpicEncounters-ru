@@ -1,0 +1,25 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+TriggerRegisterForPlayers(TRIGGER_AMER_LED_REGION_HuntmasterAppear);
+
+CharacterSetOnStage(CHARACTER_AMER_LED_Huntmaster, 0);
+CharacterSetOnStage(CHARACTER_AMER_LED_HuntmasterHorror1, 0);
+CharacterSetOnStage(CHARACTER_AMER_LED_HuntmasterHorror2, 0);
+KBSECTION
+IF
+	CharacterEnteredTrigger(_, TRIGGER_AMER_LED_REGION_HuntmasterAppear)
+THEN
+	CharacterSetOnStage(CHARACTER_AMER_LED_Huntmaster, 1);
+	CharacterSetOnStage(CHARACTER_AMER_LED_HuntmasterHorror1, 1);
+	CharacterSetOnStage(CHARACTER_AMER_LED_HuntmasterHorror2, 1);
+	CharacterPlayAnimation(CHARACTER_AMER_LED_Huntmaster, "attack3", "");
+	CharacterPlayAnimation(CHARACTER_AMER_LED_HuntmasterHorror1, "spawn", "");
+	CharacterPlayAnimation(CHARACTER_AMER_LED_HuntmasterHorror2, "spawn", "");
+	CharacterPlayEffect(CHARACTER_AMER_LED_Huntmaster, "FX_Skills_Rogue_CloackDagger_Land_A");
+	CharacterPlayEffect(CHARACTER_AMER_LED_Huntmaster, "FX_Skills_Water_GrenadeFrost_Impact_A");
+	TriggerUnregisterForPlayers(TRIGGER_AMER_LED_REGION_HuntmasterAppear);
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "__Start"

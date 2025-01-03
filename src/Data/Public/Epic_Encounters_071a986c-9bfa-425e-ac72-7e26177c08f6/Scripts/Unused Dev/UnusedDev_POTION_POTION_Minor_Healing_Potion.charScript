@@ -1,0 +1,56 @@
+#TEMPLATE "_SKILL_Base" : AMER_SKILL_EnemyMinorHealingSalve
+	
+INIT
+CHARACTER:__Me
+// [GLOBAL_VARS]
+EXTERN INT:%AMER_SKILL_EnemyMinorHealingSalve_MaximumUses = 2
+INT:%AMER_SKILL_EnemyMinorHealingSalve_UsesRemaining
+// [~GLOBAL_VARS]
+	
+EVENTS
+	
+// [EVENTS]
+// [~EVENTS]
+	
+// Calculate the priority of the skill
+EVENT CalculateScore_AMER_SKILL_EnemyMinorHealingSalve
+VARS
+	FLOAT:_Vitality
+ON
+	OnFunction("CalculateScore_AMER_SKILL_EnemyMinorHealingSalve")
+ACTIONS
+	// [CALC_ACTIONS_PRE]
+	// [~CALC_ACTIONS_PRE]
+	// [CALC_ACTIONS]
+	IF "c1"
+		IsGreaterThen(%AMER_SKILL_EnemyMinorHealingSalve_UsesRemaining, INT:0)
+	THEN
+		IF "c1&c2&!c3"
+			CharacterGetStat(_Vitality, __Me, Vitality)
+			IsLessThen(_Vitality, 0.8)
+			CharacterHasStatus(__Me, DECAYING_TOUCH)
+		THEN
+			IF "!c1"
+				CharacterHasStatus(__Me, UNHEALABLE)
+			THEN
+				Set(%SkillTargetChar_AMER_SKILL_EnemyMinorHealingSalve, __Me)
+				Add(%ActionScore_AMER_SKILL_EnemyMinorHealingSalve, 20.0)
+				Subtract(%AMER_SKILL_EnemyMinorHealingSalve_UsesRemaining, INT:1)
+			ENDIF
+		ENDIF
+	ENDIF
+	// [~CALC_ACTIONS]
+	
+	
+	
+EVENT RestockOnCombat_AMER_SKILL_EnemyMinorHealingSalve
+ON
+	OnCombatStarted()
+ACTIONS
+	Set(%AMER_SKILL_EnemyMinorHealingSalve_UsesRemaining, %AMER_SKILL_EnemyMinorHealingSalve_MaximumUses)
+	
+	
+	
+	
+	
+	

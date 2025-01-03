@@ -1,0 +1,201 @@
+//===============================================//
+//                                               //
+//     V I S I O N   O F   I G N O R A N C E     //
+//                                               //
+//     Written by Matteo "Ameranth" T. (2016)    //
+//===============================================//
+INIT
+CHARACTER:__Me
+EXTERN TRIGGER:%AMER_VisionOfIgnorance_HidingSpot = null
+EXTERN CHARACTER:%AMER_VisionOfIgnorance_Ignorance = null
+INT:%AMER_VisionOfIgnorance_FaceIgnorance = 0
+INT:%AMER_VisionOfIgnorance_SpeechChoke = 0
+FLOAT:%AMER_VisionOfIgnorance_MaximumVitality
+FLOAT:%AMER_VisionOfIgnorance_DamageBuffer = 0.0
+FLOAT:%AMER_VisionOfIgnorance_IgnoranceMaximumVitality
+	
+EVENTS
+EVENT VisionOfIgnoranceInit
+ON
+	OnInit()
+ACTIONS
+	CharacterSetImmortal(__Me, 1)
+	IF "!c1"
+		CharacterGetStat(%AMER_VisionOfIgnorance_MaximumVitality, __Me, VitalityPoints)
+	THEN
+		Set(%AMER_VisionOfIgnorance_MaximumVitality, 4000.0
+	ENDIF
+	
+	IF "!c1"
+		CharacterHasStatus(__Me, UNHEALABLE)
+	THEN
+		AddStatusInfluence(__Me, UNHEALABLE, 1, "", 0)
+	ENDIF
+	
+	IF "!c1"
+		CharacterHasStatus(__Me, CONSUME, "AMER_CMB_MelchiorFear_Link")
+	THEN
+		AddStatusInfluence(__Me, CONSUME, 1, "AMER_CMB_MelchiorFear_Link", 0)
+	ENDIF
+	
+	
+	
+EVENT VisionOfIgnoranceOnDie
+VARS
+	FLOAT:_Vitality
+ON
+	OnDamage(_, _, _, _)
+ACTIONS
+	//StartTimer("AMER_VisionOfIgnorance_ResCheck", 0.25, -1)
+	IF "c1&c2"
+		CharacterGetStat(_Vitality, __Me, Vitality)
+		IsLessThen(_Vitality, 0.02
+	THEN
+		PlayEffectAt(__Me, "FX_Skills_Air_NetherSwap_Disappear_A")
+		TeleportTo(__Me, %AMER_VisionOfIgnorance_HidingSpot, 1)
+		SetHealth(__Me, 1.0)
+	ENDIF
+	
+	
+	
+EVENT VisionOfIgnoranceResCheck
+ON
+	OnTimer("AMER_VisionOfIgnorance_ResCheck")
+ACTIONS
+	IF "c1"
+		CharacterIsDead(__Me)
+	THEN
+		CharacterResurrect(__Me, 100)
+		//CharacterApplyStatus(__Me, UNHEALABLE, -1, 1)
+		StopTimer("AMER_VisionOfIgnorance_ResCheck")
+	ENDIF
+	
+	
+	
+EVENT VisionOfIgnoranceShackles
+//Normal Shackles of Pain don't stack with one-another, so we
+//need to make our own since multiple visions link to Ignorance.
+VARS
+//===============================//
+	INT:_SupportedStacks = 7
+//===============================//
+	FLOAT:_Damage
+	CHARACTER:_Char
+	INT:_Stacks
+	STRING:_Str
+	FIXEDSTRING:_WhichEffect
+ON
+	OnDamage(_, _Damage, _Char, _)
+ACTIONS
+	IF "c1"
+		IsGreaterThen(_Damage, 0.0)		//Did attack miss or get blocked?
+	THEN
+		IF "c1"
+			IsEqual(_Char, %AMER_VisionOfIgnorance_Ignorance)
+		THEN
+			//If Ignorance attacked a Vision, he needs to gain a stack of his damage buff.
+			IF "c1"
+				GetVar(_Stacks, _Char, "AMER_MelchiorIgnorance_BuffStacks")
+			THEN
+				Print(_Str, "AMER_CMB_MelchiorIgnorance_Buff[1]", _Stacks)
+				Cast(_WhichEffect, _Str)
+				
+				IF "c1"
+					CharacterHasStatus(_Char, CONSUME, _WhichEffect)
+				THEN
+					RemoveStatusInfluence(_Char, CONSUME, 1, _WhichEffect, 0)
+				ENDIF
+				
+				Add(_Stacks, INT:1)
+				
+				IF "c1"
+					IsGreaterThen(_Stacks, _SupportedStacks)
+				THEN
+					Set(_Stacks, _SupportedStacks)
+				ENDIF
+				
+				Print(_Str, "AMER_CMB_MelchiorIgnorance_Buff[1]", _Stacks)
+				Cast(_WhichEffect, _Str)
+				AddStatusInfluence(_Char, CONSUME, 1, _WhichEffect, 0)
+				
+				//Text over Ignorance's head.
+				StatusText(%AMER_VisionOfIgnorance_Ignorance, _WhichEffect)
+				
+				SetVar(_Char, "AMER_MelchiorIgnorance_BuffStacks", _Stacks)
+			ENDIF
+		ENDIF
+		
+		//Use a buffer for damage so numerous simultaneous damage instances
+		//are all handled together, improving performance.
+		Add(%AMER_VisionOfIgnorance_DamageBuffer, _Damage)
+		StopTimer("AMER_VisionOfIgnorance_ShacklesDamageBuffer")
+		StartTimer("AMER_VisionOfIgnorance_ShacklesDamageBuffer", 0.3, 0)
+	ENDIF
+	
+	
+	
+EVENT VisionOfIgnoranceShacklesDamageBuffer
+VARS
+	FLOAT:_Vitality
+	FLOAT:_VitalityPoints
+	FLOAT:_IgnoranceMaximumVitality
+	FLOAT:_IgnoranceVitality
+	INT:_SFXChoke
+ON
+	OnTimer("AMER_VisionOfIgnorance_ShacklesDamageBuffer")
+ACTIONS
+	IF "c1&c2"
+		CharacterGetStat(_Vitality, __Me, Vitality)
+		CharacterGetStat(_IgnoranceVitality, %AMER_VisionOfIgnorance_Ignorance, Vitality)
+	THEN
+		Set(_VitalityPoints, %AMER_VisionOfIgnorance_DamageBuffer)
+		Multiply(%AMER_VisionOfIgnorance_DamageBuffer, %AMER_VisionOfIgnorance_MaximumVitality)
+		Divide(%AMER_VisionOfIgnorance_DamageBuffer, %AMER_VisionOfIgnorance_IgnoranceMaximumVitality)
+		Subtract(_IgnoranceVitality, %AMER_VisionOfIgnorance_DamageBuffer)
+		SetHealth(%AMER_VisionOfIgnorance_Ignorance, _IgnoranceVitality)
+			
+		Set(%AMER_VisionOfIgnorance_DamageBuffer, 0.0)
+		
+		IF "c1"
+			IsEqual(%AMER_VisionOfIgnorance_SpeechChoke, INT:0)
+		THEN
+			DisplayCombatInfoText(__Me, "AMER_CMB_VisionOfIgnorance_DamageShare", 3.0)
+			Set(%AMER_VisionOfIgnorance_SpeechChoke, INT:1)
+		ENDIF
+		
+		IF "c1&c2"
+			GetVar(_SFXChoke, %AMER_VisionOfIgnorance_Ignorance, "AMER_MelchiorIgnorance_LinkSFXChoke")
+			IsEqual(_SFXChoke, INT:0)
+		THEN
+			SetVar(%AMER_VisionOfIgnorance_Ignorance, "AMER_MelchiorIgnorance_LinkSFXChoke", INT:1)
+			StartTimer("AMER_VisionOfIgnorance_ResetSFXChoke", 0.3, 0)
+			CharacterPlayEffect(%AMER_VisionOfIgnorance_Ignorance, "FX_Skills_Warrior_ShacklesOfPain_Impact_A")
+		ENDIF
+	ENDIF
+	
+	
+	
+EVENT VisionOfIgnoranceResetSFXChoke
+ON
+	OnTimer("AMER_VisionOfIgnorance_ResetSFXChoke")
+ACTIONS
+	SetVar(%AMER_VisionOfIgnorance_Ignorance, "AMER_MelchiorIgnorance_LinkSFXChoke", INT:0)
+	
+	
+	
+BEHAVIOUR
+REACTION VisionOfIgnoranceFaceIgnorance, 10000
+USAGE ALL
+CHECK "c1"
+	IsEqual(%AMER_VisionOfIgnorance_FaceIgnorance, INT:1)
+VARS
+ACTIONS
+	CharacterLookAt(%AMER_VisionOfIgnorance_Ignorance)
+	Set(%AMER_VisionOfIgnorance_FaceIgnorance, INT:0)
+	
+	
+//===============================================//
+//                                               //
+//     V I S I O N   O F   I G N O R A N C E     //
+//                                               //
+//===============================================//

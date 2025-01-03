@@ -1,0 +1,103 @@
+#TEMPLATE "_SKILL_Base" : AMER_SKILL_MistyStep
+
+INIT
+CHARACTER:__Me
+FLOAT:%SkillTargetScore_AMER_SKILL_MistyStep=-1000000
+// [GLOBAL_VARS]
+EXTERN INT:%AMER_SKILL_MistyStep_UseAggressively = 0
+EXTERN FLOAT:%AMER_SKILL_MistyStep_MinAggressiveRadius = 5.0
+EXTERN FLOAT:%AMER_SKILL_MistyStep_MinSafeRadius = 3.0
+EXTERN FLOAT:%AMER_SKILL_MistyStep_EnemyWithinToUse = 3.0
+// [~GLOBAL_VARS]
+
+EVENTS
+
+// [EVENTS]
+// [~EVENTS]
+
+// Calculate the priority of the skill
+EVENT CalculateScore_AMER_SKILL_MistyStep
+VARS
+	// [CALC_VARS]
+	FLOAT:_SkillRangeMax
+	FLOAT:_CheckRadius
+	FLOAT:_Distance
+	FLOAT:_AP
+	FLOAT3:_TargetPos
+	CHARACTER:_Char
+	// [~CALC_VARS]
+ON
+	OnFunction("CalculateScore_AMER_SKILL_MistyStep")
+ACTIONS
+	Set(%SkillTargetScore_AMER_SKILL_MistyStep, -1000000)
+
+	// [CALC_ACTIONS_PRE]
+	// [~CALC_ACTIONS_PRE]
+	// [CALC_ACTIONS]
+	IF "c1"
+		IsEqual(%AMER_SKILL_MistyStep_UseAggressively, INT:0)
+	THEN
+		IF "c1&!c2"
+			CharacterGetStat(_AP, __Me, ActionPoints)
+			IsGreaterThen(_AP, 2.0)
+		THEN
+			IF "c1&c2"
+				CharacterGet(_Char, __Me, %AMER_SKILL_MistyStep_EnemyWithinToUse, Lowest, Distance, Enemy)
+				CharacterGetSkillRange(_, _SkillRangeMax, __Me, AMER_SKILL_MistyStep)
+			THEN
+				Set(_CheckRadius, _SkillRangeMax)
+				Add(_CheckRadius, %AMER_SKILL_MistyStep_EnemyWithinToUse)
+				WHILE "!c1"
+					IsLessThen(_CheckRadius, %AMER_SKILL_MistyStep_MinSafeRadius)
+				DO
+					IF "c1"
+						FindPosition(_TargetPos, __Me, _SkillRangeMax, _CheckRadius, __Me, -1, -1, -1, 0)
+					THEN
+						IF "c1&c2"
+							FindValidPosition(_TargetPos, 3.0, __Me)
+							CanSee(__Me, _TargetPos)
+						THEN
+							IF "(!c1&!c2&!c3)|c4"
+								ContainsSurface(_TargetPos, 1.0, Lava)
+								ContainsSurface(_TargetPos, 1.0, Electrified)
+								ContainsSurface(_TargetPos, 1.0, BloodElectrified)
+								CharacterHasStatus(__Me, ETHEREAL_SOLES)
+							THEN
+								Set(%SkillTargetPos_AMER_SKILL_MistyStep, _TargetPos)
+								Add(%ActionScore_AMER_SKILL_MistyStep, 20.0)
+								Set(_CheckRadius, -1.0)	//exit loop
+							ENDIF
+						ENDIF
+					ENDIF
+					Subtract(_CheckRadius, 0.5)
+				ENDWHILE
+			ENDIF
+		ENDIF
+	ELSE
+		//Only Misty Step to whatever the character's target is.
+		IF "c1"
+			CharacterGetEnemy(_Char, __Me)
+		THEN
+			GetPosition(_Char, _TargetPos)
+		    IF "c1&c2&c3&c4&c5"
+				CharacterGetSkillRange(_, _SkillRangeMax, __Me, AMER_SKILL_MistyStep)
+				GetDistance(_Distance, __Me, _Char)
+				IsGreaterThen(_Distance, %AMER_SKILL_MistyStep_MinAggressiveRadius)
+				FindValidPosition(_TargetPos, 3.0, __Me)
+				CanSee(__Me, _TargetPos)
+			THEN
+				IF "(!c1&!c2&!c3)|c4"
+					ContainsSurface(_TargetPos, 1.0, Lava)
+					ContainsSurface(_TargetPos, 1.0, Electrified)
+					ContainsSurface(_TargetPos, 1.0, BloodElectrified)
+					CharacterHasStatus(__Me, ETHEREAL_SOLES)
+				THEN
+					Set(%SkillTargetPos_AMER_SKILL_MistyStep, _TargetPos)
+					Add(%ActionScore_AMER_SKILL_MistyStep, 20.0)
+				ENDIF
+			ENDIF
+		ENDIF
+	ENDIF
+	// [~CALC_ACTIONS]
+	
+	

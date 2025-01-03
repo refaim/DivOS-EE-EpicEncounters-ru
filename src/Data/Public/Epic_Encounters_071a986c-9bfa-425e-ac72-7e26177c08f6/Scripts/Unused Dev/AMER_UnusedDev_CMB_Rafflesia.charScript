@@ -1,0 +1,125 @@
+INIT
+	CHARACTER:__Me
+	INT:%SpawnCD = 1
+	INT:%RaffTotalCounter = 0
+
+//------------------------
+BEHAVIOUR
+REACTION Rafflesia_PlayFlavorText, 1000
+USAGE COMBAT
+ACTIONS
+	CombatLogText(__Me,"CMB_LUC_Rafflesia_CombatStart",0,1)
+	SetPriority("Rafflesia_PlayFlavorText",0)
+	
+	
+	
+REACTION AMER_Rafflesia_SpawnKids, 999
+USAGE COMBAT
+VARS
+	INT:_Handle
+	INT:_Count
+	FLOAT3:_Pos
+	FLOAT:_RandX
+	FLOAT:_RandZ
+	FLOAT:_X
+	FLOAT:_Z
+	CHARACTER:_Spawn
+CHECK "!c1&c2&c3"
+	CharacterHasStatus(__Me,CHARMED)
+	IsGreaterThen(%SpawnCD, 1)
+	IsLessThen(%RaffTotalCounter, 5)
+ACTIONS
+	CharacterPlayLoopEffect(_Handle,__Me,"FX_Skills_WitchCraft_Generic_A_Prepare")
+	CharacterPlayAnimation("cast_self_cast")
+	Set(%SpawnCD, 0)
+	
+	Set(_Count, INT:0)
+	WHILE "c1&c2"
+		IsLessThen(%RaffTotalCounter, INT:5)
+		IsLessThen(_Count, INT:2)
+	DO
+		GetPosition(__Me, _Pos)
+		IF "c1&c2"
+			GetX(_Pos, _X)
+			GetZ(_Pos, _Z)
+		THEN
+			GetRandomBetween(_RandX, -6.0, 6.0)
+			GetRandomBetween(_RandZ, -6.0, 6.0)
+			Add(_X, _RandX)
+			Add(_Z, _RandZ)
+			SetX(_Pos, _X)
+			SetZ(_Pos, _Z)
+		ENDIF
+		
+		
+		IF "c1"
+			FindValidPosition(_Pos, 2.0)
+		THEN
+			SpawnCharacter(_Spawn, AMER_CHAR_RafflesiaSpawn_10fc1955-2432-4b8a-a909-d265ac33a1d2, _Pos, 1)
+			//TeleportTo(_Spawn, _Pos)
+			//PlayLoopEffectAt(%ReusableHandle, _Spawn, "FX_GP_LightPillarPurple_A")
+			Add(%RaffTotalCounter, INT:1)
+			CombatLogText(__Me, "CMB_LUC_Rafflesia_SummonsChild", 0, 1)
+			CharacterPlayEffect(_Spawn, "FX_Creatures_Animals_Zombie_Spawn_A")
+		ENDIF
+		
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+	StopLoopEffect(_Handle)
+INTERRUPT
+	Reset()
+	
+	
+EVENTS
+EVENT OnTurn_GeneralControl
+ON 
+	OnTurn()
+ACTIONS
+	Add(%SpawnCD, INT:1)
+	
+	
+	
+EVENT RaffOnCombatStart
+ON
+	OnCombatStarted()
+ACTIONS
+	Set(%SpawnCD, INT:1)
+	Set(%RaffTotalCounter, INT:0)
+	
+	
+	
+EVENT RaffOnCombatEnd
+ON
+	OnCombatEnded()
+ACTIONS
+	IF "!c1"
+		CharacterIsDead(__Me)
+	THEN
+		IterateCharactersNear(__Me, 30.0, "AMER_RaffRemoveSummons")
+	ENDIF
+	
+	
+	
+EVENT RaffRemoveSummons
+VARS
+	CHARACTER:_Char
+	CHARACTERTEMPLATE:_Root
+ON
+	OnIterateCharacter(_Char, "AMER_RaffRemoveSummons")
+ACTIONS
+	IF "!c1"
+		CharacterIsDead(_Char)
+	THEN
+		IF "c1&c2"
+			CharacterGetTemplate(_Char, _Root)
+			IsEqual(_Root, AMER_CHAR_RafflesiaSpawn_10fc1955-2432-4b8a-a909-d265ac33a1d2)
+		THEN
+			CharacterDestroy(_Char)
+		ENDIF
+	ENDIF
+	
+	
+	
+	
+	

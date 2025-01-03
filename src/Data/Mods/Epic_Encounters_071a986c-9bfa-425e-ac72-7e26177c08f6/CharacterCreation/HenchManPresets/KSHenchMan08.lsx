@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<save>
+    <header version="2" time="1427201041" />
+    <version major="1" minor="3" revision="1" build="3" />
+    <region id="CharacterCreationClass">
+        <node id="root">
+            <attribute id="Armour" value="" type="22" />
+            <attribute id="Boots" value="" type="22" />
+            <attribute id="ClassDescription" value="A young ranger/archer who is looking to see the world" handle="h4ddaec20g9776g431egb12fg6d1ca4b31c50" type="28" />
+            <attribute id="ClassLongDescription" value="Luna is a young ranger who is seeking to experience the world.  She considers herself to be a skilled marksman and can handle a bow skillfully. She is a survivor and has learned that being quiet and light on your feet is an excellent skill.  She is willing to do whatever tasks are set her way in order to assist the adventurers, including carrying more items than  her strength suggests." handle="h81ca47a5g50bbg4693gbbdegcb9bf01261f3" type="28" />
+            <attribute id="ClassName" value="Ranger" handle="h8319675fg4466g4d3fgb8a7g7a5fc50579f4" type="28" />
+            <attribute id="ClassType" value="Ranger" type="22" />
+            <attribute id="ExtraEquipmentSet" value="" type="22" />
+            <attribute id="Gloves" value="" type="22" />
+            <attribute id="Leggings" value="" type="22" />
+            <attribute id="SkillSet" value="" type="22" />
+            <attribute id="Voice" value="0" type="5" />
+            <children>
+                <node id="AbilityChanges">
+                    <children>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="RangerLore" type="23" />
+                            <attribute id="AmountIncreased" value="2" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="Bow" type="23" />
+                            <attribute id="AmountIncreased" value="2" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="Sneaking" type="23" />
+                            <attribute id="AmountIncreased" value="2" type="4" />
+                        </node>
+                    </children>
+                </node>
+                <node id="AttributeChanges">
+                    <children>
+                        <node id="AttributeChange">
+                            <attribute id="AmountIncreased" value="2" type="4" />
+                            <attribute id="Attribute" value="DEX" type="23" />
+                        </node>
+                        <node id="AttributeChange">
+                            <attribute id="AmountIncreased" value="1" type="4" />
+                            <attribute id="Attribute" value="CON" type="23" />
+                        </node>
+                        <node id="AttributeChange">
+                            <attribute id="AmountIncreased" value="1" type="4" />
+                            <attribute id="Attribute" value="SPD" type="23" />
+                        </node>
+                        <node id="AttributeChange">
+                            <attribute id="AmountIncreased" value="3" type="4" />
+                            <attribute id="Attribute" value="PER" type="23" />
+                        </node>
+                    </children>
+                </node>
+                <node id="HenchManData">
+                    <attribute id="HairColor" value="7" type="5" />
+                    <attribute id="HairType" value="4" type="5" />
+                    <attribute id="HeadType" value="7" type="5" />
+                    <attribute id="ID" value="77459391-cd0f-4f45-8dc1-287b1e858381" type="22" />
+                    <attribute id="Icon" value="10" type="5" />
+                    <attribute id="IsMale" value="0" type="19" />
+                    <attribute id="Level" value="5" type="4" />
+                    <attribute id="Name" value="Luna" type="30" />
+                    <attribute id="Race" value="0" type="5" />
+                    <attribute id="SkinColor" value="4" type="5" />
+                    <children>
+                        <node id="Skills">
+                            <attribute id="Object" value="Target_FirstAid" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="Projectile_Ricochet" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="Target_TreatPoisoning" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="Target_Doctor" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="Shout_RangedPrecisionStance" type="22" />
+                        </node>
+                    </children>
+                </node>
+                <node id="TalentsAdded">
+                    <children>
+                        <node id="TalentAdded">
+                            <attribute id="Talent" value="Carry" type="23" />
+                        </node>
+                        <node id="TalentAdded">
+                            <attribute id="Talent" value="LightStep" type="23" />
+                        </node>
+                        <node id="TalentAdded">
+                            <attribute id="Talent" value="RangerLoreArrowRecover" type="23" />
+                        </node>
+                    </children>
+                </node>
+            </children>
+        </node>
+    </region>
+</save>

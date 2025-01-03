@@ -1,0 +1,168 @@
+INIT
+
+	CHARACTER:__Me
+	ITEM:%Totem = LUC_GV_InvisibleTotem_2c6d600e-566c-4a72-a6a4-d972a58d370e
+	EXTERN TRIGGER:%MyPoint = null
+	EXTERN TRIGGER:%MyPointAroundTotem = null
+	EXTERN INT:%AMER_ObeyTotemInterval = 1
+	EXTERN INT:%AMER_ObeyTotemStart = 0
+	INT:%AMER_ObeyTotemCountdown = 0
+	INT:%AMER_EnableDialogHack = 0
+
+BEHAVIOUR
+
+REACTION GoToTotem, 0
+	USAGE PEACE
+	ACTIONS
+		IF "!c1"
+			IsGreaterThen(%AMER_ObeyTotemCountdown, INT:0)
+		THEN
+			CharacterMoveTo(%MyPointAroundTotem,0,1)
+			CharacterLookAt(%Totem)
+		ENDIF
+		ItemEvent(%Totem, "GoblinArrived")
+		
+		SetPriority("GoToTotem", 0)
+		
+REACTION GoToTent, 0
+	USAGE PEACE
+	ACTIONS
+		IF "!c1"
+			IsGreaterThen(%AMER_ObeyTotemCountdown, INT:0)
+		THEN
+			CharacterMoveTo(%MyPoint,0,1)
+			CharacterLookFrom(%MyPoint)
+			Set(%AMER_ObeyTotemCountdown, %AMER_ObeyTotemInterval)
+		ELSE
+			Subtract(%AMER_ObeyTotemCountdown, INT:1)
+		ENDIF
+		SetPriority("Dance", 0)
+		SetPriority("Die", 0)
+		SetPriority("GetDown", 0)
+		SetPriority("GetUp", 0)
+		SetPriority("GoToTent", 0)
+		
+REACTION Dance, 0
+	USAGE PEACE
+	ACTIONS
+		IF "!c1"
+			IsGreaterThen(%AMER_ObeyTotemCountdown, INT:0)
+		THEN
+			CharacterPlayAnimation("Dance_01",0,1)
+		ENDIF
+	INTERRUPT
+		Reset()
+		
+REACTION GetDown, 0
+	USAGE PEACE
+	VARS
+		FLOAT:_Timer
+	ACTIONS
+		IF "!c1"
+			IsGreaterThen(%AMER_ObeyTotemCountdown, INT:0)
+		THEN
+			GetRandomBetween(_Timer, 0, 0.5)
+			Sleep(_Timer)
+			CharacterPlayAnimation("knockdown_fall",0,1)
+			CharacterPlayAnimation("knockdown_loop",0,0)
+			Label("LoopAnim")
+			Goto("LoopAnim")
+		ENDIF
+	INTERRUPT
+		Reset()
+	
+REACTION GetUp, 0
+	USAGE PEACE
+	VARS
+		FLOAT:_Timer
+	ACTIONS
+		IF "!c1"
+			IsGreaterThen(%AMER_ObeyTotemCountdown, INT:0)
+		THEN
+			GetRandomBetween(_Timer, 0, 0.5)
+			Sleep(_Timer)
+			CharacterPlayAnimation("knockdown_getup")
+		ENDIF
+		SetPriority("GetUp", 0)
+	INTERRUPT
+		Reset()
+		
+REACTION Die, 0
+	USAGE PEACE
+	VARS
+		FLOAT:_Timer
+	ACTIONS
+		IF "!c1"
+			IsGreaterThen(%AMER_ObeyTotemCountdown, INT:0)
+		THEN
+			GetRandomBetween(_Timer, 0.2, 1)
+			Sleep(_Timer)
+			CharacterPlayAnimation("die_acid", 0, 1)
+			CharacterSetOffStage()
+		ENDIF
+		
+EVENTS
+
+EVENT TotemGoblinsInit
+ON
+	OnInit()
+ACTIONS
+	Set(%AMER_ObeyTotemCountdown, %AMER_ObeyTotemStart)
+
+EVENT GatherAtTotem
+	ON
+		OnItemEvent(%Totem, "gatherRound")
+	ACTIONS
+		//This hack should get dialogue enabled while they do their stuff.
+		//Exploit story scripting by firing the event that resets their dialogue,
+		//but only respond to it every second catch.
+		StatusText(__Me, "AMER_ChainOne")	//TEST
+		Set(%AMER_EnableDialogHack, INT:1)
+		ItemEvent(ITEM_LUC_GV_InvisibleTotem, "goBackTent")
+		
+		SetPriority("GoToTotem", 1000)
+		
+EVENT GoBackAtSpot
+	ON
+		OnItemEvent(%Totem, "goBackTent")
+	ACTIONS
+		//Only respond to this event every second catch.
+		StatusText(__Me, "AMER_ChainFive")	//TEST
+		IF "!c1"
+			IsGreaterThen(%AMER_EnableDialogHack, INT:0)
+		THEN
+			SetPriority("GoToTent", 10000)
+		ELSE
+			Subtract(%AMER_EnableDialogHack, INT:1)
+		ENDIF
+EVENT Dancing
+	ON
+		OnItemEvent(%Totem, "DanceForMe")
+	ACTIONS
+		SetPriority("Dance", 1000)
+
+EVENT Dying
+	ON
+		OnItemEvent(%Totem, "DieForMe")
+	ACTIONS
+		SetPriority("Die", 1000)
+		
+EVENT GetDown
+	ON
+		OnItemEvent(%Totem, "GetDown")
+	ACTIONS
+		SetPriority("GetDown", 1000)
+		
+EVENT GetUp
+	ON
+		OnItemEvent(%Totem, "GetUp")
+	ACTIONS
+		SetPriority("GetDown", 0)
+		SetPriority("GetUp", 1000)
+
+EVENT Respawn
+	ON
+		OnCharacterEvent(__Me, "Resurected")
+	ACTIONS
+		SetPriority("GoToTent", 10000)
+		SetPriority("Die", 0)

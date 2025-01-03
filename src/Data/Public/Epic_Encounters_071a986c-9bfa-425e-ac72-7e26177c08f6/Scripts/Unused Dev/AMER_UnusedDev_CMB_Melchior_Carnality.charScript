@@ -1,0 +1,268 @@
+//===============================================//
+//                                               //
+//     M E L C H I O R ' S   C A R N A L I T Y   //
+//                                               //
+//     Written by Matteo "Ameranth" T. (2016)    //
+//===============================================//
+INIT
+CHARACTER:__Me
+EXTERN TRIGGER:%AMER_MelchiorCarnality_PlatformCenter = null
+EXTERN TRIGGER:%AMER_MelchiorCarnality_BloodfallProj1 = null
+EXTERN TRIGGER:%AMER_MelchiorCarnality_BloodfallProj2 = null
+EXTERN TRIGGER:%AMER_MelchiorCarnality_BloodfallProj3 = null
+EXTERN TRIGGER:%AMER_MelchiorCarnality_BloodfallProj4 = null
+INT:%AMER_MelchiorCarnality_TurnCount
+INT:%AMER_MelchiorCarnality_Level
+CHARACTER:%AMER_MelchiorCarnality_Target
+	
+EVENTS
+EVENT MelchiorCarnalityInit
+ON
+	OnInit()
+ACTIONS
+	
+	
+	
+EVENT MelchiorCarnalityOnTurn
+ON
+	OnTurn()
+ACTIONS
+	Add(%AMER_MelchiorCarnality_TurnCount, INT:1)
+	SetPriority(MelchiorCarnalityBreak, 10100)
+	SetPriority(MelchiorCarnalitySpawns, 10000)
+	
+	
+	
+EVENT MelchiorCarnalityCombatStarted
+ON
+	OnCombatStarted()
+ACTIONS
+	Set(%AMER_MelchiorCarnality_TurnCount, INT:0)
+	//Get level here so it doesn't need to be done again each
+	//time a fragment is spawned. Need to use a small delay
+	//since story might scale the level.
+	StartTimer("AMER_MelchiorCarnality_GetLevel", 0.5, 0)
+	
+	//Remove any fragment buffs.
+	RemoveStatusInfluence(__Me, CONSUME, 1, "AMER_CMB_MelchiorCruelty_BossBuff1", 0)
+	RemoveStatusInfluence(__Me, CONSUME, 1, "AMER_CMB_MelchiorCruelty_BossBuff2", 0)
+	RemoveStatusInfluence(__Me, CONSUME, 1, "AMER_CMB_MelchiorCruelty_BossBuff3", 0)
+	RemoveStatusInfluence(__Me, CONSUME, 1, "AMER_CMB_MelchiorCruelty_BossBuff4", 0)
+	RemoveStatusInfluence(__Me, CONSUME, 1, "AMER_CMB_MelchiorCruelty_BossBuff5", 0)
+	RemoveStatusInfluence(__Me, CONSUME, 1, "AMER_CMB_MelchiorCruelty_BossBuff6", 0)
+	RemoveStatusInfluence(__Me, CONSUME, 1, "AMER_CMB_MelchiorCruelty_BossBuff7", 0)
+	
+	
+	
+EVENT MelchiorCarnalityCombatEnded
+ON
+	OnCombatEnded()
+ACTIONS
+	IF "!c1"
+		CharacterIsDead(__Me)
+	THEN
+		SetHealth(__Me, 1.0)
+	ENDIF
+	
+	
+	
+EVENT MelchiorCarnalityDie
+ON
+	OnDie(__Me, _, _, _)
+ACTIONS
+	DisplayText(__Me, "AMER_CMB_MelchiorCarnality_Die1", 5.0)
+	
+	
+	
+EVENT MelchiorCarnalityGetLevel
+VARS
+	FLOAT:_SourceLevel
+ON
+	OnTimer("AMER_MelchiorCarnality_GetLevel")
+ACTIONS
+	IF "c1"
+		CharacterGetStat(_SourceLevel, __Me, Level)
+	THEN
+		Cast(%AMER_MelchiorCarnality_Level, _SourceLevel)
+	ELSE
+		Set(%AMER_MelchiorCarnality_Level, INT:24)
+	ENDIF
+	
+	
+	
+EVENT MelchiorCarnalityBreakIterator
+VARS
+//===========================//
+	SKILL:_Projectile = AMER_SCRIPTSKILL_WeaponDamage50
+//===========================//
+	CHARACTER:_Char
+ON
+	OnIterateCharacter(_Char, "AMER_MelchiorCarnality_BreakIterator")
+ACTIONS
+	IF "c1"
+		CharacterIsEnemy(__Me, _Char)
+	THEN
+		IF "!c1"
+			CharacterIsDead(_Char)
+		THEN
+			CharacterPlayEffect(_Char, "FX_Skills_Warrior_CripplingBlow_Cast_A")
+			CharacterPlayEffect(_Char, "FX_Creatures_Skills_Dragon_Astral_LightningBall_Impact_A")
+			SetVar(__Me, "AMER_RemoteEffectSource",	_Char)
+			SetVar(__Me, "AMER_RemoteEffectProjectile", _Projectile)
+			SetVar(__Me, "AMER_RemoteEffectSourceAsTarget", INT:1)
+			CallFunction("AMER_DoRemoteEffect")
+		ENDIF
+	ENDIF
+	
+	
+	
+//===================BEHAVIOR====================//
+BEHAVIOUR
+REACTION MelchiorCarnalityBreak, 0
+USAGE COMBAT
+VARS
+	FLOAT3:_Pos
+	INT:_Handle
+ACTIONS
+	SetVar(__Me, "AMER_TimeoutDetection", INT:-10)	//Casting animations warrant extra time.
+	
+	Sleep(0.7)
+	
+	DisplayCombatInfoText(__Me, "AMER_CMB_MelchiorCarnality_BreakCast", 0.0)
+	DisplayText(__Me, "AMER_BLANK", 0.0)
+	
+	CharacterPlayLoopEffect(_Handle, __Me, "FX_Skills_Warrior_Flurry_Prepare_A")
+	CharacterPlayAnimation("cast_self_start",1,1)
+	CharacterPlayAnimation("cast_self_loop",1,1)
+	CharacterPlayAnimation("cast_self_cast",1,0)
+	
+	Sleep(0.35)
+	
+	StopLoopEffect(_Handle)
+	IterateCharactersInCombat(__Me, "AMER_MelchiorCarnality_BreakIterator")
+	
+	Sleep(1.5)
+	
+	SetPriority(MelchiorCarnalityBreak, 0)
+	
+	
+	
+REACTION MelchiorCarnalitySpawns, 10000
+USAGE COMBAT
+VARS
+//===========================//
+	CHARACTERTEMPLATE:_Root = "AMER_CHAR_Melchior_FragmentOfCruelty_a8b675b3-1e48-41f6-add8-50d40b77f069"
+	INT:_SpawnAmountBase = 3
+	INT:_SpawnAmountMaximum = 8
+	FLOAT:_SpawnGrowthPerTurn = 0.45
+	FLOAT:_SpawnDistance = 15.0
+//===========================//
+	CHARACTER:_Spawn
+	FLOAT:_XMod
+	FLOAT:_ZMod
+	FLOAT:_X
+	FLOAT:_Z
+	FLOAT:_SpawnAmount
+	FLOAT:_RandomAngle
+	FLOAT3:_Pos
+	FLOAT3:_Bloodfall
+	FLOAT3:_Direction
+	FLOAT3:_SpawnAngle
+	TRIGGER:_Point
+	INT:_Rand
+	INT:_Count
+	INT:_Handle
+	STRING:_Str
+	FIXEDSTRING:_Text
+ACTIONS
+	SetVar(__Me, "AMER_TimeoutDetection", INT:-10)	//Casting animations warrant extra time.
+	
+	//Calculate amount of spawns.
+	Set(_SpawnAmount, _SpawnGrowthPerTurn)
+	Multiply(_SpawnAmount, %AMER_MelchiorCarnality_TurnCount)
+	Add(_SpawnAmount, _SpawnAmountBase)
+	//Cast into an int temporarily to round down.
+	Cast(_Count, _SpawnAmount)
+	Cast(_SpawnAmount, _Count)
+	
+	//Don't go over maximum.
+	IF "c1"
+		IsGreaterThen(_SpawnAmount, _SpawnAmountMaximum)
+	THEN
+		Cast(_SpawnAmount, _SpawnAmountMaximum)
+	ENDIF
+	
+	//Short sleep here ensures the cast declaration
+	//isn't lost far up in the combat log.
+	Sleep(0.5)
+	
+	//Casting animations.
+	//CharacterPlayLoopEffect(_Handle, __Me, "FX_Skills_Warrior_Flurry_Prepare_A")
+	//CharacterPlayAnimation("cast_self_start",1,1)
+	//CharacterPlayAnimation("cast_self_loop",1,1)
+	//CharacterPlayAnimation("cast_self_cast",1,0)
+	
+	//What direction is the platform center.
+	GetDirection(__Me, %AMER_MelchiorCarnality_PlatformCenter, _Direction, _)
+	
+	Set(_Count, INT:0)
+	WHILE "c1"
+		IsLessThen(_Count, _SpawnAmount)
+	DO
+		//Calculate a random point within the opposite end of
+		//the platform to spawn at.
+		Set(_SpawnAngle, _Direction)
+		GetRandomBetween(_RandomAngle, -90.0, 90.0)
+		RotateY(_SpawnAngle, _RandomAngle)
+		GetPosition(__Me, _Pos)
+		IF "c1&c2&c3&c4"
+			GetX(_SpawnAngle, _XMod)
+			GetZ(_SpawnAngle, _ZMod)
+			GetX(_Pos, _X)
+			GetZ(_Pos, _Z)
+		THEN
+			//XMod and ZMod are essentially unit circle values for
+			//the random direction. Multiply them with _SpawnDistance
+			//to produce the correct X/Z modifications to facilitate
+			//a movement of _SpawnDistance in the random direction.
+			Multiply(_XMod, _SpawnDistance)
+			Multiply(_ZMod, _SpawnDistance)
+			Add(_X, _XMod)
+			Add(_Z, _ZMod)
+			SetX(_Pos, _X)
+			SetZ(_Pos, _Z)
+			
+			IF "c1"
+				FindValidPosition(_Pos, 10.0)
+			THEN
+		
+				//The projectiles should come from a random bloodfall.
+				GetRandomBetween(_Rand, INT:0, INT:3)
+				GetElement(_Point, _Rand, %AMER_MelchiorCarnality_BloodfallProj1, %AMER_MelchiorCarnality_BloodfallProj2, %AMER_MelchiorCarnality_BloodfallProj3, %AMER_MelchiorCarnality_BloodfallProj4)
+				GetPosition(_Point, _Bloodfall)
+				
+				//Spawn the fragment, fire the animation projectile from the random
+				//bloodfall to the spawn point, let the fragment know who I am.
+				SpawnCharacter(_Spawn, _Root, _Pos, 1, 1, __Me, %AMER_MelchiorCarnality_Level)
+				ShootWorldProjectileAt(AMER_SCRIPTSKILL_PrimordialDummyProj, __Me, _Bloodfall, _Spawn)
+				SetVar(_Spawn, "AMER_MelchiorFragment_Perfection", __Me)
+				
+				//Small wait between spawns for some drama.
+				Sleep(0.2)
+			ENDIF
+		ENDIF
+		
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+	Sleep(1.5)
+	
+	StopLoopEffect(_Handle)
+	SetPriority(MelchiorCarnalitySpawns, 0)
+	
+	
+//===============================================//
+//                                               //
+//     M E L C H I O R ' S   C A R N A L I T Y   //
+//                                               //
+//===============================================//

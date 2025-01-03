@@ -1,0 +1,250 @@
+//===============================================//
+//                                               //
+//     F R A G M E N T   O F   C R U E L T Y     //
+//                                               //
+//     Written by Matteo "Ameranth" T. (2016)    //
+//===============================================//
+INIT
+CHARACTER:__Me
+CHARACTER:%AMER_MelchiorFragment_Perfection = null
+CHARACTER:%AMER_FragmentOfCruelty_BuffTarget = null
+INT:%AMER_FragmentOfCruelty_Combat = 0
+INT:%AMER_FragmentOfCruelty_Handle
+	
+EVENTS
+EVENT FragmentOfCrueltyInit
+ON
+	OnInit()
+ACTIONS
+	CharacterApplyStatus(__Me, ETHEREAL_SOLES, -1, 1)
+	//Delay before playing the effect or the effect may not play correctly.
+	StartTimer("AMER_FragmentOfCruelty_PlayEffectDelay", 0.25, 0)
+	StartTimer("AMER_FragmentOfCruelty_RemoveSpawnEffect", 3.5, 0)
+	
+	
+	
+EVENT FragmentOfCrueltyPlayEffectDelay
+ON
+	OnTimer("AMER_FragmentOfCruelty_PlayEffectDelay")
+ACTIONS
+	CharacterPlayLoopEffect(%AMER_FragmentOfCruelty_Handle, __Me, "FX_Skills_WitchCraft_Summon_Prepare_A")
+	
+	
+	
+EVENT FragmentOfCrueltyRemoveSpawnEffect
+ON
+	OnTimer("AMER_FragmentOfCruelty_RemoveSpawnEffect")
+ACTIONS
+	StopLoopEffect(%AMER_FragmentOfCruelty_Handle)
+	
+	
+	
+EVENT FragmentOfCrueltyCombatEnded
+ON
+	OnCombatEnded()
+ACTIONS
+	IF "!c1"
+		CharacterIsDead(%AMER_MelchiorFragment_Perfection)
+	THEN
+		IF "!c1"
+			CharacterIsDead(__Me)
+		THEN
+			PlayEffectAt(__Me, "FX_Skills_Air_NetherSwap_Disappear_A")
+			CharacterDestroy(__Me)
+		ENDIF
+	ENDIF
+	
+	
+	
+EVENT FragmentOfCrueltyOnTurn
+ON
+	OnTurn()
+ACTIONS
+	StartTimer("AMER_FragmentOfCruelty_AutoDie", 0.1, -1)
+	
+	
+	
+EVENT FragmentOfCrueltyTurnEnded
+ON
+	OnTurnEnded()
+ACTIONS
+	StopTimer("AMER_FragmentOfCruelty_AutoDie")
+	
+	
+	
+EVENT FragmentOfCrueltyDeathBuff
+//Players and Melchior can be buffed, Melchior will always
+//take prescidence and only one character will be buffed.
+VARS
+	CHARACTER:_Char
+ON
+	OnIterateCharacter(_Char, "AMER_FragmentOfCruelty_DeathBuff")
+ACTIONS
+	IF "!c1"
+		CharacterIsDead(_Char)
+	THEN
+		IF "c1"
+			IsEqual(_Char, %AMER_MelchiorFragment_Perfection)
+		THEN
+			Set(%AMER_FragmentOfCruelty_BuffTarget, _Char)
+		ELIF "c1&c2"
+			CharacterIsPlayer(_Char)
+			IsEqual(%AMER_FragmentOfCruelty_BuffTarget, null)
+		THEN
+			Set(%AMER_FragmentOfCruelty_BuffTarget, _Char)
+		ENDIF
+	ENDIF
+	
+	
+	
+EVENT FragmentOfCrueltyDie
+//Apply buff to target near me when I die.
+ON
+	OnDie(__Me, _, _, _)
+ACTIONS
+	PlayEffectAt(__Me, "FX_Skills_Warrior_Rage_Cast_A")
+	Set(%AMER_FragmentOfCruelty_BuffTarget, null)
+	IterateCharactersNear(__Me, 4.0, "AMER_FragmentOfCruelty_DeathBuff")
+	IF "!c1"
+		IsEqual(%AMER_FragmentOfCruelty_BuffTarget, null)
+	THEN
+		//If the target is not Melchior, give the +damage -con buff, it doesn't stack.
+		//If the target was Melchior, update the stacking Cruelty buff.
+		IF "!c1"
+			IsEqual(%AMER_FragmentOfCruelty_BuffTarget, %AMER_MelchiorFragment_Perfection)
+		THEN
+			StatusText(%AMER_FragmentOfCruelty_BuffTarget, "AMER_CMB_MelchiorCarnality_Buff1")
+			IF "c1"
+				CharacterHasStatus(%AMER_FragmentOfCruelty_BuffTarget, CONSUME, AMER_CMB_MelchiorCarnality_Buff1)
+			THEN
+				CharacterConsume(%AMER_FragmentOfCruelty_BuffTarget, AMER_CMB_MelchiorCarnality_Buff2)
+			ELIF "c1"
+				CharacterHasStatus(%AMER_FragmentOfCruelty_BuffTarget, CONSUME, AMER_CMB_MelchiorCarnality_Buff2)
+			THEN
+				CharacterConsume(%AMER_FragmentOfCruelty_BuffTarget, AMER_CMB_MelchiorCarnality_Buff3)
+			ELIF "c1"
+				CharacterHasStatus(%AMER_FragmentOfCruelty_BuffTarget, CONSUME, AMER_CMB_MelchiorCarnality_Buff3)
+			THEN
+				CharacterConsume(%AMER_FragmentOfCruelty_BuffTarget, AMER_CMB_MelchiorCarnality_Buff4)
+			ELIF "c1"
+				CharacterHasStatus(%AMER_FragmentOfCruelty_BuffTarget, CONSUME, AMER_CMB_MelchiorCarnality_Buff4)
+			THEN
+				CharacterConsume(%AMER_FragmentOfCruelty_BuffTarget, AMER_CMB_MelchiorCarnality_Buff5)
+			ELIF "c1"
+				CharacterHasStatus(%AMER_FragmentOfCruelty_BuffTarget, CONSUME, AMER_CMB_MelchiorCarnality_Buff5)
+			THEN
+				CharacterDie(%AMER_FragmentOfCruelty_BuffTarget, Explode)
+			ELSE
+				CharacterConsume(%AMER_FragmentOfCruelty_BuffTarget, AMER_CMB_MelchiorCarnality_Buff1)
+			ENDIF
+		ELSE
+			StatusText(%AMER_MelchiorFragment_Perfection, "AMER_CMB_MelchiorCarnality_BossBuff1")
+			IF "c1"
+				CharacterHasStatus(%AMER_MelchiorFragment_Perfection, CONSUME, "AMER_CMB_MelchiorCarnality_BossBuff1")
+			THEN
+				RemoveStatusInfluence(%AMER_MelchiorFragment_Perfection, CONSUME, 1, "AMER_CMB_MelchiorCarnality_BossBuff1", 0)
+				AddStatusInfluence(%AMER_MelchiorFragment_Perfection, CONSUME, 1, "AMER_CMB_MelchiorCarnality_BossBuff2", 0)
+			ELIF "c1"
+				CharacterHasStatus(%AMER_MelchiorFragment_Perfection, CONSUME, "AMER_CMB_MelchiorCarnality_BossBuff2")
+			THEN
+				RemoveStatusInfluence(%AMER_MelchiorFragment_Perfection, CONSUME, 1, "AMER_CMB_MelchiorCarnality_BossBuff2", 0)
+				AddStatusInfluence(%AMER_MelchiorFragment_Perfection, CONSUME, 1, "AMER_CMB_MelchiorCarnality_BossBuff3", 0)
+			ELIF "c1"
+				CharacterHasStatus(%AMER_MelchiorFragment_Perfection, CONSUME, "AMER_CMB_MelchiorCarnality_BossBuff3")
+			THEN
+				RemoveStatusInfluence(%AMER_MelchiorFragment_Perfection, CONSUME, 1, "AMER_CMB_MelchiorCarnality_BossBuff3", 0)
+				AddStatusInfluence(%AMER_MelchiorFragment_Perfection, CONSUME, 1, "AMER_CMB_MelchiorCarnality_BossBuff4", 0)
+			ELIF "c1"
+				CharacterHasStatus(%AMER_MelchiorFragment_Perfection, CONSUME, "AMER_CMB_MelchiorCarnality_BossBuff4")
+			THEN
+				RemoveStatusInfluence(%AMER_MelchiorFragment_Perfection, CONSUME, 1, "AMER_CMB_MelchiorCarnality_BossBuff4", 0)
+				AddStatusInfluence(%AMER_MelchiorFragment_Perfection, CONSUME, 1, "AMER_CMB_MelchiorCarnality_BossBuff5", 0)
+			ELIF "c1"
+				CharacterHasStatus(%AMER_MelchiorFragment_Perfection, CONSUME, "AMER_CMB_MelchiorCarnality_BossBuff5")
+			THEN
+				RemoveStatusInfluence(%AMER_MelchiorFragment_Perfection, CONSUME, 1, "AMER_CMB_MelchiorCarnality_BossBuff5", 0)
+				AddStatusInfluence(%AMER_MelchiorFragment_Perfection, CONSUME, 1, "AMER_CMB_MelchiorCarnality_BossBuff6", 0)
+			ELIF "c1"
+				CharacterHasStatus(%AMER_MelchiorFragment_Perfection, CONSUME, "AMER_CMB_MelchiorCarnality_BossBuff6")
+			THEN
+				RemoveStatusInfluence(%AMER_MelchiorFragment_Perfection, CONSUME, 1, "AMER_CMB_MelchiorCarnality_BossBuff6", 0)
+				AddStatusInfluence(%AMER_MelchiorFragment_Perfection, CONSUME, 1, "AMER_CMB_MelchiorCarnality_BossBuff7", 0)
+			ELIF "c1"
+				CharacterHasStatus(%AMER_MelchiorFragment_Perfection, CONSUME, "AMER_CMB_MelchiorCarnality_BossBuff7")
+			THEN
+				RemoveStatusInfluence(%AMER_MelchiorFragment_Perfection, CONSUME, 1, "AMER_CMB_MelchiorCarnality_BossBuff7", 0)
+				AddStatusInfluence(%AMER_MelchiorFragment_Perfection, CONSUME, 1, "AMER_CMB_MelchiorCarnality_BossBuff7", 0)
+			ELSE
+				AddStatusInfluence(%AMER_MelchiorFragment_Perfection, CONSUME, 1, "AMER_CMB_MelchiorCarnality_BossBuff1", 0)
+			ENDIF
+		ENDIF
+	ENDIF
+	
+	
+	
+	
+	
+EVENT FragmentOfCrueltyCheckForCharacters
+//During its turn, the fragment automatically dies whenever
+//it comes within a set radius of a player or Melchior.
+VARS
+	CHARACTER:_Char
+ON
+	OnIterateCharacter(_Char, "AMER_FragmentOfCruelty_CheckForCharacters")
+ACTIONS
+	IF "c1|c2"
+		CharacterIsPlayer(_Char)
+		IsEqual(_Char, %AMER_MelchiorFragment_Perfection)
+	THEN
+		IF "!c1"
+			CharacterIsDead(_Char)
+		THEN
+			CharacterDie(__Me, Incinerate)
+		ENDIF
+	ENDIF
+	
+	
+	
+EVENT FragmentOfCrueltyAutoDie
+//Timer to check during my turn if Melchior
+//or a player is close to me.
+ON
+	OnTimer("AMER_FragmentOfCruelty_AutoDie")
+ACTIONS
+	IterateCharactersNear(__Me, 3.0, "AMER_FragmentOfCruelty_CheckForCharacters")
+	
+	
+	
+//===================BEHAVIOR====================//
+BEHAVIOUR
+//Always try to move toward Melchior.
+REACTION FragmentOfCrueltyMoveTowardMelchior, 10000
+USAGE COMBAT
+ACTIONS
+	CharacterMoveTo(%AMER_MelchiorFragment_Perfection, 1)
+	
+	Sleep(2.0)
+	
+	CharacterEndTurn()
+	
+	
+	
+REACTION FragmentOfCrueltyEngageCombat, 20000
+USAGE ALL
+VARS
+	FLOAT3:_Pos
+CHECK "c1"
+	IsEqual(%AMER_FragmentOfCruelty_Combat, INT:0)
+ACTIONS
+	GetPosition(__Me, _Pos)
+	TeleportTo(__Me, %AMER_MelchiorFragment_Perfection, 1)
+	Sleep(0.05)
+	TeleportTo(__Me, _Pos, 1)
+	Set(%AMER_FragmentOfCruelty_Combat, INT:1)
+	
+	
+//===============================================//
+//                                               //
+//     F R A G M E N T   O F   C R U E L T Y     //
+//                                               //
+//===============================================//

@@ -1,0 +1,1602 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<save>
+  <region  id="Markers">
+      <node  id="root">
+          <children>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="CYS_SecretHigh1" type="22"/>
+                <attribute id="MarkerLevel" value="Cyseal" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="CYS_ShovelTreasureMap5Dirt_20ce337a-d949-44be-afb8-13b88cd87827" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Item" type="22"/>
+                <attribute id="MarkerIcon" value="SecretMarker" type="22"/>
+                <attribute id="DisplayText" value="Gerome's Treasure Map V" handle="h73df3ea4g12feg4da8gba86g5d777c3a807c" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="CYS_SecretHigh2" type="22"/>
+                <attribute id="MarkerLevel" value="Cyseal" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="CYS_ShovelTreasureMap6Dirt_43971dcb-acb2-412e-bd98-9860ad9f88a5" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Item" type="22"/>
+                <attribute id="MarkerIcon" value="SecretMarker" type="22"/>
+                <attribute id="DisplayText" value="Gerome's Treasure Map VI" handle="h02215f9egf191g4264g8d8fg15547dece681" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="CYS_SecretMedium1" type="22"/>
+                <attribute id="MarkerLevel" value="Cyseal" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="CYS_ShovelTreasureMap3Dirt_9415845a-e2cd-4a13-a165-c5958782c9a2" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Item" type="22"/>
+                <attribute id="MarkerIcon" value="SecretMarker" type="22"/>
+                <attribute id="DisplayText" value="Gerome's Treasure Map III" handle="haab9cf72gd330g440aga963g350fcfb881c4" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="CYS_SecretMedium2" type="22"/>
+                <attribute id="MarkerLevel" value="Cyseal" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="CYS_ShovelTreasureMap4Dirt_d32eb6c0-ce9f-493f-b55a-8d16415bf0d0" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Item" type="22"/>
+                <attribute id="MarkerIcon" value="SecretMarker" type="22"/>
+                <attribute id="DisplayText" value="Gerome's Treasure Map IV" handle="h450d5121g437cg45dbg8630g208e6367b620" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="CYS_SecretLow1" type="22"/>
+                <attribute id="MarkerLevel" value="Cyseal" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="CYS_ShovelTreasureMap1Dirt_aa9abf9e-3997-4bed-a85f-da8395802e18" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Item" type="22"/>
+                <attribute id="MarkerIcon" value="SecretMarker" type="22"/>
+                <attribute id="DisplayText" value="Gerome's Treasure Map I" handle="h7bb26af3gc889g45dag92aeg2d633bde8866" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="CYS_SecretLow2" type="22"/>
+                <attribute id="MarkerLevel" value="Cyseal" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="CYS_ShovelTreasureMap2Dirt_dba217a9-750e-4fdc-8aae-bb1fbf2aa395" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Item" type="22"/>
+                <attribute id="MarkerIcon" value="SecretMarker" type="22"/>
+                <attribute id="DisplayText" value="Gerome's Treasure Map II" handle="hfcbdb56agb9b0g4eeag871dgfa9a3ce70bf3" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="CYS_Cyseal_Gate_Arhu" type="22"/>
+                <attribute id="MarkerLevel" value="Cyseal" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="CYS_Cyseal_Gate_Arhu_2eb0205d-513c-4981-a7cf-bf4604472628" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Item" type="22"/>
+                <attribute id="MarkerIcon" value="QuestMarker" type="22"/>
+                <attribute id="DisplayText" value="Cyseal Harbour Gate" handle="h488bf340gade0g40efg9e5dg93d8acaa588a" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="CYS_Point_GreavingOrcBrotherShovel" type="22"/>
+                <attribute id="MarkerLevel" value="Cyseal" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="CYS_ShovelGrievingOrcBrotherDirt_7ea650a3-a9ca-4b0f-98c2-ff4f7a19186b" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Item" type="22"/>
+                <attribute id="MarkerIcon" value="QuestMarker" type="22"/>
+                <attribute id="DisplayText" value="Buried Orc" handle="h8a8586ceg51a0g42ccg840bgc1b4910777f9" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="CYS_PrisonGoUpstairs" type="22"/>
+                <attribute id="MarkerLevel" value="Cyseal" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="CYS_PrisonGoUpstairs_8f7048df-01c7-4055-acff-6d8b9b3997c9" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Item" type="22"/>
+                <attribute id="MarkerIcon" value="QuestMarker" type="22"/>
+                <attribute id="DisplayText" value="Arhu's Office" handle="had8fe205gc583g485bg8b0ag1a6aee007e2a" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="05m_Citizen_A_Door_A_Item_001" type="22"/>
+                <attribute id="MarkerLevel" value="Cyseal" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="05m_Citizen_A_Door_A_Item_001_667de883-b2fa-48e9-92d7-3cf3f4dd4156" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Item" type="22"/>
+                <attribute id="MarkerIcon" value="QuestMarker" type="22"/>
+                <attribute id="DisplayText" value="Evelyn's House" handle="h79c5e573ga3dcg4e83gbd45g17a49c2c0804" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="CYS_Evelyn_LabEntrance" type="22"/>
+                <attribute id="MarkerLevel" value="Cyseal" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="CYS_Evelyn_LabEntrance_14716fca-f96a-4bba-8fb6-413ece0b2c56" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Item" type="22"/>
+                <attribute id="MarkerIcon" value="QuestMarker" type="22"/>
+                <attribute id="DisplayText" value="Evelyn's Secret Lair" handle="hfb9cfc2dg80c2g4023gb5abg1490f426256e" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="CYS_Tavern_GoUpstairs" type="22"/>
+                <attribute id="MarkerLevel" value="Cyseal" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="CYS_Tavern_GoUpstairs_ea30857a-1d5d-4590-a026-08c45be85997" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Item" type="22"/>
+                <attribute id="MarkerIcon" value="QuestMarker" type="22"/>
+                <attribute id="DisplayText" value="To Eglandaer's Room" handle="h81edfa0bg6eaeg4e02g9f32g600fbaf98cd1" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="CYS_Aureus" type="22"/>
+                <attribute id="MarkerLevel" value="Cyseal" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="CYS_Aureus_9f31e2c8-6136-4a5f-bcf0-f54f7c6e111f" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Character" type="22"/>
+                <attribute id="MarkerIcon" value="QuestMarker" type="22"/>
+                <attribute id="DisplayText" value="Aureus" handle="h6b03f5e2g127eg4aa1g8c92g94d4d4b24478" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="CYS_Esmeralda" type="22"/>
+                <attribute id="MarkerLevel" value="Cyseal" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="CYS_Esmeralda_e4fe390a-7a1f-48b9-97a8-96a03bf12cbb" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Character" type="22"/>
+                <attribute id="MarkerIcon" value="QuestMarker" type="22"/>
+                <attribute id="DisplayText" value="Esmeralda" handle="hf176e141g97c8g48f8gb6b8g17c8ea02c978" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="CYS_Door_CrimeScene" type="22"/>
+                <attribute id="MarkerLevel" value="Cyseal" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="CYS_Door_CrimeScene_5e023314-9c9e-46d1-b2a0-c805c0e8c13c" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Item" type="22"/>
+                <attribute id="MarkerIcon" value="QuestMarker" type="22"/>
+                <attribute id="DisplayText" value="Crime Scene" handle="h4c09fc47gc29ag43e9g9bb2g1b68765e3ece" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="BlackCoveEntrance" type="22"/>
+                <attribute id="MarkerLevel" value="Cyseal" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="NAT_CaveEntrance_Skull_A_000_71e6b448-1085-4e89-a08a-a63dcaff60bf" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Item" type="22"/>
+                <attribute id="MarkerIcon" value="QuestMarker" type="22"/>
+                <attribute id="DisplayText" value="Strange Cave" handle="hf96d72b4g7644g4b69g91b3g94c4850ea1a5" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="CYS_Church" type="22"/>
+                <attribute id="MarkerLevel" value="Cyseal" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="CYS_REGION_Church_d63eb4f9-6e49-476e-9fe1-0bdf7865934e" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="QuestMarker" type="22"/>
+                <attribute id="DisplayText" value="Abandoned Church" handle="hc91c63c7gf6e6g4844g9112gd7a4c8de169a" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="CYS_Graveyard" type="22"/>
+                <attribute id="MarkerLevel" value="Cyseal" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="CYS_GraveyardEnter_a14f9515-eb94-41c0-83b0-b73090472f0b" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="QuestMarker" type="22"/>
+                <attribute id="DisplayText" value="Graveyard" handle="ha25356efgb90eg45f9ga9d3gee28fc037b8b" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="CYS_ToLuculla" type="22"/>
+                <attribute id="MarkerLevel" value="Cyseal" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="Hum_Bridge_J_004_2f575e50-f4df-4789-a6c7-662fb545c7a9" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Item" type="22"/>
+                <attribute id="MarkerIcon" value="QuestMarker" type="22"/>
+                <attribute id="DisplayText" value="Road to Luculla Forest" handle="h91230f26g157dg431eg8b8cg6e3686f02ee4" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="CYS_TutDungeon" type="22"/>
+                <attribute id="MarkerLevel" value="Cyseal" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="Quest_WER_GateToCult_898613fa-2da2-488d-a085-95e220fb5f0f" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Item" type="22"/>
+                <attribute id="MarkerIcon" value="QuestMarker" type="22"/>
+                <attribute id="DisplayText" value="Abandonned Temple" handle="h905ddc10ge3aag4473g9673gbf54df1e51e4" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="LUC_MineEntrance" type="22"/>
+                <attribute id="MarkerLevel" value="LucullaForest" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="LUC_MineEntrance_144216e1-6224-4454-b386-0f2c7d0c33d5" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Item" type="22"/>
+                <attribute id="MarkerIcon" value="QuestMarker" type="22"/>
+                <attribute id="DisplayText" value="Mine Entrance" handle="h4062d70cga9d6g4d75g9194gcef65ac1a3c7" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="LUC_MineEntrance2" type="22"/>
+                <attribute id="MarkerLevel" value="LucullaForest" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="LUC_MineMirror_Fixed_0bfefbcf-011c-4f1c-8eb3-cc47376fd6fb" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Item" type="22"/>
+                <attribute id="MarkerIcon" value="QuestMarker" type="22"/>
+                <attribute id="DisplayText" value="Portal to the Mines" handle="h9bfe8964gb9f6g4d71gb393gbf02146621f2" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="LUC_WitchCabin" type="22"/>
+                <attribute id="MarkerLevel" value="LucullaForest" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="LUC_REGION_WitchCabin_33d516a3-9ef6-42a9-bdba-2857e7d699ee" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="QuestMarker" type="22"/>
+                <attribute id="DisplayText" value="Witch's Cabin" handle="h780ed947g8eb5g4dc7gb0e8g7066c947ad63" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="LUC_BlackGate" type="22"/>
+                <attribute id="MarkerLevel" value="LucullaForest" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="LUC_BG_BloodStone_809edc06-0759-49ba-a472-db450066f79b" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Item" type="22"/>
+                <attribute id="MarkerIcon" value="QuestMarker" type="22"/>
+                <attribute id="DisplayText" value="Black Gate" handle="h47292b97g9badg4357gbea9gaa39e32a3afe" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="LUC_Silverglen" type="22"/>
+                <attribute id="MarkerLevel" value="LucullaForest" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="LUC_XP_Silverglen_05ecba51-99ef-4792-a083-c657b68e802c" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="QuestMarker" type="22"/>
+                <attribute id="DisplayText" value="Silverglen" handle="h53bee2dfg5974g4b9ag9c37g58b4fea8968d" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="LUC_ImmaculatePriest" type="22"/>
+                <attribute id="MarkerLevel" value="LucullaForest" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="LUC_Loic_d9ded0c7-c2c1-411b-a18e-eabee511acbe" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Character" type="22"/>
+                <attribute id="MarkerIcon" value="QuestMarker" type="22"/>
+                <attribute id="DisplayText" value="Immaculate Priest" handle="hece8d00cg2a71g4a9fg8dccgd976065fe9e2" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="LUC_SacredStone" type="22"/>
+                <attribute id="MarkerLevel" value="LucullaForest" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="LUC_IV_Point_LoicAloneInVillage_2cfe4949-9d20-436c-95bc-c736c653e884" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="QuestMarker" type="22"/>
+                <attribute id="DisplayText" value="Sacred Stone" handle="h882e55b8g283cg4700ga70egfbd2199c0eb3" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="LUC_ChapelBasement" type="22"/>
+                <attribute id="MarkerLevel" value="LucullaForest" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="05m_HouseFarm_A_Hatch_A_Item_003_f4f773f9-d7f6-4466-ad28-08da93d9d96b" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Item" type="22"/>
+                <attribute id="MarkerIcon" value="QuestMarker" type="22"/>
+                <attribute id="DisplayText" value="Chapel Basement" handle="hd6e1e437g4e34g4172g9a3cgb8e2d2690c4c" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="HIB_Boreas" type="22"/>
+                <attribute id="MarkerLevel" value="ThePrisonGardenOfStoneKing" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="HIB_KingBoreas_52fa7fac-bcfa-4efa-892e-ee4359acb657" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Character" type="22"/>
+                <attribute id="MarkerIcon" value="QuestMarker" type="22"/>
+                <attribute id="DisplayText" value="King Boreas" handle="hc91d32c3g44b7g4273g8566g8daa81888b66" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="HIB_Forge" type="22"/>
+                <attribute id="MarkerLevel" value="ThePrisonGardenOfStoneKing" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="HIB_ElementalForge_f1e71e51-4b28-4866-b375-189c9a973626" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Item" type="22"/>
+                <attribute id="MarkerIcon" value="QuestMarker" type="22"/>
+                <attribute id="DisplayText" value="Elemental Forge" handle="hfb10b404g3fdeg45acg896bg1ddb2abe6b69" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="HOM_Weaver" type="22"/>
+                <attribute id="MarkerLevel" value="Homestead" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="HOM_Weaver_50079ace-007b-41b6-8d91-b969a1ccee09" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Character" type="22"/>
+                <attribute id="MarkerIcon" value="QuestMarker" type="22"/>
+                <attribute id="DisplayText" value="The Weaver of Time" handle="h1c7e8828g8cc9g4441g9984g2747c0520900" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="HOM_3rdGuardian" type="22"/>
+                <attribute id="MarkerLevel" value="Homestead" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="HOM_ThirdGuardianGrave_c11855b6-28b3-4f6f-97fc-ed024c63ea9b" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Item" type="22"/>
+                <attribute id="MarkerIcon" value="QuestMarker" type="22"/>
+                <attribute id="DisplayText" value="Ancient Tomb" handle="hc1b4bfd5g8f7ag452ag87a4g5e905f767b7e" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="DAF_Ratcatcher" type="22"/>
+                <attribute id="MarkerLevel" value="DarkForest" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="DAF_Ratcatcher_7bf6bfca-c0d6-4f65-92a6-595290dcc8ce" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Character" type="22"/>
+                <attribute id="MarkerIcon" value="QuestMarker" type="22"/>
+                <attribute id="DisplayText" value="Ratcatcher" handle="ha6bd320cg564cg4b7dg9a14g0a327569fa19" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="DAF_Ratking" type="22"/>
+                <attribute id="MarkerLevel" value="DarkForest" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="DAF_RatPalace_0827e825-ba0f-40d8-b7ab-e0076895df6f" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Item" type="22"/>
+                <attribute id="MarkerIcon" value="QuestMarker" type="22"/>
+                <attribute id="DisplayText" value="Rat King Hideout" handle="h28b6e5c6g18c8g47b3g9dd9gba38a9c01f82" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="DAF_Prison" type="22"/>
+                <attribute id="MarkerLevel" value="DarkForest" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="DAF_DoorVillageWarehouseHatch_06269e70-901d-4e6b-af58-082d399abba0" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Item" type="22"/>
+                <attribute id="MarkerIcon" value="QuestMarker" type="22"/>
+                <attribute id="DisplayText" value="Prison" handle="h910a69b9g671fg4f70g907bg0a36e8a3fa9f" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="DAF_Beehive" type="22"/>
+                <attribute id="MarkerLevel" value="DarkForest" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="DAF_BeehiveWithKey_1bed46b4-629b-453b-9fc9-7ce21cb59c82" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Item" type="22"/>
+                <attribute id="MarkerIcon" value="QuestMarker" type="22"/>
+                <attribute id="DisplayText" value="Hidden Key" handle="h51a5d947gadbdg40dcgbffagdfc342238ecf" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="DAF_ZandalorPortal" type="22"/>
+                <attribute id="MarkerLevel" value="DarkForest" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="DAF_DruidPortal_Cellar_fc349105-60a5-45a0-ace0-bd6a5ae892ff" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Item" type="22"/>
+                <attribute id="MarkerIcon" value="QuestMarker" type="22"/>
+                <attribute id="DisplayText" value="Portal to Zandalor's House" handle="hf85e2e99gadeeg4eabg8992g87ce60f8698d" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="DAF_ZandalorsHouse" type="22"/>
+                <attribute id="MarkerLevel" value="DarkForest" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="DAF_DruidTrap_3d696716-ab99-4eeb-be5e-02f187214f97" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="QuestMarker" type="22"/>
+                <attribute id="DisplayText" value="Zandalor's House" handle="h7bcb9b34gd856g4027g8528gc010bf15ec2d" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="DAF_Raalzen" type="22"/>
+                <attribute id="MarkerLevel" value="DarkForest" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="DAF_ImmaFort_DemonBoss_09c7e568-2eb5-4655-98b2-9d13e3a9d591" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Character" type="22"/>
+                <attribute id="MarkerIcon" value="QuestMarker" type="22"/>
+                <attribute id="DisplayText" value="Raalzen Ax'aroth" handle="h2840baabg9f1fg47afg96f6g0aff7be2e690" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="DFD_DD_Bridge" type="22"/>
+                <attribute id="MarkerLevel" value="DAF_Druid_Dungeon" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="DAF_Druid_Drawbridge_3ac6f687-342b-4ae1-b364-543f2605bc59" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Item" type="22"/>
+                <attribute id="MarkerIcon" value="QuestMarker" type="22"/>
+                <attribute id="DisplayText" value="Bridge" handle="hbcca3dc4ga838g4dfagbb14g2a6bce3ee42d" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="DFD_DD_Switch" type="22"/>
+                <attribute id="MarkerLevel" value="DAF_Druid_Dungeon" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="DAF_Druid_Drawbridge_Skull_45189919-daa7-48b2-9f4f-fd9e418a78d5" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Item" type="22"/>
+                <attribute id="MarkerIcon" value="QuestMarker" type="22"/>
+                <attribute id="DisplayText" value="Skull Switch" handle="heb373398g7daag400cgb937gf329a7d4f65d" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="LUC_SecretLow1" type="22"/>
+                <attribute id="MarkerLevel" value="LucullaForest" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="LUC_ShovelFortune1Dirt_e2fc8ec4-9929-49bb-8e87-d5ac0e18901f" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Item" type="22"/>
+                <attribute id="MarkerIcon" value="SecretMarker" type="22"/>
+                <attribute id="DisplayText" value="Madam Loenestra's Treasure Hint I" handle="hd26034bbgb039g4b7agaddag684d1f234c28" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="LUC_SecretLow2" type="22"/>
+                <attribute id="MarkerLevel" value="LucullaForest" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="LUC_ShovelFortune2Dirt_feb07472-d985-4a30-a541-d61ad7520145" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Item" type="22"/>
+                <attribute id="MarkerIcon" value="SecretMarker" type="22"/>
+                <attribute id="DisplayText" value="Madam Loenestra's Treasure Hint II" handle="h19fbf155g92ecg4aebgb598g5b74016bb00b" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="LUC_SecretMedium1" type="22"/>
+                <attribute id="MarkerLevel" value="LucullaForest" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="LUC_ShovelFortune3Dirt_cce546cf-5c1f-4a13-b68c-ccf471fff62a" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Item" type="22"/>
+                <attribute id="MarkerIcon" value="SecretMarker" type="22"/>
+                <attribute id="DisplayText" value="Madam Loenestra's Treasure Hint III" handle="h536b9328g4557g41cbga1ceg8a2722e87efb" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="LUC_SecretMedium2" type="22"/>
+                <attribute id="MarkerLevel" value="LucullaForest" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="LUC_ShovelFortune4Dirt_d78ccba5-ea5b-444d-a544-41f368ad8f9d" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Item" type="22"/>
+                <attribute id="MarkerIcon" value="SecretMarker" type="22"/>
+                <attribute id="DisplayText" value="Madam Loenestra's Treasure Hint IV" handle="h375da57aga166g4799gaf95gac2790cbe53e" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="LUC_SecretHigh1" type="22"/>
+                <attribute id="MarkerLevel" value="LucullaForest" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="LUC_ShovelFortune5Dirt_ee88dd5e-586d-49e2-8836-6d06121adfbf" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Item" type="22"/>
+                <attribute id="MarkerIcon" value="SecretMarker" type="22"/>
+                <attribute id="DisplayText" value="Madam Loenestra's Treasure Hint V" handle="h4520f708g079dg4e46g8b5eg352c343dd2d6" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="LUC_SecretHigh2" type="22"/>
+                <attribute id="MarkerLevel" value="LucullaForest" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="LUC_ShovelFortune6Dirt_972e77a4-7281-445a-988c-04705a9f188d" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Item" type="22"/>
+                <attribute id="MarkerIcon" value="SecretMarker" type="22"/>
+                <attribute id="DisplayText" value="Madam Loenestra's Treasure Hint VI" handle="he7dd2f5cga01cg4506g9a39g83b003cf11c6" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="LUC_MendiusStash" type="22"/>
+                <attribute id="MarkerLevel" value="LucullaForest" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="LUC_ShovelMendiusDirt_6f9b62b2-5240-4cd1-a4ab-2d678d8f2047" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Item" type="22"/>
+                <attribute id="MarkerIcon" value="SecretMarker" type="22"/>
+                <attribute id="DisplayText" value="Mendius' Final Stash" handle="h5419043bg0f78g4a77gb6f9g9b7d6338d6b6" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="LUC_MaradinoTreasure1" type="22"/>
+                <attribute id="MarkerLevel" value="DarkForest" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="DAF_ShovelMaradino1Dirt_88eb2700-42b8-4de1-8e3d-9e6151ff9062" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Item" type="22"/>
+                <attribute id="MarkerIcon" value="SecretMarker" type="22"/>
+                <attribute id="DisplayText" value="Maradino First Treasure" handle="h5c0c3aa5g67ceg44dfg8f4fgaa758f28b9d3" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="LUC_MaradinoTreasure2" type="22"/>
+                <attribute id="MarkerLevel" value="DarkForest" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="DAF_ShovelMaradino2Dirt_3ad00e33-9806-4bc2-96cb-52fd56787ee0" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Item" type="22"/>
+                <attribute id="MarkerIcon" value="SecretMarker" type="22"/>
+                <attribute id="DisplayText" value="Maradino Second Treasure" handle="hb4457d01g1f10g4e01gac17gc979b3ea9a4c" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="LUC_MaradinoTreasure3" type="22"/>
+                <attribute id="MarkerLevel" value="DarkForest" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="DAF_ShovelMaradino3Dirt_070601f2-e014-4d9c-aba8-ba321eb22f32" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Item" type="22"/>
+                <attribute id="MarkerIcon" value="SecretMarker" type="22"/>
+                <attribute id="DisplayText" value="Maradino Third Treasure" handle="h3d328fbcg1350g4dc9g8d7cg01d2c5bf2dd0" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="LUC_DoreenSecret" type="22"/>
+                <attribute id="MarkerLevel" value="DarkForest" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="DAF_ShovelDoreenSecretDirt_3561be2a-5db8-43c9-b858-d40ccb9d941a" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Item" type="22"/>
+                <attribute id="MarkerIcon" value="SecretMarker" type="22"/>
+                <attribute id="DisplayText" value="Doreen's Secret" handle="h6bc3775cg9a1dg4e98gb59bgaec679a1e5a7" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="CYS_SecretBlackCoveStone" type="22"/>
+                <attribute id="MarkerLevel" value="CYS_BlackCove" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="CYS_PontiusChest_319924e9-2016-420b-96ac-cfb571d327ed" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Item" type="22"/>
+                <attribute id="MarkerIcon" value="SecretMarker" type="22"/>
+                <attribute id="DisplayText" value="Secret of the Black Cove Pirates" handle="h324dfe5fgfde2g4abfg9a4agddeae1a78e02" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="LUC_SecretMaradinoStone" type="22"/>
+                <attribute id="MarkerLevel" value="LucullaForest" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="LUC_ImpMaster_BloodStone_8c77580c-a63b-44cf-be57-3601f9315401" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Item" type="22"/>
+                <attribute id="MarkerIcon" value="SecretMarker" type="22"/>
+                <attribute id="DisplayText" value="Maradino's Prize" handle="h55e01cf2gcca7g40d9gad8bg8a246ff7c792" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="LUC_SecretCathedral" type="22"/>
+                <attribute id="MarkerLevel" value="LucullaForest" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="LUC_IC_StarStone3_2e91664f-07a5-401e-945a-8230d63a5842" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Item" type="22"/>
+                <attribute id="MarkerIcon" value="SecretMarker" type="22"/>
+                <attribute id="DisplayText" value="The Nested Library" handle="h3e2b3fafg59a4g4869gb7a2g6d47247b734c" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="HIB_SecretIronMaidenStone" type="22"/>
+                <attribute id="MarkerLevel" value="ThePrisonGardenOfStoneKing" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="HIB_IronMaiden_24623cfb-9247-4a1e-8e88-52d141d7ad83" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Item" type="22"/>
+                <attribute id="MarkerIcon" value="SecretMarker" type="22"/>
+                <attribute id="DisplayText" value="The Iron Maiden" handle="h8f6099d1gf461g45b1g8f79g0452a1df3aaf" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="HIB_SecretBoreasTreaure" type="22"/>
+                <attribute id="MarkerLevel" value="ThePrisonGardenOfStoneKing" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="HIB_BoreasStarStone_b1f193c8-67a3-4593-8e0a-935b89a51639" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Item" type="22"/>
+                <attribute id="MarkerIcon" value="SecretMarker" type="22"/>
+                <attribute id="DisplayText" value="The Treasures of the Winter King" handle="h8d44c9b0gec9dg4fa5g85a8ge1b7dac612cd" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="CYS_PoisonDart" type="22"/>
+                <attribute id="MarkerLevel" value="Cyseal" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="CYS_PoisonDartPoint_dfd72362-bbce-44ff-87ae-145a3a936c02" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="SecretMarker" type="22"/>
+                <attribute id="DisplayText" value="The Legend of the Lighthouse" handle="h178ff09bgab4eg4c01ga0b8g4c8af69120af" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="CYS_Flare" type="22"/>
+                <attribute id="MarkerLevel" value="Cyseal" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="CYS_FlareSecretPoint_b2c3510a-38b9-46a0-a607-e37bf27f8f00" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="SecretMarker" type="22"/>
+                <attribute id="DisplayText" value="The Dark King's Knowledge" handle="ha6ba0e0eg0a48g4c1cgbd9bgb9a6ec7516c1" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="CYS_Multishot" type="22"/>
+                <attribute id="MarkerLevel" value="Cyseal" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="CYS_Multishot_4d3e55b0-f6a4-4d93-9e87-ae5628840de4" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="SecretMarker" type="22"/>
+                <attribute id="DisplayText" value="The Cultist's Secret" handle="h18f86d56gb902g43eegb0a5gc3608507ce28" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="CYS_Whirlwind" type="22"/>
+                <attribute id="MarkerLevel" value="Cyseal" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="CYS_Whirlwind_b1ca4962-8b0d-4147-a201-9e72f34316d1" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="SecretMarker" type="22"/>
+                <attribute id="DisplayText" value="Knowledge of the Dead" handle="hc4c708cbg3acbg4ef7g8bc6g1c7e40bf65be" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="CYS_Undead" type="22"/>
+                <attribute id="MarkerLevel" value="Cyseal" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="CYS_CreateUndead_bb83d259-e728-4081-8a3a-5940a6d26e16" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="SecretMarker" type="22"/>
+                <attribute id="DisplayText" value="Forgotten Legends" handle="h32e786e2gb22eg4920ga8f6g45debc7143a3" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="CYS_BC_EyeGouge" type="22"/>
+                <attribute id="MarkerLevel" value="CYS_BlackCove" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="CYS_BC_EyeGouge_df768096-525b-4153-ac8e-3ade556a04ad" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="SecretMarker" type="22"/>
+                <attribute id="DisplayText" value="Plundered loot" handle="h90c502a8gef29g4338gaa9fgeef3f59b5c7d" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="LUC_BlitzBolt" type="22"/>
+                <attribute id="MarkerLevel" value="LucullaForest" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="LUC_BLitzBolt_d3f9c204-d9ad-4578-8bcc-cb62ed33f0e9" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="SecretMarker" type="22"/>
+                <attribute id="DisplayText" value="A Secret Grimoire" handle="h6aa0e563g9957g490fg9fc1g3e15d1e53a00" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="LUC_Wolf" type="22"/>
+                <attribute id="MarkerLevel" value="LucullaForest" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="LUC_Wolf_2716b7ef-fd12-47c9-bca4-119c01556e76" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="SecretMarker" type="22"/>
+                <attribute id="DisplayText" value="What the Witch Knew" handle="h13119133gcea0g424ag8effgf9768d09d1fb" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="DFD_KT_Fear" type="22"/>
+                <attribute id="MarkerLevel" value="DAF_King_Tomb" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="DFD_KT_Fear_95e564ef-0d4d-4cd3-8f4f-5c71143fdd8f" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="SecretMarker" type="22"/>
+                <attribute id="DisplayText" value="Forbidden Knowledge" handle="h40aa6115g1af0g43bbg8730gc3b6aee9e371" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="HIB_IceWall" type="22"/>
+                <attribute id="MarkerLevel" value="ThePrisonGardenOfStoneKing" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="HIB_IceWall_90a1e5ab-f1fd-4307-907f-ab1b272acc50" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="SecretMarker" type="22"/>
+                <attribute id="DisplayText" value="Snow and Ice" handle="h0fd9ed1bg7dfbg4d7egb230g45e5d1ed2eba" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="DFD_Druid_Invulnerability" type="22"/>
+                <attribute id="MarkerLevel" value="DAF_Druid_Dungeon" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="DFD_Druid_Invulnerability_c64ac0cf-a0f1-47e7-9329-e684fdb73056" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="SecretMarker" type="22"/>
+                <attribute id="DisplayText" value="Sealed Secrets" handle="hd7cc86e0g43c3g47b7g9a7cg5c7b99b002a9" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="CYS_BC_SecretKey" type="22"/>
+                <attribute id="MarkerLevel" value="CYS_BlackCove" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="CYS_BC_SecretKey_6e9ac592-cc5e-445e-90ef-7e563dc1b8bb" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="SecretMarker" type="22"/>
+                <attribute id="DisplayText" value="The Pirate's Key" handle="hf8919d32ge0bag4d20gbf6dgf8d8dc140ce0" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="LUC_WitchDirt" type="22"/>
+                <attribute id="MarkerLevel" value="LucullaForest" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="LUC_ShovelWitchHut_a93182f1-7180-46a2-8729-a2e1090790b9" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="SecretMarker" type="22"/>
+                <attribute id="DisplayText" value="Buried Treasure" handle="hc13100e9gcf16g4aa1gbd36g4bca548ea35c" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="LUC_JumpChest" type="22"/>
+                <attribute id="MarkerLevel" value="LucullaForest" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="LUC_JumpChest_398f8c77-2d47-4466-bf4f-033bb303cbd2" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="SecretMarker" type="22"/>
+                <attribute id="DisplayText" value="A Secluded Secret" handle="hd3c88425g8167g4f8dgb00dg5b133a2791b5" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="LUC_Maradino" type="22"/>
+                <attribute id="MarkerLevel" value="LucullaForest" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="PUZ_Rock_Common_Big_F_001_b2efe3d9-cd14-4ce2-8b60-27257edcb4d1" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Item" type="22"/>
+                <attribute id="MarkerIcon" value="SecretMarker" type="22"/>
+                <attribute id="DisplayText" value="The Lair of the Mysterious Wizard" handle="h517520a7gab04g4be8ga459g610c8340154e" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="LUC_SacredStoneChest" type="22"/>
+                <attribute id="MarkerLevel" value="LucullaForest" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="COR_Mix_Pile_A_000_29d461c5-749a-4e46-a252-6cff25775928" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Item" type="22"/>
+                <attribute id="MarkerIcon" value="SecretMarker" type="22"/>
+                <attribute id="DisplayText" value="The Bloodied Chest" handle="hb49e7ca5g27b7g4a6cgb789g856c9bdc2a0c" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="HIB_ShamanChest" type="22"/>
+                <attribute id="MarkerLevel" value="ThePrisonGardenOfStoneKing" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="HIB_ShamanChest_7d7f4729-cecc-46ae-a76b-6a9e96d7e5f3" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="SecretMarker" type="22"/>
+                <attribute id="DisplayText" value="The Frozen Chest" handle="h3a036860g3e24g48deg9043g5410cde5d7fa" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="HOM_MagicalScroll1" type="22"/>
+                <attribute id="MarkerLevel" value="DarkForest" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="DAF_ShovelMagicalUnlock_79a6408f-445b-430a-9e99-3fd7f8c772d0" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="SecretMarker" type="22"/>
+                <attribute id="DisplayText" value="One Magical Scroll" handle="hf53fd129gfb4fg4189g93ebg7882a5f44dd7" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="HOM_MagicalScroll2" type="22"/>
+                <attribute id="MarkerLevel" value="DAF_Druid_Dungeon" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="DFD_Druid_ShovelMagicalUnlock_578aac5c-4579-4ea9-9ba5-eaa3cba5b694" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="SecretMarker" type="22"/>
+                <attribute id="DisplayText" value="One enchanted scroll" handle="h85d7d19dgc9f7g430cgb5deg652af4de05a7" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="HOM_MagicalScroll3" type="22"/>
+                <attribute id="MarkerLevel" value="LUC_Mines" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="LUC_M_ShovelMagicalUnlock_0f78c538-0543-4fd1-80a2-127370c0415d" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="SecretMarker" type="22"/>
+                <attribute id="DisplayText" value="One shimmering scroll" handle="h47ea8181g523eg450fg8acdgd0b24fe01447" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_Thelyron" type="22"/>
+                <attribute id="MarkerLevel" value="Cyseal" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="CYS_REGION_Thelyron_c1231ce6-d21e-433a-aecb-5b872a9c530f" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Thelyron's Clinic" handle="h469218dbg649ag4681g9670gc621a54badb7" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_Evelyn" type="22"/>
+                <attribute id="MarkerLevel" value="Cyseal" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="CYS_REGION_Evelyn_e6732a53-db07-4644-9784-0304675d4258" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Evelyn's House" handle="h79c5e573ga3dcg4e83gbd45g17a49c2c0804" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_Abandoned_House" type="22"/>
+                <attribute id="MarkerLevel" value="Cyseal" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="CYS_REGION_Abandoned_House_ffd6d4f6-84aa-4588-9d52-1cc3c389e1b3" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Abandoned House" handle="h5ac90327g32e1g46f9ga7e0g2ad98860eceb" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_Mortician_0" type="22"/>
+                <attribute id="MarkerLevel" value="Cyseal" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="CYS_REGION_Mortician_0_6d10f679-6051-4dc8-9946-5e7637b49f64" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Mortician's Shop" handle="h471c055ag9ad0g4c5eg86afg58484f6eab0c" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_Mortician_1" type="22"/>
+                <attribute id="MarkerLevel" value="Cyseal" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="CYS_REGION_Mortician_1_51fae303-7a33-40e3-a852-8365f18f03a1" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Mortician's Living Quarters" handle="he8a5a21fg3838g45bega93cgf83d4401c090" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_Inn_0" type="22"/>
+                <attribute id="MarkerLevel" value="Cyseal" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="CYS_REGION_Inn_0_9442461f-538a-4c7e-a1e9-bfdf4b223a96" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="The King Crab Tavern" handle="h7e9e359fgce30g4461ga008gd2ca61adf69c" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_Inn_Cellar" type="22"/>
+                <attribute id="MarkerLevel" value="Cyseal" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="CYS_REGION_Inn_Cellar_979ae596-a63a-42ac-92c2-64dae4200e79" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="The King Crab Tavern - Cellar" handle="hd94efb04g3f13g4fdeg862fg3599e50d6bb2" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_Inn_1" type="22"/>
+                <attribute id="MarkerLevel" value="Cyseal" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="CYS_REGION_Inn_1_cd6a0073-12c0-4c87-92cf-e0d8a7ba7bba" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="The King Crab Tavern - Upper Floor" handle="h1029fb89g403dg41d9gba2bgb9ec5f50f6cc" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_Esmeralda_1" type="22"/>
+                <attribute id="MarkerLevel" value="Cyseal" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="CYS_REGION_Esmeralda_1_14fafc37-9195-4615-879a-78f60bf8d897" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Jake and Esmeralda's House - Upper Floor" handle="h84c2bb8agc60cg4326g9ed6g4e21469c170f" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_Esmeralda_Shop" type="22"/>
+                <attribute id="MarkerLevel" value="Cyseal" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="CYS_REGION_Esmeralda_Shop_ffa14ddb-fef2-4514-930c-f665ae494f77" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Esmeralda's Shop" handle="h2a2b4212ga892g4e3cg91degca51aa106215" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_Esmeralda_Living" type="22"/>
+                <attribute id="MarkerLevel" value="Cyseal" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="CYS_REGION_Esmeralda_Living_29ee5b3a-c817-4513-a59f-ebf001a4590f" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Jake and Esmeralda's House - Living Quarters" handle="he56b5f9dg195cg49deg81a4gadddc39e036e" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_Esmeralda_Cellar" type="22"/>
+                <attribute id="MarkerLevel" value="Cyseal" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="CYS_REGION_Esmeralda_Cellar_aa14bdb9-c6c9-4086-91dc-19c26b0340c8" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Jake and Esmeralda's House - Cellar" handle="ha99ffa97g7017g4a71ga0d6g6d7a86240be8" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_Esmeralda_Secret" type="22"/>
+                <attribute id="MarkerLevel" value="Cyseal" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="CYS_REGION_Esmeralda_Secret_6e172e1b-eac4-417b-9048-7ced890d4ad6" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Hidden Room" handle="h2f72472bg587ag419egb045g6907c6b0d963" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_Lighthouse_0" type="22"/>
+                <attribute id="MarkerLevel" value="Cyseal" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="CYS_REGION_Lighthouse_0_899dbec2-3147-4444-9ae4-b18cb24fed14" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Lighthouse" handle="hfd954e83g81b0g4885ga09dgc9df77a7e718" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_Lighthouse_Cellar" type="22"/>
+                <attribute id="MarkerLevel" value="Cyseal" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="CYS_REGION_Lighthouse_Cellar_25d23e30-6a02-4ea3-9bcc-f627940d2857" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Lighthouse Cellar" handle="h9db58d87gb388g490cga45bg40be9b40d557" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_Townhall_Office" type="22"/>
+                <attribute id="MarkerLevel" value="Cyseal" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="CYS_REGION_Townhall_Office_690ef242-44d5-45a9-ac9e-333e2879cf5a" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Town Hall - Mayor Cecil's Office" handle="hff40e491g1262g4dc6ga694g4f06def3e482" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_Townhall_Living" type="22"/>
+                <attribute id="MarkerLevel" value="Cyseal" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="CYS_REGION_Townhall_Living_6654f7af-b543-4508-a29c-1a1c13d781a0" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Town Hall - Living Quarters" handle="h696b48acg9cbeg4057g9518g99a04fc00064" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_Townhall_Bathroom" type="22"/>
+                <attribute id="MarkerLevel" value="Cyseal" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="CYS_REGION_Townhall_Bathroom_6118dcd7-7b50-4890-8f93-97692c4aad86" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Town Hall - Bathroom" handle="h689a24c7gadbcg47e9g901bg928efcf81105" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_Townhall_1" type="22"/>
+                <attribute id="MarkerLevel" value="Cyseal" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="CYS_REGION_Townhall_1_d1ce9f67-bcde-49c0-a3e8-95d29bc78824" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Town Hall - Upper Floor" handle="h83668349ge9e0g4e22g920fg5ed62ceb95a3" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_Cook_0" type="22"/>
+                <attribute id="MarkerLevel" value="Cyseal" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="CYS_REGION_Cook_0_77d9de6b-f625-4aec-817d-c6a62964a816" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Cook's House" handle="h34907a02gf8fcg4d20g933fg22b451c8756a" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_Cook_Cellar" type="22"/>
+                <attribute id="MarkerLevel" value="Cyseal" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="CYS_REGION_Cook_Cellar_d6a2561f-421b-4dca-a5b2-74aa795c777b" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Cook's House - Cellar" handle="h0d384975g12c5g4bb3gb093g1e8beaa81536" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_Cook_1" type="22"/>
+                <attribute id="MarkerLevel" value="Cyseal" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="CYS_REGION_Cook_1_2e635a13-b86e-4141-a32b-73ba45034840" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Cook's House - Upper Floor" handle="hf8459f24gab86g4133gafc7g6069c564d591" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_Barracks_Prison" type="22"/>
+                <attribute id="MarkerLevel" value="Cyseal" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="CYS_PrisonHatch_9e1f4a03-932b-4878-9b24-e292a3be71ef" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Item" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Legion Headquarters - Prison" handle="h561032bfga894g4996gbc2fg6f78472a7e17" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_Barracks_0" type="22"/>
+                <attribute id="MarkerLevel" value="Cyseal" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="CYS_REGION_Barracks_0_65f9eed4-aa97-4008-a257-ab16b4323ec5" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Legion Headquarters" handle="h00d91480gee0eg42deg9531gd77a62ab1a2e" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_Barracks_Arhu" type="22"/>
+                <attribute id="MarkerLevel" value="Cyseal" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="CYS_PrisonGoUpstairs_8f7048df-01c7-4055-acff-6d8b9b3997c9" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Item" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Legion Headquarters - Arhu's Study" handle="h793b1899ge9c2g4492g92eagb769d07801ba" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_Barracks_Aureus" type="22"/>
+                <attribute id="MarkerLevel" value="Cyseal" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="CYS_REGION_Barracks_Aureus_a86ca381-6282-4ad7-b199-5e896ab71ae8" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Legion Headquarters - Aureus' Office" handle="h6d44bf3eg8a7ag4c9ag865bg013c106fff39" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_Archeologist_Cellar" type="22"/>
+                <attribute id="MarkerLevel" value="Cyseal" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="CYS_REGION_Archeologist_Cellar_478d7b0d-0193-41ee-b936-10a32b46f3db" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Abandoned Basement" handle="ha20a2e93gbdb1g45e1gb18cg0f59e511c0d5" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_Hidden_Crypt" type="22"/>
+                <attribute id="MarkerLevel" value="Cyseal" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="CYS_REGION_Hidden_Crypt_5a56779b-9725-44dc-aab7-5e9330fb07b3" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Hidden Crypt" handle="he9576dfcg222bg4223g9844ga879e53a623b" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_Church" type="22"/>
+                <attribute id="MarkerLevel" value="Cyseal" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="CYS_REGION_Church_d63eb4f9-6e49-476e-9fe1-0bdf7865934e" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Abandoned Church" handle="hc91c63c7gf6e6g4844g9112gd7a4c8de169a" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_Undertaker" type="22"/>
+                <attribute id="MarkerLevel" value="Cyseal" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="CYS_REGION_Undertaker_572b5b07-b610-483f-89ec-e0cdc39c8706" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Undertaker's Hut" handle="h7246d4cag3102g48efg8535g8c99c0f9a118" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_Tunnel" type="22"/>
+                <attribute id="MarkerLevel" value="Cyseal" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="CYS_REGION_Tunnel_74918b14-5d92-4d7a-b736-ccb194b78b54" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Tunnel" handle="h5a345ca9g0b3eg4bafgbc23g379548681856" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_Braccus" type="22"/>
+                <attribute id="MarkerLevel" value="Cyseal" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="CYS_REGION_Braccus_2871cb07-edc3-4a35-9fcf-1b438cf7f5be" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Subterranean Tomb" handle="he9638d1fg54c1g4f51ga1a2g5f70e4d354d6" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_Bellegar" type="22"/>
+                <attribute id="MarkerLevel" value="Cyseal" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="CYS_REGION_Bellegar_f29133ff-947a-4289-8153-491ef7ff3e0a" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Wizard's Prison" handle="hcd2af5e0gbad3g4497g8e50g80bc67711775" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_Jake_Dungeon" type="22"/>
+                <attribute id="MarkerLevel" value="Cyseal" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="CYS_REGION_Jake_Dungeon_2abb55f5-d410-4b40-9e31-210916f9353c" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Evelyn's Hideout" handle="hff3d8162g9256g4affg889agcc00e173c7e7" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_Warehouse" type="22"/>
+                <attribute id="MarkerLevel" value="Cyseal" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="CYS_REGION_Warehouse_5e6c2c16-6343-454a-8656-e495786086ff" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Harbour Warehouse" handle="hd8d4d365gd752g4063gb032g9353f1ac71c6" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_DeadGardens_01" type="22"/>
+                <attribute id="MarkerLevel" value="Cyseal" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="CYS_REGION_SkeletonGarden_01_622fc7bf-0b09-4a63-848d-116c5dd2016c" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Withered Gardens" handle="ha2ec576agd553g44e5ga0d6g8a57ec1054f5" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_DeadGardens_02" type="22"/>
+                <attribute id="MarkerLevel" value="Cyseal" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="CYS_REGION_SkeletonGarden_02_8b1cef31-7ec7-4cbe-a743-de2b5e36ac4e" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Withered Gardens" handle="ha2ec576agd553g44e5ga0d6g8a57ec1054f5" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="LUC_ImmaculateTrials" type="22"/>
+                <attribute id="MarkerLevel" value="LucullaForest" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="LUC_TempleHatch_72defef8-b9fe-4357-8387-b3d00ccbd43a" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Item" type="22"/>
+                <attribute id="MarkerIcon" value="QuestMarker" type="22"/>
+                <attribute id="DisplayText" value="Immaculate Trial Dungeon Entrance" handle="hbad4b51fg7862g4388gabaeg48c6e07be201" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_ImmaculateChapel" type="22"/>
+                <attribute id="MarkerLevel" value="LucullaForest" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="LUC_REGION_ImmaculateChapel_1076ca4f-70d0-4d6e-a331-2ee580f024a5" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Immaculate Chapel" handle="h8ee78243g54fdg47a7gb7f4g4b24af38ba2f" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_Nadia_0" type="22"/>
+                <attribute id="MarkerLevel" value="LucullaForest" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="LUC_REGION_Nadia_0_da40acfb-2799-43f1-94d0-c5e8c4af7538" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Nadia's Shop" handle="h0e800978g2997g485fg8f58g6a3ff7fa56bd" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_Nadia_Cellar" type="22"/>
+                <attribute id="MarkerLevel" value="LucullaForest" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="LUC_REGION_Nadia_Cellar_3e6850b1-19e6-46ed-ba22-b291bfc2ca7c" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Nadia's Shop - Cellar" handle="hdd427608g0aa2g4c0egaf6bg9528c8d34068" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_Smithee" type="22"/>
+                <attribute id="MarkerLevel" value="LucullaForest" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="LUC_REGION_Smithee_d314b8e1-f08b-4936-96c3-1a9f23c3ba96" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Smithy" handle="hdf3eb1fag9a55g4322gbd3ege0e33094dc88" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_SmithyUpstairs" type="22"/>
+                <attribute id="MarkerLevel" value="LucullaForest" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="LUC_REGION_SmithyUpstair_6b59a3f6-1377-49ee-b3ea-64708937fe59" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Tenebrium Smith's Shop - Upper Floor" handle="h4b6662d9g8f39g4aafgbe17g5be748069ac3" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_Tavern_0" type="22"/>
+                <attribute id="MarkerLevel" value="LucullaForest" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="LUC_REGION_Tavern_0_c05d6d9f-b53e-44df-b3b8-bac0ac5f577d" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Pickaxe Tavern" handle="he1459c46g85cag4073g91cbg1eb586197add" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_Overseer" type="22"/>
+                <attribute id="MarkerLevel" value="LucullaForest" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="LUC_REGION_Overseer_8b137db9-544b-48e6-b61b-0e49fc3953e1" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Mine Overseer's Office" handle="hdcab0803ga885g44fcgb599g3591bf98ee7d" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_Immaculate_Trials" type="22"/>
+                <attribute id="MarkerLevel" value="LucullaForest" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="LUC_REGION_Immaculate_Trials_64d9036c-0c4c-4091-891d-4a9885ec8537" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Immaculate Trial Dungeon" handle="hea2eaae0ge951g4d48gbd7bg862f116ca11b" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_WitchCabin" type="22"/>
+                <attribute id="MarkerLevel" value="LucullaForest" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="LUC_REGION_WitchCabin_33d516a3-9ef6-42a9-bdba-2857e7d699ee" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Witch's Cabin" handle="h780ed947g8eb5g4dc7gb0e8g7066c947ad63" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_Brothel" type="22"/>
+                <attribute id="MarkerLevel" value="LucullaForest" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="LUC_REGION_Brothel_12ac712c-eee3-4a35-95ac-e7b96e3d455e" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Brothel" handle="h4b3ffdf7g684cg453fg9f9dg41ffb2578dd4" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_MaradinosLair" type="22"/>
+                <attribute id="MarkerLevel" value="LucullaForest" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="LUC_REGION_MaradinosLair_4ccbdc60-d479-4818-8b18-b0462ca7b399" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Hidden Lair" handle="h2201c274gae9fg4c34g8e7eg3f7335129f6f" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_ImmaculateCathedral" type="22"/>
+                <attribute id="MarkerLevel" value="LucullaForest" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="LUC_REGION_ImmaculateCathedral_0022f3b6-aca8-4f6d-bb8c-1834cdbb1049" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Immaculate Cathedral" handle="h0d812bfcgdfb6g41c8g8fb3g176235ab25de" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_LeandraHQ" type="22"/>
+                <attribute id="MarkerLevel" value="LucullaForest" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="RegionTrigger_LeandraHQ_173281ab-cf0e-4015-821f-2e87824d83a4" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Leandra's Headquarters" handle="haa652509g6710g4051gb41ag145e1ebc19ac" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_TrollCave" type="22"/>
+                <attribute id="MarkerLevel" value="LucullaForest" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="LUC_REGION_TrollCave_383e5acc-bfc5-4320-888e-ccf028187cd9" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Troll Cave" handle="h04c0548egaedfg43c2g9667g8c6299e90f90" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_UndergroundPassage1" type="22"/>
+                <attribute id="MarkerLevel" value="LucullaForest" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="LUC_REGION_UndergroundPassage1_b995e551-c9cc-498d-9281-e1ffd8aa8fc2" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Underground Passage" handle="h09ff28fag08f5g4234g91b6g1baee8f8ebe9" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_UndergroundPassage2" type="22"/>
+                <attribute id="MarkerLevel" value="LucullaForest" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="LUC_REGION_UndergroundPassage2_cc788acb-0cba-43b2-a1c1-62c6eae7179d" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Underground Passage" handle="h09ff28fag08f5g4234g91b6g1baee8f8ebe9" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_WitchesGrotto" type="22"/>
+                <attribute id="MarkerLevel" value="LucullaForest" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="LUC_REGION_WitchesGrotto_8aad3ca7-a2a2-4abd-aef7-35c13a619e45" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Witch's Grotto" handle="h115ddedaga06eg4c0dg8ee3gbaa551b16a30" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_BlackrockSmith" type="22"/>
+                <attribute id="MarkerLevel" value="LucullaForest" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="LUC_REGION_BlackrockSmith_6d7c4bac-a7e1-44fc-a164-ae20c1db8d79" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Tenebrium Smith's Shop" handle="h78dc4c43g69ffg4d99g9142gb78134417ea9" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_ImmaculateAcademy" type="22"/>
+                <attribute id="MarkerLevel" value="LucullaForest" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="LUC_REGION_ImmaculateAcademy_8e345965-0fc4-454c-afa4-3c3ec3a8043d" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Immaculate Academy" handle="h64334153g5a61g4c40gaadag2082295f8868" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_ImmaculatePrison" type="22"/>
+                <attribute id="MarkerLevel" value="LucullaForest" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="LUC_REGION_ImmaculatePrison_0ff452b1-9ab8-4991-8248-a59f2518bc79" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Immaculate Prison" handle="h8abde201gc537g42f2g8d7eg8fe3e29e0d3a" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_GeomancersShop" type="22"/>
+                <attribute id="MarkerLevel" value="LucullaForest" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="LUC_REGION_GeomancersShop_af6b0816-6aa3-4484-89fc-43378d33b715" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Geomancer's Shop" handle="h1a491c31ga174g4459ga5e4gb8dc9191a7bf" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_TotemCave" type="22"/>
+                <attribute id="MarkerLevel" value="LucullaForest" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="LUC_REGION_TotemCave_21bd34f3-9a7e-4b37-a419-f48d17aa650d" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Totem Cave" handle="h9448b00dga064g498cg9d9eg963e48b9af93" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="LUC_TKCaveEntry" type="22"/>
+                <attribute id="MarkerLevel" value="LucullaForest" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="LUC_TK_FakeEntrance_cfe87b9d-ccbf-40c2-b8f5-728246dfb277" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Item" type="22"/>
+                <attribute id="MarkerIcon" value="QuestMarker" type="22"/>
+                <attribute id="DisplayText" value="Troll Cave Entrance" handle="h9d762c16gc668g44eag9a86g75cbcb88dd13" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_HOM_Air" type="22"/>
+                <attribute id="MarkerLevel" value="Homestead" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="HOM_TeleportToAir_Unvisited_c799fec6-07bc-40db-a175-7131e2059988" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Item" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Hall of Winds" handle="h08af3945g41c6g48fagaa1fg375cb71a1524" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_HOM_Armoury" type="22"/>
+                <attribute id="MarkerLevel" value="Homestead" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="HOM_TeleportToArmoury_Unvisited_944f1a99-a094-45a7-8353-564a743761b9" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Item" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Armoury" handle="h5453af92g34a4g4e3cgbed2g45fa7da65ea9" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_HOM_Chapel" type="22"/>
+                <attribute id="MarkerLevel" value="Homestead" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="HOM_TeleportToChapel_Unvisited_cb62f70c-ef01-4545-ab70-dafa9402a27a" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Item" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Chapel" handle="he8e2595cg59d2g461dga4b0g006483bd302d" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_HOM_Earth" type="22"/>
+                <attribute id="MarkerLevel" value="Homestead" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="HOM_TeleportToEarth_Unvisited_fbba95e3-bf81-405a-b040-a854a063397c" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Item" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Hall of Stone" handle="ha793d571g381dg41d4gbf0eg914c90aa195b" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_HOM_Fire" type="22"/>
+                <attribute id="MarkerLevel" value="Homestead" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="HOM_TeleportToFireRoom_Unvisited_a2ea856b-ad9c-4a9e-b9af-775df3eaf036" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Item" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Hall of Flames" handle="he5ea5573g4ce8g4fbegb061gdc3aaac290ac" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_HOM_HallOfHeroes" type="22"/>
+                <attribute id="MarkerLevel" value="Homestead" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="HOM_TeleportToHallOfHeroes_Unvisited_d27b1e37-8201-4a28-a89c-d6e268a54d34" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Item" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Hall of Heroes" handle="h71b2f344g397cg4af1g9b9cg210c3dcf5507" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_HOM_Ice" type="22"/>
+                <attribute id="MarkerLevel" value="Homestead" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="HOM_TeleportToIceRoom_Unvisited_1ff5f432-20e0-4865-8305-585a953b6c08" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Item" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Hall of Frost" handle="hebb614d9g4fd9g4dbcga6b0ge0db995b9020" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_HOM_Mephisto" type="22"/>
+                <attribute id="MarkerLevel" value="Homestead" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="HOM_TeleportToMephisto_Unvisited_f60f4bbd-35cc-472b-ad53-110baefe3b08" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Item" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Hall of Darkness" handle="h0f023008g6cf4g498aga304g7a87c213eb30" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_HOM_Observatory" type="22"/>
+                <attribute id="MarkerLevel" value="Homestead" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="HOM_TeleportToObservatory_785b761d-4074-4aba-933a-f0fe6c483fe4" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Item" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Observatory" handle="h092e795ag17d2g47ddgaeb0g84b9788be6dd" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_HOM_TellerOfSecrets" type="22"/>
+                <attribute id="MarkerLevel" value="Homestead" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="HOM_TeleportToTellerOfSecrets_Unvisited_7248133d-9a7c-44ec-91ed-a64565ceb327" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Item" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Hall of Secrets" handle="h078a92bcgdec2g47d5ga8aeg13397d2ea64b" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_HOM_Trader" type="22"/>
+                <attribute id="MarkerLevel" value="Homestead" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="HOM_TeleportToTrader_Unvisited_eb8a505b-a3a8-4dd7-9251-bd39375a96b0" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Item" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Trader's Emporium" handle="hc97aa2d8gacddg4bd6g82abgf377129a0257" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_HOM_Warehouse" type="22"/>
+                <attribute id="MarkerLevel" value="Homestead" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="HOM_TeleportToWarehouse_Unvisited_84e02a42-62ad-4a08-9512-b10054453073" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Item" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Inner Chamber" handle="hf0d5a454g1108g4a52g9801g31acea44d379" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_HOM_MainHall" type="22"/>
+                <attribute id="MarkerLevel" value="Homestead" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="HOM_MainHallTrigger_ee14cc04-b54b-4d77-a83b-d5d64c29b208" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Homestead Hall" handle="h955e751bg241cg4d10gbe26g5ea0077c5193" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="HIB_PrisonHatch" type="22"/>
+                <attribute id="MarkerLevel" value="ThePrisonGardenOfStoneKing" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="HIB_ShovelPrisonHatchDirt_c44fb926-4c30-43fe-a091-6d52c50c2782" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Item" type="22"/>
+                <attribute id="MarkerIcon" value="QuestMarker" type="22"/>
+                <attribute id="DisplayText" value="Prison Hatch" handle="h634e62d0gd703g4f7dga56bg5a01d7799377" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="HIB_CastleGate" type="22"/>
+                <attribute id="MarkerLevel" value="ThePrisonGardenOfStoneKing" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="HIB_CastleGate1_e121d6ad-2227-4147-a50d-8ba997698390" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Item" type="22"/>
+                <attribute id="MarkerIcon" value="QuestMarker" type="22"/>
+                <attribute id="DisplayText" value="Castle Gate" handle="h1661c78egf15ag4279ga05eg072dc040738a" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_HOM_Eden" type="22"/>
+                <attribute id="MarkerLevel" value="Homestead" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="HOM_REGION_Eden_3e3bd77c-e3bc-4d74-8fb7-a26119b3a0e0" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="First Garden" handle="h109147a1g773fg45b1gb816gdb68c88dff7a" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="DAF_SecretEntranceGrutilda" type="22"/>
+                <attribute id="MarkerLevel" value="DarkForest" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="DAF_SecretEntranceGrutilda_b976053d-96b7-4ce0-95a6-b4a3370e1b8f" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Item" type="22"/>
+                <attribute id="MarkerIcon" value="QuestMarker" type="22"/>
+                <attribute id="DisplayText" value="Grutilda's Secret Cellar" handle="h311e4f96gfcfdg47d2ga4e2gcfe180d32af2" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_DAF_Tunnel" type="22"/>
+                <attribute id="MarkerLevel" value="DarkForest" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="DAF_REGION_Tunnel_ddd556ee-ca00-439b-a6b4-4ba289aa0f78" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Forlorn Tunnel" handle="ha06e4fbbg2cebg4872gae05g442892344b72" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_Druid_0" type="22"/>
+                <attribute id="MarkerLevel" value="DarkForest" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="DAF_REGION_Druid_0_a99a1084-7a42-4168-8468-041198f045e3" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Wizard's House" handle="h64811fcfg8005g4c21gb829g8278deea1950" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_Druid_1" type="22"/>
+                <attribute id="MarkerLevel" value="DarkForest" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="DAF_REGION_Druid_1_a1224c26-b2e0-4a05-b553-19dbfbd91c13" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Wizard's House- Upper Floor" handle="h0de030b4g12deg4f9bga50cgaa50301245c5" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_Druid_Cellar" type="22"/>
+                <attribute id="MarkerLevel" value="DarkForest" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="DAF_REGION_Druid_Cellar_a7a9663b-9018-4ae2-a25d-031922c779a0" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Wizard's House - Cellar" handle="h896c1af2g2b84g4878gad57gf7741f74a148" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_Glen" type="22"/>
+                <attribute id="MarkerLevel" value="DarkForest" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="DAF_REGION_Glen_a138d625-98e4-4c13-be12-6fb406804625" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Glen's House" handle="ha3b2b53bg7cccg4b0fgaee3gbf847a2880c8" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_Glen_Cellar" type="22"/>
+                <attribute id="MarkerLevel" value="DarkForest" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="DAF_REGION_Glen_Cellar_540aa2d5-8607-443f-8a1c-2ba30344883a" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Glen's House - Cellar" handle="h5671c39cg4793g434cg82adg7d50c875cf5e" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_GrutildasOffice" type="22"/>
+                <attribute id="MarkerLevel" value="DarkForest" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="DAF_REGION_GrutildasOffice_6f039112-8ba0-434f-9a0d-a6a5725b762f" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Grutilda's Office" handle="hfc3a73efg973dg40fag940ag70aa210a042b" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_HiddenCellar" type="22"/>
+                <attribute id="MarkerLevel" value="DarkForest" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="DAF_REGION_HiddenCellar_417593b3-a6f5-40ae-8c87-6e8a33f6b33c" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Hidden Cellar" handle="h340c2575g5f38g4c25g9244g8c43b873e603" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_Mill" type="22"/>
+                <attribute id="MarkerLevel" value="DarkForest" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="DAF_REGION_Mill_9762a566-08ad-435e-8f19-4836de240d84" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Mill" handle="hcd8cdd8cg03e9g4591ga0e4g34403cc0f599" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_SearchHouse" type="22"/>
+                <attribute id="MarkerLevel" value="DarkForest" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="DAF_REGION_SearchHouse_c448409a-32e0-4476-845c-13257c0ae6cc" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Ransacked House" handle="hbe1deaf7gd31eg4adbg891dg373abaabe1b7" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_DAF_Tavern_0" type="22"/>
+                <attribute id="MarkerLevel" value="DarkForest" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="DAF_REGION_Tavern_0_d6df2e66-3009-449e-9527-ad6ca1fad20b" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Orc Tavern" handle="h8e6ad188gba3cg4bcega87dgb847501ec287" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_DAF_Tavern_1" type="22"/>
+                <attribute id="MarkerLevel" value="DarkForest" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="DAF_REGION_Tavern_1_fa338c11-34f0-4cf0-af7e-b17c1041a62f" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Orc Tavern - Upper Floor" handle="h67533224g4027g4484ga5cfg56bfe17b145a" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_Tavern_Cellar" type="22"/>
+                <attribute id="MarkerLevel" value="DarkForest" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="DAF_REGION_Tavern_Cellar_f8148e73-f17e-4904-bee0-2cd72179cdbb" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Orc Tavern - Cellar" handle="hfea42adcg1e01g444eg9e61g4b834ae8fbba" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_DAF_Warehouse" type="22"/>
+                <attribute id="MarkerLevel" value="DarkForest" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="DAF_REGION_Warehouse_08019751-232f-4b16-b9ec-7ca8836a81f4" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Tribesmen's Warehouse" handle="h389c6fecg77beg43c7gb1f6gcac73ebdd8eb" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_Warehouse_Cellar" type="22"/>
+                <attribute id="MarkerLevel" value="DarkForest" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="DAF_REGION_Warehouse_Cellar_7bea6dc3-0285-4c18-878a-ed7d22085bb4" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Tribesmen's Warehouse - Cellar" handle="h680fda09gcdb1g425agbd36g80026f5af8a3" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_CorpseProcessing" type="22"/>
+                <attribute id="MarkerLevel" value="DarkForest" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="DAF_REGION_CorpseProcessing_93a16269-caef-4b1b-8fb1-61fce9681241" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Chamber of Corpses" handle="h6e8313d6ge3b2g4961g808bg580e85c51209" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="DAF_HiddenFamily" type="22"/>
+                <attribute id="MarkerLevel" value="DarkForest" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="DAF_PointHiddenFamilyCellarOUT_50073d08-1106-417e-9771-11279f59b7d3" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="QuestMarker" type="22"/>
+                <attribute id="DisplayText" value="Hidden Cellar" handle="h340c2575g5f38g4c25g9244g8c43b873e603" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="DAF_TempleOfTheDead" type="22"/>
+                <attribute id="MarkerLevel" value="DarkForest" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="DAF_BodyTeleport_InPos_69934fdb-eed6-47b1-b63d-64fc36f6b10c" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="QuestMarker" type="22"/>
+                <attribute id="DisplayText" value="Temple of the Dead" handle="hbca7ff8eg7b72g4986gac8bgf2a970487d48" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="DAF_Swamphut" type="22"/>
+                <attribute id="MarkerLevel" value="DarkForest" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="DAF_XP_Swamphut_11051cfe-1be7-472a-be8d-20646cb4b39b" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="QuestMarker" type="22"/>
+                <attribute id="DisplayText" value="Abandoned Shack" handle="hae0f5298g5b9ag4a81gaf53g9a919c5fee63" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="DAF_InnerSanctum" type="22"/>
+                <attribute id="MarkerLevel" value="DarkForest" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="DAF_InnerSanctum_Out_332f949d-3566-4468-af51-79688d077b12" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="QuestMarker" type="22"/>
+                <attribute id="DisplayText" value="Source Temple Entrance" handle="hf1ed18ceg880fg4d2agb7bcg96fe40b0f8d3" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_CYS_ReginaldHouse" type="22"/>
+                <attribute id="MarkerLevel" value="Cyseal" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="CYS_REGION_ReginaldHouse_136b1d50-f181-4112-b646-ea9ed3ff3e06" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Reginald's House" handle="h38f08093g547bg4900g966fg8b93745b3c80" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_CYS_ReginaldCellar" type="22"/>
+                <attribute id="MarkerLevel" value="Cyseal" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="CYS_REGION_ReginaldCellar_90eb837f-6b38-4491-b205-f994203dfd43" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Reginald's House - Cellar" handle="h70eb09d5g07afg4913gae53g8043f3bdb40e" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_END_Purgatory" type="22"/>
+                <attribute id="MarkerLevel" value="END_Endgame_Main" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="END_REGION_RoomC_0d7066d7-9ff1-419f-a319-55e708105358" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Path of the Guardians" handle="h8c1fce4age6ccg4207g9b9agf270ac080243" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="SUBREGION_END_Purgatory2" type="22"/>
+                <attribute id="MarkerLevel" value="END_Endgame_Main" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="END_REGION_RoomB_f34eb540-ccd3-4928-87db-ef712cce1b1f" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Path of the Guardians" handle="h8c1fce4age6ccg4207g9b9agf270ac080243" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="NEGA_ToSecondFloor" type="22"/>
+                <attribute id="MarkerLevel" value="END_Endgame_Main" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="END_NegaCloset5_b90ac138-127c-4653-ae6f-af58494087ad" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Item" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Gnik Barc Nni - Latrop sriatsppu
+" handle="ls::TranslatedStringRepository::s_HandleUnknown" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="NEGA_ToCellar" type="22"/>
+                <attribute id="MarkerLevel" value="END_Endgame_Main" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="END_TP_NegaKingsCrab_1_Down_b8d98e23-1304-4d61-8667-203e69ba18ea" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Item" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Gnik Barc Nni - Rallec" handle="h6f53e3efg2a71g44deg9b72geeacfc648904" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="NEGA_BattleDoor" type="22"/>
+                <attribute id="MarkerLevel" value="END_Endgame_Main" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="END_Door_NegaKingsCrab_Room2_914568ec-3dca-4d73-bf14-1bc1a6456dcc" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Item" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Gnik Barc Nni - Soiretsim rood" handle="h407fef62ge256g4e7fgaa1bgc3741dce0124" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="NEGA_ToGroundFloor" type="22"/>
+                <attribute id="MarkerLevel" value="END_Endgame_Main" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="END_NegaCloset3_f2405d8e-1cb1-4fb8-b89a-358e7e693eef" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Item" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Gnik Barc Nni - Latrop Sriatsnwod" handle="h6f0026c4gfeceg4b4bga2b2g3acf5214dfe4" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="NEGA_Chapel" type="22"/>
+                <attribute id="MarkerLevel" value="END_Endgame_Main" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="END_REGION_NegaKingsCrab_Chapel_d21aa63f-7ed6-408d-b677-3d106f34828a" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Nettogrof lepahc" handle="h9edc9a2ag4a17g4c8dga896g3b90592151ab" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="NEGA_DoorToSecondFloor" type="22"/>
+                <attribute id="MarkerLevel" value="END_Endgame_Main" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="END_Door_NegaKingsCrab_Room1_fe03f27b-89f7-453f-8e7d-c66f8d82812c" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Item" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Dekcol rood" handle="h193e96bfga2e9g4b98gb3d2ga138c15010ef" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="AMER_WST_LegionTerrace" type="22"/>
+                <attribute id="MarkerLevel" value="Forgotten Waste" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="AMER_WST_XP_LegionTerrace_d70ba4fe-43b1-4c02-80a5-b8600354c984" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Legion's Terrace" handle="ls::TranslatedStringRepository::s_HandleUnknown" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="AMER_WST_MelchTower" type="22"/>
+                <attribute id="MarkerLevel" value="Forgotten Waste" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="AMER_WST_XP_MelchTower_c3c689ad-ac02-45ce-ad54-c7be9c0ce71c" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Melchior's Tower" handle="ls::TranslatedStringRepository::s_HandleUnknown" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="AMER_WST_AbyssalTower" type="22"/>
+                <attribute id="MarkerLevel" value="Forgotten Waste" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="AMER_WST_XP_AbyssalTower_aff3e759-d2cd-4d39-94fe-1756603773a5" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Tower of Abyssal Studies" handle="ls::TranslatedStringRepository::s_HandleUnknown" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="AMER_WST_AstralTower" type="22"/>
+                <attribute id="MarkerLevel" value="Forgotten Waste" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="AMER_WST_XP_AstralTower_c5ab7758-d199-4412-8a74-39d4af0e8387" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Tower of Astral Studies" handle="ls::TranslatedStringRepository::s_HandleUnknown" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="AMER_WST_ShadowTower" type="22"/>
+                <attribute id="MarkerLevel" value="Forgotten Waste" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="AMER_WST_XP_ShadowTower_d12424b2-65b2-4667-992f-1becffa60ca7" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Tower of Shadow Studies" handle="ls::TranslatedStringRepository::s_HandleUnknown" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="AMER_WST_PrimordialTower" type="22"/>
+                <attribute id="MarkerLevel" value="Forgotten Waste" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="AMER_WST_XP_PrimordialTower_f7f37878-6c39-4e6b-9e81-c619f05a3fbe" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Tower of Primordial Studies" handle="ls::TranslatedStringRepository::s_HandleUnknown" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="AMER_LED_OssurotTomb" type="22"/>
+                <attribute id="MarkerLevel" value="Snowbound Ledge" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="AMER_LED_REGION_OssurotMarker_d00e430c-7c60-4a37-8a65-f02c72d1d8ed" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Grisly Blockage" handle="ls::TranslatedStringRepository::s_HandleUnknown" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="AMER_LED_OssurotLair" type="22"/>
+                <attribute id="MarkerLevel" value="Snowbound Ledge" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="AMER_LED_REGION_OssurotLair_85846e50-8d99-42fe-9b42-fa5c4a42899e" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Lair of the Forgotten" handle="ls::TranslatedStringRepository::s_HandleUnknown" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="AMER_ASC_TowerHub" type="22"/>
+                <attribute id="MarkerLevel" value="Tower of Ascension" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="AMER_ASC_REGION_TowerHub_9042c5c0-4447-42d5-a501-f43f0ed8bec5" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Transmogrified Court" handle="ls::TranslatedStringRepository::s_HandleUnknown" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="AMER_ASC_AstralLock" type="22"/>
+                <attribute id="MarkerLevel" value="Tower of Ascension" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="AMER_ASC_REGION_AstralLock_fe99bf33-6763-43db-ab6f-1508b5675bf2" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Astral Apex" handle="ls::TranslatedStringRepository::s_HandleUnknown" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="AMER_ASC_PrimordialLock" type="22"/>
+                <attribute id="MarkerLevel" value="Tower of Ascension" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="AMER_ASC_REGION_PrimordialLock_e6c616d4-9847-46be-be18-b6ff8967cda9" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Primordial Apex" handle="ls::TranslatedStringRepository::s_HandleUnknown" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="AMER_ASC_AbyssalLock" type="22"/>
+                <attribute id="MarkerLevel" value="Tower of Ascension" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="AMER_ASC_REGION_AbyssalLock_63214b78-104a-455a-874a-2b4a39e148b2" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Abyssal Apex" handle="ls::TranslatedStringRepository::s_HandleUnknown" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="AMER_ASC_ShadowLock" type="22"/>
+                <attribute id="MarkerLevel" value="Tower of Ascension" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="AMER_ASC_REGION_ShadowLock_d72b6b0d-5e75-4c8d-8f15-f226c91b3003" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="Shadow Apex" handle="ls::TranslatedStringRepository::s_HandleUnknown" type="28"/>
+            </node>
+            <node id ="Marker">
+                <attribute id="MarkerID" value="AMER_ASC_Ascension" type="22"/>
+                <attribute id="MarkerLevel" value="Tower of Ascension" type="22"/>
+                <attribute id="MarkerTargetObjectUUID" value="AMER_ASC_REGION_Ascension_f2118f4f-328c-4ad5-9d4f-9f43d12634ae" type="22"/>
+                <attribute id="MarkerTargetObjectType" value="Trigger" type="22"/>
+                <attribute id="MarkerIcon" value="LocationMarker" type="22"/>
+                <attribute id="DisplayText" value="The Ascension" handle="ls::TranslatedStringRepository::s_HandleUnknown" type="28"/>
+            </node>
+          </children>
+      </node>
+  </region>
+</save>

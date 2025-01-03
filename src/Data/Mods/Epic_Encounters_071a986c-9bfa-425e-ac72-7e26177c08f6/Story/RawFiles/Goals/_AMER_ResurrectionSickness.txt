@@ -1,0 +1,93 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+IF
+	CharacterResurrected(_Char)
+AND
+	CharacterGetVarInteger(_Char, "AMER_IsPlayer", _IsPlayer)
+AND
+	_IsPlayer == 1
+AND
+	CharacterGetVarInteger(_Char, "AMER_IgnoreResSickness", _Flag)
+AND
+	_Flag == 0
+THEN
+	ProcResSickness(_Char);
+
+
+IF
+	CharacterResurrected(_Char)
+AND
+	CharacterGetVarInteger(_Char, "AMER_IsPlayer", _IsPlayer)
+AND
+	_IsPlayer == 1
+AND
+	CharacterGetVarInteger(_Char, "AMER_IgnoreResSickness", _Flag)
+AND
+	_Flag == 2
+THEN
+	ProcResetIgnore(_Char);
+
+
+
+PROC
+	ProcResSickness((CHARACTER)_Char)
+AND
+	CharacterGetLevel(_Char, _Level)
+AND
+	_Level < 6
+AND
+	CharacterConsume(_Char, "AMER_RezSickness", _Handle)
+THEN
+	CharacterStatusText(_Char, "AMER_RezSickness");
+
+PROC
+	ProcResSickness((CHARACTER)_Char)
+AND
+	CharacterGetLevel(_Char, _Level)
+AND
+	_Level >= 6
+AND
+	_Level < 12
+AND
+	CharacterConsume(_Char, "AMER_RezSickness2", _Handle)
+THEN
+	CharacterStatusText(_Char, "AMER_RezSickness");
+
+PROC
+	ProcResSickness((CHARACTER)_Char)
+AND
+	CharacterGetLevel(_Char, _Level)
+AND
+	_Level >= 12
+AND
+	_Level < 17
+AND
+	CharacterConsume(_Char, "AMER_RezSickness3", _Handle)
+THEN
+	CharacterStatusText(_Char, "AMER_RezSickness");
+
+PROC
+	ProcResSickness((CHARACTER)_Char)
+AND
+	CharacterGetLevel(_Char, _Level)
+AND
+	_Level >= 17
+AND
+	CharacterConsume(_Char, "AMER_RezSickness4", _Handle)
+THEN
+	CharacterStatusText(_Char, "AMER_RezSickness");
+
+
+
+PROC
+	ProcResetIgnore((CHARACTER)_Char)
+THEN
+	CharacterSetVarInteger(_Char, "AMER_IgnoreResSickness", 0);
+
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "__Start"

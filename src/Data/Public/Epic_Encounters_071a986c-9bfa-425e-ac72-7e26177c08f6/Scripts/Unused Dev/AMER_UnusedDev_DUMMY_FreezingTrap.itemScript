@@ -1,0 +1,117 @@
+//===============================================//
+//                                               //
+//           F R E E Z I N G   T R A P           //
+//                                               //
+//     Written by Matteo "Ameranth" T. (2017)    //
+//===============================================//
+INIT
+ITEM:__Me
+CHARACTER:%AMER_FreezingTrap_Owner = null
+FLOAT:%AMER_FreezingTrap_Lifetime = 18	//3 turns.
+	
+EVENTS
+EVENT FreezingTrapInit
+VARS
+	CHARACTER:_Char
+	FLOAT3:_Position
+ON
+	OnInit()
+ACTIONS
+	StartTimer("AMER_FreezingTrap_Update", 0.5, -1)
+	
+	
+	
+EVENT FreezingTrapShutdown
+ON
+	OnShutdown()
+ACTIONS
+	StopTimer("AMER_FreezingTrap_Update")
+	ItemDestroy(__Me)
+	
+	
+	
+EVENT FreezingTrapUpdateDurationFromOwner
+VARS
+	CHARACTER:_Char
+ON
+	OnCharacterEvent(_Char, "AMER_UpdateSkillItems")
+ACTIONS
+	//When in combat, trap duration decays on a per-round basis.
+	IF "c1"
+		IsEqual(_Char, %AMER_FreezingTrap_Owner)
+	THEN
+		Subtract(%AMER_FreezingTrap_Lifetime, 6.0)
+		IF "!c1"
+			IsGreaterThen(%AMER_FreezingTrap_Lifetime, 0.0)
+		THEN
+			CallFunction("AMER_FreezingTrap_Explode")
+		ENDIF
+	ENDIF
+	
+	
+	
+EVENT FreezingTrapUpdate
+ON
+	OnTimer("AMER_FreezingTrap_Update")
+ACTIONS
+	IterateCharactersNear(__Me, 3.0, "AMER_FreezingTrap_CheckChars")
+	
+	//Decay the trap's duration if the owner is not in combat.
+	IF "!c1"
+		IsInCombat(%AMER_FreezingTrap_Owner)
+	THEN
+		Subtract(%AMER_FreezingTrap_Lifetime, 0.5)
+	ENDIF
+	
+	IF "!c1"
+		IsGreaterThen(%AMER_FreezingTrap_Lifetime, 0.0)
+	THEN
+		CallFunction("AMER_FreezingTrap_Explode")
+	ENDIF
+	
+	
+	
+EVENT FreezingTrapCheckChars
+VARS
+	CHARACTER:_Char
+ON
+	OnIterateCharacter(_Char, "AMER_FreezingTrap_CheckChars")
+ACTIONS
+	IF "c1"
+		CharacterIsEnemy(%AMER_FreezingTrap_Owner, _Char)
+	THEN
+		IF "!c1"
+			CharacterIsDead(_Char)
+		THEN
+			IF "!c1"
+				IsEqual(%AMER_FreezingTrap_Lifetime, -1.0)
+			THEN
+				Set(%AMER_FreezingTrap_Lifetime, -1.0)	//Flag for explode.
+				StatusText(__Me, "AMER_FreezingTrap")
+			ENDIF
+		ENDIF
+	ENDIF
+	
+	
+	
+EVENT FreezingTrapExplode
+VARS
+	FLOAT:_SourceLevel
+	INT:_Level
+ON
+	OnFunction("AMER_FreezingTrap_Explode")
+ACTIONS
+	IF "c1"
+		CharacterGetStat(_SourceLevel, %AMER_FreezingTrap_Owner, Level)
+	THEN
+		Cast(_Level, _SourceLevel)
+		ExplodeAt(__Me, AMER_SCRIPTSKILL_FreezingTrapExplode, _Level, %AMER_FreezingTrap_Owner)
+		StopTimer("AMER_FreezingTrap_Update")
+		ItemDie(__Me)
+	ENDIF
+	
+//===============================================//
+//                                               //
+//           F R E E Z I N G   T R A P           //
+//                                               //
+//===============================================//

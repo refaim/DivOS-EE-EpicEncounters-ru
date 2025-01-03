@@ -1,0 +1,953 @@
+//===============================================//
+//                                               //
+//      P L A Y E R   E X T E N S I O N S        //
+//                                               //
+//     Written by Matteo "Ameranth" T. (2016)    //
+//===============================================//
+#INCLUDE AMER_MAIN_PlayerFeatureFunctions
+#INCLUDE AMER_MAIN_PlayerStatFunctions
+#INCLUDE AMER_MAIN_PlayerItemFunctions
+	
+INIT
+CHARACTER:__Me
+	
+//Accurate way for story to see that I am a player.
+INT:%AMER_IsPlayer = 1
+	
+//Index of heartbeat initialization
+INT:%AMER_BeatNo = 0
+	
+//Track if game loaded fixes should be attempted.
+INT:%AMER_DoLoadFixes = 20
+	
+USING AMER_MAIN_PlayerFeatureFunctions
+USING AMER_MAIN_PlayerStatFunctions
+USING AMER_MAIN_PlayerItemFunctions
+	
+	
+EVENTS
+	
+//===========================================================//
+//               Respecialization Handling                   //
+//===========================================================//	
+EVENT RespecHandling
+//Some features are scripted permanent applications when a player
+//chooses a talent. As a result, these effects need to be removed
+//manually when a player chooses to respecialize.
+VARS
+	INT:_Reactions
+ON
+	OnCharacterEvent(__Me, "AMER_Respec")
+ACTIONS
+	IF "c1"
+		CharacterHasTalent(__Me, LoneWolf)
+	THEN
+		IF "c1"
+			GetVar(_Reactions, __Me, "AMER_PredatorReactionRecovery")
+		THEN
+			Subtract(_Reactions, INT:1)
+			SetVar(__Me, "AMER_PredatorReactionRecovery", _Reactions)
+		ENDIF
+		IF "c1"
+			GetVar(_Reactions, __Me, "AMER_AngelReactionRecovery")
+		THEN
+			Subtract(_Reactions, INT:1)
+			SetVar(__Me, "AMER_AngelReactionRecovery", _Reactions)
+		ENDIF
+		IF "c1"
+			GetVar(_Reactions, __Me, "AMER_DemonReactionRecovery")
+		THEN
+			Subtract(_Reactions, INT:1)
+			SetVar(__Me, "AMER_DemonReactionRecovery", _Reactions)
+		ENDIF
+		IF "c1"
+			GetVar(_Reactions, __Me, "AMER_CharismaReactionRecovery")
+		THEN
+			Subtract(_Reactions, INT:1)
+			SetVar(__Me, "AMER_CharismaReactionRecovery", _Reactions)
+		ENDIF
+	ENDIF
+	IF "c1"
+		CharacterHasTalent(__Me, IceKing)
+	THEN
+		Subtract(%AMER_MaxWaterRes, 10.0)
+	ENDIF
+	IF "c1"
+		CharacterHasTalent(__Me, Demon)
+	THEN
+		Subtract(%AMER_MaxFireRes, 10.0)
+	ENDIF
+	IF "c1"
+		CharacterHasTalent(__Me, Zombie)
+	THEN
+		Subtract(%AMER_MaxPoisonRes, 300.0)
+	ENDIF
+	IF "c1"
+		CharacterHasTalent(__Me, RogueLoreMovementBonus)
+	THEN
+		RemoveStatusInfluence(__Me, CONSUME, 1, "AMER_FleetFootedMovement", 0)
+	ENDIF
+	IF "c1"
+		CharacterHasTalent(__Me, Escapist)
+	THEN
+		RemoveStatusInfluence(__Me, CONSUME, 1, "AMER_NimbleDexterity", 0)
+		RemoveStatusInfluence(__Me, CONSUME, 1, "AMER_EscapistImmunity", 0)
+	ENDIF
+	IF "c1"
+		CharacterHasTalent(__Me, NoAttackOfOpportunity)
+	THEN
+		RemoveStatusInfluence(__Me, CONSUME, 1, "AMER_ClairvoyantPerception", 0)
+	ENDIF
+	IF "c1"
+		CharacterHasTalent(__Me, Carry)
+	THEN
+		RemoveStatusInfluence(__Me, CONSUME, 1, "AMER_PackmuleStrength", 0)
+		RemoveStatusInfluence(__Me, CONSUME, 1, "AMER_CarryImmunity", 0)
+	ENDIF
+	IF "c1"
+		CharacterHasTalent(__Me, Bully)
+	THEN
+		RemoveStatusInfluence(__Me, CONSUME, 1, "AMER_BullyPenalty", 0)
+	ENDIF
+	IF "c1"
+		CharacterHasTalent(__Me, Durability)
+	THEN
+		RemoveStatusInfluence(__Me, CONSUME, 1, "AMER_FieldSmith1", 0)
+		RemoveStatusInfluence(__Me, CONSUME, 1, "AMER_FieldSmith2", 0)
+		RemoveStatusInfluence(__Me, CONSUME, 1, "AMER_FieldSmith3", 0)
+		RemoveStatusInfluence(__Me, CONSUME, 1, "AMER_FieldSmith4", 0)
+		RemoveStatusInfluence(__Me, CONSUME, 1, "AMER_FieldSmith5", 0)
+	ENDIF
+	IF "c1"
+		CharacterHasTalent(__Me, WarriorLoreNaturalArmor)
+	THEN
+		RemoveStatusInfluence(__Me, CONSUME, 1, "AMER_ThickSkin1", 0)
+		RemoveStatusInfluence(__Me, CONSUME, 1, "AMER_ThickSkin2", 0)
+		RemoveStatusInfluence(__Me, CONSUME, 1, "AMER_ThickSkin3", 0)
+		RemoveStatusInfluence(__Me, CONSUME, 1, "AMER_ThickSkin4", 0)
+		RemoveStatusInfluence(__Me, CONSUME, 1, "AMER_ThickSkin5", 0)
+	ENDIF
+	IF "c1"
+		CharacterHasTalent(__Me, WarriorLoreNaturalResistance)
+	THEN
+		Subtract(%AMER_MaxFireRes, %AMER_SoldierCount)
+		Subtract(%AMER_MaxWaterRes, %AMER_SoldierCount)
+		Subtract(%AMER_MaxAirRes, %AMER_SoldierCount)
+		Subtract(%AMER_MaxEarthRes, %AMER_SoldierCount)
+	ENDIF
+	IF "c1"
+		CharacterHasTalent(__Me, WarriorLoreNaturalHealth)
+	THEN
+		RemoveStatusInfluence(__Me, CONSUME, 1, "AMER_PictureOfHealthImmunity", 0)
+	ENDIF
+	IF "c1"
+		CharacterHasTalent(__Me, WhatARush)
+	THEN
+		RemoveStatusInfluence(__Me, CONSUME, 1, "AMER_WhatARushAP3", 0)
+		RemoveStatusInfluence(__Me, CONSUME, 1, "AMER_WhatARushAP2", 0)
+		RemoveStatusInfluence(__Me, CONSUME, 1, "AMER_WhatARushAP1", 0)
+	ENDIF
+	IF "c1"
+		CharacterHasTalent(__Me, RogueLoreGrenadePrecision)
+	THEN
+		RemoveStatusInfluence(__Me, CONSUME, 1, "AMER_PinpointCrit", 0)
+	ENDIF
+	IF "c1"
+		CharacterHasTalent(__Me, DualWieldingBlock)
+	THEN
+		RemoveStatusInfluence(__Me, CONSUME, 1, "AMER_ParryMasterDefense", 0)
+	ENDIF
+	IF "c1"
+		CharacterHasTalent(__Me, WandCharge)
+	THEN
+		CharacterRemoveSkill(AMER_SKILL_Overcharge)
+	ENDIF
+	IF "c1"
+		CharacterHasTalent(__Me, MrKnowItAll)
+	THEN
+		RemoveStatusInfluence(__Me, CONSUME, 1, "AMER_KnowItAllImmunity", 0)
+	ENDIF
+			
+	//Set(%AMER_SoldierCount, 0.0)
+	
+	
+	
+//===========================================================//
+//                      Lone Wolf                            //
+//===========================================================//	
+EVENT LoneWolfReactions
+//Support Lone Wolf adding an extra reaction each turn.
+VARS
+	INT:_Reactions
+ON
+	OnTalentUnlocked(__Me, "LoneWolf")
+ACTIONS
+	IF "c1"
+		GetVar(_Reactions, __Me, "AMER_PredatorReactionRecovery")
+	THEN
+		Add(_Reactions, INT:1)
+		SetVar(__Me, "AMER_PredatorReactionRecovery", _Reactions)
+	ENDIF
+	IF "c1"
+		GetVar(_Reactions, __Me, "AMER_AngelReactionRecovery")
+	THEN
+		Add(_Reactions, INT:1)
+		SetVar(__Me, "AMER_AngelReactionRecovery", _Reactions)
+	ENDIF
+	IF "c1"
+		GetVar(_Reactions, __Me, "AMER_DemonReactionRecovery")
+	THEN
+		Add(_Reactions, INT:1)
+		SetVar(__Me, "AMER_DemonReactionRecovery", _Reactions)
+	ENDIF
+	IF "c1"
+		GetVar(_Reactions, __Me, "AMER_CharismaReactionRecovery")
+	THEN
+		Add(_Reactions, INT:1)
+		SetVar(__Me, "AMER_CharismaReactionRecovery", _Reactions)
+	ENDIF
+	
+	
+	
+//===========================================================//
+//                       Ice King                            //
+//===========================================================//	
+EVENT IceKingMaxWaterRes
+//Support Ice King adding Maximum Water Resistance.
+ON
+	OnTalentUnlocked(__Me, "IceKing")
+ACTIONS
+	Add(%AMER_MaxWaterRes, 10)
+	
+	
+	
+//===========================================================//
+//                         Demon                             //
+//===========================================================//	
+EVENT DemonMaxFireRes
+//Support Demon adding Maximum Fire Resistance.
+ON
+	OnTalentUnlocked(__Me, "Demon")
+ACTIONS
+	Add(%AMER_MaxFireRes, 10)
+	
+	
+	
+//===========================================================//
+//                        Zombie                             //
+//===========================================================//	
+EVENT ZombieMaxPoisonRes
+//Support Zombie setting Poison Resistance to 200%.
+ON
+	OnTalentUnlocked(__Me, "Zombie")
+ACTIONS
+	//Zombie does weird things, add a huge amount to maxres
+	//to allow Zombie to do its Zombie things.
+	Add(%AMER_MaxPoisonRes, 300.0)
+	
+	
+	
+//===========================================================//
+//                     Fleet Footed                          //
+//===========================================================//	
+EVENT FleetFootedMoveSpeed
+//Support for Fleet Footed providing bonus Movement Speed.
+//This buff needs to be removed if the player respecializes.
+ON
+	OnTalentUnlocked(__Me, RogueLoreMovementBonus)
+ACTIONS
+	AddStatusInfluence(__Me, CONSUME, 1, "AMER_FleetFootedMovement", 0)
+	
+	
+	
+//===========================================================//
+//                         Nimble                            //
+//===========================================================//	
+EVENT NimbleDexterity
+//Support for Nimble providing bonus Dexterity. This buff needs
+//to be removed if the player respecializes.
+ON
+	OnTalentUnlocked(__Me, Escapist)
+ACTIONS
+	AddStatusInfluence(__Me, CONSUME, 1, "AMER_NimbleDexterity", 0)
+	Set(%AMER_ScoundrelCount, 0.0)	//Force execution of Scoundrel check.
+	Set(%AMER_RangerCount, 0.0)	//Force execution of Ranger check.
+	
+	
+	
+//===========================================================//
+//                      Clairvoyant                          //
+//===========================================================//	
+EVENT ClairvoyantPerception
+//Support for Clairvoyant providing bonus Perception. This buff needs
+//to be removed if the player respecializes.
+ON
+	OnTalentUnlocked(__Me, NoAttackOfOpportunity)
+ACTIONS
+	AddStatusInfluence(__Me, CONSUME, 1, "AMER_ClairvoyantPerception", 0)
+	
+	
+	
+//===========================================================//
+//                        Packmule                           //
+//===========================================================//	
+EVENT PackmuleStrength
+//Support for Packmule providing bonus Strength. This buff needs
+//to be removed if the player respecializes.
+ON
+	OnTalentUnlocked(__Me, Carry)
+ACTIONS
+	AddStatusInfluence(__Me, CONSUME, 1, "AMER_PackmuleStrength", 0)
+	Set(%AMER_SoldierCount, 0.0)	//Force execution of Soldier check.
+	
+	
+	
+//===========================================================//
+//                           Bully                           //
+//===========================================================//	
+EVENT BullyPenalty
+//Support Bully imposing a damage penalty. This buff needs
+//to be removed if the player respecializes.
+ON
+	OnTalentUnlocked(__Me, Bully)
+ACTIONS
+	AddStatusInfluence(__Me, CONSUME, 1, "AMER_BullyPenalty", 0)
+	
+	
+	
+//===========================================================//
+//                        Overcharge                         //
+//===========================================================//	
+EVENT OverchargeSkill
+//Overcharge gives the Overcharge skill.
+ON
+	OnTalentUnlocked(__Me, WandCharge)
+ACTIONS
+	CharacterAddSkill(AMER_SKILL_Overcharge)
+	
+	
+	
+//===========================================================//
+//                      Parry Master                         //
+//===========================================================//	
+EVENT ParryMasterDefense
+//Parry Master adds defense.
+ON
+	OnTalentUnlocked(__Me, DualWieldingBlock)
+ACTIONS
+	AddStatusInfluence(__Me, CONSUME, 1, "AMER_ParryMasterDefense", 0)
+	
+	
+	
+//===========================================================//
+//                         Pinpoint                          //
+//===========================================================//	
+EVENT PinpointCrit
+//Pinpoint adds Critical Chance.
+ON
+	OnTalentUnlocked(__Me, RogueLoreGrenadePrecision)
+ACTIONS
+	AddStatusInfluence(__Me, CONSUME, 1, "AMER_PinpointCrit", 0)
+	
+	
+	
+//===========================================================//
+//                    Picture of Health                      //
+//===========================================================//	
+EVENT PictureOfHealthChosen
+ON
+	OnTalentUnlocked(__Me, WarriorLoreNaturalHealth)
+ACTIONS
+	Set(%AMER_SoldierCount, 0.0)	//Force execution of Soldier check.
+	
+	
+	
+//===========================================================//
+//                         Iron Hide                         //
+//===========================================================//	
+EVENT IronHideChosen
+ON
+	OnTalentUnlocked(__Me, WarriorLoreNaturalResistance)
+ACTIONS
+	Set(%AMER_SoldierCount, 0.0)	//Force execution of Soldier check.
+	
+	
+	
+//===========================================================//
+//                        Thick Skin                         //
+//===========================================================//	
+EVENT ThickSkinChosen
+ON
+	OnTalentUnlocked(__Me, WarriorLoreNaturalArmor)
+ACTIONS
+	Set(%AMER_SoldierCount, 0.0)	//Force execution of Soldier check.
+	
+	
+	
+//===========================================================//
+//                       Philosopher                         //
+//===========================================================//	
+EVENT PhilosopherChosen
+ON
+	OnTalentUnlocked(__Me, MrKnowItAll)
+ACTIONS
+	Set(%AMER_WitchcraftCount, 0.0)	//Force execution of Witchcraft check.
+	
+	
+	
+//================================================================================//
+//The heartbeat an ever-running timer that handles various mechanics on the       //
+//player. Each of its 9 "beats" handles a different set of functions. This is     //
+//done to spread the processing load over a few instances of time rather than     //
+//doing a huge amount of actions at the same time.                                //
+//================================================================================//
+EVENT InitializePlayerExtensions
+ON
+	OnInit()
+ACTIONS
+	StopTimer("AMER_PlayerHeartbeat")	//Prevent timer stacking.
+	Set(%AMER_BeatNo, INT:0)
+	StartTimer("AMER_PlayerHeartbeat", 0.2, -1)	//Patch 1.1.9 merges all 9 heartbeat timers into one.
+	//Hide depreciated abilities.
+	CharacterEvent(__Me, "AMER_LockAbilities")
+	
+	
+	
+EVENT PlayerHeartbeat
+VARS
+	FIXEDSTRING:_WhichBeat
+ON
+	OnTimer("AMER_PlayerHeartbeat")
+ACTIONS
+	//Patch 1.1.9 merges all heartbeat timers into one. This should
+	//be much easier on the system than the old 9-timer implementation.
+	GetElement(_WhichBeat, %AMER_BeatNo, "AMER_PlayerHeartbeat1", "AMER_PlayerHeartbeat2", "AMER_PlayerHeartbeat3", "AMER_PlayerHeartbeat4", "AMER_PlayerHeartbeat5", "AMER_PlayerHeartbeat6", "AMER_PlayerHeartbeat7", "AMER_PlayerHeartbeat8", "AMER_PlayerHeartbeat9")
+	Add(%AMER_BeatNo, 1)
+	CallFunction(_WhichBeat)
+	
+	
+EVENT PlayerHeartbeat1
+//Player Heartbeat
+ON
+	OnFunction("AMER_PlayerHeartbeat1")
+	//OnTimer("AMER_PlayerHeartbeat1")
+ACTIONS
+	IF "!c1"
+		CharacterIsDead(__Me)
+	THEN
+		//Check Physique
+		CallFunction("AMER_CheckPhysique")
+		
+		//Check Tenebrium
+		CallFunction("AMER_CheckTenebrium")
+		
+		//Handle maximum resistance limit.
+		Set(%AMER_ResString, "Fire")
+		Set(%AMER_ResType, FireResistance)
+		CallFunction("AMER_LimitResists")
+		
+		//Patch 1.1.9.3 consistently cycles through
+		//the old "on loading" fixes while the game
+		//is played. This should fix some script breaks
+		//as well as reduce occurance of "old" essences/souls.
+		Subtract(%AMER_DoLoadFixes, 1)
+		IF "c1"
+			IsLessThen(%AMER_DoLoadFixes, 0)
+		THEN
+			Set(%AMER_DoLoadFixes, 21)
+		ENDIF
+		
+		//StatusText(__Me, "AMER_TEST_1")		//TEST
+	ENDIF
+	
+EVENT PlayerHeartbeat2
+//Player Heartbeat
+VARS
+	FLOAT:_Vitality
+ON
+	OnFunction("AMER_PlayerHeartbeat2")
+	//OnTimer("AMER_PlayerHeartbeat2")
+ACTIONS
+	IF "!c1"
+		CharacterIsDead(__Me)
+	THEN
+		//Handle maximum resistance limit.
+		Set(%AMER_ResString, "Water")
+		Set(%AMER_ResType, WaterResistance)
+		CallFunction("AMER_LimitResists")
+		
+		//Check Soldier
+		CallFunction("AMER_CheckSoldier")
+		
+		//Check Lucky Charm crit bonus
+		CallFunction("AMER_CheckLuckyCharmCrit")
+		
+		IF "c1"
+			IsEqual(%AMER_DoLoadFixes, 21)
+		THEN
+			//This fix is potentially dangerous. Try not
+			//to attempt it when the player is in action.
+			IF "!c1&c2&c3"
+				IsInCombat(__Me)
+				CharacterGetStat(_Vitality, __Me, Vitality)
+				IsEqual(_Vitality, 1.0)
+			THEN
+				Set(%AMER_ResFixDone, INT:0)
+				CallFunction("AMER_RecalculateMaxResists")
+			ENDIF
+		ENDIF
+		
+		//StatusText(__Me, "AMER_TEST_1")		//TEST
+	ENDIF
+	
+EVENT PlayerHeartbeat3
+//Player Heartbeat
+ON
+	OnFunction("AMER_PlayerHeartbeat3")
+	//OnTimer("AMER_PlayerHeartbeat3")
+ACTIONS
+	IF "!c1"
+		CharacterIsDead(__Me)
+	THEN
+		//Handle maximum resistance limit.
+		Set(%AMER_ResString, "Air")
+		Set(%AMER_ResType, AirResistance)
+		CallFunction("AMER_LimitResists")
+		
+		//Check Scoundrel
+		CallFunction("AMER_CheckScoundrel")
+		
+		//Check if Perception Crit buffs need to be changed.
+		CallFunction("AMER_CheckPerception")
+		
+		//StatusText(__Me, "AMER_TEST_1")		//TEST
+	ENDIF
+	
+EVENT PlayerHeartbeat4
+//Player Heartbeat
+ON
+	OnFunction("AMER_PlayerHeartbeat4")
+	//OnTimer("AMER_PlayerHeartbeat4")
+ACTIONS
+	IF "!c1"
+		CharacterIsDead(__Me)
+	THEN
+		//Handle maximum resistance limit.
+		Set(%AMER_ResString, "Earth")
+		Set(%AMER_ResType, EarthResistance)
+		CallFunction("AMER_LimitResists")
+		
+		//Check if Perception Initiative buffs need to be changed.
+		CallFunction("AMER_CheckPerceptionInit")
+		
+		//StatusText(__Me, "AMER_TEST_1")		//TEST
+	ENDIF
+	
+EVENT PlayerHeartbeat5
+//Player Heartbeat
+ON
+	OnFunction("AMER_PlayerHeartbeat5")
+	//OnTimer("AMER_PlayerHeartbeat5")
+ACTIONS
+	IF "!c1"
+		CharacterIsDead(__Me)
+	THEN
+		//Handle maximum resistance limit.
+		Set(%AMER_ResString, "Poison")
+		Set(%AMER_ResType, PoisonResistance)
+		CallFunction("AMER_LimitResists")
+		
+		//Check Ranger
+		CallFunction("AMER_CheckRanger")
+		
+		//Check if OoC Healing should start. This is done here as well
+		//as on vitality change because player vitality can sometimes
+		//be modified without triggering that event.
+		IF "c1"
+			IsEqual(%AMER_OoCHealingEnabled, INT:1)
+		THEN
+			CallFunction("AMER_BeginOoCHealing")
+		ENDIF
+		
+		IF "c1"
+			IsEqual(%AMER_DoLoadFixes, 14)
+		THEN
+			IF "!c1"
+				IsInCombat(__Me)
+			THEN
+				StartTimer("AMER_FixIngredients", 0.7, -1)
+			ENDIF
+		ENDIF
+		
+		//StatusText(__Me, "AMER_TEST_1")		//TEST
+	ENDIF
+	
+EVENT PlayerHeartbeat6
+//Player Heartbeat
+ON
+	OnFunction("AMER_PlayerHeartbeat6")
+	//OnTimer("AMER_PlayerHeartbeat6")
+ACTIONS
+	IF "!c1"
+		CharacterIsDead(__Me)
+	THEN
+		//Handle maximum resistance limit.
+		Set(%AMER_ResString, "Shadow")
+		Set(%AMER_ResType, ShadowResistance)
+		CallFunction("AMER_LimitResists")
+	
+		//Check for blindness simulation
+		CallFunction("AMER_CheckBlind")
+		
+		//Check Witchcraft
+		CallFunction("AMER_CheckWitchcraft")
+		
+		//StatusText(__Me, "AMER_TEST_1")		//TEST
+	ENDIF
+	
+EVENT PlayerHeartbeat7
+//Player Heartbeat
+ON
+	OnFunction("AMER_PlayerHeartbeat7")
+	//OnTimer("AMER_PlayerHeartbeat7")
+ACTIONS
+	IF "!c1"
+		CharacterIsDead(__Me)
+	THEN
+		//Handle maximum resistance limit.
+		Set(%AMER_ResString, "Piercing")
+		Set(%AMER_ResType, PiercingResistance)
+		CallFunction("AMER_LimitResists")
+		
+		//Check What A Rush
+		IF "c1"
+			CharacterHasTalent(__Me, WhatARush)
+		THEN
+			CallFunction("AMER_CheckWhatARush")
+		ENDIF
+	
+		//Check Invisible/Sneaking hit bonus
+		CallFunction("AMER_CheckInvis")
+		
+		//StatusText(__Me, "AMER_TEST_1")		//TEST
+	ENDIF
+	
+EVENT PlayerHeartbeat8
+//Player Heartbeat
+ON
+	OnFunction("AMER_PlayerHeartbeat8")
+	//OnTimer("AMER_PlayerHeartbeat8")
+ACTIONS
+	IF "!c1"
+		CharacterIsDead(__Me)
+	THEN
+		//Handle maximum resistance limit.
+		Set(%AMER_ResString, "Slashing")
+		Set(%AMER_ResType, SlashingResistance)
+		CallFunction("AMER_LimitResists")
+	
+		//Check if Nasty Deeds need to be equalized.
+		CallFunction("AMER_CheckTricks")
+		
+		//Check if Mind And Matter needs to be equalized.
+		CallFunction("AMER_CheckMetamind")
+		
+		IF "c1"
+			IsEqual(%AMER_DoLoadFixes, 7)
+		THEN
+			IF "!c1"
+				IsInCombat(__Me)
+			THEN
+				CallFunction("AMER_OnLoadFixes")
+			ENDIF
+		ENDIF
+		
+		//StatusText(__Me, "AMER_TEST_1")		//TEST
+	ENDIF
+	
+EVENT PlayerHeartbeat9
+//Player Heartbeat
+ON
+	OnFunction("AMER_PlayerHeartbeat9")
+	//OnTimer("AMER_PlayerHeartbeat9")
+ACTIONS
+	Set(%AMER_BeatNo, INT:0)	//Wrap the heartbeat counter back.
+	
+	IF "!c1"
+		CharacterIsDead(__Me)
+	THEN
+		//Handle maximum resistance limit.
+		Set(%AMER_ResString, "Crushing")
+		Set(%AMER_ResType, CrushingResistance)
+		CallFunction("AMER_LimitResists")
+		
+		//Check Field Smith
+		IF "c1"
+			CharacterHasTalent(__Me, Durability)
+		THEN
+			CallFunction("AMER_CheckFieldSmith")
+		ENDIF
+		
+		//Check Artifact Unique Buffs
+		CallFunction("AMER_ArtifactCheckAmulet")
+		CallFunction("AMER_ArtifactCheckChest")
+		
+		//StatusText(__Me, "AMER_TEST_5")		//TEST
+	ENDIF
+	
+	
+	
+EVENT PlayerOnTurnEnd
+//Functionality for player-only effects at turn end.
+ON
+	OnTurnEnded()
+ACTIONS
+	//Make characters visible again when a blind character passes turn.
+	IF "c1"
+		IsEqual(%AMER_BlindThisTurn, INT:1)
+	THEN
+		IterateCharactersInCombat(__Me, "AMER_RemoveSimulatedBlindness")
+		IF "!c1"
+			CharacterHasStatus(__Me, BLIND)
+		THEN
+			Set(%AMER_BlindThisTurn, INT:0)
+		ENDIF
+	ENDIF
+	
+	CallFunction("AMER_PlayerItemFunctionsOnTurnEnd")
+	
+	
+	
+EVENT PlayerOnTurn
+//Functionality for player-only effects at the start of their turn.
+ON
+	OnTurn()
+ACTIONS
+	//Display status text if a player is blind on their turn.
+	IF "c1"
+		CharacterHasStatus(__Me, BLIND)
+	THEN
+		StatusText(__Me, "AMER_Blind")
+	ENDIF
+	
+	CallFunction("AMER_PlayerItemFunctionsOnTurn")
+	
+	
+	
+EVENT AMERPlayerDamaged
+//Functionality for player-only effects when damaged.
+VARS
+	FLOAT:_Damage
+	FLOAT:_Stat
+	CHARACTER:_Char
+	DAMAGE:_Type
+ON
+	OnDamage(_Type, _Damage, _Char, _)
+ACTIONS
+	IF "c1"
+		IsGreaterThen(_Damage, 0.00)
+	THEN
+		//Item affix hooks.
+		//Empyrean Vestments:
+		IF "c1"
+			IsEqual(%AMER_CheckArtifactChest, 6)
+		THEN
+			IF "c1"
+				CharacterHasStatus(__Me, CONSUME, "AMER_UNI_Empyrean")
+			THEN
+				IF "c1"
+					CharacterGetStat(_Stat, __Me, Intelligence)
+				THEN
+					//Empyrean Vestments heals for 1% of damage taken
+					//per point of intelligence.
+					Multiply(_Stat, 0.01)
+					Multiply(_Damage, _Stat)
+					CharacterHeal(__Me, _Damage)
+				ENDIF
+			ENDIF
+		ENDIF
+		
+		IF "!c1"
+			IsInCombat(__Me)
+		THEN
+			IF "c1"
+				IsEqual(%AMER_OoCHealingEnabled, INT:1)
+			THEN
+				//OoC Healing.
+				IF "c1"
+					CharacterHasStatus(__Me, CONSUME, "AMER_OoCHealing")
+				THEN
+					RemoveStatusInfluence(__Me, CONSUME, 1, "AMER_OoCHealing", 0)
+				ENDIF
+				CallFunction("AMER_BeginOoCHealing")
+				Set(%AMER_OoCHealingTicks, INT:0)
+			ENDIF
+		ENDIF
+	ENDIF
+	
+	
+	
+EVENT PlayerOnDie
+//Functionality for player-only effects when dying.
+VARS
+	STRING:_Str
+	FIXEDSTRING:_WhichEffect
+ON
+	OnDie(__Me, _, _, _)
+ACTIONS
+	//Remove Overcharge stacks. No funny buisness, I got bug reports
+	//that the Overcharge buff icon was lingering. Just remove them
+	//all and take no chances because nothing works.
+	IF "c1"
+		CharacterHasTalent(__Me, WandCharge)
+	THEN
+		RemoveStatusInfluence(__Me, CONSUME, 1, "AMER_Overcharge1", 0)
+		RemoveStatusInfluence(__Me, CONSUME, 1, "AMER_Overcharge2", 0)
+		RemoveStatusInfluence(__Me, CONSUME, 1, "AMER_Overcharge3", 0)
+		RemoveStatusInfluence(__Me, CONSUME, 1, "AMER_Overcharge4", 0)
+			
+		Set(%AMER_OverchargeCount, INT:0)
+	ENDIF
+	
+	
+	
+EVENT PlayerOnKill
+//Functionality for player-only effects when killing.
+VARS
+	CHARACTER:_Dead
+	CHARACTER:_Killer
+	FLOAT:_Distance
+	FLOAT:_Stat
+	FLOAT:_Level
+	ITEM:_Item
+	INT:_Value
+ON
+	OnDie(_Dead, _, __Me, _)
+ACTIONS
+	IF "c1"
+		CharacterIsEnemy(__Me, _Dead)
+	THEN
+		//Check if I have Reaper.
+		IF "c1"
+			CharacterHasTalent(__Me, ResurrectToFullHealth)
+		THEN
+			//Check If the killer is still alive.
+			IF "!c1"
+				CharacterIsDead(__Me)
+			THEN
+				//Check if I am within range.
+				IF "c1&!c2"
+					GetInnerDistance(_Distance, _Dead, __Me)
+					IsGreaterThen(_Distance, 4.0)
+				THEN
+					CharacterConsume(__Me, "AMER_ReaperAdrenaline")
+				ENDIF
+			ENDIF
+		ENDIF
+		
+		//Check if any relevant item effects should be run.
+		IF "c1"
+			CharacterHasStatus(__Me, CONSUME, ReapersDelight)
+		THEN
+			IF "!c1"
+				CharacterHasStatus(__Me, DECAYING_TOUCH)
+			THEN
+				CharacterHeal(__Me, 0.25)
+			ENDIF
+		ENDIF
+		
+		//Bounty Hunter's effect checks for the self-buff first, so all 5
+		//target buffs aren't checked each time.
+		IF "c1"
+			CharacterHasStatus(__Me, CONSUME, "AMER_UNI_BountyHunterSelf")
+		THEN
+			IF "c1|c2|c3|c4|c5"
+				CharacterHasStatus(_Dead, CONSUME, "AMER_UNI_BountyHunter")
+				CharacterHasStatus(_Dead, CONSUME, "AMER_UNI_BountyHunter_B")
+				CharacterHasStatus(_Dead, CONSUME, "AMER_UNI_BountyHunter_C")
+				CharacterHasStatus(_Dead, CONSUME, "AMER_UNI_BountyHunter_D")
+				CharacterHasStatus(_Dead, CONSUME, "AMER_UNI_BountyHunter_E")
+			THEN
+				//calculate bounty.
+				IF "c1"
+					CharacterGetStat(_Level, __Me, Level)
+				THEN
+					Set(_Stat, _Level)
+					Add(_Stat, 10.0)
+					Multiply(_Level, 5.0)
+					Multiply(_Level, _Stat)
+					IF "c1"
+						CharacterIsBoss(_Dead)
+					THEN
+						Multiply(_Level, 10.0)
+					ENDIF
+					
+					CharacterPlayEffect(__Me, "FX_GP_Projectile_Gold_Impact_A", "Dummy_OverheadFX")
+					//Try to add to an existing gold stack if possible. If
+					//not then just create a new stack.
+					IF "c1"
+						ItemGetFromInventory(_Item, __Me, "Small_Gold")
+					THEN
+						IF "c1"
+							ItemGetStat(_Stat, _Item, Value)
+						THEN
+							Add(_Stat, _Level)
+							IF "c1"
+								IsLessThen(_Stat, 999999.0)
+							THEN
+								Cast(_Value, _Stat)
+								ItemSetAmount(_Item, _Value)
+							ELSE
+								Cast(_Value, _Level)
+								CharacterAddToInventory(__Me, "Small_Gold", _Value)
+							ENDIF
+						ENDIF
+					ELSE
+						Cast(_Value, _Level)
+						CharacterAddToInventory(__Me, "Small_Gold", _Value)
+					ENDIF
+				ENDIF
+			ENDIF
+		ENDIF
+	ENDIF
+	
+	
+	
+EVENT PlayerCombatEnded
+//Functionality for player-only effects when combat ends.
+VARS
+//============================//
+	FLOAT:_OoCHealingTickTime = 0.35
+//============================//
+	STRING:_Str
+	FIXEDSTRING:_WhichEffect
+ON
+	OnCombatEnded()
+ACTIONS
+	//Remove Overcharge stacks. No funny buisness, I got bug reports
+	//that the Overcharge buff icon was lingering. Just remove them
+	//all and take no chances because nothing works.
+	IF "c1"
+		CharacterHasTalent(__Me, WandCharge)
+	THEN
+		RemoveStatusInfluence(__Me, CONSUME, 1, "AMER_Overcharge1", 0)
+		RemoveStatusInfluence(__Me, CONSUME, 1, "AMER_Overcharge2", 0)
+		RemoveStatusInfluence(__Me, CONSUME, 1, "AMER_Overcharge3", 0)
+		RemoveStatusInfluence(__Me, CONSUME, 1, "AMER_Overcharge4", 0)
+		
+		Set(%AMER_OverchargeCount, INT:0)
+	ENDIF
+	
+	IF "c1"
+		IsEqual(%AMER_OoCHealingEnabled, INT:1)
+	THEN
+		StartTimer("AMER_OoCHealing", _OoCHealingTickTime, -1)
+	ENDIF
+	
+	
+	
+//===============================================//
+//                                               //
+//      P L A Y E R   E X T E N S I O N S        //
+//                                               //
+//===============================================//

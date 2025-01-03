@@ -1,0 +1,228 @@
+<?xml version='1.0' encoding='utf-8'?>
+<save>
+	<header time="0" version="2" />
+	<version build="0" major="2" minor="0" revision="0" />
+	<region id="TranslatedStringKeys">
+		<node id="root">
+			<children>
+				<node id="TranslatedStringKey">
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="In Epic Encounters your resistances are limited to 75%, but some powerful effects can allow you to surpass this limit." />
+					<attribute id="ExtraData" type="23" value="" />
+					<attribute id="Speaker" type="22" value="" />
+					<attribute id="Stub" type="19" value="True" />
+					<attribute id="UUID" type="22" value="HINT_CAM_ROTATE" />
+				</node>
+				<node id="TranslatedStringKey">
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Take caution to protect your resurrected companions, as they will return in a greatly weakened state for a short time." />
+					<attribute id="ExtraData" type="23" value="" />
+					<attribute id="Speaker" type="22" value="" />
+					<attribute id="Stub" type="19" value="True" />
+					<attribute id="UUID" type="22" value="HINT_CAM_ZOOM" />
+				</node>
+				<node id="TranslatedStringKey">
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="If you've been blinded, try to keep track of where everyone is before your turn. In Epic Encounters, blind characters have a difficult time seeing things." />
+					<attribute id="ExtraData" type="23" value="" />
+					<attribute id="Speaker" type="22" value="" />
+					<attribute id="Stub" type="19" value="True" />
+					<attribute id="UUID" type="22" value="HINT_CAM_HOME" />
+				</node>
+				<node id="TranslatedStringKey">
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="If a fight is getting the better of you, don't feel bad- this stuff is pretty hard. You can always flee and come back when you&amp;apos;re more prepared, too- but let's be real; who flees?" />
+					<attribute id="ExtraData" type="23" value="" />
+					<attribute id="Speaker" type="22" value="" />
+					<attribute id="Stub" type="19" value="True" />
+					<attribute id="UUID" type="22" value="HINT_FLEE" />
+				</node>
+				<node id="TranslatedStringKey">
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Attacking guards in a city is one of the funniest ways to kill people." />
+					<attribute id="ExtraData" type="23" value="" />
+					<attribute id="Speaker" type="22" value="" />
+					<attribute id="Stub" type="19" value="True" />
+					<attribute id="UUID" type="22" value="HINT_GUARD" />
+				</node>
+				<node id="TranslatedStringKey">
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Agonizing over how to build a character? Good! I accept the compliment." />
+					<attribute id="ExtraData" type="23" value="" />
+					<attribute id="Speaker" type="22" value="" />
+					<attribute id="Stub" type="19" value="True" />
+					<attribute id="UUID" type="22" value="HINT_REPAIR" />
+				</node>
+				<node id="TranslatedStringKey">
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="If someone really deserves it, murder in broad daylight is sure to be an entertaining experience." />
+					<attribute id="ExtraData" type="23" value="" />
+					<attribute id="Speaker" type="22" value="" />
+					<attribute id="Stub" type="19" value="True" />
+					<attribute id="UUID" type="22" value="HINT_ASSAULT" />
+				</node>
+				<node id="TranslatedStringKey">
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Be careful when saving up Chain bonus- if you miss an attack, you'll lose two stacks, and if you aren't invisible or sneaking when your turn starts, you'll lose it all!" />
+					<attribute id="ExtraData" type="23" value="" />
+					<attribute id="Speaker" type="22" value="" />
+					<attribute id="Stub" type="19" value="True" />
+					<attribute id="UUID" type="22" value="HINT_STACKS" />
+				</node>
+				<node id="TranslatedStringKey">
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Revisit every skill! Epic Encounters reworks the original skills, so give those subpar spells another chance and see if they can't catch your fancy." />
+					<attribute id="ExtraData" type="23" value="" />
+					<attribute id="Speaker" type="22" value="" />
+					<attribute id="Stub" type="19" value="True" />
+					<attribute id="UUID" type="22" value="HINT_COMBINE" />
+				</node>
+				<node id="TranslatedStringKey">
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Epic Encounters introduces several ways to perform various reactions while out of turn.&amp;lt;br&amp;gt;These are similar to Attacks of Opportunity, but trigger in different ways and have a wide range of effects." />
+					<attribute id="ExtraData" type="23" value="" />
+					<attribute id="Speaker" type="22" value="" />
+					<attribute id="Stub" type="19" value="True" />
+					<attribute id="UUID" type="22" value="HINT_TRAPS" />
+				</node>
+				<node id="TranslatedStringKey">
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="No one has more friends than the man with many Metamind points!&amp;lt;br&amp;gt;Epic Encounters groups Loremaster and Telekinesis into this single ability so you can grab stuff from a distance while you check stuff from a distance." />
+					<attribute id="ExtraData" type="23" value="" />
+					<attribute id="Speaker" type="22" value="" />
+					<attribute id="Stub" type="19" value="True" />
+					<attribute id="UUID" type="22" value="HINT_WATERSURF" />
+				</node>
+				<node id="TranslatedStringKey">
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="To the favored ones; to my friends: Facepalm, In and Out, Sleep, I am Disappoint--thanks for the memories." />
+					<attribute id="ExtraData" type="23" value="" />
+					<attribute id="Speaker" type="22" value="" />
+					<attribute id="Stub" type="19" value="True" />
+					<attribute id="UUID" type="22" value="HINT_BREAKING" />
+				</node>
+				<node id="TranslatedStringKey">
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Pesky Hyperacutes getting the better of your Rogue? Throw a blind on &amp;apos;em and they won&amp;apos;t spot much more after that." />
+					<attribute id="ExtraData" type="23" value="" />
+					<attribute id="Speaker" type="22" value="" />
+					<attribute id="Stub" type="19" value="True" />
+					<attribute id="UUID" type="22" value="HINT_FOG" />
+				</node>
+				<node id="TranslatedStringKey">
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Many new skills have been added with Epic Encounters.&amp;lt;br&amp;gt;If you find a weird looking skillbook, it probably requires more than one ability to learn, but is well worth the investment." />
+					<attribute id="ExtraData" type="23" value="" />
+					<attribute id="Speaker" type="22" value="" />
+					<attribute id="Stub" type="19" value="True" />
+					<attribute id="UUID" type="22" value="HINT_SKILLBOOKS" />
+				</node>
+				<node id="TranslatedStringKey">
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Many skills have higher &quot;recommended&quot; attribute or ability values than their requirements. In Epic Encounters, you can always see these values on any skill or skillbook." />
+					<attribute id="ExtraData" type="23" value="" />
+					<attribute id="Speaker" type="22" value="" />
+					<attribute id="Stub" type="19" value="True" />
+					<attribute id="UUID" type="22" value="HINT_AP" />
+				</node>
+				<node id="TranslatedStringKey">
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="We hope you enjoy experiencing Epic Encounters at least as much as we enjoyed creating it. :)" />
+					<attribute id="ExtraData" type="23" value="" />
+					<attribute id="Speaker" type="22" value="" />
+					<attribute id="Stub" type="19" value="True" />
+					<attribute id="UUID" type="22" value="HINT_GEAR" />
+				</node>
+				<node id="TranslatedStringKey">
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Bows and crossbows have the potential to fire from great distances, but are always limited to your sight radius and become less accurate when further from a target." />
+					<attribute id="ExtraData" type="23" value="" />
+					<attribute id="Speaker" type="22" value="" />
+					<attribute id="Stub" type="19" value="True" />
+					<attribute id="UUID" type="22" value="HINT_RANGE" />
+				</node>
+				<node id="TranslatedStringKey">
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Perception is great! In Epic Encounters Perception has been greatly improved, and is essential for any character hoping to score critical strikes.&amp;lt;br&amp;gt;You can even add on the Hyperacuity talent to detect hidden enemies!" />
+					<attribute id="ExtraData" type="23" value="" />
+					<attribute id="Speaker" type="22" value="" />
+					<attribute id="Stub" type="19" value="True" />
+					<attribute id="UUID" type="22" value="HINT_HOMTRADERS" />
+				</node>
+				<node id="TranslatedStringKey">
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="In Epic Encounters, wielding a dagger allows a character to build Chain from striking enemies; you can gain two per turn and up to five total. Save up your Chain to use with Chain Finishers for powerful bonus effects!" />
+					<attribute id="ExtraData" type="23" value="" />
+					<attribute id="Speaker" type="22" value="" />
+					<attribute id="Stub" type="19" value="True" />
+					<attribute id="UUID" type="22" value="HINT_OUTLINE" />
+				</node>
+				<node id="TranslatedStringKey">
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="To examine a character, hover over them and hit [IE_ToggleInfo]. The higher your Metamind skill, the more detailed the info you get." />
+					<attribute id="ExtraData" type="23" value="" />
+					<attribute id="Speaker" type="22" value="" />
+					<attribute id="Stub" type="19" value="True" />
+					<attribute id="UUID" type="22" value="HINT_PERCEPTION" />
+				</node>
+				<node id="TranslatedStringKey">
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="You can move heavy items by increasing your Strength or investing points in Metamind." />
+					<attribute id="ExtraData" type="23" value="" />
+					<attribute id="Speaker" type="22" value="" />
+					<attribute id="Stub" type="19" value="True" />
+					<attribute id="UUID" type="22" value="HINT_HEAVYSTUFF" />
+				</node>
+				<node id="TranslatedStringKey">
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Make some mischief! Epic Encounters bundles Sneaking, Pickpocketing, and Lockpicking into one ability, Tricks of the Trade, so don&amp;apos;t feel bad about grabbing a few points and terrorizing the townsfolk." />
+					<attribute id="ExtraData" type="23" value="" />
+					<attribute id="Speaker" type="22" value="" />
+					<attribute id="Stub" type="19" value="True" />
+					<attribute id="UUID" type="22" value="HINT_PICKPOCKET" />
+				</node>
+				<node id="TranslatedStringKey">
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Don't be so quick to put the moves on your enemies; in Epic Encounters charmed enemies will become enraged after they realize you've charmed them, making them immune to further charms and just very upset in general." />
+					<attribute id="ExtraData" type="23" value="" />
+					<attribute id="Speaker" type="22" value="" />
+					<attribute id="Stub" type="19" value="True" />
+					<attribute id="UUID" type="22" value="HINT_DISARMTRAPS" />
+				</node>
+				<node id="TranslatedStringKey">
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Many skills have a reduced character level requirement in Epic Encounters, so go ahead and experiment with all that top-shelf stuff early on. Besides, you&amp;apos;ll probably need it anyway." />
+					<attribute id="ExtraData" type="23" value="" />
+					<attribute id="Speaker" type="22" value="" />
+					<attribute id="Stub" type="19" value="True" />
+					<attribute id="UUID" type="22" value="HINT_FORMATION" />
+				</node>
+				<node id="TranslatedStringKey">
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Diversify your disables! Epic Encounters imposes a two for every five turns limit on most effects that completely disable an enemy." />
+					<attribute id="ExtraData" type="23" value="" />
+					<attribute id="Speaker" type="22" value="" />
+					<attribute id="Stub" type="19" value="True" />
+					<attribute id="UUID" type="22" value="HINT_WANDHOTBAR" />
+				</node>
+				<node id="TranslatedStringKey">
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="While wielding two weapons, they will suffer a 30% damage penalty. To reduce this, invest points in Dual Wielding." />
+					<attribute id="ExtraData" type="23" value="" />
+					<attribute id="Speaker" type="22" value="" />
+					<attribute id="Stub" type="19" value="True" />
+					<attribute id="UUID" type="22" value="HINT_DUALWIELD" />
+				</node>
+				<node id="TranslatedStringKey">
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Today a Wizard, tomorrow a Battlemage: Your starting stats don't have to determine the rest of your game. In Epic Encounters, you start with one respecialization point, and you can buy more from vendors- so don't be afraid to try new things!" />
+					<attribute id="ExtraData" type="23" value="" />
+					<attribute id="Speaker" type="22" value="" />
+					<attribute id="Stub" type="19" value="True" />
+					<attribute id="UUID" type="22" value="HINT_CLASSLESS" />
+				</node>
+				<node id="TranslatedStringKey">
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Empowered skills are improved variants of existing skills that can only appear on equipment. You can always see which part of the skill is altered by looking for &amp;lt;font color=&quot;00ffff&quot;&amp;gt;colored text&amp;lt;/font&amp;gt; on the skill card." />
+					<attribute id="ExtraData" type="23" value="" />
+					<attribute id="Speaker" type="22" value="" />
+					<attribute id="Stub" type="19" value="True" />
+					<attribute id="UUID" type="22" value="HINT_TRADE" />
+				</node>
+				<node id="TranslatedStringKey">
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="In Epic Encounters spears are classified as Dexterity weapons- so go ahead, be the next Oberyn! Just try to keep a cool head." />
+					<attribute id="ExtraData" type="23" value="" />
+					<attribute id="Speaker" type="22" value="" />
+					<attribute id="Stub" type="19" value="True" />
+					<attribute id="UUID" type="22" value="HINT_ALLIANCE" />
+				</node>
+				<node id="TranslatedStringKey">
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Epic Encounters reworks Charisma into the new ability, Bard. With its awesome new reactions you don't have to feel bad about picking it to win arguments anymore!" />
+					<attribute id="ExtraData" type="23" value="" />
+					<attribute id="Speaker" type="22" value="" />
+					<attribute id="Stub" type="19" value="True" />
+					<attribute id="UUID" type="22" value="HINT_PETPAL" />
+				</node>
+				<node id="TranslatedStringKey">
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Be sure to pay Epic Encounters' additional areas a visit. You can find the entrace to this content from the later portion of the Phantom Forest- it's tough to miss." />
+					<attribute id="ExtraData" type="23" value="" />
+					<attribute id="Speaker" type="22" value="" />
+					<attribute id="Stub" type="19" value="True" />
+					<attribute id="UUID" type="22" value="HINT_MAPMARKER" />
+				</node>
+			</children>
+		</node>
+	</region>
+</save>
