@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <save>
 	<version major="2" minor="0" revision="0" build="0" lslib_meta="v1,bswap_guids" />
 	<region id="Templates">
@@ -535,7 +535,7 @@
 					<attribute id="CanSeeThrough" type="19" value="True" />
 					<attribute id="CanShootThrough" type="19" value="True" />
 					<attribute id="CastShadow" type="19" value="False" />
-					<attribute id="DisplayName" type="28" handle="ls::TranslatedStringRepository::s_HandleUnknown" value="Freezing Trap" />
+					<attribute id="DisplayName" type="28" handle="ls::TranslatedStringRepository::s_HandleUnknown" value="Морозная ловушка" />
 					<attribute id="Flag" type="4" value="0" />
 					<attribute id="GroupID" type="5" value="0" />
 					<attribute id="Icon" type="22" value="Item_PUZ_Trap_Mine_A_Blue" />

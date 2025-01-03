@@ -83,7 +83,7 @@
 					<attribute id="UUID" type="22" value="Hateful" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="h0cd5ffa9g2fe4g4126gb0f6g3cea0316ba19" id="Content" type="28" value="of Consecration" />
+					<attribute handle="h0cd5ffa9g2fe4g4126gb0f6g3cea0316ba19" id="Content" type="28" value="освящения" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />

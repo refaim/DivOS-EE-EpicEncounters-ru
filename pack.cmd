@@ -1,14 +1,19 @@
 @echo off
 
+set SRC_DIR=%~dp0\src
 set BUILD_DIR=%~dp0\build
-set DIVINE=%~dp0\Tools\Divine\Divine.exe
+set TOOLS_DIR=%~dp0\tools
+set DIVINE=%TOOLS_DIR%\Divine\Divine.exe
 
 pushd %~dp0
+
+echo Incorporating localization strings...
+call python3 %TOOLS_DIR%\strings.py text_to_game %SRC_DIR%\strings.csv %SRC_DIR%
 
 echo Settig up build directory...
 rmdir /s /q %BUILD_DIR%
 mkdir %BUILD_DIR%
-robocopy /S %~dp0\src\Data %BUILD_DIR% >nul
+robocopy /S %SRC_DIR%\Data %BUILD_DIR% >nul
 
 echo Compressing localization XML...
 set LSX_DIR=%BUILD_DIR%\Mods\Epic_Encounters_071a986c-9bfa-425e-ac72-7e26177c08f6\Localization

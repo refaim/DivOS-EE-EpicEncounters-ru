@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <save>
 	<version major="2" minor="0" revision="0" build="0" lslib_meta="v1,bswap_guids" />
 	<region id="Templates">
@@ -154,7 +154,7 @@
 				</node>
 				<node id="GameObjects">
 					<attribute id="Alignment" type="22" value="Companion14" />
-					<attribute id="DisplayName" type="28" handle="hf61b05d8gffc4g424egbdb5gf519637903a2" value="Wolgraff" />
+					<attribute id="DisplayName" type="28" handle="hf61b05d8gffc4g424egbdb5gf519637903a2" value="Вольграфф" />
 					<attribute id="Equipment" type="22" value="Henchman_Wolgraff_Rogue" />
 					<attribute id="EquipmentClass" type="1" value="0" />
 					<attribute id="ExplodedResourceID" type="22" value="fed27733-292d-465c-b6cf-9a6b9126307c" />
@@ -1237,7 +1237,7 @@
 				</node>
 				<node id="GameObjects">
 					<attribute id="Alignment" type="22" value="Companion13" />
-					<attribute id="DisplayName" type="28" handle="heb6bf6e6gfe72g4b69g934fg679c99f45a72" value="Bairdotr" />
+					<attribute id="DisplayName" type="28" handle="heb6bf6e6gfe72g4b69g934fg679c99f45a72" value="Байрдоттир" />
 					<attribute id="Equipment" type="22" value="Henchman_Bairdotr_Ranger" />
 					<attribute id="EquipmentClass" type="1" value="1" />
 					<attribute id="ExplodedResourceID" type="22" value="fed27733-292d-465c-b6cf-9a6b9126307c" />

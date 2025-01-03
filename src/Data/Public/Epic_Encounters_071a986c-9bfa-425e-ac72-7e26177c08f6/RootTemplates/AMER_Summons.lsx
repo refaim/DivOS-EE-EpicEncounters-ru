@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <save>
 	<version major="2" minor="0" revision="0" build="0" lslib_meta="v1,bswap_guids" />
 	<region id="Templates">
@@ -7,7 +7,7 @@
 				<node id="GameObjects">
 					<attribute id="Alignment" type="22" value="Good NPC" />
 					<attribute id="BloodSurfaceType" type="1" value="4" />
-					<attribute id="DisplayName" type="28" handle="h015d4a33g0a97g4b32g8479gacacfffd48fc" value="Spider" />
+					<attribute id="DisplayName" type="28" handle="h015d4a33g0a97g4b32g8479gacacfffd48fc" value="Паук" />
 					<attribute id="Equipment" type="22" value="Summon_Earth_Spider" />
 					<attribute id="ExplodedResourceID" type="22" value="ff728129-419a-4455-ae4c-766c1f22f2a1" />
 					<attribute id="ExplosionFX" type="22" value="FX_GP_CorpseExplosion_Human_A" />
