@@ -1,10 +1,12 @@
 @echo off
 
-set PAK_NAME=EpicEncountersRu.pak
-set WITH_ADDITIONAL_COMBOS=no
+set MOD_VERSION=v1.1.9.5c
+
+set PAK_NAME=EpicEncountersRu_%MOD_VERSION%.pak
+set WITH_ADDITIONAL_CRAFTING_RECIPES=no
 if [%1] == [--custom] (
-    set PAK_NAME=EpicEncountersRu_CustomRefaimVersion.pak
-    set WITH_ADDITIONAL_COMBOS=yes
+    set PAK_NAME=EpicEncountersRu_%MOD_VERSION%_WithAdditionalCraftingRecipes.pak
+    set WITH_ADDITIONAL_CRAFTING_RECIPES=yes
 )
 
 set SRC_DIR=%~dp0\src
@@ -22,12 +24,12 @@ echo Incorporating localization strings...
 call python3 %TOOLS_DIR%\strings.py text_to_game %SRC_DIR%\ModRussianTranslation\strings.csv %SRC_DIR%\Mod
 
 echo Settig up build directory...
-rmdir /s /q %BUILD_DIR%
+rmdir /s /q %BUILD_DIR% 2>nul
 mkdir %BUILD_DIR%
 robocopy /S %SRC_DIR%\Mod\Data %MOD_BUILD_DIR% >nul
 
-if %WITH_ADDITIONAL_COMBOS% == yes (
-    echo Incorporating additional item combos...
+if %WITH_ADDITIONAL_CRAFTING_RECIPES% == yes (
+    echo Incorporating additional crafting recipes...
     xcopy /y %SRC_DIR%\CustomItemCombos\*.* %MOD_BUILD_DIR%\Public\Epic_Encounters_071a986c-9bfa-425e-ac72-7e26177c08f6\Stats >nul
 )
 
@@ -46,7 +48,7 @@ del /s /q *.lsx >nul
 popd
 
 echo Building Epic Encounters PAK...
-rmdir /s /q %OUTPUT_DIR%
+rmdir /s /q %OUTPUT_DIR% 2>nul
 mkdir %OUTPUT_DIR%
 %DIVINE% -g dos2de -a create-package -c lz4hc -s %MOD_BUILD_DIR% -d %OUTPUT_DIR%\%PAK_NAME%
 copy /y %SRC_DIR%\Mod\readme.txt %OUTPUT_DIR%\EpicEncountersReadme.txt >nul

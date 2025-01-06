@@ -1,0 +1,43 @@
+name: Pack
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+  schedule:
+    - cron: '0 0 * * 0'
+
+jobs:
+  pack:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+          architecture: x64
+
+      - name: Pack Vanilla
+        shell: cmd
+        run: ./pack.cmd
+
+      - name: Upload Vanilla
+        uses: actions/upload-artifact@v4
+        with:
+          name: EpicEncountersRu_v1.1.9.5c
+          path: output\
+          if-no-files-found: error
+
+      - name: Pack Custom
+        shell: cmd
+        run: ./pack.cmd --custom
+
+      - name: Upload Custom
+        uses: actions/upload-artifact@v4
+        with:
+          name: EpicEncountersRu_v1.1.9.5c_WithAdditionalCraftingRecipes
+          path: output\
+          if-no-files-found: error

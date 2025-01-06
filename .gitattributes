@@ -2,3 +2,4 @@
 *.dds binary
 *.data binary
 *.bullet binary
+*.cmd eol=crlf
