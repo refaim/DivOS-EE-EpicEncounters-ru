@@ -5,7 +5,7 @@
 [Тема на форуме Arcane Coast для обсуждения перевода](https://arcanecoast.ru/forum/viewtopic.php?f=69&t=1379&sid=e069e16e72638deced25d7a78b6e0b9a).
 
 ### Как поиграть?
-- Скачать свежую сборку мода с переводом: [обычную](https://nightly.link/refaim/DivOS-EE-EpicEncounters-ru/workflows/pack/master/EpicEncountersRu_v1.1.9.5c.zip) или [с дополнительными крафтовыми рецептами](https://nightly.link/refaim/DivOS-EE-EpicEncounters-ru/workflows/pack/master/EpicEncountersRu_v1.1.9.5c_WithAdditionalCraftingRecipes.zip)
+- Скачать свежую сборку мода с переводом: [обычную](https://nightly.link/refaim/DivOS-EE-EpicEncounters-ru/workflows/package/master/EpicEncountersRu_v1.1.9.5c.zip) или [с дополнительными крафтовыми рецептами](https://nightly.link/refaim/DivOS-EE-EpicEncounters-ru/workflows/package/master/EpicEncountersRu_v1.1.9.5c_WithAdditionalCraftingRecipes.zip)
 - Файл `EpicEncounters*.pak` положить в папку `%USERPROFILE%\Documents\Larian Studios\Divinity Original Sin Enhanced Edition\Mods`
 - Файл `Russian.pak` положить в папку игры, например `С:\games\Steam\steamapps\common\Divinity Original Sin Enhanced Edition\Data\Localization`
 - Включить мод в меню модов после запуска игры
