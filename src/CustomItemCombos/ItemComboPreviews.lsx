@@ -108,7 +108,7 @@
 			<!--========================-->
 			<!--Artifact Unique Breaking-->
 			<!--========================-->
-			
+
 			<!--  Dummy recipes to override component display for recipe book: -->
             <node id="Combo">
                 <attribute id="CombinationID" value="Shard_Artifact_A" type="22" />
@@ -160,7 +160,7 @@
                 <attribute id="StatsID" value="AMER_LOOT_UNI_Shard_E" type="22" />
                 <attribute id="CraftAmount" value="3" type="4" />
             </node>
-			
+
 			<!--  Actual recipes: -->
             <node id="Combo">
                 <attribute id="CombinationID" value="Shard_Artifact_C" type="22" />
@@ -4586,6 +4586,183 @@
                 <attribute id="StatsID" value="AMER_LOOT_Soul_Tormented_A" type="22" />
                 <attribute id="CraftAmount" value="7" type="4" />
             </node>
+
+            <!-- Make food and drinks -->
+            <node id="Combo">
+                <attribute id="CombinationID" value="LFR_CON_Drink_Mug_Beer_A_ITEM_EmptyBottle" type="22" />
+                <attribute id="RecipeCategory" value="Food" type="22" />
+                <attribute id="Object1" value="CON_Drink_Mug_Beer_A" type="22" />
+                <attribute id="Object2" value="ITEM_EmptyBottle" type="22" />
+                <attribute id="RequiredSkillLevel" value="0" type="4" />
+                <attribute id="StatsID" value="CON_Drink_Bottle_Beer_A" type="22" />
+                <attribute id="CraftAmount" value="7" type="4" />
+            </node>
+            <node id="Combo">
+                <attribute id="CombinationID" value="LFR_CON_Drink_Mug_A_Beer_ITEM_EmptyBottle" type="22" />
+                <attribute id="RecipeCategory" value="Food" type="22" />
+                <attribute id="Object1" value="CON_Drink_Mug_Beer_A" type="22" />
+                <attribute id="Object2" value="ITEM_EmptyBottle" type="22" />
+                <attribute id="RequiredSkillLevel" value="0" type="4" />
+                <attribute id="StatsID" value="CON_Drink_Bottle_Beer_A" type="22" />
+                <attribute id="CraftAmount" value="7" type="4" />
+            </node>
+            <node id="Combo">
+                <attribute id="CombinationID" value="LFR_CON_Drink_Bottle_Beer_A" type="22" />
+                <attribute id="RecipeCategory" value="Food" type="22" />
+                <attribute id="Object1" value="CON_UNI_Mug_Beer_Nurrid_Ovrur" type="22" />
+                <attribute id="Object2" value="ITEM_EmptyBottle" type="22" />
+                <attribute id="RequiredSkillLevel" value="0" type="4" />
+                <attribute id="StatsID" value="CON_Drink_Bottle_Beer_A" type="22" />
+                <attribute id="CraftAmount" value="7" type="4" />
+            </node>
+            <node id="Combo">
+                <attribute id="CombinationID" value="LFR_CON_Drink_Mug_Beer_A" type="22" />
+                <attribute id="RecipeCategory" value="Food" type="22" />
+                <attribute id="Object1" value="CON_UNI_Mug_Beer_Nurrid_Ovrur" type="22" />
+                <attribute id="Object2" value="CON_Drink_Mug_A_Empty" type="22" />
+                <attribute id="RequiredSkillLevel" value="0" type="4" />
+                <attribute id="StatsID" value="CON_Drink_Mug_Beer_A" type="22" />
+                <attribute id="CraftAmount" value="3" type="4" />
+            </node>
+            <node id="Combo">
+                <attribute id="CombinationID" value="LFR_CON_Food_Stew_Dwarven_B" type="22" />
+                <attribute id="RecipeCategory" value="Food" type="22" />
+                <attribute id="Object1" value="CON_UNI_Mug_Beer_Nurrid_Ovrur" type="22" />
+                <attribute id="Object2" value="CON_Food_Dinner_A" type="22" />
+                <attribute id="RequiredSkillLevel" value="0" type="4" />
+                <attribute id="StatsID" value="CON_Food_Stew_Dwarven_A" type="22" />
+                <attribute id="CraftAmount" value="3" type="4" />
+            </node>
+            <node id="Combo">
+                <attribute id="CombinationID" value="LFR_CON_Food_Stew_Dwarven_A" type="22" />
+                <attribute id="RecipeCategory" value="Food" type="22" />
+                <attribute id="Object1" value="CON_Drink_Bottle_Beer_A" type="22" />
+                <attribute id="Object2" value="CON_Food_Dinner_A" type="22" />
+                <attribute id="RequiredSkillLevel" value="0" type="4" />
+                <attribute id="StatsID" value="CON_Food_Stew_Dwarven_A" type="22" />
+                <attribute id="CraftAmount" value="7" type="4" />
+            </node>
+
+            <!-- Make scraps -->
+            <node id="Combo">
+                <attribute id="CombinationID" value="LFR_LOOT_Scraps_Cloth_A" type="22" />
+                <attribute id="RecipeCategory" value="Objects" type="22" />
+                <attribute id="Object1" value="ITEM_FoldedShirts" type="22" />
+                <attribute id="Category2" value="Knife" type="22" />
+                <attribute id="RequiredSkillLevel" value="0" type="4" />
+                <attribute id="StatsID" value="LOOT_Scraps_Cloth_A" type="22" />
+                <attribute id="CraftAmount" value="2" type="4" />
+            </node>
+            <node id="Combo">
+                <attribute id="CombinationID" value="LFR_LOOT_Scraps_Cloth_B" type="22" />
+                <attribute id="RecipeCategory" value="Objects" type="22" />
+                <attribute id="Object1" value="ITEM_FoldedShirts" type="22" />
+                <attribute id="Category2" value="Dagger" type="22" />
+                <attribute id="RequiredSkillLevel" value="0" type="4" />
+                <attribute id="StatsID" value="LOOT_Scraps_Cloth_A" type="22" />
+                <attribute id="CraftAmount" value="2" type="4" />
+            </node>
+
+            <!-- Make Tormented Souls -->
+            <node id="Combo">
+                <attribute id="CombinationID" value="LFR_AMER_LOOT_Soul_Tormented_A" type="22" />
+                <attribute id="RecipeCategory" value="Objects" type="22" />
+                <attribute id="Object1" value="LOOT_Skull_Human_A_Magic" type="22" />
+                <attribute id="Object2" value="SCROLL_Resurrect_1" type="22" />
+                <attribute id="RequiredSkillLevel" value="4" type="4" />
+                <attribute id="StatsID" value="AMER_LOOT_Soul_Tormented_A" type="22" />
+                <attribute id="CraftAmount" value="7" type="4" />
+            </node>
+            <node id="Combo">
+                <attribute id="CombinationID" value="LFR_AMER_LOOT_Soul_Tormented_B" type="22" />
+                <attribute id="RecipeCategory" value="Objects" type="22" />
+                <attribute id="Object1" value="LOOT_Skull_Human_A_Magic_Tattooed" type="22" />
+                <attribute id="Object2" value="SCROLL_Resurrect_1" type="22" />
+                <attribute id="RequiredSkillLevel" value="4" type="4" />
+                <attribute id="StatsID" value="AMER_LOOT_Soul_Tormented_A" type="22" />
+                <attribute id="CraftAmount" value="7" type="4" />
+            </node>
+            <node id="Combo">
+                <attribute id="CombinationID" value="LFR_AMER_LOOT_Soul_Tormented_C" type="22" />
+                <attribute id="RecipeCategory" value="Objects" type="22" />
+                <attribute id="Object1" value="LOOT_Skull_Human_A_Magic_Ancient" type="22" />
+                <attribute id="Object2" value="SCROLL_Resurrect_1" type="22" />
+                <attribute id="RequiredSkillLevel" value="4" type="4" />
+                <attribute id="StatsID" value="AMER_LOOT_Soul_Tormented_A" type="22" />
+                <attribute id="CraftAmount" value="7" type="4" />
+            </node>
+
+            <!-- Make Scope -->
+            <node id="Combo">
+                <attribute id="CombinationID" value="LFR_TOOL_Scope_A" type="22" />
+                <attribute id="RecipeCategory" value="Objects" type="22" />
+                <attribute id="Object1" value="TOOL_IdentifyingGlass" type="22" />
+                <attribute id="Object2" value="LOOT_OreBar_A_Silver_A" type="22" />
+                <attribute id="RequiredSkillLevel" value="5" type="4" />
+                <attribute id="StatsID" value="TOOL_Scope_A" type="22" />
+                <attribute id="CraftAmount" value="7" type="4" />
+            </node>
+
+            <!-- Extract essences from scrolls -->
+            <node id="Combo">
+                <attribute id="CombinationID" value="LFR_LOOT_Essence_Air_A" type="22" />
+                <attribute id="RecipeCategory" value="Objects" type="22" />
+                <attribute id="Object1" value="TOOL_Pouch_Dust_Pixie_A" type="22" />
+                <attribute id="Object2" value="Scroll_Skill_Air_Blank_A" type="22" />
+                <attribute id="RequiredSkillLevel" value="5" type="4" />
+                <attribute id="StatsID" value="LOOT_Essence_Air_A" type="22" />
+                <attribute id="CraftAmount" value="7" type="4" />
+            </node>
+            <node id="Combo">
+                <attribute id="CombinationID" value="LFR_LOOT_Essence_Earth_A" type="22" />
+                <attribute id="RecipeCategory" value="Objects" type="22" />
+                <attribute id="Object1" value="TOOL_Pouch_Dust_Pixie_A" type="22" />
+                <attribute id="Object2" value="Scroll_Skill_Earth_Blank_A" type="22" />
+                <attribute id="RequiredSkillLevel" value="5" type="4" />
+                <attribute id="StatsID" value="LOOT_Essence_Earth_A" type="22" />
+                <attribute id="CraftAmount" value="7" type="4" />
+            </node>
+            <node id="Combo">
+                <attribute id="CombinationID" value="LFR_LOOT_Essence_Fire_A" type="22" />
+                <attribute id="RecipeCategory" value="Objects" type="22" />
+                <attribute id="Object1" value="TOOL_Pouch_Dust_Pixie_A" type="22" />
+                <attribute id="Object2" value="Scroll_Skill_Fire_Blank_A" type="22" />
+                <attribute id="RequiredSkillLevel" value="5" type="4" />
+                <attribute id="StatsID" value="LOOT_Essence_Fire_A" type="22" />
+                <attribute id="CraftAmount" value="7" type="4" />
+            </node>
+            <node id="Combo">
+                <attribute id="CombinationID" value="LFR_LOOT_Essence_Water_A" type="22" />
+                <attribute id="RecipeCategory" value="Objects" type="22" />
+                <attribute id="Object1" value="TOOL_Pouch_Dust_Pixie_A" type="22" />
+                <attribute id="Object2" value="Scroll_Skill_Water_Blank_A" type="22" />
+                <attribute id="RequiredSkillLevel" value="5" type="4" />
+                <attribute id="StatsID" value="LOOT_Essence_Water_A" type="22" />
+                <attribute id="CraftAmount" value="7" type="4" />
+            </node>
+
+            <!-- Melt stuff -->
+            <node id="Combo">
+                <attribute id="CombinationID" value="Oven_TOOL_Hammer" type="22" />
+                <attribute id="RecipeCategory" value="Objects" type="22" />
+                <attribute id="Category1" value="Oven" type="22" />
+                <attribute id="Category2" value="TOOL_Hammer" type="22" />
+                <attribute id="RequiredSkill" value="Blacksmithing" type="22" />
+                <attribute id="RequiredSkillLevel" value="1" type="4" />
+                <attribute id="StatsID" value="LOOT_OreBar_A_Iron_A" type="22" />
+                <attribute id="CraftAmount" value="3" type="4" />
+            </node>
+            <node id="Combo">
+                <attribute id="CombinationID" value="Oven_TOOL_Hammer" type="22" />
+                <attribute id="RecipeCategory" value="Objects" type="22" />
+                <attribute id="Category1" value="Oven" type="22" />
+                <attribute id="Category2" value="TOOL_RepairHammer" type="22" />
+                <attribute id="RequiredSkill" value="Blacksmithing" type="22" />
+                <attribute id="RequiredSkillLevel" value="1" type="4" />
+                <attribute id="StatsID" value="LOOT_OreBar_A_Iron_A" type="22" />
+                <attribute id="CraftAmount" value="3" type="4" />
+            </node>
+
         </children>
     </node>
 </region>
