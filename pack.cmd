@@ -30,7 +30,7 @@ robocopy /S %SRC_DIR%\Mod\Data %MOD_BUILD_DIR% >nul
 
 if %WITH_ADDITIONAL_CRAFTING_RECIPES% == yes (
     echo Incorporating additional crafting recipes...
-    xcopy /y %SRC_DIR%\CustomItemCombos\*.* %MOD_BUILD_DIR%\Public\Epic_Encounters_071a986c-9bfa-425e-ac72-7e26177c08f6\Stats >nul
+    xcopy /exclude:readme.txt /y %SRC_DIR%\CustomItemCombos\*.* %MOD_BUILD_DIR%\Public\Epic_Encounters_071a986c-9bfa-425e-ac72-7e26177c08f6\Stats >nul
 )
 
 echo Compressing localization XML...
@@ -52,6 +52,7 @@ rmdir /s /q %OUTPUT_DIR% 2>nul
 mkdir %OUTPUT_DIR%
 %DIVINE% -g dos2de -a create-package -c lz4hc -s %MOD_BUILD_DIR% -d %OUTPUT_DIR%\%PAK_NAME%
 copy /y %SRC_DIR%\Mod\readme.txt %OUTPUT_DIR%\EpicEncountersReadme.txt >nul
+if %WITH_ADDITIONAL_CRAFTING_RECIPES% == yes copy /y %SRC_DIR%\CustomItemCombos\readme.txt %OUTPUT_DIR%\NewCraftingRecipes.txt >nul
 
 echo Building main game russian translation PAK...
 robocopy /S %SRC_DIR%\MainGameRussianTranslation\Localization %BUILD_DIR%\MainGameRussianTranslation\Localization >nul
