@@ -1,0 +1,23 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+TriggerRegisterForPlayers(TRIGGER_AMER_LED_REGION_WeaversAppear);
+
+CharacterSetOnStage(CHARACTER_AMER_LED_Ambush_ZeeWeaver01, 0);
+CharacterSetOnStage(CHARACTER_AMER_LED_Ambush_ZeeWeaver02, 0);
+CharacterSetOnStage(CHARACTER_AMER_LED_Ambush_ZeeWeaver03, 0);
+KBSECTION
+IF
+	CharacterEnteredTrigger(_, TRIGGER_AMER_LED_REGION_WeaversAppear)
+THEN
+	CharacterSetOnStage(CHARACTER_AMER_LED_Ambush_ZeeWeaver01, 1);
+	CharacterSetOnStage(CHARACTER_AMER_LED_Ambush_ZeeWeaver02, 1);
+	CharacterSetOnStage(CHARACTER_AMER_LED_Ambush_ZeeWeaver03, 1);
+	CharacterPlayAnimation(CHARACTER_AMER_LED_Ambush_ZeeWeaver01, "spawn", "AMER_LED_WeaversAppear");
+	CharacterPlayAnimation(CHARACTER_AMER_LED_Ambush_ZeeWeaver02, "spawn", "AMER_LED_WeaversAppear");
+	CharacterPlayAnimation(CHARACTER_AMER_LED_Ambush_ZeeWeaver03, "spawn", "AMER_LED_WeaversAppear");
+	TriggerUnregisterForPlayers(TRIGGER_AMER_LED_REGION_WeaversAppear);
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "__Start"

@@ -1,0 +1,992 @@
+<?xml version='1.0' encoding='utf-8'?>
+<save>
+	<version major="2" minor="0" revision="0" build="0" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="root">
+			<children>
+				<node id="GameObjects">
+					<attribute id="Acceleration" type="6" value="128" />
+					<attribute id="CastBone" type="23" value="Dummy_L_Hand" />
+					<attribute id="Flag" type="4" value="0" />
+					<attribute id="GroupID" type="5" value="0" />
+					<attribute id="ImpactFX" type="22" value="FX_GP_Animal_Spider_Boss_B_Attack_B_Impact" />
+					<attribute id="ImpactFXSize" type="6" value="0" />
+					<attribute id="LevelName" type="22" value="" />
+					<attribute id="LifeTime" type="6" value="9" />
+					<attribute id="MapKey" type="22" value="07bc912c-15c4-470c-9409-f3360fc0110d" />
+					<attribute id="Name" type="23" value="AMER_PROJ_NaturesFury" />
+					<attribute id="PathMaxArcDist" type="6" value="-1" />
+					<attribute id="PathMinArcDist" type="6" value="-1" />
+					<attribute id="PathRadius" type="6" value="1" />
+					<attribute id="PathRepeat" type="5" value="2" />
+					<attribute id="PathShift" type="6" value="0.5" />
+					<attribute id="PhysicsTemplate" type="22" value="a465845b-908e-4c19-9ee9-643c5f2fbfa1" />
+					<attribute id="ProjectilePath" type="1" value="0" />
+					<attribute id="RotateImpact" type="19" value="True" />
+					<attribute id="Scale" type="6" value="1" />
+					<attribute id="Speed" type="6" value="32" />
+					<attribute id="TrailFX" type="22" value="FX_GP_Animal_Spider_Boss_B_Attack_B" />
+					<attribute id="Type" type="22" value="projectile" />
+					<attribute id="VisualTemplate" type="22" value="" />
+					<children>
+						<node id="AIBounds" />
+					</children>
+				</node>
+				<node id="GameObjects">
+					<attribute id="Acceleration" type="6" value="7" />
+					<attribute id="CastBone" type="23" value="" />
+					<attribute id="Flag" type="4" value="0" />
+					<attribute id="GroupID" type="5" value="0" />
+					<attribute id="ImpactFX" type="22" value="" />
+					<attribute id="ImpactFXSize" type="6" value="0" />
+					<attribute id="LevelName" type="22" value="" />
+					<attribute id="LifeTime" type="6" value="3" />
+					<attribute id="MapKey" type="22" value="1b61b719-1129-4df5-b348-5c3cec3368a4" />
+					<attribute id="Name" type="23" value="AMER_DummyProj_Maze" />
+					<attribute id="PathMaxArcDist" type="6" value="-1" />
+					<attribute id="PathMinArcDist" type="6" value="-1" />
+					<attribute id="PathRadius" type="6" value="1" />
+					<attribute id="PathRepeat" type="5" value="1" />
+					<attribute id="PathShift" type="6" value="0" />
+					<attribute id="PhysicsTemplate" type="22" value="" />
+					<attribute id="ProjectilePath" type="1" value="0" />
+					<attribute id="RotateImpact" type="19" value="False" />
+					<attribute id="Scale" type="6" value="1" />
+					<attribute id="Speed" type="6" value="0" />
+					<attribute id="TrailFX" type="22" value="FX_Skills_Earth_Shield_Summon_A" />
+					<attribute id="Type" type="22" value="projectile" />
+					<attribute id="VisualTemplate" type="22" value="" />
+					<children>
+						<node id="AIBounds" />
+					</children>
+				</node>
+				<node id="GameObjects">
+					<attribute id="Acceleration" type="6" value="16" />
+					<attribute id="CastBone" type="23" value="Dummy_L_Hand" />
+					<attribute id="Flag" type="4" value="0" />
+					<attribute id="GroupID" type="5" value="0" />
+					<attribute id="ImpactFX" type="22" value="FX_GP_Arrow_Knockdown_Impact_A" />
+					<attribute id="ImpactFXSize" type="6" value="0" />
+					<attribute id="LevelName" type="22" value="" />
+					<attribute id="LifeTime" type="6" value="10" />
+					<attribute id="MapKey" type="22" value="1f0c5cc5-7923-425d-90cc-9028a2ac8beb" />
+					<attribute id="Name" type="23" value="AMER_PROJ_RodOfCommand" />
+					<attribute id="PathMaxArcDist" type="6" value="-1" />
+					<attribute id="PathMinArcDist" type="6" value="-1" />
+					<attribute id="PathRadius" type="6" value="1" />
+					<attribute id="PathRepeat" type="5" value="2" />
+					<attribute id="PathShift" type="6" value="0.5" />
+					<attribute id="PhysicsTemplate" type="22" value="a465845b-908e-4c19-9ee9-643c5f2fbfa1" />
+					<attribute id="ProjectilePath" type="1" value="0" />
+					<attribute id="RotateImpact" type="19" value="True" />
+					<attribute id="Scale" type="6" value="1" />
+					<attribute id="Speed" type="6" value="32" />
+					<attribute id="TrailFX" type="22" value="FX_Skills_WitchCraft_GrenadeTerror_Trail_A" />
+					<attribute id="Type" type="22" value="projectile" />
+					<attribute id="VisualTemplate" type="22" value="" />
+					<children>
+						<node id="AIBounds" />
+					</children>
+				</node>
+				<node id="GameObjects">
+					<attribute id="Acceleration" type="6" value="0" />
+					<attribute id="CastBone" type="23" value="Dummy_L_Hand" />
+					<attribute id="Flag" type="4" value="0" />
+					<attribute id="GroupID" type="5" value="0" />
+					<attribute id="ImpactFX" type="22" value="FX_GP_Arrow_Knockdown_Impact_A" />
+					<attribute id="ImpactFXSize" type="6" value="0" />
+					<attribute id="LevelName" type="22" value="" />
+					<attribute id="LifeTime" type="6" value="10" />
+					<attribute id="MapKey" type="22" value="2406bf75-21fb-4cc5-9ee2-d0f8df36fa8e" />
+					<attribute id="Name" type="23" value="AMER_PROJ_IgnoranceBolt" />
+					<attribute id="PathMaxArcDist" type="6" value="-1" />
+					<attribute id="PathMinArcDist" type="6" value="-1" />
+					<attribute id="PathRadius" type="6" value="1" />
+					<attribute id="PathRepeat" type="5" value="1" />
+					<attribute id="PathShift" type="6" value="0.5" />
+					<attribute id="PhysicsTemplate" type="22" value="a465845b-908e-4c19-9ee9-643c5f2fbfa1" />
+					<attribute id="ProjectilePath" type="1" value="0" />
+					<attribute id="RotateImpact" type="19" value="True" />
+					<attribute id="Scale" type="6" value="1" />
+					<attribute id="Speed" type="6" value="100" />
+					<attribute id="TrailFX" type="22" value="FX_Skills_Ranger_Arrow_Knockdown_Travel_B" />
+					<attribute id="Type" type="22" value="projectile" />
+					<attribute id="VisualTemplate" type="22" value="" />
+					<children>
+						<node id="AIBounds" />
+					</children>
+				</node>
+				<node id="GameObjects">
+					<attribute id="Acceleration" type="6" value="0" />
+					<attribute id="CastBone" type="23" value="Dummy_R_Hand" />
+					<attribute id="Flag" type="4" value="0" />
+					<attribute id="GroupID" type="5" value="0" />
+					<attribute id="ImpactFX" type="22" value="FX_Skills_Earth_GrenadeTremor_Impact_A" />
+					<attribute id="ImpactFXSize" type="6" value="2" />
+					<attribute id="LevelName" type="22" value="" />
+					<attribute id="LifeTime" type="6" value="10" />
+					<attribute id="MapKey" type="22" value="3bdff298-ad8d-4645-a229-b7e4a2cf9ea0" />
+					<attribute id="Name" type="23" value="AMER_DummyProj_MelchiorRestraintDamage" />
+					<attribute id="PathMaxArcDist" type="6" value="-1" />
+					<attribute id="PathMinArcDist" type="6" value="-1" />
+					<attribute id="PathRadius" type="6" value="5" />
+					<attribute id="PathRepeat" type="5" value="1" />
+					<attribute id="PathShift" type="6" value="0.6" />
+					<attribute id="PhysicsTemplate" type="22" value="a465845b-908e-4c19-9ee9-643c5f2fbfa1" />
+					<attribute id="ProjectilePath" type="1" value="3" />
+					<attribute id="RotateImpact" type="19" value="False" />
+					<attribute id="Scale" type="6" value="1" />
+					<attribute id="Speed" type="6" value="-1" />
+					<attribute id="TrailFX" type="22" value="FX_Skills_Earth_GrenadeStone_Trail_A" />
+					<attribute id="Type" type="22" value="projectile" />
+					<attribute id="VisualTemplate" type="22" value="5bf68828-f181-4384-a268-f64de435d5e6" />
+					<children>
+						<node id="AIBounds" />
+					</children>
+				</node>
+				<node id="GameObjects">
+					<attribute id="Acceleration" type="6" value="0" />
+					<attribute id="CastBone" type="23" value="" />
+					<attribute id="Flag" type="4" value="0" />
+					<attribute id="GroupID" type="5" value="0" />
+					<attribute id="ImpactFX" type="22" value="FX_GP_Regenerate" />
+					<attribute id="ImpactFXSize" type="6" value="0" />
+					<attribute id="LevelName" type="22" value="" />
+					<attribute id="LifeTime" type="6" value="10" />
+					<attribute id="MapKey" type="22" value="42b0c557-8a93-44f2-8722-2247f09d3f41" />
+					<attribute id="Name" type="23" value="AMER_DummyProj_MassHeal" />
+					<attribute id="PathMaxArcDist" type="6" value="-1" />
+					<attribute id="PathMinArcDist" type="6" value="-1" />
+					<attribute id="PathRadius" type="6" value="1" />
+					<attribute id="PathRepeat" type="5" value="1" />
+					<attribute id="PathShift" type="6" value="1" />
+					<attribute id="PhysicsTemplate" type="22" value="a465845b-908e-4c19-9ee9-643c5f2fbfa1" />
+					<attribute id="ProjectilePath" type="1" value="0" />
+					<attribute id="RotateImpact" type="19" value="False" />
+					<attribute id="Scale" type="6" value="3" />
+					<attribute id="Speed" type="6" value="1" />
+					<attribute id="TrailFX" type="22" value="" />
+					<attribute id="Type" type="22" value="projectile" />
+					<attribute id="VisualTemplate" type="22" value="" />
+					<children>
+						<node id="AIBounds" />
+					</children>
+				</node>
+				<node id="GameObjects">
+					<attribute id="Acceleration" type="6" value="0" />
+					<attribute id="CastBone" type="23" value="Dummy_L_Hand" />
+					<attribute id="Flag" type="4" value="0" />
+					<attribute id="GroupID" type="5" value="0" />
+					<attribute id="ImpactFX" type="22" value="FX_Skills_Water_GrenadeHealing_Impact_A" />
+					<attribute id="ImpactFXSize" type="6" value="5" />
+					<attribute id="LevelName" type="22" value="" />
+					<attribute id="LifeTime" type="6" value="10" />
+					<attribute id="MapKey" type="22" value="43caf689-1ea2-4324-8428-9a47eb08b0cd" />
+					<attribute id="Name" type="23" value="AMER_DummyProj_Angel" />
+					<attribute id="PathMaxArcDist" type="6" value="-1" />
+					<attribute id="PathMinArcDist" type="6" value="-1" />
+					<attribute id="PathRadius" type="6" value="1" />
+					<attribute id="PathRepeat" type="5" value="1" />
+					<attribute id="PathShift" type="6" value="0.5" />
+					<attribute id="PhysicsTemplate" type="22" value="a465845b-908e-4c19-9ee9-643c5f2fbfa1" />
+					<attribute id="ProjectilePath" type="1" value="0" />
+					<attribute id="RotateImpact" type="19" value="True" />
+					<attribute id="Scale" type="6" value="1" />
+					<attribute id="Speed" type="6" value="100" />
+					<attribute id="TrailFX" type="22" value="" />
+					<attribute id="Type" type="22" value="projectile" />
+					<attribute id="VisualTemplate" type="22" value="" />
+					<children>
+						<node id="AIBounds" />
+					</children>
+				</node>
+				<node id="GameObjects">
+					<attribute id="Acceleration" type="6" value="128" />
+					<attribute id="CastBone" type="23" value="" />
+					<attribute id="Flag" type="4" value="0" />
+					<attribute id="GroupID" type="5" value="0" />
+					<attribute id="ImpactFX" type="22" value="FX_GP_Arrow_Knockdown_Impact_A" />
+					<attribute id="ImpactFXSize" type="6" value="0" />
+					<attribute id="LevelName" type="22" value="" />
+					<attribute id="LifeTime" type="6" value="10" />
+					<attribute id="MapKey" type="22" value="56d72ab4-3bf6-4753-970d-5b3df13442bb" />
+					<attribute id="Name" type="23" value="AMER_PROJ_Chthonian" />
+					<attribute id="PathMaxArcDist" type="6" value="-1" />
+					<attribute id="PathMinArcDist" type="6" value="-1" />
+					<attribute id="PathRadius" type="6" value="1" />
+					<attribute id="PathRepeat" type="5" value="1" />
+					<attribute id="PathShift" type="6" value="0.5" />
+					<attribute id="PhysicsTemplate" type="22" value="a465845b-908e-4c19-9ee9-643c5f2fbfa1" />
+					<attribute id="ProjectilePath" type="1" value="0" />
+					<attribute id="RecieveDecal" type="19" value="False" />
+					<attribute id="RotateImpact" type="19" value="False" />
+					<attribute id="Scale" type="6" value="1" />
+					<attribute id="Speed" type="6" value="8" />
+					<attribute id="TrailFX" type="22" value="FX_Skills_Earth_EnemyEarthProjectile_Projectile_A" />
+					<attribute id="Type" type="22" value="projectile" />
+					<attribute id="VisualTemplate" type="22" value="" />
+					<children>
+						<node id="AIBounds" />
+					</children>
+				</node>
+				<node id="GameObjects">
+					<attribute id="Acceleration" type="6" value="0" />
+					<attribute id="CastBone" type="23" value="Dummy_R_Hand" />
+					<attribute id="Flag" type="4" value="0" />
+					<attribute id="GroupID" type="5" value="0" />
+					<attribute id="ImpactFX" type="22" value="FX_Skills_Earth_GrenadeTremor_Impact_A" />
+					<attribute id="ImpactFXSize" type="6" value="4" />
+					<attribute id="LevelName" type="22" value="" />
+					<attribute id="LifeTime" type="6" value="10" />
+					<attribute id="MapKey" type="22" value="5a945c2b-04f5-4a2f-9ba0-bd815ff01d71" />
+					<attribute id="Name" type="23" value="AMER_DummyProj_ChthonianAoE" />
+					<attribute id="PathMaxArcDist" type="6" value="-1" />
+					<attribute id="PathMinArcDist" type="6" value="-1" />
+					<attribute id="PathRadius" type="6" value="5" />
+					<attribute id="PathRepeat" type="5" value="1" />
+					<attribute id="PathShift" type="6" value="0.6" />
+					<attribute id="PhysicsTemplate" type="22" value="a465845b-908e-4c19-9ee9-643c5f2fbfa1" />
+					<attribute id="ProjectilePath" type="1" value="3" />
+					<attribute id="RotateImpact" type="19" value="False" />
+					<attribute id="Scale" type="6" value="1" />
+					<attribute id="Speed" type="6" value="-1" />
+					<attribute id="TrailFX" type="22" value="FX_Skills_Earth_GrenadeStone_Trail_A" />
+					<attribute id="Type" type="22" value="projectile" />
+					<attribute id="VisualTemplate" type="22" value="5bf68828-f181-4384-a268-f64de435d5e6" />
+					<children>
+						<node id="AIBounds" />
+					</children>
+				</node>
+				<node id="GameObjects">
+					<attribute id="Acceleration" type="6" value="0" />
+					<attribute id="CastBone" type="23" value="" />
+					<attribute id="Flag" type="4" value="0" />
+					<attribute id="GroupID" type="5" value="0" />
+					<attribute id="ImpactFX" type="22" value="FX_Skills_Water_GrenadeFrost_Impact_A" />
+					<attribute id="ImpactFXSize" type="6" value="11" />
+					<attribute id="LevelName" type="22" value="" />
+					<attribute id="LifeTime" type="6" value="10" />
+					<attribute id="MapKey" type="22" value="5cb7eb9a-9470-4144-9991-29ee3fb6cd6f" />
+					<attribute id="Name" type="23" value="AMER_PROJ_WinterWolfBreath" />
+					<attribute id="PathMaxArcDist" type="6" value="-1" />
+					<attribute id="PathMinArcDist" type="6" value="-1" />
+					<attribute id="PathRadius" type="6" value="2" />
+					<attribute id="PathRepeat" type="5" value="1" />
+					<attribute id="PathShift" type="6" value="0.4" />
+					<attribute id="PhysicsTemplate" type="22" value="a465845b-908e-4c19-9ee9-643c5f2fbfa1" />
+					<attribute id="ProjectilePath" type="1" value="0" />
+					<attribute id="RotateImpact" type="19" value="False" />
+					<attribute id="Scale" type="6" value="1" />
+					<attribute id="Speed" type="6" value="25" />
+					<attribute id="TrailFX" type="22" value="FX_Creatures_Skills_Dragon_Astral_IceShard_Projectile_A" />
+					<attribute id="Type" type="22" value="projectile" />
+					<attribute id="VisualTemplate" type="22" value="" />
+					<children>
+						<node id="AIBounds" />
+					</children>
+				</node>
+				<node id="GameObjects">
+					<attribute id="Acceleration" type="6" value="48" />
+					<attribute id="CastBone" type="23" value="Dummy_L_Hand" />
+					<attribute id="Flag" type="4" value="0" />
+					<attribute id="GroupID" type="5" value="0" />
+					<attribute id="ImpactFX" type="22" value="FX_GP_Mage_Impact_B" />
+					<attribute id="ImpactFXSize" type="6" value="0" />
+					<attribute id="LevelName" type="22" value="" />
+					<attribute id="LifeTime" type="6" value="10" />
+					<attribute id="MapKey" type="22" value="5cbc4efb-c492-464e-a681-ffb9280293c8" />
+					<attribute id="Name" type="23" value="AMER_PROJ_ElementalHavoc" />
+					<attribute id="PathMaxArcDist" type="6" value="-1" />
+					<attribute id="PathMinArcDist" type="6" value="-1" />
+					<attribute id="PathRadius" type="6" value="0.7" />
+					<attribute id="PathRepeat" type="5" value="1" />
+					<attribute id="PathShift" type="6" value="0.6" />
+					<attribute id="PhysicsTemplate" type="22" value="a465845b-908e-4c19-9ee9-643c5f2fbfa1" />
+					<attribute id="ProjectilePath" type="1" value="1" />
+					<attribute id="RotateImpact" type="19" value="False" />
+					<attribute id="Scale" type="6" value="1" />
+					<attribute id="Speed" type="6" value="1" />
+					<attribute id="TrailFX" type="22" value="FX_GP_Mage_Projectile_B" />
+					<attribute id="Type" type="22" value="projectile" />
+					<attribute id="VisualTemplate" type="22" value="" />
+					<children>
+						<node id="AIBounds" />
+					</children>
+				</node>
+				<node id="GameObjects">
+					<attribute id="Acceleration" type="6" value="0" />
+					<attribute id="CastBone" type="23" value="Dummy_R_Hand" />
+					<attribute id="Flag" type="4" value="0" />
+					<attribute id="GroupID" type="5" value="0" />
+					<attribute id="ImpactFX" type="22" value="FX_GP_Arrow_Silver_Impact_A" />
+					<attribute id="ImpactFXSize" type="6" value="4" />
+					<attribute id="LevelName" type="22" value="" />
+					<attribute id="LifeTime" type="6" value="10" />
+					<attribute id="MapKey" type="22" value="62cfd47b-d76b-4170-8159-bd6b875fcb5e" />
+					<attribute id="Name" type="23" value="AMER_DummyProj_Cruelty" />
+					<attribute id="PathMaxArcDist" type="6" value="-1" />
+					<attribute id="PathMinArcDist" type="6" value="-1" />
+					<attribute id="PathRadius" type="6" value="5" />
+					<attribute id="PathRepeat" type="5" value="1" />
+					<attribute id="PathShift" type="6" value="0.6" />
+					<attribute id="PhysicsTemplate" type="22" value="a465845b-908e-4c19-9ee9-643c5f2fbfa1" />
+					<attribute id="ProjectilePath" type="1" value="3" />
+					<attribute id="RotateImpact" type="19" value="False" />
+					<attribute id="Scale" type="6" value="1" />
+					<attribute id="Speed" type="6" value="-1" />
+					<attribute id="TrailFX" type="22" value="" />
+					<attribute id="Type" type="22" value="projectile" />
+					<attribute id="VisualTemplate" type="22" value="5bf68828-f181-4384-a268-f64de435d5e6" />
+					<children>
+						<node id="AIBounds" />
+					</children>
+				</node>
+				<node id="GameObjects">
+					<attribute id="Acceleration" type="6" value="16" />
+					<attribute id="CastBone" type="23" value="Dummy_L_Hand" />
+					<attribute id="Flag" type="4" value="0" />
+					<attribute id="GroupID" type="5" value="0" />
+					<attribute id="ImpactFX" type="22" value="FX_Creatures_Flies_A_BigGroup" />
+					<attribute id="ImpactFXSize" type="6" value="0" />
+					<attribute id="LevelName" type="22" value="" />
+					<attribute id="LifeTime" type="6" value="10" />
+					<attribute id="MapKey" type="22" value="70fc1931-57d2-476f-925d-218de3b44d06" />
+					<attribute id="Name" type="23" value="AMER_PROJ_InsectPlague" />
+					<attribute id="PathMaxArcDist" type="6" value="-1" />
+					<attribute id="PathMinArcDist" type="6" value="-1" />
+					<attribute id="PathRadius" type="6" value="1" />
+					<attribute id="PathRepeat" type="5" value="1" />
+					<attribute id="PathShift" type="6" value="0.4" />
+					<attribute id="PhysicsTemplate" type="22" value="a465845b-908e-4c19-9ee9-643c5f2fbfa1" />
+					<attribute id="ProjectilePath" type="1" value="0" />
+					<attribute id="RotateImpact" type="19" value="True" />
+					<attribute id="Scale" type="6" value="1" />
+					<attribute id="Speed" type="6" value="2" />
+					<attribute id="TrailFX" type="22" value="FX_Creatures_Flies_A_BigGroup" />
+					<attribute id="Type" type="22" value="projectile" />
+					<attribute id="VisualTemplate" type="22" value="" />
+					<children>
+						<node id="AIBounds" />
+					</children>
+				</node>
+				<node id="GameObjects">
+					<attribute id="Acceleration" type="6" value="0" />
+					<attribute id="CastBone" type="23" value="Dummy_L_Hand" />
+					<attribute id="Flag" type="4" value="0" />
+					<attribute id="GroupID" type="5" value="0" />
+					<attribute id="ImpactFX" type="22" value="FX_GP_Arrow_Impact_A" />
+					<attribute id="ImpactFXSize" type="6" value="0" />
+					<attribute id="LevelName" type="22" value="" />
+					<attribute id="LifeTime" type="6" value="10" />
+					<attribute id="MapKey" type="22" value="71271ada-bf12-4758-8ef3-e80bf3d519a9" />
+					<attribute id="Name" type="23" value="AMER_PROJ_Arrow" />
+					<attribute id="PathMaxArcDist" type="6" value="-1" />
+					<attribute id="PathMinArcDist" type="6" value="-1" />
+					<attribute id="PathRadius" type="6" value="1" />
+					<attribute id="PathRepeat" type="5" value="1" />
+					<attribute id="PathShift" type="6" value="0.5" />
+					<attribute id="PhysicsTemplate" type="22" value="a465845b-908e-4c19-9ee9-643c5f2fbfa1" />
+					<attribute id="ProjectilePath" type="1" value="0" />
+					<attribute id="RotateImpact" type="19" value="True" />
+					<attribute id="Scale" type="6" value="1" />
+					<attribute id="Speed" type="6" value="48" />
+					<attribute id="TrailFX" type="22" value="FX_Skills_Ranger_Arrow_Silver_Travel_B" />
+					<attribute id="Type" type="22" value="projectile" />
+					<attribute id="VisualTemplate" type="22" value="" />
+					<children>
+						<node id="AIBounds" />
+					</children>
+				</node>
+				<node id="GameObjects">
+					<attribute id="Acceleration" type="6" value="0" />
+					<attribute id="CastBone" type="23" value="Dummy_L_Hand" />
+					<attribute id="Flag" type="4" value="0" />
+					<attribute id="GroupID" type="5" value="0" />
+					<attribute id="ImpactFX" type="22" value="FX_GP_Arrow_Knockdown_Impact_A" />
+					<attribute id="ImpactFXSize" type="6" value="0" />
+					<attribute id="LevelName" type="22" value="" />
+					<attribute id="LifeTime" type="6" value="10" />
+					<attribute id="MapKey" type="22" value="7273fc9a-514b-44d6-98b8-0facb1bd279a" />
+					<attribute id="Name" type="23" value="AMER_PROJ_MomentumProc" />
+					<attribute id="PathMaxArcDist" type="6" value="-1" />
+					<attribute id="PathMinArcDist" type="6" value="-1" />
+					<attribute id="PathRadius" type="6" value="1" />
+					<attribute id="PathRepeat" type="5" value="1" />
+					<attribute id="PathShift" type="6" value="0.5" />
+					<attribute id="PhysicsTemplate" type="22" value="a465845b-908e-4c19-9ee9-643c5f2fbfa1" />
+					<attribute id="ProjectilePath" type="1" value="0" />
+					<attribute id="RotateImpact" type="19" value="True" />
+					<attribute id="Scale" type="6" value="1" />
+					<attribute id="Speed" type="6" value="48" />
+					<attribute id="TrailFX" type="22" value="FX_Skills_Ranger_Arrow_Silver_Travel_B" />
+					<attribute id="Type" type="22" value="projectile" />
+					<attribute id="VisualTemplate" type="22" value="" />
+					<children>
+						<node id="AIBounds" />
+					</children>
+				</node>
+				<node id="GameObjects">
+					<attribute id="Acceleration" type="6" value="32" />
+					<attribute id="CastBone" type="23" value="Dummy_L_Hand" />
+					<attribute id="Flag" type="4" value="0" />
+					<attribute id="GroupID" type="5" value="0" />
+					<attribute id="ImpactFX" type="22" value="FX_Creatures_Skills_Animals_Blood_Impact_A" />
+					<attribute id="ImpactFXSize" type="6" value="0" />
+					<attribute id="LevelName" type="22" value="" />
+					<attribute id="LifeTime" type="6" value="10" />
+					<attribute id="MapKey" type="22" value="79c4a200-b2f3-40c1-be8d-39d40c53093c" />
+					<attribute id="Name" type="23" value="AMER_DummyProj_ArcingBlood" />
+					<attribute id="PathMaxArcDist" type="6" value="-1" />
+					<attribute id="PathMinArcDist" type="6" value="-1" />
+					<attribute id="PathRadius" type="6" value="3" />
+					<attribute id="PathRepeat" type="5" value="1" />
+					<attribute id="PathShift" type="6" value="0.4" />
+					<attribute id="PhysicsTemplate" type="22" value="a465845b-908e-4c19-9ee9-643c5f2fbfa1" />
+					<attribute id="ProjectilePath" type="1" value="1" />
+					<attribute id="RotateImpact" type="19" value="False" />
+					<attribute id="Scale" type="6" value="1" />
+					<attribute id="Speed" type="6" value="2" />
+					<attribute id="TrailFX" type="22" value="FX_Creatures_Skills_Animals_Blood_Projectile_A" />
+					<attribute id="Type" type="22" value="projectile" />
+					<attribute id="VisualTemplate" type="22" value="" />
+					<children>
+						<node id="AIBounds" />
+					</children>
+				</node>
+				<node id="GameObjects">
+					<attribute id="Acceleration" type="6" value="20" />
+					<attribute id="CastBone" type="23" value="Dummy_L_Hand" />
+					<attribute id="CastShadow" type="19" value="False" />
+					<attribute id="Flag" type="4" value="0" />
+					<attribute id="GroupID" type="5" value="0" />
+					<attribute id="ImpactFX" type="22" value="FX_Skills_Water_GrenadeWaterBalloon_Impact_B" />
+					<attribute id="ImpactFXSize" type="6" value="10" />
+					<attribute id="LevelName" type="22" value="" />
+					<attribute id="LifeTime" type="6" value="10" />
+					<attribute id="MapKey" type="22" value="7f85d96d-429a-4d45-8d61-d55e2a73f6a6" />
+					<attribute id="Name" type="23" value="AMER_PROJ_Deluge" />
+					<attribute id="PathMaxArcDist" type="6" value="-1" />
+					<attribute id="PathMinArcDist" type="6" value="-1" />
+					<attribute id="PathRadius" type="6" value="1" />
+					<attribute id="PathRepeat" type="5" value="1" />
+					<attribute id="PathShift" type="6" value="0" />
+					<attribute id="PhysicsTemplate" type="22" value="a465845b-908e-4c19-9ee9-643c5f2fbfa1" />
+					<attribute id="ProjectilePath" type="1" value="0" />
+					<attribute id="RotateImpact" type="19" value="True" />
+					<attribute id="Scale" type="6" value="1" />
+					<attribute id="Speed" type="6" value="3" />
+					<attribute id="TrailFX" type="22" value="FX_GP_Arrow_SteamCloud_Impact_A" />
+					<attribute id="Type" type="22" value="projectile" />
+					<attribute id="VisualTemplate" type="22" value="" />
+					<children>
+						<node id="AIBounds" />
+					</children>
+				</node>
+				<node id="GameObjects">
+					<attribute id="Acceleration" type="6" value="20" />
+					<attribute id="CastBone" type="23" value="Dummy_L_Hand" />
+					<attribute id="Flag" type="4" value="0" />
+					<attribute id="GroupID" type="5" value="0" />
+					<attribute id="ImpactFX" type="22" value="FX_GP_Animal_Spider_Boss_B_Attack_C_Impact" />
+					<attribute id="ImpactFXSize" type="6" value="0" />
+					<attribute id="LevelName" type="22" value="" />
+					<attribute id="LifeTime" type="6" value="10" />
+					<attribute id="MapKey" type="22" value="80ebe1bf-811a-4d90-835c-90b82123b063" />
+					<attribute id="Name" type="23" value="AMER_PROJ_DeadlySpore" />
+					<attribute id="PathMaxArcDist" type="6" value="-1" />
+					<attribute id="PathMinArcDist" type="6" value="-1" />
+					<attribute id="PathRadius" type="6" value="4" />
+					<attribute id="PathRepeat" type="5" value="1" />
+					<attribute id="PathShift" type="6" value="-0.1" />
+					<attribute id="PhysicsTemplate" type="22" value="a465845b-908e-4c19-9ee9-643c5f2fbfa1" />
+					<attribute id="ProjectilePath" type="1" value="1" />
+					<attribute id="RotateImpact" type="19" value="True" />
+					<attribute id="Scale" type="6" value="1" />
+					<attribute id="Speed" type="6" value="0" />
+					<attribute id="TrailFX" type="22" value="FX_Skills_Earth_DeadlySpore_Projectile_A" />
+					<attribute id="Type" type="22" value="projectile" />
+					<attribute id="VisualTemplate" type="22" value="" />
+					<children>
+						<node id="AIBounds" />
+					</children>
+				</node>
+				<node id="GameObjects">
+					<attribute id="Acceleration" type="6" value="16" />
+					<attribute id="CastBone" type="23" value="Dummy_L_Hand" />
+					<attribute id="Flag" type="4" value="0" />
+					<attribute id="GroupID" type="5" value="0" />
+					<attribute id="ImpactFX" type="22" value="" />
+					<attribute id="ImpactFXSize" type="6" value="0" />
+					<attribute id="LevelName" type="22" value="" />
+					<attribute id="LifeTime" type="6" value="10" />
+					<attribute id="MapKey" type="22" value="8796803a-4a1a-400f-8514-e1182d1a22c4" />
+					<attribute id="Name" type="23" value="AMER_PROJ_Slashes" />
+					<attribute id="PathMaxArcDist" type="6" value="-1" />
+					<attribute id="PathMinArcDist" type="6" value="-1" />
+					<attribute id="PathRadius" type="6" value="1" />
+					<attribute id="PathRepeat" type="5" value="2" />
+					<attribute id="PathShift" type="6" value="0.5" />
+					<attribute id="PhysicsTemplate" type="22" value="a465845b-908e-4c19-9ee9-643c5f2fbfa1" />
+					<attribute id="ProjectilePath" type="1" value="0" />
+					<attribute id="RotateImpact" type="19" value="True" />
+					<attribute id="Scale" type="6" value="1" />
+					<attribute id="Speed" type="6" value="4" />
+					<attribute id="TrailFX" type="22" value="FX_Skills_WitchCraft_Bloodletting_Impact_A" />
+					<attribute id="Type" type="22" value="projectile" />
+					<attribute id="VisualTemplate" type="22" value="" />
+					<children>
+						<node id="AIBounds" />
+					</children>
+				</node>
+				<node id="GameObjects">
+					<attribute id="Acceleration" type="6" value="32" />
+					<attribute id="CastBone" type="23" value="Dummy_L_Hand" />
+					<attribute id="Flag" type="4" value="0" />
+					<attribute id="GroupID" type="5" value="0" />
+					<attribute id="ImpactFX" type="22" value="FX_Skills_Ranger_Silence_Impact_A" />
+					<attribute id="ImpactFXSize" type="6" value="0" />
+					<attribute id="LevelName" type="22" value="" />
+					<attribute id="LifeTime" type="6" value="10" />
+					<attribute id="MapKey" type="22" value="b4de33a5-b6f2-48bf-b81f-83e64cfd482b" />
+					<attribute id="Name" type="23" value="AMER_PROJ_FingerOfDeath" />
+					<attribute id="PathMaxArcDist" type="6" value="-1" />
+					<attribute id="PathMinArcDist" type="6" value="-1" />
+					<attribute id="PathRadius" type="6" value="1" />
+					<attribute id="PathRepeat" type="5" value="1" />
+					<attribute id="PathShift" type="6" value="0" />
+					<attribute id="PhysicsTemplate" type="22" value="a465845b-908e-4c19-9ee9-643c5f2fbfa1" />
+					<attribute id="ProjectilePath" type="1" value="0" />
+					<attribute id="RotateImpact" type="19" value="True" />
+					<attribute id="Scale" type="6" value="1" />
+					<attribute id="Speed" type="6" value="32" />
+					<attribute id="TrailFX" type="22" value="FX_Skills_Ranger_CorpseExplosion_Projectile_B" />
+					<attribute id="Type" type="22" value="projectile" />
+					<attribute id="VisualTemplate" type="22" value="" />
+					<children>
+						<node id="AIBounds" />
+					</children>
+				</node>
+				<node id="GameObjects">
+					<attribute id="Acceleration" type="6" value="12" />
+					<attribute id="CastBone" type="23" value="Dummy_ArrowFX" />
+					<attribute id="Flag" type="4" value="0" />
+					<attribute id="GroupID" type="5" value="0" />
+					<attribute id="ImpactFX" type="22" value="FX_Skills_Ranger_CorpseExplosion_Impact_A" />
+					<attribute id="ImpactFXSize" type="6" value="0" />
+					<attribute id="LevelName" type="22" value="" />
+					<attribute id="LifeTime" type="6" value="10" />
+					<attribute id="MapKey" type="22" value="b8d03343-6093-4c8c-a5e3-415918b891a8" />
+					<attribute id="Name" type="23" value="AMER_PROJ_Attenuate" />
+					<attribute id="PathMaxArcDist" type="6" value="-1" />
+					<attribute id="PathMinArcDist" type="6" value="-1" />
+					<attribute id="PathRadius" type="6" value="2" />
+					<attribute id="PathRepeat" type="5" value="1" />
+					<attribute id="PathShift" type="6" value="0.5" />
+					<attribute id="PhysicsTemplate" type="22" value="a465845b-908e-4c19-9ee9-643c5f2fbfa1" />
+					<attribute id="ProjectilePath" type="1" value="1" />
+					<attribute id="RotateImpact" type="19" value="True" />
+					<attribute id="Scale" type="6" value="1" />
+					<attribute id="Speed" type="6" value="2" />
+					<attribute id="TrailFX" type="22" value="FX_Skills_Ranger_CorpseExplosion_Projectile_B" />
+					<attribute id="Type" type="22" value="projectile" />
+					<attribute id="VisualTemplate" type="22" value="" />
+					<children>
+						<node id="AIBounds" />
+					</children>
+				</node>
+				<node id="GameObjects">
+					<attribute id="Acceleration" type="6" value="0" />
+					<attribute id="CastBone" type="23" value="Dummy_L_Hand" />
+					<attribute id="Flag" type="4" value="0" />
+					<attribute id="GroupID" type="5" value="0" />
+					<attribute id="ImpactFX" type="22" value="FX_Skills_Air_Storm_Impact_A" />
+					<attribute id="ImpactFXSize" type="6" value="3" />
+					<attribute id="LevelName" type="22" value="" />
+					<attribute id="LifeTime" type="6" value="10" />
+					<attribute id="MapKey" type="22" value="c68cf8ba-26c3-48f1-a79e-ea0667c16ff5" />
+					<attribute id="Name" type="23" value="AMER_DummyProj_Vengeance" />
+					<attribute id="PathMaxArcDist" type="6" value="-1" />
+					<attribute id="PathMinArcDist" type="6" value="-1" />
+					<attribute id="PathRadius" type="6" value="1" />
+					<attribute id="PathRepeat" type="5" value="1" />
+					<attribute id="PathShift" type="6" value="0.5" />
+					<attribute id="PhysicsTemplate" type="22" value="a465845b-908e-4c19-9ee9-643c5f2fbfa1" />
+					<attribute id="ProjectilePath" type="1" value="0" />
+					<attribute id="RotateImpact" type="19" value="True" />
+					<attribute id="Scale" type="6" value="1" />
+					<attribute id="Speed" type="6" value="100" />
+					<attribute id="TrailFX" type="22" value="" />
+					<attribute id="Type" type="22" value="projectile" />
+					<attribute id="VisualTemplate" type="22" value="" />
+					<children>
+						<node id="AIBounds" />
+					</children>
+				</node>
+				<node id="GameObjects">
+					<attribute id="Acceleration" type="6" value="32" />
+					<attribute id="CastBone" type="23" value="Dummy_L_Hand" />
+					<attribute id="Flag" type="4" value="0" />
+					<attribute id="GroupID" type="5" value="0" />
+					<attribute id="ImpactFX" type="22" value="FX_Skills_Fire_GrenadeMolotov_Impact_A" />
+					<attribute id="ImpactFXSize" type="6" value="0" />
+					<attribute id="LevelName" type="22" value="" />
+					<attribute id="LifeTime" type="6" value="10" />
+					<attribute id="MapKey" type="22" value="c94986ca-ade0-4fd6-acb6-7d0ee3384359" />
+					<attribute id="Name" type="23" value="AMER_PROJ_Fireball" />
+					<attribute id="PathMaxArcDist" type="6" value="-1" />
+					<attribute id="PathMinArcDist" type="6" value="-1" />
+					<attribute id="PathRadius" type="6" value="3" />
+					<attribute id="PathRepeat" type="5" value="1" />
+					<attribute id="PathShift" type="6" value="0.5" />
+					<attribute id="PhysicsTemplate" type="22" value="a465845b-908e-4c19-9ee9-643c5f2fbfa1" />
+					<attribute id="ProjectilePath" type="1" value="1" />
+					<attribute id="RotateImpact" type="19" value="False" />
+					<attribute id="Scale" type="6" value="1" />
+					<attribute id="Speed" type="6" value="4" />
+					<attribute id="TrailFX" type="22" value="FX_Creatures_Skills_Dragon_Astral_FireBall_Projectile_A" />
+					<attribute id="Type" type="22" value="projectile" />
+					<attribute id="VisualTemplate" type="22" value="" />
+					<children>
+						<node id="AIBounds" />
+					</children>
+				</node>
+				<node id="GameObjects">
+					<attribute id="Acceleration" type="6" value="0" />
+					<attribute id="CastBone" type="23" value="Dummy_L_Hand" />
+					<attribute id="Flag" type="4" value="0" />
+					<attribute id="GroupID" type="5" value="0" />
+					<attribute id="ImpactFX" type="22" value="FX_Skills_Fire_Immolate_Impact_A" />
+					<attribute id="ImpactFXSize" type="6" value="5" />
+					<attribute id="LevelName" type="22" value="" />
+					<attribute id="LifeTime" type="6" value="10" />
+					<attribute id="MapKey" type="22" value="cf0c3564-a5d1-4599-a854-f5fc4633bf46" />
+					<attribute id="Name" type="23" value="AMER_DummyProj_Demon" />
+					<attribute id="PathMaxArcDist" type="6" value="-1" />
+					<attribute id="PathMinArcDist" type="6" value="-1" />
+					<attribute id="PathRadius" type="6" value="1" />
+					<attribute id="PathRepeat" type="5" value="1" />
+					<attribute id="PathShift" type="6" value="0.5" />
+					<attribute id="PhysicsTemplate" type="22" value="a465845b-908e-4c19-9ee9-643c5f2fbfa1" />
+					<attribute id="ProjectilePath" type="1" value="0" />
+					<attribute id="RotateImpact" type="19" value="True" />
+					<attribute id="Scale" type="6" value="1" />
+					<attribute id="Speed" type="6" value="100" />
+					<attribute id="TrailFX" type="22" value="" />
+					<attribute id="Type" type="22" value="projectile" />
+					<attribute id="VisualTemplate" type="22" value="" />
+					<children>
+						<node id="AIBounds" />
+					</children>
+				</node>
+				<node id="GameObjects">
+					<attribute id="Acceleration" type="6" value="16" />
+					<attribute id="CastBone" type="23" value="Dummy_L_Hand" />
+					<attribute id="Flag" type="4" value="0" />
+					<attribute id="GroupID" type="5" value="0" />
+					<attribute id="ImpactFX" type="22" value="FX_GP_Arrow_Knockdown_Impact_A" />
+					<attribute id="ImpactFXSize" type="6" value="0" />
+					<attribute id="LevelName" type="22" value="" />
+					<attribute id="LifeTime" type="6" value="10" />
+					<attribute id="MapKey" type="22" value="cfe3b8bb-0afb-4121-b9c1-397884b28bd7" />
+					<attribute id="Name" type="23" value="AMER_PROJ_MagicMissiles" />
+					<attribute id="PathMaxArcDist" type="6" value="-1" />
+					<attribute id="PathMinArcDist" type="6" value="-1" />
+					<attribute id="PathRadius" type="6" value="3" />
+					<attribute id="PathRepeat" type="5" value="3" />
+					<attribute id="PathShift" type="6" value="0.4" />
+					<attribute id="PhysicsTemplate" type="22" value="a465845b-908e-4c19-9ee9-643c5f2fbfa1" />
+					<attribute id="ProjectilePath" type="1" value="1" />
+					<attribute id="RotateImpact" type="19" value="True" />
+					<attribute id="Scale" type="6" value="1" />
+					<attribute id="Speed" type="6" value="2" />
+					<attribute id="TrailFX" type="22" value="FX_Skills_WitchCraft_GrenadeTerror_Trail_A" />
+					<attribute id="Type" type="22" value="projectile" />
+					<attribute id="VisualTemplate" type="22" value="" />
+					<children>
+						<node id="AIBounds" />
+					</children>
+				</node>
+				<node id="GameObjects">
+					<attribute id="Acceleration" type="6" value="0" />
+					<attribute id="CastBone" type="23" value="Dummy_L_Hand" />
+					<attribute id="Flag" type="4" value="0" />
+					<attribute id="GroupID" type="5" value="0" />
+					<attribute id="ImpactFX" type="22" value="FX_Creatures_Skills_Dragon_Astral_VoidBall_Impact_A" />
+					<attribute id="ImpactFXSize" type="6" value="0" />
+					<attribute id="LevelName" type="22" value="" />
+					<attribute id="LifeTime" type="6" value="10" />
+					<attribute id="MapKey" type="22" value="d30f999d-7894-43bc-bd97-a24d8be2e506" />
+					<attribute id="Name" type="23" value="AMER_PROJ_VampiricArrow" />
+					<attribute id="PathMaxArcDist" type="6" value="-1" />
+					<attribute id="PathMinArcDist" type="6" value="-1" />
+					<attribute id="PathRadius" type="6" value="1" />
+					<attribute id="PathRepeat" type="5" value="1" />
+					<attribute id="PathShift" type="6" value="0.5" />
+					<attribute id="PhysicsTemplate" type="22" value="a465845b-908e-4c19-9ee9-643c5f2fbfa1" />
+					<attribute id="ProjectilePath" type="1" value="0" />
+					<attribute id="RotateImpact" type="19" value="True" />
+					<attribute id="Scale" type="6" value="1" />
+					<attribute id="Speed" type="6" value="48" />
+					<attribute id="TrailFX" type="22" value="FX_Skills_Ranger_Arrow_Vampiric_Travel_B" />
+					<attribute id="Type" type="22" value="projectile" />
+					<attribute id="VisualTemplate" type="22" value="" />
+					<children>
+						<node id="AIBounds" />
+					</children>
+				</node>
+				<node id="GameObjects">
+					<attribute id="Acceleration" type="6" value="0" />
+					<attribute id="CastBone" type="23" value="Dummy_L_Hand" />
+					<attribute id="Flag" type="4" value="0" />
+					<attribute id="GroupID" type="5" value="0" />
+					<attribute id="ImpactFX" type="22" value="" />
+					<attribute id="ImpactFXSize" type="6" value="3" />
+					<attribute id="LevelName" type="22" value="" />
+					<attribute id="LifeTime" type="6" value="10" />
+					<attribute id="MapKey" type="22" value="d3a560c1-1ef7-4aff-aa26-49dd25479e7c" />
+					<attribute id="Name" type="23" value="AMER_DummyProj_NoFX" />
+					<attribute id="PathMaxArcDist" type="6" value="-1" />
+					<attribute id="PathMinArcDist" type="6" value="-1" />
+					<attribute id="PathRadius" type="6" value="1" />
+					<attribute id="PathRepeat" type="5" value="1" />
+					<attribute id="PathShift" type="6" value="0.5" />
+					<attribute id="PhysicsTemplate" type="22" value="a465845b-908e-4c19-9ee9-643c5f2fbfa1" />
+					<attribute id="ProjectilePath" type="1" value="0" />
+					<attribute id="RotateImpact" type="19" value="True" />
+					<attribute id="Scale" type="6" value="1" />
+					<attribute id="Speed" type="6" value="100" />
+					<attribute id="TrailFX" type="22" value="" />
+					<attribute id="Type" type="22" value="projectile" />
+					<attribute id="VisualTemplate" type="22" value="" />
+					<children>
+						<node id="AIBounds" />
+					</children>
+				</node>
+				<node id="GameObjects">
+					<attribute id="Acceleration" type="6" value="1" />
+					<attribute id="CastBone" type="23" value="" />
+					<attribute id="Flag" type="4" value="0" />
+					<attribute id="GroupID" type="5" value="0" />
+					<attribute id="ImpactFX" type="22" value="" />
+					<attribute id="ImpactFXSize" type="6" value="0" />
+					<attribute id="LevelName" type="22" value="" />
+					<attribute id="LifeTime" type="6" value="3" />
+					<attribute id="MapKey" type="22" value="d67e1188-caef-4812-9a43-3617397f4f2b" />
+					<attribute id="Name" type="23" value="AMER_DummyProj_BorrowedTime" />
+					<attribute id="PathMaxArcDist" type="6" value="-1" />
+					<attribute id="PathMinArcDist" type="6" value="-1" />
+					<attribute id="PathRadius" type="6" value="1" />
+					<attribute id="PathRepeat" type="5" value="1" />
+					<attribute id="PathShift" type="6" value="0" />
+					<attribute id="PhysicsTemplate" type="22" value="" />
+					<attribute id="ProjectilePath" type="1" value="0" />
+					<attribute id="RotateImpact" type="19" value="False" />
+					<attribute id="Scale" type="6" value="1" />
+					<attribute id="Speed" type="6" value="0" />
+					<attribute id="TrailFX" type="22" value="FX_Skills_Air_ChillyWind_Cast_A" />
+					<attribute id="Type" type="22" value="projectile" />
+					<attribute id="VisualTemplate" type="22" value="" />
+					<children>
+						<node id="AIBounds" />
+					</children>
+				</node>
+				<node id="GameObjects">
+					<attribute id="Acceleration" type="6" value="0" />
+					<attribute id="CastBone" type="23" value="Dummy_L_Hand" />
+					<attribute id="Flag" type="4" value="0" />
+					<attribute id="GroupID" type="5" value="0" />
+					<attribute id="ImpactFX" type="22" value="FX_GP_Arrow_Impact_A" />
+					<attribute id="ImpactFXSize" type="6" value="0" />
+					<attribute id="LevelName" type="22" value="" />
+					<attribute id="LifeTime" type="6" value="10" />
+					<attribute id="MapKey" type="22" value="d6c0446c-bf9e-483b-8fb7-f53fb97262d2" />
+					<attribute id="Name" type="23" value="AMER_PROJ_Expedition" />
+					<attribute id="PathMaxArcDist" type="6" value="-1" />
+					<attribute id="PathMinArcDist" type="6" value="-1" />
+					<attribute id="PathRadius" type="6" value="1" />
+					<attribute id="PathRepeat" type="5" value="1" />
+					<attribute id="PathShift" type="6" value="0.5" />
+					<attribute id="PhysicsTemplate" type="22" value="a465845b-908e-4c19-9ee9-643c5f2fbfa1" />
+					<attribute id="ProjectilePath" type="1" value="0" />
+					<attribute id="RotateImpact" type="19" value="True" />
+					<attribute id="Scale" type="6" value="1" />
+					<attribute id="Speed" type="6" value="48" />
+					<attribute id="TrailFX" type="22" value="FX_Skills_Ranger_Arrow_Poison_Travel_B" />
+					<attribute id="Type" type="22" value="projectile" />
+					<attribute id="VisualTemplate" type="22" value="" />
+					<children>
+						<node id="AIBounds" />
+					</children>
+				</node>
+				<node id="GameObjects">
+					<attribute id="Acceleration" type="6" value="0" />
+					<attribute id="CastBone" type="23" value="Dummy_R_Hand" />
+					<attribute id="Flag" type="4" value="0" />
+					<attribute id="GroupID" type="5" value="0" />
+					<attribute id="ImpactFX" type="22" value="FX_GP_Arrow_PoisonCloud_Impact_A" />
+					<attribute id="ImpactFXSize" type="6" value="4" />
+					<attribute id="LevelName" type="22" value="" />
+					<attribute id="LifeTime" type="6" value="10" />
+					<attribute id="MapKey" type="22" value="db52a287-49b8-45c8-aafb-8ef81ba00a2c" />
+					<attribute id="Name" type="23" value="AMER_DummyProj_BalanceDoT" />
+					<attribute id="PathMaxArcDist" type="6" value="-1" />
+					<attribute id="PathMinArcDist" type="6" value="-1" />
+					<attribute id="PathRadius" type="6" value="5" />
+					<attribute id="PathRepeat" type="5" value="1" />
+					<attribute id="PathShift" type="6" value="0.6" />
+					<attribute id="PhysicsTemplate" type="22" value="a465845b-908e-4c19-9ee9-643c5f2fbfa1" />
+					<attribute id="ProjectilePath" type="1" value="3" />
+					<attribute id="RotateImpact" type="19" value="False" />
+					<attribute id="Scale" type="6" value="1" />
+					<attribute id="Speed" type="6" value="-1" />
+					<attribute id="TrailFX" type="22" value="FX_Skills_Earth_DeadlySpore_Projectile_A" />
+					<attribute id="Type" type="22" value="projectile" />
+					<attribute id="VisualTemplate" type="22" value="5bf68828-f181-4384-a268-f64de435d5e6" />
+					<children>
+						<node id="AIBounds" />
+					</children>
+				</node>
+				<node id="GameObjects">
+					<attribute id="Acceleration" type="6" value="0" />
+					<attribute id="CastBone" type="23" value="Dummy_R_Hand" />
+					<attribute id="Flag" type="4" value="0" />
+					<attribute id="GroupID" type="5" value="0" />
+					<attribute id="ImpactFX" type="22" value="FX_Skills_Earth_GrenadeArmorPiercing_Impact_A" />
+					<attribute id="ImpactFXSize" type="6" value="4" />
+					<attribute id="LevelName" type="22" value="" />
+					<attribute id="LifeTime" type="6" value="10" />
+					<attribute id="MapKey" type="22" value="db5f3d36-521c-4939-8cca-4450cf488443" />
+					<attribute id="Name" type="23" value="AMER_DummyProj_Crush" />
+					<attribute id="PathMaxArcDist" type="6" value="-1" />
+					<attribute id="PathMinArcDist" type="6" value="-1" />
+					<attribute id="PathRadius" type="6" value="5" />
+					<attribute id="PathRepeat" type="5" value="1" />
+					<attribute id="PathShift" type="6" value="0.6" />
+					<attribute id="PhysicsTemplate" type="22" value="a465845b-908e-4c19-9ee9-643c5f2fbfa1" />
+					<attribute id="ProjectilePath" type="1" value="3" />
+					<attribute id="RotateImpact" type="19" value="False" />
+					<attribute id="Scale" type="6" value="1" />
+					<attribute id="Speed" type="6" value="-1" />
+					<attribute id="TrailFX" type="22" value="FX_Skills_Earth_GrenadeArmorPiercing_Trail_A" />
+					<attribute id="Type" type="22" value="projectile" />
+					<attribute id="VisualTemplate" type="22" value="5bf68828-f181-4384-a268-f64de435d5e6" />
+					<children>
+						<node id="AIBounds" />
+					</children>
+				</node>
+				<node id="GameObjects">
+					<attribute id="Acceleration" type="6" value="32" />
+					<attribute id="CastBone" type="23" value="Dummy_L_Hand" />
+					<attribute id="Flag" type="4" value="0" />
+					<attribute id="GroupID" type="5" value="0" />
+					<attribute id="ImpactFX" type="22" value="FX_GP_Projectile_Wand_Earth_Impact_A" />
+					<attribute id="ImpactFXSize" type="6" value="0" />
+					<attribute id="LevelName" type="22" value="" />
+					<attribute id="LifeTime" type="6" value="10" />
+					<attribute id="MapKey" type="22" value="df6fdca2-eb14-44cc-9aac-b04d2c15220c" />
+					<attribute id="Name" type="23" value="AMER_PROJ_ThornCascade" />
+					<attribute id="PathMaxArcDist" type="6" value="-1" />
+					<attribute id="PathMinArcDist" type="6" value="-1" />
+					<attribute id="PathRadius" type="6" value="3" />
+					<attribute id="PathRepeat" type="5" value="1" />
+					<attribute id="PathShift" type="6" value="0.3" />
+					<attribute id="PhysicsTemplate" type="22" value="a465845b-908e-4c19-9ee9-643c5f2fbfa1" />
+					<attribute id="ProjectilePath" type="1" value="1" />
+					<attribute id="RotateImpact" type="19" value="False" />
+					<attribute id="Scale" type="6" value="1" />
+					<attribute id="Speed" type="6" value="2" />
+					<attribute id="TrailFX" type="22" value="FX_Skills_Earth_EnemyEarthProjectile_Projectile_A" />
+					<attribute id="Type" type="22" value="projectile" />
+					<attribute id="VisualTemplate" type="22" value="" />
+					<children>
+						<node id="AIBounds" />
+					</children>
+				</node>
+				<node id="GameObjects">
+					<attribute id="Acceleration" type="6" value="128" />
+					<attribute id="CastBone" type="23" value="Dummy_L_Hand" />
+					<attribute id="Flag" type="4" value="0" />
+					<attribute id="GroupID" type="5" value="0" />
+					<attribute id="ImpactFX" type="22" value="FX_Creatures_Skills_Animals_Blood_Impact_A" />
+					<attribute id="ImpactFXSize" type="6" value="0" />
+					<attribute id="LevelName" type="22" value="" />
+					<attribute id="LifeTime" type="6" value="10" />
+					<attribute id="MapKey" type="22" value="e739c923-5892-49f8-bce3-3e134f20781d" />
+					<attribute id="Name" type="23" value="AMER_PROJ_BloodShower" />
+					<attribute id="PathMaxArcDist" type="6" value="-1" />
+					<attribute id="PathMinArcDist" type="6" value="-1" />
+					<attribute id="PathRadius" type="6" value="1" />
+					<attribute id="PathRepeat" type="5" value="1" />
+					<attribute id="PathShift" type="6" value="0.5" />
+					<attribute id="PhysicsTemplate" type="22" value="a465845b-908e-4c19-9ee9-643c5f2fbfa1" />
+					<attribute id="ProjectilePath" type="1" value="0" />
+					<attribute id="RotateImpact" type="19" value="False" />
+					<attribute id="Scale" type="6" value="1" />
+					<attribute id="Speed" type="6" value="4" />
+					<attribute id="TrailFX" type="22" value="FX_Creatures_Skills_Animals_Blood_Projectile_A" />
+					<attribute id="Type" type="22" value="projectile" />
+					<attribute id="VisualTemplate" type="22" value="" />
+					<children>
+						<node id="AIBounds" />
+					</children>
+				</node>
+				<node id="GameObjects">
+					<attribute id="Acceleration" type="6" value="128" />
+					<attribute id="CastBone" type="23" value="Dummy_L_Hand" />
+					<attribute id="Flag" type="4" value="0" />
+					<attribute id="GroupID" type="5" value="0" />
+					<attribute id="ImpactFX" type="22" value="FX_Skills_Water_GrenadeFrost_Impact_A" />
+					<attribute id="ImpactFXSize" type="6" value="15" />
+					<attribute id="LevelName" type="22" value="" />
+					<attribute id="LifeTime" type="6" value="10" />
+					<attribute id="MapKey" type="22" value="ec1a0ee2-7292-46fd-891e-229017ce071f" />
+					<attribute id="Name" type="23" value="AMER_PROJ_Hailstorm" />
+					<attribute id="PathMaxArcDist" type="6" value="-1" />
+					<attribute id="PathMinArcDist" type="6" value="-1" />
+					<attribute id="PathRadius" type="6" value="1" />
+					<attribute id="PathRepeat" type="5" value="1" />
+					<attribute id="PathShift" type="6" value="0.5" />
+					<attribute id="PhysicsTemplate" type="22" value="a465845b-908e-4c19-9ee9-643c5f2fbfa1" />
+					<attribute id="ProjectilePath" type="1" value="0" />
+					<attribute id="RotateImpact" type="19" value="False" />
+					<attribute id="Scale" type="6" value="1" />
+					<attribute id="Speed" type="6" value="4" />
+					<attribute id="TrailFX" type="22" value="FX_Skills_Water_GrenadeFrost_Trail_A" />
+					<attribute id="Type" type="22" value="projectile" />
+					<attribute id="VisualTemplate" type="22" value="" />
+					<children>
+						<node id="AIBounds" />
+					</children>
+				</node>
+				<node id="GameObjects">
+					<attribute id="Acceleration" type="6" value="0" />
+					<attribute id="CastBone" type="23" value="Dummy_L_Hand" />
+					<attribute id="Flag" type="4" value="0" />
+					<attribute id="GroupID" type="5" value="0" />
+					<attribute id="ImpactFX" type="22" value="FX_GP_Arrow_Explosion_Impact_A" />
+					<attribute id="ImpactFXSize" type="6" value="0" />
+					<attribute id="LevelName" type="22" value="" />
+					<attribute id="LifeTime" type="6" value="10" />
+					<attribute id="MapKey" type="22" value="fac29985-6cbe-46b7-b89a-9822b583ca4b" />
+					<attribute id="Name" type="23" value="AMER_PROJ_Zenith" />
+					<attribute id="PathMaxArcDist" type="6" value="-1" />
+					<attribute id="PathMinArcDist" type="6" value="-1" />
+					<attribute id="PathRadius" type="6" value="1" />
+					<attribute id="PathRepeat" type="5" value="1" />
+					<attribute id="PathShift" type="6" value="0.5" />
+					<attribute id="PhysicsTemplate" type="22" value="a465845b-908e-4c19-9ee9-643c5f2fbfa1" />
+					<attribute id="ProjectilePath" type="1" value="0" />
+					<attribute id="RotateImpact" type="19" value="True" />
+					<attribute id="Scale" type="6" value="1" />
+					<attribute id="Speed" type="6" value="48" />
+					<attribute id="TrailFX" type="22" value="FX_Skills_Ranger_Arrow_Stunning_Travel_B" />
+					<attribute id="Type" type="22" value="projectile" />
+					<attribute id="VisualTemplate" type="22" value="" />
+					<children>
+						<node id="AIBounds" />
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

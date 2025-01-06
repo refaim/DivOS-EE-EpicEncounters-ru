@@ -1,0 +1,127 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+IF
+	CharacterUsedItem(_Char, ITEM_AMER_TEST_ButtonTenebrium)
+THEN
+	CharacterUnlockAbility(_Char, "Blackrock");
+	CharacterAddAbility(_Char, "Blackrock", 1);
+
+
+
+IF
+	CharacterUsedItem(_Char, ITEM_AMER_TEST_ButtonLoot01)
+THEN
+	GenerateItems(_Char, CHARACTER_AMER_TEST_Mulch);
+
+
+
+IF
+	CharacterUsedItem(_Char, ITEM_AMER_TEST_ButtonLevelUp)
+THEN
+	CharacterLevelUp(_Char);
+
+
+
+IF
+	CharacterUsedItem(_Char, ITEM_AMER_TEST_ButtonBlunt)
+THEN
+	CharacterAddTrait(_Char, "Blunt", 1);
+IF
+	CharacterUsedItem(_Char, ITEM_AMER_TEST_ButtonConsid)
+THEN
+	CharacterAddTrait(_Char, "Considerate", 1);
+
+
+
+IF
+	CharacterUsedItem(_Char, ITEM_AMER_TEST_ButtonIndep)
+THEN
+	CharacterAddTrait(_Char, "Independent", 1);
+IF
+	CharacterUsedItem(_Char, ITEM_AMER_TEST_ButtonObed)
+THEN
+	CharacterAddTrait(_Char, "Obedient", 1);
+	
+	
+	
+IF
+	CharacterUsedItem(_Char, ITEM_AMER_TEST_ButtonCompass)
+THEN
+	CharacterAddTrait(_Char, "Compassionate", 1);
+IF
+	CharacterUsedItem(_Char, ITEM_AMER_TEST_ButtonHeart)
+THEN
+	CharacterAddTrait(_Char, "Heartless", 1);
+	
+	
+	
+IF
+	CharacterUsedItem(_Char, ITEM_AMER_TEST_ButtonAltru)
+THEN
+	CharacterAddTrait(_Char, "Altruistic", 1);
+IF
+	CharacterUsedItem(_Char, ITEM_AMER_TEST_ButtonEgo)
+THEN
+	CharacterAddTrait(_Char, "Egotistical", 1);
+	
+	
+	
+IF
+	CharacterUsedItem(_Char, ITEM_AMER_TEST_ButtonRight)
+THEN
+	CharacterAddTrait(_Char, "Righteous", 1);
+IF
+	CharacterUsedItem(_Char, ITEM_AMER_TEST_ButtonRene)
+THEN
+	CharacterAddTrait(_Char, "Renegade", 1);
+	
+	
+	
+IF
+	CharacterUsedItem(_Char, ITEM_AMER_TEST_ButtonBold)
+THEN
+	CharacterAddTrait(_Char, "Bold", 1);
+IF
+	CharacterUsedItem(_Char, ITEM_AMER_TEST_ButtonCaut)
+THEN
+	CharacterAddTrait(_Char, "Timid", 1);
+	
+	
+	
+IF
+	CharacterUsedItem(_Char, ITEM_AMER_TEST_ButtonPrag)
+THEN
+	CharacterAddTrait(_Char, "Pragmatic", 1);
+IF
+	CharacterUsedItem(_Char, ITEM_AMER_TEST_ButtonRoman)
+THEN
+	CharacterAddTrait(_Char, "Romantic", 1);
+	
+	
+	
+IF
+	CharacterUsedItem(_Char, ITEM_AMER_TEST_ButtonForg)
+THEN
+	CharacterAddTrait(_Char, "Forgiving", 1);
+IF
+	CharacterUsedItem(_Char, ITEM_AMER_TEST_ButtonVind)
+THEN
+	CharacterAddTrait(_Char, "Vindictive", 1);
+	
+	
+	
+IF
+	CharacterUsedItem(_Char, ITEM_AMER_TEST_ButtonSpirit)
+THEN
+	CharacterAddTrait(_Char, "Spiritual", 1);
+IF
+	CharacterUsedItem(_Char, ITEM_AMER_TEST_ButtonMat)
+THEN
+	CharacterAddTrait(_Char, "Materialistic", 1);
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "__Start"

@@ -1,0 +1,59 @@
+//===============================================//
+//                                               //
+//       D E F A U L T   C H A R A C T E R       //
+//                                               //
+//           Original script by Larian           //
+//     Modified by Matteo "Ameranth" T. (2017)   //
+//===============================================//
+	
+//This is a stripped-down default character script,
+//intended for creatures that are not going to be
+//in combat. Additionally, this script will destroy
+//the parent creature when it unloads. This should net
+//some increase in performance and reduce save size
+//somewhat. At the time of creation, this is replacing
+//the original default character script for rats and
+//rabbits.
+#INCLUDE Base
+	
+INIT
+	USING Base
+	CHARACTER:__Me
+	CHARACTER:%DialogLookAtChar=null
+	
+EVENTS
+EVENT InconsequentialDestroyOnDeath
+ON
+	OnDeactivate()
+ACTIONS
+	IF "c1"
+		CharacterIsDead(__Me)
+	THEN
+		CharacterDestroy(__Me)
+	ENDIF
+	
+	
+	
+BEHAVIOUR
+REACTION AutomatedDialog_Interrupt, 1700
+USAGE PEACE
+CHECK "c1&!c2"
+	IsInDialog(__Me)
+	CharacterIsPlayer(__Me)
+ACTIONS
+	IF "!c1"
+		IsEqual(%DialogLookAtChar,null)
+	THEN
+		CharacterLookAt(%DialogLookAtChar,0)
+	ENDIF
+	Sleep(2.0)
+INTERRUPT
+	Set(%DialogLookAtChar,null)
+	
+	
+	
+//===============================================//
+//                                               //
+//       D E F A U L T   C H A R A C T E R       //
+//                                               //
+//===============================================//

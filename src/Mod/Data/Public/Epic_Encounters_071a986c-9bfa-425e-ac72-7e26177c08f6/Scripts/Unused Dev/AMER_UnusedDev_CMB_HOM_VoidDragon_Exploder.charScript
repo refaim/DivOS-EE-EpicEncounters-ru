@@ -1,0 +1,40 @@
+INIT
+	CHARACTER:__Me
+	CHARACTER:%Dragon=HOM_AstralDragon_fd8e91d7-843e-46fc-9b2e-965b3de76a7e
+
+
+//-------
+BEHAVIOUR
+REACTION EndFight_Exploder_WalkToDragon_Peace,500
+USAGE PEACE
+ACTIONS
+	CharacterMoveTo(%Dragon,0,0,1)
+
+REACTION EndFight_Exploder_WalkToDragon_Combat,500
+USAGE COMBAT
+ACTIONS
+	CharacterMoveTo(%Dragon,0,0,1)
+	CharacterDie(__Me,"Explode")
+
+//-------	
+EVENTS
+EVENT OnInit_OverrideDefChar
+ON
+	OnInit()
+ACTIONS
+	SetPriority("Combat_AttackSetEnemy",0)
+	SetPriority("Combat_MoveToSetEnemy",0)	
+	
+EVENT OnDie_Explode
+VARS
+	FLOAT:_Distance
+ON
+	OnDie(__Me,_,_,_)
+ACTIONS
+	ExplodeAt(__Me,"AMER_SCRIPTSKILL_VoidExplosion",-1,__Me)
+	IF "c1&c2"
+		GetDistance(_Distance, __Me, %Dragon)
+		IsLessThen(_Distance, 6.0)
+	THEN
+		CharacterHeal(%Dragon, 0.3)
+	ENDIF

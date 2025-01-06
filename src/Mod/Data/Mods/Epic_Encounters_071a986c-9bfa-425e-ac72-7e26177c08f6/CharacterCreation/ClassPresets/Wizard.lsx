@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<save>
+    <header version="2" time="1387205254" />
+    <version major="1" minor="3" revision="0" build="0" />
+    <region id="CharacterCreationClass">
+        <node id="root">
+            <attribute id="Armour" value="ARM_Robe_SourceHunter_Damage" type="22" />
+			<attribute id="Leggings" value="ARM_Garment_Sourcehunter" type="22" />
+            <attribute id="Boots" value="ARM_SourceHunter_Boots" type="22" />
+            <attribute id="ClassDescription" value="A scholar of magic specialised in starting and ending battles with a flick of the wrist, exacting swift victory from a safe distance" handle="hdcdd9c36gb527g4e7fg911cg27ad30056c2c" type="28" />
+			<attribute id="ClassLongDescription" value="The wizard's eyes snapped up from the heavy tome. Outside the small hut, the unmistakable sound of a struggle erupted, and an orcish roar sent shivers down the wizard's spine. But now was not the time for fear.<br><br>By the light of the moons, the orc's hulking silhouette was a boil upon the outline of the peaceful woods. He had pinned someone beneath one great knee, and the victim cried out in futile anguish. The wizard whistled. Turning its great head, the orc had only just noticed the distant figure before its great green mass erupted into a shower of ash. <br><br>The would-be victim rose, dusting the orc from his hair, and held out a hand. The signet ring of the Order of the Source Hunters glinted upon his finger.<br><br>&quot;Friend,&quot; he said, &quot;I was sent to find the great wizard of these woods. But it seems you found me first.&quot;" handle="heee2c64eg9825g4f22gbbbdgbbacd8d16d6d" type="28" />
+            <attribute id="ClassName" value="Wizard" handle="h9ead48cfg6af8g40b7gac12g0beabc01c20e" type="28" />
+            <attribute id="ClassType" value="Wizard" type="22" />
+            <attribute id="ExtraEquipmentSet" value="Class_Wizard" type="22" />
+            <attribute id="Gloves" value="ARM_SourceHunter_Bracers" type="22" />
+            <attribute id="SkillSet" value="Class_Wizard" type="22" />
+            <attribute id="Voice" value="1" type="5" />
+			<attribute id="Icon" value="11" type="5" />
+            <children>
+                <node id="AbilityChanges">
+                    <children>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="Willpower" type="23" />
+                            <attribute id="AmountIncreased" value="1" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="EarthSpecialist" type="23" />
+                            <attribute id="AmountIncreased" value="1" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="Loremaster" type="23" />
+                            <attribute id="AmountIncreased" value="1" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="FireSpecialist" type="23" />
+                            <attribute id="AmountIncreased" value="1" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="Charisma" type="23" />
+                            <attribute id="AmountIncreased" value="1" type="4" />
+                        </node>
+                    </children>
+                </node>
+                <node id="AttributeChanges">
+                    <children>
+                        <node id="AttributeChange">
+                            <attribute id="AmountIncreased" value="2" type="4" />
+                            <attribute id="Attribute" value="INT" type="23" />
+                        </node>
+                        <node id="AttributeChange">
+                            <attribute id="AmountIncreased" value="1" type="4" />
+                            <attribute id="Attribute" value="CON" type="23" />
+                        </node>
+                        <node id="AttributeChange">
+                            <attribute id="AmountIncreased" value="1" type="4" />
+                            <attribute id="Attribute" value="SPD" type="23" />
+                        </node>
+                        <node id="AttributeChange">
+                            <attribute id="AmountIncreased" value="1" type="4" />
+                            <attribute id="Attribute" value="PER" type="23" />
+                        </node>
+                    </children>
+                </node>
+                <node id="TalentsAdded">
+                    <children>
+                        <node id="TalentAdded">
+                            <attribute id="Talent" value="MrKnowItAll" type="23" />
+                        </node>
+                        <node id="TalentAdded">
+                            <attribute id="Talent" value="FaroutDude" type="23" />
+                        </node>
+                    </children>
+                </node>
+            </children>
+        </node>
+    </region>
+</save>

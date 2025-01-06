@@ -1,0 +1,44 @@
+//=====================================================//
+//                                                     //
+//      R E M O V E   T R E A S U R E T A B L E S      //
+//                                                     //
+//       Written by Matteo "Ameranth" T. (2017)        //
+//=====================================================//
+//The use of this script is such that one-shot treasuretable
+//generation can be facilitated. This is probably in use for
+//permanent crafting tool generation only once.
+INIT
+	CHARACTER:__Me
+	EXTERN FIXEDSTRING:%AMER_RemoveTreasuretables_Table1 = null
+	EXTERN FIXEDSTRING:%AMER_RemoveTreasuretables_Table2 = null
+	EXTERN FIXEDSTRING:%AMER_RemoveTreasuretables_Table3 = null
+
+//------------------------
+EVENTS
+EVENT RemoveTreasuretablesOnInit
+ON
+	OnInit()
+ACTIONS
+	IF "!c1"
+		IsEqual(%AMER_RemoveTreasuretables_Table1, null)
+	THEN
+		CharacterRemoveTreasureTable(__Me, %AMER_RemoveTreasuretables_Table1)
+		Set(%AMER_RemoveTreasuretables_Table1, null)
+	ENDIF
+	IF "!c1"
+		IsEqual(%AMER_RemoveTreasuretables_Table2, null)
+	THEN
+		CharacterRemoveTreasureTable(__Me, %AMER_RemoveTreasuretables_Table2)
+		Set(%AMER_RemoveTreasuretables_Table2, null)
+	ENDIF
+	IF "!c1"
+		IsEqual(%AMER_RemoveTreasuretables_Table3, null)
+	THEN
+		CharacterRemoveTreasureTable(__Me, %AMER_RemoveTreasuretables_Table3)
+		Set(%AMER_RemoveTreasuretables_Table3, null)
+	ENDIF
+//=====================================================//
+//                                                     //
+//      R E M O V E   T R E A S U R E T A B L E S      //
+//                                                     //
+//=====================================================//

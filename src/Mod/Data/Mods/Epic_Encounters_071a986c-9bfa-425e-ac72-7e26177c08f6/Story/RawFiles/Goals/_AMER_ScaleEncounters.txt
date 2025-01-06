@@ -1,0 +1,64 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+IF
+	CharacterEnteredCombat(_Char, _)
+AND
+	CharacterGetVarInteger(_Char, "AMER_IsPlayer", _IsPlayer)
+AND
+	_IsPlayer == 0
+AND
+	CharacterGetRelationToCharacter(_Char, CHARACTER_Player1, _Relation)
+AND
+	_Relation == 0
+AND
+	CharacterGetLevel(CHARACTER_Player1, _PlayerLevel1)
+AND
+	CharacterGetLevel(CHARACTER_Player2, _PlayerLevel2)
+AND
+	IntegerMax(_PlayerLevel1, _PlayerLevel2, _TargetLevel)
+THEN
+	ProcLevelIsBoss(_Char, _TargetLevel);
+	ProcLevelNotBoss(_Char, _TargetLevel);
+
+
+
+PROC
+	ProcLevelIsBoss((CHARACTER)_Char, (INTEGER)_TargetLevel)
+AND
+	CharacterIsBoss(_Char, _Bool)
+AND
+	_Bool == 1
+AND
+	IntegerSum(_TargetLevel, 1, _NewLevel)
+THEN
+	ProcScaleEnemy(_Char, _NewLevel);
+
+
+
+PROC
+	ProcLevelNotBoss((CHARACTER)_Char, (INTEGER)_TargetLevel)
+AND
+	CharacterIsBoss(_Char, _Bool)
+AND
+	_Bool == 0
+THEN
+	ProcScaleEnemy(_Char, _TargetLevel);
+
+
+
+PROC
+	ProcScaleEnemy((CHARACTER)_Char, (INTEGER)_TargetLevel)
+AND
+	CharacterGetLevel(_Char, _CharLevel)
+AND
+	_CharLevel < _TargetLevel
+THEN
+	CharacterLevelUp(_Char);
+	ProcScaleEnemy(_Char, _TargetLevel);
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "__Start"

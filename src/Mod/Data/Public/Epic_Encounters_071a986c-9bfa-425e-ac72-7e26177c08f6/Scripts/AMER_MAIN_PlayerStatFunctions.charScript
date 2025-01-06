@@ -1,0 +1,801 @@
+//=================================================//
+//                                                 //
+//    P L A Y E R   S T A T   F U N C T I O N S    //
+//                                                 //
+//     Written by Matteo "Ameranth" T. (2017)      //
+//=================================================//
+INIT
+CHARACTER:__Me
+	
+//Used to track how much maximum resistance Physique
+//is giving.
+FLOAT:%AMER_PhysiqueMaxRes = 0
+	
+//Used to track how much Soldier the player has.
+FLOAT:%AMER_SoldierCount = 0
+	
+//Used to track how much Scoundrel the player has.
+FLOAT:%AMER_ScoundrelCount = 0
+	
+//Used to track how much Ranger the player has.
+FLOAT:%AMER_RangerCount = 0
+	
+//Used to track how much Witchcraft the player has.
+FLOAT:%AMER_WitchcraftCount = 0
+	
+//Used to track how much maximum resistance Tenebrium
+//is giving.
+FLOAT:%AMER_TenebriumMaxRes = 0
+	
+//Used to track the level of the "Nasty Deeds"
+//family of abilities, as we try to treat them
+//as a single ability.
+//INT:%AMER_NastyDeedsLevel = 0
+//INT:%AMER_BaseSneaking
+	
+//Used to track the level of Telekinesis/Loremaster
+//as we treat them as a single ability.
+//INT:%AMER_MindAndMatterLevel = 0
+//INT:%AMER_BaseLoremaster
+	
+	
+EVENTS
+//===========================================================//
+//                        Lucky Charm                        //
+//===========================================================//	
+EVENT LuckyCharmCrit
+VARS
+//=============================//
+	INT:_SupportedIndex = 10		//Up to +55% crit chance.
+	INT:_CritPerLucky = 1
+//=============================//
+	INT:_LuckyCharm
+	INT:_PrevLuckyCharm = INT:0
+	INT:_Count
+	INT:_Amount
+	STRING:_Str
+	FIXEDSTRING:_WhichEffect
+ON
+	OnFunction("AMER_CheckLuckyCharmCrit")
+ACTIONS
+	IF "c1&!c2"
+		CharacterGetAbility(_LuckyCharm, __Me, Luck)
+		IsEqual(_LuckyCharm, _PrevLuckyCharm)
+	THEN
+		
+		Multiply(_LuckyCharm, _CritPerLucky)
+		
+		//It's unlikely that more than _SupportedIndex is going to be
+		//used by a character, so the while loop to handle larger values
+		//will only be used in those cases.
+		IF "c1|c2"
+			IsGreaterThen(_LuckyCharm, _SupportedIndex)
+			IsGreaterThen(_PrevLuckyCharm, _SupportedIndex)
+		THEN
+			//Check from highest value to lowest.
+			Set(_Count, _SupportedIndex)
+			WHILE "c1"
+				IsGreaterThen(_Count, INT:0)
+			DO
+				Print(_Str, "AMER_LuckyCharm_BaseCrit[1]", _Count)
+				Cast(_WhichEffect, _Str)
+				
+				IF "!c1"
+					IsLessThen(_LuckyCharm, _Count)
+				THEN
+					Subtract(_LuckyCharm, _Count)
+					IF "!c1"
+						CharacterHasStatus(__Me, CONSUME, _WhichEffect)
+					THEN
+						AddStatusInfluence(__Me, CONSUME, 1, _WhichEffect, 0)
+					ENDIF
+				ELIF "c1"
+					CharacterHasStatus(__Me, CONSUME, _WhichEffect)
+				THEN
+					RemoveStatusInfluence(__Me, CONSUME, 1, _WhichEffect, 0)
+				ENDIF
+				
+				Subtract(_Count, INT:1)
+			ENDWHILE
+		ELSE
+			IF "!c1"
+				IsEqual(_PrevLuckyCharm, INT:0)
+			THEN
+				Print(_Str, "AMER_LuckyCharm_BaseCrit[1]", _PrevLuckyCharm)
+				Cast(_WhichEffect, _Str)
+				IF "c1"
+					CharacterHasStatus(__Me, CONSUME, _WhichEffect)
+				THEN
+					RemoveStatusInfluence(__Me, CONSUME, 1, _WhichEffect, 0)
+				ENDIF
+			ENDIF
+			
+			Print(_Str, "AMER_LuckyCharm_BaseCrit[1]", _LuckyCharm)
+			Cast(_WhichEffect, _Str)
+			IF "!c1"
+				CharacterHasStatus(__Me, CONSUME, _WhichEffect)
+			THEN
+				AddStatusInfluence(__Me, CONSUME, 1, _WhichEffect, 0)
+			ENDIF
+			
+		ENDIF
+		
+		Set(_PrevLuckyCharm, _LuckyCharm)
+	ENDIF
+	
+	
+	
+//===========================================================//
+//                        Field Smith                        //
+//===========================================================//	
+EVENT FieldSmith
+VARS
+//==========================//
+	INT:_MaxIndex = 5
+	INT:_ArmorPerLevel = 6
+//==========================//
+	INT:_Smithing
+	INT:_PrevSmithing = INT:0
+	INT:_ArmorToAdd
+	INT:_Count
+	INT:_Amount
+	FIXEDSTRING:_WhichEffect
+ON
+	OnFunction("AMER_CheckFieldSmith")
+ACTIONS
+	IF "c1"
+		CharacterGetAbility(_Smithing, __Me, Repair)
+		//assume it's higher than zero because Field Smith requires it.
+	THEN
+		IF "!c1"
+			IsEqual(_Smithing, _PrevSmithing)
+		THEN
+			Set(_PrevSmithing, _Smithing)
+			Set(_ArmorToAdd, _Smithing)
+			Multiply(_ArmorToAdd, _ArmorPerLevel)
+				
+			Set(_Count, INT:0)
+			WHILE "c1"
+				IsLessThen(_Count, _MaxIndex)
+			DO
+				GetElement(_Amount, _Count, INT:18, INT:18, INT:18, INT:12, INT:6)
+				GetElement(_WhichEffect, _Count, "AMER_FieldSmith5", "AMER_FieldSmith4", "AMER_FieldSmith3", "AMER_FieldSmith2", "AMER_FieldSmith1")
+				IF "!c1"
+					IsGreaterThen(_Amount, _ArmorToAdd)
+				THEN
+					Subtract(_ArmorToAdd, _Amount)
+					IF "!c1"
+						CharacterHasStatus(__Me, CONSUME, _WhichEffect)
+					THEN
+						AddStatusInfluence(__Me, CONSUME, 1, _WhichEffect, 0)
+					ENDIF
+				ELIF "c1"
+					CharacterHasStatus(__Me, CONSUME, _WhichEffect)
+				THEN
+					RemoveStatusInfluence(__Me, CONSUME, 1, _WhichEffect, 0)
+				ENDIF
+					
+				Add(_Count, INT:1)
+			ENDWHILE
+		ENDIF
+	ENDIF
+	
+	
+	
+//===========================================================//
+//                        What A Rush                        //
+//===========================================================//	
+EVENT WhatARushExtension
+VARS
+//==========================//
+	INT:_MaxIndex = 5
+//==========================//
+	FLOAT:_Vitality
+	FLOAT:_PrevVitality = 0.0
+	INT:_Index
+	INT:_Count
+	FIXEDSTRING:_WhichEffect
+	//FIXEDSTRING:_TestStr	//TEST
+ON
+	OnFunction("AMER_CheckWhatARush")
+ACTIONS
+	IF "c1&!c2"
+		CharacterGetStat(_Vitality, __Me, Vitality)
+		IsEqual(_Vitality, _PrevVitality)
+	THEN
+		IF "c1"
+			IsLessThen(_Vitality, 0.5)
+		THEN
+			Set(_PrevVitality, _Vitality)
+			
+			Multiply(_Vitality, 10.0)
+			Cast(_Index, _Vitality)
+			
+			RemoveStatusInfluence(__Me, CONSUME, 1, "AMER_WhatARushAP3", 0)
+			RemoveStatusInfluence(__Me, CONSUME, 1, "AMER_WhatARushAP2", 0)
+			RemoveStatusInfluence(__Me, CONSUME, 1, "AMER_WhatARushAP1", 0)
+			
+			IF "!c1"
+				IsEqual(_Vitality, 0.0)
+			THEN
+				GetElement(_WhichEffect, _Index, "AMER_WhatARushAP3", "AMER_WhatARushAP2", "AMER_WhatARushAP1", "AMER_WhatARushAP2", "AMER_WhatARushAP1")
+				IF "!c1"
+					CharacterHasStatus(__Me, CONSUME, _WhichEffect)
+				THEN
+					AddStatusInfluence(__Me, CONSUME, 1, _WhichEffect, 0)
+				ENDIF
+			ENDIF
+		ELSE
+			IF "c1"
+				IsLessThen(_PrevVitality, 0.5)
+			THEN
+				RemoveStatusInfluence(__Me, CONSUME, 1, "AMER_WhatARushAP3", 0)
+				RemoveStatusInfluence(__Me, CONSUME, 1, "AMER_WhatARushAP2", 0)
+				RemoveStatusInfluence(__Me, CONSUME, 1, "AMER_WhatARushAP1", 0)
+			ENDIF
+			
+			Set(_PrevVitality, _Vitality)
+		ENDIF
+	ENDIF
+	
+	
+	
+//===========================================================//
+//                      Check Physique                       //
+//===========================================================//	
+EVENT CheckPhysique
+VARS
+	FLOAT:_FloatBonus
+	FLOAT:_MaxRes
+	INT:_Bonus
+	INT:_Count
+	INT:_Amount
+	INT:_ResToAdd
+	FIXEDSTRING:_WhichEffect
+ON
+	OnFunction("AMER_CheckPhysique")
+ACTIONS
+	IF "c1"
+		CharacterGetAbility(_Bonus, __Me, ArmorMastery)
+	THEN
+		Set(_ResToAdd, _Bonus)
+		
+		//Over 5 Physique, gain +2% maxres per point.
+		IF "c1"
+			IsGreaterThen(_Bonus, INT:5)
+		THEN
+			Subtract(_Bonus, INT:5)
+			Multiply(_Bonus, INT:2)
+			Add(_Bonus, INT:5)
+		ENDIF
+		
+		Cast(_FloatBonus, _Bonus)
+		
+		IF "!c1"
+			IsEqual(%AMER_PhysiqueMaxRes, _FloatBonus)
+		THEN
+			//If the physique bonus changed, then remove the old bonus
+			//and apply the new one.
+			Set(_Count, INT:0)
+			WHILE "c1"
+				IsLessThen(_Count, 6)
+			DO
+				GetElement(_WhichEffect, _Count, "AMER_MaxFireRes", "AMER_MaxWaterRes", "AMER_MaxAirRes", "AMER_MaxEarthRes", "AMER_MaxPoisonRes", "AMER_MaxShadowRes")
+				IF "c1"
+					GetVar(_MaxRes, __Me, _WhichEffect)
+				THEN
+					Subtract(_MaxRes, %AMER_PhysiqueMaxRes)
+					Add(_MaxRes, _FloatBonus)
+					SetVar(__Me, _WhichEffect, _MaxRes)
+				ENDIF
+				Add(_Count, 1)
+			ENDWHILE
+			
+			//Poison Resistance component.
+			Multiply(_ResToAdd, INT:5)
+			Set(_Count, INT:0)
+			WHILE "c1"
+				IsLessThen(_Count, INT:4)
+			DO
+				GetElement(_Amount, _Count, INT:40, INT:20, INT:10, INT:5)
+				GetElement(_WhichEffect, _Count, AMER_PhysiquePoisonRes40, AMER_PhysiquePoisonRes20, AMER_PhysiquePoisonRes10, AMER_PhysiquePoisonRes5)
+				IF "!c1"
+					IsGreaterThen(_Amount, _ResToAdd)
+				THEN
+					Subtract(_ResToAdd, _Amount)
+					IF "!c1"
+						CharacterHasStatus(__Me, CONSUME, _WhichEffect)
+					THEN
+						AddStatusInfluence(__Me, CONSUME, 1, _WhichEffect, 0)
+					ENDIF
+				ELSE
+					RemoveStatusInfluence(__Me, CONSUME, 1, _WhichEffect, 0)
+				ENDIF
+				
+				Add(_Count, INT:1)
+			ENDWHILE
+			
+			//Store the newly recorded value.
+			Set(%AMER_PhysiqueMaxRes, _FloatBonus)
+		ENDIF
+	ENDIF
+	
+	
+	
+//===========================================================//
+//                    Check Witchcraft                       //
+//===========================================================//	
+EVENT CheckWitchcraft
+VARS
+	INT:_Witchcraft
+ON
+	OnFunction("AMER_CheckWitchcraft")
+ACTIONS
+	IF "c1&!c2"
+		CharacterGetAbility(_Witchcraft, __Me, Sourcery)
+		IsEqual(_Witchcraft, %AMER_WitchcraftCount)
+	THEN
+		IF "c1"
+			IsEqual(_Witchcraft,  5)
+		THEN
+			//Add Immunity from Philosopher.
+			IF "c1&!c2"
+				CharacterHasTalent(__Me, MrKnowItAll)
+				CharacterHasStatus(__Me, CONSUME, AMER_KnowItAllImmunity)
+			THEN
+				AddStatusInfluence(__Me, CONSUME, 1, AMER_KnowItAllImmunity, 0)
+			ENDIF
+		ENDIF
+		
+		//Store the newly recorded value.
+		Cast(%AMER_WitchcraftCount, _Witchcraft)
+	ENDIF
+	
+	
+	
+//===========================================================//
+//                       Check Ranger                        //
+//===========================================================//	
+EVENT CheckRanger
+VARS
+	INT:_Ranger
+ON
+	OnFunction("AMER_CheckRanger")
+ACTIONS
+	IF "c1&!c2"
+		CharacterGetAbility(_Ranger, __Me, RangerLore)
+		IsEqual(_Ranger, %AMER_RangerCount)
+	THEN
+		IF "c1"
+			IsEqual(_Ranger,  5)
+		THEN
+			//Add Immunity from Nimble.
+			IF "c1&!c2"
+				CharacterHasTalent(__Me, Escapist)
+				CharacterHasStatus(__Me, CONSUME, AMER_EscapistImmunity)
+			THEN
+				AddStatusInfluence(__Me, CONSUME, 1, AMER_EscapistImmunity, 0)
+			ENDIF
+		ENDIF
+		
+		//Store the newly recorded value.
+		Cast(%AMER_RangerCount, _Ranger)
+	ENDIF
+	
+	
+	
+//===========================================================//
+//                     Check Scoundrel                       //
+//===========================================================//	
+EVENT CheckScoundrel
+VARS
+	INT:_Scoundrel
+ON
+	OnFunction("AMER_CheckScoundrel")
+ACTIONS
+	IF "c1&!c2"
+		CharacterGetAbility(_Scoundrel, __Me, RogueLore)
+		IsEqual(_Scoundrel, %AMER_ScoundrelCount)
+	THEN
+		IF "c1"
+			IsEqual(_Scoundrel,  5)
+		THEN
+			//Add Immunity from Nimble.
+			IF "c1&!c2"
+				CharacterHasTalent(__Me, Escapist)
+				CharacterHasStatus(__Me, CONSUME, AMER_EscapistImmunity)
+			THEN
+				AddStatusInfluence(__Me, CONSUME, 1, AMER_EscapistImmunity, 0)
+			ENDIF
+		ENDIF
+		
+		//Store the newly recorded value.
+		Cast(%AMER_ScoundrelCount, _Scoundrel)
+	ENDIF
+	
+	
+	
+//===========================================================//
+//                      Check Soldier                        //
+//===========================================================//	
+EVENT CheckSoldier
+VARS
+	INT:_Soldier
+	INT:_Count
+	FLOAT:_MaxRes
+	STRING:_Str
+	FIXEDSTRING:_WhichEffect
+ON
+	OnFunction("AMER_CheckSoldier")
+ACTIONS
+	IF "c1&!c2"
+		CharacterGetAbility(_Soldier, __Me, WarriorLore)
+		IsEqual(_Soldier, %AMER_SoldierCount)
+	THEN
+		IF "c1"
+			IsEqual(_Soldier,  5)
+		THEN
+			//Add Immunity from Picture of Health.
+			IF "c1&!c2"
+				CharacterHasTalent(__Me, WarriorLoreNaturalHealth)
+				CharacterHasStatus(__Me, CONSUME, AMER_PictureOfHealthImmunity)
+			THEN
+				AddStatusInfluence(__Me, CONSUME, 1, AMER_PictureOfHealthImmunity, 0)
+			ENDIF
+			
+			//Add Immunity from Packmule.
+			IF "c1&!c2"
+				CharacterHasTalent(__Me, Carry)
+				CharacterHasStatus(__Me, CONSUME, AMER_CarryImmunity)
+			THEN
+				AddStatusInfluence(__Me, CONSUME, 1, AMER_CarryImmunity, 0)
+			ENDIF
+		ENDIF
+
+		IF "c1"
+			CharacterHasTalent(__Me, WarriorLoreNaturalArmor)
+		THEN
+			Print(_Str, "AMER_ThickSkin[1]", %AMER_SoldierCount)
+			Cast(_WhichEffect, _Str)
+			RemoveStatusInfluence(__Me, CONSUME, 1, _WhichEffect, 0)
+			
+			IF "c1"
+				IsGreaterThen(_Soldier, 5)
+			THEN
+				Set(_Soldier, 5)
+			ENDIF
+			
+			IF "c1"
+				IsGreaterThen(_Soldier, INT:0)
+			THEN
+				Print(_Str, "AMER_ThickSkin[1]", _Soldier)
+				Cast(_WhichEffect, _Str)
+				AddStatusInfluence(__Me, CONSUME, 1, _WhichEffect, 0)
+			ENDIF
+		ENDIF
+		
+		IF "c1"
+			CharacterHasTalent(__Me, WarriorLoreNaturalResistance)
+		THEN
+			//If our last recorded Iron Hide bonus is not the same as
+			//what we detected, then remove the recorded bonus from
+			//our maximum elemental resistances and add the new bonus
+			//to them afterward. Record the new bonus.
+			Set(_Count, INT:0)
+			WHILE "c1"
+				IsLessThen(_Count, 4)
+			DO
+				GetElement(_WhichEffect, _Count, "AMER_MaxFireRes", "AMER_MaxWaterRes", "AMER_MaxAirRes", "AMER_MaxEarthRes")
+				IF "c1"
+					GetVar(_MaxRes, __Me, _WhichEffect)
+				THEN
+					Subtract(_MaxRes, %AMER_SoldierCount)
+					Add(_MaxRes, _Soldier)
+					SetVar(__Me, _WhichEffect, _MaxRes)
+				ENDIF
+				Add(_Count, 1)
+			ENDWHILE
+		ENDIF
+		
+		//Store the newly recorded value.
+		Cast(%AMER_SoldierCount, _Soldier)
+	ENDIF
+	
+	
+	
+//===========================================================//
+//                      Check Tenebrium                      //
+//===========================================================//	
+EVENT CheckTenebrium
+VARS
+	FLOAT:_MaxRes
+	FLOAT:_FloatBonus
+	INT:_Bonus
+	INT:_ExtraBonus
+ON
+	OnFunction("AMER_CheckTenebrium")
+ACTIONS
+	IF "c1"
+		CharacterGetAbility(_Bonus, __Me, Blackrock)
+	THEN
+		
+		IF "c1"
+			IsGreaterThen(_Bonus, INT:5)
+		THEN
+			Set(_ExtraBonus, _Bonus)
+			Subtract(_ExtraBonus, INT:5)
+			Add(_Bonus, _ExtraBonus)
+		ENDIF
+		
+		Cast(_FloatBonus, _Bonus)
+		
+		IF "!c1"
+			IsEqual(%AMER_TenebriumMaxRes, _FloatBonus)
+		THEN
+			//If the physique bonus changed, then remove the old bonus
+			//and apply the new one.
+			IF "c1"
+				GetVar(_MaxRes, __Me, "AMER_MaxShadowRes")
+			THEN
+				Subtract(_MaxRes, %AMER_TenebriumMaxRes)
+				Set(%AMER_TenebriumMaxRes, _FloatBonus)
+				Add(_MaxRes, %AMER_TenebriumMaxRes)
+				SetVar(__Me, "AMER_MaxShadowRes", _MaxRes)
+			ENDIF
+		ENDIF
+	ENDIF
+	
+	
+	
+//===========================================================//
+//                     Check Perception                      //
+//===========================================================//	
+EVENT CheckPerceptionInitiative
+VARS
+//===========================//
+	INT:_MaxInitIndex = 6		//Up to 32 added initiative
+//===========================//
+	FLOAT:_Perception
+	FLOAT:_PrevPerception = 0.0
+	FLOAT:_Speed
+	FLOAT:_EvenOrOdd
+	FLOAT:_RoundUp
+	INT:_Initiative
+	INT:_Count
+	INT:_SplitIndex
+	INT:_ArrayValue
+	FIXEDSTRING:_WhichEffect
+ON
+	OnFunction("AMER_CheckPerceptionInit")
+ACTIONS
+	IF "c1&!c2"
+		CharacterGetStat(_Perception, __Me, Perception)
+		IsEqual(_Perception, PrevPerception)
+	THEN
+		IF "c1"
+			CharacterGetStat(_Speed, __Me, Speed)
+		THEN
+			Set(_PrevPerception, _Perception)
+			
+			Add(_Speed, _Perception)
+			Divide(_Speed, FLOAT:2.0)
+			Cast(_Initiative, _Speed)
+			Cast(_EvenOrOdd, _Initiative)
+			
+			//If these are not equal, then the sum of speed and perception is an odd number.
+			//Odd numbers are rounded down when divided by 2, so if it is odd, we add 0.5
+			//to the dividend. Ultimately, this creates the effect that adding a point into
+			//perception always gives 1 initiative, as opposed to alternating from giving 0
+			//to 2.
+			
+			Set(_RoundUp, FLOAT:0)
+			//Only Perception past 5 is counted, if it was 5 or less, this execution serves to remove previous bonuses.
+			Subtract(_Perception, FLOAT:5)
+			Divide(_Perception, FLOAT:2.0)
+			
+			//If speed is odd, and perception is even, then we need to round up to gain a point
+			//of initiative for this value.
+			IF "!c1"
+				IsEqual(_EvenOrOdd, _Speed)
+			THEN
+				Cast(_Initiative, _Perception)
+				Cast(_EvenOrOdd, _Initiative)
+				IF "!c1"
+					IsEqual(_EvenOrOdd, _Perception)
+				THEN
+					Set(_RoundUp, FLOAT:0.5)
+				ENDIF
+			ENDIF
+			
+			Add(_Perception, _RoundUp)
+			Cast(_Initiative, _Perception)
+			
+			Set(_Count, INT:0)
+			
+			WHILE "c1"
+				IsLessThen(_Count, _MaxInitIndex)
+			DO
+				GetElement(_ArrayValue, _Count, INT:10, INT:10, INT:5, INT:4, INT:2, INT:1)
+				GetElement(_WhichEffect, _Count, "AMER_PERC_Init20", "AMER_PERC_Init10", "AMER_PERC_Init5", "AMER_PERC_Init4", "AMER_PERC_Init2", "AMER_PERC_Init1")
+				
+				IF "!c1"
+					IsLessThen(_Initiative, _ArrayValue)
+				THEN
+					Subtract(_Initiative, _ArrayValue)
+					IF "!c1"
+						CharacterHasStatus(__Me, CONSUME, _WhichEffect)
+					THEN
+						AddStatusInfluence(__Me, CONSUME, 1, _WhichEffect, 0)
+					ENDIF
+				ELIF "c1"
+					CharacterHasStatus(__Me, CONSUME, _WhichEffect)
+				THEN
+					RemoveStatusInfluence(__Me, CONSUME, 1, _WhichEffect, 0)
+				ENDIF
+				
+				Add(_Count, INT:1)
+			ENDWHILE
+		ENDIF
+	ENDIF
+	
+EVENT CheckPerceptionCrit
+VARS
+//===========================//
+	INT:_MaxCritIndex = 10		//Up to 71% added crit.
+	FLOAT:_CritPerPerc = 1.5
+//===========================//
+	FLOAT:_Perception
+	FLOAT:_PrevPerception = 0.0
+	INT:_Crit
+	INT:_InitialCrit
+	INT:_Count
+	INT:_ArrayValue
+	FIXEDSTRING:_WhichEffect
+ON
+	OnFunction("AMER_CheckPerception")
+ACTIONS
+	IF "c1&!c2"
+		CharacterGetStat(_Perception, __Me, Perception)
+		IsEqual(_Perception, PrevPerception)
+	THEN
+		Set(_PrevPerception, _Perception)
+		
+		//Only Perception past 5 is counted, if it was 5 or less, this execution serves to remove previous bonuses.
+		Subtract(_Perception, FLOAT:5)
+		Multiply(_Perception, _CritPerPerc)	//_CritPerPerc extra crit is given.
+		Cast(_Crit, _Perception)			//Float to Int always rounds down.
+		
+		Set(_InitialCrit, _Crit)
+		Set(_Count, INT:0)
+		WHILE "c1"
+			IsLessThen(_Count, _MaxCritIndex)
+		DO
+			GetElement(_ArrayValue, _Count, INT:10, INT:10, INT:10, INT:10, INT:10, INT:8, INT:6, INT:4, INT:2, INT:1)
+			GetElement(_WhichEffect, _Count, "AMER_PERC_Crit50", "AMER_PERC_Crit40", "AMER_PERC_Crit30", "AMER_PERC_Crit20", "AMER_PERC_Crit10", "AMER_PERC_Crit8", "AMER_PERC_Crit6", "AMER_PERC_Crit4", "AMER_PERC_Crit2", "AMER_PERC_Crit1")
+			
+			IF "!c1"
+				IsLessThen(_Crit, _ArrayValue)
+			THEN
+				Subtract(_Crit, _ArrayValue)
+				IF "!c1"
+					CharacterHasStatus(__Me, CONSUME, _WhichEffect)
+				THEN
+					AddStatusInfluence(__Me, CONSUME, 1, _WhichEffect, 0)
+				ENDIF
+			ELIF "c1"
+				CharacterHasStatus(__Me, CONSUME, _WhichEffect)
+			THEN
+				RemoveStatusInfluence(__Me, CONSUME, 1, _WhichEffect, 0)
+			ENDIF
+			
+			Add(_Count, INT:1)
+		ENDWHILE
+	ENDIF
+	
+	
+	
+	
+//===========================================================//
+//                      Check Metamind                       //
+//===========================================================//
+EVENT CheckMetamind
+VARS
+//=============================//
+	INT:_SupportedMaximum = 8
+//=============================//
+	INT:_Metamind
+	INT:_PrevMetamind = INT:0
+	FIXEDSTRING:_WhichEffect
+	STRING:_Str
+ON
+	OnFunction("AMER_CheckMetamind")
+ACTIONS
+	IF "c1&!c2"
+		CharacterGetAbility(_Metamind, __Me, Loremaster)
+		IsEqual(_Metamind, _PrevMetamind)
+	THEN
+		Print(_Str, "AMER_ABIL_Telekinesis[1]", _PrevMetamind)
+		Cast(_WhichEffect, _Str)
+		RemoveStatusInfluence(__Me, CONSUME, 1, _WhichEffect, 0)
+		
+		Set(_PrevMetamind, _Metamind)
+		
+		IF "c1"
+			IsGreaterThen(_Metamind, _SupportedMaximum)
+		THEN
+			Set(_Metamind, _SupportedMaximum)
+		ENDIF
+		
+		Print(_Str, "AMER_ABIL_Telekinesis[1]", _Metamind)
+		Cast(_WhichEffect, _Str)
+		
+		
+		IF "!c1"
+			CharacterHasStatus(__Me, CONSUME, _WhichEffect)
+		THEN
+			AddStatusInfluence(__Me, CONSUME, 1, _WhichEffect, 0)
+		ENDIF
+	ENDIF
+	
+	
+	
+//===========================================================//
+//                       Check Tricks                        //
+//===========================================================//
+EVENT CheckNastyDeeds
+VARS
+//=============================//
+	INT:_SupportedMaximum = 9
+//=============================//
+	INT:_Tricks
+	INT:_PrevTricks = INT:0
+	FIXEDSTRING:_WhichEffect
+	STRING:_Str
+ON
+	OnFunction("AMER_CheckTricks")
+ACTIONS
+	IF "c1&!c2"
+		CharacterGetAbility(_Tricks, __Me, Sneaking)
+		IsEqual(_Tricks, _PrevTricks)
+	THEN
+		Print(_Str, "AMER_ABIL_Pickpocket[1]", _PrevTricks)
+		Cast(_WhichEffect, _Str)
+		RemoveStatusInfluence(__Me, CONSUME, 1, _WhichEffect, 0)
+		Print(_Str, "AMER_ABIL_Lockpicking[1]", _PrevTricks)
+		Cast(_WhichEffect, _Str)
+		RemoveStatusInfluence(__Me, CONSUME, 1, _WhichEffect, 0)
+		
+		Set(_PrevTricks, _Tricks)
+		
+		IF "c1"
+			IsGreaterThen(_Tricks, _SupportedMaximum)
+		THEN
+			Set(_Tricks, _SupportedMaximum)
+		ENDIF
+		
+		Print(_Str, "AMER_ABIL_Pickpocket[1]", _Tricks)
+		Cast(_WhichEffect, _Str)
+		
+		IF "!c1"
+			CharacterHasStatus(__Me, CONSUME, _WhichEffect)
+		THEN
+			AddStatusInfluence(__Me, CONSUME, 1, _WhichEffect, 0)
+		ENDIF
+		
+		Print(_Str, "AMER_ABIL_Lockpicking[1]", _Tricks)
+		Cast(_WhichEffect, _Str)
+		
+		IF "!c1"
+			CharacterHasStatus(__Me, CONSUME, _WhichEffect)
+		THEN
+			AddStatusInfluence(__Me, CONSUME, 1, _WhichEffect, 0)
+		ENDIF
+	ENDIF
+	
+	
+	
+//=================================================//
+//                                                 //
+//    P L A Y E R   S T A T   F U N C T I O N S    //
+//                                                 //
+//=================================================//

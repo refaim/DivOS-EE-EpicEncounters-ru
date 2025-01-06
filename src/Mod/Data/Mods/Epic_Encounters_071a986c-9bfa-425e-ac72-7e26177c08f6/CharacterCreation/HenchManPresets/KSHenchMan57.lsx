@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<save>
+    <header version="2" time="1427201041" />
+    <version major="1" minor="3" revision="1" build="3" />
+    <region id="CharacterCreationClass">
+        <node id="root">
+            <attribute id="Armour" value="" type="22" />
+            <attribute id="Boots" value="" type="22" />
+            <attribute id="ClassDescription" value="Deadly fire from the shadows" handle="hcb4bb0f2g3f88g4353g926fg6bd054702912" type="28" />
+            <attribute id="ClassLongDescription" value="When Daxalina was young, her parents became embroiled in a dispute with a powerful warlord. One night, she woke to the smell of smoke. Their modest cottage had been set ablaze. Boards and beams fell; smoke clouded every sense. Daxalina alone flew from the burning mass just as it crumbled. But the fire intended to consume her has only made her stronger. Since that night, she has been learning; growing; preparing. Like a phoenix she is rising, a single word on her ashen breath: Revenge." handle="h7b0e12deg9d55g4e50g994cg9f699bfad89a" type="28" />
+            <attribute id="ClassName" value="Shadowblade" handle="hb6eb0f87gcc24g447fg82f2g959446e5edec" type="28" />
+            <attribute id="ClassType" value="Shadowblade" type="22" />
+            <attribute id="ExtraEquipmentSet" value="" type="22" />
+            <attribute id="Gloves" value="" type="22" />
+            <attribute id="Leggings" value="" type="22" />
+            <attribute id="SkillSet" value="" type="22" />
+            <attribute id="Voice" value="0" type="5" />
+            <children>
+                <node id="AbilityChanges">
+                    <children>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="RogueLore" type="23" />
+                            <attribute id="AmountIncreased" value="2" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="SingleHanded" type="23" />
+                            <attribute id="AmountIncreased" value="2" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="FireSpecialist" type="23" />
+                            <attribute id="AmountIncreased" value="1" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="Sneaking" type="23" />
+                            <attribute id="AmountIncreased" value="2" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="Pickpocket" type="23" />
+                            <attribute id="AmountIncreased" value="1" type="4" />
+                        </node>
+                    </children>
+                </node>
+                <node id="AttributeChanges">
+                    <children>
+                        <node id="AttributeChange">
+                            <attribute id="AmountIncreased" value="3" type="4" />
+                            <attribute id="Attribute" value="DEX" type="23" />
+                        </node>
+                        <node id="AttributeChange">
+                            <attribute id="AmountIncreased" value="3" type="4" />
+                            <attribute id="Attribute" value="INT" type="23" />
+                        </node>
+                        <node id="AttributeChange">
+                            <attribute id="AmountIncreased" value="2" type="4" />
+                            <attribute id="Attribute" value="SPD" type="23" />
+                        </node>
+                    </children>
+                </node>
+                <node id="HenchManData">
+                    <attribute id="HairColor" value="6" type="5" />
+                    <attribute id="HairType" value="0" type="5" />
+                    <attribute id="HeadType" value="7" type="5" />
+                    <attribute id="ID" value="0e560cb1-806d-41a5-8a10-01b2998cdab1" type="22" />
+                    <attribute id="Icon" value="6" type="5" />
+                    <attribute id="IsMale" value="0" type="19" />
+                    <attribute id="Level" value="6" type="4" />
+                    <attribute id="Name" value="Daxalina" type="30" />
+                    <attribute id="Race" value="0" type="5" />
+                    <attribute id="SkinColor" value="2" type="5" />
+                    <children>
+                        <node id="Skills">
+                            <attribute id="Object" value="Shout_FireSurfaceSelf" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="Target_Lacerate" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="Target_Trip" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="Target_ImmuneToBurning" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="Target_TargetedPerception" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="Target_Poison" type="22" />
+                        </node>
+                    </children>
+                </node>
+                <node id="TalentsAdded">
+                    <children>
+                        <node id="TalentAdded">
+                            <attribute id="Talent" value="MrKnowItAll" type="23" />
+                        </node>
+                        <node id="TalentAdded">
+                            <attribute id="Talent" value="WhatARush" type="23" />
+                        </node>
+                        <node id="TalentAdded">
+                            <attribute id="Talent" value="WalkItOff" type="23" />
+                        </node>
+                    </children>
+                </node>
+            </children>
+        </node>
+    </region>
+</save>

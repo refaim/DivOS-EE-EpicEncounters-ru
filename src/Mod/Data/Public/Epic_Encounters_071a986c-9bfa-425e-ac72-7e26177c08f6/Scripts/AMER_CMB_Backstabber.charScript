@@ -1,0 +1,422 @@
+//===============================================//
+//                                               //
+//             B A C K S T A B B E R             //
+//                                               //
+//           Original script by Larian           //
+//     Modified by Matteo "Ameranth" T. (2016)   //
+//===============================================//
+INIT
+	CHARACTER:__Me
+	FLOAT:%AMER_Backstabber_SightRange	
+	INT:%AMER_Backstabber_ShadowstepsLeft = 0
+	FLOAT:%AMER_Backstabber_TargetScore = 0
+	CHARACTER:%AMER_Backstabber_Target
+	EXTERN INT:%AMER_Backstabber_ShadowstepsPerTurn = 1
+	EXTERN INT:%AMER_Priority_Backstabber_Shadowstep = 1000
+	EXTERN INT:%AMER_Priority_Backstabber_Reposition = 400
+	EXTERN INT:%AMER_Priority_Backstabber_Backstab = 500
+	EXTERN INT:%AMER_Priority_Backstabber_Finisher = 600
+	EXTERN INT:%AMER_Priority_Backstabber_ChainToFinish = 5
+	EXTERN SKILL:%AMER_Backstabber_FinisherChoice1 = Target_Lacerate
+	EXTERN SKILL:%AMER_Backstabber_FinisherChoice2 = Target_Lacerate
+	EXTERN SKILL:%AMER_Backstabber_FinisherChoice3 = Target_Lacerate
+	
+	
+EVENTS
+	
+EVENT BackstabberInitialize
+ON
+	OnInit()
+ACTIONS
+	IF "c1"
+		CharacterGetSightRange(%AMER_Backstabber_SightRange, __Me)
+	THEN
+		CharacterAddSkill(%AMER_Backstabber_FinisherChoice1)
+		CharacterAddSkill(%AMER_Backstabber_FinisherChoice2)
+		CharacterAddSkill(%AMER_Backstabber_FinisherChoice3)
+		SetPriority(BackstabberShadowStep, %AMER_Priority_Backstabber_Shadowstep)
+		SetPriority(BackstabberReposition, %AMER_Priority_Backstabber_Reposition)
+		IF "c1"
+			IsEqual(%AMER_Backstabber_ShadowstepsPerTurn, INT:-1)
+		THEN
+			Set(%AMER_Backstabber_ShadowstepsPerTurn, INT:100)
+		ENDIF
+	ENDIF
+	
+	
+	
+EVENT BackstabberResetPrio
+ON
+	OnTurnEnded()
+ACTIONS
+	SetPriority(BackstabberShadowStep, %AMER_Priority_Backstabber_Shadowstep)
+	Set(%AMER_Backstabber_ShadowstepsLeft, %AMER_Backstabber_ShadowstepsPerTurn)
+	SetPriority(BackstabberAttack, 0)
+	SetPriority(BackstabberReposition, %AMER_Priority_Backstabber_Reposition)
+	
+	
+	
+EVENT BackstabberFindRepositionTarget
+VARS
+	CHARACTER:_Target
+	INT:_Shield
+	FLOAT:_Distance
+	FLOAT:_Vitality
+	FLOAT:_Score
+ON
+	OnIterateCharacter(_Target, "AMER_Backstabber_FindReposition")
+ACTIONS
+	IF "!c1"
+		CharacterIsAlly(__Me, _Target)
+	THEN
+		IF "!c1"
+			CharacterIsDead(_Target)
+		THEN
+			IF "!c1&!c2&!c3&!c4"
+				CharacterHasStatus(_Target, INVISIBLE)
+				CharacterHasStatus(_Target, SNEAKING)
+				CharacterHasStatus(_Target, DYING)
+				CharacterHasStatus(_Target, INVULNERABLE)
+			THEN
+				//Calculate target score.
+				IF "c1&c2&c3"
+					CharacterGetAbility(_Shield, _Target, Shield)
+					CharacterGetStat(_Vitality, _Target, Vitality)
+					GetDistance(_Distance, __Me, _Target)
+				THEN
+					Multiply(_Vitality, -10.0)
+					Add(_Vitality, 10.0)
+					Multiply(_Distance, -1.0)
+					Multiply(_Shield, -3)
+					Set(_Score, _Vitality)
+					Add(_Score, _Distance)
+					Add(_Score, _Shield)
+					
+					IF "c1"
+						CharacterIsSummon(_Target)
+					THEN
+						Add(_Score, -10.0)
+					ENDIF
+					
+					IF "c1"
+						IsGreaterThen(_Score, %AMER_Backstabber_TargetScore)
+					THEN
+						Set(%AMER_Backstabber_TargetScore, _Score)
+						Set(%AMER_Backstabber_Target, _Target)
+					ENDIF
+				ENDIF
+			ENDIF
+		ENDIF
+	ENDIF
+	
+	
+	
+EVENT BackstabberFindStepTarget
+VARS
+	CHARACTER:_Target
+	INT:_Shield
+	FLOAT:_Distance
+	FLOAT:_Vitality
+	FLOAT:_Score
+ON
+	OnIterateCharacter(_Target, "AMER_Backstabber_FindStepTarget")
+ACTIONS
+	IF "!c1"
+		CharacterIsAlly(__Me, _Target)
+	THEN
+		IF "!c1"
+			CharacterIsDead(_Target)
+		THEN
+			IF "!c1&!c2&!c3&!c4"
+				CharacterHasStatus(_Target, INVISIBLE)
+				CharacterHasStatus(_Target, SNEAKING)
+				CharacterHasStatus(_Target, DYING)
+				CharacterHasStatus(_Target, INVULNERABLE)
+			THEN
+				IF "c1&c2&c3"
+					CanSee(__Me, _Target)
+					GetDistance(_Distance, __Me, _Target)
+					IsGreaterThen(_Distance, 3)
+				THEN
+					//Calculate target score.
+					IF "c1&c2"
+						CharacterGetAbility(_Shield, _Target, Shield)
+						CharacterGetStat(_Vitality, _Target, Vitality)
+					THEN
+						Multiply(_Vitality, -10.0)
+						Add(_Vitality, 10.0)
+						Multiply(_Shield, -3)
+						Set(_Score, _Vitality)
+						Add(_Score, _Shield)
+							
+						IF "c1"
+							CharacterIsSummon(_Target)
+						THEN
+							Add(_Score, -10.0)
+						ENDIF
+							
+						IF "c1"
+							IsGreaterThen(_Score, %AMER_Backstabber_TargetScore)
+						THEN
+							Set(%AMER_Backstabber_TargetScore, _Score)
+							Set(%AMER_Backstabber_Target, _Target)
+						ENDIF
+					ENDIF
+				ENDIF
+			ENDIF
+		ENDIF
+	ENDIF
+	
+//===================BEHAVIOR====================//
+BEHAVIOUR
+REACTION BackstabberFinisher, 0
+USAGE COMBAT
+VARS
+//=========================//
+	INT:_SupportedFinishers = 3
+	FLOAT:_FinisherRange = 5
+	FLOAT:_Sleep = 1
+//=========================//
+	INT:_Count
+	INT:_Chain
+	FLOAT:_MaxRange
+	FLOAT:_Distance
+	SKILL:_Finisher
+	CHARACTER:_Target
+CHECK "!c1&!c2&!c3&!c4&!c5"
+	CharacterHasStatus(__Me,FROZEN)
+	CharacterHasStatus(__Me,STUNNED)
+	CharacterHasStatus(__Me,KNOCKED_DOWN)
+	CharacterHasStatus(__Me,PETRIFIED)
+	CharacterHasStatus(__Me,FEAR)
+ACTIONS
+	IF "c1&!c2"
+		GetVar(_Chain, __Me, "AMER_Chain")
+		IsLessThen(_Chain, %AMER_Priority_Backstabber_ChainToFinish)
+	THEN
+		Set(_Count, INT:0)
+		WHILE "c1"
+			IsLessThen(_Count, _SupportedFinishers)
+		DO
+			GetElement(_Finisher, _Count, %AMER_Backstabber_FinisherChoice1, %AMER_Backstabber_FinisherChoice2, %AMER_Backstabber_FinisherChoice3)
+			IF "c1"
+				CharacterCanCast(__Me, _Finisher)
+			THEN
+				IF "c1&!c2&!c3&!c4&!c5"
+					CharacterGet(_Target, __Me, _FinisherRange, Lowest, Distance, Enemy)
+					CharacterIsDead(_Target)
+					CharacterHasStatus(_Target, INVISIBLE)
+					CharacterHasStatus(_Target, DYING)
+					CharacterHasStatus(_Target, INVULNERABLE)
+				THEN
+					CharacterUseSkill(_Finisher, _Target)
+					Set(_Count, _SupportedFinishers)	//Exit loop after using a finisher.
+					Sleep(_Sleep) //Make sure the chain bonuses resolve correctly.
+				ENDIF
+			ENDIF
+			
+			Add(_Count, INT:1)
+		ENDWHILE
+	ENDIF
+	SetPriority(BackstabberFinisher, 0)
+	
+	
+REACTION BackstabberShadowStep, 0
+USAGE COMBAT
+VARS
+	CHARACTER:_Target
+	CHARACTER:_Taunter
+	FLOAT3:_TargetPosition
+	FLOAT3:_BackwDirection
+	FLOAT:_DistanceTarget
+CHECK "!c1&!c2&!c3&!c4&!c5&!c6"
+	CharacterHasStatus(__Me,FROZEN)
+	CharacterHasStatus(__Me,STUNNED)
+	CharacterHasStatus(__Me,KNOCKED_DOWN)
+	CharacterHasStatus(__Me,PETRIFIED)
+	CharacterHasStatus(__Me,FEAR)
+	IsEqual(%AMER_Backstabber_ShadowstepsLeft, INT:0)
+ACTIONS
+	//Find a valid target, result returned into %AMER_Backstabber_Target.
+	Set(%AMER_Backstabber_Target, null)
+	Set(%AMER_Backstabber_TargetScore, FLOAT:-1000000)
+	
+	//If I'm taunted, attack the taunter unless I can't attack it.
+	IF "c1"
+		CharacterHasStatus(__Me, TAUNTED)
+	THEN
+		IF "c1"
+			CharacterGetStatusSourceCharacter(__Me, TAUNTED, _Taunter)
+		THEN
+			IF "!c1&!c2&!c3&!c4&!c5"
+				CharacterIsDead(_Taunter)
+				CharacterHasStatus(_Taunter, DYING)
+				CharacterHasStatus(_Taunter, INVISIBLE)
+				CharacterHasStatus(_Taunter, SNEAKING)
+				CharacterHasStatus(_Taunter, INVULNERABLE)
+			THEN
+				Set(%AMER_Backstabber_Target, _Taunter)
+			ENDIF
+		ENDIF
+	ENDIF
+	
+	//Find a valid target if no valid taunter exists.
+	IF "c1"
+		IsEqual(%AMER_Backstabber_Target, null)
+	THEN
+		IterateCharactersNear(__Me, %AMER_Backstabber_SightRange, "AMER_Backstabber_FindStepTarget", Lowest, Vitality)
+	ENDIF
+	Set(_Target, %AMER_Backstabber_Target)
+	
+	IF "!c1"
+		IsEqual(_Target, null)
+	THEN
+		//Find the location behind my target to move to.
+		GetPosition(_Target,_TargetPosition)
+		GetForwardDirection(_Target,_BackwDirection)
+		RotateY(_BackwDirection,180)
+		Add(_TargetPosition,_BackwDirection)
+		
+		//Display FX and move.
+		CharacterPlayEffect(__Me,"FX_GP_TeleportSmoke_A")
+		CharacterTeleportTo(_TargetPosition)
+		CharacterPlayEffect(__Me,"FX_GP_TeleportSmoke_A")
+		
+		//Flag that I have used Shadowstep, update priority for attacks.
+		Subtract(%AMER_Backstabber_ShadowstepsLeft, INT:1)
+		SetPriority(BackstabberFinisher, %AMER_Priority_Backstabber_Finisher)
+		SetPriority(BackstabberAttack, %AMER_Priority_Backstabber_Backstab)
+	ENDIF
+	//Zero the priority of this behavior so others can execute.
+	SetPriority(BackstabberShadowStep, 0)
+	//DelayReaction("BackstabberShadowStep", 1.0)
+	
+	
+	
+REACTION BackstabberReposition, 0
+USAGE COMBAT
+VARS
+	CHARACTER:_Target
+	CHARACTER:_Taunter
+	FLOAT:_APAmount
+	FLOAT3:_TargetPosition
+	FLOAT3:_BackwDirection
+	FLOAT:_Distance
+	FLOAT:_ZMod
+	FLOAT:_XMod
+	FLOAT:_Z
+	FLOAT:_X
+CHECK "!c1&!c2&!c3&!c4&!c5"
+	CharacterHasStatus(__Me, FROZEN)
+	CharacterHasStatus(__Me, STUNNED)
+	CharacterHasStatus(__Me, KNOCKED_DOWN)
+	CharacterHasStatus(__Me, PETRIFIED)
+	CharacterHasStatus(__Me, FEAR)
+ACTIONS
+	//Find a valid target, result returned into %AMER_Backstabber_Target.
+	Set(%AMER_Backstabber_Target, null)
+	Set(%AMER_Backstabber_TargetScore, FLOAT:-1000000)
+	
+	//If I'm taunted, attack the taunter unless I can't attack it.
+	IF "c1"
+		CharacterHasStatus(__Me, TAUNTED)
+	THEN
+		IF "c1"
+			CharacterGetStatusSourceCharacter(__Me, TAUNTED, _Taunter)
+		THEN
+			IF "!c1&!c2&!c3&!c4&!c5"
+				CharacterIsDead(_Taunter)
+				CharacterHasStatus(_Taunter, DYING)
+				CharacterHasStatus(_Taunter, INVISIBLE)
+				CharacterHasStatus(_Taunter, SNEAKING)
+				CharacterHasStatus(_Taunter, INVULNERABLE)
+			THEN
+				Set(%AMER_Backstabber_Target, _Taunter)
+			ENDIF
+		ENDIF
+	ENDIF
+	
+	//Find a valid target if no valid taunter exists.
+	IF "c1"
+		IsEqual(%AMER_Backstabber_Target, null)
+	THEN
+		IterateCharactersNear(__Me, %AMER_Backstabber_SightRange, "AMER_Backstabber_FindReposition", Lowest, Vitality)
+	ENDIF
+	Set(_Target, %AMER_Backstabber_Target)
+	
+	IF "!c1"
+		IsEqual(_Target, null)
+	THEN
+		GetPosition(_Target, _TargetPosition)
+		GetForwardDirection(_Target, _BackwDirection)
+		RotateY(_BackwDirection, 180)
+		
+		//Modify the target's position by a small amount in
+		//the opposite direction the target is facing.
+		IF "c1&c2&c3&c4"
+			GetZ(_BackwDirection, _ZMod)
+			GetX(_BackwDirection, _XMod)
+			GetZ(_TargetPosition, _Z)
+			GetX(_TargetPosition, _X)
+		THEN
+			Multiply(_ZMod, 2.0)
+			Multiply(_XMod, 2.0)
+			Add(_Z, _ZMod)
+			Add(_X, _XMod)
+			SetZ(_TargetPosition, _Z)
+			SetX(_TargetPosition, _X)
+			Add(_TargetPosition, _BackwDirection)
+		ENDIF
+		
+		IF "c1&c2"
+			GetInnerDistance(_Distance, __Me, _Target)
+			IsGreaterThen(_Distance, 8)
+		THEN
+			CharacterMoveTo(_TargetPosition, 1, 1, 1, 0.2)
+		ELIF "c1&!c2"
+			GetInnerDistance(_Distance, __Me, _Target)
+			IsLessThen(_Distance, 3)
+		THEN
+			CharacterMoveTo(_TargetPosition, 1, 1, 0, 0.2)
+		ENDIF
+		SetPriority(BackstabberFinisher, %AMER_Priority_Backstabber_Finisher)
+		SetPriority(BackstabberAttack, %AMER_Priority_Backstabber_Backstab)
+	ELSE
+		SetPriority(BackstabberReposition, 0)
+	ENDIF
+INTERRUPT
+	DelayReaction("BackstabberReposition", 2)
+	CallFunction("StartEvaluateScore")
+	
+	
+REACTION BackstabberAttack,0
+VARS
+	CHARACTER:_Target
+USAGE COMBAT
+CHECK "!c1"
+	CharacterGet(_Target, __Me, %AMER_Backstabber_SightRange, Lowest, Distance, Enemy)
+ACTIONS
+	IF "!c1&!c2"
+		CharacterHasStatus(_Target, DYING)
+		CharacterIsDead(_Target)
+	THEN
+		CharacterAttack(_Target)
+	ENDIF
+	
+	//Attempt to use Shadowstep after a kill if I have any left.
+	IF "c1&(c2|c3)"
+		IsGreaterThen(%AMER_Backstabber_ShadowstepsLeft, INT:0)
+		CharacterHasStatus(_Target, DYING)
+		CharacterIsDead(_Target)
+	THEN
+		SetPriority(BackstabberShadowStep, %AMER_Priority_Backstabber_Shadowstep)
+	ENDIF
+	SetPriority(BackstabberAttack, 0)
+INTERRUPT
+	DelayReaction("BackstabberAttack", 2)
+	CallFunction("StartEvaluateScore")
+//===============================================//
+//                                               //
+//             B A C K S T A B B E R             //
+//                                               //
+//===============================================//

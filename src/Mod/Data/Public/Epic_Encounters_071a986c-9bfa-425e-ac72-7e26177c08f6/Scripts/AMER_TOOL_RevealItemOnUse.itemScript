@@ -1,0 +1,137 @@
+//===============================================//
+//                                               //
+//      R E V E A L   I T E M   O N   U S E      //
+//                                               //
+//     Written by Matteo "Ameranth" T. (2016)    //
+//===============================================//
+INIT
+ITEM:__Me
+EXTERN ITEM:%AMER_RevealItemOnUse_OnlyWithItem = null
+EXTERN INT:%AMER_RevealItemOnUse_Toggle = 0
+EXTERN INT:%AMER_RevealItemOnUse_StartState = 0
+EXTERN INT:%AMER_RevealItemOnUse_ManipulateOnlyVisibility = 0
+EXTERN INT:%AMER_RevealItemOnUse_HideMeOnActivate = 0
+EXTERN ITEM:%AMER_RevealItemOnUse_ItemToManipulate = null
+EXTERN STRING:%AMER_RevealItemOnUse_RevealFX = "NONE"
+EXTERN FIXEDSTRING:%AMER_RevealItemOnUse_DisplayTextActivate = null
+EXTERN FIXEDSTRING:%AMER_RevealItemOnUse_DisplayTextDeactivate = null
+EXTERN FIXEDSTRING:%AMER_RevealItemOnUse_DisplayTextFailedUse = null
+EXTERN FLOAT:%AMER_RevealItemOnUse_ActivateTextDuration = 3.5
+EXTERN FLOAT:%AMER_RevealItemOnUse_DeactivateTextDuration = 3.5
+EXTERN FLOAT:%AMER_RevealItemOnUse_FailedUseTextDuration = 3.5
+INT:%AMER_RevealItemOnUse_ToggleState = 0
+INT:%AMER_RevealItemOnUse_InitOnce = 0
+CHARACTER:%AMER_RevealItemOnUse_Char
+	
+EVENTS
+EVENT RevealItemOnUseInit
+ON
+	OnInit()
+ACTIONS
+	IF "c1"
+		IsEqual(%AMER_RevealItemOnUse_InitOnce, INT:0)
+	THEN
+		Set(%AMER_RevealItemOnUse_InitOnce, INT:1)
+	
+		IF "c1"
+			IsEqual(%AMER_RevealItemOnUse_ManipulateOnlyVisibility, INT:0)
+		THEN
+			ItemSetOnStage(%AMER_RevealItemOnUse_ItemToManipulate, %AMER_RevealItemOnUse_StartState)
+		ELSE
+			SetVisible(%AMER_RevealItemOnUse_ItemToManipulate, %AMER_RevealItemOnUse_StartState)
+		ENDIF
+	ENDIF
+	
+	
+	
+EVENT RevealItemOnUse
+VARS
+	CHARACTER:_Char
+ON
+	OnUseItem(_Char, __Me)
+ACTIONS
+	Set(%AMER_RevealItemOnUse_Char, _Char)
+	
+	IF "!c1"
+		IsEqual(%AMER_RevealItemOnUse_OnlyWithItem, null)
+	THEN
+		IF "c1"
+			ItemIsInCharacterInventory(%AMER_RevealItemOnUse_OnlyWithItem, _Char)
+		THEN
+			CallFunction("AMER_RevealItemOnUse_Reveal")
+		ELIF "!c1"
+			IsEqual(%AMER_RevealItemOnUse_DisplayTextFailedUse, null)
+		THEN
+			DisplayText(_Char, %AMER_RevealItemOnUse_DisplayTextFailedUse, %AMER_RevealItemOnUse_FailedUseTextDuration)
+		ENDIF
+	ELSE
+		CallFunction("AMER_RevealItemOnUse_Reveal")
+	ENDIF
+	
+	
+	
+EVENT RevealItemOnUseReveal
+ON
+	OnFunction("AMER_RevealItemOnUse_Reveal")
+ACTIONS
+	IF "c1"
+		IsEqual(%AMER_RevealItemOnUse_ToggleState, INT:0)
+	THEN
+		Set(%AMER_RevealItemOnUse_ToggleState, INT:1)
+		
+		IF "!c1"
+			IsEqual(%AMER_RevealItemOnUse_DisplayTextActivate, null)
+		THEN
+			DisplayText(%AMER_RevealItemOnUse_Char, %AMER_RevealItemOnUse_DisplayTextActivate, %AMER_RevealItemOnUse_ActivateTextDuration)
+		ENDIF
+			
+		IF "c1"
+			IsEqual(%AMER_RevealItemOnUse_ManipulateOnlyVisibility, INT:0)
+		THEN
+			ItemSetOnStage(%AMER_RevealItemOnUse_ItemToManipulate, INT:1)
+		ELSE
+			SetVisible(%AMER_RevealItemOnUse_ItemToManipulate, INT:1)
+		ENDIF
+		
+		IF "!c1"
+			IsEqual(%AMER_RevealItemOnUse_RevealFX, "NONE")
+		THEN
+			ItemPlayEffect(%AMER_RevealItemOnUse_ItemToManipulate, %AMER_RevealItemOnUse_RevealFX)
+		ENDIF
+	ELIF "c1"
+		IsEqual(%AMER_RevealItemOnUse_Toggle, INT:1)
+	THEN
+		Set(%AMER_RevealItemOnUse_ToggleState, INT:0)
+		
+		IF "!c1"
+			IsEqual(%AMER_RevealItemOnUse_DisplayTextDeactivate, null)
+		THEN
+			DisplayText(%AMER_RevealItemOnUse_Char, %AMER_RevealItemOnUse_DisplayTextDeactivate, %AMER_RevealItemOnUse_DeactivateTextDuration)
+		ENDIF
+		
+		IF "c1"
+			IsEqual(%AMER_RevealItemOnUse_ManipulateOnlyVisibility, INT:0)
+		THEN
+			ItemSetOnStage(%AMER_RevealItemOnUse_ItemToManipulate, INT:0)
+		ELSE
+			SetVisible(%AMER_RevealItemOnUse_ItemToManipulate, INT:0)
+		ENDIF
+	ENDIF
+	
+	IF "c1"
+		IsEqual(%AMER_RevealItemOnUse_HideMeOnActivate, INT:1)
+	THEN
+		IF "c1"
+			IsEqual(%AMER_RevealItemOnUse_ManipulateOnlyVisibility, INT:0)
+		THEN
+			ItemSetOnStage(__Me, INT:0)
+		ELSE
+			SetVisible(__Me, INT:0)
+		ENDIF
+	ENDIF
+	
+//===============================================//
+//                                               //
+//      R E V E A L   I T E M   O N   U S E      //
+//                                               //
+//===============================================//

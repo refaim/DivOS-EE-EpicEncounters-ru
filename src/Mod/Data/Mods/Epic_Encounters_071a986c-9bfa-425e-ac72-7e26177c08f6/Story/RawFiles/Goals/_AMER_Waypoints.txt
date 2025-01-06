@@ -1,0 +1,17 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+DB_WaypointInfo(ITEM_AMER_WAYP_WST_NearMelch, TRIGGER_AMER_WAYP_WST_Point_NearMelch, "AMER_WAYP_WST_NearMelch");
+DB_WaypointInfo(ITEM_AMER_WAYP_WST_PrimordialTower, TRIGGER_AMER_WAYP_WST_Point_PrimordialTower, "AMER_WAYP_WST_PrimordialTower");
+DB_WaypointInfo(ITEM_AMER_WAYP_WST_Shoreline, TRIGGER_AMER_WAYP_WST_Point_Shoreline, "AMER_WAYP_WST_Shoreline");
+DB_WaypointInfo(ITEM_AMER_WAYP_WST_Terrace, TRIGGER_AMER_WAYP_WST_Point_Terrace, "AMER_WAYP_WST_Terrace");
+DB_WaypointInfo(ITEM_AMER_WAYP_SUB_Entrance, TRIGGER_AMER_WAYP_SUB_Point_Entrance, "AMER_WAYP_SUB_Entrance");
+DB_WaypointInfo(ITEM_AMER_WAYP_LED_Entrance, TRIGGER_AMER_WAYP_LED_Point_Entrance, "AMER_WAYP_LED_Entrance");
+DB_WaypointInfo(ITEM_AMER_WAYP_ASC_Endgame, TRIGGER_AMER_WAYP_ASC_Point_MelchiorEndgame, "AMER_WAYP_ASC_Endgame");
+DB_WaypointInfo(ITEM_AMER_WAYP_SAC_Endgame, TRIGGER_AMER_WAYP_SAC_Point_Endgame, "AMER_WAYP_SAC_Endgame");
+KBSECTION
+
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "__Start"

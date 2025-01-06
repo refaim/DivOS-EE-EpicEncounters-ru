@@ -1,0 +1,90 @@
+//===========================================================//
+//                                                           //
+//  I T E M   C O N T R O L L E R   S E T   M A T E R I A L  //
+//                                                           //
+//           Written by Matteo "Ameranth" T. (2016)          //
+//===========================================================//
+INIT
+ITEM:__Me
+EXTERN ITEM:%AMER_ItemControllerSetMaterial_Item1 = null
+EXTERN ITEM:%AMER_ItemControllerSetMaterial_Item2 = null
+EXTERN ITEM:%AMER_ItemControllerSetMaterial_Item3 = null
+EXTERN ITEM:%AMER_ItemControllerSetMaterial_Item4 = null
+EXTERN ITEM:%AMER_ItemControllerSetMaterial_Item5 = null
+EXTERN ITEM:%AMER_ItemControllerSetMaterial_Item6 = null
+EXTERN FIXEDSTRING:%AMER_ItemControllerSetMaterial_Material1 = null
+EXTERN FIXEDSTRING:%AMER_ItemControllerSetMaterial_Material2 = null
+EXTERN FIXEDSTRING:%AMER_ItemControllerSetMaterial_Material3 = null
+EXTERN FIXEDSTRING:%AMER_ItemControllerSetMaterial_Material4 = null
+EXTERN FIXEDSTRING:%AMER_ItemControllerSetMaterial_Material5 = null
+EXTERN FIXEDSTRING:%AMER_ItemControllerSetMaterial_Material6 = null
+EXTERN INT:%AMER_ItemControllerSetMaterial_Overlay1 = 0
+EXTERN INT:%AMER_ItemControllerSetMaterial_Overlay2 = 0
+EXTERN INT:%AMER_ItemControllerSetMaterial_Overlay3 = 0
+EXTERN INT:%AMER_ItemControllerSetMaterial_Overlay4 = 0
+EXTERN INT:%AMER_ItemControllerSetMaterial_Overlay5 = 0
+EXTERN INT:%AMER_ItemControllerSetMaterial_Overlay6 = 0
+
+EVENTS
+EVENT ItemControllerSetMaterialInit
+//This script was necessary to create because some materials need to be applied
+//to objects far before the object's own scripts are loaded. With this method,
+//an item known to be loaded at the needed time can apply materials to remote objects.
+//JUST KIDDING APPARENTLY THERE'S NO WAY AROUND THAT AWESOME BEHAVIOR.
+VARS
+//==========================//
+	INT:_SupportedItems = 6
+//==========================//
+	INT:_Count
+	INT:_Overlay
+	ITEM:_Item
+	STRING:_Str
+	FIXEDSTRING:_VarMat
+	FIXEDSTRING:_VarItem
+	FIXEDSTRING:_Material
+	FLOAT3:_Position
+ON
+	OnInit()
+ACTIONS
+	//Start count from 1 to match naming scheme.
+	Set(_Count, INT:1)
+	WHILE "!c1"
+		IsGreaterThen(_Count, _SupportedItems)
+	DO
+		//String construction is used to find the variables here because it allows
+		//for future expansion of this script with great ease, if necessary.
+		Print(_Str, "AMER_ItemControllerSetMaterial_Material[1]", _Count)
+		Cast(_VarMat, _Str)
+		Print(_Str, "AMER_ItemControllerSetMaterial_Item[1]", _Count)
+		Cast(_VarItem, _Str)
+		
+		IF "c1&c2"
+			GetVar(_Material, __Me, _VarMat)
+			GetVar(_Item, __Me, _VarItem)
+		THEN
+			//Do we have both an item ID and a material for this index?
+			IF "!c1&!c2"
+				IsEqual(_Material, null)
+				IsEqual(_Item, null)
+			THEN
+				//Figure out if this material should be an overlay.
+				Print(_Str, "AMER_ItemControllerSetMaterial_Overlay[1]", _Count)
+				Cast(_VarMat, _Str)
+				IF "c1"
+					GetVar(_Overlay, __Me, _VarMat)
+				THEN
+					GetPosition(_Item, _Position)
+					ItemTeleportTo(_Item, __Me)
+					SetMaterial(_Item, _Material, -1, 1, 1, 1, 0, _Overlay, 0)
+					ItemTeleportTo(_Item, _Position)
+				ENDIF
+			ENDIF
+		ENDIF
+		
+		Add(_Count, INT:1)
+	ENDWHILE
+//===========================================================//
+//                                                           //
+//  I T E M   C O N T R O L L E R   S E T   M A T E R I A L  //
+//                                                           //
+//===========================================================//

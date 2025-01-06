@@ -1,0 +1,119 @@
+//===============================================//
+//                                               //
+//                 V A M P I R E                 //
+//                                               //
+//      Written by Matteo "Ameranth" T. (2016)   //
+//===============================================//
+INIT
+CHARACTER:__Me
+EXTERN INT:%AMER_Vampire_DrainsToLevel = 2
+EXTERN INT:%AMER_Vampire_AfterLevelCooldown = 2
+INT:%AMER_Vampire_LeveledCountdown = 0
+INT:%AMER_Vampire_DrainStacks = 0
+INT:%AMER_Vampire_DrainStackHandled = 0
+	
+	
+	
+EVENTS
+EVENT VampireCombatEnded
+VARS
+	FIXEDSTRING:_Mat
+ON
+	OnCombatEnded()
+ACTIONS
+	//Reapply a set material if one exists.
+	IF "c1"
+		GetVar(_Mat, __Me, "AMER_SetMaterial_Material")
+	THEN
+		CallFunction("AMER_SetMaterial_ManualApply")
+	ENDIF
+	
+	
+	
+EVENT VampireCombatStarted
+ON
+	OnCombatStarted()
+ACTIONS
+	Set(%AMER_Vampire_DrainStacks, INT:0)
+	Set(%AMER_Vampire_LeveledCountdown, INT:0)
+	
+	
+	
+EVENT VampireOnTurn
+VARS
+	FIXEDSTRING:_Mat
+ON
+	OnTurn()
+ACTIONS
+	//Check if I'm coming off of a blood high.
+	IF "!c1"
+		IsEqual(%AMER_Vampire_LeveledCountdown, INT:0)
+	THEN
+		Subtract(%AMER_Vampire_LeveledCountdown, INT:1)
+		IF "c1"
+			IsEqual(%AMER_Vampire_LeveledCountdown, INT:0)
+		THEN
+			//Unblock Energy Drain AI script.
+			SetVar(__Me, "AMER_SKILL_EnemyVampireEnergyDrain_BlockedByScript", INT:0)
+			
+			//Reapply a set material if one exists.
+			IF "c1"
+				GetVar(_Mat, __Me, "AMER_SetMaterial_Material")
+			THEN
+				IF "!c1"
+					IsEqual(_Mat, null)
+				THEN
+					CallFunction("AMER_SetMaterial_ManualApply")
+				ENDIF
+			ENDIF
+		ENDIF
+	ENDIF
+	
+	
+	
+EVENT VampireEnergyDrainEffects
+VARS
+	FIXEDSTRING:_Text
+ON
+	OnCharacterStatus(__Me, CONSUME)
+ACTIONS
+	//Check if I applied drainheal to myself. If I did, then do special effects.
+	IF "c1"
+		IsEqual(%AMER_Vampire_DrainStackHandled, INT:0)
+	THEN
+		IF "c1"
+			CharacterHasStatus(__Me, CONSUME, "AMER_CMB_Vampire_DrainHeal")
+		THEN
+			Set(%AMER_Vampire_DrainStackHandled, INT:1)
+			StartTimer("AMER_Vampire_ResetHandled", 0.50, 0)
+			CharacterConsume(__Me, "AMER_CMB_Vampire_RemoveDrainHeal")
+			
+			//If I have enough stacks, level me up and make me look cool and stuff.
+			Add(%AMER_Vampire_DrainStacks, INT:1)
+			IF "c1"
+				IsEqual(%AMER_Vampire_DrainStacks, %AMER_Vampire_DrainsToLevel)
+			THEN
+				Set(%AMER_Vampire_DrainStacks, INT:0)
+				Set(%AMER_Vampire_LeveledCountdown, %AMER_Vampire_AfterLevelCooldown)
+				SetVar(__Me, "AMER_SKILL_EnemyVampireEnergyDrain_BlockedByScript", INT:1)	//Block Energy Drain AI script.
+				
+				CharacterEvent(__Me, "AMER_Vampire_Levelup")
+				SetMaterial(__Me, "76b2ab4a-401c-438b-b987-b8f54ec8c8eb", -1, 1, 1, 1)
+				GetRandom(_Text, "AMER_CMB_Vampire_Ding1", "AMER_CMB_Vampire_Ding2", "AMER_CMB_Vampire_Ding3", "AMER_CMB_Vampire_Ding4")
+				DisplayCombatInfoText(__Me, _Text, 2.5)
+			ENDIF
+		ENDIF
+	ENDIF
+	
+	
+	
+EVENT VampireResetHandled
+ON
+	OnTimer("AMER_Vampire_ResetHandled")
+ACTIONS
+	Set(%AMER_Vampire_DrainStackHandled, INT:0)
+//===============================================//
+//                                               //
+//                 V A M P I R E                 //
+//                                               //
+//===============================================//

@@ -1,0 +1,274 @@
+//===============================================//
+//                                               //
+//             S T A T   A D J U S T             //
+//                                               //
+//     Written by Matteo "Ameranth" T. (2016)    //
+//===============================================//
+INIT
+CHARACTER:__Me
+EXTERN INT:%AMER_StatAdjust_Damage = 0
+EXTERN INT:%AMER_StatAdjust_BodyBuilding = 0
+EXTERN INT:%AMER_StatAdjust_Willpower = 0
+EXTERN INT:%AMER_StatAdjust_Initiative = 0
+EXTERN INT:%AMER_StatAdjust_APRecovery = 0
+EXTERN INT:%AMER_StatAdjust_APStart = 0
+EXTERN INT:%AMER_StatAdjust_Sight = 0
+EXTERN INT:%AMER_StatAdjust_CasualDisable = 1
+	
+EVENTS
+EVENT StatAdjustInit
+VARS
+	STRING:_Str
+	FIXEDSTRING:_WhichEffect
+ON
+	OnInit()
+ACTIONS
+	IF "c1|!c2"
+		IsEqual(%AMER_StatAdjust_CasualDisable, INT:0)
+		IsCasual()
+	THEN
+		IF "c1"
+			IsGreaterThen(%AMER_StatAdjust_BodyBuilding, INT:0)
+		THEN
+			Print(_Str, "AMER_DIFFICULTY_BodyBuilding[1]", %AMER_StatAdjust_BodyBuilding)
+			Cast(_WhichEffect, _Str)
+			//Set(_Count, %AMER_StatAdjust_BodyBuilding)
+			//Subtract(_Count, INT:1)	//Index starts at zero.
+			//GetElement(_WhichEffect, _Count, "AMER_DIFFICULTY_BodyBuilding1", "AMER_DIFFICULTY_BodyBuilding2", "AMER_DIFFICULTY_BodyBuilding3", "AMER_DIFFICULTY_BodyBuilding4", "AMER_DIFFICULTY_BodyBuilding5", "AMER_DIFFICULTY_BodyBuilding6", "AMER_DIFFICULTY_BodyBuilding7")
+			AddStatusInfluence(__Me, CONSUME, 1, _WhichEffect, 0)
+		ENDIF
+		
+		IF "c1"
+			IsGreaterThen(%AMER_StatAdjust_Willpower, INT:0)
+		THEN
+			Print(_Str, "AMER_DIFFICULTY_Willpower[1]", %AMER_StatAdjust_Willpower)
+			Cast(_WhichEffect, _Str)
+			//Set(_Count, %AMER_StatAdjust_Willpower)
+			//Subtract(_Count, INT:1)	//Index starts at zero.
+			//GetElement(_WhichEffect, _Count, "AMER_DIFFICULTY_Willpower1", "AMER_DIFFICULTY_Willpower2", "AMER_DIFFICULTY_Willpower3", "AMER_DIFFICULTY_Willpower4", "AMER_DIFFICULTY_Willpower5", "AMER_DIFFICULTY_Willpower6", "AMER_DIFFICULTY_Willpower7")
+			AddStatusInfluence(__Me, CONSUME, 1, _WhichEffect, 0)
+		ENDIF
+		
+		IF "c1"
+			IsGreaterThen(%AMER_StatAdjust_Damage, INT:0)
+		THEN
+			CallFunction("AMER_StatAdjust_ModifyDamage")
+		ENDIF
+		
+		IF "c1"
+			IsGreaterThen(%AMER_StatAdjust_Initiative, INT:0)
+		THEN
+			CallFunction("AMER_StatAdjust_ModifyInitiative")
+		ENDIF
+		
+		IF "c1"
+			IsGreaterThen(%AMER_StatAdjust_APRecovery, INT:0)
+		THEN
+			CallFunction("AMER_StatAdjust_APRecovery")
+		ENDIF
+		
+		IF "c1"
+			IsGreaterThen(%AMER_StatAdjust_APStart, INT:0)
+		THEN
+			CallFunction("AMER_StatAdjust_APStart")
+		ENDIF
+		
+		IF "!c1"
+			IsEqual(%AMER_StatAdjust_Sight, INT:0)
+		THEN
+			CallFunction("AMER_StatAdjust_Sight")
+		ENDIF
+	ENDIF
+	
+	
+	
+EVENT StatAdjustModifyDamage
+VARS
+//==========================//
+	INT:_MaxDamageIndex = 10	//Amount of Damage consume effects listed
+//==========================//
+	INT:_StatToAdd
+	INT:_Count
+	INT:_Amount
+	FIXEDSTRING:_WhichEffect
+	STRING:_Str
+ON
+	OnFunction("AMER_StatAdjust_ModifyDamage")
+ACTIONS
+	Set(_Count, INT:0)
+	Set(_StatToAdd, %AMER_StatAdjust_Damage)
+	WHILE "c1&c2"
+		IsLessThen(_Count, _MaxDamageIndex)
+		IsGreaterThen(_StatToAdd, INT:0)
+	DO
+		GetElement(_Amount, _Count, INT:512, INT:256, INT:128, INT:64, INT:32, INT:16, INT:8, INT:4, INT:2, INT:1)
+		IF "!c1"
+			IsLessThen(_StatToAdd, _Amount)
+		THEN
+			Print(_Str, "AMER_DIFFICULTY_Damage[1]", _Amount)
+			Cast(_WhichEffect, _Str)
+			//GetElement(_WhichEffect, _Count, "AMER_DIFFICULTY_Damage200", "AMER_DIFFICULTY_Damage100", "AMER_DIFFICULTY_Damage50", "AMER_DIFFICULTY_Damage40", "AMER_DIFFICULTY_Damage20", "AMER_DIFFICULTY_Damage10", "AMER_DIFFICULTY_Damage5", "AMER_DIFFICULTY_Damage4", "AMER_DIFFICULTY_Damage2", "AMER_DIFFICULTY_Damage1")
+			AddStatusInfluence(__Me, CONSUME, 1, _WhichEffect, 0)
+			Subtract(_StatToAdd, _Amount)
+		ENDIF
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+	
+	
+EVENT StatAdjustModifyInitiative
+VARS
+//==========================//
+	INT:_MaxInitiativeIndex = 8	//Amount of Initiative consume effects listed
+//==========================//
+	INT:_StatToAdd
+	INT:_Count
+	INT:_Amount
+	FIXEDSTRING:_WhichEffect
+	STRING:_Str
+ON
+	OnFunction("AMER_StatAdjust_ModifyInitiative")
+ACTIONS
+	Set(_Count, INT:0)
+	Set(_StatToAdd, %AMER_StatAdjust_Initiative)
+	WHILE "c1&c2"
+		IsLessThen(_Count, _MaxInitiativeIndex)
+		IsGreaterThen(_StatToAdd, INT:0)
+	DO
+		GetElement(_Amount, _Count, INT:128, INT:64, INT:32, INT:16, INT:8, INT:4, INT:2, INT:1)
+		IF "!c1"
+			IsLessThen(_StatToAdd, _Amount)
+		THEN
+			Print(_Str, "AMER_DIFFICULTY_Initiative[1]", _Amount)
+			Cast(_WhichEffect, _Str)
+			//GetElement(_WhichEffect, _Count, "AMER_DIFFICULTY_Initiative50", "AMER_DIFFICULTY_Initiative40", "AMER_DIFFICULTY_Initiative20", "AMER_DIFFICULTY_Initiative10", "AMER_DIFFICULTY_Initiative5", "AMER_DIFFICULTY_Initiative4", "AMER_DIFFICULTY_Initiative2", "AMER_DIFFICULTY_Initiative1")
+			AddStatusInfluence(__Me, CONSUME, 1, _WhichEffect, 0)
+			Subtract(_StatToAdd, _Amount)
+		ENDIF
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+	
+	
+EVENT StatAdjustModifyAPRecovery
+VARS
+//==========================//
+	INT:_MaxAPRecoveryIndex = 6	//Amount of APRecovery consume effects listed
+//==========================//
+	INT:_StatToAdd
+	INT:_Count
+	INT:_Amount
+	FIXEDSTRING:_WhichEffect
+	STRING:_Str
+ON
+	OnFunction("AMER_StatAdjust_ModifyDamage")
+ACTIONS
+	Set(_Count, INT:0)
+	Set(_StatToAdd, %AMER_StatAdjust_APRecovery)
+	WHILE "c1&c2"
+		IsLessThen(_Count, _MaxAPRecoveryIndex)
+		IsGreaterThen(_StatToAdd, INT:0)
+	DO
+		GetElement(_Amount, _Count, INT:32, INT:16, INT:8, INT:4, INT:2, INT:1)
+		IF "!c1"
+			IsLessThen(_StatToAdd, _Amount)
+		THEN
+			Print(_Str, "AMER_DIFFICULTY_APRecovery[1]", _Amount)
+			Cast(_WhichEffect, _Str)
+			AddStatusInfluence(__Me, CONSUME, 1, _WhichEffect, 0)
+			Subtract(_StatToAdd, _Amount)
+		ENDIF
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+	
+	
+EVENT StatAdjustModifyAPStart
+VARS
+//==========================//
+	INT:_MaxAPStartIndex = 6	//Amount of APStart consume effects listed
+//==========================//
+	INT:_StatToAdd
+	INT:_Count
+	INT:_Amount
+	FIXEDSTRING:_WhichEffect
+	STRING:_Str
+ON
+	OnFunction("AMER_StatAdjust_ModifyAPStart")
+ACTIONS
+	Set(_Count, INT:0)
+	Set(_StatToAdd, %AMER_StatAdjust_APStart)
+	WHILE "c1&c2"
+		IsLessThen(_Count, _MaxAPStartIndex)
+		IsGreaterThen(_StatToAdd, INT:0)
+	DO
+		GetElement(_Amount, _Count, INT:32, INT:16, INT:8, INT:4, INT:2, INT:1)
+		IF "!c1"
+			IsLessThen(_StatToAdd, _Amount)
+		THEN
+			Print(_Str, "AMER_DIFFICULTY_APStart[1]", _Amount)
+			Cast(_WhichEffect, _Str)
+			AddStatusInfluence(__Me, CONSUME, 1, _WhichEffect, 0)
+			Subtract(_StatToAdd, _Amount)
+		ENDIF
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+	
+	
+EVENT StatAdjustModifySight
+VARS
+//==========================//
+	INT:_MaxSightIndex = 5		//Amount of Sight consume effects listed
+//==========================//
+	INT:_StatToAdd
+	INT:_Count
+	INT:_Amount
+	INT:_IsNegative
+	FIXEDSTRING:_WhichEffect
+	STRING:_Str
+ON
+	OnFunction("AMER_StatAdjust_ModifySight")
+ACTIONS
+	Set(_Count, INT:0)
+	Set(_StatToAdd, %AMER_StatAdjust_Sight)
+	Set(_IsNegative, INT:0)
+	IF "c1"
+		IsLessThen(_StatToAdd, INT:0)
+	THEN
+		Set(_IsNegative, INT:1)
+	ENDIF
+	WHILE "c1&!c2"
+		IsLessThen(_Count, _MaxSightIndex)
+		IsEqual(_StatToAdd, INT:0)
+	DO
+		//Make adjustments if amount to add is supposed to be negative.
+		GetElement(_Amount, _Count, INT:10, INT:8, INT:4, INT:2, INT:1)
+		IF "c1"
+			IsEqual(_IsNegative, INT:1)
+		THEN
+			Print(_Str, "AMER_DIFFICULTY_SightN[1]", _Amount)
+			Multiply(_Amount, INT:-1)
+		ELSE
+			Print(_Str, "AMER_DIFFICULTY_Sight[1]", _Amount)
+		ENDIF
+		
+		IF "(!c1&c2)|(!c3&c4)"
+			IsLessThen(_StatToAdd, _Amount)
+			IsEqual(_IsNegative, INT:0)
+			IsGreaterThen(_StatToAdd, _Amount)
+			IsEqual(_IsNegative, INT:1)
+		THEN
+			Cast(_WhichEffect, _Str)
+			//GetElement(_WhichEffect, _Count, "AMER_DIFFICULTY_APStart20", "AMER_DIFFICULTY_APStart10", "AMER_DIFFICULTY_APStart5", "AMER_DIFFICULTY_APStart4", "AMER_DIFFICULTY_APStart2", "AMER_DIFFICULTY_APStart1")
+			AddStatusInfluence(__Me, CONSUME, 1, _WhichEffect, 0)
+			Subtract(_StatToAdd, _Amount)
+		ENDIF
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+//===============================================//
+//                                               //
+//             S T A T   A D J U S T             //
+//                                               //
+//===============================================//

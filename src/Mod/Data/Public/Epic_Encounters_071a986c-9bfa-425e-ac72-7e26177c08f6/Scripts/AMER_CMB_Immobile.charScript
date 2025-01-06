@@ -1,0 +1,10 @@
+INIT
+	CHARACTER:__Me
+	INT:%AMER_IAmImmobile = 1
+
+//------------------------
+BEHAVIOUR
+REACTION Immobile_CannotMoveSoEndTurn,200
+USAGE COMBAT
+ACTIONS
+	CharacterEndTurn()

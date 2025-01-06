@@ -1,0 +1,56 @@
+//=====================================================//
+//                                                     //
+//               M I S C   V E N D O R                 //
+//                                                     //
+//       Written by Matteo "Ameranth" T. (2017)        //
+//=====================================================//
+//The purpose of this script is to simulate the game's
+//basic treasure generation system for vendors, for misc.
+//The reason this is done is to save item handles by only
+//generating the items when they are actually missing
+//(have been purchased), rather than on every vendor cycle.
+INIT
+CHARACTER:__Me
+EXTERN FIXEDSTRING:%AMER_MiscVendor_ItemStat01 = null
+EXTERN FIXEDSTRING:%AMER_MiscVendor_ItemStat02 = null
+EXTERN FIXEDSTRING:%AMER_MiscVendor_ItemStat03 = null
+EXTERN FIXEDSTRING:%AMER_MiscVendor_ItemStat04 = null
+EXTERN FIXEDSTRING:%AMER_MiscVendor_ItemStat05 = null
+	
+EVENTS
+EVENT MiscVendorOnInit
+VARS
+	FIXEDSTRING:_WhichItem = null
+	ITEM:_Item
+	INT:_Count
+ON
+	OnInit()
+ACTIONS
+	IF "!c1"
+		CharacterIsDead(__Me)
+	THEN
+		Set(_Count, INT:0)
+		WHILE "c1"
+			IsLessThen(_Count, 5)
+		DO
+			GetElement(_WhichItem, _Count, %AMER_MiscVendor_ItemStat01, %AMER_MiscVendor_ItemStat02, %AMER_MiscVendor_ItemStat03, %AMER_MiscVendor_ItemStat04, %AMER_MiscVendor_ItemStat05)
+			IF "!c1"
+				IsEqual(_WhichItem, null)
+			THEN
+				IF "!c1"
+					ItemGetFromInventory(_Item, __Me, _WhichItem)
+				THEN
+					CharacterAddToInventory(__Me, _WhichItem, 1)
+				ENDIF
+			ENDIF
+			Add(_Count, 1)
+		ENDWHILE
+	ENDIF
+	
+	
+	
+//=====================================================//
+//                                                     //
+//               M I S C   V E N D O R                 //
+//                                                     //
+//=====================================================//

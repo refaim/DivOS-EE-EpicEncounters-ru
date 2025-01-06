@@ -1,0 +1,112 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+CharacterSetOnStage(CHARACTER_AMER_SUB_Titan_Herald_000, 0);
+CharacterSetOnStage(CHARACTER_AMER_SUB_Titan_Herald_001, 0);
+CharacterSetOnStage(CHARACTER_AMER_SUB_Titan_Herald_002, 0);
+CharacterSetOnStage(CHARACTER_AMER_SUB_Titan_Herald_003, 0);
+CharacterSetOnStage(CHARACTER_AMER_SUB_Titan_Herald_004, 0);
+CharacterSetOnStage(CHARACTER_AMER_SUB_Titan_Herald_005, 0);
+
+CharacterSetInvulnerable(CHARACTER_AMER_Rabbit_Ezio, 1);
+CharacterSetInvulnerable(CHARACTER_AMER_Rabbit_Winter, 1);
+CharacterSetInvulnerable(CHARACTER_AMER_Rabbit_Moebius, 1);
+CharacterSetInvulnerable(CHARACTER_AMER_Rabbit_Elf, 1);
+KBSECTION
+IF
+CharacterEvent(_Char, "AMER_SetCharOnStage")
+THEN
+CharacterSetOnStage(_Char, 1);
+CharacterPlayAnimation(_Char, "spawn", "");
+
+
+
+IF
+CharacterEvent(_Char, "AMER_SetCharOffStage")
+THEN
+CharacterSetOnStage(_Char, 0);
+
+
+
+IF
+CharacterEvent(_Char, "AMER_DoScaledSFX")
+AND
+CharacterGetVarFloat3(_Char, "AMER_DoScaledSFX_Point", _X, _Y, _Z)
+AND
+CharacterGetVarFixedString(_Char, "AMER_DoScaledSFX_Effect", _Effect)
+AND
+CharacterGetVarFloat(_Char, "AMER_DoScaledSFX_Scale", _Scale)
+THEN
+PlayScaledEffectAtPosition(_Effect, _Scale, _X, _Y, _Z);
+
+
+
+IF
+CharacterEvent(_Char, "AMER_DoBeamEffectItemToItem")
+AND
+CharacterGetVarItem(_Char, "AMER_DoBeamEffect_Item", _Item)
+AND
+CharacterGetVarItem(_Char, "AMER_DoBeamEffect_ItemSource", _ItemSource)
+AND
+CharacterGetVarFixedString(_Char, "AMER_DoBeamEffect_Effect", _Effect)
+THEN
+ItemPlayBeamEffectToItem(_ItemSource, _Item, _Effect, "", "");
+
+
+
+IF
+CharacterEvent(_Char, "AMER_DoBeamEffect")
+AND
+CharacterGetVarItem(_Char, "AMER_DoBeamEffect_Item", _Item)
+AND
+CharacterGetVarFixedString(_Char, "AMER_DoBeamEffect_Effect", _Effect)
+AND
+CharacterGetVarFixedString(_Char, "AMER_DoBeamEffect_SourceBone", _SourceBone)
+THEN
+CharacterPlayBeamEffectToItem(_Char, _Item, _Effect, _SourceBone, "");
+
+
+
+IF
+CharacterEvent(_Char, "AMER_DoBeamEffectWithDuration")
+AND
+CharacterGetVarItem(_Char, "AMER_DoBeamEffect_Item", _Item)
+AND
+CharacterGetVarFixedString(_Char, "AMER_DoBeamEffect_Effect", _Effect)
+AND
+CharacterGetVarFixedString(_Char, "AMER_DoBeamEffect_SourceBone", _SourceBone)
+AND
+CharacterPlayLoopBeamEffectToItem(_Char, _Item, _Effect, "", "", _Handle)
+THEN
+CharacterSetVarInteger(_Char, "AMER_DoBeamEffect_Handle", _Handle);
+
+
+
+IF
+CharacterEvent(_Char, "AMER_DoBeamEffect_RemoveHandle")
+AND
+CharacterGetVarInteger(_Char, "AMER_DoBeamEffect_Handle", _Handle)
+THEN
+StopLoopEffect(_Handle);
+
+
+
+IF
+CharacterEvent(_Char, "AMER_DoMoveItem")
+AND
+CharacterGetVarItem(_Char, "AMER_DoMoveItem_Item", _Item)
+AND
+CharacterGetVarTrigger(_Char, "AMER_DoMoveItem_Trigger", _Trigger)
+AND
+CharacterGetVarFloat(_Char, "AMER_DoMoveItem_Speed", _Speed)
+AND
+CharacterGetVarFloat(_Char, "AMER_DoMoveItem_Acceleration", _Acceleration)
+AND
+CharacterGetVarInteger(_Char, "AMER_DoMoveItem_UseRotation", _UseRotation)
+THEN
+ItemMoveToTrigger(_Item, _Trigger, _Speed, _Acceleration, _UseRotation);
+
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "__Start"

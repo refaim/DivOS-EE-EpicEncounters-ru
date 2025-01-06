@@ -1,0 +1,175 @@
+#TEMPLATE "_SKILL_Base" : Target_EnemyDecayingTouch
+	
+INIT
+CHARACTER:__Me
+FLOAT:%SkillTargetScore_Target_EnemyDecayingTouch=-1000000
+// [GLOBAL_VARS]
+EXTERN FLOAT:%Target_EnemyDecayingTouch_MinVitalityToUse = 0.6
+// [~GLOBAL_VARS]
+	
+EVENTS
+	
+// [EVENTS]
+// [~EVENTS]
+	
+// Calculate the priority of the skill
+EVENT CalculateScore_Target_EnemyDecayingTouch
+VARS
+	// [CALC_VARS]
+	FLOAT:_SkillRangeMin
+	FLOAT:_SkillRangeMax
+	FLOAT3:_TargetPos
+	FLOAT:_Vitality
+	// [~CALC_VARS]
+ON
+	OnFunction("CalculateScore_Target_EnemyDecayingTouch")
+ACTIONS
+	Set(%SkillTargetScore_Target_EnemyDecayingTouch, -1000000)
+
+	// [CALC_ACTIONS_PRE]
+	// [~CALC_ACTIONS_PRE]
+	// [CALC_ACTIONS]
+	IterateCharactersInCombat(__Me, "CalculateTarget_Target_EnemyDecayingTouch", Lowest, Vitality)
+	IF "!c1"
+		IsEqual(%SkillTargetChar_Target_EnemyDecayingTouch, null)
+	THEN
+		Add(%ActionScore_Target_EnemyDecayingTouch, %SkillTargetScore_Target_EnemyDecayingTouch)
+	ENDIF
+	// [~CALC_ACTIONS]
+	
+	
+	
+	
+// Calculate the character we should attack
+EVENT CalculateTarget_Target_EnemyDecayingTouch
+VARS	
+	CHARACTER:_Char
+	// [CALC_TARGET_VARS]
+	INT:_ClassScore_Target_EnemyDecayingTouch
+	FLOAT:_StatResistance
+	FLOAT:_Score
+	FLOAT:_SkillRangeMin
+	FLOAT:_SkillRangeMax
+	FLOAT:_DistanceToChar
+	FLOAT:_DistanceScore
+	FLOAT:_SaveScore
+	FLOAT:_Vitality
+	FLOAT:_HealWeight
+	INT:_SaveAmount
+	ABILITY:_SaveType = Willpower
+	// [~CALC_TARGET_VARS]
+ON
+	OnIterateCharacter(_Char, "CalculateTarget_Target_EnemyDecayingTouch")	
+ACTIONS
+	// [CALC_CHAR_TARGET_ACTIONS_PRE]
+	Set(_Score, 0.0)
+	// [~CALC_CHAR_TARGET_ACTIONS_PRE]
+	// [CALC_CHAR_TARGET_ACTIONS]
+	IF "c1"
+	    CharacterIsEnemy(__Me, _Char)
+	THEN
+		IF "!c1"
+			CharacterIsDead(_Char)
+		THEN
+			IF "!c1&!c2"
+			    CharacterHasStatus(_Char, INVISIBLE)
+			    CharacterHasStatus(_Char, SNEAKING)
+			THEN
+				IF "!c1"
+					CharacterHasStatus(_Char, CHARMED)	//Don't heal charmed enemies.
+				THEN
+					IF "!c1"
+						CharacterIsSummon(_Char)	//Don't use this on a summon.
+					THEN
+						IF "!c1"
+							CharacterHasStatus(_Char, DECAYING_TOUCH)
+						THEN
+							IF "(c1&!c2)|c3|c4"
+								CharacterGetStat(_Vitality, _Char, Vitality)
+								IsGreaterThen(_Vitality, %Target_EnemyDecayingTouch_MinVitalityToUse)
+								CharacterHasStatus(_Char, HEALING)
+								CharacterHasStatus(_Char, CONSUME, AMER_MassHeal)
+							THEN
+								//Saving Throw score calculation
+								IF "c1"
+									CharacterGetAbility(_SaveAmount, _Char, _SaveType)
+								THEN
+									Cast(_SaveScore, _SaveAmount)
+									Multiply(_SaveScore, 2.0)
+									Add(_Score, _SaveScore)
+								ENDIF
+								
+								//Kill range calculation: favor low vitality
+								//targets with healing magic active.
+								Add(_Vitality, -1.0)
+								Multiply(_Vitality, 5.0)
+								Set(_HealWeight, 1.0)
+								IF "c1"
+									CharacterHasStatus(_Char, HEALING)
+								THEN
+									Add(_HealWeight, 1.0)
+								ENDIF
+								IF "c1"
+									CharacterHasStatus(_Char, CONSUME, AMER_Regenerate)
+								THEN
+									Add(_HealWeight, 1.3)
+								ENDIF
+								IF "c1"
+									CharacterHasStatus(_Char, CONSUME, AMER_MassHeal)
+								THEN
+									Add(_HealWeight, 2.0)
+								ENDIF
+								Multiply(_Vitality, _HealWeight)
+								Add(_Score, _Vitality)
+								
+								// Range score calculation
+								IF "c1&c2"
+									CharacterGetSkillRange(_SkillRangeMin, _SkillRangeMax, __Me, Target_EnemyDecayingTouch)
+									GetDistance(_DistanceToChar, __Me, _Char)
+								THEN
+									Set(_DistanceScore, _DistanceToChar)
+									IF "c1"
+										IsGreaterThen(_DistanceScore, _SkillRangeMax)
+									THEN
+										Subtract(_DistanceScore, _SkillRangeMax)
+										Multiply(_DistanceScore, -1.0)
+									ELIF "c1"
+										IsLessThen(_DistanceScore, _SkillRangeMin)
+									THEN
+										Subtract(_DistanceScore, _SkillRangeMin)
+										Multiply(_DistanceScore, 1.0)
+									ELSE 
+										Set(_DistanceScore, 0.0)
+									ENDIF
+									Add(_Score, _DistanceScore)
+								ENDIF
+								
+								// Can see score calculation
+								IF "!c1"
+									CharacterCanSee(__Me, _Char)
+								THEN
+									Add(_Score, -10.0)
+								ENDIF
+								
+								IF "c1"
+									IsGreaterThen(_Score, %SkillTargetScore_Target_EnemyDecayingTouch)
+								THEN
+									Set(%SkillTargetChar_Target_EnemyDecayingTouch, _Char)
+									Set(%SkillTargetScore_Target_EnemyDecayingTouch, _Score)
+								ENDIF
+							ENDIF
+						ENDIF
+					ENDIF
+				ENDIF
+			ENDIF
+		ENDIF
+	ENDIF
+	// [~CALC_CHAR_TARGET_ACTIONS]
+	
+	
+	
+	
+	
+	
+	
+	

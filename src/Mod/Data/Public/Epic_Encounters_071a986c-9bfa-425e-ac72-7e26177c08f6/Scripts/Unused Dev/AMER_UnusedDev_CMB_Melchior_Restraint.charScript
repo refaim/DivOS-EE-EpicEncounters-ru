@@ -1,0 +1,185 @@
+//===============================================//
+//                                               //
+//     M E L C H I O R ' S   R E S T R A I N T   //
+//                                               //
+//     Written by Matteo "Ameranth" T. (2016)    //
+//===============================================//
+INIT
+CHARACTER:__Me
+EXTERN CHARACTER:%AMER_MelchiorRestraint_Fear = null
+FLOAT:%AMER_MelchiorRestraint_PrevVitality
+FLOAT:%AMER_MelchiorRestraint_MaximumVitality
+INT:%AMER_MelchiorRestraint_LinkSFXChoke = 0
+	
+EVENTS
+EVENT MelchiorRestraintInit
+ON
+	OnInit()
+ACTIONS
+	IF "!c1"
+		CharacterGetStat(%AMER_MelchiorRestraint_MaximumVitality, __Me, VitalityPoints)
+	THEN
+		Set(%AMER_MelchiorRestraint_MaximumVitality, 40000.0)
+	ENDIF
+	AddStatusInfluence(__Me, CONSUME, 1, AMER_CMB_MelchiorRestraint_Thorns, 0)
+	
+	
+	
+EVENT MelchiorRestraintCombatEnded
+ON
+	OnCombatEnded()
+ACTIONS
+	IF "!c1"
+		CharacterIsDead(__Me)
+	THEN
+		SetHealth(__Me, 1.0)
+	ENDIF
+	
+	
+	
+EVENT MelchiorRestraintDie
+ON
+	OnDie(__Me, _, _, _)
+ACTIONS
+	DisplayText(__Me, "AMER_MelchiorRestraint_Die1", 5.0)
+	
+	
+	
+EVENT MelchiorRestraintCombatStart
+ON
+	OnCombatStarted()
+ACTIONS
+	Set(%AMER_MelchiorRestraint_PrevVitality, 1.0)
+	
+	
+	
+EVENT MelchiorRestraintDamageIterator
+VARS
+	CHARACTER:_Char
+ON
+	OnIterateCharacter(_Char, "AMER_MelchiorRestraint_DamageIterator")
+ACTIONS
+	IF "c1"
+		CharacterIsEnemy(__Me, _Char)
+	THEN
+		IF "!c1"
+			CharacterIsDead(_Char)
+		THEN
+			SetVar(__Me, "AMER_RemoteEffectSourceAsTarget", INT:1)
+			SetVar(__Me, "AMER_RemoteEffectSource", _Char)
+			CallFunction("AMER_DoRemoteEffect")
+		ENDIF
+	ENDIF
+	
+	
+	
+EVENT MelchiorRestraintScaleDamage
+VARS
+//===========================//
+	INT:_MaximumBonus = 1028
+	FLOAT:_LifeLossForMaximum = 0.75
+//===========================//
+	FLOAT:_Vitality
+	FLOAT:_OldVitality
+	INT:_Bonus
+	INT:_Amount
+	INT:_Count
+	STRING:_Str
+	FIXEDSTRING:_WhichEffect
+ON
+	OnFunction("AMER_MelchiorRestraint_ScaleDamage")
+ACTIONS
+	IF "c1"
+		CharacterGetStat(_Vitality, __Me, Vitality)
+	THEN
+		Set(_OldVitality, %AMER_MelchiorRestraint_PrevVitality)
+		Subtract(_OldVitality, _Vitality)
+		Divide(_OldVitality, _LifeLossForMaximum)
+		Multiply(_OldVitality, _MaximumBonus)
+		Cast(_Bonus, _OldVitality)
+		
+		Set(_Count, _MaximumBonus)
+		WHILE "c1"
+			IsGreaterThen(_Count, INT:0)
+		DO
+			Print(_Str, "AMER_DIFFICULTY_Damage[1]", _Count)
+			Cast(_WhichEffect, _Str)
+			
+			IF "!c1"
+				IsLessThen(_Bonus, _Count)
+			THEN
+				AddStatusInfluence(__Me, CONSUME, 1, _WhichEffect, 0)
+				Subtract(_Bonus, _Count)
+			ELIF "c1"
+				CharacterHasStatus(__Me, CONSUME, _WhichEffect)
+			THEN
+				RemoveStatusInfluence(__Me, CONSUME, 1, _WhichEffect, 0)
+			ENDIF
+			Divide(_Count, INT:2)
+		ENDWHILE
+	ENDIF
+	
+	
+	
+//===================BEHAVIOR====================//
+BEHAVIOUR
+REACTION MelchiorRestraintDamage, 10000
+USAGE COMBAT
+VARS
+//===========================//
+	SKILL:_Projectile = AMER_SCRIPTSKILL_EnemyMelchiorRestraintDamage
+	FLOAT:_PreSleep = 0.7
+//===========================//
+	INT:_Rand
+	INT:_Handle
+	STRING:_Str
+	FIXEDSTRING:_Text
+ACTIONS
+	SetVar(__Me, "AMER_TimeoutDetection", INT:-10)	//Casting animations warrant extra time.
+	//Short sleep here ensures the cast declaration
+	//isn't lost far up in the combat log.
+	Sleep(_PreSleep)
+	
+	GetRandomBetween(_Rand, INT:1, INT:5)
+	Print(_Str, "AMER_CMB_MelchiorRestraint_Turn[1]", _Rand)
+	Cast(_Text, _Str)
+	DisplayCombatInfoText(__Me, _Text, 5.0)
+	
+	CharacterPlayLoopEffect(_Handle, __Me, "FX_Skills_Warrior_Flurry_Prepare_A")
+	CharacterPlayAnimation("cast_self_start",1,1)
+	CharacterPlayAnimation("cast_self_loop",1,1)
+	CharacterPlayAnimation("cast_self_cast",1,0)
+	
+	//Scale my damage now, probably good not to do this
+	//and the iterator at the same time. Small wait for
+	//animation drama.
+	CallFunction("AMER_MelchiorRestraint_ScaleDamage")
+	Sleep(0.75)
+	
+	CharacterPlayEffect(__Me, "FX_Skills_Warrior_Flurry_Cast_A")
+	CharacterPlayEffect(__Me, "FX_Skills_Earth_GrenadeTremor_Impact_A")
+	Sleep(1.0)
+	
+	//Load the projectile for remote damage effect, the iterator will fill in
+	//the target information before calling the function.
+	SetVar(__Me, "AMER_RemoteEffectProjectile", _Projectile)
+	IterateCharactersInCombat(__Me, "AMER_MelchiorRestraint_DamageIterator")
+	
+	CharacterPlayEffect(__Me, "FX_Skills_Earth_GrenadeTremor_Impact_A")
+	StopLoopEffect(_Handle)
+	Sleep(2.50)
+	
+	GetRandomBetween(_Rand, INT:1, INT:5)
+	Print(_Str, "AMER_CMB_MelchiorRestraint_EndTurn[1]", _Rand)
+	Cast(_Text, _Str)
+	DisplayCombatInfoText(__Me, _Text, 5.0)
+	Sleep(3.50)
+	
+	CharacterEndTurn()
+	
+	
+//===============================================//
+//                                               //
+//     M E L C H I O R ' S   R E S T R A I N T   //
+//                                               //
+//===============================================//

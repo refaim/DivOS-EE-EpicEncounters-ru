@@ -1,0 +1,179 @@
+<?xml version='1.0' encoding='utf-8'?>
+<save>
+	<header time="0" version="2" />
+	<version build="0" major="2" minor="0" revision="0" />
+	<region id="TranslatedStringKeys">
+		<node id="root">
+			<children>
+				<node id="TranslatedStringKey">
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Tower of Abyssal Studies" />
+					<attribute id="ExtraData" type="23" value="" />
+					<attribute id="Speaker" type="22" value="" />
+					<attribute id="Stub" type="19" value="True" />
+					<attribute id="UUID" type="22" value="AMER_WST_AbyssalTower" />
+				</node>
+				<node id="TranslatedStringKey">
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Tower of Astral Studies" />
+					<attribute id="ExtraData" type="23" value="" />
+					<attribute id="Speaker" type="22" value="" />
+					<attribute id="Stub" type="19" value="True" />
+					<attribute id="UUID" type="22" value="AMER_WST_AstralTower" />
+				</node>
+				<node id="TranslatedStringKey">
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Hall of the Eternal" />
+					<attribute id="ExtraData" type="23" value="" />
+					<attribute id="Speaker" type="22" value="" />
+					<attribute id="Stub" type="19" value="True" />
+					<attribute id="UUID" type="22" value="AMER_WST_EternalHall" />
+				</node>
+				<node id="TranslatedStringKey">
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Legion's Terrace" />
+					<attribute id="ExtraData" type="23" value="" />
+					<attribute id="Speaker" type="22" value="" />
+					<attribute id="Stub" type="19" value="True" />
+					<attribute id="UUID" type="22" value="AMER_WST_LegionTerrace" />
+				</node>
+				<node id="TranslatedStringKey">
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Melchior's Tower" />
+					<attribute id="ExtraData" type="23" value="" />
+					<attribute id="Speaker" type="22" value="" />
+					<attribute id="Stub" type="19" value="True" />
+					<attribute id="UUID" type="22" value="AMER_WST_MelchTower" />
+				</node>
+				<node id="TranslatedStringKey">
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Tower of Primordial Studies" />
+					<attribute id="ExtraData" type="23" value="" />
+					<attribute id="Speaker" type="22" value="" />
+					<attribute id="Stub" type="19" value="True" />
+					<attribute id="UUID" type="22" value="AMER_WST_PrimordialTower" />
+				</node>
+				<node id="TranslatedStringKey">
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Tower of Shadow Studies" />
+					<attribute id="ExtraData" type="23" value="" />
+					<attribute id="Speaker" type="22" value="" />
+					<attribute id="Stub" type="19" value="True" />
+					<attribute id="UUID" type="22" value="AMER_WST_ShadowTower" />
+				</node>
+				<node id="TranslatedStringKey">
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Sinking Warehouse" />
+					<attribute id="ExtraData" type="23" value="" />
+					<attribute id="Speaker" type="22" value="" />
+					<attribute id="Stub" type="19" value="True" />
+					<attribute id="UUID" type="22" value="AMER_WST_SinkingWarehouse" />
+				</node>
+				<node id="TranslatedStringKey">
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Epic Encounters - Central Aqueducts" />
+					<attribute id="ExtraData" type="23" value="" />
+					<attribute id="Speaker" type="22" value="" />
+					<attribute id="Stub" type="19" value="True" />
+					<attribute id="UUID" type="22" value="AMER_WAYP_WST_NearMelch" />
+				</node>
+				<node id="TranslatedStringKey">
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Epic Encounters - Northern Tower" />
+					<attribute id="ExtraData" type="23" value="" />
+					<attribute id="Speaker" type="22" value="" />
+					<attribute id="Stub" type="19" value="True" />
+					<attribute id="UUID" type="22" value="AMER_WAYP_WST_PrimordialTower" />
+				</node>
+				<node id="TranslatedStringKey">
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Epic Encounters - Shoreline Aqueducts" />
+					<attribute id="ExtraData" type="23" value="" />
+					<attribute id="Speaker" type="22" value="" />
+					<attribute id="Stub" type="19" value="True" />
+					<attribute id="UUID" type="22" value="AMER_WAYP_WST_Shoreline" />
+				</node>
+				<node id="TranslatedStringKey">
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Epic Encounters - Legion's Terrace" />
+					<attribute id="ExtraData" type="23" value="" />
+					<attribute id="Speaker" type="22" value="" />
+					<attribute id="Stub" type="19" value="True" />
+					<attribute id="UUID" type="22" value="AMER_WAYP_WST_Terrace" />
+				</node>
+				<node id="TranslatedStringKey">
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Grisly Threshold" />
+					<attribute id="ExtraData" type="23" value="" />
+					<attribute id="Speaker" type="22" value="" />
+					<attribute id="Stub" type="19" value="True" />
+					<attribute id="UUID" type="22" value="AMER_LED_OssurotTomb" />
+				</node>
+				<node id="TranslatedStringKey">
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="The Ascension" />
+					<attribute id="ExtraData" type="23" value="" />
+					<attribute id="Speaker" type="22" value="" />
+					<attribute id="Stub" type="19" value="True" />
+					<attribute id="UUID" type="22" value="AMER_ASC_Ascension" />
+				</node>
+				<node id="TranslatedStringKey">
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Shadow Apex" />
+					<attribute id="ExtraData" type="23" value="" />
+					<attribute id="Speaker" type="22" value="" />
+					<attribute id="Stub" type="19" value="True" />
+					<attribute id="UUID" type="22" value="AMER_ASC_ShadowLock" />
+				</node>
+				<node id="TranslatedStringKey">
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Abyssal Apex" />
+					<attribute id="ExtraData" type="23" value="" />
+					<attribute id="Speaker" type="22" value="" />
+					<attribute id="Stub" type="19" value="True" />
+					<attribute id="UUID" type="22" value="AMER_ASC_AbyssalLock" />
+				</node>
+				<node id="TranslatedStringKey">
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Primordial Apex" />
+					<attribute id="ExtraData" type="23" value="" />
+					<attribute id="Speaker" type="22" value="" />
+					<attribute id="Stub" type="19" value="True" />
+					<attribute id="UUID" type="22" value="AMER_ASC_PrimordialLock" />
+				</node>
+				<node id="TranslatedStringKey">
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Astral Apex" />
+					<attribute id="ExtraData" type="23" value="" />
+					<attribute id="Speaker" type="22" value="" />
+					<attribute id="Stub" type="19" value="True" />
+					<attribute id="UUID" type="22" value="AMER_ASC_AstralLock" />
+				</node>
+				<node id="TranslatedStringKey">
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Transmogrified Court" />
+					<attribute id="ExtraData" type="23" value="" />
+					<attribute id="Speaker" type="22" value="" />
+					<attribute id="Stub" type="19" value="True" />
+					<attribute id="UUID" type="22" value="AMER_ASC_TowerHub" />
+				</node>
+				<node id="TranslatedStringKey">
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Lair of the Forgotten" />
+					<attribute id="ExtraData" type="23" value="" />
+					<attribute id="Speaker" type="22" value="" />
+					<attribute id="Stub" type="19" value="True" />
+					<attribute id="UUID" type="22" value="AMER_LED_OssurotLair" />
+				</node>
+				<node id="TranslatedStringKey">
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Epic Encounters - Subterranean Passage" />
+					<attribute id="ExtraData" type="23" value="" />
+					<attribute id="Speaker" type="22" value="" />
+					<attribute id="Stub" type="19" value="True" />
+					<attribute id="UUID" type="22" value="AMER_WAYP_SUB_Entrance" />
+				</node>
+				<node id="TranslatedStringKey">
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Epic Encounters - Snowbound Ledge" />
+					<attribute id="ExtraData" type="23" value="" />
+					<attribute id="Speaker" type="22" value="" />
+					<attribute id="Stub" type="19" value="True" />
+					<attribute id="UUID" type="22" value="AMER_WAYP_LED_Entrance" />
+				</node>
+				<node id="TranslatedStringKey">
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Sourcehunter Academy" />
+					<attribute id="ExtraData" type="23" value="" />
+					<attribute id="Speaker" type="22" value="" />
+					<attribute id="Stub" type="19" value="True" />
+					<attribute id="UUID" type="22" value="AMER_WAYP_SAC_Endgame" />
+				</node>
+				<node id="TranslatedStringKey">
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Epic Encounters - The Ascension Engine" />
+					<attribute id="ExtraData" type="23" value="" />
+					<attribute id="Speaker" type="22" value="" />
+					<attribute id="Stub" type="19" value="True" />
+					<attribute id="UUID" type="22" value="AMER_WAYP_ASC_Endgame" />
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

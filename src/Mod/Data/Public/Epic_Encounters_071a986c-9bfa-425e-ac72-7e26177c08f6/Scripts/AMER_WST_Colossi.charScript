@@ -1,0 +1,247 @@
+//===============================================//
+//                                               //
+//                 C O L O S S I                 //
+//                                               //
+//     Written by Matteo "Ameranth" T. (2017)    //
+//===============================================//
+INIT
+CHARACTER:__Me
+FLOAT3:%AMER_Colossi_CombatPos
+INT:%AMER_Colossi_SpeechChoke = 0
+INT:%AMER_Colossi_GetFriends = 0
+	
+EVENTS
+EVENT ColossiOnInit
+ON
+	OnInit()
+ACTIONS
+	IF "!c1"
+		CharacterIsDead(__Me)
+	THEN
+		StartTimer("AMER_Colossi_MainLoop", 0.7, -1)
+	ENDIF
+	
+	
+	
+EVENT ColossiCombatEnded
+ON
+	OnCombatEnded()
+ACTIONS
+	IF "!c1&!c2"
+		CharacterIsDead(__Me)
+		CharacterHasStatus(__Me, DYING)
+	THEN
+		CharacterSetFaction(__Me, "Neutral NPC")
+		StartTimer("AMER_Colossi_MainLoop", 0.7, -1)
+	ENDIF
+	
+	
+	
+EVENT ColossiCombatStarted
+VARS
+	FIXEDSTRING:_WhichLine
+	STRING:_Str
+	INT:_Rand
+ON
+	OnCombatStarted()
+ACTIONS
+	CharacterSetFaction(__Me, "Evil NPC")
+	StopTimer("AMER_Colossi_MainLoop")
+	
+	GetRandomBetween(_Rand, 1, 3)
+	Print(_Str, "AMER_WST_ColossiCombat[1]", _Rand)
+	Cast(_WhichLine, _Str)
+	DisplayText(__Me, _WhichLine, 3.0)
+	
+	
+EVENT ColossiOnShutdown
+ON
+	OnShutdown()
+ACTIONS
+	StopTimer("AMER_Colossi_MainLoop")
+	
+	
+	/*
+EVENT ColossiOnTurn
+ON
+	OnTurn()
+ACTIONS
+	IterateCharactersNear(__Me, 18.0, "AMER_Colossi_FindFriends")
+	IF "c1"
+		IsEqual(%AMER_Colossi_GetFriends, 1)
+	THEN
+		Set(%AMER_Colossi_GetFriends, INT:0)
+		SetPriority(ColossiCallFriends, 1000)
+	ENDIF
+	*/
+	
+	
+	
+EVENT ColossiDamaged
+VARS
+	FIXEDSTRING:_Faction
+	CHARACTER:_CharSource
+	DAMAGE:_Type
+	FLOAT:_Damage
+ON
+	OnDamage(_Type, _Damage, _CharSource, _)
+ACTIONS
+	IF "c1&!c2"
+		CharacterGetFaction(_Faction, __Me)
+		IsEqual(_Faction, "Evil NPC")
+	THEN
+		CharacterSetFaction(__Me, "Evil NPC")
+	ENDIF
+	
+	
+	/*
+EVENT ColossiFindFriends
+VARS
+	CHARACTER:_Char
+ON
+	OnIterateCharacter(_Char, "AMER_Colossi_FindFriends")
+ACTIONS
+	IF "!c1&!c2"
+		IsInCombat(_Char)
+		IsEqual(_Char, __Me)
+	THEN
+		IF "c1"
+			CharacterIsAlly(__Me, _Char)
+		THEN
+			IF "!c1"
+				CharacterIsDead(_Char)
+			THEN
+				Set(%AMER_Colossi_GetFriends, 1)
+			ENDIF
+		ENDIF
+	ENDIF
+	*/
+	
+	
+	
+EVENT ColossiMainLoop
+VARS
+	CHARACTER:_Player
+ON
+	OnTimer("AMER_Colossi_MainLoop")
+ACTIONS
+	IF "c1"
+		IsEqual(%AMER_Colossi_SpeechChoke, INT:0)
+	THEN
+		IterateCharactersNear(__Me, 3.0, "AMER_Colossi_Proximity")
+	ELSE
+		Subtract(%AMER_Colossi_SpeechChoke, 1)
+	ENDIF
+	
+	IF "c1"
+		GetPlayerByIndex(_Player, INT:0)
+	THEN
+		IterateParty("AMER_Colossi_SearchForCombat", Lowest, Distance, _Player)
+	ENDIF
+	
+	IF "c1"
+		CharacterIsDead(__Me)
+	THEN
+		StopTimer("AMER_Colossi_MainLoop")
+	ENDIF
+	
+	
+	
+EVENT ColossiProximity
+VARS
+	CHARACTER:_Char
+	FIXEDSTRING:_WhichLine
+	STRING:_Str
+	INT:_Rand
+ON
+	OnIterateCharacter(_Char, "AMER_Colossi_Proximity")
+ACTIONS
+	IF "c1"
+		CharacterIsPlayer(_Char)
+	THEN
+		GetRandomBetween(_Rand, 1, 8)
+		Print(_Str, "AMER_WST_ColossiProximity[1]", _Rand)
+		Cast(_WhichLine, _Str)
+		DisplayText(__Me, _WhichLine, 3.0)
+			
+		Set(%AMER_Colossi_SpeechChoke, 11)
+		//StartTimer("AMER_Colossi_ResetSpeechChoke", 8.0, 0)
+	ENDIF
+	
+	
+	/*
+EVENT ColossiResetSpeechChoke
+ON
+	OnTimer("AMER_Colossi_ResetSpeechChoke")
+ACTIONS
+	Set(%AMER_Colossi_SpeechChoke, INT:0)
+	*/
+	
+	
+	
+EVENT ColossiSearchForCombat
+VARS
+	CHARACTER:_Char
+	FLOAT:_Distance
+ON
+	OnIterateCharacter(_Char, "AMER_Colossi_SearchForCombat")
+ACTIONS
+	IF "c1"
+		IsInCombat(_Char)
+	THEN
+		IF "c1&!c2"
+			GetDistance(_Distance, __Me, _Char)
+			IsGreaterThen(_Distance, 18.0)
+		THEN
+			IF "c1"
+				IsEqual(%AMER_Colossi_CombatPos, null)
+			THEN
+				StopTimer("AMER_Colossi_MainLoop")
+				GetPosition(_Char, %AMER_Colossi_CombatPos)
+				CharacterSetFaction(__Me, "Evil NPC")
+				SetPriority(ColossiEnterCombat, 1000)
+			ENDIF
+		ENDIF
+	ENDIF
+	
+	
+	
+	
+BEHAVIOUR
+REACTION ColossiMoveIntoCombat, 0
+USAGE PEACE
+ACTIONS
+	CharacterMoveTo(%AMER_Colossi_CombatPos)
+	Set(%AMER_Colossi_CombatPos, null)
+	SetPriority(ColossiEnterCombat, 0)
+INTERRUPT
+ON
+	OnMovementFailed(_)
+ACTIONS
+	Set(%AMER_Colossi_CombatPos, null)
+	SetPriority(ColossiEnterCombat, 0)
+	
+	
+	/*
+REACTION ColossiCallFriends, 0
+USAGE COMBAT
+VARS
+	FIXEDSTRING:_WhichLine
+	STRING:_Str
+	INT:_Rand
+ACTIONS
+	GetRandomBetween(_Rand, 1, 3)
+	Print(_Str, "AMER_WST_ColossiFriendsFound[1]", _Rand)
+	Cast(_WhichLine, _Str)
+	DisplayText(__Me, _WhichLine, 3.0)
+	
+	Sleep(2.0)
+	SetPriority(ColossiCallFriends, 0)
+	*/
+
+	
+//===============================================//
+//                                               //
+//                 C O L O S S I                 //
+//                                               //
+//===============================================//

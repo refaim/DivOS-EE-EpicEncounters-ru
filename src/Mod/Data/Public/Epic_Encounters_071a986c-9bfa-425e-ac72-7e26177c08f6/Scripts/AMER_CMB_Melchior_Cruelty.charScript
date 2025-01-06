@@ -1,0 +1,129 @@
+//===============================================//
+//                                               //
+//       M E L C H I O R ' S   C R U E L T Y     //
+//                                               //
+//     Written by Matteo "Ameranth" T. (2016)    //
+//===============================================//
+INIT
+CHARACTER:__Me
+EXTERN CHARACTER:%AMER_MelchiorCruelty_Compassion = null
+INT:%AMER_MelchiorCruelty_FreshEngage = 1	//Is it the first time I was attacked?
+INT:%AMER_MelchiorCruelty_SaidEnrageText
+	
+EVENTS	
+EVENT MelchiorCrueltyCombatEnded
+ON
+	OnCombatEnded()
+ACTIONS
+	//Reset the fight if combat ends and I am not dead.
+	IF "!c1"
+		CharacterIsDead(__Me)
+	THEN
+		CharacterConsume(__Me, "AMER_CMB_MelchiorCruelty_RemoveBuff")
+		IF "c1"
+			CharacterHasStatus(__Me, CONSUME, "AMER_CMB_MelchiorCruelty_Enrage"
+		THEN
+			RemoveStatusInfluence(__Me, CONSUME, 1, "AMER_CMB_MelchiorCruelty_Enrage", 0)
+		ENDIF
+		
+		IF "c1"
+			CharacterIsDead(%AMER_MelchiorCruelty_Compassion)
+		THEN
+			CharacterResurrect(%AMER_MelchiorCruelty_Compassion, 100)
+			StartTimer("AMER_MelchiorCruelty_GiveInvulnerableDelay", 3.0, 0)
+		ENDIF
+	ENDIF
+	
+	
+	
+EVENT MelchiorCrueltyGiveInvulnerableDelay
+ON
+	OnTimer("AMER_MelchiorCruelty_GiveInvulnerableDelay")
+ACTIONS
+	CharacterApplyStatus(%AMER_MelchiorCruelty_Compassion, VOID_AURA, -1, 1)
+	
+	
+	
+EVENT MelchiorCrueltyCombatStart
+ON
+	OnCombatStarted()
+ACTIONS
+	CharacterSetImmortal(__Me, 1)
+	Set(%AMER_MelchiorCruelty_SaidEnrageText, INT:0)
+	
+	
+	
+EVENT MelchiorCrueltyDie
+ON
+	OnDie(__Me, _, _, _)
+ACTIONS
+	DisplayText(__Me, "AMER_CMB_MelchiorCruelty_Die1", 5.0)
+	
+	
+	
+EVENT MelchiorCrueltyOnTurn
+ON
+	OnTurn()
+ACTIONS
+	IF "!c1"
+		CharacterIsDead(%AMER_MelchiorCruelty_Compassion)
+	THEN
+		SetPriority(MelchiorCrueltyTurnSpeech, INT:10000)
+	ELIF "c1"
+		IsEqual(%AMER_MelchiorCruelty_SaidEnrageText, INT:0)
+	THEN
+		Set(%AMER_MelchiorCruelty_SaidEnrageText, INT:1)
+		SetPriority(MelchiorCrueltyEnrage, INT:10000)
+	ENDIF
+	
+	
+	
+//===================BEHAVIOR====================//
+BEHAVIOUR
+REACTION MelchiorCrueltyEnrage, 0
+USAGE COMBAT
+ACTIONS
+	DisplayCombatInfoText(__Me, "AMER_CMB_MelchiorCruelty_Enraged", 4.0)
+	CharacterPlayEffect(__Me, "FX_Skills_Warrior_Rage_Cast_A")
+	CharacterPlayAnimation("cast_shout_cast", 1, 1)
+	CharacterPlayEffect(__Me, "FX_Skills_Warrior_Rage_Cast_A")
+	AddStatusInfluence(__Me, CONSUME, 1, "AMER_CMB_MelchiorCruelty_Enrage", 0)
+	StatusText(__Me, "AMER_CMB_MelchiorCompassion_Enrage")
+	
+	Sleep(3.0)
+	
+	SetPriority(MelchiorCrueltyEnrage, INT:0)
+	
+	
+	
+REACTION MelchiorCrueltyTurnSpeech, 0
+USAGE COMBAT
+VARS
+	FIXEDSTRING:_Text
+	STRING:_Str
+	INT:_Rand
+	CHARACTER:_Target
+ACTIONS
+	IF "c1"
+		CharacterGetEnemy(_Target, __Me)
+	THEN
+		CharacterLookAt(_Target)
+	ENDIF
+	
+	Sleep(0.75)
+	
+	GetRandomBetween(_Rand, INT:1, INT:7)
+	Print(_Str, "AMER_CMB_MelchiorCruelty_Turn[1]", _Rand)
+	Cast(_Text, _Str)
+	DisplayCombatInfoText(__Me, _Text, 4.0)
+	
+	Sleep(2.0)
+	
+	SetPriority(MelchiorCrueltyTurnSpeech, INT:0)
+	
+	
+//===============================================//
+//                                               //
+//       M E L C H I O R ' S   C R U E L T Y     //
+//                                               //
+//===============================================//

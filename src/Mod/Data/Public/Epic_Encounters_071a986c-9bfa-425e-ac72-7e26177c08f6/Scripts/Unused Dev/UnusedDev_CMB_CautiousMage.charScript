@@ -1,0 +1,105 @@
+INIT
+	CHARACTER:__Me		
+	EXTERN SKILL:%SkillInQuestion=null
+	EXTERN INT:%RangeAdjustment=5
+	EXTERN INT:%CautiousMageFleePriority = 300
+	FLOAT:%MaxRange
+	FLOAT:%CautiousMagesSightRange
+	INT:%CautiousMageThreatFound = 0
+
+//------------------------
+BEHAVIOUR
+REACTION DefaultCharacter_KillNoSetEnemy, 5000
+USAGE COMBAT
+ACTIONS	
+	SetPriority("Combat_NoSetEnemy",0)
+	//DebugText(__Me,"Cautious Mage does not get near the closest target if he can't find any! It just waits!")
+	SetPriority("DefaultCharacter_KillNoSetEnemy",0)	
+	
+REACTION KeepYourDistance, 0
+USAGE COMBAT
+VARS
+	CHARACTER:_Enemy
+CHECK "c1&!c2"
+	IsEqual(%CautiousMageThreatFound, INT:1)
+	CharacterHasStatus(__Me,"CHARMED")
+ACTIONS
+	DebugText(__Me,"CautMage: keeping my distances!")
+	CharacterFleeFrom(Enemy,%MaxRange)
+	SetPriority(KeepYourDistance, 0)
+INTERRUPT
+ON
+	OnMovementFailed(_)
+ACTIONS
+	SetPriority(KeepYourDistance, 0)
+
+//------------------------
+EVENTS
+EVENT InitializeCautiousMage
+ON
+	OnInit()
+ACTIONS
+	IF "c1&c2"	
+		CharacterGetSkillRange(_,%MaxRange,__Me,%SkillInQuestion)
+		CharacterGetSightRange(%CautiousMagesSightRange,__Me)
+	THEN
+		SetPriority("Combat_AttackSetEnemy",0) //the Cautious Mage does not use their weapon, they prefer to skip their turn
+		SetPriority("Combat_MoveToSetEnemy",0)
+		Subtract(%MaxRange,%RangeAdjustment)
+	ENDIF
+
+EVENT CheckDistance
+ON
+	OnTurn()
+VARS
+	FLOAT:_DistanceToEnemy
+	FLOAT:_MySightRange		
+	CHARACTER:_ClosestEnemy		
+ACTIONS
+	IF "!c1"
+		CharacterHasStatus(__Me,"CHARMED")
+	THEN
+		SetPriority("DefaultCharacter_KillNoSetEnemy",5000)
+		Set(%CautiousMageThreatFound, INT:0)
+		IterateCharactersInCombat(__Me, "AMER_CautiousMageIterateForThreat", Lowest, Distance)
+	ENDIF
+	
+EVENT CautiousMageIterateForThreat
+VARS
+	CHARACTER:_Char
+	FLOAT:_Distance
+ON
+	OnIterateCharacter(_Char, "AMER_CautiousMageIterateForThreat")
+ACTIONS
+	IF "c1"
+		IsEqual(%CautiousMageThreatFound, INT:0)
+	THEN
+		IF "c1"
+			CharacterIsEnemy(__Me, _Char)
+		THEN
+			IF "!c1"
+				CharacterIsDead(_Char)
+			THEN
+				IF "!c1"
+					CharacterIsSummon(_Char)
+				THEN
+					IF "c1&c2"
+						GetDistance(_Distance, __Me, _Char)
+						IsLessThen(_Distance, %MaxRange)
+					THEN
+						Set(%CautiousMageThreatFound, INT:1)
+						SetPriority("KeepYourDistance",%CautiousMageFleePriority)
+					ENDIF
+				ENDIF
+			ENDIF
+		ENDIF
+	ENDIF
+	
+	
+	
+	
+	
+	
+	
+	
+	

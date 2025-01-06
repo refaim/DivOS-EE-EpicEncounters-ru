@@ -1,0 +1,157 @@
+#TEMPLATE "_SKILL_Base" : Target_EnemyResurrect
+	
+INIT
+CHARACTER:__Me
+FLOAT:%SkillTargetScore_Target_EnemyResurrect=-1000000
+// [GLOBAL_VARS]
+EXTERN INT:%Target_EnemyResurrect_InterruptAlliedRebirth = 0
+FLOAT:%Target_EnemyResurrect_MyInitiative
+// [~GLOBAL_VARS]
+	
+EVENTS
+	
+// [EVENTS]
+// [~EVENTS]
+	
+// Calculate the priority of the skill
+EVENT CalculateScore_Target_EnemyResurrect
+VARS
+	// [CALC_VARS]
+	FLOAT:_SkillRangeMin
+	FLOAT:_SkillRangeMax
+	FLOAT3:_TargetPos
+	// [~CALC_VARS]
+ON
+	OnFunction("CalculateScore_Target_EnemyResurrect")
+ACTIONS
+	Set(%SkillTargetScore_Target_EnemyResurrect, -1000000)
+
+	// [CALC_ACTIONS_PRE]
+	// [~CALC_ACTIONS_PRE]
+	// [CALC_ACTIONS]
+	IF "c1"
+		CharacterGetStat(%Target_EnemyResurrect_MyInitiative, __Me, Initiative)
+	THEN
+		IterateCharactersInCombat(__Me, "CalculateTarget_Target_EnemyResurrect")
+		IF "!c1"
+			IsEqual(%SkillTargetChar_Target_EnemyResurrect, null)
+		THEN
+			Add(%ActionScore_Target_EnemyResurrect, %SkillTargetScore_Target_EnemyResurrect)
+		ENDIF
+	ENDIF
+	// [~CALC_ACTIONS]
+	
+	
+	
+	
+// Calculate the character we should target
+EVENT CalculateTarget_Target_EnemyResurrect
+VARS	
+	CHARACTER:_Char
+	// [CALC_TARGET_VARS]
+	INT:_ClassScore_Target_EnemyResurrect
+	FLOAT:_Score
+	FLOAT:_SkillRangeMin
+	FLOAT:_SkillRangeMax
+	FLOAT:_DistanceToChar
+	FLOAT:_DistanceScore
+	FLOAT:_TargetInit
+	FLOAT:_Resistance
+	INT:_Rebirthing
+	// [~CALC_TARGET_VARS]
+ON
+	OnIterateCharacter(_Char, "CalculateTarget_Target_EnemyResurrect")	
+ACTIONS
+	// [CALC_CHAR_TARGET_ACTIONS_PRE]
+	Set(_Score, 0.0)
+	// [~CALC_CHAR_TARGET_ACTIONS_PRE]
+	// [CALC_CHAR_TARGET_ACTIONS]
+	IF "c1"
+		CharacterIsDead(_Char)
+	THEN
+		IF "c1"
+			CharacterIsAlly(__Me, _Char)
+		THEN
+			IF "!c1"
+				CharacterIsSummon(_Char)
+			THEN
+				IF "!c1|(c2&!c3)"
+					IsInSurface(_Char, Lava)
+					CharacterGetStat(_Resistance, _Char, FireResistance)
+					IsLessThen(_Resistance, 100.0)
+				THEN
+					IF "!c1|c2|c3"
+						//Either I can't find the Rebirth countdown variable, the target
+						//is not Rebirthing, or I am allowed to interrupt Rebirth.
+						GetVar(_Rebirthing, _Char, "AMER_RebirthCountdown")
+						IsEqual(_Rebirthing, INT:-1)
+						IsEqual(%Target_EnemyResurrect_InterruptAlliedRebirth, INT:1)
+					THEN
+						//Save a boss calculation
+						IF "c1"
+							CharacterIsBoss(_Char)
+						THEN
+							Add(_Score, 10.0)
+						ENDIF
+						
+						//Initiative order calculation: favor targets who haven't yet
+						//had their turn.
+						IF "c1"
+							CharacterGetStat(_TargetInit, _Char, Initiative)
+						THEN
+							IF "c1"
+								IsLessThen(_TargetInit, %Target_EnemyResurrect_MyInitiative)
+							THEN
+								Add(_Score, 5.0)
+							ENDIF
+						ENDIF
+						
+						//Range score calculation
+						IF "c1&c2"
+							CharacterGetSkillRange(_SkillRangeMin, _SkillRangeMax, __Me, Target_EnemyResurrect)
+							GetDistance(_DistanceToChar, __Me, _Char)
+						THEN
+							Set(_DistanceScore, _DistanceToChar)
+							IF "c1"
+								IsGreaterThen(_DistanceScore, _SkillRangeMax)
+							THEN
+								Subtract(_DistanceScore, _SkillRangeMax)
+								Multiply(_DistanceScore, -1.0)
+							ELIF "c1"
+								IsLessThen(_DistanceScore, _SkillRangeMin)
+							THEN
+								Subtract(_DistanceScore, _SkillRangeMin)
+								Multiply(_DistanceScore, 1.0)
+							ELSE 
+								Set(_DistanceScore, 0.0)
+							ENDIF
+							Add(_Score, _DistanceScore)
+						ENDIF
+						
+						//Can see score calculation
+						IF "!c1"
+							CharacterCanSee(__Me, _Char)
+						THEN
+							Add(_Score, -10.0)
+						ENDIF
+						
+						IF "c1"
+							IsGreaterThen(_Score, %SkillTargetScore_Target_EnemyResurrect)
+						THEN
+							Set(%SkillTargetChar_Target_EnemyResurrect, _Char)
+							Set(%SkillTargetScore_Target_EnemyResurrect, _Score)
+						ENDIF
+					ENDIF
+				ENDIF
+			ENDIF
+		ENDIF
+	ENDIF
+	// [~CALC_CHAR_TARGET_ACTIONS]
+	
+	
+	
+	
+	
+	
+	
+	

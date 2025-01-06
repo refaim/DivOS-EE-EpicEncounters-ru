@@ -1,0 +1,283 @@
+//===============================================//
+//                                               //
+//         M E L C H I O R ' S   F E A R         //
+//                                               //
+//     Written by Matteo "Ameranth" T. (2016)    //
+//===============================================//
+INIT
+CHARACTER:__Me
+EXTERN CHARACTER:%AMER_MelchiorFear_Restraint = null
+EXTERN INT:%AMER_MelchiorFear_NotAClone = 0
+EXTERN TRIGGER:%AMER_MelchiorFear_Origin = null
+INT:%AMER_MelchiorFear_Linked = 0
+FLOAT:%AMER_MelchiorFear_MaximumVitality
+FLOAT:%AMER_MelchiorFear_DamageBuffer = 0.0
+FLOAT:%AMER_MelchiorFear_RestraintMaximumVitality
+	
+EVENTS
+EVENT MelchiorFearInit
+ON
+	OnInit()
+ACTIONS
+	IF "!c1"
+		CharacterGetStat(%AMER_MelchiorFear_MaximumVitality, __Me, VitalityPoints)
+	THEN
+		Set(%AMER_MelchiorFear_MaximumVitality, 7000.0
+	ENDIF
+	CharacterAddSkill(AMER_SKILL_EnemyMelchiorFearShackles)
+	
+	CharacterApplyStatus(__Me, UNHEALABLE, -1, 1)
+	
+	
+	
+EVENT MelchiorFearCombatEnded
+ON
+	OnCombatEnded()
+ACTIONS
+	IF "!c1"
+		CharacterIsDead(%AMER_MelchiorFear_Restraint)
+	THEN
+		IF "c1"
+			IsEqual(%AMER_MelchiorFear_NotAClone, INT:1)
+		THEN
+			IF "c1"
+				CharacterIsDead(__Me)
+			THEN
+				CharacterResurrect(__Me, 100)
+				TeleportTo(__Me, %AMER_MelchiorFear_Origin, 1)
+				CharacterApplyStatus(__Me, UNHEALABLE, -1, 1)
+			ENDIF
+			
+			Set(%AMER_MelchiorFear_Linked, INT:0)
+			Set(%AMER_MelchiorFear_DamageBuffer, 0.0)
+		ELIF "!c1"
+			CharacterIsDead(__Me)
+		THEN
+			PlayEffectAt(__Me, "FX_Skills_Air_NetherSwap_Disappear_A")
+			CharacterDestroy(__Me)
+		ENDIF
+	ENDIF
+	
+	
+	
+EVENT MelchiorFearCombatStarted
+ON
+	OnCombatStarted()
+ACTIONS
+	IF "!c1"
+		GetVar(%AMER_MelchiorFear_RestraintMaximumVitality, %AMER_MelchiorFear_Restraint, "AMER_MelchiorRestraint_MaximumVitality")
+	THEN
+		Set(%AMER_MelchiorFear_RestraintMaximumVitality, 40000.0)
+	ENDIF
+	
+	
+	
+EVENT MelchiorFearShackles
+//Normal Shackles of Pain don't stack with one-another, so we
+//need to make our own since all Fear clones should link to Restraint.
+VARS
+	FLOAT:_Damage
+	DAMAGE:_Type
+	CHARACTER:_Char
+	ITEM:_Item
+ON
+	OnDamage(_Type, _Damage, _Char, _Item)
+ACTIONS
+	IF "c1"
+		IsEqual(%AMER_MelchiorFear_Linked, INT:1)
+	THEN
+		IF "!c1"
+			IsEqual(_Damage, 0)		//Did attack miss or get blocked?
+		THEN
+			IF "!c1"
+				//Don't bother with this if Restraint is already dead.
+				CharacterIsDead(%AMER_MelchiorFear_Restraint)
+			THEN
+				//Use a buffer for damage so numerous simultaneous damage instances
+				//are all handled together, improving performance.
+				Add(%AMER_MelchiorFear_DamageBuffer, _Damage)
+				StopTimer("AMER_MelchiorFear_ShacklesDamageBuffer")
+				StartTimer("AMER_MelchiorFear_ShacklesDamageBuffer", 0.3, 0)
+			ENDIF
+		ENDIF
+	ENDIF
+	
+	
+	
+EVENT MelchiorFearShacklesDamageBuffer
+VARS
+	FLOAT:_Damage
+	FLOAT:_Vitality
+	FLOAT:_VitalityPoints
+	FLOAT:_RestraintMaximumVitality
+	FLOAT:_RestraintVitality
+	INT:_SFXChoke
+ON
+	OnTimer("AMER_MelchiorFear_ShacklesDamageBuffer")
+ACTIONS
+	IF "!c1"
+		//Don't let Restraint hurt himself.
+		CharacterIsInActiveTurn(%AMER_MelchiorFear_Restraint)
+	THEN
+		IF "c1&c2"
+			CharacterGetStat(_Vitality, __Me, Vitality)
+			CharacterGetStat(_RestraintVitality, %AMER_MelchiorFear_Restraint, Vitality)
+		THEN
+			Set(_Damage, %AMER_MelchiorFear_DamageBuffer)
+			
+			Set(_VitalityPoints, _Damage)
+			Multiply(_Damage, %AMER_MelchiorFear_MaximumVitality)
+			Divide(_Damage, %AMER_MelchiorFear_RestraintMaximumVitality)
+			Subtract(_RestraintVitality, _Damage)
+			SetHealth(%AMER_MelchiorFear_Restraint, _RestraintVitality)
+			
+			Set(%AMER_MelchiorFear_DamageBuffer, 0.0)
+			IF "c1&c2"
+				GetVar(_SFXChoke, %AMER_MelchiorFear_Restraint, "AMER_MelchiorRestraint_LinkSFXChoke")
+				IsEqual(_SFXChoke, INT:0)
+			THEN
+				SetVar(%AMER_MelchiorFear_Restraint, "AMER_MelchiorRestraint_LinkSFXChoke", INT:1)
+				StartTimer("AMER_MelchiorFear_ResetSFXChoke", 0.3, 0)
+				CharacterPlayEffect(%AMER_MelchiorFear_Restraint, "FX_Skills_WitchCraft_Bloodletting_Impact_A")
+			ENDIF
+		ENDIF
+	ENDIF
+	
+	
+	
+EVENT MelchiorFearResetSFXChoke
+ON
+	OnTimer("AMER_MelchiorFear_ResetSFXChoke")
+ACTIONS
+	SetVar(%AMER_MelchiorFear_Restraint, "AMER_MelchiorRestraint_LinkSFXChoke", INT:0)
+	
+	
+	
+EVENT MelchiorFearRestraitDied
+ON
+	OnDie(%AMER_MelchiorFear_Restraint, _, _, _)
+ACTIONS
+	IF "c1"
+		IsEqual(%AMER_MelchiorFear_NotAClone, INT:1)
+	THEN
+		IF "!c1"
+			CharacterIsDead(__Me)
+		THEN
+			PlayEffectAt(__Me, "FX_Skills_Air_NetherSwap_Disappear_A")
+			CharacterDie(__Me)
+		ENDIF
+	ELSE
+		PlayEffectAt(__Me, "FX_Skills_Air_NetherSwap_Disappear_A")
+		CharacterDestroy(__Me)
+	ENDIF
+	
+	
+	
+EVENT MelchiorFearDie
+//Spawn two clones when I die, let them know who Restraint is.
+VARS
+	CHARACTER:_Spawn
+	FLOAT3:_MyPos
+	FLOAT3:_Position
+	FLOAT:_RandX
+	FLOAT:_RandZ
+	FLOAT:_PosX
+	FLOAT:_PosZ
+ON
+	OnDie(__Me, _, _, _)
+ACTIONS
+	IF "!c1&!c2"
+		CharacterIsDead(%AMER_MelchiorFear_Restraint)
+		CharacterHasStatus(%AMER_MelchiorFear_Restraint, DYING)
+	THEN
+		PlayEffectAt(__Me, "FX_Skills_Air_NetherSwap_Disappear_A")
+		
+		GetPosition(__Me, _MyPos)
+		
+		//Spawn the clone at a random offset from my position,
+		//to make the combat feel more alive.
+		Set(_Position, _MyPos)
+		IF "c1&c2"
+			GetX(_Position, _PosX)
+			GetZ(_Position, _PosZ)
+		THEN
+			GetRandomBetween(_RandX, -6.0, 6.0)
+			GetRandomBetween(_RandZ, -6.0, 6.0)
+			Add(_PosX, _RandX)
+			Add(_PosZ, _RandZ)
+			SetX(_Position, _PosX)
+			SetZ(_Position, _PosZ)
+		ENDIF
+		
+		IF "c1"
+			FindValidPosition(_Position, 6.0, __Me)
+		THEN
+			SpawnCharacter(_Spawn, AMER_CHAR_Melchior_Fear_22f6696d-0353-41ea-bc36-bc6a8f34f06d, _Position, 0, 1, %AMER_MelchiorFear_Restraint)
+		ELSE
+			SpawnCharacter(_Spawn, AMER_CHAR_Melchior_Fear_22f6696d-0353-41ea-bc36-bc6a8f34f06d, __Me, 0, 1, %AMER_MelchiorFear_Restraint)
+		ENDIF
+		
+		CharacterPlayEffect(_Spawn, "FX_Skills_Air_NetherSwap_Reappear_A")
+		SetVar(_Spawn, "AMER_MelchiorFear_Restraint", %AMER_MelchiorFear_Restraint)
+		
+		//Spawn the clone at a random offset from my position,
+		//to make the combat feel more alive.
+		Set(_Position, _MyPos)
+		IF "c1&c2"
+			GetX(_Position, _PosX)
+			GetZ(_Position, _PosZ)
+		THEN
+			GetRandomBetween(_RandX, -6.0, 6.0)
+			GetRandomBetween(_RandZ, -6.0, 6.0)
+			Add(_PosX, _RandX)
+			Add(_PosZ, _RandZ)
+			SetX(_Position, _PosX)
+			SetZ(_Position, _PosZ)
+		ENDIF
+		
+		IF "c1"
+			FindValidPosition(_Position, 6.0, __Me)
+		THEN
+			SpawnCharacter(_Spawn, AMER_CHAR_Melchior_Fear_22f6696d-0353-41ea-bc36-bc6a8f34f06d, _Position, 0, 1, %AMER_MelchiorFear_Restraint)
+		ELSE
+			SpawnCharacter(_Spawn, AMER_CHAR_Melchior_Fear_22f6696d-0353-41ea-bc36-bc6a8f34f06d, __Me, 0, 1, %AMER_MelchiorFear_Restraint)
+		ENDIF
+		
+		CharacterPlayEffect(_Spawn, "FX_Skills_Air_NetherSwap_Reappear_A")
+		SetVar(_Spawn, "AMER_MelchiorFear_Restraint", %AMER_MelchiorFear_Restraint)
+	ENDIF
+	
+	
+	
+EVENT MelchiorFearLinkTextDelay
+ON
+	OnTimer("AMER_MelchiorFear_LinkTextDelay")
+ACTIONS
+	StatusText(__Me, "AMER_SKILL_EnemyMelchiorFearShackles_DisplayName")
+	StatusText(%AMER_MelchiorFear_Restraint, "AMER_SKILL_EnemyMelchiorFearShackles_DisplayName")
+	AddStatusInfluence(__Me, CONSUME, 1, "AMER_CMB_MelchiorFear_Link", 0)	//Make an icon that the player can see.
+	
+	
+	
+//===================BEHAVIOR====================//
+BEHAVIOUR
+REACTION MelchiorFearShackleRestraint, 10001
+USAGE COMBAT
+ACTIONS
+	CharacterLookAt(%AMER_MelchiorFear_Restraint)
+	Sleep(0.3)
+	
+	StartTimer("AMER_MelchiorFear_LinkTextDelay", 1.9, 0)	//need the text to display right as the cast point is reached.
+	CharacterUseSkill(AMER_SKILL_EnemyMelchiorFearShackles, %AMER_MelchiorFear_Restraint)
+	Set(%AMER_MelchiorFear_Linked, INT:1)
+	
+	Sleep(0.7)
+	
+	SetPriority(MelchiorFearShackleRestraint, INT:0)
+	
+	
+//===============================================//
+//                                               //
+//         M E L C H I O R ' S   F E A R         //
+//                                               //
+//===============================================//

@@ -1,0 +1,1072 @@
+<?xml version='1.0' encoding='utf-8'?>
+<save>
+	<version major="2" minor="0" revision="0" build="0" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="root">
+			<children>
+				<node id="GameObjects">
+					<attribute id="CanBeMoved" type="19" value="True" />
+					<attribute id="CanBePickedUp" type="19" value="True" />
+					<attribute id="CanSeeThrough" type="19" value="True" />
+					<attribute id="CanShootThrough" type="19" value="True" />
+					<attribute id="Description" type="28" handle="h4662a667gd922g47d1gb6ccgab0b3f396b76" value="This wand is sheathed in icy crystals, vapour swirling in the air around it. Still, it is oddly warm and comfortable in your hand." />
+					<attribute id="DropSound" type="22" value="dea27d29-65a0-4bf1-b563-9dde8d32daf5" />
+					<attribute id="Flag" type="4" value="0" />
+					<attribute id="GroupID" type="5" value="0" />
+					<attribute id="Icon" type="22" value="Item_WPN_Wand_C_Water" />
+					<attribute id="IsSurfaceCloudInteractable" type="19" value="True" />
+					<attribute id="IsSurfaceInteractable" type="19" value="True" />
+					<attribute id="LevelName" type="22" value="" />
+					<attribute id="MapKey" type="22" value="0cd3e4e4-a7c2-442f-b3e0-510f8dc8cd8e" />
+					<attribute id="Name" type="23" value="WPN_Wand_C_Water" />
+					<attribute id="PhysicsTemplate" type="22" value="8b7df81d-2fd4-46bd-be0e-7254a02731d5" />
+					<attribute id="PickupSound" type="22" value="dbf85d5f-4c1e-43e0-a749-0b3f30e9b1ba" />
+					<attribute id="Scale" type="6" value="1" />
+					<attribute id="Stats" type="22" value="WPN_Wand_Water_I" />
+					<attribute id="Tooltip" type="1" value="2" />
+					<attribute id="Type" type="22" value="item" />
+					<attribute id="VisualTemplate" type="22" value="63a7cb16-0240-4a42-a2c9-bb5bfb0edbae" />
+					<attribute id="WalkThrough" type="19" value="True" />
+					<children>
+						<node id="AIBounds">
+							<attribute id="AIType" type="1" value="1" />
+							<attribute id="Height" type="6" value="0.134972" />
+							<attribute id="Max" type="12" value="0.0632051 0.0665716 0.124931" />
+							<attribute id="Min" type="12" value="-0.0423214 -0.0684001 -0.764315" />
+							<attribute id="Radius" type="6" value="0.2264" />
+						</node>
+						<node id="Equipment">
+							<children>
+								<node id="CustomBodyMaterials">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="CustomBodyMaterials">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="CustomBodyMaterials">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" type="22" value="" />
+								</node>
+							</children>
+						</node>
+						<node id="InventoryList" />
+						<node id="OnDestroyActions" />
+						<node id="OnUsePeaceActions" />
+						<node id="Scripts" />
+					</children>
+				</node>
+				<node id="GameObjects">
+					<attribute id="CanBeMoved" type="19" value="True" />
+					<attribute id="CanBePickedUp" type="19" value="True" />
+					<attribute id="CanSeeThrough" type="19" value="True" />
+					<attribute id="CanShootThrough" type="19" value="True" />
+					<attribute id="Description" type="28" handle="hb068653fg355fg4d59gb329ge1387f437b8a" value="A wand encased with static energy, it even gives your fingertips a light shock when touched." />
+					<attribute id="DropSound" type="22" value="dea27d29-65a0-4bf1-b563-9dde8d32daf5" />
+					<attribute id="Flag" type="4" value="0" />
+					<attribute id="GroupID" type="5" value="0" />
+					<attribute id="Icon" type="22" value="Item_WPN_Wand_C_Air" />
+					<attribute id="IsSurfaceCloudInteractable" type="19" value="True" />
+					<attribute id="IsSurfaceInteractable" type="19" value="True" />
+					<attribute id="LevelName" type="22" value="" />
+					<attribute id="MapKey" type="22" value="36d4cb60-4eec-4a5e-b20c-efa0bf458ba0" />
+					<attribute id="Name" type="23" value="WPN_Wand_C_Air" />
+					<attribute id="PhysicsTemplate" type="22" value="8b7df81d-2fd4-46bd-be0e-7254a02731d5" />
+					<attribute id="PickupSound" type="22" value="dbf85d5f-4c1e-43e0-a749-0b3f30e9b1ba" />
+					<attribute id="Scale" type="6" value="1" />
+					<attribute id="Stats" type="22" value="WPN_Wand_Air_I" />
+					<attribute id="Tooltip" type="1" value="2" />
+					<attribute id="Type" type="22" value="item" />
+					<attribute id="VisualTemplate" type="22" value="63a7cb16-0240-4a42-a2c9-bb5bfb0edbae" />
+					<attribute id="WalkThrough" type="19" value="True" />
+					<children>
+						<node id="AIBounds">
+							<attribute id="AIType" type="1" value="1" />
+							<attribute id="Height" type="6" value="0.134972" />
+							<attribute id="Max" type="12" value="0.0632051 0.0665716 0.124931" />
+							<attribute id="Min" type="12" value="-0.0423214 -0.0684001 -0.764315" />
+							<attribute id="Radius" type="6" value="0.2264" />
+						</node>
+						<node id="Equipment">
+							<children>
+								<node id="CustomBodyMaterials">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="CustomBodyMaterials">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="CustomBodyMaterials">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" type="22" value="" />
+								</node>
+							</children>
+						</node>
+						<node id="InventoryList" />
+						<node id="OnDestroyActions" />
+						<node id="OnUsePeaceActions" />
+						<node id="Scripts" />
+					</children>
+				</node>
+				<node id="GameObjects">
+					<attribute id="CanBeMoved" type="19" value="True" />
+					<attribute id="CanBePickedUp" type="19" value="True" />
+					<attribute id="CanSeeThrough" type="19" value="True" />
+					<attribute id="CanShootThrough" type="19" value="True" />
+					<attribute id="Description" type="28" handle="hf43aebc3ga8d8g43d7gb561gd0f3d463bb52" value="Wildfire sparks from this hardy wand; if you're very quiet, you can hear its inner embers crackle." />
+					<attribute id="DropSound" type="22" value="dea27d29-65a0-4bf1-b563-9dde8d32daf5" />
+					<attribute id="Flag" type="4" value="0" />
+					<attribute id="GroupID" type="5" value="0" />
+					<attribute id="Icon" type="22" value="Item_WPN_Wand_B_Fire" />
+					<attribute id="IsSurfaceCloudInteractable" type="19" value="True" />
+					<attribute id="IsSurfaceInteractable" type="19" value="True" />
+					<attribute id="LevelName" type="22" value="" />
+					<attribute id="MapKey" type="22" value="3c78b047-a5ff-450a-b0b2-70f2c12dc77b" />
+					<attribute id="Name" type="23" value="WPN_Wand_B_Fire" />
+					<attribute id="PhysicsTemplate" type="22" value="94982eb0-2090-489c-91bd-4cee5fab5f43" />
+					<attribute id="PickupSound" type="22" value="dbf85d5f-4c1e-43e0-a749-0b3f30e9b1ba" />
+					<attribute id="Scale" type="6" value="1" />
+					<attribute id="Stats" type="22" value="WPN_Wand_Fire_E" />
+					<attribute id="Tooltip" type="1" value="2" />
+					<attribute id="Type" type="22" value="item" />
+					<attribute id="VisualTemplate" type="22" value="4bf51d8f-1ab2-4ed7-b671-bfc4faa0d910" />
+					<attribute id="WalkThrough" type="19" value="True" />
+					<children>
+						<node id="AIBounds">
+							<attribute id="AIType" type="1" value="1" />
+							<attribute id="Height" type="6" value="0.134972" />
+							<attribute id="Max" type="12" value="0.0632051 0.0665716 0.124931" />
+							<attribute id="Min" type="12" value="-0.0423214 -0.0684001 -0.764315" />
+							<attribute id="Radius" type="6" value="0.2264" />
+						</node>
+						<node id="Equipment">
+							<children>
+								<node id="CustomBodyMaterials">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="CustomBodyMaterials">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="CustomBodyMaterials">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" type="22" value="" />
+								</node>
+							</children>
+						</node>
+						<node id="InventoryList" />
+						<node id="OnDestroyActions" />
+						<node id="OnUsePeaceActions" />
+						<node id="Scripts" />
+					</children>
+				</node>
+				<node id="GameObjects">
+					<attribute id="CanBeMoved" type="19" value="True" />
+					<attribute id="CanBePickedUp" type="19" value="True" />
+					<attribute id="CanSeeThrough" type="19" value="True" />
+					<attribute id="CanShootThrough" type="19" value="True" />
+					<attribute id="Description" type="28" handle="hf5db8871gf8b7g453cgae9fge04200ed5d3c" value="This wand appears to be cut from still-living wood; tender shoots and fresh green leaves bud from the tip." />
+					<attribute id="DropSound" type="22" value="dea27d29-65a0-4bf1-b563-9dde8d32daf5" />
+					<attribute id="Flag" type="4" value="0" />
+					<attribute id="GroupID" type="5" value="0" />
+					<attribute id="Icon" type="22" value="Item_WPN_Wand_B_Earth" />
+					<attribute id="IsSurfaceCloudInteractable" type="19" value="True" />
+					<attribute id="IsSurfaceInteractable" type="19" value="True" />
+					<attribute id="LevelName" type="22" value="" />
+					<attribute id="MapKey" type="22" value="43145d45-a3ad-4d06-81fc-08d5d5fe5b54" />
+					<attribute id="Name" type="23" value="WPN_Wand_B_Earth" />
+					<attribute id="PhysicsTemplate" type="22" value="94982eb0-2090-489c-91bd-4cee5fab5f43" />
+					<attribute id="PickupSound" type="22" value="dbf85d5f-4c1e-43e0-a749-0b3f30e9b1ba" />
+					<attribute id="Scale" type="6" value="1" />
+					<attribute id="Stats" type="22" value="WPN_Wand_Earth_E" />
+					<attribute id="Tooltip" type="1" value="2" />
+					<attribute id="Type" type="22" value="item" />
+					<attribute id="VisualTemplate" type="22" value="4bf51d8f-1ab2-4ed7-b671-bfc4faa0d910" />
+					<attribute id="WalkThrough" type="19" value="True" />
+					<children>
+						<node id="AIBounds">
+							<attribute id="AIType" type="1" value="1" />
+							<attribute id="Height" type="6" value="0.134972" />
+							<attribute id="Max" type="12" value="0.0632051 0.0665716 0.124931" />
+							<attribute id="Min" type="12" value="-0.0423214 -0.0684001 -0.764315" />
+							<attribute id="Radius" type="6" value="0.2264" />
+						</node>
+						<node id="Equipment">
+							<children>
+								<node id="CustomBodyMaterials">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="CustomBodyMaterials">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="CustomBodyMaterials">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" type="22" value="" />
+								</node>
+							</children>
+						</node>
+						<node id="InventoryList" />
+						<node id="OnDestroyActions" />
+						<node id="OnUsePeaceActions" />
+						<node id="Scripts" />
+					</children>
+				</node>
+				<node id="GameObjects">
+					<attribute id="CanBeMoved" type="19" value="True" />
+					<attribute id="CanBePickedUp" type="19" value="True" />
+					<attribute id="CanSeeThrough" type="19" value="True" />
+					<attribute id="CanShootThrough" type="19" value="True" />
+					<attribute id="Description" type="28" handle="h8292f235gb625g48eega2fagb17c74ffb771" value="Enveloped in shadowy smoke, this wand appears carved from the very darkness itself." />
+					<attribute id="DropSound" type="22" value="dea27d29-65a0-4bf1-b563-9dde8d32daf5" />
+					<attribute id="Flag" type="4" value="0" />
+					<attribute id="GroupID" type="5" value="0" />
+					<attribute id="Icon" type="22" value="Item_WPN_Wand_C_Shadow" />
+					<attribute id="IsSurfaceCloudInteractable" type="19" value="True" />
+					<attribute id="IsSurfaceInteractable" type="19" value="True" />
+					<attribute id="LevelName" type="22" value="" />
+					<attribute id="MapKey" type="22" value="45c95589-f29b-49d6-87cf-6527cd24c829" />
+					<attribute id="Name" type="23" value="WPN_Wand_C_Shadow" />
+					<attribute id="PhysicsTemplate" type="22" value="8b7df81d-2fd4-46bd-be0e-7254a02731d5" />
+					<attribute id="PickupSound" type="22" value="dbf85d5f-4c1e-43e0-a749-0b3f30e9b1ba" />
+					<attribute id="Scale" type="6" value="1" />
+					<attribute id="Stats" type="22" value="WPN_Wand_Shadow" />
+					<attribute id="Tooltip" type="1" value="2" />
+					<attribute id="Type" type="22" value="item" />
+					<attribute id="VisualTemplate" type="22" value="63a7cb16-0240-4a42-a2c9-bb5bfb0edbae" />
+					<attribute id="WalkThrough" type="19" value="True" />
+					<children>
+						<node id="AIBounds">
+							<attribute id="AIType" type="1" value="1" />
+							<attribute id="Height" type="6" value="0.134972" />
+							<attribute id="Max" type="12" value="0.0632051 0.0665716 0.124931" />
+							<attribute id="Min" type="12" value="-0.0423214 -0.0684001 -0.764315" />
+							<attribute id="Radius" type="6" value="0.2264" />
+						</node>
+						<node id="Equipment">
+							<children>
+								<node id="CustomBodyMaterials">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="CustomBodyMaterials">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="CustomBodyMaterials">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" type="22" value="" />
+								</node>
+							</children>
+						</node>
+						<node id="InventoryList" />
+						<node id="OnDestroyActions" />
+						<node id="OnUsePeaceActions" />
+						<node id="Scripts" />
+					</children>
+				</node>
+				<node id="GameObjects">
+					<attribute id="CanBeMoved" type="19" value="True" />
+					<attribute id="CanBePickedUp" type="19" value="True" />
+					<attribute id="CanSeeThrough" type="19" value="True" />
+					<attribute id="CanShootThrough" type="19" value="True" />
+					<attribute id="Description" type="28" handle="h59987825g0d9cg4d0dg8d2eg4dfe837af002" value="This wand is topped with a deep red gem; peering closely within reveals a cluster of eternally-smouldering embers." />
+					<attribute id="DropSound" type="22" value="dea27d29-65a0-4bf1-b563-9dde8d32daf5" />
+					<attribute id="Flag" type="4" value="0" />
+					<attribute id="GroupID" type="5" value="0" />
+					<attribute id="Icon" type="22" value="Item_WPN_Wand_D_Fire" />
+					<attribute id="IsSurfaceCloudInteractable" type="19" value="True" />
+					<attribute id="IsSurfaceInteractable" type="19" value="True" />
+					<attribute id="LevelName" type="22" value="" />
+					<attribute id="MapKey" type="22" value="4a515e9b-d227-4f47-a7f3-79e70525cdd1" />
+					<attribute id="Name" type="23" value="WPN_Wand_D_Fire" />
+					<attribute id="PhysicsTemplate" type="22" value="237beda2-d412-4e8f-b538-d01dda487f76" />
+					<attribute id="PickupSound" type="22" value="dbf85d5f-4c1e-43e0-a749-0b3f30e9b1ba" />
+					<attribute id="Scale" type="6" value="1" />
+					<attribute id="Stats" type="22" value="WPN_Wand_Fire_M" />
+					<attribute id="Tooltip" type="1" value="2" />
+					<attribute id="Type" type="22" value="item" />
+					<attribute id="VisualTemplate" type="22" value="da64c4e3-62fc-4f23-8c37-102324d081d0" />
+					<attribute id="WalkThrough" type="19" value="True" />
+					<children>
+						<node id="AIBounds">
+							<attribute id="AIType" type="1" value="1" />
+							<attribute id="Height" type="6" value="0.134972" />
+							<attribute id="Max" type="12" value="0.0632051 0.0665716 0.124931" />
+							<attribute id="Min" type="12" value="-0.0423214 -0.0684001 -0.764315" />
+							<attribute id="Radius" type="6" value="0.2264" />
+						</node>
+						<node id="Equipment">
+							<children>
+								<node id="CustomBodyMaterials">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="CustomBodyMaterials">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="CustomBodyMaterials">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" type="22" value="" />
+								</node>
+							</children>
+						</node>
+						<node id="InventoryList" />
+						<node id="OnDestroyActions" />
+						<node id="OnUsePeaceActions" />
+						<node id="Scripts" />
+					</children>
+				</node>
+				<node id="GameObjects">
+					<attribute id="CanBeMoved" type="19" value="True" />
+					<attribute id="CanBePickedUp" type="19" value="True" />
+					<attribute id="CanSeeThrough" type="19" value="True" />
+					<attribute id="CanShootThrough" type="19" value="True" />
+					<attribute id="Description" type="28" handle="ha773a1abg3842g4eafg9325g157aa76686ad" value="Tiny spiders crawl around this staff, occasionally disappearing into petite holes in the hollow-seeming wood. Their presence seems to strengthen the rod rather than weaken it." />
+					<attribute id="DropSound" type="22" value="dea27d29-65a0-4bf1-b563-9dde8d32daf5" />
+					<attribute id="Flag" type="4" value="0" />
+					<attribute id="GroupID" type="5" value="0" />
+					<attribute id="Icon" type="22" value="Item_WPN_Wand_C_Earth" />
+					<attribute id="IsSurfaceCloudInteractable" type="19" value="True" />
+					<attribute id="IsSurfaceInteractable" type="19" value="True" />
+					<attribute id="LevelName" type="22" value="" />
+					<attribute id="MapKey" type="22" value="5f48eb53-ca36-46af-a0d8-9367143ef2f7" />
+					<attribute id="Name" type="23" value="WPN_Wand_C_Earth" />
+					<attribute id="PhysicsTemplate" type="22" value="8b7df81d-2fd4-46bd-be0e-7254a02731d5" />
+					<attribute id="PickupSound" type="22" value="dbf85d5f-4c1e-43e0-a749-0b3f30e9b1ba" />
+					<attribute id="Scale" type="6" value="1" />
+					<attribute id="Stats" type="22" value="WPN_Wand_Earth_I" />
+					<attribute id="Tooltip" type="1" value="2" />
+					<attribute id="Type" type="22" value="item" />
+					<attribute id="VisualTemplate" type="22" value="63a7cb16-0240-4a42-a2c9-bb5bfb0edbae" />
+					<attribute id="WalkThrough" type="19" value="True" />
+					<children>
+						<node id="AIBounds">
+							<attribute id="AIType" type="1" value="1" />
+							<attribute id="Height" type="6" value="0.134972" />
+							<attribute id="Max" type="12" value="0.0632051 0.0665716 0.124931" />
+							<attribute id="Min" type="12" value="-0.0423214 -0.0684001 -0.764315" />
+							<attribute id="Radius" type="6" value="0.2264" />
+						</node>
+						<node id="Equipment">
+							<children>
+								<node id="CustomBodyMaterials">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="CustomBodyMaterials">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="CustomBodyMaterials">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" type="22" value="" />
+								</node>
+							</children>
+						</node>
+						<node id="InventoryList" />
+						<node id="OnDestroyActions" />
+						<node id="OnUsePeaceActions" />
+						<node id="Scripts" />
+					</children>
+				</node>
+				<node id="GameObjects">
+					<attribute id="CanBeMoved" type="19" value="True" />
+					<attribute id="CanBePickedUp" type="19" value="True" />
+					<attribute id="CanSeeThrough" type="19" value="True" />
+					<attribute id="CanShootThrough" type="19" value="True" />
+					<attribute id="Description" type="28" handle="hccfe4b37gf85bg4922gad1ag746e5d4a13c2" value="The flames that lick this blazing wand hold no heat to your touch, but contain the promise of burning destruction for your foes." />
+					<attribute id="DropSound" type="22" value="dea27d29-65a0-4bf1-b563-9dde8d32daf5" />
+					<attribute id="Flag" type="4" value="0" />
+					<attribute id="GroupID" type="5" value="0" />
+					<attribute id="Icon" type="22" value="Item_WPN_Wand_C_Fire" />
+					<attribute id="IsSurfaceCloudInteractable" type="19" value="True" />
+					<attribute id="IsSurfaceInteractable" type="19" value="True" />
+					<attribute id="LevelName" type="22" value="" />
+					<attribute id="MapKey" type="22" value="628e147d-0d08-4675-aa6a-ce4f357f7a31" />
+					<attribute id="Name" type="23" value="WPN_Wand_C_Fire" />
+					<attribute id="PhysicsTemplate" type="22" value="8b7df81d-2fd4-46bd-be0e-7254a02731d5" />
+					<attribute id="PickupSound" type="22" value="dbf85d5f-4c1e-43e0-a749-0b3f30e9b1ba" />
+					<attribute id="Scale" type="6" value="1" />
+					<attribute id="Stats" type="22" value="WPN_Wand_Fire_I" />
+					<attribute id="Tooltip" type="1" value="2" />
+					<attribute id="Type" type="22" value="item" />
+					<attribute id="VisualTemplate" type="22" value="63a7cb16-0240-4a42-a2c9-bb5bfb0edbae" />
+					<attribute id="WalkThrough" type="19" value="True" />
+					<children>
+						<node id="AIBounds">
+							<attribute id="AIType" type="1" value="1" />
+							<attribute id="Height" type="6" value="0.134972" />
+							<attribute id="Max" type="12" value="0.0632051 0.0665716 0.124931" />
+							<attribute id="Min" type="12" value="-0.0423214 -0.0684001 -0.764315" />
+							<attribute id="Radius" type="6" value="0.2264" />
+						</node>
+						<node id="Equipment">
+							<children>
+								<node id="CustomBodyMaterials">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="CustomBodyMaterials">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="CustomBodyMaterials">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" type="22" value="" />
+								</node>
+							</children>
+						</node>
+						<node id="InventoryList" />
+						<node id="OnDestroyActions" />
+						<node id="OnUsePeaceActions" />
+						<node id="Scripts" />
+					</children>
+				</node>
+				<node id="GameObjects">
+					<attribute id="CanBeMoved" type="19" value="True" />
+					<attribute id="CanBePickedUp" type="19" value="True" />
+					<attribute id="CanSeeThrough" type="19" value="True" />
+					<attribute id="CanShootThrough" type="19" value="True" />
+					<attribute id="Description" type="28" handle="h7674cefdg3fb4g4f28g90d8g4aaf60a3aace" value="Obscuring everything close by with a veil of gloom, this dusky wand whispers secrets you are not sure you want to hear." />
+					<attribute id="DropSound" type="22" value="dea27d29-65a0-4bf1-b563-9dde8d32daf5" />
+					<attribute id="Flag" type="4" value="0" />
+					<attribute id="GroupID" type="5" value="0" />
+					<attribute id="Icon" type="22" value="Item_WPN_Wand_D_Shadow" />
+					<attribute id="IsSurfaceCloudInteractable" type="19" value="True" />
+					<attribute id="IsSurfaceInteractable" type="19" value="True" />
+					<attribute id="LevelName" type="22" value="" />
+					<attribute id="MapKey" type="22" value="7712ffb5-51cd-43b1-9887-9adf6149dff1" />
+					<attribute id="Name" type="23" value="WPN_Wand_D_Shadow" />
+					<attribute id="PhysicsTemplate" type="22" value="237beda2-d412-4e8f-b538-d01dda487f76" />
+					<attribute id="PickupSound" type="22" value="dbf85d5f-4c1e-43e0-a749-0b3f30e9b1ba" />
+					<attribute id="Scale" type="6" value="1" />
+					<attribute id="Stats" type="22" value="WPN_Wand_Shadow_E" />
+					<attribute id="Tooltip" type="1" value="2" />
+					<attribute id="Type" type="22" value="item" />
+					<attribute id="VisualTemplate" type="22" value="da64c4e3-62fc-4f23-8c37-102324d081d0" />
+					<attribute id="WalkThrough" type="19" value="True" />
+					<children>
+						<node id="AIBounds">
+							<attribute id="AIType" type="1" value="1" />
+							<attribute id="Height" type="6" value="0.134972" />
+							<attribute id="Max" type="12" value="0.0632051 0.0665716 0.124931" />
+							<attribute id="Min" type="12" value="-0.0423214 -0.0684001 -0.764315" />
+							<attribute id="Radius" type="6" value="0.2264" />
+						</node>
+						<node id="Equipment">
+							<children>
+								<node id="CustomBodyMaterials">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="CustomBodyMaterials">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="CustomBodyMaterials">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" type="22" value="" />
+								</node>
+							</children>
+						</node>
+						<node id="InventoryList" />
+						<node id="OnDestroyActions" />
+						<node id="OnUsePeaceActions" />
+						<node id="Scripts" />
+					</children>
+				</node>
+				<node id="GameObjects">
+					<attribute id="CanBeMoved" type="19" value="True" />
+					<attribute id="CanBePickedUp" type="19" value="True" />
+					<attribute id="CanSeeThrough" type="19" value="True" />
+					<attribute id="CanShootThrough" type="19" value="True" />
+					<attribute id="Description" type="28" handle="h39754dbfg9628g49dagb275ga453dd8987ee" value="Encrusted with clumps of dirt, this staff wafts the scent of earth and loam." />
+					<attribute id="DropSound" type="22" value="dea27d29-65a0-4bf1-b563-9dde8d32daf5" />
+					<attribute id="Flag" type="4" value="0" />
+					<attribute id="GroupID" type="5" value="0" />
+					<attribute id="Icon" type="22" value="Item_WPN_Wand_A_Earth" />
+					<attribute id="IsSurfaceCloudInteractable" type="19" value="True" />
+					<attribute id="IsSurfaceInteractable" type="19" value="True" />
+					<attribute id="LevelName" type="22" value="" />
+					<attribute id="MapKey" type="22" value="903fb31a-a7a5-4c36-ad74-af168fa736ab" />
+					<attribute id="Name" type="23" value="WPN_Wand_A_Earth" />
+					<attribute id="PhysicsTemplate" type="22" value="725f6436-bdc5-4823-9a5f-8a6e3e485ac9" />
+					<attribute id="PickupSound" type="22" value="dbf85d5f-4c1e-43e0-a749-0b3f30e9b1ba" />
+					<attribute id="Scale" type="6" value="1" />
+					<attribute id="Stats" type="22" value="WPN_Wand_Earth" />
+					<attribute id="Tooltip" type="1" value="2" />
+					<attribute id="Type" type="22" value="item" />
+					<attribute id="VisualTemplate" type="22" value="0f357cbf-5db8-4c48-9180-46c9b9cbcbf7" />
+					<attribute id="WalkThrough" type="19" value="True" />
+					<children>
+						<node id="AIBounds">
+							<attribute id="AIType" type="1" value="1" />
+							<attribute id="Height" type="6" value="0.134972" />
+							<attribute id="Max" type="12" value="0.0632051 0.0665716 0.124931" />
+							<attribute id="Min" type="12" value="-0.0423214 -0.0684001 -0.764315" />
+							<attribute id="Radius" type="6" value="0.2264" />
+						</node>
+						<node id="Equipment">
+							<children>
+								<node id="CustomBodyMaterials">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="CustomBodyMaterials">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="CustomBodyMaterials">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" type="22" value="" />
+								</node>
+							</children>
+						</node>
+						<node id="InventoryList" />
+						<node id="OnDestroyActions" />
+						<node id="OnUsePeaceActions" />
+						<node id="Scripts" />
+					</children>
+				</node>
+				<node id="GameObjects">
+					<attribute id="CanBeMoved" type="19" value="True" />
+					<attribute id="CanBePickedUp" type="19" value="True" />
+					<attribute id="CanSeeThrough" type="19" value="True" />
+					<attribute id="CanShootThrough" type="19" value="True" />
+					<attribute id="Description" type="28" handle="h22334a93g687cg460bg8293g90dc112556d6" value="Sparks fly from the tip of this wand when you hold it aloft, drawing down the power of the skies." />
+					<attribute id="DropSound" type="22" value="dea27d29-65a0-4bf1-b563-9dde8d32daf5" />
+					<attribute id="Flag" type="4" value="0" />
+					<attribute id="GroupID" type="5" value="0" />
+					<attribute id="Icon" type="22" value="Item_WPN_Wand_D_Air" />
+					<attribute id="IsSurfaceCloudInteractable" type="19" value="True" />
+					<attribute id="IsSurfaceInteractable" type="19" value="True" />
+					<attribute id="LevelName" type="22" value="" />
+					<attribute id="MapKey" type="22" value="9548a38c-b4bf-4658-822e-5a33d4354da8" />
+					<attribute id="Name" type="23" value="WPN_Wand_D_Air" />
+					<attribute id="PhysicsTemplate" type="22" value="237beda2-d412-4e8f-b538-d01dda487f76" />
+					<attribute id="PickupSound" type="22" value="dbf85d5f-4c1e-43e0-a749-0b3f30e9b1ba" />
+					<attribute id="Scale" type="6" value="1" />
+					<attribute id="Stats" type="22" value="WPN_Wand_Air_M" />
+					<attribute id="Tooltip" type="1" value="2" />
+					<attribute id="Type" type="22" value="item" />
+					<attribute id="VisualTemplate" type="22" value="da64c4e3-62fc-4f23-8c37-102324d081d0" />
+					<attribute id="WalkThrough" type="19" value="True" />
+					<children>
+						<node id="AIBounds">
+							<attribute id="AIType" type="1" value="1" />
+							<attribute id="Height" type="6" value="0.134972" />
+							<attribute id="Max" type="12" value="0.0632051 0.0665716 0.124931" />
+							<attribute id="Min" type="12" value="-0.0423214 -0.0684001 -0.764315" />
+							<attribute id="Radius" type="6" value="0.2264" />
+						</node>
+						<node id="Equipment">
+							<children>
+								<node id="CustomBodyMaterials">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="CustomBodyMaterials">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="CustomBodyMaterials">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" type="22" value="" />
+								</node>
+							</children>
+						</node>
+						<node id="InventoryList" />
+						<node id="OnDestroyActions" />
+						<node id="OnUsePeaceActions" />
+						<node id="Scripts" />
+					</children>
+				</node>
+				<node id="GameObjects">
+					<attribute id="CanBeMoved" type="19" value="True" />
+					<attribute id="CanBePickedUp" type="19" value="True" />
+					<attribute id="CanSeeThrough" type="19" value="True" />
+					<attribute id="CanShootThrough" type="19" value="True" />
+					<attribute id="Description" type="28" handle="hfdec5759g8ad3g4718g87dcg4b8b11a82804" value="Crackling with barely-contained energy, this wand promises all the power of a tempest." />
+					<attribute id="DropSound" type="22" value="dea27d29-65a0-4bf1-b563-9dde8d32daf5" />
+					<attribute id="Flag" type="4" value="0" />
+					<attribute id="GroupID" type="5" value="0" />
+					<attribute id="Icon" type="22" value="Item_WPN_Wand_B_Air" />
+					<attribute id="IsSurfaceCloudInteractable" type="19" value="True" />
+					<attribute id="IsSurfaceInteractable" type="19" value="True" />
+					<attribute id="LevelName" type="22" value="" />
+					<attribute id="MapKey" type="22" value="b014d96c-45ac-46ec-b37e-a995497c4faa" />
+					<attribute id="Name" type="23" value="WPN_Wand_B_Air" />
+					<attribute id="PhysicsTemplate" type="22" value="94982eb0-2090-489c-91bd-4cee5fab5f43" />
+					<attribute id="PickupSound" type="22" value="dbf85d5f-4c1e-43e0-a749-0b3f30e9b1ba" />
+					<attribute id="Scale" type="6" value="1" />
+					<attribute id="Stats" type="22" value="WPN_Wand_Air_E" />
+					<attribute id="Tooltip" type="1" value="2" />
+					<attribute id="Type" type="22" value="item" />
+					<attribute id="VisualTemplate" type="22" value="4bf51d8f-1ab2-4ed7-b671-bfc4faa0d910" />
+					<attribute id="WalkThrough" type="19" value="True" />
+					<children>
+						<node id="AIBounds">
+							<attribute id="AIType" type="1" value="1" />
+							<attribute id="Height" type="6" value="0.134972" />
+							<attribute id="Max" type="12" value="0.0632051 0.0665716 0.124931" />
+							<attribute id="Min" type="12" value="-0.0423214 -0.0684001 -0.764315" />
+							<attribute id="Radius" type="6" value="0.2264" />
+						</node>
+						<node id="Equipment">
+							<children>
+								<node id="CustomBodyMaterials">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="CustomBodyMaterials">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="CustomBodyMaterials">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" type="22" value="" />
+								</node>
+							</children>
+						</node>
+						<node id="InventoryList" />
+						<node id="OnDestroyActions" />
+						<node id="OnUsePeaceActions" />
+						<node id="Scripts" />
+					</children>
+				</node>
+				<node id="GameObjects">
+					<attribute id="CanBeMoved" type="19" value="True" />
+					<attribute id="CanBePickedUp" type="19" value="True" />
+					<attribute id="CanSeeThrough" type="19" value="True" />
+					<attribute id="CanShootThrough" type="19" value="True" />
+					<attribute id="Description" type="28" handle="h4716f71cgd824g4837gac8fg5375400a5a8e" value="This wand whistles delicately if you wave it in the air-- the song of one at home with the wind." />
+					<attribute id="DropSound" type="22" value="dea27d29-65a0-4bf1-b563-9dde8d32daf5" />
+					<attribute id="Flag" type="4" value="0" />
+					<attribute id="GroupID" type="5" value="0" />
+					<attribute id="Icon" type="22" value="Item_WPN_Wand_A_Air" />
+					<attribute id="IsSurfaceCloudInteractable" type="19" value="True" />
+					<attribute id="IsSurfaceInteractable" type="19" value="True" />
+					<attribute id="LevelName" type="22" value="" />
+					<attribute id="MapKey" type="22" value="c0bbee60-a0a0-49e9-a618-83925e3d6ca0" />
+					<attribute id="Name" type="23" value="WPN_Wand_A_Air" />
+					<attribute id="PhysicsTemplate" type="22" value="725f6436-bdc5-4823-9a5f-8a6e3e485ac9" />
+					<attribute id="PickupSound" type="22" value="dbf85d5f-4c1e-43e0-a749-0b3f30e9b1ba" />
+					<attribute id="Scale" type="6" value="1" />
+					<attribute id="Stats" type="22" value="WPN_Wand_Air" />
+					<attribute id="Tooltip" type="1" value="2" />
+					<attribute id="Type" type="22" value="item" />
+					<attribute id="VisualTemplate" type="22" value="0f357cbf-5db8-4c48-9180-46c9b9cbcbf7" />
+					<attribute id="WalkThrough" type="19" value="True" />
+					<children>
+						<node id="AIBounds">
+							<attribute id="AIType" type="1" value="1" />
+							<attribute id="Height" type="6" value="0.134972" />
+							<attribute id="Max" type="12" value="0.0632051 0.0665716 0.124931" />
+							<attribute id="Min" type="12" value="-0.0423214 -0.0684001 -0.764315" />
+							<attribute id="Radius" type="6" value="0.2264" />
+						</node>
+						<node id="Equipment">
+							<children>
+								<node id="CustomBodyMaterials">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="CustomBodyMaterials">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="CustomBodyMaterials">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" type="22" value="" />
+								</node>
+							</children>
+						</node>
+						<node id="InventoryList" />
+						<node id="OnDestroyActions" />
+						<node id="OnUsePeaceActions" />
+						<node id="Scripts" />
+					</children>
+				</node>
+				<node id="GameObjects">
+					<attribute id="CanBeMoved" type="19" value="True" />
+					<attribute id="CanBePickedUp" type="19" value="True" />
+					<attribute id="CanSeeThrough" type="19" value="True" />
+					<attribute id="CanShootThrough" type="19" value="True" />
+					<attribute id="Description" type="28" handle="h3619719cge611g494fg929ag052f2842bad3" value="This clammy wand feels soggy in your grip. Put it to use, however, and witness as floods of magic pour forth from its tip." />
+					<attribute id="DropSound" type="22" value="dea27d29-65a0-4bf1-b563-9dde8d32daf5" />
+					<attribute id="Flag" type="4" value="0" />
+					<attribute id="GroupID" type="5" value="0" />
+					<attribute id="Icon" type="22" value="Item_WPN_Wand_B_Water" />
+					<attribute id="IsSurfaceCloudInteractable" type="19" value="True" />
+					<attribute id="IsSurfaceInteractable" type="19" value="True" />
+					<attribute id="LevelName" type="22" value="" />
+					<attribute id="MapKey" type="22" value="d5d1f90c-37be-426f-9246-1641d4b06aca" />
+					<attribute id="Name" type="23" value="WPN_Wand_B_Water" />
+					<attribute id="PhysicsTemplate" type="22" value="94982eb0-2090-489c-91bd-4cee5fab5f43" />
+					<attribute id="PickupSound" type="22" value="dbf85d5f-4c1e-43e0-a749-0b3f30e9b1ba" />
+					<attribute id="Scale" type="6" value="1" />
+					<attribute id="Stats" type="22" value="WPN_Wand_Water_E" />
+					<attribute id="Tooltip" type="1" value="2" />
+					<attribute id="Type" type="22" value="item" />
+					<attribute id="VisualTemplate" type="22" value="4bf51d8f-1ab2-4ed7-b671-bfc4faa0d910" />
+					<attribute id="WalkThrough" type="19" value="True" />
+					<children>
+						<node id="AIBounds">
+							<attribute id="AIType" type="1" value="1" />
+							<attribute id="Height" type="6" value="0.134972" />
+							<attribute id="Max" type="12" value="0.0632051 0.0665716 0.124931" />
+							<attribute id="Min" type="12" value="-0.0423214 -0.0684001 -0.764315" />
+							<attribute id="Radius" type="6" value="0.2264" />
+						</node>
+						<node id="Equipment">
+							<children>
+								<node id="CustomBodyMaterials">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="CustomBodyMaterials">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="CustomBodyMaterials">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" type="22" value="" />
+								</node>
+							</children>
+						</node>
+						<node id="InventoryList" />
+						<node id="OnDestroyActions" />
+						<node id="OnUsePeaceActions" />
+						<node id="Scripts" />
+					</children>
+				</node>
+				<node id="GameObjects">
+					<attribute id="CanBeMoved" type="19" value="True" />
+					<attribute id="CanBePickedUp" type="19" value="True" />
+					<attribute id="CanSeeThrough" type="19" value="True" />
+					<attribute id="CanShootThrough" type="19" value="True" />
+					<attribute id="Description" type="28" handle="hc9a618ebg967ag4e44g948dg2bdd74ba3ce9" value="A twisted and twined wand carved from unusual wood topped with gleaming amber. Within the amber, a single ant strives eternally for freedom." />
+					<attribute id="DropSound" type="22" value="dea27d29-65a0-4bf1-b563-9dde8d32daf5" />
+					<attribute id="Flag" type="4" value="0" />
+					<attribute id="GroupID" type="5" value="0" />
+					<attribute id="Icon" type="22" value="Item_WPN_Wand_D_Earth" />
+					<attribute id="IsSurfaceCloudInteractable" type="19" value="True" />
+					<attribute id="IsSurfaceInteractable" type="19" value="True" />
+					<attribute id="LevelName" type="22" value="" />
+					<attribute id="MapKey" type="22" value="d8511a66-8e9f-4487-bed2-9313cfc9d336" />
+					<attribute id="Name" type="23" value="WPN_Wand_D_Earth" />
+					<attribute id="PhysicsTemplate" type="22" value="237beda2-d412-4e8f-b538-d01dda487f76" />
+					<attribute id="PickupSound" type="22" value="dbf85d5f-4c1e-43e0-a749-0b3f30e9b1ba" />
+					<attribute id="Scale" type="6" value="1" />
+					<attribute id="Stats" type="22" value="WPN_Wand_Earth_M" />
+					<attribute id="Tooltip" type="1" value="2" />
+					<attribute id="Type" type="22" value="item" />
+					<attribute id="VisualTemplate" type="22" value="da64c4e3-62fc-4f23-8c37-102324d081d0" />
+					<attribute id="WalkThrough" type="19" value="True" />
+					<children>
+						<node id="AIBounds">
+							<attribute id="AIType" type="1" value="1" />
+							<attribute id="Height" type="6" value="0.134972" />
+							<attribute id="Max" type="12" value="0.0632051 0.0665716 0.124931" />
+							<attribute id="Min" type="12" value="-0.0423214 -0.0684001 -0.764315" />
+							<attribute id="Radius" type="6" value="0.2264" />
+						</node>
+						<node id="Equipment">
+							<children>
+								<node id="CustomBodyMaterials">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="CustomBodyMaterials">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="CustomBodyMaterials">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" type="22" value="" />
+								</node>
+							</children>
+						</node>
+						<node id="InventoryList" />
+						<node id="OnDestroyActions" />
+						<node id="OnUsePeaceActions" />
+						<node id="Scripts" />
+					</children>
+				</node>
+				<node id="GameObjects">
+					<attribute id="CanBeMoved" type="19" value="True" />
+					<attribute id="CanBePickedUp" type="19" value="True" />
+					<attribute id="CanSeeThrough" type="19" value="True" />
+					<attribute id="CanShootThrough" type="19" value="True" />
+					<attribute id="Description" type="28" handle="h76b74863gaa4bg4581gbeb8g2bba122cf611" value="Water drips constantly from the end of this wand, a steady trickle that draws blossoms and shrubs forth from the path you walk." />
+					<attribute id="DropSound" type="22" value="dea27d29-65a0-4bf1-b563-9dde8d32daf5" />
+					<attribute id="Flag" type="4" value="0" />
+					<attribute id="GroupID" type="5" value="0" />
+					<attribute id="Icon" type="22" value="Item_WPN_Wand_A_Water" />
+					<attribute id="IsSurfaceCloudInteractable" type="19" value="True" />
+					<attribute id="IsSurfaceInteractable" type="19" value="True" />
+					<attribute id="LevelName" type="22" value="" />
+					<attribute id="MapKey" type="22" value="e14d8b79-4f75-41d2-aa0f-836d04d0c0d2" />
+					<attribute id="Name" type="23" value="WPN_Wand_A_Water" />
+					<attribute id="PhysicsTemplate" type="22" value="725f6436-bdc5-4823-9a5f-8a6e3e485ac9" />
+					<attribute id="PickupSound" type="22" value="dbf85d5f-4c1e-43e0-a749-0b3f30e9b1ba" />
+					<attribute id="Scale" type="6" value="1" />
+					<attribute id="Stats" type="22" value="WPN_Wand_Water" />
+					<attribute id="Tooltip" type="1" value="2" />
+					<attribute id="Type" type="22" value="item" />
+					<attribute id="VisualTemplate" type="22" value="0f357cbf-5db8-4c48-9180-46c9b9cbcbf7" />
+					<attribute id="WalkThrough" type="19" value="True" />
+					<children>
+						<node id="AIBounds">
+							<attribute id="AIType" type="1" value="1" />
+							<attribute id="Height" type="6" value="0.134972" />
+							<attribute id="Max" type="12" value="0.0632051 0.0665716 0.124931" />
+							<attribute id="Min" type="12" value="-0.0423214 -0.0684001 -0.764315" />
+							<attribute id="Radius" type="6" value="0.2264" />
+						</node>
+						<node id="Equipment">
+							<children>
+								<node id="CustomBodyMaterials">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="CustomBodyMaterials">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="CustomBodyMaterials">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" type="22" value="" />
+								</node>
+							</children>
+						</node>
+						<node id="InventoryList" />
+						<node id="OnDestroyActions" />
+						<node id="OnUsePeaceActions" />
+						<node id="Scripts" />
+					</children>
+				</node>
+				<node id="GameObjects">
+					<attribute id="CanBeMoved" type="19" value="True" />
+					<attribute id="CanBePickedUp" type="19" value="True" />
+					<attribute id="CanSeeThrough" type="19" value="True" />
+					<attribute id="CanShootThrough" type="19" value="True" />
+					<attribute id="Description" type="28" handle="h1c8dda5bg7a7cg496eg8c54g8b009c998264" value="A glowing wand wreathed in phantom flame; it rests warm in your hand, as if its core were made of glowing coals." />
+					<attribute id="DropSound" type="22" value="dea27d29-65a0-4bf1-b563-9dde8d32daf5" />
+					<attribute id="Flag" type="4" value="0" />
+					<attribute id="GroupID" type="5" value="0" />
+					<attribute id="Icon" type="22" value="Item_WPN_Wand_A_Fire" />
+					<attribute id="IsSurfaceCloudInteractable" type="19" value="True" />
+					<attribute id="IsSurfaceInteractable" type="19" value="True" />
+					<attribute id="LevelName" type="22" value="" />
+					<attribute id="MapKey" type="22" value="f2badec8-4bab-4973-8dcc-4b12e9b243de" />
+					<attribute id="Name" type="23" value="WPN_Wand_A_Fire" />
+					<attribute id="PhysicsTemplate" type="22" value="725f6436-bdc5-4823-9a5f-8a6e3e485ac9" />
+					<attribute id="PickupSound" type="22" value="dbf85d5f-4c1e-43e0-a749-0b3f30e9b1ba" />
+					<attribute id="Scale" type="6" value="1" />
+					<attribute id="Stats" type="22" value="WPN_Wand_Fire" />
+					<attribute id="Tooltip" type="1" value="2" />
+					<attribute id="Type" type="22" value="item" />
+					<attribute id="VisualTemplate" type="22" value="0f357cbf-5db8-4c48-9180-46c9b9cbcbf7" />
+					<attribute id="WalkThrough" type="19" value="True" />
+					<children>
+						<node id="AIBounds">
+							<attribute id="AIType" type="1" value="1" />
+							<attribute id="Height" type="6" value="0.134972" />
+							<attribute id="Max" type="12" value="0.0632051 0.0665716 0.124931" />
+							<attribute id="Min" type="12" value="-0.0423214 -0.0684001 -0.764315" />
+							<attribute id="Radius" type="6" value="0.2264" />
+						</node>
+						<node id="Equipment">
+							<children>
+								<node id="CustomBodyMaterials">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="CustomBodyMaterials">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="CustomBodyMaterials">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" type="22" value="" />
+								</node>
+							</children>
+						</node>
+						<node id="InventoryList" />
+						<node id="OnDestroyActions" />
+						<node id="OnUsePeaceActions" />
+						<node id="Scripts" />
+					</children>
+				</node>
+				<node id="GameObjects">
+					<attribute id="CanBeMoved" type="19" value="True" />
+					<attribute id="CanBePickedUp" type="19" value="True" />
+					<attribute id="CanSeeThrough" type="19" value="True" />
+					<attribute id="CanShootThrough" type="19" value="True" />
+					<attribute id="Description" type="28" handle="hf7348c39g12e5g4aadga145gadafdd40a391" value="Freezing all it touches save your own skin, this wand could be useful for pulling pranks around puddles." />
+					<attribute id="DropSound" type="22" value="dea27d29-65a0-4bf1-b563-9dde8d32daf5" />
+					<attribute id="Flag" type="4" value="0" />
+					<attribute id="GroupID" type="5" value="0" />
+					<attribute id="Icon" type="22" value="Item_WPN_Wand_D_Water" />
+					<attribute id="IsSurfaceCloudInteractable" type="19" value="True" />
+					<attribute id="IsSurfaceInteractable" type="19" value="True" />
+					<attribute id="LevelName" type="22" value="" />
+					<attribute id="MapKey" type="22" value="f910a1de-93f5-40da-962a-9f572ec5f0ff" />
+					<attribute id="Name" type="23" value="WPN_Wand_D_Water" />
+					<attribute id="PhysicsTemplate" type="22" value="237beda2-d412-4e8f-b538-d01dda487f76" />
+					<attribute id="PickupSound" type="22" value="dbf85d5f-4c1e-43e0-a749-0b3f30e9b1ba" />
+					<attribute id="Scale" type="6" value="1" />
+					<attribute id="Stats" type="22" value="WPN_Wand_Water_M" />
+					<attribute id="Tooltip" type="1" value="2" />
+					<attribute id="Type" type="22" value="item" />
+					<attribute id="VisualTemplate" type="22" value="da64c4e3-62fc-4f23-8c37-102324d081d0" />
+					<attribute id="WalkThrough" type="19" value="True" />
+					<children>
+						<node id="AIBounds">
+							<attribute id="AIType" type="1" value="1" />
+							<attribute id="Height" type="6" value="0.134972" />
+							<attribute id="Max" type="12" value="0.0632051 0.0665716 0.124931" />
+							<attribute id="Min" type="12" value="-0.0423214 -0.0684001 -0.764315" />
+							<attribute id="Radius" type="6" value="0.2264" />
+						</node>
+						<node id="Equipment">
+							<children>
+								<node id="CustomBodyMaterials">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="CustomBodyMaterials">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="CustomBodyMaterials">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" type="22" value="" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" type="22" value="" />
+								</node>
+							</children>
+						</node>
+						<node id="InventoryList" />
+						<node id="OnDestroyActions" />
+						<node id="OnUsePeaceActions" />
+						<node id="Scripts" />
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

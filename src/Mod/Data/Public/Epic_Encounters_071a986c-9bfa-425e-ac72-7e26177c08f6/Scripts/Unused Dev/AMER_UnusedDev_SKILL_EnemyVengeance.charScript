@@ -1,0 +1,72 @@
+#TEMPLATE "_SKILL_Base" : AMER_SKILL_Vengeance
+
+INIT
+CHARACTER:__Me
+// [GLOBAL_VARS]
+INT:%AMER_SKILL_Vengeance_EnemiesInRange
+EXTERN FLOAT:%AMER_SKILL_Vengeance_CheckEnemiesRadius = 9.9
+// [~GLOBAL_VARS]
+
+EVENTS
+
+// [EVENTS]
+// [~EVENTS]
+
+// Calculate the priority of the skill
+EVENT CalculateScore_AMER_SKILL_Vengeance
+VARS
+	// [CALC_VARS]
+	FLOAT:_Score
+	// [~CALC_VARS]
+ON
+	OnFunction("CalculateScore_AMER_SKILL_Vengeance")
+ACTIONS	
+	// [CALC_ACTIONS_PRE]
+	Set(_Score, 0.0)
+	// [~CALC_ACTIONS_PRE]
+	// [CALC_ACTIONS]
+	IF "!c1"
+	    CharacterHasStatus(__Me, CONSUME, AMER_Vengeance)
+	THEN
+		//Check if anyone is in range to be affected by the initial blast. Need to check
+		//with an iterator to stipulate living nonsummons.
+		Set(%AMER_SKILL_Vengeance_EnemiesInRange, INT:0)
+		IterateCharactersNear(__Me, %AMER_SKILL_Vengeance_CheckEnemiesRadius, "AMER_SKILL_Vengeance_CheckForEnemies")
+	    
+		IF "c1"
+			IsEqual(%AMER_SKILL_Vengeance_EnemiesInRange, INT:1)
+		THEN
+		    Set(%SkillTargetChar_AMER_SKILL_Vengeance, __Me)
+		    Add(%ActionScore_AMER_SKILL_Vengeance, _Score)
+		ENDIF
+	ENDIF
+	// [~CALC_ACTIONS]
+	
+	
+EVENT AMER_SKILL_Vengeance_CheckForEnemies
+VARS
+	CHARACTER:_Char
+ON
+	OnIterateCharacter(_Char, "AMER_SKILL_Vengeance_CheckForEnemies")
+ACTIONS
+	IF "c1"
+		IsEqual(%AMER_SKILL_Vengeance_EnemiesInRange, INT:0)
+	THEN
+		IF "c1"
+			CharacterIsEnemy(__Me, _Char)
+		THEN
+			IF "!c1"
+				CharacterIsDead(_Char)
+			THEN
+				IF "!c1"
+					CharacterIsSummon(_Char)
+				THEN
+					Set(%AMER_SKILL_Vengeance_EnemiesInRange, INT:1)
+				ENDIF
+			ENDIF
+		ENDIF
+	ENDIF
+
+	
+
+	

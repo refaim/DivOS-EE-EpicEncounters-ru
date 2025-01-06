@@ -1,0 +1,106 @@
+//===============================================//
+//                                               //
+//        F R A G M E N T   O F   F E A R        //
+//                                               //
+//     Written by Matteo "Ameranth" T. (2016)    //
+//===============================================//
+INIT
+CHARACTER:__Me
+CHARACTER:%AMER_MelchiorFragment_Perfection = null
+INT:%AMER_FragmentOfFear_Combat = 0
+INT:%AMER_FragmentOfFear_Handle
+	
+EVENTS
+EVENT FragmentOfFearInit
+ON
+	OnInit()
+ACTIONS
+	CharacterApplyStatus(__Me, ETHEREAL_SOLES, -1, 1)
+	StartTimer("AMER_FragmentOfFear_PlayEffectDelay", 0.25, 0)
+	StartTimer("AMER_FragmentOfFear_RemoveSpawnEffect", 3.5, 0)
+	
+	
+	
+EVENT FragmentOfFearPlayEffectDelay
+ON
+	OnTimer("AMER_FragmentOfFear_PlayEffectDelay")
+ACTIONS
+	CharacterPlayLoopEffect(%AMER_FragmentOfFear_Handle, __Me, "FX_Skills_WitchCraft_Summon_Prepare_A")
+	
+	
+EVENT FragmentOfFearRemoveSpawnEffect
+ON
+	OnTimer("AMER_FragmentOfFear_RemoveSpawnEffect")
+ACTIONS
+	StopLoopEffect(%AMER_FragmentOfFear_Handle)
+	
+	
+	
+EVENT FragmentOfFearCombatEnded
+ON
+	OnCombatEnded()
+ACTIONS
+	IF "!c1"
+		CharacterIsDead(%AMER_MelchiorFragment_Perfection)
+	THEN
+		IF "!c1"
+			CharacterIsDead(__Me)
+		THEN
+			PlayEffectAt(__Me, "FX_Skills_Air_NetherSwap_Disappear_A")
+			CharacterDestroy(__Me)
+		ENDIF
+	ENDIF
+	
+	
+	
+EVENT FragmentOfFearFearBomb
+VARS
+	CHARACTER:_Char
+ON
+	OnIterateCharacter(_Char, "AMER_FragmentOfFear_FearBomb")
+ACTIONS
+	IF "c1"
+		CharacterIsEnemy(__Me, _Char)
+	THEN
+		IF "!c1"
+			CharacterIsDead(_Char)
+		THEN
+			CharacterApplyStatus(_Char, FEAR, 1)
+		ENDIF
+	ENDIF
+	
+	
+	
+EVENT FragmentOfFearDie
+//Fear-bomb when I die
+VARS
+//=========================//
+	FLOAT:_FearRadius = 10.0
+//=========================//
+ON
+	OnDie(__Me, _, _, _)
+ACTIONS
+	PlayEffectAt(__Me, "FX_Skills_WitchCraft_GrenadeTerror_Impact_A")
+	IterateCharactersNear(__Me, _FearRadius, "AMER_FragmentOfFear_FearBomb")
+	
+	
+	
+//===================BEHAVIOR====================//
+BEHAVIOUR
+REACTION FragmentOfFearEngageCombat, 20000
+USAGE ALL
+VARS
+	FLOAT3:_Pos
+CHECK "c1"
+	IsEqual(%AMER_FragmentOfFear_Combat, INT:0)
+ACTIONS
+	GetPosition(__Me, _Pos)
+	TeleportTo(__Me, %AMER_MelchiorFragment_Perfection, 1)
+	Sleep(0.05)
+	TeleportTo(__Me, _Pos, 1)
+	Set(%AMER_FragmentOfFear_Combat, INT:1)
+//===============================================//
+//                                               //
+//        F R A G M E N T   O F   F E A R        //
+//                                               //
+//===============================================//

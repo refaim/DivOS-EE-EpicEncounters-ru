@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='utf-8'?>
+<save>
+	<version major="2" minor="0" revision="0" build="0" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="root">
+			<children>
+				<node id="GameObjects">
+					<attribute id="Alignment" type="22" value="Good NPC" />
+					<attribute id="BloodSurfaceType" type="1" value="4" />
+					<attribute id="DisplayName" type="28" handle="h015d4a33g0a97g4b32g8479gacacfffd48fc" value="Паук" />
+					<attribute id="Equipment" type="22" value="Summon_Earth_Spider" />
+					<attribute id="ExplodedResourceID" type="22" value="ff728129-419a-4455-ae4c-766c1f22f2a1" />
+					<attribute id="ExplosionFX" type="22" value="FX_GP_CorpseExplosion_Human_A" />
+					<attribute id="Flag" type="4" value="0" />
+					<attribute id="Gender" type="1" value="1" />
+					<attribute id="GroupID" type="5" value="0" />
+					<attribute id="HitFX" type="22" value="FX_GP_Hit_ShadowBlood_A_Large" />
+					<attribute id="Icon" type="22" value="Portrait_Animals_Spider_B" />
+					<attribute id="LevelName" type="22" value="" />
+					<attribute id="MapKey" type="22" value="6d16a931-5609-4555-9eea-b936ca16c563" />
+					<attribute id="Name" type="23" value="Summons_Earth_Spider" />
+					<attribute id="PhysicsTemplate" type="22" value="b3a580d9-8ded-4f4b-bc33-e00896f6ab45" />
+					<attribute id="Random" type="24" value="9223372036854775808" />
+					<attribute id="RunSpeed" type="6" value="5" />
+					<attribute id="Scale" type="6" value="0.7" />
+					<attribute id="SkillSet" type="22" value="Summon_Spider" />
+					<attribute id="SoundSwitch" type="22" value="Spider_Reg" />
+					<attribute id="Speaker" type="22" value="GEN_Animal_Spider_M" />
+					<attribute id="Stats" type="22" value="Summon_Earth_Spider" />
+					<attribute id="Type" type="22" value="character" />
+					<attribute id="VisualTemplate" type="22" value="508fdf6c-7223-4d28-b119-4362ddfca8b7" />
+					<attribute id="WalkSpeed" type="6" value="3" />
+					<children>
+						<node id="AIBounds">
+							<attribute id="AIType" type="1" value="2" />
+							<attribute id="Height" type="6" value="1.8" />
+							<attribute id="Max" type="12" value="1.1547 2.1547 1.1547" />
+							<attribute id="Min" type="12" value="-1.1547 -0.154701 -1.1547" />
+							<attribute id="Radius" type="6" value="1" />
+						</node>
+						<node id="OnDeathActions" />
+						<node id="Scripts">
+							<children>
+								<node id="Script">
+									<attribute id="UUID" type="22" value="5bc80992-a7f6-4da6-83e2-3d276384d8f7" />
+									<children>
+										<node id="Parameters">
+											<children>
+												<node id="Parameter">
+													<attribute id="MapKey" type="22" value="HardcoreOnly" />
+													<attribute id="Type" type="4" value="1" />
+													<attribute id="Value" type="23" value="0" />
+												</node>
+												<node id="Parameter">
+													<attribute id="MapKey" type="22" value="SayBlindedText" />
+													<attribute id="Type" type="4" value="1" />
+													<attribute id="Value" type="23" value="1" />
+												</node>
+											</children>
+										</node>
+									</children>
+								</node>
+								<node id="Script">
+									<attribute id="UUID" type="22" value="5f6440b3-51dd-42ab-9432-f9a94e4af403" />
+									<children>
+										<node id="Parameters">
+											<children>
+												<node id="Parameter">
+													<attribute id="MapKey" type="22" value="HardcoreOnly" />
+													<attribute id="Type" type="4" value="1" />
+													<attribute id="Value" type="23" value="0" />
+												</node>
+											</children>
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+						<node id="Treasures">
+							<attribute id="TreasureItem" type="22" value="Empty" />
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

@@ -1,0 +1,49 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+IF
+CharacterEvent(_Char, "AMER_LockAbilities")
+THEN
+CharacterLockAbility(_Char, "Pickpocket");
+CharacterLockAbility(_Char, "Lockpicking");
+CharacterLockAbility(_Char, "Telekinesis");
+
+
+
+IF
+CharacterTraitChanged(_Char, "Blunt")
+THEN
+Proc_EqualizeTraitBlunt(_Char);
+
+IF
+CharacterTraitChanged(_Char, "Considerate")
+THEN
+Proc_EqualizeTraitConsiderate(_Char);
+
+
+
+PROC
+Proc_EqualizeTraitBlunt((CHARACTER)_Char)
+AND
+CharacterHasTrait(_Char, "Blunt", _Bool)
+AND
+_Bool == 1
+THEN
+CharacterAddTrait(_Char, "Considerate", 1);
+Proc_EqualizeTraitBlunt(_Char);
+
+PROC
+Proc_EqualizeTraitConsiderate((CHARACTER)_Char)
+AND
+CharacterHasTrait(_Char, "Considerate", _Bool)
+AND
+_Bool == 1
+THEN
+CharacterAddTrait(_Char, "Blunt", 1);
+Proc_EqualizeTraitConsiderate(_Char);
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "__Start"

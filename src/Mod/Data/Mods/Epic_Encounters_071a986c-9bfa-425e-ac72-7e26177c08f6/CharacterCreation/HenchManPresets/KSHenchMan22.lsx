@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<save>
+    <header version="2" time="1430149344" />
+    <version major="1" minor="3" revision="1" build="3" />
+    <region id="CharacterCreationClass">
+        <node id="root">
+            <attribute id="Armour" value="" type="22" />
+            <attribute id="Boots" value="" type="22" />
+            <attribute id="ClassDescription" value="A young, willful archer; short and nimble" handle="ha955ddebg6cc9g4a13g89b7gff3b671fc580" type="28" />
+            <attribute id="ClassLongDescription" value="A young woman with nearly white hair, Arya Southgard is short and slender, but strong and willfull. She comes from a small village in the north and travelled south to find something to do besides tilling the fields. She was trained in basic swordplay by her father and is an adept archer. She has a younger sister (Tiril Southgard), who has stayed at home in the north, and Arya vows to return to her with any earned treasure after she has sated her lust for adventure." handle="h8b3188e2gde12g493ag9c33g76b412c0aff5" type="28" />
+            <attribute id="ClassName" value="Rogue" handle="h82f88f08gba5bg4164g9821gf53ed0fb69ff" type="28" />
+            <attribute id="ClassType" value="Rogue" type="22" />
+            <attribute id="ExtraEquipmentSet" value="" type="22" />
+            <attribute id="Gloves" value="" type="22" />
+            <attribute id="Leggings" value="" type="22" />
+            <attribute id="SkillSet" value="" type="22" />
+            <attribute id="Voice" value="0" type="5" />
+            <children>
+                <node id="AbilityChanges">
+                    <children>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="RogueLore" type="23" />
+                            <attribute id="AmountIncreased" value="1" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="DualWielding" type="23" />
+                            <attribute id="AmountIncreased" value="1" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="Bow" type="23" />
+                            <attribute id="AmountIncreased" value="2" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="Pickpocket" type="23" />
+                            <attribute id="AmountIncreased" value="1" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="Lockpicking" type="23" />
+                            <attribute id="AmountIncreased" value="1" type="4" />
+                        </node>
+                    </children>
+                </node>
+                <node id="AttributeChanges">
+                    <children>
+                        <node id="AttributeChange">
+                            <attribute id="AmountIncreased" value="4" type="4" />
+                            <attribute id="Attribute" value="DEX" type="23" />
+                        </node>
+                        <node id="AttributeChange">
+                            <attribute id="AmountIncreased" value="2" type="4" />
+                            <attribute id="Attribute" value="SPD" type="23" />
+                        </node>
+                    </children>
+                </node>
+                <node id="HenchManData">
+                    <attribute id="HairColor" value="8" type="5" />
+                    <attribute id="HairType" value="4" type="5" />
+                    <attribute id="HeadType" value="7" type="5" />
+                    <attribute id="ID" value="d359ac99-cea4-483d-bf50-653a2c6129de" type="22" />
+                    <attribute id="Icon" value="12" type="5" />
+                    <attribute id="IsMale" value="0" type="19" />
+                    <attribute id="Level" value="3" type="4" />
+                    <attribute id="Name" value="Arya Southgard" type="30" />
+                    <attribute id="Race" value="0" type="5" />
+                    <attribute id="SkinColor" value="2" type="5" />
+                    <children>
+                        <node id="Skills">
+                            <attribute id="Object" value="Shout_InvisibilitySelfRogue" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="Target_Lacerate" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="Shout_FastTrack" type="22" />
+                        </node>
+                    </children>
+                </node>
+                <node id="TalentsAdded">
+                    <children>
+                        <node id="TalentAdded">
+                            <attribute id="Talent" value="LightStep" type="23" />
+                        </node>
+                        <node id="TalentAdded">
+                            <attribute id="Talent" value="WhatARush" type="23" />
+                        </node>
+                        <node id="TalentAdded">
+                            <attribute id="Talent" value="RangerLoreArrowRecover" type="23" />
+                        </node>
+                    </children>
+                </node>
+            </children>
+        </node>
+    </region>
+</save>
