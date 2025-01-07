@@ -30,7 +30,7 @@ robocopy /S %SRC_DIR%\Mod\Data %MOD_BUILD_DIR% >nul
 
 if %WITH_ADDITIONAL_CRAFTING_RECIPES% == yes (
     echo Incorporating additional crafting recipes...
-    xcopy /exclude:readme.txt /y %SRC_DIR%\CustomItemCombos\*.* %MOD_BUILD_DIR%\Public\Epic_Encounters_071a986c-9bfa-425e-ac72-7e26177c08f6\Stats >nul
+    xcopy /exclude:%SRC_DIR%\CustomItemCombos\readme.txt /y %SRC_DIR%\CustomItemCombos\*.* %MOD_BUILD_DIR%\Public\Epic_Encounters_071a986c-9bfa-425e-ac72-7e26177c08f6\Stats >nul
 )
 
 echo Compressing localization XML...
