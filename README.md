@@ -2,7 +2,7 @@
 
 Перевод основан на [исправленном официальном переводе Divinity: Original Sin - Enhanced Edition](https://github.com/EugVV/DivOS-EE-ru).
 
-Версия перевода: 0.67 (9 января 2025).
+Версия перевода: 0.68 (9 января 2025).
 
 [Тема на форуме Arcane Coast для обсуждения перевода](https://arcanecoast.ru/forum/viewtopic.php?f=69&t=1379&sid=e069e16e72638deced25d7a78b6e0b9a).
 
