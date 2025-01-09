@@ -27,14 +27,14 @@
 					<attribute id="UUID" type="22" value="Lethal" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="головоломства" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="меткости" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="of Headstriking" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Heartseeker's" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Сердцебоя" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
@@ -55,7 +55,7 @@
 					<attribute id="UUID" type="22" value="of Eternity" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Непреклонн." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Неумолим." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
@@ -76,7 +76,7 @@
 					<attribute id="UUID" type="22" value="of the Stone" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Прочн." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Неистребим." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
@@ -90,7 +90,7 @@
 					<attribute id="UUID" type="22" value="of the Jaguar" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Набрасывающ." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Стремительн." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
@@ -132,49 +132,49 @@
 					<attribute id="UUID" type="22" value="of the Ox" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Избит." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Сокрушающ." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="Thrashing" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="искажения" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="увечья" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="of Mangling" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Бинокулярн." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Всевидящ." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="Binocular" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="видения" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="прозрения" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="of Vision" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Empowered" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Могуществен." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="Empowered" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="of Empowering" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="могущества" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="of Empowering" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Ментальн." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Мыслителя." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
@@ -195,7 +195,7 @@
 					<attribute id="UUID" type="22" value="of Tricks" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Трикстерск." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Плута" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
@@ -216,7 +216,7 @@
 					<attribute id="UUID" type="22" value="of the Eternal Reign" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Тенешёлк." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Тенеткан." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
@@ -237,7 +237,7 @@
 					<attribute id="UUID" type="22" value="of Divinity" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Освобождённ." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Неукротим." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
@@ -279,7 +279,7 @@
 					<attribute id="UUID" type="22" value="Vitriolic" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="коррозии" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="разложения" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />

@@ -6,518 +6,518 @@
 		<node id="root">
 			<children>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="You will suffer! You will *all* suffer!" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Вы будете страдать! Все вы будете страдать!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CMB_MelchiorCruelty_Turn1" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Kneel before your king!" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="На колени перед своим королём!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CMB_MelchiorCruelty_Turn2" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="The bones of the weak pave the road to power." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Кости слабых мостят дорогу к власти." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CMB_MelchiorCruelty_Turn3" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="TREASON!" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="ИЗМЕНА!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CMB_MelchiorCruelty_Turn4" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Receive your judgement! Receive death!" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Примите свой приговор! Примите смерть!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CMB_MelchiorCruelty_Turn5" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="A man chooses, a slave OBEYS!" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Человек выбирает, раб ПОДЧИНЯЕТСЯ!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CMB_MelchiorCruelty_Turn6" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="I am renewed...." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Я возрождён..." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CMB_MelchiorCruelty_Healed1" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="My power grows...." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Моя мощь растёт..." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CMB_MelchiorCruelty_Healed2" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Power flows through my veins...." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Сила течёт по моим венам..." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CMB_MelchiorCruelty_Healed3" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Beg for mercy!" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Молите о пощаде!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CMB_MelchiorCruelty_Turn7" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="I will shoulder your suffering, brothers and sisters...." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Я возьму ваши страдания на себя, братья и сёстры..." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CMB_MelchiorCompassion_Healing1" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Let me bear your burdens...." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Позвольте мне разделить вашу ношу..." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CMB_MelchiorCompassion_Healing2" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="It is a king's duty  to suffer for his subjects." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Долг короля — страдать за своих подданных." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CMB_MelchiorCompassion_Healing3" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="I give my dying breath for you." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Мой последний вздох — вам." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CMB_MelchiorCompassion_Death1" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="I die a king's death, in service to my people." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Я умираю королевской смертью, служа своему народу." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CMB_MelchiorCompassion_Death2" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="I lay down my life for the Empire." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Я отдаю свою жизнь за Империю." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CMB_MelchiorCompassion_Death3" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="YES... gaze upon your king, vermin! Gaze upon your GOD!" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="ДА... взгляните на своего короля, ничтожества! Взгляните на своего БОГА!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CMB_MelchiorCruelty_Enraged" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Show me your restraint!" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Покажите мне свою сдержанность!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CMB_MelchiorRestraint_EndTurn1" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="A king without restraint is nothing more than a tyrant." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Король без сдержанности — не более чем тиран." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CMB_MelchiorRestraint_Turn1" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Master your fear, let it serve you!" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Подчините свой страх, заставьте его служить вам!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CMB_MelchiorRestraint_EndTurn2" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="The demonstration begins, pay attention." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Урок начинается, внимание." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CMB_MelchiorRestraint_Turn2" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="A battle nearly won: a failure." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Почти выигранная битва — это поражение." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CMB_MelchiorRestraint_Turn3" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Show me! What have you learned?" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Покажите! Чему вы научились?" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CMB_MelchiorRestraint_EndTurn3" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="When fear bubbles in your heart, do you surrender? Or do you learn?" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Когда страх бурлит в вашем сердце, вы сдаётесь? Или учитесь?" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CMB_MelchiorRestraint_EndTurn4" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="The perfect opportunity." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Идеальная возможность." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CMB_MelchiorRestraint_Turn4" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Compose yourselves! Fear comes." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Соберитесь! Грядёт страх." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CMB_MelchiorRestraint_EndTurn5" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="The careless king is quickly lost in a sea of pawns." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Неосторожный король быстро теряется в море пешек." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CMB_MelchiorRestraint_Turn5" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="As you approach the stone structure with the Astral Anchor in hand, a shimmering portal sparks to life before you." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Когда вы приближаетесь к каменному сооружению с Якорем Астрала в руках, перед вами вспыхивает мерцающий портал." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_ASC_AstralPortalActivate" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="As you approach the stone structure with the Abyssal Anchor in hand, a shimmering opening sparks to life before you." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Когда вы приближаетесь к каменному сооружению с Якорем Бездны в руках, перед вами вспыхивает мерцающий разлом." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_ASC_AbyssalPortalActivate" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="As you approach the stone structure with the Primordial Anchor in hand, a shimmering opening sparks to life before you." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Когда вы приближаетесь к каменному сооружению с Якорем Первородного в руках, перед вами вспыхивает мерцающий проход." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_ASC_PrimordialPortalActivate" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="As you approach the stone structure with the Shadow Anchor in hand, a shimmering opening sparks to life before you." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Когда вы приближаетесь к каменному сооружению с Якорем Тени в руках, перед вами вспыхивает мерцающая брешь." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_ASC_ShadowPortalActivate" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="The stone device before you lies lifeless, awaiting some sort of activation, no doubt." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Каменное устройство перед вами безжизненно — похоже, чего-то ждёт." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_ASC_PortalFailedUse" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="The grisly trophy leaps from your grasp, burying itself within the repository before you. Met with the faint grinding of stone and faint, coalescing clouds of smoke, you are certain its purpose is served." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Жуткий трофей вырывается из ваших рук и вонзается в хранилище перед вами. Тихий скрежет камня и клубящиеся облачка дыма убеждают вас — он выполнил своё предназначение." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_LED_OssurotDoorActivate" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="A shiver travels down your spine as you inspect the ghoulish recepticle. A low, grating whisper drones on from within; unresponsive." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Дрожь пробегает по спине, пока вы разглядываете зловещее углубление. Изнутри доносится тихий, скрежещущий шёпот, но ничего не происходит." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_LED_OssurotDoorFailedUse" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="I told you; it's hopeless...." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Я же говорил: всё безнадёжно..." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CMB_MelchiorIgnorance_Wipe" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Steel yourself with Hope, champion." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Закались Надеждой, чемпион." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CMB_MelchiorHope_Proximity1" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Make Hope your shield." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Пусть Надежда станет твоим щитом." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CMB_MelchiorHope_Proximity2" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Make this Hope your own." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Прими эту Надежду как свою." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CMB_MelchiorHope_Proximity3" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Keep to your Hope, child." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Держись своей Надежды, дитя." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CMB_MelchiorHope_Proximity4" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Hope will protect you, friend." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Надежда защитит тебя, друг мой." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CMB_MelchiorHope_Proximity5" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Hope was his, once." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Когда-то Надежда была его..." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CMB_MelchiorHope_Proximity6" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Sheltered by Hope, you will find victory." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="од сенью Надежды ты обретёшь победу." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CMB_MelchiorHope_Proximity7" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Search for Hope; find salvation." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Ищи Надежду – найдёшь спасение." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CMB_MelchiorHope_Proximity8" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="I was abandoned, but I will not do the same to you." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Меня покинули, но я не поступлю так с тобой." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CMB_MelchiorHope_Proximity9" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Hope...." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Надежда..." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CMB_MelchiorHope_Proximity10" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="I am your Hope, but you are my freedom." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Я — твоя Надежда, но ты — моя свобода." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CMB_MelchiorHope_Proximity11" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="I can't... Hear you..." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Я не... Не слышу тебя..." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CMB_MelchiorIgnorance_SneakStarted1" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Quiet one, aren't you?" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Тихоня, да?" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CMB_MelchiorIgnorance_SneakStarted2" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="I'll find you... Eventually...." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Я найду тебя... Рано или поздно..." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CMB_MelchiorIgnorance_SneakStarted3" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="You can't hide forever." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Вечно прятаться не выйдет." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CMB_MelchiorIgnorance_SneakStarted4" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="FOUND!" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="А ВОТ И ТЫ!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CMB_MelchiorIgnorance_SneakEnded1" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Not quiet enough!" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Недостаточно тихо!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CMB_MelchiorIgnorance_SneakEnded2" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="What did you expect?" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="А как иначе?" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CMB_MelchiorIgnorance_SneakEnded3" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Unexpected?" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Неожиданно?" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CMB_MelchiorIgnorance_SneakEnded4" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="I can still hear you!" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Я всё равно тебя слышу!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CMB_MelchiorIgnorance_Invis1" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="I'm already BLIND fool!" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Я и так СЛЕП, тупица!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CMB_MelchiorIgnorance_Invis2" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="How could I ever find you now?" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="И как же мне теперь тебя искать?" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CMB_MelchiorIgnorance_Invis3" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="As if I could see you before?" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Как будто раньше я тебя видел!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CMB_MelchiorIgnorance_Invis4" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Do you think this is some sort of game?" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Я что, какая-то шутка?" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CMB_MelchiorIgnorance_Rain1" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Enough! This is OVER, gnats!" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Хватит! Вам конец, ничтожества!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CMB_MelchiorIgnorance_Rain2" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="There is no escape!" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Вам не сбежать!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CMB_MelchiorIgnorance_Rain3" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Do you ever learn? This is hopeless!" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Вы так ничему и не научились. Жалкое зрелище." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CMB_MelchiorIgnorance_Rain4" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="There is no victory, only darkness." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Нет никакой победы, есть только тьма." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CMB_MelchiorIgnorance_Rain5" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Listen closely, it ends now." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Слушайте внимательно: вам крышка." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CMB_MelchiorIgnorance_Rain6" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="The image of your enemy recoils in pain as it is struck, briefly revealing its connection to Ignorance." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Образ вашего врага корчится от боли под ударом, на миг обнажая свою связь с Невежеством." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CMB_VisionOfIgnorance_DamageShare" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="CRY HAVOC!" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="ДА НАЧНЕТСЯ ЖАТВА!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CMB_MelchiorIgnorance_Spray1" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="No memory, no fanfare, only death." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Ни памяти, ни славы — только смерть." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CMB_MelchiorIgnorance_Spray2" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="HEEL, dogs!" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="К НОГЕ, псы!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CMB_MelchiorIgnorance_Spray3" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Visitors? I almost didn't hear you." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Гости? А я вас и не заметил." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CMB_MelchiorIgnorance_FirstTurn1" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Keep your eye on the ball." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Не спускайте глаз с цели." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CMB_MelchiorIgnorance_Turn1" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Hide if you like, it won't matter." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Прячьтесь сколько угодно — это бесполезно." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CMB_MelchiorIgnorance_Turn2" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="I always did love this game...." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Как же я любил эту игру..." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CMB_MelchiorIgnorance_Turn3" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="If only I could see your faces...." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Вот бы увидеть ваши лица…" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CMB_MelchiorIgnorance_Turn4" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Take a minute, think on it, I can wait...." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Не спешите, подумайте хорошенько, я подожду..." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
