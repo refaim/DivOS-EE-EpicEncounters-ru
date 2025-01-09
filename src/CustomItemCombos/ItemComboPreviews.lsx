@@ -4741,28 +4741,6 @@
                 <attribute id="CraftAmount" value="7" type="4" />
             </node>
 
-            <!-- Melt stuff -->
-            <node id="Combo">
-                <attribute id="CombinationID" value="Oven_TOOL_Hammer" type="22" />
-                <attribute id="RecipeCategory" value="Objects" type="22" />
-                <attribute id="Category1" value="Oven" type="22" />
-                <attribute id="Category2" value="TOOL_Hammer" type="22" />
-                <attribute id="RequiredSkill" value="Blacksmithing" type="22" />
-                <attribute id="RequiredSkillLevel" value="1" type="4" />
-                <attribute id="StatsID" value="LOOT_OreBar_A_Iron_A" type="22" />
-                <attribute id="CraftAmount" value="3" type="4" />
-            </node>
-            <node id="Combo">
-                <attribute id="CombinationID" value="Oven_TOOL_Hammer" type="22" />
-                <attribute id="RecipeCategory" value="Objects" type="22" />
-                <attribute id="Category1" value="Oven" type="22" />
-                <attribute id="Category2" value="TOOL_RepairHammer" type="22" />
-                <attribute id="RequiredSkill" value="Blacksmithing" type="22" />
-                <attribute id="RequiredSkillLevel" value="1" type="4" />
-                <attribute id="StatsID" value="LOOT_OreBar_A_Iron_A" type="22" />
-                <attribute id="CraftAmount" value="3" type="4" />
-            </node>
-
         </children>
     </node>
 </region>
