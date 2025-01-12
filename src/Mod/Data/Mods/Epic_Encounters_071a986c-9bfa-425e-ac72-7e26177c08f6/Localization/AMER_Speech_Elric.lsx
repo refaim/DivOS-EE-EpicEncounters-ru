@@ -6,644 +6,644 @@
 		<node id="root">
 			<children>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="A rusted and rime-covered grate blocks your path. You can't use this... yet." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Покрытая ржавчиной и инеем решётка преграждает путь. Пока что вы не можете ею воспользоваться..." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_WST_SewerEntranceUse" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="The Oversoul exists but offers nothing, the same way that answers given by a reflection in a mirror mean nothing. We cannot truly learn from ourselves, self-deception will not allow it.&lt;br&gt;      Where can we turn to escape the tyranny of the senses?" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Сверхдуша существует, но не даёт ничего — как и ответы, полученные от отражения в зеркале, лишены всякого смысла. Мы не можем истинно учиться у самих себя, самообман не позволит этого.&lt;br&gt; Куда нам обратиться, чтобы избежать тирании чувств?" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_BOOK_Melchior1" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="History is the wreckage of time. How can we live like this, picking through the carcasses of action, like crows raiding a battlefield?" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="История — это обломки времени. Как мы можем так жить, копаясь в останках деяний, словно вороны, что рыщут по полю битвы?" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_BOOK_Melchior2" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Even free will fails us. Choice appears, already hobbled by fetters. Knowledge and ignorance shape choice before the moment of choosing. Ignorance blinds us to the true scope of action. Knowledge shackles us with fear of consequence in action. How can we claim that we choose freely?" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Даже свобода воли нас подводит. Выбор предстаёт перед нами уже скованным цепями. Знание и невежество определяют выбор прежде самого момента выбора. Невежество ослепляет нас, скрывая истинный размах деяний. Знание сковывает нас страхом перед последствиями действий. Как можем мы утверждать, что выбираем свободно?" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_BOOK_Melchior3" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="I crushed my enemy, but I did not win the war. What is this peace? No peace at all, just exhaustion--the rebel provinces submit to the Empire because I broke their backs. Even my exalted station cannot give me arrogance enough to ignore this truth. I bought victory with steel and savagery, and with blood. I drowned Pandion and his rebels in the blood of my soldiers, of the subjects who looked to me for salvation, in Selenia's blood. I would have traded thousands of lives to save hers. The Emperor cannot afford such thoughts. I will free the Empire from my weakness. " />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Я сокрушил врага, но не выиграл войну. Что это за мир? Никакого мира, лишь истощение — мятежные провинции покорились Империи, потому что я сломал их хребет. Даже моё возвышенное положение не даёт мне достаточно спеси, чтобы игнорировать эту истину. Я купил победу сталью и жестокостью, и кровью. Я утопил Пандиона и его мятежников в крови моих солдат, подданных, искавших у меня спасения, в крови Селении. Я отдал бы тысячи жизней, чтобы спасти её. Император не может позволить себе таких мыслей. Я избавлю Империю от своей слабости." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_BOOK_Melchior4" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="A badly charred scrap of paper, only one legible line remains:&lt;br&gt;&lt;br&gt;Nothing is true; all is permitted." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Сильно обугленный клочок бумаги, осталась лишь одна разборчивая строка:&lt;br&gt;&lt;br&gt;Ничто не истинно; всё дозволено." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_BOOK_Melchior5" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Written in glowing, silver script on what appears to be a leaf of darkness:&lt;br&gt;&lt;br&gt;      The root of time exists somewhere beyond. It has sunk deep into the black loam of shadow, into the dark place that the planes revolve around, but cannot touch. Even the gods do not speak of this place. Perhaps they remain mute because even they cannot see into it. I have found it now. I have walked its borders, but not entered. It resists me, like a threshold that opens only onto itself. The instant of entrance and the instant of repulsion are one." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Написано светящимися серебряными письменами на том, что кажется листом тьмы:&lt;br&gt;&lt;br&gt; Корень времени существует где-то за пределами. Он глубоко погрузился в чёрный перегной теней, в то тёмное место, вокруг которого вращаются планы бытия, но не могут его коснуться. Даже боги не говорят об этом месте. Возможно, они молчат потому, что даже они не могут заглянуть в него. Теперь я нашёл его. Я ходил по его границам, но не входил. Оно отталкивает меня, как порог, что открывается только в самого себя. Миг входа и миг отторжения едины." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_BOOK_Melchior6" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Mold has invaded this travel log rendering most of its contents illegible. Nonetheless, you manage to pry the pages apart and decipher a few fragments of text:&lt;NewPage&gt;      Snowstorm's got me stranded. The wind in the canyon has more teeth that a pack of wolves. Even if I could pull the cart through the drifts, it's no use. I can't see my own hand in front of my nose out there. No--better to hole up here where its warmish and mostly dry. The back of the cave has a rotty, mushroomy stink that I don't like too well, but this still beats outside. Now I know first hand why they call this pass the Gorgon's Eye. Wander out in one of these storms and they find you when it thaws, dead as a stone, and frozen twice as solid.&lt;NewPage&gt;      I heard some wolves this evening, pretty far off, when I poked my head out to check on the weather. It's still terrible. No doubt they wander up and down the pass looking for food. They can't possibly find much  in this weather, with all the prey animals hibernating or holed up, like me.&lt;NewPage&gt;      Three days straight of snow already. Luckily, I thought this might happen; I probably brought twice the food I really need, so at least I won't starve.&lt;NewPage&gt;      I'll have to take care with the fire. Not sure what I'll find to burn if my fuel runs out.&lt;NewPage&gt;      I heard the wolves again, maybe a little closer this time.&lt;NewPage&gt;      Getting bored. I can only review my maps so many times.&lt;NewPage&gt;      I thought I heard something moving around the back of the cave, but I didn't see anything. I couldn't find anything when I went to investigate.&lt;NewPage&gt;      When will this storm end?&lt;NewPage&gt;      The howling never stops now. Where does it come from? I can't see them. I never see them.&lt;NewPage&gt;      They are everywhere.&lt;NewPage&gt;      The final page has no text, only a crude drawing rendered in a rust-colored pigment. The image depicts an eye with a circle of canines forming the iris and a grinning mouth in place of the pupil." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Плесень изъела этот путевой журнал, сделав большую часть его содержимого нечитаемой. Тем не менее, вам удаётся разлепить страницы и разобрать несколько фрагментов текста:&lt;NewPage&gt; Застрял тут из-за метели. Ветер в ущелье кусается похлеще волчьей стаи. Даже если бы я смог протащить телегу через сугробы, толку никакого. В двух шагах ничего не видно. Нет уж — лучше отсидеться здесь, где тепло и почти сухо. В глубине пещеры воняет гнилью и грибами, но это лучше, чем снаружи. Теперь я на своей шкуре узнал, почему этот перевал прозвали Оком Горгоны. Сунешься в такую бурю — найдут по весне, окаменевшего насмерть и промёрзшего до самых костей.&lt;NewPage&gt; Вечером слышал волков, довольно далеко, когда высунулся проверить погоду. До сих пор ужасная. Наверняка рыщут по перевалу в поисках добычи. Вряд ли им удастся что-то найти в такую погоду, когда вся живность либо в спячке, либо попряталась, как я.&lt;NewPage&gt; Уже три дня снег не прекращается. К счастью, я предвидел такое; взял, наверное, вдвое больше еды, чем нужно, так что хотя бы с голоду не помру.&lt;NewPage&gt; Нужно экономить огонь. Не уверен, что найду, чем его поддерживать, если кончатся дрова.&lt;NewPage&gt; Снова слышал волков, кажется, уже ближе.&lt;NewPage&gt; Умираю со скуки. Сколько можно разглядывать одни и те же карты.&lt;NewPage&gt; Мне почудилось какое-то движение в глубине пещеры, но я ничего не увидел. Когда пошёл проверить, тоже ничего не нашёл.&lt;NewPage&gt; Когда же закончится эта буря?&lt;NewPage&gt; Вой теперь не стихает. Откуда он доносится? Я не вижу их. Я никогда их не вижу.&lt;NewPage&gt; Они повсюду.&lt;NewPage&gt; На последней странице нет текста, только грубый рисунок, выполненный пигментом ржавого цвета. На нём изображён глаз, в радужке которого — круг из волчьих клыков, а вместо зрачка — ухмыляющийся рот." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_BOOK_SpiceMerchant1" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="The shadow realm gives its knowledge eagerly. That sets the trap: knowledge for sanity, knowledge for humanity. One cannot master the shadow, one can only bargain with it." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Царство теней охотно делится своими знаниями. В этом и кроется ловушка: знания в обмен на рассудок, знания в обмен на человечность. Тенью нельзя повелевать, с ней можно только торговаться." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_BOOK_Shadow1" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="The shadows whisper constantly there. The darkness in that place is only a distant cousin to the darkness of our world. Here darkness denotes absence, lack of light, of life, of hope. There, the darkness overflows; it exists as a void of plenitude. In Shadow the darkness serves will, shaping itself to the whims of choice. This docile void lays a trap more subtle than the most patient assassin." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Там тени постоянно шепчут. Тьма в том месте лишь дальняя родственница тьмы нашего мира. Здесь тьма означает отсутствие — света, жизни, надежды. Там же тьма переполняет всё; она существует как бездна изобилия. В Царстве Теней тьма покорна воле, принимая любую форму по прихоти выбора. Эта послушная бездна расставляет ловушки искуснее самого терпеливого убийцы." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_BOOK_Shadow2" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="They call themselves Nightwalkers and claim that they wish to serve me. I can feel their consciousnesses brushing against my own. Their wills communicate directly without word or gesture. The plane itself makes this possible. I suspect that they do not realize I am aware of their attempts to read my mind, or perhaps they want me to assume this; to form another layer of deception. For the moment I am content to fill my mind with thoughts I know will intrigue them." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Они называют себя Ночными Странниками и утверждают, что хотят служить мне. Я чувствую, как их сознания касаются моего. Их воли общаются напрямую, без слов и жестов. Сама суть этого плана бытия делает это возможным. Подозреваю, они не понимают, что я замечаю их попытки прочесть мои мысли, а может, хотят, чтобы я так думал — ещё один слой обмана. Пока что я довольствуюсь тем, что наполняю разум мыслями, которые, как я знаю, их заинтригуют." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_BOOK_Shadow3" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="When we stare long into the Abyss, it stares back, and the light of its gaze eradicates all illusion. This light burns us until only truth and death remain: death for the weak, and the truth of ascension for the worthy, the incandescent soul." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Когда мы долго всматриваемся в Бездну, она всматривается в ответ, и свет её взора уничтожает все иллюзии. Этот свет выжигает нас, пока не остаются лишь истина и смерть: смерть для слабых и истина восхождения для достойных, для душ пылающих." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_BOOK_Abyss1" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="The brittle, yellowed pages of this journal has sustained extensive water damage, rendering most of the text illegible. You can make out the name &quot;Krosis&quot; on the inside of the front cover, and read the following entries from an undamaged area near the end of the book:&lt;NewPage&gt;      That damned shadow dog escaped, like I told them it would. Build a creature out of shadows pulled from beyond the stars--what a notion. The acolytes overestimate their understanding. Not a one of them has ever set foot in Shadow. Those arrogant wand-wavers never had a hope of controlling the beast. I'm surprised that Terrestra allowed the experiment in the first place. Now it looks like I get to clean up the mess. This should be interesting.&lt;NewPage&gt;      The little bastard tore up a squad on its own yesterday--all hand-picked men, no less. It acts like a big pup, all playful, running around, right until it goes for your throat. One poor sod lost a hand; the others got worked on bad enough to lay them up for at least a few months. They only escaped because it lost interest halfway through and took to a fallen helmet as a chew toy. What an embarrassment. I'll have to get involved personally.&lt;NewPage&gt;      There's never been anything like it. A dog made of darkness. The thing can hide in broad daylight. It just seems to run into a shadow, fold itself up, and disappear, only to reappear moment later, usually breathing down the back of my neck. Once it got so close that I actually punched it in the nose, most unbecoming for a ranger. No, I didn't much care for that at all. It's snout had an inexplicable consistency, though--very firm, but much too elastic. I got the sense that the thing hasn't got any bones at all.&lt;NewPage&gt;      I shot the son of a bitch seventeen times yesterday, or at least it looked like I did. I certainly had plenty of clear shots. The thing only appears to wander through the southernmost part of Kadath. It really doesn't look to have any intention of straying any further than that.... But how could it take an arrow dead between the eyes and keep breathing? I'll have to consult with Terrestra. The least she can do is give me a weapon that can actually harm the beast." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Хрупкие пожелтевшие страницы этого дневника сильно повреждены водой, из-за чего большая часть текста неразборчива. На внутренней стороне обложки можно разобрать имя «Крозис», а в уцелевшей части ближе к концу книги читаются следующие записи:&lt;NewPage&gt; Эта проклятая теневая псина сбежала, как я их и предупреждал. Надо же — создать существо из теней, извлечённых из-за звёзд! Послушники переоценивают свои познания. Ни один из них и носа не совал в Царство Теней. У этих заносчивых махателей палочками не было ни единого шанса обуздать зверя. Удивительно, что Терестра вообще разрешила этот эксперимент. Теперь, похоже, мне придётся разгребать эту кашу. Будет любопытно.&lt;NewPage&gt; Вчера этот паршивец в одиночку разделал целый отряд — и ведь все отборные бойцы. Ведёт себя как щенок-переросток, игривый, носится кругами, пока не вцепится тебе в глотку. Один бедолага лишился руки, остальных потрепало так, что проваляются в лазарете месяца три как минимум. Спаслись только потому, что ему наскучило, и он увлёкся упавшим шлемом, словно игрушкой. Какой позор. Придётся вмешаться лично.&lt;NewPage&gt; Такого я ещё не видывал. Пёс из тьмы. Тварь может прятаться средь бела дня. Просто забегает в тень, сворачивается и исчезает, чтобы через мгновение появиться снова, обычно за спиной, обдавая затылок дыханием. Однажды подобрался так близко, что я, позабыв всякие приличия, съездил ему по носу. Нет, мне это совсем не понравилось. Правда, морда у него странная — очень твёрдая, но слишком уж упругая. Такое чувство, будто в нём вовсе нет костей.&lt;NewPage&gt; Вчера всадил в сукина сына семнадцать стрел, по крайней мере, так казалось. Выстрелы-то были чистые. Похоже, тварь не собирается покидать южную часть Кадата. Вроде и не стремится забредать дальше... Но как может существо, получившее стрелу промеж глаз, преспокойно разгуливать? Надо посоветоваться с Терестрой. Уж оружие, способное навредить этому зверю, она мне задолжала." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_BOOK_Krosis1" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Raised in memory of Ossurot the Resplendent, cloaked in miracles. His gaze transfixed the truth, and never turned from it." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="В память об Оссуроте Лучезарном, окутанном чудесами. Его взор был прикован к истине, и никогда не отворачивался от неё." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_BOOK_Inscription1" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="We who stand at the forefront of the modern, of the new humanity, salute our brothers and sisters. In memory of the fallen, in praise of those yet to fall, raise your eyes to the heavens and see the new dawn." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Мы, стоящие на пороге современности, новой эры человечества, приветствуем наших братьев и сестёр. В память о павших, во славу тех, кому ещё предстоит пасть, возведите очи к небесам и узрите новый рассвет." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_BOOK_Inscription2" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Transcendence and death." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Возвышение и смерть." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_BOOK_Inscription3" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Our blood travels through the veins of history. We give life to Time." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Наша кровь течёт по венам истории. Мы даруем жизнь Времени." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_BOOK_Inscription4" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Year 325 of the Empire, twelfth month, first day.&lt;br&gt;&lt;br&gt;      Emperor Basileus accepts Assur, last of the apostate kingdoms, into the Empire. The open hand of peace has triumphed where war and deceit could not. Assur becomes a province of the Empire, her people granted citizenship, protection under the law, and free passage throughout the land. In celebration, Emperor Basileus declares a month of festival in the capitol. The gates of Kadath have been flung open to receive all the peoples of the Empire, and imperial coin buys food and drink for all.&lt;br&gt;      Now, the Emperor's embrace encircles the world." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Год 325 от основания Империи, двенадцатый месяц, первый день.&lt;br&gt;&lt;br&gt; Император Басилеус принимает Ассур, последнее из отступнических королевств, в состав Империи. Протянутая рука мира одержала победу там, где не смогли война и обман. Ассур становится имперской провинцией, её народ получает гражданство, защиту закона и право свободного передвижения по всем землям. В честь этого император Басилеус объявляет месяц празднеств в столице. Врата Кадата распахнуты для всех народов Империи, а имперское золото оплачивает еду и питьё для каждого.&lt;br&gt; Отныне объятия императора окружают весь мир." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_BOOK_History1" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Year 375 of the Empire, seventh month, nineteenth day.&lt;br&gt;&lt;br&gt;      Treacherous Assur and her allies turn against the Empire. The Rogue King, Pandion, rides at their head. Assur's friendship is revealed as a maneuver to conquer the Empire from within, using its own strength. Five decades of peace, free trade, and unhindered travel have swelled the rebel provinces' might, and now their armies encircle the Empire." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Год 375 от основания Империи, седьмой месяц, девятнадцатый день.&lt;br&gt;&lt;br&gt; Вероломный Ассур и его союзники обращаются против Империи. Во главе их войск встаёт Король-Отступник Пандион. Дружба Ассура оказывается лишь уловкой для покорения Империи изнутри, используя её же силу. Пять десятилетий мира, свободной торговли и беспрепятственных путешествий преумножили мощь мятежных провинций, и теперь их армии окружают Империю." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_BOOK_History2" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Year 375 of the Empire, ninth month, thirtieth day.&lt;br&gt;&lt;br&gt;      Sixteen legions leave Kadath--supported by soldiers gathered from those provinces still loyal to the Empire. General Zandrix rides north with Krosis, Eye of the Legion, while Baron Karanus and Lord Eliezer march to the east and west. Emperor Melchior himself sails south to confront King Pandion's armies. Terrestra, Supreme Architect, remains in Kadath with Empress Selenia to defend the capitol. &lt;br&gt;      The gates of Kadath shut behind Melchior, the hand of the Empire closing in a fist. Assur's arrogance has tarnished a golden age." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Год 375 от основания Империи, девятый месяц, тридцатый день.&lt;br&gt;&lt;br&gt; Шестнадцать легионов покидают Кадат — их поддерживают воины, собранные из провинций, сохранивших верность Империи. Генерал Зандрикс движется на север с Кросисом, Оком Легиона, в то время как барон Каранус и лорд Элиезер направляются на восток и запад. Сам император Мельхиор отплывает на юг, чтобы встретиться с армиями короля Пандиона. Терестра, Верховный Архитектор, остаётся в Кадате вместе с императрицей Селенией для защиты столицы.&lt;br&gt; Врата Кадата закрываются за спиной Мельхиора, рука Империи сжимается в кулак. Высокомерие Ассура запятнало золотой век." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_BOOK_History3" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Year 378 of the Empire, first month, fifth day.&lt;br&gt;&lt;br&gt;      General Zandrix returns triumphant to Kadath, carrying the bloodied crowns of three rebel kings. Velsu, Oibalos, and Anshan have fallen to Zandrix, but at terrible cost—a quarter of his men now sleep in foreign graves. The conquering hero returns at the head of only one legion. Two legions more remain in the northern provinces to ensure that the North does not fall into chaos yet again.&lt;br&gt;&lt;NewPage&gt;      Zandrix stays only three nights in Kadath, long enough to burn offerings for the souls of his dead soldiers and collect supplies, no more. On the dawn of the fourth day his legion marches South via West along the coast to join Emperor Melchior in battle against King Pandion. " />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Год 378 от основания Империи, первый месяц, пятый день.&lt;br&gt;&lt;br&gt; Генерал Зандрикс триумфально возвращается в Кадат, неся окровавленные короны трёх мятежных королей. Вельсу, Ойбалос и Аншан пали перед Зандриксом, но страшной ценой — четверть его воинов теперь покоится в чужой земле. Победоносный герой возвращается во главе лишь одного легиона. Ещё два легиона остаются в северных провинциях, чтобы не допустить нового погружения Севера в хаос.&lt;br&gt;&lt;NewPage&gt; Зандрикс проводит в Кадате всего три ночи — лишь чтобы совершить подношения душам павших воинов и пополнить припасы, не более. На рассвете четвёртого дня его легион выступает на юг вдоль западного побережья, чтобы присоединиться к императору Мельхиору в битве против короля Пандиона." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_BOOK_History4" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Year 378 of the Empire, tenth month, seventh day.&lt;br&gt;&lt;br&gt;      The princes of Ryn and Bas all lie dead or return to Kadath as hostages, entrusted to the Supreme Architect. Baron Karanas paid the price of their defeat with his life. His son Calas now commands the legionnaires who survived the Eastern front. Empress Selenia herself presided over Baron Karanas' funeral. He now rests in a hero's tomb within the Legion's Terrace. " />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Год 378 от основания Империи, десятый месяц, седьмой день.&lt;br&gt;&lt;br&gt; Все принцы Рина и Баса либо мертвы, либо возвращаются в Кадат как заложники под надзор Верховного Архитектора. Барон Каранас заплатил за их поражение своей жизнью. Теперь его сын Калас командует легионерами, пережившими восточный фронт. Сама императрица Селения председательствовала на похоронах барона Караноса. Ныне он покоится в гробнице героя на Террасе Легиона." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_BOOK_History5" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Year 379 of the Empire, forth month, twenty-sixth day.&lt;br&gt;&lt;br&gt;      More sorrow. The Supreme Architect inscribes Lord Eliezer's name in the ledger of honored dead, and he joins Baron Karanas beneath the Legion's Terrace. In trade, all of the western provinces, save loyal Alba, lie smoldering. Assur found her closest allies in the west, and only merciless brutality was sufficient to subdue them.&lt;br&gt;      The westerners died for a dream that Assur herself does not believe in. " />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Год 379 от основания Империи, четвёртый месяц, двадцать шестой день.&lt;br&gt;&lt;br&gt; Новое горе. Верховный Архитектор вносит имя лорда Элиезера в книгу почётных мертвых, и он присоединяется к барону Каранасу под Террасой Легиона. Взамен все западные провинции, кроме верной Альбы, лежат в руинах. Ассур нашёл своих ближайших союзников на западе, и лишь беспощадная жестокость смогла усмирить их.&lt;br&gt; Жители запада погибли за мечту, в которую не верит даже сам Ассур." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_BOOK_History6" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Year 379 of the Empire, seventh month, ninth day.&lt;br&gt;&lt;br&gt;      Word from Emperor Melchior and General Zandrix finally arrives. All surviving legions, save the single legion defending Kadath, must travel south. King Pandion has gathered his remaining forces--a host still greater than the Emperor's army--in the capitol of Assur. Emperor Melchior will tear up the rebellion by its root. A final decisive battle decides the fate of the Empire." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Год 379 от основания Империи, седьмой месяц, девятый день.&lt;br&gt;&lt;br&gt; Наконец приходят вести от императора Мельхиора и генерала Зандрикса. Все уцелевшие легионы, кроме единственного, защищающего Кадат, должны двинуться на юг. Король Пандион собрал оставшиеся силы — войско, всё ещё превосходящее армию императора — в столице Ассура. Император Мельхиор намерен вырвать мятеж с корнем. Решающая битва определит судьбу Империи." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_BOOK_History7" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Year 379 of the Empire, eleventh month, second day.&lt;br&gt;&lt;br&gt;      King Pandion's soldiers lay siege to Kadath.&lt;br&gt;      Emperor Melchior crushed the army he found in Assur's capitol, yet only a fraction of the Rogue King's men held that city. But the trap is sprung; King Pandion's ruse has lured the Emperor too far away. He cannot defend his home.&lt;br&gt;      Catapults and ballistae bombard Kadath day and night with burning missiles. Though only a single legion guards Kadath, King Pandion is too shrewd to throw his men against the bulwarks. He will let famine, fear, and fire do their work before the real assault begins. " />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Год 379 от основания Империи, одиннадцатый месяц, второй день.&lt;br&gt;&lt;br&gt; Воины короля Пандиона осаждают Кадат.&lt;br&gt; Император Мельхиор разгромил армию, найденную в столице Ассура, но лишь малая часть войск Короля-Отступника удерживала тот город. Ловушка захлопнулась; уловка короля Пандиона заманила императора слишком далеко. Он не может защитить свой дом.&lt;br&gt; Катапульты и баллисты день и ночь обстреливают Кадат горящими снарядами. Хотя Кадат защищает лишь один легион, король Пандион слишком хитёр, чтобы бросать своих людей на укрепления. Он позволит голоду, страху и огню сделать своё дело прежде, чем начнётся настоящий штурм." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_BOOK_History8" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Year 380 of the Empire, third month, twenty-eighth day.&lt;br&gt;&lt;br&gt;      The northern and western gates finally fall. The garrisons in those districts lie dead to the last man. Any legionnaire not killed in battle is executed without ceremony, like cattle or pigs. The streets and gutters fill with the blood of the honored dead.&lt;br&gt;      Empress Selenia and the Supreme Architect barricade the eastern and southern districts. They move all surviving citizens of Kadath into the sewers and tunnels beneath the city. Only their retainers and soldiers remain above ground to meet Pandion's onslaught. " />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Год 380 от основания Империи, третий месяц, двадцать восьмой день.&lt;br&gt;&lt;br&gt; Северные и западные ворота наконец пали. Гарнизоны в этих районах полегли до последнего человека. Любой легионер, не павший в бою, казнён без церемоний, как скот. Улицы и сточные канавы наполнены кровью почётных мертвых.&lt;br&gt; Императрица Селения и Верховный Архитектор укрепляют восточные и южные районы. Они перемещают всех выживших жителей Кадата в канализацию и туннели под городом. Лишь их приближённые и солдаты остаются на поверхности, чтобы встретить натиск Пандиона." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_BOOK_History9" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Year 380 of the Empire, fourth month, sixteenth day. &lt;br&gt;&lt;br&gt;      On this black day the eastern district falls, Empress Selenia still trapped within. A traitor within the royal household gave away her escape route, and now King Pandion keeps the Empress hostage somewhere beneath the palace.&lt;br&gt;      Assur's hideous banner flies atop every spire to the North, East, and West. Only the southern district of Kadath remains under the Supreme Architect's control. She makes her last stand in the Tower of Ascension." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Год 380 от основания Империи, четвёртый месяц, шестнадцатый день.&lt;br&gt;&lt;br&gt; В этот чёрный день пал восточный район, и императрица Селения оказалась в ловушке. Предатель из царского двора выдал путь её отступления, и теперь король Пандион держит императрицу в заложниках где-то под дворцом.&lt;br&gt; Мерзкое знамя Ассура развевается на каждом шпиле севера, востока и запада. Лишь южный район Кадата остаётся под контролем Верховного Архитектора. Она готовится к последнему сражению в Башне Вознесения." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_BOOK_History10" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Year 380 of the Empire, fourth month, thirty-first day. &lt;br&gt;&lt;br&gt;      King Pandion's men swarm the southern district. The Rogue King declares himself emperor.&lt;br&gt;      In a final act of defiance, the Supreme Architect encases the Tower of Ascension in a block of ice. King Pandion struggles in vain to break the enchantment. Neither steel nor fire so much as chip the surface of the ice. Sorcery and siege engines have just as little effect, but the Supreme Architect's bravado cannot raise Kadath from its ashes." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Год 380 от основания Империи, четвёртый месяц, тридцать первый день.&lt;br&gt;&lt;br&gt; Люди короля Пандиона наводняют южный район. Король-Отступник провозглашает себя императором.&lt;br&gt; В последнем акте неповиновения Верховный Архитектор заключает Башню Вознесения в глыбу льда. Король Пандион тщетно пытается разрушить чары. Ни сталь, ни огонь не могут даже поцарапать поверхность льда. Колдовство и осадные орудия столь же бессильны, но отвага Верховного Архитектора не может поднять Кадат из пепла." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_BOOK_History11" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Year 380 of the Empire, sixth month, second day. &lt;br&gt;&lt;br&gt;      The Emperor returns to Kadath by sea. Seven legions follow him, and their fury gathers like a storm on the southern horizon." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Год 380 от основания Империи, шестой месяц, второй день.&lt;br&gt;&lt;br&gt; Император возвращается в Кадат морем. За ним следуют семь легионов, и их ярость собирается подобно буре на южном горизонте." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_BOOK_History12" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Year 380 of the Empire, sixth month, third day. &lt;br&gt;&lt;br&gt;      King Pandion suffers a terrible defeat. The fortifications raised at the docks could not withstand Emperor Melchior's rage; the rogue king's lines shatter in the first few hours. His men, drunk on the wine of conquest, prove no match for seven legions of hardened veterans fighting to recapture their home. Between carnage and capture, King Pandion's army loses fully half its number in the rout.&lt;br&gt;      The survivors barricade themselves throughout the northern, eastern, an western districts of the city, and a string of vicious skirmishes ensues. Both sides fight like ravenous animals, neither asking for, nor giving, quarter. A spirit of reckless hatred possesses all in Kadath." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Год 380 от основания Империи, шестой месяц, третий день.&lt;br&gt;&lt;br&gt; Король Пандион терпит сокрушительное поражение. Укрепления, возведённые у причалов, не могли противостоять ярости императора Мельхиора; ряды короля-отступника рассыпаются в первые же часы. Его люди, опьянённые вином завоевания, оказываются не ровней семи легионам закалённых ветеранов, сражающихся за возвращение родного дома. Между резнёй и пленением армия короля Пандиона теряет в этом разгроме половину своей численности.&lt;br&gt; Уцелевшие баррикадируются по всему северному, восточному и западному районам города, и начинается череда жестоких стычек. Обе стороны бьются как бешеные звери, не прося и не давая пощады. Дух безрассудной ненависти овладевает всеми в Кадате." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_BOOK_History13" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Year 380 of the Empire, sixth month, seventh day. &lt;br&gt;&lt;br&gt;      Kadath belongs to the Empire once more. Some 30,000 legionaries have paid the price of unity with their blood. Countless more citizens and allies of the Empire fell for the same cause.&lt;br&gt;      The survivors anoint and bury their fallen comrades, while the bodies of the Assurans fuel immense pyres. The smoke of their burning throws a black shroud over the entire city.&lt;br&gt;      Empress Selenia is dead, and Emperor Melchior has plunged himself into an ocean of grief. In the final hours of the war, King Pandion retreated into the palace with a score of soldiers. Emperor Melchior, accompanied by his generals, quickly dispatched Pandion's guards, but the Rogue King managed to escape into the tunnels below the palace. The Emperor followed him alone, forbidding his generals to follow. None know exactly what took place, but when Emperor emerged from beneath the palace, he carried the dead Empress in his arms, and King Pandion's head hung from his belt. " />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Год 380 от основания Империи, шестой месяц, седьмой день.&lt;br&gt;&lt;br&gt; Кадат вновь принадлежит Империи. Около 30 000 легионеров заплатили за единство своей кровью. Бессчётное множество граждан и союзников Империи пало за то же дело.&lt;br&gt; Выжившие умащивают и хоронят павших товарищей, в то время как тела ассуранцев питают огромные погребальные костры. Дым от их сожжения бросает чёрный покров на весь город.&lt;br&gt; Императрица Селения мертва, и император Мельхиор погрузился в океан скорби. В последние часы войны король Пандион отступил во дворец с двумя десятками солдат. Император Мельхиор в сопровождении своих генералов быстро расправился с охраной Пандиона, но Король-Отступник сумел бежать в туннели под дворцом. Император последовал за ним один, запретив генералам следовать за собой. Никто не знает точно, что произошло, но когда император emerged из-под дворца, он нёс на руках мёртвую императрицу, а голова короля Пандиона висела на его поясе." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_BOOK_History14" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Year 381 of the Empire, second month, third day. &lt;br&gt;&lt;br&gt;      Emperor Melchior closes the Tower of Ascension to petitioners and ceases to attend court. He ignores the nobles' demand that he take an Assuran wife to solidify the peace. He shuts himself off from all but the inner circle: General Zandrix; Terrestra, Supreme Architect; Krosis, Eye of the Legion, and a newcomer from the western provinces that has rapidly gained fame and favor since arriving in Kadath. This man, named Ossurot, has dispelled the magic entombing the Tower of Ascension and freed Terrestra from the prison she built for herself.   " />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Год 381 от основания Империи, второй месяц, третий день.&lt;br&gt;&lt;br&gt; Император Мельхиор закрывает Башню Вознесения для просителей и перестаёт посещать двор. Он игнорирует требование знати взять в жёны ассуранку для укрепления мира. Он отгораживается от всех, кроме ближнего круга: генерала Зандрикса; Терестры, Верховного Архитектора; Кросиса, Ока Легиона, и новоприбывшего из западных провинций, который быстро обрёл славу и благосклонность после прибытия в Кадат. Этот человек, по имени Оссурот, рассеял магию, погребшую Башню Вознесения, и освободил Терестру из темницы, которую она создала для себя." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_BOOK_History15" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Year 381 of the Empire, third month, twenty-fifth day. &lt;br&gt;&lt;br&gt;      Emperor Melchior sends messengers to the four corners of the Empire. He calls every wizard, priest, and man of science to Kadath.&lt;br&gt;      Using means magical and mundane, the Supreme Architect, aided by Ossurot, raises four towers devoted to the study of arcane and otherworldly sciences. " />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Год 381 от основания Империи, третий месяц, двадцать пятый день.&lt;br&gt;&lt;br&gt; Император Мельхиор рассылает гонцов во все четыре стороны Империи. Он созывает в Кадат каждого чародея, жреца и учёного мужа.&lt;br&gt; Используя магические и мирские средства, Верховный Архитектор при помощи Оссурота возводит четыре башни, посвящённые изучению тайных и потусторонних наук." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_BOOK_History16" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Year 381 of the Empire, fifth month, fourteenth day. &lt;br&gt;&lt;br&gt;      Emperor Melchior abolishes his court and installs a new council of Arcanists to oversee the business of the Empire.&lt;br&gt;      Countless acolytes, sages, and mystics move between the four towers and the Tower of Ascension like a line of ants feeding their nest.&lt;br&gt;      The Emperor seldom appears anywhere outside of the Tower of Ascension or its satellites. The Supreme Architect and Ossurot seem to accompany him day and night." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Год 381 от основания Империи, пятый месяц, четырнадцатый день.&lt;br&gt;&lt;br&gt; Император Мельхиор распускает свой двор и учреждает новый совет Арканистов для управления делами Империи.&lt;br&gt; Бесчисленные послушники, мудрецы и мистики снуют между четырьмя башнями и Башней Вознесения, словно муравьи, кормящие своё гнездо.&lt;br&gt; Император редко появляется где-либо за пределами Башни Вознесения или её спутников. Кажется, Верховный Архитектор и Оссурот сопровождают его днём и ночью." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_BOOK_History17" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="The script covering this torn piece of hide slowly skitters and shifts as you read:&lt;br&gt;&lt;br&gt;      The Ascension Ritual had unforeseen consequences. The ramifications of this event for the Empire are unfortunate, but interesting nonetheless.&lt;br&gt;      The rarefaction process crystallized ninety percent of the population within seconds, the rate and spread of vitrification increasing exponentially with the number of those consumed. Another roughly seven percent underwent a partial form of ascension, becoming Transmogrants. They display varying degrees of sophistication in accordance with their state of spritual preparation at the time of Ascension. The remaining three percent sustained an essentially complete Acension and emerged purified, retaining much of their previous agency and personality. Constructs remained unaffected." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Письмена на этом обрывке кожи медленно шевелятся и смещаются, пока вы читаете:&lt;br&gt;&lt;br&gt; Ритуал Вознесения имел непредвиденные последствия. Его влияние на Империю печально, хотя и небезынтересно.&lt;br&gt; Процесс разрежения кристаллизовал девяносто процентов населения за считанные секунды, скорость и распространение витрификации возрастали в геометрической прогрессии с числом поглощённых душ. Ещё примерно семь процентов подверглись частичному вознесению, став Трансмогрантами. Они демонстрируют различные степени развития в соответствии с уровнем их духовной подготовки на момент Вознесения. Оставшиеся три процента достигли практически полного Вознесения и вышли очищенными, сохранив большую часть своей прежней воли и личности. Конструкты остались незатронутыми." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_BOOK_Melchior7" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Written in minutely precise characters on pristine vellum:&lt;br&gt;&lt;br&gt;      All previous iterations of the Ascension Ritual remained restricted to a much smaller scale, although they too required significant amounts of energy to stabilize the focus long enough to create a usable doorway. At first glance, the final clause appended to the incantation likely created the unexpected effect. This set of parameters, using knowledge gained in the unfinished plane, allowed the spell to acquire a sort of false life, or at least, the tendency that living things display to seek their own continued survival. The ritual required immeasurably more energy to create a stable doorway in this version than previously observed. As a result, the offerings used to begin the ritual depleted immediately, and the spell availed itself of all readily available energy sources, primarily light, heat, and the vital force of living creatures. " />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Написано невероятно мелким, точным почерком на безупречном пергаменте:&lt;br&gt;&lt;br&gt; Все предыдущие варианты Ритуала Вознесения оставались ограничены гораздо меньшими масштабами, хотя и они требовали значительных объёмов энергии для стабилизации фокуса на время, достаточное для создания пригодного портала. На первый взгляд, неожиданный эффект, вероятно, создала финальная оговорка, добавленная к заклинанию. Этот набор параметров, использующий знания, полученные в незавершённом плане, позволил заклинанию обрести своего рода ложную жизнь или, по крайней мере, свойственное живым существам стремление к самосохранению. Для создания стабильного портала в этой версии ритуал потребовал неизмеримо больше энергии, чем наблюдалось ранее. В результате подношения, использованные для начала ритуала, истощились немедленно, и заклинание обратилось ко всем доступным источникам энергии, преимущественно к свету, теплу и жизненной силе живых существ." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_BOOK_Terrestra2" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Immense structures cut from raw stone soar up from the unknown roots of this plane. They look like temples or prisons. Perhaps in the Abyss the two concepts do not exist separately." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Исполинские сооружения, высеченные из необработанного камня, взмывают вверх от неведомых корней этого плана. Они напоминают храмы или темницы. Возможно, в Бездне эти два понятия не существуют раздельно." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_BOOK_Abyss2" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="I feel them moving at the barest edges of perception, watching, calculating. Whatever creatures exist here, the do not wish to reveal themselves as the folk of Shadow did. I must take care not to think about the doorway out, lest something follow me that would better remain trapped here." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Я чувствую их движение на самом краю восприятия, наблюдающих, рассчитывающих. Какие бы создания ни обитали здесь, они не желают раскрывать себя, как это сделали обитатели Тени. Я должен остерегаться мыслей о пути назад, чтобы за мной не последовало нечто, чему лучше оставаться в заточении здесь." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_BOOK_Abyss3" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="The glaring radiance of self-knowledge and the haze of ignorance entwine. Time has no meaning. An hour, a day, a thousand years, all collapse to a single point, or so one thinks. The Astral realm is the perfect mirror, defining everything of itself such that all boundaries, delineations, or dissimilarities appear meaningless." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Ослепительное сияние самопознания и дымка невежества переплетаются. Время теряет смысл. Час, день, тысяча лет — всё сжимается в единую точку, или так кажется. Астральный план — совершенное зеркало, определяющее всё через себя так, что любые границы, различия или несходства кажутся бессмысленными." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_BOOK_Astral1" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="How strange that a reality completely permeable to will should have no native life. Any life that exists here the traveler brings with her. The motes of time that form the only substance of the plane sheath each thought in shimmering flesh. Only an empty mind can brush aside these veils of fulfilled desire and pierce the truth that lies beneath." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Как странно, что реальность, полностью проницаемая для воли, не имеет собственной жизни. Любая жизнь здесь — та, что путешественник приносит с собой. Частицы времени, составляющие единственную субстанцию этого плана, облекают каждую мысль в мерцающую плоть. Лишь пустой разум может отодвинуть эти завесы исполненных желаний и проникнуть в истину, что лежит под ними." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_BOOK_Astral2" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font size=24 face=&quot;Copperplate Gothic Light&quot;&gt;HISTORY OF THE EMPIRE&lt;/font&gt;&lt;br&gt;&lt;br&gt;Pages of this large tome hang from its weathered spine; much of the information originally contained within has long since been lost to the elements. Even so, there is much that is legible.&lt;NewPage&gt;Year 325 of the Empire, twelfth month, first day.&lt;br&gt;&lt;br&gt;      Emperor Basileus accepts Assur, last of the apostate kingdoms, into the Empire. The open hand of peace has triumphed where war and deceit could not. Assur becomes a province of the Empire, her people granted citizenship, protection under the law, and free passage throughout the land. In celebration, Emperor Basileus declares a month of festival in the capitol. The gates of Kadath have been flung open to receive all the peoples of the Empire, and imperial coin buys food and drink for all.&lt;br&gt;      Now, the Emperor's embrace encircles the world.&lt;NewPage&gt;Year 375 of the Empire, seventh month, nineteenth day.&lt;br&gt;&lt;br&gt;      Treacherous Assur and her allies turn against the Empire. The Rogue King, Pandion, rides at their head. Assur's friendship is revealed as a maneuver to conquer the Empire from within, using its own strength. Five decades of peace, free trade, and unhindered travel have swelled the rebel provinces' might, and now their armies encircle the Empire.&lt;NewPage&gt;Year 375 of the Empire, ninth month, thirtieth day.&lt;br&gt;&lt;br&gt;      Sixteen legions leave Kadath--supported by soldiers gathered from those provinces still loyal to the Empire. General Zandrix rides north with Krosis, Eye of the Legion, while Baron Karanus and Lord Eliezer march to the east and west. Emperor Melchior himself sails south to confront King Pandion's armies. Terrestra, Supreme Architect, remains in Kadath with Empress Selenia to defend the capitol. &lt;br&gt;      The gates of Kadath shut behind Melchior, the hand of the Empire closing in a fist. Assur's arrogance has tarnished a golden age.&lt;NewPage&gt;Year 378 of the Empire, first month, fifth day.&lt;br&gt;&lt;br&gt;      General Zandrix returns triumphant to Kadath, carrying the bloodied crowns of three rebel kings. Velsu, Oibalos, and Anshan have fallen to Zandrix, but at terrible cost—a quarter of his men now sleep in foreign graves. The conquering hero returns at the head of only one legion. Two legions more remain in the northern provinces to ensure that the North does not fall into chaos yet again.&lt;br&gt;&lt;br&gt;      Zandrix stays only three nights in Kadath, long enough to burn offerings for the souls of his dead soldiers and collect supplies, no more. On the dawn of the fourth day his legion marches South via West along the coast to join Emperor Melchior in battle against King Pandion.&lt;NewPage&gt;Year 378 of the Empire, tenth month, seventh day.&lt;br&gt;&lt;br&gt;      The princes of Ryn and Bas all lie dead or return to Kadath as hostages, entrusted to the Supreme Architect. Baron Karanas paid the price of their defeat with his life. His son Calas now commands the legionnaires who survived the Eastern front. Empress Selenia herself presided over Baron Karanas' funeral. He now rests in a hero's tomb within the Legion's Terrace.&lt;NewPage&gt;Year 379 of the Empire, forth month, twenty-sixth day.&lt;br&gt;&lt;br&gt;      More sorrow. The Supreme Architect inscribes Lord Eliezer's name in the ledger of honored dead, and he joins Baron Karanas beneath the Legion's Terrace. In trade, all of the western provinces, save loyal Alba, lie smoldering. Assur found her closest allies in the west, and only merciless brutality was sufficient to subdue them.&lt;br&gt;      The westerners died for a dream that Assur herself does not believe in.&lt;NewPage&gt;Year 379 of the Empire, seventh month, ninth day.&lt;br&gt;&lt;br&gt;      Word from Emperor Melchior and General Zandrix finally arrives. All surviving legions, save the single legion defending Kadath, must travel south. King Pandion has gathered his remaining forces--a host still greater than the Emperor's army--in the capitol of Assur. Emperor Melchior will tear up the rebellion by its root. A final decisive battle decides the fate of the Empire.&lt;NewPage&gt;Year 379 of the Empire, eleventh month, second day.&lt;br&gt;&lt;br&gt;      King Pandion's soldiers lay siege to Kadath.&lt;br&gt;      Emperor Melchior crushed the army he found in Assur's capitol, yet only a fraction of the Rogue King's men held that city. But the trap is sprung; King Pandion's ruse has lured the Emperor too far away. He cannot defend his home.&lt;br&gt;      Catapults and ballistae bombard Kadath day and night with burning missiles. Though only a single legion guards Kadath, King Pandion is too shrewd to throw his men against the bulwarks. He will let famine, fear, and fire do their work before the real assault begins.&lt;NewPage&gt;Year 380 of the Empire, third month, twenty-eighth day.&lt;br&gt;&lt;br&gt;      The northern and western gates finally fall. The garrisons in those districts lie dead to the last man. Any legionnaire not killed in battle is executed without ceremony, like cattle or pigs. The streets and gutters fill with the blood of the honored dead.&lt;br&gt;      Empress Selenia and the Supreme Architect barricade the eastern and southern districts. They move all surviving citizens of Kadath into the sewers and tunnels beneath the city. Only their retainers and soldiers remain above ground to meet Pandion's onslaught.&lt;NewPage&gt;Year 380 of the Empire, fourth month, sixteenth day. &lt;br&gt;&lt;br&gt;      On this black day the eastern district falls, Empress Selenia still trapped within. A traitor within the royal household gave away her escape route, and now King Pandion keeps the Empress hostage somewhere beneath the palace.&lt;br&gt;      Assur's hideous banner flies atop every spire to the North, East, and West. Only the southern district of Kadath remains under the Supreme Architect's control. She makes her last stand in the Tower of Ascension.&lt;NewPage&gt;Year 380 of the Empire, fourth month, thirty-first day. &lt;br&gt;&lt;br&gt;      King Pandion's men swarm the southern district. The Rogue King declares himself emperor.&lt;br&gt;      In a final act of defiance, the Supreme Architect encases the Tower of Ascension in a block of ice. King Pandion struggles in vain to break the enchantment. Neither steel nor fire so much as chip the surface of the ice. Sorcery and siege engines have just as little effect, but the Supreme Architect's bravado cannot raise Kadath from its ashes.&lt;NewPage&gt;Year 380 of the Empire, sixth month, second day. &lt;br&gt;&lt;br&gt;      The Emperor returns to Kadath by sea. Seven legions follow him, and their fury gathers like a storm on the southern horizon.&lt;NewPage&gt;Year 380 of the Empire, sixth month, third day. &lt;br&gt;&lt;br&gt;      King Pandion suffers a terrible defeat. The fortifications raised at the docks could not withstand Emperor Melchior's rage; the rogue king's lines shatter in the first few hours. His men, drunk on the wine of conquest, prove no match for seven legions of hardened veterans fighting to recapture their home. Between carnage and capture, King Pandion's army loses fully half its number in the rout.&lt;br&gt;      The survivors barricade themselves throughout the northern, eastern, an western districts of the city, and a string of vicious skirmishes ensues. Both sides fight like ravenous animals, neither asking for, nor giving, quarter. A spirit of reckless hatred possesses all in Kadath.&lt;NewPage&gt;Year 380 of the Empire, sixth month, seventh day. &lt;br&gt;&lt;br&gt;      Kadath belongs to the Empire once more. Some 30,000 legionaries have paid the price of unity with their blood. Countless more citizens and allies of the Empire fell for the same cause.&lt;br&gt;      The survivors anoint and bury their fallen comrades, while the bodies of the Assurans fuel immense pyres. The smoke of their burning throws a black shroud over the entire city.&lt;br&gt;      Empress Selenia is dead, and Emperor Melchior has plunged himself into an ocean of grief. In the final hours of the war, King Pandion retreated into the palace with a score of soldiers. Emperor Melchior, accompanied by his generals, quickly dispatched Pandion's guards, but the Rogue King managed to escape into the tunnels below the palace. The Emperor followed him alone, forbidding his generals to follow. None know exactly what took place, but when Emperor emerged from beneath the palace, he carried the dead Empress in his arms, and King Pandion's head hung from his belt.&lt;NewPage&gt;Year 381 of the Empire, second month, third day. &lt;br&gt;&lt;br&gt;      Emperor Melchior closes the Tower of Ascension to petitioners and ceases to attend court. He ignores the nobles' demand that he take an Assuran wife to solidify the peace. He shuts himself off from all but the inner circle: General Zandrix; Terrestra, Supreme Architect; Krosis, Eye of the Legion, and a newcomer from the western provinces that has rapidly gained fame and favor since arriving in Kadath. This man, named Ossurot, has dispelled the magic entombing the Tower of Ascension and freed Terrestra from the prison she built for herself.&lt;NewPage&gt;Year 381 of the Empire, third month, twenty-fifth day. &lt;br&gt;&lt;br&gt;      Emperor Melchior sends messengers to the four corners of the Empire. He calls every wizard, priest, and man of science to Kadath.&lt;br&gt;      Using means magical and mundane, the Supreme Architect, aided by Ossurot, raises four towers devoted to the study of arcane and otherworldly sciences.&lt;NewPage&gt;Year 381 of the Empire, fifth month, fourteenth day. &lt;br&gt;&lt;br&gt;      Emperor Melchior abolishes his court and installs a new council of Arcanists to oversee the business of the Empire.&lt;br&gt;      Countless acolytes, sages, and mystics move between the four towers and the Tower of Ascension like a line of ants feeding their nest.&lt;br&gt;      The Emperor seldom appears anywhere outside of the Tower of Ascension or its satellites. The Supreme Architect and Ossurot seem to accompany him day and night." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font size=24 face=&quot;Copperplate Gothic Light&quot;&gt;ИСТОРИЯ ИМПЕРИИ&lt;/font&gt;&lt;br&gt;&lt;br&gt;Страницы этого большого тома свисают с обветшалого корешка; многое из информации, изначально содержавшейся в нём, давно утрачено под воздействием стихий. Тем не менее, многое ещё можно прочесть.&lt;NewPage&gt;Год 325 от основания Империи, двенадцатый месяц, первый день.&lt;br&gt;&lt;br&gt; Император Басилеус принимает Ассур, последнее из отступнических королевств, в состав Империи. Протянутая рука мира одержала победу там, где не смогли война и обман. Ассур становится имперской провинцией, её народ получает гражданство, защиту закона и право свободного передвижения по всем землям. В честь этого император Басилеус объявляет месяц празднеств в столице. Врата Кадата распахнуты для всех народов Империи, а имперское золото оплачивает еду и питьё для каждого.&lt;br&gt; Отныне объятия императора окружают весь мир.&lt;NewPage&gt;Год 375 от основания Империи, седьмой месяц, девятнадцатый день.&lt;br&gt;&lt;br&gt; Вероломный Ассур и его союзники обращаются против Империи. Во главе их войск встаёт Король-Отступник Пандион. Дружба Ассура оказывается лишь уловкой для покорения Империи изнутри, используя её же силу. Пять десятилетий мира, свободной торговли и беспрепятственных путешествий преумножили мощь мятежных провинций, и теперь их армии окружают Империю.&lt;NewPage&gt;Год 375 от основания Империи, девятый месяц, тридцатый день.&lt;br&gt;&lt;br&gt; Шестнадцать легионов покидают Кадат — их поддерживают воины, собранные из провинций, сохранивших верность Империи. Генерал Зандрикс движется на север с Кросисом, Оком Легиона, в то время как барон Каранус и лорд Элиезер направляются на восток и запад. Сам император Мельхиор отплывает на юг, чтобы встретиться с армиями короля Пандиона. Терестра, Верховный Архитектор, остаётся в Кадате вместе с императрицей Селенией для защиты столицы.&lt;br&gt; Врата Кадата закрываются за спиной Мельхиора, рука Империи сжимается в кулак. Высокомерие Ассура запятнало золотой век.&lt;NewPage&gt;Год 378 от основания Империи, первый месяц, пятый день.&lt;br&gt;&lt;br&gt; Генерал Зандрикс триумфально возвращается в Кадат, неся окровавленные короны трёх мятежных королей. Вельсу, Ойбалос и Аншан пали перед Зандриксом, но страшной ценой — четверть его воинов теперь покоится в чужой земле. Победоносный герой возвращается во главе лишь одного легиона. Ещё два легиона остаются в северных провинциях, чтобы не допустить нового погружения Севера в хаос.&lt;br&gt;&lt;NewPage&gt; Зандрикс проводит в Кадате всего три ночи — лишь чтобы совершить подношения душам павших воинов и пополнить припасы, не более. На рассвете четвёртого дня его легион выступает на юг вдоль западного побережья, чтобы присоединиться к императору Мельхиору в битве против короля Пандиона.&lt;NewPage&gt;Год 378 от основания Империи, десятый месяц, седьмой день.&lt;br&gt;&lt;br&gt; Все принцы Рина и Баса либо мертвы, либо возвращаются в Кадат как заложники под надзор Верховного Архитектора. Барон Каранас заплатил за их поражение своей жизнью. Теперь его сын Калас командует легионерами, пережившими восточный фронт. Сама императрица Селения председательствовала на похоронах барона Караноса. Ныне он покоится в гробнице героя на Террасе Легиона.&lt;NewPage&gt;Год 379 от основания Империи, четвёртый месяц, двадцать шестой день.&lt;br&gt;&lt;br&gt; Новое горе. Верховный Архитектор вносит имя лорда Элиезера в книгу почётных мертвых, и он присоединяется к барону Каранасу под Террасой Легиона. Взамен все западные провинции, кроме верной Альбы, лежат в руинах. Ассур нашёл своих ближайших союзников на западе, и лишь беспощадная жестокость смогла усмирить их.&lt;br&gt; Жители запада погибли за мечту, в которую не верит даже сам Ассур.&lt;NewPage&gt;Год 379 от основания Империи, седьмой месяц, девятый день.&lt;br&gt;&lt;br&gt; Наконец приходят вести от императора Мельхиора и генерала Зандрикса. Все уцелевшие легионы, кроме единственного, защищающего Кадат, должны двинуться на юг. Король Пандион собрал оставшиеся силы — войско, всё ещё превосходящее армию императора — в столице Ассура. Император Мельхиор намерен вырвать мятеж с корнем. Решающая битва определит судьбу Империи.&lt;NewPage&gt;Год 379 от основания Империи, одиннадцатый месяц, второй день.&lt;br&gt;&lt;br&gt; Воины короля Пандиона осаждают Кадат.&lt;br&gt; Император Мельхиор разгромил армию, найденную в столице Ассура, но лишь малая часть войск Короля-Отступника удерживала тот город. Ловушка захлопнулась; уловка короля Пандиона заманила императора слишком далеко. Он не может защитить свой дом.&lt;br&gt; Катапульты и баллисты день и ночь обстреливают Кадат горящими снарядами. Хотя Кадат защищает лишь один легион, король Пандион слишком хитёр, чтобы бросать своих людей на укрепления. Он позволит голоду, страху и огню сделать своё дело прежде, чем начнётся настоящий штурм.&lt;NewPage&gt;Год 380 от основания Империи, третий месяц, двадцать восьмой день.&lt;br&gt;&lt;br&gt; Северные и западные ворота наконец пали. Гарнизоны в этих районах полегли до последнего человека. Любой легионер, не павший в бою, казнён без церемоний, как скот. Улицы и сточные канавы наполнены кровью почётных мертвых.&lt;br&gt; Императрица Селения и Верховный Архитектор укрепляют восточные и южные районы. Они перемещают всех выживших жителей Кадата в канализацию и туннели под городом. Лишь их приближённые и солдаты остаются на поверхности, чтобы встретить натиск Пандиона.&lt;NewPage&gt;Год 380 от основания Империи, четвёртый месяц, шестнадцатый день.&lt;br&gt;&lt;br&gt; В этот чёрный день пал восточный район, и императрица Селения оказалась в ловушке. Предатель из царского двора выдал путь её отступления, и теперь король Пандион держит императрицу в заложниках где-то под дворцом.&lt;br&gt; Мерзкое знамя Ассура развевается на каждом шпиле севера, востока и запада. Лишь южный район Кадата остаётся под контролем Верховного Архитектора. Она готовится к последнему сражению в Башне Вознесения.&lt;NewPage&gt;Год 380 от основания Империи, четвёртый месяц, тридцать первый день.&lt;br&gt;&lt;br&gt; Люди короля Пандиона наводняют южный район. Король-Отступник провозглашает себя императором.&lt;br&gt; В последнем акте неповиновения Верховный Архитектор заключает Башню Вознесения в глыбу льда. Король Пандион тщетно пытается разрушить чары. Ни сталь, ни огонь не могут даже поцарапать поверхность льда. Колдовство и осадные орудия столь же бессильны, но отвага Верховного Архитектора не может поднять Кадат из пепла.&lt;NewPage&gt;Год 380 от основания Империи, шестой месяц, второй день.&lt;br&gt;&lt;br&gt; Император возвращается в Кадат морем. За ним следуют семь легионов, и их ярость собирается подобно буре на южном горизонте.&lt;NewPage&gt;Год 380 от основания Империи, шестой месяц, третий день.&lt;br&gt;&lt;br&gt; Король Пандион терпит сокрушительное поражение. Укрепления, возведённые у причалов, не могли противостоять ярости императора Мельхиора; ряды короля-отступника рассыпаются в первые же часы. Его люди, опьянённые вином завоевания, оказываются не ровней семи легионам закалённых ветеранов, сражающихся за возвращение родного дома. Между резнёй и пленением армия короля Пандиона теряет в этом разгроме половину своей численности.&lt;br&gt; Уцелевшие баррикадируются по всему северному, восточному и западному районам города, и начинается череда жестоких стычек. Обе стороны бьются как бешеные звери, не прося и не давая пощады. Дух безрассудной ненависти овладевает всеми в Кадате.&lt;NewPage&gt;Год 380 от основания Империи, шестой месяц, седьмой день.&lt;br&gt;&lt;br&gt; Кадат вновь принадлежит Империи. Около 30 000 легионеров заплатили за единство своей кровью. Бессчётное множество граждан и союзников Империи пало за то же дело.&lt;br&gt; Выжившие умащивают и хоронят павших товарищей, в то время как тела ассуранцев питают огромные погребальные костры. Дым от их сожжения бросает чёрный покров на весь город.&lt;br&gt; Императрица Селения мертва, и император Мельхиор погрузился в океан скорби. В последние часы войны король Пандион отступил во дворец с двумя десятками солдат. Император Мельхиор в сопровождении своих генералов быстро расправился с охраной Пандиона, но Король-Отступник сумел бежать в туннели под дворцом. Император последовал за ним один, запретив генералам следовать за собой. Никто не знает точно, что произошло, но когда император emerged из-под дворца, он нёс на руках мёртвую императрицу, а голова короля Пандиона висела на его поясе.&lt;NewPage&gt;Год 381 от основания Империи, второй месяц, третий день.&lt;br&gt;&lt;br&gt; Император Мельхиор закрывает Башню Вознесения для просителей и перестаёт посещать двор. Он игнорирует требование знати взять в жёны ассуранку для укрепления мира. Он отгораживается от всех, кроме ближнего круга: генерала Зандрикса; Терестры, Верховного Архитектора; Кросиса, Ока Легиона, и новоприбывшего из западных провинций, который быстро обрёл славу и благосклонность после прибытия в Кадат. Этот человек, по имени Оссурот, рассеял магию, погребшую Башню Вознесения, и освободил Терестру из темницы, которую она создала для себя.&lt;NewPage&gt;Год 381 от основания Империи, третий месяц, двадцать пятый день.&lt;br&gt;&lt;br&gt; Император Мельхиор рассылает гонцов во все четыре стороны Империи. Он созывает в Кадат каждого чародея, жреца и учёного мужа.&lt;br&gt; Используя магические и мирские средства, Верховный Архитектор при помощи Оссурота возводит четыре башни, посвящённые изучению тайных и потусторонних наук.&lt;NewPage&gt;Год 381 от основания Империи, пятый месяц, четырнадцатый день.&lt;br&gt;&lt;br&gt; Император Мельхиор распускает свой двор и учреждает новый совет Арканистов для управления делами Империи.&lt;br&gt; Бесчисленные послушники, мудрецы и мистики снуют между четырьмя башнями и Башней Вознесения, словно муравьи, кормящие своё гнездо.&lt;br&gt; Император редко появляется где-либо за пределами Башни Вознесения или её спутников. Кажется, Верховный Архитектор и Оссурот сопровождают его днём и ночью." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_BOOK_HistoryComplete" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="This heavy tome is bound in a disturbingly supple leather--you do not dare think to what sort of creature it originally came from. A loathsome, tar-like substance permeates most of the pages. Only three readable fragments remain:&lt;br&gt;&lt;br&gt;      My Emperor, my apprentice, you will pave the road to my immortality. The gifts that Melchior casts aside, Ossurot accepts. I will show you where to find the door, and teach you how to fashion the key. Soon my allies from Outside will walk the Material Plane once more.&lt;NewPage&gt;      My misguided student, how can you believe perfection derives from sacrifice? The wolf does not thrive by starving itself. Instead it delights in slaughter. The blood of the lesser feeds the wolf's strength. This is not evil, but natural. We were born for this. Reject this wisdom if you must; I will embrace it and profit.&lt;NewPage&gt;      Fear, cruelty, ignorance, and carnality. I claim a portion of each of these supposed weaknesses. A single mote of any one of these holds more power than a hundred blood sacrifices. Such vast energy--this will satisfy even the phylactery's hunger." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Этот тяжёлый том переплетён в пугающе мягкую кожу — вы не осмеливаетесь думать о том, какому существу она некогда принадлежала. Омерзительная смолоподобная субстанция пропитала большинство страниц. Осталось лишь три читаемых фрагмента:&lt;br&gt;&lt;br&gt; Мой император, мой ученик, ты проложишь дорогу к моему бессмертию. Дары, что отвергает Мельхиор, принимает Оссурот. Я покажу тебе, где найти дверь, и научу, как выковать ключ. Скоро мои союзники из Внешнего мира вновь будут ходить по Материальному Плану.&lt;NewPage&gt; Мой заблудший ученик, как ты можешь верить, что совершенство происходит из жертвы? Волк не процветает, моря себя голодом. Напротив, он упивается резнёй. Кровь низших питает силу волка. Это не зло, но естество. Мы рождены для этого. Отвергни эту мудрость, если должен; я же приму её и извлеку выгоду.&lt;NewPage&gt; Страх, жестокость, невежество и плотские желания. Я претендую на долю каждой из этих мнимых слабостей. Единая крупица любой из них содержит больше силы, чем сотня кровавых жертв. Такая vast энергия — это утолит даже голод филактерии." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_BOOK_Ossurot1" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Silverfish have tunneled through this journal creating many voids throughout the text. The cover bears the insignia of the Legion.&lt;br&gt;&lt;br&gt;      Log of General Zandrix, Year of the Empire 381&lt;br&gt;      I have survived the greatest war of our time. Now I don't know what to do with myself. I'm built for open combat against real soldiers, not for hunting down ragtag bands of separatists that somehow escaped their beating the first time around and haven't learned their lesson because of it. I personally took the heads of three kings, renowned fighters all--these upstarts don't know even the half-measure of my wrath.&lt;NewPage&gt;      They raised a statue of me in the Legion's Terrace. It's the highest honor a legionnaire can aspire to, short of burial beneath the Terrace amongst the honored dead, and I don't deserve it. I laid waste to three kingdoms, but lost an entire legion in the process—sloppy.&lt;NewPage&gt;      Praise the gods, Emperor Melchior has thrown out the nobles! Who counsels a man still mourning his dead wife to take another in a political marriage only months after the first has died? They spend too much time thinking about ways to preserve their own peace rather than who has to pay for it.&lt;NewPage&gt;      It seems I'm not the only one having some difficulty adjusting to peacetime after over four solid years of war. Krosis tells me his latest assignment poses some unique problems.&lt;NewPage&gt;      Journeys to other worlds, the ascension of the flesh, the purification of the spirit... Listening to Terrestra and Ossurot makes a man's head spin. I'm getting too old for this shit." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Книжные черви проделали в этом дневнике множество пустот в тексте. На обложке виден знак Легиона.&lt;br&gt;&lt;br&gt; Записи генерала Зандрикса, год 381 от основания Империи&lt;br&gt; Я пережил величайшую войну нашего времени. Теперь не знаю, чем себя занять. Я создан для открытого боя против настоящих солдат, а не для охоты на разрозненные банды сепаратистов, которые каким-то образом избежали первой трёпки и не усвоили урок.&lt;br&gt; Я лично снял головы с трёх королей, прославленных воинов — эти выскочки не знают и половины моего гнева.&lt;NewPage&gt; На Террасе Легиона воздвигли мою статую. Это высочайшая честь, о которой может мечтать легионер, не считая погребения под Террасой среди почётных мертвых, и я её не заслуживаю. Я разорил три королевства, но потерял целый легион в процессе — неряшливая работа.&lt;NewPage&gt; Хвала богам, император Мельхиор изгнал знать! Кто советует человеку, всё ещё скорбящему по умершей жене, взять другую в политический брак лишь через несколько месяцев после смерти первой? Они слишком много думают о способах сохранить свой собственный мир, а не о том, кто должен за него платить.&lt;NewPage&gt; Похоже, не я один испытываю некоторые трудности с приспособлением к мирному времени после более чем четырёх лет непрерывной войны. Кросис говорит, что его последнее задание создаёт некоторые уникальные проблемы.&lt;NewPage&gt; Путешествия в иные миры, вознесение плоти, очищение духа... От разговоров с Терестрой и Осуротом голова идёт кругом. Я слишком стар для этого дерьма." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_BOOK_Zandrix1" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="The key to the enigma of flesh resides somewhere in this reality of blood and water.&lt;br&gt;&lt;br&gt;      All observations lead to the one conclusion: this plane is unfinished. For some inscrutable reason, whatever force brought it into being did not complete the creative act. Now we will finish that act and master the secrets of our own construction." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Ключ к загадке плоти таится где-то в этой реальности крови и воды.&lt;br&gt;&lt;br&gt; Все наблюдения ведут к единому выводу: этот план не завершён. По какой-то непостижимой причине сила, породившая его, не завершила акт творения. Теперь мы завершим этот акт и овладеем тайнами нашего собственного устройства." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_BOOK_Primordial1" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="A number of unintelligible diagrams cover this ink-stained bit of parchment; amidst the scribbling you read a handful of loosely related notes:&lt;br&gt;&lt;br&gt;      Maddening antiquity defines everything here.&lt;br&gt;&lt;br&gt;      This reality predates the Material Plane, perhaps even the gods themselves....&lt;br&gt;&lt;br&gt;      Flesh predates thought and purpose. Flesh is it's own purpose." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Множество непонятных диаграмм покрывает этот испачканный чернилами кусок пергамента; среди каракулей вы читаете горстку слабо связанных заметок:&lt;br&gt;&lt;br&gt; Сводящая с ума древность определяет здесь всё.&lt;br&gt;&lt;br&gt; Эта реальность предшествует Материальному Плану, возможно, даже самим богам...&lt;br&gt;&lt;br&gt; Плоть предшествует мысли и предназначению. Плоть сама есть предназначение." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_BOOK_Primordial2" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="It is a prototype, a study for the mortal world, where meat predates thought--the negative corollary of the astral realm. Creatures composed solely of blood or bare muscle wander the swamps and islands. Their forms resemble own, but cruder, exaggerated, as though out bodies resulted form a streamlined version of the process used to create them. " />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Это прототип, эскиз смертного мира, где мясо предшествует мысли — отрицательное отражение астрального царства. Создания, состоящие исключительно из крови или голых мышц, бродят по болотам и островам. Их формы напоминают наши, но более грубые, преувеличенные, словно наши тела возникли в результате оптимизации процесса, использованного для их создания." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_BOOK_Primordial3" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="The ink of these loose, moist papers has run, and  many are torn and scattered. What remains appears to be a list of goods:&lt;NewPage&gt;Declaration and Inventory of Carried Goods:&lt;br&gt;&lt;br&gt;     Kala Jeera: 1.2Kg.&lt;br&gt;      Saffron: 0.6Kg.      &lt;br&gt;Amchur Powder: 1.7Kg.      &lt;br&gt;Anardana: 1.1Kg.      &lt;br&gt;Machalepi : 1.9Kg.      &lt;br&gt;Ajowan Seeds : 1.3Kg.      &lt;br&gt;Charnushka Powder : 2.0Kg.      &lt;br&gt;Foosaka Powder : 400gp.      &lt;br&gt;Espresso Powder : 1.4Kg.      &lt;br&gt;Fenugreek Seeds : 0.7Kg.      &lt;br&gt;Madras Curry : 2.0Kg.      &lt;br&gt;Ras el Hanout : 1.2Kg.      &lt;br&gt;Shichimi Togarashi : 0.6Kg.      &lt;br&gt;Star Anise Powder : 1.8Kg.      &lt;br&gt;Vadouvan : 1.0Kg.      &lt;br&gt;Vindaloo : 1.3Kg.      &lt;br&gt;Pure Wasabi Powder : 2.0Kg." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Чернила на этих рассыпанных влажных листах расплылись, многие порваны и разбросаны. Сохранился, похоже, список товаров:&lt;NewPage&gt;Декларация и опись перевозимых товаров:&lt;br&gt;&lt;br&gt; Кала джира: 1,2 кг&lt;br&gt; Шафран: 0,6 кг&lt;br&gt; Амчур в порошке: 1,7 кг&lt;br&gt; Анардана: 1,1 кг&lt;br&gt; Махлеб: 1,9 кг&lt;br&gt; Семена аджвана: 1,3 кг&lt;br&gt; Калинджи молотый: 2,0 кг&lt;br&gt; Порошок фусака: 400 зм&lt;br&gt; Эспрессо в порошке: 1,4 кг&lt;br&gt; Семена пажитника: 0,7 кг&lt;br&gt; Карри мадрас: 2,0 кг&lt;br&gt; Рас-эль-ханут: 1,2 кг&lt;br&gt; Шичими тогараши: 0,6 кг&lt;br&gt; Бадьян молотый: 1,8 кг&lt;br&gt; Вадуван: 1,0 кг&lt;br&gt; Виндалу: 1,3 кг&lt;br&gt; Чистый порошок васаби: 2,0 кг" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_BOOK_SpiceMerchant2" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="This damp document details a routine voyage to one “Hunter's Keep;” the location of which, along with other information, is absent.&lt;br&gt;&lt;br&gt;      The Keep remains strong, silent as ever. I met personally with the sisters, as is customary. Lucy and Phoebe received me well enough, and were eager to renew formal relations in addition to offering continued sanctuary for those of the organization. Of course, Cynthia sat wordlessly, eyeing me the entire time with her awkward grin. She terrifies me.&lt;br&gt;      I was unable to gather any new information on the whereabouts of the missing sailor who last took refuge with the sisters—when I enquired they only giggled and offered me more pork." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Этот влажный документ описывает обычный рейс к некой «Охотничьей Крепости»; её местоположение, как и прочая информация, отсутствует.&lt;br&gt;&lt;br&gt; Крепость стоит крепко, молчалива как всегда. Я лично встретился с сёстрами, как положено. Люси и Фиби приняли меня достаточно хорошо и жаждали возобновить формальные отношения, а также предложили продолжить предоставлять убежище членам организации. Конечно, Синтия просидела молча, пялясь на меня всё время со своей неловкой ухмылкой. Она меня ужасает.&lt;br&gt; Мне не удалось собрать никакой новой информации о местонахождении пропавшего моряка, который в последний раз нашёл убежище у сестёр — когда я осведомился, они лишь хихикнули и предложили мне ещё свинины." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_BOOK_PortReport1" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="The brittle wax seal crumbles when you open this missive. It is a summons addressed to Ossurot from the Emperor of Kadath:&lt;br&gt;&lt;br&gt;      We do not know what business could be so urgent as to draw you away from our shared quest, but we bear you no malice for it. Return to Kadath; the hour of our triumph approaches. We have nearly completed preparations for the last Ritual of Ascension. In a fortnight we will complete our work. You showed us how to take the first step on this journey, do not turn your back on us when the moment to cross the final threshold arrives. Remember, once we have opened that door, we cannot turn back for you. " />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Хрупкая восковая печать крошится, когда вы открываете это послание. Это вызов, адресованный Оссуроту от императора Кадата:&lt;br&gt;&lt;br&gt; Мы не знаем, какое дело могло быть столь срочным, чтобы отвлечь тебя от нашего общего поиска, но мы не держим на тебя зла. Возвращайся в Кадат; час нашего триумфа приближается. Мы почти завершили приготовления к последнему Ритуалу Вознесения. Через две недели мы закончим нашу работу. Ты показал нам, как сделать первый шаг в этом путешествии, не отворачивайся от нас, когда настанет момент переступить последний порог. Помни, как только мы откроем эту дверь, мы не сможем вернуться за тобой." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_BOOK_Herald1" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="A thin book bound in blue leather, the spine fell apart long ago, and many of the pages have disappeared while the remainder have suffered the effects of some corrosive substance. A series of notes remain:&lt;br&gt;&lt;br&gt;      How long did I sleep in the ice? It seemed like eternity. I meant it to last for eternity....&lt;NewPage&gt;      What happened beneath the palace? Emperor Melchior will not speak of it. Somehow he does not blame me for the Empress' death. Surprising. Someone with a stronger taste for heroism might have tried to free her from dungeon. I did not.&lt;NewPage&gt;      I have difficulty trusting Ossurot, but I cannot find any flaws in his science. He has Emperor Melchior's ear, and perhaps that suffices. I have not always been a good judge of character. Ossurot found a way to free me from the ice tomb I conjured, even though I designed it to last indefinitely.&lt;NewPage&gt;      If he can bind a piece of himself to a plane, that should free him of its influence....&lt;NewPage&gt;      I told him that we have no way of foreseeing any secondary effects that the ritual may produce due to the absence of any actual data. The first time is a leap of faith. I am peculiarly ill-suited to this sort of work. We have brought our science to the edge of its ability, to the point where all rational structures disintegrate and the unknown seeps up from beneath.&lt;NewPage&gt;      We call it Ascension....&lt;NewPage&gt;      Emperor Melchior appears noticeably changed following his binding to the Plane of Shadow, emboldened, or perhaps simply more reckless. His reasoning has developed an unusually brilliant tendency. He leaps from point A to D without needing the assurance of having past through B and C.&lt;NewPage&gt;      I have decided to undergo the Ritual of Ascension myself. I have watched Emperor Melchior charge headlong into a world of unrestrained thought and action, with each step forward dwarfing the last. Ascension is the gateway to this new world.&lt;NewPage&gt;      I am changed, and everything is illuminated. Before I needed light to see, now my light allows others to see...." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Тонкая книга в синем кожаном переплёте, корешок давно отвалился, многие страницы исчезли, а оставшиеся пострадали от воздействия какого-то едкого вещества. Сохранилась серия заметок:&lt;br&gt;&lt;br&gt;      Как долго я спала во льду? Казалось, целую вечность. Я и намеревалась, чтобы это длилось вечно...&lt;NewPage&gt;      Что произошло под дворцом? Император Мельхиор не говорит об этом. Почему-то он не винит меня в смерти императрицы. Удивительно. Кто-нибудь с более сильной тягой к героизму мог бы попытаться освободить её из подземелья. Я не стала.&lt;NewPage&gt;      Мне трудно доверять Оссуроту, но я не могу найти изъянов в его науке. У него есть ухо императора Мельхиора, и, возможно, этого достаточно. Я не всегда была хорошим судьёй характеров. Оссурот нашёл способ освободить меня из ледяной гробницы, которую я создала, хотя я проектировала её как бессрочную.&lt;NewPage&gt;      Если он сможет привязать часть себя к плану, это должно освободить его от его влияния...&lt;NewPage&gt;      Я сказала ему, что у нас нет способа предвидеть какие-либо побочные эффекты, которые может произвести ритуал из-за отсутствия каких-либо фактических данных. Первый раз — это прыжок веры. Я на удивление плохо подхожу для такой работы. Мы довели нашу науку до предела её возможностей, до точки, где все рациональные структуры распадаются и неизвестное просачивается снизу.&lt;NewPage&gt;      Мы называем это Вознесением...&lt;NewPage&gt;      Император Мельхиор заметно изменился после привязки к Плану Теней, стал более смелым или, возможно, просто более безрассудным. Его мышление приобрело необычайно блестящую тенденцию. Он перепрыгивает от точки А к точке Г, не нуждаясь в уверенности, что прошёл через Б и В.&lt;NewPage&gt;      Я решила сама пройти Ритуал Вознесения. Я наблюдала, как император Мельхиор стремительно погружается в мир неограниченной мысли и действия, каждый шаг вперёд затмевает предыдущий. Вознесение — это врата в этот новый мир.&lt;NewPage&gt;      Я изменилась, и всё озарилось. Раньше мне нужен был свет, чтобы видеть, теперь мой свет позволяет видеть другим..." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_BOOK_Terrestra1" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="The yellowed bones of this unfortunate individual display a multitude of tiny gouges; they appear to be teeth marks." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Пожелтевшие кости этого несчастного покрыты множеством крошечных зарубок; похоже на следы зубов." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_LED_SpiceMerchantSkeleton" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="The masonry at the back of this cave does not appear to match the front. You get the sense that this is much older. Even though debris fills this area of the cave, you surmise the wolves entered through here somehow." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Кладка в задней части пещеры не похожа на ту, что спереди. Создаётся впечатление, что она намного старше. Хотя эта часть пещеры завалена обломками, вы догадываетесь, что волки как-то проникли именно отсюда." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_LED_SpiceMerchantOldMasonry" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="This massive wood-fired oven hasn't seen use in years, but oddly still smells of sea buscuits." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Эта огромная дровяная печь не использовалась годами, но, странное дело, до сих пор пахнет морскими сухарями." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_LED_ZeeOven" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Run aground by salty dogs--should have learned how to use a sextant properly." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Посажен на мель морскими волками — стоило лучше учиться пользоваться секстантом." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_LED_ZeeBoat" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="This fellow has had a rather drastic run of bad luck, and so have his friends." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Этому парню крупно не повезло, как и его друзьям." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_LED_ZeeZailors" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Not even dragon fire can withstand the cold in this place." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Даже драконье пламя не может противостоять холоду этого места." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_LED_OutsideDragon" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="The statue's gaze appears to follow you. For a moment the chill in the air grows even sharper." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Кажется, будто статуя следит за вами. На мгновение холод в воздухе становится ещё пронзительнее." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_LED_OutsideStatues" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="A heavily gnawed skeleton surrounded by moldy map fragments, and notably missing a left arm--it seems you have stumble across the remains of famed catographer, Tyriok. Looks like even the best charts could not show him the way out of this one.... " />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Сильно обглоданный скелет в окружении заплесневелых обрывков карт, примечательно отсутствие левой руки — похоже, вы наткнулись на останки прославленного картографа Тириока. Видимо, даже лучшие карты не смогли указать ему выход отсюда..." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_SUB_Tyriok" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Initially, these bones appear frozen, but further inspection reveals something far more disturbing. These remains underwent some sort of crystallization or vitrification. Many of the skeletons have fused together, joined by razor-edged spurs of crystal." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="На первый взгляд эти кости кажутся замёрзшими, но более тщательный осмотр раскрывает нечто куда более тревожное. Эти останки подверглись какому-то процессу кристаллизации или витрификации. Многие скелеты сплавились воедино, соединённые острыми как бритва кристаллическими наростами." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_WST_CrystalRemainsInitial" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="In bold capitals, the base of the statue reads: Empress Selenia, Light of the Empire." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="На постаменте статуи крупными буквами выбито: Императрица Селения, Свет Империи." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_WST_SeleniaMonument1" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="In bold capitals, the base of the statue reads: Empress Selenia, Heart of the Empire." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="На постаменте статуи крупными буквами выбито: Императрица Селения, Сердце Империи." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_WST_SeleniaMonument2" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Bow your head, friend, for you tread on sacred ground. You now enter the Vaults of the Honored Dead." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Склони голову, друг, ибо ты ступаешь по священной земле. Ты входишь в Склепы Почётных Мертвых." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_WST_TerraceVaults" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="A curious inversion of an otherwise mundane image of piety. Placing the reliefs upside-down may indicate humility, or, for some unknown reason, negation. " />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Любопытная инверсия в целом обыденного образа благочестия. Размещение рельефов вверх ногами может указывать на смирение или, по какой-то неведомой причине, на отрицание." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_WST_TerraceVaultsUpsideDownReliefs" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="The sinister message of this image of torture is unmistakable; it does not seem in keeping with the tone of a burial chamber for the revered dead...." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Зловещий посыл этого изображения пытки недвусмысленен; кажется, оно не соответствует духу погребальной камеры почитаемых мертвецов..." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_WST_TerraceVaultGruesomeStatues" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="The inscription at the base of the statue reads: General Zandrix, the Flail of Peace, songs of his triumph in the North with resound through the corridors of time.  " />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Надпись у подножия статуи гласит: Генерал Зандрикс, Бич Мира, песни о его триумфе на Севере будут звучать в коридорах времени." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_WST_TerraceGeneralZandrixStatue1" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="A contained, but intense, explosion has upset this basalt altar. It almost appears as though some small, hot projectile struck the altar, leaving a shallow crater in it's center." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Локальный, но мощный взрыв повредил этот базальтовый алтарь. Похоже, будто какой-то маленький раскалённый снаряд ударил в алтарь, оставив неглубокий кратер в центре." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_WST_BlastedAltar" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="The remains of some nameless ritual sacrifice, methodically, almost lovingly, arranged. Judging by the preservation of these grisly artifacts, something terrible took place here, not too long ago." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Останки какого-то безымянного ритуального жертвоприношения, методично, почти с любовью разложенные. Судя по сохранности этих жутких артефактов, что-то ужасное произошло здесь совсем недавно." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_WST_MeatRing1" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Immaculately preserved machinery serving an inscrutable purpose. These engines still perform their function, though the people they served moldered away ages ago." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Безупречно сохранившиеся механизмы, служащие непостижимой цели. Эти машины до сих пор выполняют свою функцию, хотя люди, которым они служили, истлели много веков назад." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_WST_DocksMachinery" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="This shattered longboat displays the marks of imperial design during the reign of Emperor Melchior: Elegance, precision, and a certain disdain for conventional ornamentation." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Эта разбитая ладья демонстрирует характерные черты имперского дизайна времён правления императора Мельхиора: изящество, точность и определённое пренебрежение традиционными украшениями." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_WST_DocksBoat" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="The dedication reads: We who stand at the forefront of the modern, of the new humanity, salute our brothers and sisters. In memory of the fallen, in praise of those yet to fall, raise your eyes to the heavens and see the new dawn." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Посвящение гласит: Мы, стоящие на переднем крае современности, нового человечества, приветствуем наших братьев и сестёр. В память о павших, во славу тех, кому ещё предстоит пасть, поднимите глаза к небесам и узрите новый рассвет." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_WST_AscensionMonument1" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Emblazoned on the base of the statue you read: Transcendence or death. We will not live as slaves to fate any longer." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="На постаменте статуи начертано: Преображение или смерть. Мы больше не будем жить рабами судьбы." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_WST_AscensionMonument2" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Emblazoned on the base of the statue you read: Our blood travels through the veins of history. We give life to Time." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="На постаменте статуи начертано: Наша кровь течёт по венам истории. Мы даруем жизнь Времени." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_WST_AscensionMonument3" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Intense unease fills you as you approach this repulsive altar. You don't belong here." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Вас охватывает сильнейшее беспокойство, когда вы приближаетесь к этому омерзительному алтарю. Вам здесь не место." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_WST_MeatAltars" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Heaped remains, again mysteriously fused and crystallized. It appears someone dragged and piled these, fracturing many of the skeletons in the process. " />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Нагромождённые останки, снова загадочным образом сплавленные и кристаллизованные. Похоже, кто-то стаскивал и складывал их в кучу, переломав при этом множество скелетов." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_WST_TerraceCrystalRemainsPiles" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="The unmistakably human bones charring in this hearth poison an otherwise inviting scene. " />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Обугливающиеся в этом очаге, несомненно человеческие кости отравляют иначе уютную картину." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_WST_AstralTowerFireplace" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="A round map--apparently the Empire's cartographers had some unorthodox notions about the shape of Rivellon." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Круглая карта — похоже, картографы Империи имели некоторые неортодоксальные представления о форме Ривеллона." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_WST_AstralTowerGlobe" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="The hunter became the hunted. " />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Охотник стал добычей." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_WST_AbyssalTowerTrophy" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="The disarray of this room's contents bespeak nothing short of madness, everything slashed, hacked, or crushed. Fevered rage passed through here like a storm." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Хаос, царящий в этой комнате, говорит не иначе как о безумии — всё изрезано, изрублено или разбито. Лихорадочная ярость пронеслась здесь подобно буре." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_WST_AbyssalTowerChaos" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="What a fine example of an ordinary Plumbus." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Какой превосходный образец обычного Плумбуса." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_WST_ShadowTowerPlumbus" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="A transformer serving some mysterious purpose. It hums quietly, still in working order. For that matter, you cannot find a single piece of equipment in this laboratory in less than pristine condition." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Трансформатор, служащий какой-то загадочной цели. Он тихо гудит, всё ещё в рабочем состоянии. Впрочем, во всей этой лаборатории вы не можете найти ни единого прибора, который не был бы в безупречном состоянии." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_WST_ShadowTowerTransformer" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="A catalogue of various energy sources, and potential ways to harness them, written in small, rigorously precise characters. It makes a number of assertions concerning the use of time as a fuel for spellcasting." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Каталог различных источников энергии и возможных способов их обуздания, написанный мелким, педантично точным почерком. В нём содержится ряд утверждений об использовании времени как топлива для сотворения заклинаний." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_WST_ShadowTowerTreatise" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Exotic botanical reagents crowd the plot of earth sheltered within this tower. The scent of exotic blooms momentarily makes your head swim." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Экзотические растительные реагенты теснятся на участке земли, укрытом внутри этой башни. От аромата диковинных цветов у вас на мгновение кружится голова." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_WST_PrimordialTowerBotanicals" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="To your surprise, the majority of the bottles on this shelf appear filled with blood. Age has rendered the labels illegible, so you have no way of guessing the purpose of these samples." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="К вашему удивлению, большинство бутылок на этой полке, похоже, наполнены кровью. Время сделало этикетки нечитаемыми, так что вы никак не можете угадать предназначение этих образцов." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_WST_PrimordialTowerBlood" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="For a single terrifying instant, you experience the sensation of falling headlong through windy darkness, and then the darkness parts. Hard, white light filters through shimmering fog. This is the Astral." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="На одно ужасающее мгновение вы испытываете ощущение стремительного падения сквозь ветреную тьму, а затем тьма расступается. Жёсткий белый свет просачивается сквозь мерцающий туман. Это Астрал." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_WST_AstralTowerPortal" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="You step into the shadowed passageway. Thick smoke presses against you like a sinuous, living creature. You tear at it with you hands, but it has already disappeared. The monotonous sound of a constant wind fills your ears. This is the Abyss." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Вы шагаете в затенённый проход. Густой дым давит на вас, словно извивающееся живое существо. Вы разрываете его руками, но он уже исчез. Ваши уши наполняет монотонный звук непрекращающегося ветра. Это Бездна." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_WST_AyssalTowerPortal" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Crossing the threshold, warm shadows embrace you. Forms begin to emerge in the murk. A sea of grating whispers welcome you in countless languages. The eager voices weave through each other, revealing nothing and complicating everything. This is Shadow. " />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Пересекая порог, вас обнимают тёплые тени. Из мрака начинают проступать формы. Море скрежещущих шёпотов приветствует вас на бесчисленных языках. Жадные голоса переплетаются друг с другом, ничего не раскрывая и всё усложняя. Это Тень." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_WST_ShadowTowerPortal" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Your body dissolves. Your will erodes. Passing through the gate feels like going home. Then your eyes open again. The heavy scent of exotic flowers hangs in the air, and a thin, ceaseless rain drenches everything. This is the Unfinished Plane." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Ваше тело растворяется. Ваша воля размывается. Прохождение через врата ощущается как возвращение домой. Затем ваши глаза открываются вновь. В воздухе висит тяжёлый аромат экзотических цветов, а тонкий, нескончаемый дождь пропитывает всё вокруг. Это Незавершённый План." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_WST_PrimordialTowerPortal" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Through the portal a furnace awaits you. Molten winds surge and churn through oceans of light. You stand in the storm's eye, the incandescent core of the Astral, where the blistering anxiety of possibility irradiates all thought and action. " />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="За порталом вас ожидает горнило. Расплавленные ветра вздымаются и кружат в океанах света. Вы стоите в оке бури, в пылающем сердце Астрала, где обжигающая тревога возможностей пронизывает излучением всякую мысль и действие." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_ASC_AstralPortal" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Exiting the portal, terror meets you. Those whispers that beckoned you before now beg you to stay back. The darkness trembles; it almost inspires pity. How strange that you have finally become the most terrible creature in the shadows." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Выходя из портала, вы встречаетесь с ужасом. Те шёпоты, что прежде манили вас, теперь умоляют держаться поодаль. Тьма трепещет; это почти вызывает жалость. Как странно, что вы наконец стали самым страшным существом в тенях." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_ASC_ShadowPortal" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Vast despair struggles overwhelm you. Give up. No hope remains. Hope never existed, only its illusion, and now it has abandoned you.... No. You will not bend. Despair vanishes, and you direct your hate into the heart of the Abyss." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Необъятное отчаяние пытается одолеть вас. Сдайтесь. Надежды не осталось. Надежды никогда не существовало, лишь её иллюзия, и теперь она покинула вас... Нет. Вы не согнётесь. Отчаяние исчезает, и вы направляете свою ненависть в самое сердце Бездны." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_ASC_AbyssalPortal" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="The metallic scent of blood fills your lungs. Overhead, an incoherent tangle of tarry forms sieve the light of an endless sunset. These half-formed appendages grasp at nothing and everything, caught in the ravenous instant of becoming." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Металлический запах крови наполняет ваши лёгкие. Над головой бессвязное сплетение смолянистых форм процеживает свет бесконечного заката. Эти полуоформленные отростки хватают ничто и всё сразу, застыв в ненасытном мгновении становления." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_ASC_PrimordialPortal" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="At an initial glace the illegible text of this ledger shifts and obfuscates, maintaining a peripheral blur. Yet, after a brief moment of concentration, each page manifests itself in your native tongue.&lt;NewPage&gt;Listed herein are a multitude of ancient, dated entries; each meticulously detailing a unique binding of source to an inanimate vestige. Though the data spans many lifetimes, most entries refer to identical or similarly named individuals; suggesting the process as a guarded craft.&lt;br&gt;&lt;br&gt;You find that, while the majority of these techniques would be impossible to implement in today's Rivellon, the refining processes might indeed be replicable with such an object already intact.&lt;NewPage&gt;Through further study of these entries, you gather that, with an object referred to as an Artificer's Stone, one can capture an artifact's essence into a shard. These shards can then be manipulated around other such artifacts to empower their abilities." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="На первый взгляд нечитаемый текст этого фолианта ускользает и затуманивается, сохраняя размытость по краям. Однако после краткого сосредоточения каждая страница проявляется на вашем родном языке.&lt;NewPage&gt;Здесь перечислено множество древних, датированных записей; каждая скрупулёзно описывает уникальную привязку источника к неодушевлённому вместилищу. Хотя данные охватывают много жизней, большинство записей относятся к одним и тем же или схожим именам; что намекает на охраняемое мастерство.&lt;br&gt;&lt;br&gt;Вы обнаруживаете, что, хотя большинство этих техник невозможно воспроизвести в современном Ривеллоне, процессы очищения действительно могут быть повторены с уже существующим предметом.&lt;NewPage&gt;Дальнейшее изучение этих записей позволяет понять, что с помощью предмета, именуемого Камнем Артефактора, можно захватить сущность артефакта в осколок. Эти осколки затем можно использовать рядом с другими подобными артефактами для усиления их способностей." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />

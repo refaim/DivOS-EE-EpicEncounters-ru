@@ -41,7 +41,7 @@
 					<attribute id="UUID" type="22" value="AMER_UNI_PariahProc" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Good Housekeeping" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Образцовая хозяйственность" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
@@ -153,98 +153,98 @@
 					<attribute id="UUID" type="22" value="AMER_UNI_PatienceProc5" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Oooh! Such strong hands!" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Ох! Какие сильные руки!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_UNI_FurinProcSpeech1" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Do you HAVE to go below the belt!?" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Обязательно было бить ниже пояса?!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_UNI_FurinProcSpeech2" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Get to da choppa!" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Бегом к швабре!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_UNI_FurinProcSpeech3" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="That's a CLEAN hit, HA! Get it?" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Вот это ЧИСТЫЙ удар! Ха! Поняли шутку?" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_UNI_FurinProcSpeech4" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Is it weird to like the taste of blood?" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Странно ли, что мне нравится вкус крови?" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_UNI_FurinProcSpeech5" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Housekeeping!" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Уборка!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_UNI_FurinProcSpeech6" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Furin frequently flounders frivolously for finance fees forwarded finally." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Фурин фанатично фехтует феноменально фирменной фиброй, фланируя." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_UNI_FurinProcSpeech7" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="You know, I feel like we're really beginning to understand each other." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Знаешь, мне кажется, мы начинаем по-настоящему понимать друг друга." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_UNI_FurinProcSpeech8" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="The BROOM! Give him the BROOM!" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="МЕТЛУ! Дайте ему МЕТЛУ!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_UNI_FurinProcSpeech9" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Cleanliness is next to godliness." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Чистота – залог победы." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_UNI_FurinProcSpeech10" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="My mother used to tell me, &quot;stop trying to fight fire!&quot; She *was* a Bissell... Love ya mom." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Матушка всегда говорила: «Прекрати сражаться с огнём!» Ну а что вы хотели, она же из семьи Чистюль... Люблю тебя, мам." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_UNI_FurinProcSpeech11" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Strong, broad strokes!" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Сильные, широкие взмахи!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_UNI_FurinProcSpeech12" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="BOOM! Imma BROOM, baby!" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="БАХ! Я МЕТЛА, детка!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_UNI_FurinProcSpeech13" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Have you seen my dustpan?" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Не видели мой совок?" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
@@ -258,7 +258,7 @@
 					<attribute id="UUID" type="22" value="AMER_SKILL_UNI_WendigoStance_DisplayName" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="With the Predator talent, this grisly trophy grants one additional Predator reaction each round." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Благодаря таланту «Хищник» этот жуткий трофей даёт одну дополнительную реакцию Хищника за ход." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
@@ -300,7 +300,7 @@
 					<attribute id="UUID" type="22" value="AMER_SKILL_UNI_ArcturusStance_DisplayName" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Opportunist's attack bonuses apply to Centurion retaliations." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Бонусы к атаке от таланта «Оппортунист» применяются к ответным ударам Центуриона." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
@@ -314,7 +314,7 @@
 					<attribute id="UUID" type="22" value="AMER_SKILL_UNI_GhostflameStance_DisplayName" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="With the Demon talent, this ghastly token grants one additional Demon reaction each round." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Этот зловещий знак даёт одну дополнительную реакцию демона за ход, если у вас есть талант «Демон»." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
@@ -328,7 +328,7 @@
 					<attribute id="UUID" type="22" value="AMER_SKILL_UNI_SeraphStance_DisplayName" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="With the Angel talent, this angelic relic grants one additional Angel reaction each round." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Эта ангельская реликвия даёт одну дополнительную реакцию ангела за ход, если у вас есть талант «Ангел»." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
@@ -342,7 +342,7 @@
 					<attribute id="UUID" type="22" value="AMER_SKILL_UNI_AbyssStance_DisplayName" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="In attuning to the hellish voidplate, Abyss grants +[1]% increased damage and +[2]% critical chance." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Настроившись на адскую пустотную пластину, Бездна даёт +[1]% к урону и +[2]% к шансу крита." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
@@ -384,84 +384,84 @@
 					<attribute id="UUID" type="22" value="AMER_UNI_Abyss_E" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c7a758&quot;&gt;Antediluvian Carapace&lt;/font&gt;" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c7a758&quot;&gt;Допотопный панцирь&lt;/font&gt;" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_UNI_Antediluvian" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Antediluvian Carapace" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Допотопный панцирь" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_SKILL_UNI_AntediluvianStance_DisplayName" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Bound to the elements, this ancient plate grants +5% to all non-physical maximum resistances while active." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Этот связанный со стихиями древний доспех на 5% повышает максимальное сопротивление всем видам урона, кроме физического." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_SKILL_UNI_AntediluvianStance_Description" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="The arcane mechanisms of this powerful artifact instantly regenerate 1% of damage suffered for each point of intelligence you have." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Тайные механизмы этого могущественного артефакта мгновенно восстанавливают 1% от полученного урона за каждое очко интеллекта." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_SKILL_UNI_EmpyreanStance_Description" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Empyrean Barrier" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Небесный барьер" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_SKILL_UNI_EmpyreanStance_DisplayName" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c7a758&quot;&gt;Empyrean Barrier&lt;/font&gt;" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c7a758&quot;&gt;Небесный барьер&lt;/font&gt;" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_UNI_Empyrean" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c7a758&quot;&gt;Necromancer's Cloak&lt;/font&gt;" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c7a758&quot;&gt;Плащ некроманта&lt;/font&gt;" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_UNI_Necromancer" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Necromancer's Cloak" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Плащ некроманта" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_SKILL_UNI_NecromancerStance_DisplayName" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="While active, this grim garb grants +1 AP Recovery for every corpse within 3.0m, up to +3, at the end of each turn." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Это зловещее облачение даёт +1 к восстановлению очков действия за каждый труп в радиусе 3 м (максимум +3)" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_SKILL_UNI_NecromancerStance_Description" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Плащ Некроманта" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Плащ некроманта" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_UNI_NecromancerAP1" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Плащ Некроманта" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Плащ некроманта" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_UNI_NecromancerAP2" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Плащ Некроманта" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Плащ некроманта" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
@@ -482,70 +482,70 @@
 					<attribute id="UUID" type="22" value="AMER_SKILL_UNI_VaultStance_DisplayName" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="The Vault's powerful magic multiplies your energy as you bide, while active, 30% of current action points are gained as action point recovery at the end of each turn." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Могущественная магия Сокровищницы приумножает вашу энергию во время ожидания. Пока активна, 30% текущих очков действия преобразуются в восстановление очков действия в конце каждого хода." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_SKILL_UNI_VaultStance_Description" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c7a758&quot;&gt;Bounty Hunter&lt;/font&gt;" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c7a758&quot;&gt;Охотник за головами&lt;/font&gt;" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_UNI_BountyHunter" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Bounty Hunter" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Охотник за головами" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_SKILL_UNI_BountyHunter_DisplayName" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;p align=&quot;left&quot;&gt;&lt;font face=&quot;Copperplate Gothic Bold&quot;&gt;Physical resistances: [1]%.&lt;br&gt;Gold awarded is based on your level, boss-creatures are worth 10 times normal bounty.&lt;/font&gt;&lt;/p&gt;" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;p align=&quot;left&quot;&gt;&lt;font face=&quot;Copperplate Gothic Bold&quot;&gt;Сопротивление физическому урону: [1]%.&lt;br&gt;Награда в золоте зависит от вашего уровня, за боссов награда в 10 раз выше обычной.&lt;/font&gt;&lt;/p&gt;" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_SKILL_UNI_BountyHunter_StatsDescription" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Suddenly your target has a sizeable reward for slaying, gold will be awarded to any Bounty Hunter who scores the killing blow." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Внезапно за голову вашей цели назначена внушительная награда. Золото получит любой охотник за головами, нанёсший смертельный удар." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_SKILL_UNI_BountyHunter_Description" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c7a758&quot;&gt;Bounty Hunter&lt;/font&gt;" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c7a758&quot;&gt;Охотник за головами&lt;/font&gt;" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_UNI_BountyHunter_B" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c7a758&quot;&gt;Bounty Hunter&lt;/font&gt;" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c7a758&quot;&gt;Охотник за головами&lt;/font&gt;" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_UNI_BountyHunter_C" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c7a758&quot;&gt;Bounty Hunter&lt;/font&gt;" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c7a758&quot;&gt;Охотник за головами&lt;/font&gt;" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_UNI_BountyHunter_D" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c7a758&quot;&gt;Bounty Hunter&lt;/font&gt;" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c7a758&quot;&gt;Охотник за головами&lt;/font&gt;" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_UNI_BountyHunter_E" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Bounty Hunter" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Охотник за головами" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
@@ -580,154 +580,154 @@
 					<attribute id="UUID" type="22" value="AMER_UNI_Vault_AP8" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c7a758&quot;&gt;Urgency&lt;/font&gt;" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c7a758&quot;&gt;Неистовство&lt;/font&gt;" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_UNI_Urgency" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c7a758&quot;&gt;Urgency I&lt;/font&gt;" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c7a758&quot;&gt;Неистовство I&lt;/font&gt;" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_UNI_UrgencyBuff1" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c7a758&quot;&gt;Urgency II&lt;/font&gt;" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c7a758&quot;&gt;Неистовство II&lt;/font&gt;" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_UNI_UrgencyBuff2" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c7a758&quot;&gt;Urgency III&lt;/font&gt;" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c7a758&quot;&gt;Неистовство III&lt;/font&gt;" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_UNI_UrgencyBuff3" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c7a758&quot;&gt;Urgency IV&lt;/font&gt;" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c7a758&quot;&gt;Неистовство IV&lt;/font&gt;" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_UNI_UrgencyBuff4" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c7a758&quot;&gt;Urgency V&lt;/font&gt;" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c7a758&quot;&gt;Неистовство V&lt;/font&gt;" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_UNI_UrgencyBuff5" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Urgency" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Неистовство" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_SKILL_UNI_Urgency_DisplayName" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="While active, Urgency heightens your senses during states of high adrenaline, granting additional movement speed, chance to hit, and damage while injured." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Неистовство обостряет ваши чувства в состоянии сильного возбуждения, увеличивая скорость передвижения, меткость и урон, когда вы ранены." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_SKILL_UNI_Urgency_Description" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;p align=&quot;left&quot;&gt;&lt;font face=&quot;Copperplate Gothic Bold&quot;&gt;99-80%: +[1]% hit chance, +[2]% damage.&lt;br&gt;79-60%: +[3]% movement, +[4]% hit chance, +[5]% damage.&lt;br&gt;59-40%: +[6]% movement, +[7]% hit chance, +[8]% damage.&lt;br&gt;39-20%: +[9]% movement, +[10]% hit chance, +[11]% damage.&lt;br&gt;19-0%: +[12]% movement, +[13]% hit chance, +[14]% damage.&lt;/font&gt;&lt;br&gt;&lt;br&gt;Lasts until cancelled or replaced by another stance.&lt;/p&gt;" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;p align=&quot;left&quot;&gt;&lt;font face=&quot;Copperplate Gothic Bold&quot;&gt;99-80%: +[1]% к меткости, +[2]% к урону.&lt;br&gt;79-60%: +[3]% к скорости передвижения, +[4]% к меткости, +[5]% к урону.&lt;br&gt;59-40%: +[6]% к скорости передвижения, +[7]% к меткости, +[8]% к урону.&lt;br&gt;39-20%: +[9]% к скорости передвижения, +[10]% к меткости, +[11]% к урону.&lt;br&gt;19-0%: +[12]% к скорости передвижения, +[13]% к меткости, +[14]% к урону.&lt;/font&gt;&lt;br&gt;&lt;br&gt;Длится, пока не будет отменено или заменено другой стойкой.&lt;/p&gt;" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_SKILL_UNI_Urgency_StatsDescription" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Chthonic Terraforming" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Хтоническое терраформирование" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_UNI_ChthonianProc" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Impetus" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Импульс" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_UNI_MomentumProc" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c7a758&quot;&gt;Momentum I&lt;/font&gt;" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c7a758&quot;&gt;Инерция I&lt;/font&gt;" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_UNI_MomentumDebuff1" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c7a758&quot;&gt;Momentum II&lt;/font&gt;" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c7a758&quot;&gt;Инерция II&lt;/font&gt;" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_UNI_MomentumDebuff2" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c7a758&quot;&gt;Momentum III&lt;/font&gt;" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c7a758&quot;&gt;Инерция III&lt;/font&gt;" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_UNI_MomentumDebuff3" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c7a758&quot;&gt;Momentum IV&lt;/font&gt;" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c7a758&quot;&gt;Инерция IV&lt;/font&gt;" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_UNI_MomentumDebuff4" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c7a758&quot;&gt;Momentum V&lt;/font&gt;" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c7a758&quot;&gt;Инерция V&lt;/font&gt;" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_UNI_MomentumDebuff5" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c7a758&quot;&gt;Discipline&lt;/font&gt;" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c7a758&quot;&gt;Дисциплина&lt;/font&gt;" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_UNI_Discipline" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c7a758&quot;&gt;Fanaticism&lt;/font&gt;" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c7a758&quot;&gt;Фанатизм&lt;/font&gt;" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_UNI_Zeal" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Lumbering" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Неповоротливость" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_UNI_LeviathanProc" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c7a758&quot;&gt;Lumbering&lt;/font&gt;" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c7a758&quot;&gt;Неповоротливость&lt;/font&gt;" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_UNI_Leviathan" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Lodestone Translocation" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Магнитная транслокация" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_UNI_LodestoneProc" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Gram Poison Lance" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Отравленное Копьё Грама" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
