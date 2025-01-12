@@ -1344,7 +1344,7 @@ Ln\AMER_UniqueEffects.lsx;AMER_UNI_Leviathan;"<font color=""c7a758"">Lumbering</
 Ln\AMER_UniqueEffects.lsx;AMER_UNI_LodestoneProc;Lodestone Translocation;Магнитная транслокация
 Ln\AMER_UniqueEffects.lsx;AMER_UNI_GramProc;Gram Poison Lance;Отравленное Копьё Грама
 Ln\ayylmao.lsx;SKILLBOOST_ImmolationStatus;Immolated;
-Ln\ayylmao.lsx;Target_PetrifyingTouch_Description;Turn a nearby target and enemies within [3] meters of it to stone, dealing [2] damage. Creates an oil surface beneath the primary target.;
+Ln\ayylmao.lsx;Target_PetrifyingTouch_Description;Turn a nearby target and enemies within [3] meters of it to stone, dealing [2] damage. Creates an oil surface beneath the primary target.;Превращает в камень выбранную цель и врагов в радиусе [3] метров от неё, нанося [2] урона. Создаёт лужу масла под целью.
 Ln\ayylmao.lsx;ProjectileStrike_BoulderBash_StatsDescription;"<p align=""left""><font color=""ff9500"" size=19 face=""Copperplate Gothic Light"">   RECOMMENDED</font><br><font color=cc7700"" face=""Copperplate Gothic Light"">    •    9 Intelligence<br>    •    2 Geomancer<br>    •    Cooldown -3 at 13 Intelligence</font><br><br><font face=""Copperplate Gothic Bold"">Range: [3]<br>Radius: [2]</font></p>";
 Ln\ayylmao.lsx;Target_Immolate_StatsDescription;"<p align=""left""><font color=""ff9500"" size=19 face=""Copperplate Gothic Light"">   RECOMMENDED</font><br><font color=cc7700"" face=""Copperplate Gothic Light"">    •    13 Intelligence<br>    •    5 Pyrokinetic<br>    •    Cooldown -2 at 15 Intelligence</font><br><br><font face=""Copperplate Gothic Bold"">Range: [1]<br>Soulburn has no Saving Throw.<br>Armor: [3]<br>All Resistances: [4]%<br>Willpower: [5]<br>Grit: [6]</font><br><br>Burning targets take fire damage over time and are more susceptible to fire damage, but are resistant to water.</p>";
 Ln\ayylmao.lsx;Projectile_IceShardStart_Description;Shoot [3] frozen shards of ice that each freeze and deal [1] damage.;
@@ -1364,7 +1364,7 @@ Ln\ayylmao.lsx;Projectile_InfectiousFlame_StatsDescription;"<p align=""left""><f
 Ln\ayylmao.lsx;Shout_MeleePowerStance_StatsDescription;"<p align=""left""><br><br><font face=""Copperplate Gothic Bold"">Chance to Hit: +[1]%<br>Movement speed: [2]%</font><br><br>Lasts until cancelled or replaced by another stance.</p>";
 Ln\ayylmao.lsx;Shout_MeleePowerStance_Description;Improves accuracy at the cost of movement speed. (Toggle Stance);
 Ln\ayylmao.lsx;Shout_BarbedCoat_Description;"The Soldier's shield is as much a weapon as a sword; returning damage to those that would strike you in melee combat. (Toggle Stance)";
-Ln\ayylmao.lsx;Shout_BarbedCoat_DisplayName;Spiked Shell;
+Ln\ayylmao.lsx;Shout_BarbedCoat_DisplayName;Spiked Shell;Шипастый панцирь
 Ln\ayylmao.lsx;Shout_BarbedCoat_StatsDescription;"<p align=""left""><font color=""ff9500"" size=19 face=""Copperplate Gothic Light"">   RECOMMENDED</font><br><font color=cc7700"" face=""Copperplate Gothic Light"">    •    Cooldown -2 at 15 Strength</font><br><br><font face=""Copperplate Gothic Bold"">Reflect 50% of melee damage taken to attackers as piercing.</font><br><br>Lasts until cancelled or replaced by another stance.</p>";
 Ln\ayylmao.lsx;Shout_ElementalTortoise_Description;"The trained Soldier with a shield fears no element; gain massive elemental defense at the cost of movement speed.  (Toggle Stance)";
 Ln\ayylmao.lsx;Shout_ElementalTortoise_StatsDescription;"<p align=""left""><font color=""ff9500"" size=19 face=""Copperplate Gothic Light"">   RECOMMENDED</font><br><font color=cc7700"" face=""Copperplate Gothic Light"">    •    Cooldown -2 at 15 Strength</font><br><br><font face=""Copperplate Gothic Bold"">Fire resistance: +[1]%<br>Water resistance: +[2]%<br>Air resistance: +[3]%<br>Earth resistance: +[4]%<br>Movement Speed: [5]%</font><br><br>Lasts until cancelled or replaced by another stance.</p>";
@@ -1381,30 +1381,30 @@ Ln\ayylmao.lsx;AMER_Sunder;Armor Pierced;
 Ln\ayylmao.lsx;Projectile_VampiricArrow_Description;Fire a heavily imbued arrow that deals [1] damage and siphons the life of its victim to you, healing a small amount instantly.;
 Ln\ayylmao.lsx;Shout_SurvivorsKarma_Description;Increases the Luck and Critical Chance of all allies affected.;
 Ln\ayylmao.lsx;Shout_SurvivorsKarma_StatsDescription;"<p align=""left""><font color=""ff9500"" size=19 face=""Copperplate Gothic Light"">   RECOMMENDED</font><br><font color=cc7700"" face=""Copperplate Gothic Light"">    •    10 Dexterity<br>    •    3 Ranger<br>    •    Cooldown -2 at 15 Dexterity</font><br><br><font face=""Copperplate Gothic Bold"">Radius: [1]<br>Lucky Charm: +2<br>Critical Chance: +10%</font></p>";
-Ln\ayylmao.lsx;AMER_ExtraCrit;Karma;
+Ln\ayylmao.lsx;AMER_ExtraCrit;Karma;Карма
 Ln\ayylmao.lsx;Rain_RainOfArrows_Description;Loose a shower of piercing arrows to rain down upon your enemies. Deals [1] damage to each target within the raidus.;
-Ln\ayylmao.lsx;AMER_ChainOne;"<font color=""E5FA00"">Chain Bonus x 1!</font>";
-Ln\ayylmao.lsx;AMER_ChainTwo;"<font color=""FADD00"">Chain Bonus x 2!</font>";
-Ln\ayylmao.lsx;AMER_ChainThree;"<font color=""FAA300"">Chain Bonus x 3!</font>";
-Ln\ayylmao.lsx;AMER_ChainFour;"<font color=""FA7000"">Chain Bonus x 4!</font>";
-Ln\ayylmao.lsx;AMER_ChainFive;"<font color=""FA2E00"">Chain Bonus x 5!</font>";
-Ln\ayylmao.lsx;AMER_FinisherPreciseIncision;Chain Finisher;
+Ln\ayylmao.lsx;AMER_ChainOne;"<font color=""E5FA00"">Chain Bonus x 1!</font>";"<font color=""E5FA00"">Комбо-очки x1!</font>"
+Ln\ayylmao.lsx;AMER_ChainTwo;"<font color=""FADD00"">Chain Bonus x 2!</font>";"<font color=""E5FA00"">Комбо-очки x2!</font>"
+Ln\ayylmao.lsx;AMER_ChainThree;"<font color=""FAA300"">Chain Bonus x 3!</font>";"<font color=""E5FA00"">Комбо-очки x3!</font>"
+Ln\ayylmao.lsx;AMER_ChainFour;"<font color=""FA7000"">Chain Bonus x 4!</font>";"<font color=""E5FA00"">Комбо-очки x4!</font>"
+Ln\ayylmao.lsx;AMER_ChainFive;"<font color=""FA2E00"">Chain Bonus x 5!</font>";"<font color=""E5FA00"">Комбо-очки x5!</font>"
+Ln\ayylmao.lsx;AMER_FinisherPreciseIncision;Chain Finisher;Комбо-финишер
 Ln\ayylmao.lsx;Target_PreciseIncision_StatsDescription;"<p align=""left""><font color=""ff9500"" size=19 face=""Copperplate Gothic Light"">   RECOMMENDED</font><br><font color=cc7700"" face=""Copperplate Gothic Light"">    •    Cooldown -2 at 15 Dexterity</font><br><br><font face=""Copperplate Gothic Bold"">Range: [1]<br><br>Chain Bonus: Reaching Strike</font><br>x1: +35% weapon damage in 5 meter line.<br>x2: Damage to 70%.<br>x3: Line to 180° cone. 50% chance to apply Weak.<br>x4: Damage to 100%. Weak chance to 70%.<br>x5: Damage to 200%.<br><br>Weak lowers target's damage by [2]% and strength by [3]<br>Damage dealt depends on your weapon's damage rating.</p>";
 Ln\ayylmao.lsx;Target_PreciseIncision_Description;Pierce deftly into your target, dealing [4] damage and causing weakness.<br>Gains additional effects when used with an active Chain.;
-Ln\ayylmao.lsx;AMER_ApplyPreciseIncision;Chain Finisher;
-Ln\ayylmao.lsx;AMER_ApplyVenomousStrike;Chain Finisher;
+Ln\ayylmao.lsx;AMER_ApplyPreciseIncision;Chain Finisher;Комбо-финишер
+Ln\ayylmao.lsx;AMER_ApplyVenomousStrike;Chain Finisher;Комбо-финишер
 Ln\ayylmao.lsx;Target_Poison_Description;Coat your weapon with a vile poison and strike your target, poisoning and dealing [1] damage.;
 Ln\ayylmao.lsx;Target_Poison_StatsDescription;"<p align=""left""><font color=""ff9500"" size=19 face=""Copperplate Gothic Light"">   RECOMMENDED</font><br><font color=cc7700"" face=""Copperplate Gothic Light"">    •    9 Dexterity</font><br><br><font face=""Copperplate Gothic Bold"">Range: [2]<br><br>Chain Bonus: Toxic Finale</font><br>x1: +25% weapon damage as Poison to target.<br>x2: Damage to 50%.<br>x3: Damage to 100%. 75% chance to inflict Disease for 1 turn.<br>x4: 150% chance to inflict Disease for 2 turns.<br>x5: Damage to 200%. Target is Sickened for 3 turns.<br><br>Poisoned deals poison damage over time.<br>Damage dealt depends on your weapon's damage rating.</p>";
 Ln\ayylmao.lsx;Target_Lacerate_Description;Tear open a jagged gash on your target, causing [1] damage and inflicting Bleeding.;
 Ln\ayylmao.lsx;Target_Lacerate_StatsDescription;"<p align=""left""><font color=""ff9500"" size=19 face=""Copperplate Gothic Light"">   RECOMMENDED</font><br><font color=cc7700"" face=""Copperplate Gothic Light"">    •    8 Dexterity<br>    •    Cooldown -2 at 15 Dexterity</font><br><br><font face=""Copperplate Gothic Bold"">Range: [2]<br><br>Chain Bonus: Blood Thief</font><br>x1: Heal self 8% of maximum vitality.<br>x2: Heal self 20% of maximum vitality.<br>x3: +70% weapon damage as Slashing to target.<br>x4: 140% chance to inflict Decaying Touch.<br>x5: Damage to 140%. Heal now lasts 3 turns.<br><br>Bleeding deals physical damage over time.<br>Damage dealt depends on your weapon's damage rating.</p>";
 Ln\ayylmao.lsx;AMER_LacerateHeal;Blood Thief;
-Ln\ayylmao.lsx;AMER_ApplyLacerate;Chain Finisher;
-Ln\ayylmao.lsx;AMER_BackstabBonus3;"<font color=""c80000"">Backstab! Damage times 2.3!</font>";
-Ln\ayylmao.lsx;AMER_BackstabBonus4;"<font color=""c80000"">Backstab! Damage times 2.6!</font>";
-Ln\ayylmao.lsx;AMER_BackstabBonus5;"<font color=""c80000"">Backstab! Damage times 2.9!</font>";
-Ln\ayylmao.lsx;AMER_BackstabBonus6;"<font color=""c80000"">Backstab! Damage times 3.2!</font>";
-Ln\ayylmao.lsx;AMER_BackstabBonus7;"<font color=""c80000"">Backstab! Damage times 3.5!</font>";
-Ln\ayylmao.lsx;AMER_BackstabBonus2;"<font color=""c80000"">Backstab! Damage times 2!</font>";
+Ln\ayylmao.lsx;AMER_ApplyLacerate;Chain Finisher;Комбо-финишер
+Ln\ayylmao.lsx;AMER_BackstabBonus3;"<font color=""c80000"">Backstab! Damage times 2.3!</font>";"<font color=""c80000"">Удар в спину! Урон увеличен в 2.3 раза!</font>"
+Ln\ayylmao.lsx;AMER_BackstabBonus4;"<font color=""c80000"">Backstab! Damage times 2.6!</font>";"<font color=""c80000"">Удар в спину! Урон увеличен в 2.6 раза!</font>"
+Ln\ayylmao.lsx;AMER_BackstabBonus5;"<font color=""c80000"">Backstab! Damage times 2.9!</font>";"<font color=""c80000"">Удар в спину! Урон увеличен в 2.9 раза!</font>"
+Ln\ayylmao.lsx;AMER_BackstabBonus6;"<font color=""c80000"">Backstab! Damage times 3.2!</font>";"<font color=""c80000"">Удар в спину! Урон увеличен в 3.2 раза!</font>"
+Ln\ayylmao.lsx;AMER_BackstabBonus7;"<font color=""c80000"">Backstab! Damage times 3.5!</font>";"<font color=""c80000"">Удар в спину! Урон увеличен в 3.5 раза!</font>"
+Ln\ayylmao.lsx;AMER_BackstabBonus2;"<font color=""c80000"">Backstab! Damage times 2!</font>";"<font color=""c80000"">Удар в спину! Урон увеличен в 2 раза!</font>"
 Ln\ayylmao.lsx;Projectile_StunningArrow_DisplayName;Shocking Arrow;
 Ln\ayylmao.lsx;Projectile_FreezingArrow_Description;Can chill a target and does [1] damage.;
 Ln\ayylmao.lsx;Projectile_FreezingArrow_StatsDescription;Chilled increases the chance to be Frozen by 30%.<br>Can target terrain to create ice surface or freeze water.<br>Damage dealt depends on your weapon's damage rating.;
@@ -1468,26 +1468,26 @@ Ln\ayylmao.lsx;Target_InvisibilityTarget_StatsDescription;"<p align=""left""><fo
 Ln\ayylmao.lsx;Target_InvisibilityTarget_Description;Imbue a target with Greater Invisibility.;Облачает цель в латы незримости.
 Ln\ayylmao.lsx;AMER_GreaterInvisibility;Greater Invisibility;Латы незримости
 Ln\ayylmao.lsx;SKILLBOOK_InvisibilityTarget;Greater Invisibility Skillbook;Книга навыка «Латы незримости»
-Ln\ayylmao.lsx;SKILLBOOK_BarbedCoat;Spiked Shell Skillbook;
+Ln\ayylmao.lsx;SKILLBOOK_BarbedCoat;Spiked Shell Skillbook;Книга навыка «Шипастый панцирь»
 Ln\ayylmao.lsx;SKILLBOOK_TargetedPerceptionBoost;Elemental Visions Skillbook;Книга навыка «Пламенное зрение»
 Ln\ayylmao.lsx;Target_TargetedPerception_DisplayName;Elemental Visions;Пламенное зрение
-Ln\ayylmao.lsx;Target_TargetedPerception_Description;Searing light clarifies a target's vision, granting a temporary perception bonus and curing Blind.;
-Ln\ayylmao.lsx;Summon_Ooze_DisplayName;Summon Toxic Horror;
-Ln\ayylmao.lsx;Summon_Ooze_Description;Conjure forth a bubbling, poisonous ooze at target point to do your bidding.;
-Ln\ayylmao.lsx;SKILLBOOK_Ooze;Summon Toxic Horror Skillbook;
+Ln\ayylmao.lsx;Target_TargetedPerception_Description;Searing light clarifies a target's vision, granting a temporary perception bonus and curing Blind.;Обжигающий свет проясняет зрение цели, временно повышая восприятие и снимая слепоту.
+Ln\ayylmao.lsx;Summon_Ooze_DisplayName;Summon Toxic Horror;Призыв ядовитого ужаса
+Ln\ayylmao.lsx;Summon_Ooze_Description;Conjure forth a bubbling, poisonous ooze at target point to do your bidding.;Призывает в указанную точку бурлящую ядовитую слизь, которая будет выполнять ваши приказы.
+Ln\ayylmao.lsx;SKILLBOOK_Ooze;Summon Toxic Horror Skillbook;Книга навыка «Призыв ядовитого ужаса»
 Ln\ayylmao.lsx;Target_BanishSummon_DisplayName;Banishment;Изгнание
-Ln\ayylmao.lsx;Target_BanishSummon_Description;In banishing a summoned creature, it is torn apart from within, suffering immense damage.;
-Ln\ayylmao.lsx;SKILLBOOST_BarbedCoat;Spiked Shell;
-Ln\ayylmao.lsx;SKILLBOOST_Blink;Fade;
-Ln\ayylmao.lsx;Shout_Blink_DisplayName;Fade;
-Ln\ayylmao.lsx;Shout_Blink_Description;Your physicality blends and fades into the shadows, reducing all physical damage dealt to you.;
+Ln\ayylmao.lsx;Target_BanishSummon_Description;In banishing a summoned creature, it is torn apart from within, suffering immense damage.;При изгнании призванное существо разрывается изнутри, получая огромный урон.
+Ln\ayylmao.lsx;SKILLBOOST_BarbedCoat;Spiked Shell;Шипастый панцирь
+Ln\ayylmao.lsx;SKILLBOOST_Blink;Fade;Растворение
+Ln\ayylmao.lsx;Shout_Blink_DisplayName;Fade;Растворение
+Ln\ayylmao.lsx;Shout_Blink_Description;Your physicality blends and fades into the shadows, reducing all physical damage dealt to you.;Ваша плоть растворяется в тенях, уменьшая весь получаемый физический урон.
 Ln\ayylmao.lsx;AMER_RezSickness;"<font color=""c80000"">Touch of the Grave</font>";"<font color=""c80000"">Дыхание смерти</font>"
-Ln\ayylmao.lsx;SKILLBOOK_Blink;Fade Skillbook;
-Ln\ayylmao.lsx;Wall_Ice_Description;Raise icy crystals to block an area, enemies caught inside the crystals may be frozen and take [1] damage.;
-Ln\ayylmao.lsx;Quake_Earthquake_Description;Rock the earth with powerful tremors, knocking down characters and spewing oil out onto the battlefield at random locations. deals [1] damage.;
-Ln\ayylmao.lsx;Cone_EarthSpray_Description;Conjure a subterranian beast to spew oil and rock onto the battlefield, dealing [1] damage to all targets in the affected cone. Creates an oil surface. Has a chance to petrify.;
-Ln\ayylmao.lsx;Cone_WinterbreathMedium_Description;"Call forth a spirit of frost to freeze and deal [1] damage to all targets in a [2] degree, [3] long cone; twice.";
-Ln\ayylmao.lsx;Cone_DivineLight_Description;A bright, radiant light emanates from your hands and clings to those affected, making them more susceptible to affliction.;
+Ln\ayylmao.lsx;SKILLBOOK_Blink;Fade Skillbook;Книга навыка «Растворение»
+Ln\ayylmao.lsx;Wall_Ice_Description;Raise icy crystals to block an area, enemies caught inside the crystals may be frozen and take [1] damage.;Поднимает ледяные кристаллы, преграждающие путь. Враги, оказавшиеся внутри кристаллов, получают [1] урона и могут быть заморожены.
+Ln\ayylmao.lsx;Quake_Earthquake_Description;Rock the earth with powerful tremors, knocking down characters and spewing oil out onto the battlefield at random locations. deals [1] damage.;Сотрясает землю мощными толчками, сбивая персонажей с ног и выбрасывая на поле боя лужи масла в случайных местах. Наносит [1] урона.
+Ln\ayylmao.lsx;Cone_EarthSpray_Description;Conjure a subterranian beast to spew oil and rock onto the battlefield, dealing [1] damage to all targets in the affected cone. Creates an oil surface. Has a chance to petrify.;Призывает подземного зверя, который извергает на поле боя масло и камни, нанося урон [1] всем целям в конусе поражения. Создаёт масляную поверхность. Может обратить в камень.
+Ln\ayylmao.lsx;Cone_WinterbreathMedium_Description;"Call forth a spirit of frost to freeze and deal [1] damage to all targets in a [2] degree, [3] long cone; twice.";Призывает духа мороза, который дважды замораживает все цели и наносит [1] урона в конусе длиной [3] с углом в [2] градусов.
+Ln\ayylmao.lsx;Cone_DivineLight_Description;A bright, radiant light emanates from your hands and clings to those affected, making them more susceptible to affliction.;Яркий, лучистый свет исходит из ваших рук и окутывает задетых им существ, делая их более уязвимыми к негативным эффектам.
 Ln\ayylmao.lsx;Cone_DivineLight_StatsDescription;"<p align=""left""><font color=""ff9500"" size=19 face=""Copperplate Gothic Light"">   RECOMMENDED</font><br><font color=cc7700"" face=""Copperplate Gothic Light"">    •    8 Strength<br>    •    Cooldown -4 at 15 Strength</font><br><br><font face=""Copperplate Gothic Bold"">Cone angle: [3]°<br>Length: [2]<br>Decreases Grit and Willpower by [1].</font><br><br>Warm targets are more susceptible to fire damage but are resistant to water. Warm targets that are warmed again become burned. Warm increases the chance to be Burned by 30%.</p>";
 Ln\ayylmao.lsx;AMER_STATUS_ShockedSave;"saved against <font color=""7b70d2"">Shock</font>.";
 Ln\ayylmao.lsx;AMER_STATUS_ShockedFail;"is <font color=""7b70d2"">Shocked</font>.";
@@ -1564,24 +1564,24 @@ Ln\ayylmao.lsx;AMER_TwoHand5;Two-Handed;Двуручное оружие
 Ln\ayylmao.lsx;AMER_TwoHand6;Two-Handed;Двуручное оружие
 Ln\ayylmao.lsx;AMER_TwoHand7;Two-Handed;Двуручное оружие
 Ln\ayylmao.lsx;AMER_TwoHand8;Two-Handed;Двуручное оружие
-Ln\ayylmao.lsx;AMER_BackstabBonus8;"<font color=""c80000"">Backstab! Damage times 3.8!</font>";
-Ln\ayylmao.lsx;AMER_BackstabBonus9;"<font color=""c80000"">Backstab! Damage times 4.2!</font>";
+Ln\ayylmao.lsx;AMER_BackstabBonus8;"<font color=""c80000"">Backstab! Damage times 3.8!</font>";"<font color=""c80000"">Удар в спину! Урон увеличен в 3.8 раза!</font>"
+Ln\ayylmao.lsx;AMER_BackstabBonus9;"<font color=""c80000"">Backstab! Damage times 4.2!</font>";"<font color=""c80000"">Удар в спину! Урон увеличен в 4.2 раза!</font>"
 Ln\ayylmao.lsx;AMER_BullyPenalty;Bully;Забияка
-Ln\ayylmao.lsx;AMER_CrossbowArmor5;Crossbow Mastery;
-Ln\ayylmao.lsx;AMER_CrossbowArmor1;Crossbow Mastery;
-Ln\ayylmao.lsx;AMER_CrossbowArmor3;Crossbow Mastery;
-Ln\ayylmao.lsx;AMER_CrossbowArmor2;Crossbow Mastery;
-Ln\ayylmao.lsx;AMER_CrossbowArmor6;Crossbow Mastery;
-Ln\ayylmao.lsx;AMER_CrossbowArmor4;Crossbow Mastery;
-Ln\ayylmao.lsx;AMER_CrossbowArmor7;Crossbow Mastery;
-Ln\ayylmao.lsx;AMER_CrossbowArmor8;Crossbow Mastery;
-Ln\ayylmao.lsx;AMER_CrossbowArmor10-2;Crossbow Mastery;
-Ln\ayylmao.lsx;AMER_CrossbowArmor20-2;Crossbow Mastery;
-Ln\ayylmao.lsx;AMER_CrossbowArmor10-3;Crossbow Mastery;
-Ln\ayylmao.lsx;AMER_CrossbowArmor20-3;Crossbow Mastery;
-Ln\ayylmao.lsx;AMER_InvisSpotted;Spotted a hidden enemy!;
-Ln\ayylmao.lsx;AMER_Detected;"<font color=""c80000"">Detected!</font>";
-Ln\ayylmao.lsx;AMER_DetectedInfo;was revealed by a perceptive enemy.;
+Ln\ayylmao.lsx;AMER_CrossbowArmor5;Crossbow Mastery;Владение арбалетом
+Ln\ayylmao.lsx;AMER_CrossbowArmor1;Crossbow Mastery;Владение арбалетом
+Ln\ayylmao.lsx;AMER_CrossbowArmor3;Crossbow Mastery;Владение арбалетом
+Ln\ayylmao.lsx;AMER_CrossbowArmor2;Crossbow Mastery;Владение арбалетом
+Ln\ayylmao.lsx;AMER_CrossbowArmor6;Crossbow Mastery;Владение арбалетом
+Ln\ayylmao.lsx;AMER_CrossbowArmor4;Crossbow Mastery;Владение арбалетом
+Ln\ayylmao.lsx;AMER_CrossbowArmor7;Crossbow Mastery;Владение арбалетом
+Ln\ayylmao.lsx;AMER_CrossbowArmor8;Crossbow Mastery;Владение арбалетом
+Ln\ayylmao.lsx;AMER_CrossbowArmor10-2;Crossbow Mastery;Владение арбалетом
+Ln\ayylmao.lsx;AMER_CrossbowArmor20-2;Crossbow Mastery;Владение арбалетом
+Ln\ayylmao.lsx;AMER_CrossbowArmor10-3;Crossbow Mastery;Владение арбалетом
+Ln\ayylmao.lsx;AMER_CrossbowArmor20-3;Crossbow Mastery;Владение арбалетом
+Ln\ayylmao.lsx;AMER_InvisSpotted;Spotted a hidden enemy!;Замечен скрытый враг!
+Ln\ayylmao.lsx;AMER_Detected;"<font color=""c80000"">Detected!</font>";"<font color=""c80000"">Замечен!</font>"
+Ln\ayylmao.lsx;AMER_DetectedInfo;was revealed by a perceptive enemy.;замечен бдительным врагом.
 Ln\ayylmao.lsx;AMER_FieldSmith1;Field Smith;Мастер-кузнец
 Ln\ayylmao.lsx;AMER_FieldSmith2;Field Smith;Мастер-кузнец
 Ln\ayylmao.lsx;AMER_FieldSmith3;Field Smith;Мастер-кузнец
@@ -1698,7 +1698,7 @@ Ln\ayylmao.lsx;Target_Infect_StatsDescription;"<p align=""left""><font color=""f
 Ln\ayylmao.lsx;Projectile_VampiricArrow_StatsDescription;"<p align=""left""><font color=""ff9500"" size=19 face=""Copperplate Gothic Light"">   RECOMMENDED</font><br><font color=cc7700"" face=""Copperplate Gothic Light"">    •    11 Dexterity<br>    •    4 Ranger<br>    •    Cooldown -2 at 15 Dexterity</font><br><br><font face=""Copperplate Gothic Bold"">Range: [2]<br>Additionally heals 5% of maximum vitality +3% per Dexterity above recommended.</font><br><br>Damage dealt depends on your weapon's damage rating.</p>";
 Ln\ayylmao.lsx;Projectile_SplittingArrow_StatsDescription;"<p align=""left""><font color=""ff9500"" size=19 face=""Copperplate Gothic Light"">   RECOMMENDED</font><br><font color=cc7700"" face=""Copperplate Gothic Light"">    •    5 Ranger<br>    •    Cooldown -2 at 15 Dexterity</font><br><br><font face=""Copperplate Gothic Bold"">Range: [3]</font><br><br>An individual target can only be damaged by up to 8 arrows.<br>Damage dealt depends on your weapon's damage rating.</p>";
 Ln\ayylmao.lsx;Rain_RainOfArrows_StatsDescription;"<p align=""left""><font color=""ff9500"" size=19 face=""Copperplate Gothic Light"">   RECOMMENDED</font><br><font color=cc7700"" face=""Copperplate Gothic Light"">    •    5 Ranger<br>    •    Cooldown -2 at 15 Dexterity</font><br><br><font face=""Copperplate Gothic Bold"">Range: [2]<br>Radius: [3]</font><br><br>Damage dealt depends on your weapon's damage rating.</p>";
-Ln\ayylmao.lsx;Target_ShacklesOfPain_Description;"Bind the life of your enemies to yourself; all targets affected take equivalent damage whenever you do.";
+Ln\ayylmao.lsx;Target_ShacklesOfPain_Description;"Bind the life of your enemies to yourself; all targets affected take equivalent damage whenever you do.";"Связывает жизнь ваших врагов с вашей; все пораженные цели получают такой же урон, что и вы."
 Ln\ayylmao.lsx;AMER_STATUS_ShacklesOfPain;"<font color=""c80000"">Shackles Of Pain</font>";"<font color=""c80000"">Оковы боли</font>"
 Ln\ayylmao.lsx;AMER_SKILL_Rebirth_Description;Accept death's cold embrace, only to be reborn in blazing glory shortly after.;Утони в холодных объятиях смерти и возродись в ревущем пламени.
 Ln\ayylmao.lsx;AMER_SKILL_Rebirth_DisplayName;Rebirth;Перерождение
@@ -1805,49 +1805,49 @@ Ln\ayylmao.lsx;AMER_STATUS_BlindImmune2;Blind Immunity;Нельзя ослепи
 Ln\ayylmao.lsx;AMER_STATUS_BlindImmune1;Blind Immunity;Нельзя ослепить
 Ln\ayylmao.lsx;AMER_STATUS_BlindImmune3;Blind Immunity;Нельзя ослепить
 Ln\ayylmao.lsx;Projectile_SplittingArrow_DisplayName;Fusillade;Расстрел
-Ln\ayylmao.lsx;AMER_SKILL_Erosion_DisplayName;Erosion;
-Ln\ayylmao.lsx;AMER_SKILL_Erosion_Description;Water bubbles and seeps forth from flesh and bone, splintering away what was once whole.;
+Ln\ayylmao.lsx;AMER_SKILL_Erosion_DisplayName;Erosion;Разъедание
+Ln\ayylmao.lsx;AMER_SKILL_Erosion_Description;Water bubbles and seeps forth from flesh and bone, splintering away what was once whole.;Вода просачивается сквозь плоть и кости, разрушая некогда целое на части.
 Ln\ayylmao.lsx;AMER_SKILL_Erosion_StatsDescription;"<p align=""left""><font color=""ff9500"" size=19 face=""Copperplate Gothic Light"">   RECOMMENDED</font><br><font color=cc7700"" face=""Copperplate Gothic Light"">    •    13 Intelligence<br>    •    5 Geomancer<br>    •    Cooldown -4 at 15 Intelligence</font><br><br><font face=""Copperplate Gothic Bold"">Radius: [3]<br>Grit: [2]<br>No Saving Throw</font><br><br>&quot;Flesh and bone, steel or stone; all is as dust before me.&quot;</p>";
-Ln\ayylmao.lsx;AMER_SKILLBOOK_Erosion;"<font color=""c7a758"">Erosion Skillbook</font>";
-Ln\ayylmao.lsx;AMER_Erosion;"<font color=""b27756"">Eroded</font>";
-Ln\ayylmao.lsx;AMER_ApplyErosion;Erosion;
-Ln\ayylmao.lsx;AMER_SKILL_BorrowedTime_DisplayName;Borrowed Time;
-Ln\ayylmao.lsx;AMER_SKILL_BorrowedTime_Description;Bend time and slow those around you, gaining the difference yourself.;
+Ln\ayylmao.lsx;AMER_SKILLBOOK_Erosion;"<font color=""c7a758"">Erosion Skillbook</font>";"<font color=""c7a758"">Книга навыка «Разъедание»</font>"
+Ln\ayylmao.lsx;AMER_Erosion;"<font color=""b27756"">Eroded</font>";"<font color=""b27756"">Разъеден</font>"
+Ln\ayylmao.lsx;AMER_ApplyErosion;Erosion;Разъедание
+Ln\ayylmao.lsx;AMER_SKILL_BorrowedTime_DisplayName;Borrowed Time;Заёмное время
+Ln\ayylmao.lsx;AMER_SKILL_BorrowedTime_Description;Bend time and slow those around you, gaining the difference yourself.;Искривляет время, замедляя окружающих и присваивая себе разницу.
 Ln\ayylmao.lsx;AMER_SKILL_BorrowedTime_StatsDescription;"<p align=""left""><font color=""ff9500"" size=19 face=""Copperplate Gothic Light"">   RECOMMENDED</font><br><font color=cc7700"" face=""Copperplate Gothic Light"">    •    10 Dexterity<br>    •    3 Scoundrel<br>    •    Cooldown -4 at 15 Dexterity</font><br><br><font face=""Copperplate Gothic Bold"">Radius: [3]<br>Saving Throw: Willpower<br>Target AP Recovery: [4]<br>Self AP Recovery: +[2]<br>Self AP Maximum: +[1]<br>Grants bonus for up to 5 targets.</font><br><br>&quot;Don't worry! I'll give it back... Probably.&quot;</p>";
-Ln\ayylmao.lsx;AMER_SKILLBOOK_BorrowedTime;"<font color=""c7a758"">Borrowed Time Skillbook</font>";
-Ln\ayylmao.lsx;AMER_STATUS_ApplyBorrowedTime;Borrowed Time;
-Ln\ayylmao.lsx;AMER_STATUS_BorrowedTime1;"<font color=""7b70d2"">Borrowed Time I</font>";
-Ln\ayylmao.lsx;AMER_STATUS_BorrowedTime2;"<font color=""7b70d2"">Borrowed Time II</font>";
-Ln\ayylmao.lsx;AMER_STATUS_BorrowedTime3;"<font color=""7b70d2"">Borrowed Time III</font>";
-Ln\ayylmao.lsx;AMER_STATUS_BorrowedTime4;"<font color=""7b70d2"">Borrowed Time IV</font>";
-Ln\ayylmao.lsx;AMER_STATUS_BorrowedTime5;"<font color=""7b70d2"">Borrowed Time V</font>";
-Ln\ayylmao.lsx;AMER_STATUS_BorrowedTimeSlow;"<font color=""7b70d2"">Borrowed Time</font>";
-Ln\ayylmao.lsx;AMER_STATUS_BorrowedTimeStill;"is still <font color=""7b70d2"">Time-Borrowed</font>.";
-Ln\ayylmao.lsx;AMER_STATUS_BorrowedTimeNoLonger;"is no longer <font color=""7b70d2"">Time-Borrowed</font>.";
-Ln\ayylmao.lsx;AMER_STATUS_BorrowedTimeFail;"is <font color=""7b70d2"">Time-Borrowed</font>.";
-Ln\ayylmao.lsx;AMER_STATUS_BorrowedTimeSave;"saved against <font color=""7b70d2"">Borrowed Time</font>.";
+Ln\ayylmao.lsx;AMER_SKILLBOOK_BorrowedTime;"<font color=""c7a758"">Borrowed Time Skillbook</font>";"<font color=""c7a758"">Книга навыка «Заёмное время»</font>"
+Ln\ayylmao.lsx;AMER_STATUS_ApplyBorrowedTime;Borrowed Time;Заёмное время
+Ln\ayylmao.lsx;AMER_STATUS_BorrowedTime1;"<font color=""7b70d2"">Borrowed Time I</font>";"<font color=""7b70d2"">Заёмное время I</font>"
+Ln\ayylmao.lsx;AMER_STATUS_BorrowedTime2;"<font color=""7b70d2"">Borrowed Time II</font>";"<font color=""7b70d2"">Заёмное время II</font>"
+Ln\ayylmao.lsx;AMER_STATUS_BorrowedTime3;"<font color=""7b70d2"">Borrowed Time III</font>";"<font color=""7b70d2"">Заёмное время III</font>"
+Ln\ayylmao.lsx;AMER_STATUS_BorrowedTime4;"<font color=""7b70d2"">Borrowed Time IV</font>";"<font color=""7b70d2"">Заёмное время IV</font>"
+Ln\ayylmao.lsx;AMER_STATUS_BorrowedTime5;"<font color=""7b70d2"">Borrowed Time V</font>";"<font color=""7b70d2"">Заёмное время V</font>"
+Ln\ayylmao.lsx;AMER_STATUS_BorrowedTimeSlow;"<font color=""7b70d2"">Borrowed Time</font>";"<font color=""7b70d2"">Заёмное время</font>"
+Ln\ayylmao.lsx;AMER_STATUS_BorrowedTimeStill;"is still <font color=""7b70d2"">Time-Borrowed</font>.";"всё ещё под действием <font color=""7b70d2"">временного займа</font>."
+Ln\ayylmao.lsx;AMER_STATUS_BorrowedTimeNoLonger;"is no longer <font color=""7b70d2"">Time-Borrowed</font>.";"больше не под действием <font color=""7b70d2"">временного займа</font>."
+Ln\ayylmao.lsx;AMER_STATUS_BorrowedTimeFail;"is <font color=""7b70d2"">Time-Borrowed</font>.";"под действием <font color=""7b70d2"">временного займа</font>."
+Ln\ayylmao.lsx;AMER_STATUS_BorrowedTimeSave;"saved against <font color=""7b70d2"">Borrowed Time</font>.";"сопротивляется действию <font color=""7b70d2"">«Заёмного времени»</font>."
 Ln\ayylmao.lsx;AMER_SKILL_Stasis_DisplayName;Stasis;Стазис
 Ln\ayylmao.lsx;AMER_SKILL_Stasis_Description;Instantly place a target into protective stasis, greatly increasing their hardiness but preventing healing and freezing it solid.;
 Ln\ayylmao.lsx;AMER_SKILL_Stasis_StatsDescription;"<p align=""left""><font color=""ff9500"" size=19 face=""Copperplate Gothic Light"">   RECOMMENDED</font><br><font color=cc7700"" face=""Copperplate Gothic Light"">    •    11 Intelligence<br>    •    4 Hydrosophist<br>    •    Cooldown -4 at 15 Intelligence</font><br><font color=""c80000"" size=19 face=""Copperplate Gothic Light"">   VITALITY COST: 30%</font><br><br><font face=""Copperplate Gothic Bold"">Range: [3]<br>Constitution: +[1]<br>Armor: +[2]</font><br><br>&quot;Not yet.&quot;</p>";
 Ln\ayylmao.lsx;AMER_SKILLBOOK_Stasis;"<font color=""c7a758"">Stasis Skillbook</font>";"<font color=""c7a758"">Книга навыка «Стазис»</font>"
 Ln\ayylmao.lsx;AMER_StasisBuff;Stasis Fortification;Стазис
 Ln\ayylmao.lsx;AMER_SKILL_Despair_DisplayName;Despair;Отчаяние
-Ln\ayylmao.lsx;AMER_SKILL_Despair_Description;Fill the target with an immense sense of hopelessness and despair, making it Mute, Slow, and Weak.;
+Ln\ayylmao.lsx;AMER_SKILL_Despair_Description;Fill the target with an immense sense of hopelessness and despair, making it Mute, Slow, and Weak.;Наполняет цель чувством безысходности и отчаяния, замедляя её, ослабляя и погружая в немоту.
 Ln\ayylmao.lsx;AMER_SKILL_Despair_StatsDescription;"<p align=""left""><font color=""ff9500"" size=19 face=""Copperplate Gothic Light"">   RECOMMENDED</font><br><font color=cc7700"" face=""Copperplate Gothic Light"">    •    10 Intelligence<br>    •    3 Witchcraft<br>    •    Cooldown -4 at 15 Intelligence</font><br><br><font face=""Copperplate Gothic Bold"">Range: [1]</font><br><br>&quot;Hope is an illusion- let me show you.&quot;</p>";
 Ln\ayylmao.lsx;AMER_SKILLBOOK_Despair;"<font color=""c7a758"">Despair Skillbook</font>";"<font color=""c7a758"">Книга навыка «Отчаяние»</font>"
-Ln\ayylmao.lsx;AMER_STATUS_ApplyAmberPrison;"<font color=""e9d23d"">Stone Curse</font>";
-Ln\ayylmao.lsx;AMER_SKILLBOOK_AmberPrison;"<font color=""c7a758"">Stone Curse Skillbook</font>";
-Ln\ayylmao.lsx;AMER_SKILL_AmberPrison_DisplayName;Stone Curse;
-Ln\ayylmao.lsx;AMER_SKILL_AmberPrison_Description;A vicious curse that slowly turns a target to stone from within, dealing [2] damage and increasingly hindering the afflicted each turn before eventual petrification.;
+Ln\ayylmao.lsx;AMER_STATUS_ApplyAmberPrison;"<font color=""e9d23d"">Stone Curse</font>";"<font color=""e9d23d"">Каменное проклятие</font>"
+Ln\ayylmao.lsx;AMER_SKILLBOOK_AmberPrison;"<font color=""c7a758"">Stone Curse Skillbook</font>";"<font color=""c7a758"">Книга навыка «Каменное проклятие»</font>"
+Ln\ayylmao.lsx;AMER_SKILL_AmberPrison_DisplayName;Stone Curse;Каменное проклятие
+Ln\ayylmao.lsx;AMER_SKILL_AmberPrison_Description;A vicious curse that slowly turns a target to stone from within, dealing [2] damage and increasingly hindering the afflicted each turn before eventual petrification.;Жестокое проклятие, которое медленно обращает цель в камень изнутри, нанося [2] урона каждый ход и всё сильнее сковывая жертву до полного окаменения.
 Ln\ayylmao.lsx;AMER_SKILL_AmberPrison_StatsDescription;"<p align=""left""><font color=""ff9500"" size=19 face=""Copperplate Gothic Light"">   RECOMMENDED</font><br><font color=cc7700"" face=""Copperplate Gothic Light"">    •    13 Intelligence<br>    •    5 Geomancer<br>    •    Cooldown -4 at 15 Intelligence</font><br><br><font face=""Copperplate Gothic Bold"">Range: [1]<br>Saving Throw: Willpower<br>Movement: [4]%<br>AP Recovery: [5]<br>Slow effect doubles each turn.<br>Petrifies for 2 turns and deals double damage on successful save or expiration.</font><br><br>&quot;Even Mutamin would be envious of this one.&quot;</p>";
-Ln\ayylmao.lsx;AMER_STATUS_AmberPrisonSlow;"<font color=""e9d23d"">Stone Curse</font>";
-Ln\ayylmao.lsx;AMER_STATUS_AmberPrisonFail;"is <font color=""e9d23d"">Stone Cursed</font>.";
-Ln\ayylmao.lsx;AMER_STATUS_AmberPrisonSave;"saved against <font color=""e9d23d"">Stone Curse</font>.";
-Ln\ayylmao.lsx;AMER_STATUS_AmberPrisonStill;"is still <font color=""e9d23d"">Stone Cursed</font>.";
-Ln\ayylmao.lsx;AMER_STATUS_AmberPrisonNoLonger;"is no longer <font color=""e9d23d"">Stone Cursed</font>.";
-Ln\ayylmao.lsx;Stats_Petrified;Petrified;
-Ln\ayylmao.lsx;AMER_STATUS_AmberPrisonSlow2;"<font color=""e9d23d"">Stone Curse</font>";
-Ln\ayylmao.lsx;AMER_STATUS_AmberPrisonSlow3;"<font color=""e9d23d"">Stone Curse</font>";
+Ln\ayylmao.lsx;AMER_STATUS_AmberPrisonSlow;"<font color=""e9d23d"">Stone Curse</font>";"<font color=""e9d23d"">Каменное проклятие</font>"
+Ln\ayylmao.lsx;AMER_STATUS_AmberPrisonFail;"is <font color=""e9d23d"">Stone Cursed</font>.";"под действием <font color=""e9d23d"">«Каменного проклятия»</font>."
+Ln\ayylmao.lsx;AMER_STATUS_AmberPrisonSave;"saved against <font color=""e9d23d"">Stone Curse</font>.";"сопротивляется <font color=""e9d23d"">«Каменному проклятию»</font>."
+Ln\ayylmao.lsx;AMER_STATUS_AmberPrisonStill;"is still <font color=""e9d23d"">Stone Cursed</font>.";"всё ещё под действием <font color=""e9d23d"">«Каменного проклятия»</font>."
+Ln\ayylmao.lsx;AMER_STATUS_AmberPrisonNoLonger;"is no longer <font color=""e9d23d"">Stone Cursed</font>.";"больше не под действием <font color=""e9d23d"">«Каменного проклятия»</font>."
+Ln\ayylmao.lsx;Stats_Petrified;Petrified;Окаменение
+Ln\ayylmao.lsx;AMER_STATUS_AmberPrisonSlow2;"<font color=""e9d23d"">Stone Curse</font>";"<font color=""e9d23d"">Каменное проклятие</font>"
+Ln\ayylmao.lsx;AMER_STATUS_AmberPrisonSlow3;"<font color=""e9d23d"">Stone Curse</font>";"<font color=""e9d23d"">Каменное проклятие</font>"
 Ln\ayylmao.lsx;AMER_SKILL_Squander_DisplayName;Squander;
 Ln\ayylmao.lsx;AMER_SKILL_Squander_Description;Muster your remaining strength to fling a heavy stack of coin at your target, causing [2] damage. Your remaining AP is spent in the process.;
 Ln\ayylmao.lsx;AMER_SKILL_Squander_StatsDescription;"<p align=""left""><font color=""ff9500"" size=19 face=""Copperplate Gothic Light"">   RECOMMENDED</font><br><font color=cc7700"" face=""Copperplate Gothic Light"">    •    9 Dexterity<br>    •    Cooldown -3 at 13 Dexterity</font><br><br><font face=""Copperplate Gothic Bold"">Range: [1]<br>Spends all remaining AP.</font><br><br>Damage dealt depends on your weapon's damage rating.<br><br>&quot;Hey! I'm Squandin' in here!&quot;</p>";
@@ -1872,7 +1872,7 @@ Ln\ayylmao.lsx;AMER_Audacity;"<font color=""7b70d2"">Audacious</font>";
 Ln\ayylmao.lsx;AMER_SKILLBOOK_Audacity;"<font color=""c7a758"">Audacity Skillbook</font>";
 Ln\ayylmao.lsx;AMER_SKILL_Cauterize_DisplayName;Cauterize;Прижигание
 Ln\ayylmao.lsx;AMER_SKILLBOOK_Cauterize;"<font color=""c7a758"">Cauterize Skillbook</font>";"<font color=""c7a758"">Книга навыка «Прижигание»</font>"
-Ln\ayylmao.lsx;AMER_SKILL_Cauterize_Description;Sear away scar and burn together tissue, dealing [2] damage before greatly healing the target and removing Bleeding and Decaying Touch. If targeting enemies, no healing occurs unless they are a Zombie or afflicted with Decaying Touch.;
+Ln\ayylmao.lsx;AMER_SKILL_Cauterize_Description;Sear away scar and burn together tissue, dealing [2] damage before greatly healing the target and removing Bleeding and Decaying Touch. If targeting enemies, no healing occurs unless they are a Zombie or afflicted with Decaying Touch.;Выжигает шрамы и сращивает ткани, нанося [2] урона, после чего восстанавливает цели значительное количество здоровья, исцеляя кровотечение и гниение. При использовании на врагах лечит только зомби или поражённых гниением.
 Ln\ayylmao.lsx;AMER_SKILL_Cauterize_StatsDescription;"<p align=""left""><font color=""ff9500"" size=19 face=""Copperplate Gothic Light"">   RECOMMENDED</font><br><font color=cc7700"" face=""Copperplate Gothic Light"">    •    11 Intelligence<br>    •    3 Pyrokinetic<br>    •    Cooldown -4 at 15 Intelligence</font><br><br><font face=""Copperplate Gothic Bold"">Range: [1]<br>Additionally heals 10% of maximum vitality +3% per Intelligence above recommended.</font><br><br>&quot;This might sting a bit.&quot;</p>";
 Ln\ayylmao.lsx;AMER_ApplyCauterize;Cauterize;Прижигание
 Ln\ayylmao.lsx;AMER_SKILLBOOK_Attonement;"<font color=""c7a758"">Attonement Skillbook</font>";
@@ -1912,62 +1912,62 @@ Ln\ayylmao.lsx;AMER_STATUS_ApplyMaze;Mazed;
 Ln\ayylmao.lsx;Shout_MeleePowerStance_DisplayName;Melee Precision Stance;Стойка точности
 Ln\ayylmao.lsx;SKILLBOOK_Warrior_Shout_MeleePowerStance;Melee Precision Stance Skillbook;Книга навыка «Стойка точности»
 Ln\ayylmao.lsx;Target_StunStart_Description;"An enormous fist smashes your enemy and knocks it down; dealing [1] damage.";
-Ln\ayylmao.lsx;AMER_STATUS_Lucky;"<font color=""c1a257"">Lucky</font>";
-Ln\ayylmao.lsx;AMER_LuckyCharm_Armor1;Lucky!;
-Ln\ayylmao.lsx;AMER_LuckyCharm_HitChance1;Lucky!;
-Ln\ayylmao.lsx;AMER_LuckyCharm_CritChance1;Lucky!;
-Ln\ayylmao.lsx;AMER_LuckyCharm_Damage1;Lucky!;
-Ln\ayylmao.lsx;AMER_LuckyCharm_Resist1;Lucky!;
-Ln\ayylmao.lsx;AMER_LuckyCharm_Heal1;Lucky!;
-Ln\ayylmao.lsx;AMER_LuckyCharm_AP1;Lucky!;
-Ln\ayylmao.lsx;AMER_LuckyCharm_Initiative1;Lucky!;
-Ln\ayylmao.lsx;AMER_LuckyCharm_MoveSpeed1;Lucky!;
-Ln\ayylmao.lsx;AMER_LuckyCharm_Sight1;Lucky!;
-Ln\ayylmao.lsx;AMER_LuckyCharm_Armor2;Lucky!;
-Ln\ayylmao.lsx;AMER_LuckyCharm_HitChance2;Lucky!;
-Ln\ayylmao.lsx;AMER_LuckyCharm_CritChance2;Lucky!;
-Ln\ayylmao.lsx;AMER_LuckyCharm_Damage2;Lucky!;
-Ln\ayylmao.lsx;AMER_LuckyCharm_Resist2;Lucky!;
-Ln\ayylmao.lsx;AMER_LuckyCharm_Heal2;Lucky!;
-Ln\ayylmao.lsx;AMER_LuckyCharm_AP2;Lucky!;
-Ln\ayylmao.lsx;AMER_LuckyCharm_Initiative2;Lucky!;
-Ln\ayylmao.lsx;AMER_LuckyCharm_MoveSpeed2;Lucky!;
-Ln\ayylmao.lsx;AMER_LuckyCharm_Sight2;Lucky!;
-Ln\ayylmao.lsx;AMER_LuckyCharm_Shield2;Lucky!;
-Ln\ayylmao.lsx;AMER_LuckyCharm_Strength2;Lucky!;
-Ln\ayylmao.lsx;AMER_LuckyCharm_Dexterity2;Lucky!;
-Ln\ayylmao.lsx;AMER_LuckyCharm_Intelligence2;Lucky!;
-Ln\ayylmao.lsx;AMER_LuckyCharm_Perception2;Lucky!;
-Ln\ayylmao.lsx;AMER_LuckyCharm_StatusRemoval2;Lucky!;
-Ln\ayylmao.lsx;AMER_LuckyCharm_Armor3;Lucky!;
-Ln\ayylmao.lsx;AMER_LuckyCharm_HitChance3;Lucky!;
-Ln\ayylmao.lsx;AMER_LuckyCharm_CritChance3;Lucky!;
-Ln\ayylmao.lsx;AMER_LuckyCharm_Damage3;Lucky!;
-Ln\ayylmao.lsx;AMER_LuckyCharm_Resist3;Lucky!;
-Ln\ayylmao.lsx;AMER_LuckyCharm_Heal3;Lucky!;
-Ln\ayylmao.lsx;AMER_LuckyCharm_AP3;Lucky!;
-Ln\ayylmao.lsx;AMER_LuckyCharm_Initiative3;Lucky!;
-Ln\ayylmao.lsx;AMER_LuckyCharm_MoveSpeed3;Lucky!;
-Ln\ayylmao.lsx;AMER_LuckyCharm_Sight3;Lucky!;
-Ln\ayylmao.lsx;AMER_LuckyCharm_Shield3;Lucky!;
-Ln\ayylmao.lsx;AMER_LuckyCharm_Strength3;Lucky!;
-Ln\ayylmao.lsx;AMER_LuckyCharm_Dexterity3;Lucky!;
-Ln\ayylmao.lsx;AMER_LuckyCharm_Intelligence3;Lucky!;
-Ln\ayylmao.lsx;AMER_LuckyCharm_Perception3;Lucky!;
-Ln\ayylmao.lsx;AMER_LuckyCharm_Constitution3;Lucky!;
-Ln\ayylmao.lsx;AMER_LuckyCharm_Grit3;Lucky!;
-Ln\ayylmao.lsx;AMER_LuckyCharm_Willpower3;Lucky!;
-Ln\ayylmao.lsx;AMER_LuckyCharm_StatusRemoval3;Lucky!;
-Ln\ayylmao.lsx;AMER_LuckyCharm_BaseCrit1;Lucky Charm;
-Ln\ayylmao.lsx;AMER_LuckyCharm_BaseCrit2;Lucky Charm;
-Ln\ayylmao.lsx;AMER_LuckyCharm_BaseCrit3;Lucky Charm;
-Ln\ayylmao.lsx;AMER_LuckyCharm_BaseCrit4;Lucky Charm;
-Ln\ayylmao.lsx;AMER_LuckyCharm_BaseCrit5;Lucky Charm;
-Ln\ayylmao.lsx;AMER_LuckyCharm_BaseCrit6;Lucky Charm;
-Ln\ayylmao.lsx;AMER_LuckyCharm_BaseCrit7;Lucky Charm;
-Ln\ayylmao.lsx;AMER_LuckyCharm_BaseCrit8;Lucky Charm;
-Ln\ayylmao.lsx;AMER_LuckyCharm_BaseCrit9;Lucky Charm;
-Ln\ayylmao.lsx;AMER_LuckyCharm_BaseCrit10;Lucky Charm;
+Ln\ayylmao.lsx;AMER_STATUS_Lucky;"<font color=""c1a257"">Lucky</font>";"<font color=""c1a257"">Удача</font>"
+Ln\ayylmao.lsx;AMER_LuckyCharm_Armor1;Lucky!;Удача!
+Ln\ayylmao.lsx;AMER_LuckyCharm_HitChance1;Lucky!;Удача!
+Ln\ayylmao.lsx;AMER_LuckyCharm_CritChance1;Lucky!;Удача!
+Ln\ayylmao.lsx;AMER_LuckyCharm_Damage1;Lucky!;Удача!
+Ln\ayylmao.lsx;AMER_LuckyCharm_Resist1;Lucky!;Удача!
+Ln\ayylmao.lsx;AMER_LuckyCharm_Heal1;Lucky!;Удача!
+Ln\ayylmao.lsx;AMER_LuckyCharm_AP1;Lucky!;Удача!
+Ln\ayylmao.lsx;AMER_LuckyCharm_Initiative1;Lucky!;Удача!
+Ln\ayylmao.lsx;AMER_LuckyCharm_MoveSpeed1;Lucky!;Удача!
+Ln\ayylmao.lsx;AMER_LuckyCharm_Sight1;Lucky!;Удача!
+Ln\ayylmao.lsx;AMER_LuckyCharm_Armor2;Lucky!;Удача!
+Ln\ayylmao.lsx;AMER_LuckyCharm_HitChance2;Lucky!;Удача!
+Ln\ayylmao.lsx;AMER_LuckyCharm_CritChance2;Lucky!;Удача!
+Ln\ayylmao.lsx;AMER_LuckyCharm_Damage2;Lucky!;Удача!
+Ln\ayylmao.lsx;AMER_LuckyCharm_Resist2;Lucky!;Удача!
+Ln\ayylmao.lsx;AMER_LuckyCharm_Heal2;Lucky!;Удача!
+Ln\ayylmao.lsx;AMER_LuckyCharm_AP2;Lucky!;Удача!
+Ln\ayylmao.lsx;AMER_LuckyCharm_Initiative2;Lucky!;Удача!
+Ln\ayylmao.lsx;AMER_LuckyCharm_MoveSpeed2;Lucky!;Удача!
+Ln\ayylmao.lsx;AMER_LuckyCharm_Sight2;Lucky!;Удача!
+Ln\ayylmao.lsx;AMER_LuckyCharm_Shield2;Lucky!;Удача!
+Ln\ayylmao.lsx;AMER_LuckyCharm_Strength2;Lucky!;Удача!
+Ln\ayylmao.lsx;AMER_LuckyCharm_Dexterity2;Lucky!;Удача!
+Ln\ayylmao.lsx;AMER_LuckyCharm_Intelligence2;Lucky!;Удача!
+Ln\ayylmao.lsx;AMER_LuckyCharm_Perception2;Lucky!;Удача!
+Ln\ayylmao.lsx;AMER_LuckyCharm_StatusRemoval2;Lucky!;Удача!
+Ln\ayylmao.lsx;AMER_LuckyCharm_Armor3;Lucky!;Удача!
+Ln\ayylmao.lsx;AMER_LuckyCharm_HitChance3;Lucky!;Удача!
+Ln\ayylmao.lsx;AMER_LuckyCharm_CritChance3;Lucky!;Удача!
+Ln\ayylmao.lsx;AMER_LuckyCharm_Damage3;Lucky!;Удача!
+Ln\ayylmao.lsx;AMER_LuckyCharm_Resist3;Lucky!;Удача!
+Ln\ayylmao.lsx;AMER_LuckyCharm_Heal3;Lucky!;Удача!
+Ln\ayylmao.lsx;AMER_LuckyCharm_AP3;Lucky!;Удача!
+Ln\ayylmao.lsx;AMER_LuckyCharm_Initiative3;Lucky!;Удача!
+Ln\ayylmao.lsx;AMER_LuckyCharm_MoveSpeed3;Lucky!;Удача!
+Ln\ayylmao.lsx;AMER_LuckyCharm_Sight3;Lucky!;Удача!
+Ln\ayylmao.lsx;AMER_LuckyCharm_Shield3;Lucky!;Удача!
+Ln\ayylmao.lsx;AMER_LuckyCharm_Strength3;Lucky!;Удача!
+Ln\ayylmao.lsx;AMER_LuckyCharm_Dexterity3;Lucky!;Удача!
+Ln\ayylmao.lsx;AMER_LuckyCharm_Intelligence3;Lucky!;Удача!
+Ln\ayylmao.lsx;AMER_LuckyCharm_Perception3;Lucky!;Удача!
+Ln\ayylmao.lsx;AMER_LuckyCharm_Constitution3;Lucky!;Удача!
+Ln\ayylmao.lsx;AMER_LuckyCharm_Grit3;Lucky!;Удача!
+Ln\ayylmao.lsx;AMER_LuckyCharm_Willpower3;Lucky!;Удача!
+Ln\ayylmao.lsx;AMER_LuckyCharm_StatusRemoval3;Lucky!;Удача!
+Ln\ayylmao.lsx;AMER_LuckyCharm_BaseCrit1;Lucky Charm;Удачливость
+Ln\ayylmao.lsx;AMER_LuckyCharm_BaseCrit2;Lucky Charm;Удачливость
+Ln\ayylmao.lsx;AMER_LuckyCharm_BaseCrit3;Lucky Charm;Удачливость
+Ln\ayylmao.lsx;AMER_LuckyCharm_BaseCrit4;Lucky Charm;Удачливость
+Ln\ayylmao.lsx;AMER_LuckyCharm_BaseCrit5;Lucky Charm;Удачливость
+Ln\ayylmao.lsx;AMER_LuckyCharm_BaseCrit6;Lucky Charm;Удачливость
+Ln\ayylmao.lsx;AMER_LuckyCharm_BaseCrit7;Lucky Charm;Удачливость
+Ln\ayylmao.lsx;AMER_LuckyCharm_BaseCrit8;Lucky Charm;Удачливость
+Ln\ayylmao.lsx;AMER_LuckyCharm_BaseCrit9;Lucky Charm;Удачливость
+Ln\ayylmao.lsx;AMER_LuckyCharm_BaseCrit10;Lucky Charm;Удачливость
 Ln\ayylmao.lsx;AMER_Shield_Air_StatsDescription;"<p align=""left""><font color=""ff9500"" size=19 face=""Copperplate Gothic Light"">   RECOMMENDED</font><br><font color=cc7700"" face=""Copperplate Gothic Light"">    •    9 Intelligence<br>    •    2 Aerotheurge<br>    •    Cooldown -3 at 15 Intelligence</font><br><br><font face=""Copperplate Gothic Bold"">Range: [3]<br>Absorbs up to [2] of your maximum vitality.</font></p>";
 Ln\ayylmao.lsx;AMER_SKILLBOOK_NaturalOrder;"<font color=""c7a758"">Natural Order Skillbook</font>";Книга навыка «Буйный рост»
 Ln\ayylmao.lsx;AMER_SKILL_NaturalOrder_DisplayName;Natural Order;Буйный рост
@@ -2029,7 +2029,7 @@ Ln\ayylmao.lsx;AMER_Charisma_BlockBuff2;"<font color=""c1a257"">Bardic Reaction<
 Ln\ayylmao.lsx;AMER_Charisma_BlockBuff3;"<font color=""c1a257"">Bardic Reaction</font>";"<font color=""c1a257"">Бардовская реакция</font>"
 Ln\ayylmao.lsx;AMER_Charisma_BlockDebuff3;"<font color=""c1a257"">Bardic Reaction</font>";"<font color=""c1a257"">Бардовская реакция</font>"
 Ln\ayylmao.lsx;AMER_Charisma_BlockDebuff2;"<font color=""c1a257"">Bardic Reaction</font>";"<font color=""c1a257"">Бардовская реакция</font>"
-Ln\ayylmao.lsx;AMER_BOOK_InfestorJournal;"*Most of the pages are long-decayed and coated in a thick fungal coat; it is difficult to find any legible text.*<br><br><br><NewPage>...Those fanatics will be the end of us all...<NewPage>...I will hide us, what else can I do?<NewPage>...Everyone is changing...<NewPage>I can no longer leave.";
+Ln\ayylmao.lsx;AMER_BOOK_InfestorJournal;"*Most of the pages are long-decayed and coated in a thick fungal coat; it is difficult to find any legible text.*<br><br><br><NewPage>...Those fanatics will be the end of us all...<NewPage>...I will hide us, what else can I do?<NewPage>...Everyone is changing...<NewPage>I can no longer leave.";"*большинство страниц давно истлели и покрыты толстым слоем грибка; мало что удаётся прочитать*<br><br><br><NewPage>...Эти фанатики погубят всех нас...<NewPage>...Я спрячу нас, что ещё мне остаётся?<NewPage>...Все меняются...<NewPage>Я больше не могу выйти."
 Ln\ayylmao.lsx;AMER_DIFFICULTY_Damage1;Epic Encounters;Былинные битвы
 Ln\ayylmao.lsx;AMER_DIFFICULTY_Damage2;Epic Encounters;Былинные битвы
 Ln\ayylmao.lsx;AMER_DIFFICULTY_Damage4;Epic Encounters;Былинные битвы
@@ -2092,28 +2092,28 @@ Ln\ayylmao.lsx;AMER_SKILLBOOK_Soothe;Soothe Skillbook;Книга навыка «
 Ln\ayylmao.lsx;AMER_SKILL_Soothe_Description;Radiate healing energy, slowly mending the wounds of all around you.;
 Ln\ayylmao.lsx;AMER_SKILL_Soothe_DisplayName;Soothe;Утешение
 Ln\ayylmao.lsx;AMER_SKILL_Soothe_StatsDescription;"<p align=""left""><font color=""ff9500"" size=19 face=""Copperplate Gothic Light"">   RECOMMENDED</font><br><font color=cc7700"" face=""Copperplate Gothic Light"">    •    9 Intelligence<br>    •    Cooldown -3 at 13 Intelligence</font><br><br><font face=""Copperplate Gothic Bold"">Radius: [1]<br>Additionally heals 3% of maximum vitality +1% per Intelligence above recommended.</font></p>";
-Ln\ayylmao.lsx;AMER_SKILL_Deluge_DisplayName;Deluge;Водопад
-Ln\ayylmao.lsx;AMER_SKILLBOOK_Deluge;Deluge Skillbook;Книга навыка «Водопад»
-Ln\ayylmao.lsx;AMER_SKILL_Deluge_Description;Release a crushing torrent of water over the target area, dealing [1] damage five times and causing Wet to any within the radius.;
+Ln\ayylmao.lsx;AMER_SKILL_Deluge_DisplayName;Deluge;Потоп
+Ln\ayylmao.lsx;AMER_SKILLBOOK_Deluge;Deluge Skillbook;Книга навыка «Потоп»
+Ln\ayylmao.lsx;AMER_SKILL_Deluge_Description;Release a crushing torrent of water over the target area, dealing [1] damage five times and causing Wet to any within the radius.;Обрушивает сокрушительный поток воды на указанную область, нанося [1] урона пять раз и накладывая эффект «Сырость» на всех в радиусе действия.
 Ln\ayylmao.lsx;AMER_SKILL_Deluge_StatsDescription;"<p align=""left""><font color=""ff9500"" size=19 face=""Copperplate Gothic Light"">   RECOMMENDED</font><br><font color=cc7700"" face=""Copperplate Gothic Light"">    •    10 Intelligence<br>    •    3 Hydrosophist<br>    •    Cooldown -3 at 13 Intelligence</font><br><br><font face=""Copperplate Gothic Bold"">Range: [2]</font><br><br>Wet targets are more susceptible to water and air damage, but are resistant to fire. Wet increases the chance to be Shocked or Stunned by 10%, and the chance to be Frozen by 20%.</p>";
-Ln\ayylmao.lsx;AMER_SKILL_Rime_DisplayName;Rime;Иней
-Ln\ayylmao.lsx;AMER_SKILL_Rime_Description;The area beneath your target is continuously frozen as it moves, making movement difficult if it is not accustomed to treading on ice. If cast on an ally, the target cannot slip while affected.;
+Ln\ayylmao.lsx;AMER_SKILL_Rime_DisplayName;Rime;Изморозь
+Ln\ayylmao.lsx;AMER_SKILL_Rime_Description;The area beneath your target is continuously frozen as it moves, making movement difficult if it is not accustomed to treading on ice. If cast on an ally, the target cannot slip while affected.;Под целью по мере её движения намерзает лёд, из-за чего непривычные к хождению по льду существа с трудом удерживают равновесие. Если применить на союзника, тот не поскользнется, пока действует эффект.
 Ln\ayylmao.lsx;AMER_SKILL_Rime_StatsDescription;"<p align=""left""><font color=""ff9500"" size=19 face=""Copperplate Gothic Light"">   RECOMMENDED</font><br><font color=cc7700"" face=""Copperplate Gothic Light"">    •    10 Intelligence<br>    •    3 Hydrosophist<br>    •    Cooldown -3 at 15 Intelligence</font><br><br><font face=""Copperplate Gothic Bold"">Range: [1]<br>Saving Throw: Grit<br>Surface Radius: 2.0m</font><br><br>Characters moving over a frozen surface may slip and become Knocked Down.</p>";
-Ln\ayylmao.lsx;AMER_SKILLBOOK_Rime;Rime Skillbook;Книга навыка «Иней»
-Ln\ayylmao.lsx;AMER_STATUS_EnemyRime;"<font color=""3ba8f0"">Rime</font>";"<font color=""3ba8f0"">Иней</font>"
-Ln\ayylmao.lsx;AMER_STATUS_FriendRime;"<font color=""3ba8f0"">Rime</font>";"<font color=""3ba8f0"">Иней</font>"
-Ln\ayylmao.lsx;AMER_STATUS_ApplyRime;Rime;Иней
-Ln\ayylmao.lsx;AMER_STATUS_RimeStill;"is still <font color=""3ba8f0"">Rimed</font>.";"всё ещё покрыт <font color=""3ba8f0"">инеем</font>."
-Ln\ayylmao.lsx;AMER_STATUS_RimeNoLonger;"is <font color=""3ba8f0"">Rimed</font> no longer.";"больше не покрыт <font color=""3ba8f0"">инеем</font>."
-Ln\ayylmao.lsx;AMER_STATUS_RimeFail;"is <font color=""3ba8f0"">Rimed</font>.";"покрыт <font color=""3ba8f0"">инеем</font>."
-Ln\ayylmao.lsx;AMER_STATUS_RimeSave;"saved against <font color=""3ba8f0"">Rime</font>.";"сопротивляется <font color=""3ba8f0"">инею</font>."
-Ln\ayylmao.lsx;AMER_STATUS_DecayingTouch;"<font color=""9b26de"">Decaying Touch</font>";
+Ln\ayylmao.lsx;AMER_SKILLBOOK_Rime;Rime Skillbook;Книга навыка «Изморозь»
+Ln\ayylmao.lsx;AMER_STATUS_EnemyRime;"<font color=""3ba8f0"">Rime</font>";"<font color=""3ba8f0"">Изморозь</font>"
+Ln\ayylmao.lsx;AMER_STATUS_FriendRime;"<font color=""3ba8f0"">Rime</font>";"<font color=""3ba8f0"">Изморозь</font>"
+Ln\ayylmao.lsx;AMER_STATUS_ApplyRime;Rime;Изморозь
+Ln\ayylmao.lsx;AMER_STATUS_RimeStill;"is still <font color=""3ba8f0"">Rimed</font>.";"всё ещё в <font color=""3ba8f0"">изморози</font>."
+Ln\ayylmao.lsx;AMER_STATUS_RimeNoLonger;"is <font color=""3ba8f0"">Rimed</font> no longer.";"больше не в <font color=""3ba8f0"">изморози</font>."
+Ln\ayylmao.lsx;AMER_STATUS_RimeFail;"is <font color=""3ba8f0"">Rimed</font>.";"покрыт <font color=""3ba8f0"">изморозью</font>."
+Ln\ayylmao.lsx;AMER_STATUS_RimeSave;"saved against <font color=""3ba8f0"">Rime</font>.";"сопротивляется <font color=""3ba8f0"">изморози</font>."
+Ln\ayylmao.lsx;AMER_STATUS_DecayingTouch;"<font color=""9b26de"">Decaying Touch</font>";"<font color=""9b26de"">Гниение</font>"
 Ln\ayylmao.lsx;AMER_ApplyFingerOfDeath;Finger of Death;Перст смерти
 Ln\ayylmao.lsx;Target_FingerOfDeath_DisplayName;Finger of Death;Перст смерти
 Ln\ayylmao.lsx;SKILLBOOK_FingerOfDeath;Finger of Death Skillbook;Книга навыка «Перст смерти»
-Ln\ayylmao.lsx;AMER_ExecuteKill;"<font color=""c80000"">Fatality</font>";
+Ln\ayylmao.lsx;AMER_ExecuteKill;"<font color=""c80000"">Fatality</font>";"<font color=""c80000"">Смертельный удар</font>"
 Ln\ayylmao.lsx;Target_Fatality_DisplayName;Execute;Казнь
-Ln\ayylmao.lsx;Target_Fatality_Description;Deliver a series of 5 vicious attacks to your target, each dealing [2] damage.;
+Ln\ayylmao.lsx;Target_Fatality_Description;Deliver a series of 5 vicious attacks to your target, each dealing [2] damage.;Обрушивает на цель серию из 5 беспощадных атак, каждая из которых наносит [2] урона.
 Ln\ayylmao.lsx;Target_Fatality_StatsDescription;"<p align=""left""><font color=""ff9500"" size=19 face=""Copperplate Gothic Light"">   RECOMMENDED</font><br><font color=cc7700"" face=""Copperplate Gothic Light"">    •    13 Dexterity<br>    •    5 Scoundrel<br>    •    Cooldown -4 at 15 Dexterity</font><br><br><font face=""Copperplate Gothic Bold"">Range: [1]<br><br>Chain Bonus: Fatality</font><br>x5: When Execute has finished, if it dealt more damage than half the target's remaining vitality, the target is instantly slain.<br><br>Boss-creatures can never be instantly slain.<br><br>Damage dealt depends on your weapon's damage rating.</p>";
 Ln\ayylmao.lsx;AMER_STATUS_FingerOfDeath;"<font color=""9b26de"">Finger of Death</font>";"<font color=""9b26de"">Перст смерти</font>"
 Ln\ayylmao.lsx;AMER_STATUS_ApplyFingerOfDeath;Finger of Death;Перст смерти
@@ -2141,80 +2141,80 @@ Ln\ayylmao.lsx;Projectile_SteamCloudArrow_StatsDescription;Can blind when target
 Ln\ayylmao.lsx;Projectile_StaticCloudArrow_StatsDescription;A static cloud has a very high chance of stunning, and a low chance of blinding the target.<br>Blinded characters cannot target others unless they're standing right next to them. Blindness reduces a Hyperacute character's chance to detect hidden enemies.<br>Stunned makes target unable to move or act.<br>Damage dealt depends on your weapon's damage rating.;
 Ln\ayylmao.lsx;Target_EyeGouge_Description;With one deft strike you blind your opponent. Does [1] damage and causes Blindness.;
 Ln\ayylmao.lsx;Target_EyeGouge_StatsDescription;"<p align=""left""><font color=""ff9500"" size=19 face=""Copperplate Gothic Light"">   RECOMMENDED</font><br><font color=cc7700"" face=""Copperplate Gothic Light"">    •    9 Dexterity<br>    •    Cooldown -3 at 15 Dexterity</font><br><br><font face=""Copperplate Gothic Bold"">Range: [2]<br><br></font>Blinded characters cannot target others unless they're standing right next to them. Blindness reduces a Hyperacute character's chance to detect hidden enemies.<br>Damage dealt depends on your weapon's damage rating.</p>";
-Ln\ayylmao.lsx;AMER_SKILL_Cruelty_DisplayName;Cruelty;
-Ln\ayylmao.lsx;AMER_SKILL_Cruelty_Description;"Your thoughts fill with malice and terrible intent, your foes weaknesses are revealed; now, you exploit them. Every instance of piercing damage you deal reduces the armor of your targets and causes Bleeding.";
+Ln\ayylmao.lsx;AMER_SKILL_Cruelty_DisplayName;Cruelty;Жестокость
+Ln\ayylmao.lsx;AMER_SKILL_Cruelty_Description;"Your thoughts fill with malice and terrible intent, your foes weaknesses are revealed; now, you exploit them. Every instance of piercing damage you deal reduces the armor of your targets and causes Bleeding.";Ваши мысли наполняются злобой и жаждой крови, обнажая слабости врагов, которыми вы немедленно пользуетесь. Ваш колющий урон снижает броню цели и вызывает кровотечение.
 Ln\ayylmao.lsx;AMER_SKILL_Cruelty_StatsDescription;"<p align=""left""><font color=""ff9500"" size=19 face=""Copperplate Gothic Light"">   RECOMMENDED</font><br><font color=cc7700"" face=""Copperplate Gothic Light"">    •    13 Dexterity<br>    •    5 Scoundrel<br>    •    Cooldown -4 at 15 Dexterity</font><br><br><font face=""Copperplate Gothic Bold""><br>Effects are applied on every instance of Piercing damage dealt.<br>50% chance to cause Bleeding for 2 turns.<br>Armor reduced by 4 for 2 turns.<br>Armor reduction may stack up to -60 Armor.</font><br><br>&quot;Let's play a game! Which body part do you need the least?&quot;</p>";
 Ln\ayylmao.lsx;AMER_SKILLBOOK_Cruelty;"<font color=""c7a758"">Cruelty Skillbook</font>";
-Ln\ayylmao.lsx;AMER_Cruelty;Cruelty;
-Ln\ayylmao.lsx;AMER_CrueltyDebuff;"<font color=""c80000"">Cruelty</font>";
-Ln\ayylmao.lsx;AMER_CrueltyArmorPen4;"<font color=""c80000"">Cruelty</font>";
-Ln\ayylmao.lsx;AMER_CrueltyArmorPen8;"<font color=""c80000"">Cruelty</font>";
-Ln\ayylmao.lsx;AMER_CrueltyArmorPen16;"<font color=""c80000"">Cruelty</font>";
-Ln\ayylmao.lsx;AMER_CrueltyArmorPen20;"<font color=""c80000"">Cruelty</font>";
-Ln\ayylmao.lsx;AMER_CrueltyArmorPen40;"<font color=""c80000"">Cruelty</font>";
-Ln\ayylmao.lsx;AMER_CrueltyArmorPen60;"<font color=""c80000"">Cruelty</font>";
-Ln\ayylmao.lsx;AMER_TEST_200;200;
-Ln\ayylmao.lsx;AMER_TEST_100;100;
-Ln\ayylmao.lsx;AMER_TEST_50;50;
-Ln\ayylmao.lsx;AMER_TEST_40;40;
-Ln\ayylmao.lsx;AMER_TEST_20;20;
-Ln\ayylmao.lsx;AMER_TEST_10;10;
-Ln\ayylmao.lsx;AMER_TEST_5;5;
-Ln\ayylmao.lsx;AMER_TEST_4;4;
-Ln\ayylmao.lsx;AMER_TEST_2;2;
-Ln\ayylmao.lsx;AMER_TEST_1;1;
-Ln\ayylmao.lsx;AMER_SKILL_HeatMetal_DisplayName;Heat Metal;
-Ln\ayylmao.lsx;AMER_SKILL_HeatMetal_Description;Concentrate on the armor of your target, causing rapid vibrations and heating it to an extreme temperature. [2] damage is dealt from the heat, increasing against those who are heavily armored.;
+Ln\ayylmao.lsx;AMER_Cruelty;Cruelty;Жестокость
+Ln\ayylmao.lsx;AMER_CrueltyDebuff;"<font color=""c80000"">Cruelty</font>";"<font color=""c80000"">Жестокость</font>"
+Ln\ayylmao.lsx;AMER_CrueltyArmorPen4;"<font color=""c80000"">Cruelty</font>";"<font color=""c80000"">Жестокость</font>"
+Ln\ayylmao.lsx;AMER_CrueltyArmorPen8;"<font color=""c80000"">Cruelty</font>";"<font color=""c80000"">Жестокость</font>"
+Ln\ayylmao.lsx;AMER_CrueltyArmorPen16;"<font color=""c80000"">Cruelty</font>";"<font color=""c80000"">Жестокость</font>"
+Ln\ayylmao.lsx;AMER_CrueltyArmorPen20;"<font color=""c80000"">Cruelty</font>";"<font color=""c80000"">Жестокость</font>"
+Ln\ayylmao.lsx;AMER_CrueltyArmorPen40;"<font color=""c80000"">Cruelty</font>";"<font color=""c80000"">Жестокость</font>"
+Ln\ayylmao.lsx;AMER_CrueltyArmorPen60;"<font color=""c80000"">Cruelty</font>";"<font color=""c80000"">Жестокость</font>"
+Ln\ayylmao.lsx;AMER_TEST_200;200;200
+Ln\ayylmao.lsx;AMER_TEST_100;100;100
+Ln\ayylmao.lsx;AMER_TEST_50;50;50
+Ln\ayylmao.lsx;AMER_TEST_40;40;40
+Ln\ayylmao.lsx;AMER_TEST_20;20;20
+Ln\ayylmao.lsx;AMER_TEST_10;10;10
+Ln\ayylmao.lsx;AMER_TEST_5;5;5
+Ln\ayylmao.lsx;AMER_TEST_4;4;4
+Ln\ayylmao.lsx;AMER_TEST_2;2;2
+Ln\ayylmao.lsx;AMER_TEST_1;1;1
+Ln\ayylmao.lsx;AMER_SKILL_HeatMetal_DisplayName;Heat Metal;Плавильная печь
+Ln\ayylmao.lsx;AMER_SKILL_HeatMetal_Description;Concentrate on the armor of your target, causing rapid vibrations and heating it to an extreme temperature. [2] damage is dealt from the heat, increasing against those who are heavily armored.;Заставляет доспех цели вибрировать и раскаляет его до невыносимой температуры. Наносит урон [2] от жара. Хорошо бронированные противники получают больше урона.
 Ln\ayylmao.lsx;AMER_SKILL_HeatMetal_StatsDescription;"<p align=""left""><font color=""ff9500"" size=19 face=""Copperplate Gothic Light"">   RECOMMENDED</font><br><font color=cc7700"" face=""Copperplate Gothic Light"">    •    9 Intelligence<br>    •    Cooldown -4 at 15 Intelligence</font><br><br><font face=""Copperplate Gothic Bold"">Range: [1]<br>Armor: [3]<br>Armored targets suffer increased damage.<br>Targets can take up to 300% increased damage.</font><br><br>Warm targets are more susceptible to fire damage but are resistant to water. Warm targets that are warmed again become burned. Warm increases the chance to be Burned by 30%.</p>";
-Ln\ayylmao.lsx;AMER_ApplyHeatMetal;Heat Metal;
-Ln\ayylmao.lsx;AMER_SKILLBOOK_HeatMetal;Heat Metal Skillbook;
+Ln\ayylmao.lsx;AMER_ApplyHeatMetal;Heat Metal;Плавильная печь
+Ln\ayylmao.lsx;AMER_SKILLBOOK_HeatMetal;Heat Metal Skillbook;Книга навыка «Плавильная печь»
 Ln\ayylmao.lsx;AMER_SKILL_Boil_DisplayName;Boil;Кипячение
-Ln\ayylmao.lsx;AMER_SKILL_Boil_Description;"Boil the water that surrounds your target, causing [2] damage. 150% extra damage is dealt if the target is Wet or standing in water; or 300% if both.";
+Ln\ayylmao.lsx;AMER_SKILL_Boil_Description;"Boil the water that surrounds your target, causing [2] damage. 150% extra damage is dealt if the target is Wet or standing in water; or 300% if both.";Заставляет воду вокруг цели вскипеть, нанося [2] урона. Наносит на 150% больше урона, если цель мокрая или стоит в воде, или на 300%, если и то, и другое.
 Ln\ayylmao.lsx;AMER_SKILL_Boil_StatsDescription;"<p align=""left""><font color=""ff9500"" size=19 face=""Copperplate Gothic Light"">   RECOMMENDED</font><br><font color=cc7700"" face=""Copperplate Gothic Light"">    •    10 Intelligence<br>    •    3 Pyrokinetic<br>    •    Cooldown -3 at 13 Intelligence</font><br><br><font face=""Copperplate Gothic Bold"">Range: [1]<br>Water under the target becomes Steam.<br>Removes Wet from the target.</font><br><br>&quot;Let&apos;s get cookin&apos;!&quot;</p>";
 Ln\ayylmao.lsx;AMER_SKILLBOOK_Boil;"<font color=""c7a758"">Boil Skillbook</font>";"<font color=""c7a758"">Книга навыка «Кипячение»</font>"
 Ln\ayylmao.lsx;AMER_ApplyBoil;Boil;Кипячение
-Ln\ayylmao.lsx;AMER_STATUS_Balance;"<font color=""5fbd00"">Balance</font>";
-Ln\ayylmao.lsx;AMER_STATUS_BalanceStill;"is still <font color=""5fbd00"">Balanced</font>.";
-Ln\ayylmao.lsx;AMER_STATUS_BalanceNoLonger;"is no longer <font color=""5fbd00"">Balanced</font>.";
-Ln\ayylmao.lsx;AMER_STATUS_BalanceFail;"is <font color=""5fbd00"">Balanced</font>.";
-Ln\ayylmao.lsx;AMER_STATUS_BalanceSave;"saved against <font color=""5fbd00"">Balance</font>.";
-Ln\ayylmao.lsx;AMER_SKILL_Balance_DisplayName;Balance;
-Ln\ayylmao.lsx;AMER_SKILL_Balance_Description;Conjure a poisonous parasite within your target, who deals [2] damage, poisons, and heals your nearby allies each turn.;
+Ln\ayylmao.lsx;AMER_STATUS_Balance;"<font color=""5fbd00"">Balance</font>";"<font color=""5fbd00"">Паразит</font>"
+Ln\ayylmao.lsx;AMER_STATUS_BalanceStill;"is still <font color=""5fbd00"">Balanced</font>.";"всё ещё страдает от <font color=""5fbd00"">паразита</font>."
+Ln\ayylmao.lsx;AMER_STATUS_BalanceNoLonger;"is no longer <font color=""5fbd00"">Balanced</font>.";"больше не страдает от <font color=""5fbd00"">паразита</font>."
+Ln\ayylmao.lsx;AMER_STATUS_BalanceFail;"is <font color=""5fbd00"">Balanced</font>.";"под воздействием <font color=""5fbd00"">паразита</font>."
+Ln\ayylmao.lsx;AMER_STATUS_BalanceSave;"saved against <font color=""5fbd00"">Balance</font>.";"сопротивляется <font color=""5fbd00"">паразиту</font>."
+Ln\ayylmao.lsx;AMER_SKILL_Balance_DisplayName;Balance;Паразит
+Ln\ayylmao.lsx;AMER_SKILL_Balance_Description;Conjure a poisonous parasite within your target, who deals [2] damage, poisons, and heals your nearby allies each turn.;Призывает ядовитого паразита внутри цели, который наносит [2] урона, отравляет её и исцеляет ваших союзников поблизости каждый ход.
 Ln\ayylmao.lsx;AMER_SKILL_Balance_StatsDescription;"<p align=""left""><font color=""ff9500"" size=19 face=""Copperplate Gothic Light"">   RECOMMENDED</font><br><font color=cc7700"" face=""Copperplate Gothic Light"">    •    11 Intelligence<br>    •    4 Geomancer<br>    •    Cooldown -4 at 15 Intelligence</font><br><br><font face=""Copperplate Gothic Bold"">Range: [1]<br>Saving Throw: Grit<br>Heals allies within 3.0m of the target.<br>Additionally heals 3% of maximum vitality +1% per Intelligence above recommended.</font><br><br>&quot;Nature's servant awaits.&quot;</p>";
-Ln\ayylmao.lsx;AMER_STATUS_ApplyBalance;Balance;
-Ln\ayylmao.lsx;AMER_SKILLBOOK_Balance;"<font color=""c7a758"">Balance Skillbook</font>";
+Ln\ayylmao.lsx;AMER_STATUS_ApplyBalance;Balance;Паразит
+Ln\ayylmao.lsx;AMER_SKILLBOOK_Balance;"<font color=""c7a758"">Balance Skillbook</font>";"<font color=""c7a758"">Книга навыка «Паразит»</font>"
 Ln\ayylmao.lsx;AMER_SKILL_Fallow_StatsDescription;"<p align=""left""><font color=""ff9500"" size=19 face=""Copperplate Gothic Light"">   RECOMMENDED</font><br><font color=cc7700"" face=""Copperplate Gothic Light"">    •    10 Intelligence<br>    •    3 Geomancer<br>    •    Cooldown -4 at 15 Intelligence</font><br><br><font face=""Copperplate Gothic Bold"">Range: [2]<br>Zombie allies can be healed by drained AP.<br>An ally's AP is only drained enough to be fully healed.</font><br><br>&quot;Seeking the company of plants ensures that your wits will go to seed.&quot;</p>";
-Ln\ayylmao.lsx;AMER_SKILL_Fallow_Description;"Drain the energy of your target to seal its wounds. Drains up to 4 AP from an ally, if it is available; each point of AP drained restores 4% of the target's maximum vitality +2% per Intelligence above recommended. If cast on an enemy, all stored AP is drained and no additional healing occurs.";
-Ln\ayylmao.lsx;AMER_SKILL_Fallow_DisplayName;Fallow;
-Ln\ayylmao.lsx;AMER_SKILLBOOK_Fallow;"<font color=""c7a758"">Fallow Skillbook</font>";
-Ln\ayylmao.lsx;AMER_ApplyFallow;Fallow;
-Ln\ayylmao.lsx;AMER_RES_Crushing1;maximum Crushing Resistance;
-Ln\ayylmao.lsx;AMER_RES_Crushing2;maximum Crushing Resistance;
-Ln\ayylmao.lsx;AMER_RES_Crushing4;maximum Crushing Resistance;
-Ln\ayylmao.lsx;AMER_RES_Crushing8;maximum Crushing Resistance;
-Ln\ayylmao.lsx;AMER_RES_Crushing16;maximum Crushing Resistance;
-Ln\ayylmao.lsx;AMER_RES_Crushing32;maximum Crushing Resistance;
-Ln\ayylmao.lsx;AMER_RES_Crushing64;maximum Crushing Resistance;
-Ln\ayylmao.lsx;AMER_RES_Crushing128;maximum Crushing Resistance;
-Ln\ayylmao.lsx;AMER_RES_Crushing256;maximum Crushing Resistance;
-Ln\ayylmao.lsx;AMER_RES_Slashing1;maximum Slashing Resistance;
-Ln\ayylmao.lsx;AMER_RES_Slashing2;maximum Slashing Resistance;
-Ln\ayylmao.lsx;AMER_RES_Slashing4;maximum Slashing Resistance;
-Ln\ayylmao.lsx;AMER_RES_Slashing8;maximum Slashing Resistance;
-Ln\ayylmao.lsx;AMER_RES_Slashing16;maximum Slashing Resistance;
-Ln\ayylmao.lsx;AMER_RES_Slashing32;maximum Slashing Resistance;
-Ln\ayylmao.lsx;AMER_RES_Slashing64;maximum Slashing Resistance;
-Ln\ayylmao.lsx;AMER_RES_Slashing128;maximum Slashing Resistance;
-Ln\ayylmao.lsx;AMER_RES_Slashing256;maximum Slashing Resistance;
-Ln\ayylmao.lsx;AMER_RES_Piercing1;maximum Piercing Resistance;
-Ln\ayylmao.lsx;AMER_RES_Piercing2;maximum Piercing Resistance;
-Ln\ayylmao.lsx;AMER_RES_Piercing4;maximum Piercing Resistance;
-Ln\ayylmao.lsx;AMER_RES_Piercing8;maximum Piercing Resistance;
-Ln\ayylmao.lsx;AMER_RES_Piercing16;maximum Piercing Resistance;
-Ln\ayylmao.lsx;AMER_RES_Piercing32;maximum Piercing Resistance;
-Ln\ayylmao.lsx;AMER_RES_Piercing64;maximum Piercing Resistance;
-Ln\ayylmao.lsx;AMER_RES_Piercing128;maximum Piercing Resistance;
-Ln\ayylmao.lsx;AMER_RES_Piercing256;maximum Piercing Resistance;
+Ln\ayylmao.lsx;AMER_SKILL_Fallow_Description;"Drain the energy of your target to seal its wounds. Drains up to 4 AP from an ally, if it is available; each point of AP drained restores 4% of the target's maximum vitality +2% per Intelligence above recommended. If cast on an enemy, all stored AP is drained and no additional healing occurs.";"Вытягивает энергию из цели, чтобы залечить её раны. Забирает до 4 ОД у союзника, если они доступны; каждое поглощённое очко действия восстанавливает 4% от максимального здоровья цели +2% за каждое очко Интеллекта выше рекомендуемого. При использовании на врагах поглощает все накопленные ОД без эффекта исцеления."
+Ln\ayylmao.lsx;AMER_SKILL_Fallow_DisplayName;Fallow;Опустошение
+Ln\ayylmao.lsx;AMER_SKILLBOOK_Fallow;"<font color=""c7a758"">Fallow Skillbook</font>";"<font color=""c7a758"">Книга навыка «Опустошение»</font>"
+Ln\ayylmao.lsx;AMER_ApplyFallow;Fallow;Опустошение
+Ln\ayylmao.lsx;AMER_RES_Crushing1;maximum Crushing Resistance;макс. сопротивление дробящему урону
+Ln\ayylmao.lsx;AMER_RES_Crushing2;maximum Crushing Resistance;макс. сопротивление дробящему урону
+Ln\ayylmao.lsx;AMER_RES_Crushing4;maximum Crushing Resistance;макс. сопротивление дробящему урону
+Ln\ayylmao.lsx;AMER_RES_Crushing8;maximum Crushing Resistance;макс. сопротивление дробящему урону
+Ln\ayylmao.lsx;AMER_RES_Crushing16;maximum Crushing Resistance;макс. сопротивление дробящему урону
+Ln\ayylmao.lsx;AMER_RES_Crushing32;maximum Crushing Resistance;макс. сопротивление дробящему урону
+Ln\ayylmao.lsx;AMER_RES_Crushing64;maximum Crushing Resistance;макс. сопротивление дробящему урону
+Ln\ayylmao.lsx;AMER_RES_Crushing128;maximum Crushing Resistance;макс. сопротивление дробящему урону
+Ln\ayylmao.lsx;AMER_RES_Crushing256;maximum Crushing Resistance;макс. сопротивление дробящему урону
+Ln\ayylmao.lsx;AMER_RES_Slashing1;maximum Slashing Resistance;макс. сопротивление рубящему урону
+Ln\ayylmao.lsx;AMER_RES_Slashing2;maximum Slashing Resistance;макс. сопротивление рубящему урону
+Ln\ayylmao.lsx;AMER_RES_Slashing4;maximum Slashing Resistance;макс. сопротивление рубящему урону
+Ln\ayylmao.lsx;AMER_RES_Slashing8;maximum Slashing Resistance;макс. сопротивление рубящему урону
+Ln\ayylmao.lsx;AMER_RES_Slashing16;maximum Slashing Resistance;макс. сопротивление рубящему урону
+Ln\ayylmao.lsx;AMER_RES_Slashing32;maximum Slashing Resistance;макс. сопротивление рубящему урону
+Ln\ayylmao.lsx;AMER_RES_Slashing64;maximum Slashing Resistance;макс. сопротивление рубящему урону
+Ln\ayylmao.lsx;AMER_RES_Slashing128;maximum Slashing Resistance;макс. сопротивление рубящему урону
+Ln\ayylmao.lsx;AMER_RES_Slashing256;maximum Slashing Resistance;макс. сопротивление рубящему урону
+Ln\ayylmao.lsx;AMER_RES_Piercing1;maximum Piercing Resistance;макс. сопротивление колющему урону
+Ln\ayylmao.lsx;AMER_RES_Piercing2;maximum Piercing Resistance;макс. сопротивление колющему урону
+Ln\ayylmao.lsx;AMER_RES_Piercing4;maximum Piercing Resistance;макс. сопротивление колющему урону
+Ln\ayylmao.lsx;AMER_RES_Piercing8;maximum Piercing Resistance;макс. сопротивление колющему урону
+Ln\ayylmao.lsx;AMER_RES_Piercing16;maximum Piercing Resistance;макс. сопротивление колющему урону
+Ln\ayylmao.lsx;AMER_RES_Piercing32;maximum Piercing Resistance;макс. сопротивление колющему урону
+Ln\ayylmao.lsx;AMER_RES_Piercing64;maximum Piercing Resistance;макс. сопротивление колющему урону
+Ln\ayylmao.lsx;AMER_RES_Piercing128;maximum Piercing Resistance;макс. сопротивление колющему урону
+Ln\ayylmao.lsx;AMER_RES_Piercing256;maximum Piercing Resistance;макс. сопротивление колющему урону
 Ln\ayylmao.lsx;AMER_SKILL_Windrun_DisplayName;Windrun;
 Ln\ayylmao.lsx;AMER_SKILL_Windrun_Description;Channel the air around you and focus yourself to quicken your step, cleansing slow and gaining immense movement speed in exchange for damage potential.;
 Ln\ayylmao.lsx;AMER_SKILL_Windrun_StatsDescription;"<p align=""left""><font color=""ff9500"" size=19 face=""Copperplate Gothic Light"">   RECOMMENDED</font><br><font color=cc7700"" face=""Copperplate Gothic Light"">    •    10 Intelligence<br>    •    3 Aerotheurge<br>    •    Cooldown -4 at 15 Intelligence</font><br><br><font face=""Copperplate Gothic Bold""><br>Base Movement Speed: +1.0<br>Movement Speed: +[1]%<br>Damage: [3]%</font><br><br>&quot;Gotta go fast!&quot;</p>";
@@ -2245,100 +2245,100 @@ Ln\ayylmao.lsx;AMER_LuckyCombatText16;"<font color=""c1a257"">Lucky!</font> Stat
 Ln\ayylmao.lsx;AMER_LuckyCombatText17;"<font color=""c1a257"">Lucky!</font> Constitution increased.";
 Ln\ayylmao.lsx;AMER_LuckyCombatText18;"<font color=""c1a257"">Lucky!</font> Grit increased.";
 Ln\ayylmao.lsx;AMER_LuckyCombatText19;"<font color=""c1a257"">Lucky!</font> Willpower increased.";
-Ln\ayylmao.lsx;AMER_Angel_Reactions0;"0 <font color=""3ba8f0"">Angel</font> reactions remaining.";
-Ln\ayylmao.lsx;AMER_Angel_Reactions1;"1 <font color=""3ba8f0"">Angel</font> reaction remaining.";
-Ln\ayylmao.lsx;AMER_Angel_Reactions2;"2 <font color=""3ba8f0"">Angel</font> reactions remaining.";
-Ln\ayylmao.lsx;AMER_Angel_Reactions3;"3 <font color=""3ba8f0"">Angel</font> reactions remaining.";
-Ln\ayylmao.lsx;AMER_Angel_Recovered0;"Maximum <font color=""3ba8f0"">Angel</font> reactions are stored.";
-Ln\ayylmao.lsx;AMER_Angel_Recovered1;"1 <font color=""3ba8f0"">Angel</font> reaction is recovered.";
-Ln\ayylmao.lsx;AMER_Angel_Recovered2;"2 <font color=""3ba8f0"">Angel</font> reactions are recovered.";
-Ln\ayylmao.lsx;AMER_Demon_Reactions0;"0 <font color=""c80000"">Demon</font> reactions remaining.";
-Ln\ayylmao.lsx;AMER_Demon_Reactions1;"1 <font color=""c80000"">Demon</font> reaction remaining.";
-Ln\ayylmao.lsx;AMER_Demon_Reactions2;"2 <font color=""c80000"">Demon</font> reactions remaining.";
-Ln\ayylmao.lsx;AMER_Demon_Reactions3;"3 <font color=""c80000"">Demon</font> reactions remaining.";
-Ln\ayylmao.lsx;AMER_Demon_Recovered0;"Maximum <font color=""c80000"">Demon</font> reactions are stored.";
-Ln\ayylmao.lsx;AMER_Demon_Recovered1;"1 <font color=""c80000"">Demon</font> reaction is recovered.";
-Ln\ayylmao.lsx;AMER_Demon_Recovered2;"2 <font color=""c80000"">Demon</font> reactions are recovered.";
-Ln\ayylmao.lsx;AMER_Predator_Recovered0;"Maximum <font color=""5fbd00"">Predator</font> reactions are stored.";
-Ln\ayylmao.lsx;AMER_Predator_Recovered1;"1 <font color=""5fbd00"">Predator</font> reaction is recovered.";
-Ln\ayylmao.lsx;AMER_Predator_Recovered2;"2 <font color=""5fbd00"">Predator</font> reactions are recovered.";
-Ln\ayylmao.lsx;AMER_Predator_Reactions0;"0 <font color=""5fbd00"">Predator</font> reactions remaining.";
-Ln\ayylmao.lsx;AMER_Predator_Reactions1;"1 <font color=""5fbd00"">Predator</font> reaction remaining.";
-Ln\ayylmao.lsx;AMER_Predator_Reactions2;"2 <font color=""5fbd00"">Predator</font> reactions remaining.";
-Ln\ayylmao.lsx;AMER_Predator_Reactions3;"3 <font color=""5fbd00"">Predator</font> reactions remaining.";
-Ln\ayylmao.lsx;AMER_STATUS_ApplyBless;"<font color=""c1a257"">Blessed</font>";
-Ln\ayylmao.lsx;AMER_Bard_Reactions0;"0 <font color=""c1a257"">Bard</font> reactions remaining.";
-Ln\ayylmao.lsx;AMER_Bard_Reactions1;"1 <font color=""c1a257"">Bard</font> reaction remaining.";
-Ln\ayylmao.lsx;AMER_Bard_Reactions2;"2 <font color=""c1a257"">Bard</font> reactions remaining.";
-Ln\ayylmao.lsx;AMER_Bard_Reactions3;"3 <font color=""c1a257"">Bard</font> reactions remaining.";
-Ln\ayylmao.lsx;AMER_Bard_Reactions4;"4 <font color=""c1a257"">Bard</font> reactions remaining.";
-Ln\ayylmao.lsx;AMER_Bard_Reactions5;"5 <font color=""c1a257"">Bard</font> reactions remaining.";
-Ln\ayylmao.lsx;AMER_Bard_Reactions6;"6 <font color=""c1a257"">Bard</font> reactions remaining.";
-Ln\ayylmao.lsx;AMER_Bard_Reactions7;"7 <font color=""c1a257"">Bard</font> reactions remaining.";
-Ln\ayylmao.lsx;AMER_Bard_Recovered0;"Maximum <font color=""c1a257"">Bard</font> reactions are stored.";
-Ln\ayylmao.lsx;AMER_Bard_Recovered1;"1 <font color=""c1a257"">Bard</font> reaction is recovered.";
-Ln\ayylmao.lsx;AMER_Bard_Recovered2;"2 <font color=""c1a257"">Bard</font> reactions are recovered.";
-Ln\ayylmao.lsx;AMER_BardCombatText0;"Hit Chance increased by <font color=""c1a257"">Bardic Reaction</font>!";
-Ln\ayylmao.lsx;AMER_BardCombatText1;"Air Resistance increased by <font color=""c1a257"">Bardic Reaction</font>!";
-Ln\ayylmao.lsx;AMER_BardCombatText2;"Water Resistance increased by <font color=""c1a257"">Bardic Reaction</font>!";
-Ln\ayylmao.lsx;AMER_BardCombatText3;"Fire Resistance increased by <font color=""c1a257"">Bardic Reaction</font>!";
-Ln\ayylmao.lsx;AMER_BardCombatText4;"Earth Resistance increased by <font color=""c1a257"">Bardic Reaction</font>!";
-Ln\ayylmao.lsx;AMER_BardCombatText5;"Fear removed by <font color=""c1a257"">Bardic Reaction</font>!";
-Ln\ayylmao.lsx;AMER_BardCombatText6;"Slow removed by <font color=""c1a257"">Bardic Reaction</font>!";
-Ln\ayylmao.lsx;AMER_BardCombatText10;"Charm removed by <font color=""c1a257"">Bardic Reaction</font>!";
-Ln\ayylmao.lsx;AMER_BardCombatText8;"Invisibility reapplied by <font color=""c1a257"">Bardic Reaction</font>!";
-Ln\ayylmao.lsx;AMER_BardCombatText9;"Shield Specialist modified by <font color=""c1a257"">Bardic Reaction</font>!";
-Ln\ayylmao.lsx;AMER_BardCombatText7;"Knocked Down removed by <font color=""c1a257"">Bardic Reaction</font>!";
-Ln\ayylmao.lsx;AMER_BardCombatText11;"Haste countered by <font color=""c1a257"">Bardic Reaction</font>!";
-Ln\ayylmao.lsx;AMER_BardCombatText12;"Hit Chance reduced by <font color=""c1a257"">Bardic Reaction</font>!";
-Ln\ayylmao.lsx;AMER_SKILLBOOK_ColdSnap;Cold Snap Skillbook;Книга навыка «Внезапное похолодание»
-Ln\ayylmao.lsx;AMER_SKILL_ColdSnap_DisplayName;Cold Snap;Внезапное похолодание
-Ln\ayylmao.lsx;AMER_SKILL_ColdSnap_Description;Your target crystallizes and cracks, suffering [2] damage. 100% extra damage is dealt if the target is Wet or Chilled, while 200% extra is suffered if Frozen.;
+Ln\ayylmao.lsx;AMER_Angel_Reactions0;"0 <font color=""3ba8f0"">Angel</font> reactions remaining.";"Не осталось <font color=""3ba8f0"">ангельских</font> реакций."
+Ln\ayylmao.lsx;AMER_Angel_Reactions1;"1 <font color=""3ba8f0"">Angel</font> reaction remaining.";"Осталась 1 <font color=""3ba8f0"">ангельская</font> реакция."
+Ln\ayylmao.lsx;AMER_Angel_Reactions2;"2 <font color=""3ba8f0"">Angel</font> reactions remaining.";"Осталось 2 <font color=""3ba8f0"">ангельских</font> реакции."
+Ln\ayylmao.lsx;AMER_Angel_Reactions3;"3 <font color=""3ba8f0"">Angel</font> reactions remaining.";"Осталось 3 <font color=""3ba8f0"">ангельских</font> реакции."
+Ln\ayylmao.lsx;AMER_Angel_Recovered0;"Maximum <font color=""3ba8f0"">Angel</font> reactions are stored.";"Накоплен максимум <font color=""3ba8f0"">ангельских</font> реакций."
+Ln\ayylmao.lsx;AMER_Angel_Recovered1;"1 <font color=""3ba8f0"">Angel</font> reaction is recovered.";"Восстановлена 1 <font color=""3ba8f0"">ангельская</font> реакция."
+Ln\ayylmao.lsx;AMER_Angel_Recovered2;"2 <font color=""3ba8f0"">Angel</font> reactions are recovered.";"Восстановлено 2 <font color=""3ba8f0"">ангельских</font> реакции."
+Ln\ayylmao.lsx;AMER_Demon_Reactions0;"0 <font color=""c80000"">Demon</font> reactions remaining.";"Не осталось <font color=""c80000"">демонических</font> реакций."
+Ln\ayylmao.lsx;AMER_Demon_Reactions1;"1 <font color=""c80000"">Demon</font> reaction remaining.";"Осталась 1 <font color=""c80000"">демоническая</font> реакция."
+Ln\ayylmao.lsx;AMER_Demon_Reactions2;"2 <font color=""c80000"">Demon</font> reactions remaining.";"Осталось 2 <font color=""c80000"">демонических</font> реакции."
+Ln\ayylmao.lsx;AMER_Demon_Reactions3;"3 <font color=""c80000"">Demon</font> reactions remaining.";"Осталось 3 <font color=""c80000"">демонических</font> реакции."
+Ln\ayylmao.lsx;AMER_Demon_Recovered0;"Maximum <font color=""c80000"">Demon</font> reactions are stored.";"Накоплен максимум <font color=""c80000"">демонических</font> реакций."
+Ln\ayylmao.lsx;AMER_Demon_Recovered1;"1 <font color=""c80000"">Demon</font> reaction is recovered.";"Восстановлена 1 <font color=""c80000"">демоническая</font> реакция."
+Ln\ayylmao.lsx;AMER_Demon_Recovered2;"2 <font color=""c80000"">Demon</font> reactions are recovered.";"Восстановлено 2 <font color=""c80000"">демонических</font> реакции."
+Ln\ayylmao.lsx;AMER_Predator_Recovered0;"Maximum <font color=""5fbd00"">Predator</font> reactions are stored.";"Накоплено максимум реакций <font color=""5fbd00"">хищника</font>."
+Ln\ayylmao.lsx;AMER_Predator_Recovered1;"1 <font color=""5fbd00"">Predator</font> reaction is recovered.";"Восстановлена 1 реакция <font color=""5fbd00"">хищника</font>."
+Ln\ayylmao.lsx;AMER_Predator_Recovered2;"2 <font color=""5fbd00"">Predator</font> reactions are recovered.";"Восстановлено 2 реакции <font color=""5fbd00"">хищника</font>."
+Ln\ayylmao.lsx;AMER_Predator_Reactions0;"0 <font color=""5fbd00"">Predator</font> reactions remaining.";"Не осталось реакций <font color=""5fbd00"">хищника</font>."
+Ln\ayylmao.lsx;AMER_Predator_Reactions1;"1 <font color=""5fbd00"">Predator</font> reaction remaining.";"Осталась 1 реакция <font color=""5fbd00"">хищника</font>."
+Ln\ayylmao.lsx;AMER_Predator_Reactions2;"2 <font color=""5fbd00"">Predator</font> reactions remaining.";"Осталось 2 реакции <font color=""5fbd00"">хищника</font>."
+Ln\ayylmao.lsx;AMER_Predator_Reactions3;"3 <font color=""5fbd00"">Predator</font> reactions remaining.";"Осталось 3 реакции <font color=""5fbd00"">хищника</font>."
+Ln\ayylmao.lsx;AMER_STATUS_ApplyBless;"<font color=""c1a257"">Blessed</font>";"<font color=""c1a257"">Благословление</font>"
+Ln\ayylmao.lsx;AMER_Bard_Reactions0;"0 <font color=""c1a257"">Bard</font> reactions remaining.";"Не осталось <font color=""c1a257"">бардовских</font> реакций."
+Ln\ayylmao.lsx;AMER_Bard_Reactions1;"1 <font color=""c1a257"">Bard</font> reaction remaining.";"Осталась 1 <font color=""c1a257"">бардовская</font> реакция."
+Ln\ayylmao.lsx;AMER_Bard_Reactions2;"2 <font color=""c1a257"">Bard</font> reactions remaining.";"Осталось 2 <font color=""c1a257"">бардовские</font> реакции."
+Ln\ayylmao.lsx;AMER_Bard_Reactions3;"3 <font color=""c1a257"">Bard</font> reactions remaining.";"Осталось 3 <font color=""c1a257"">бардовские</font> реакции."
+Ln\ayylmao.lsx;AMER_Bard_Reactions4;"4 <font color=""c1a257"">Bard</font> reactions remaining.";"Осталось 4 <font color=""c1a257"">бардовские</font> реакции."
+Ln\ayylmao.lsx;AMER_Bard_Reactions5;"5 <font color=""c1a257"">Bard</font> reactions remaining.";"Осталось 5 <font color=""c1a257"">бардовских</font> реакций."
+Ln\ayylmao.lsx;AMER_Bard_Reactions6;"6 <font color=""c1a257"">Bard</font> reactions remaining.";"Осталось 6 <font color=""c1a257"">бардовских</font> реакций."
+Ln\ayylmao.lsx;AMER_Bard_Reactions7;"7 <font color=""c1a257"">Bard</font> reactions remaining.";"Осталось 7 <font color=""c1a257"">бардовских</font> реакций."
+Ln\ayylmao.lsx;AMER_Bard_Recovered0;"Maximum <font color=""c1a257"">Bard</font> reactions are stored.";"Накоплен максимум <font color=""c1a257"">бардовских</font> реакций."
+Ln\ayylmao.lsx;AMER_Bard_Recovered1;"1 <font color=""c1a257"">Bard</font> reaction is recovered.";"Восстановлена 1 <font color=""c1a257"">бардовская</font> реакция."
+Ln\ayylmao.lsx;AMER_Bard_Recovered2;"2 <font color=""c1a257"">Bard</font> reactions are recovered.";"Восстановлено 2 <font color=""c1a257"">бардовские</font> реакции."
+Ln\ayylmao.lsx;AMER_BardCombatText0;"Hit Chance increased by <font color=""c1a257"">Bardic Reaction</font>!";"Шанс попадания увеличен <font color=""c1a257"">бардовской реакцией</font>!"
+Ln\ayylmao.lsx;AMER_BardCombatText1;"Air Resistance increased by <font color=""c1a257"">Bardic Reaction</font>!";"Сопротивление воздуху увеличено <font color=""c1a257"">бардовской реакцией</font>!"
+Ln\ayylmao.lsx;AMER_BardCombatText2;"Water Resistance increased by <font color=""c1a257"">Bardic Reaction</font>!";"Сопротивление воде увеличено <font color=""c1a257"">бардовской реакцией</font>!"
+Ln\ayylmao.lsx;AMER_BardCombatText3;"Fire Resistance increased by <font color=""c1a257"">Bardic Reaction</font>!";"Сопротивление огню увеличено <font color=""c1a257"">бардовской реакцией</font>!"
+Ln\ayylmao.lsx;AMER_BardCombatText4;"Earth Resistance increased by <font color=""c1a257"">Bardic Reaction</font>!";"Сопротивление земле увеличено <font color=""c1a257"">бардовской реакцией</font>!"
+Ln\ayylmao.lsx;AMER_BardCombatText5;"Fear removed by <font color=""c1a257"">Bardic Reaction</font>!";"Страх снят <font color=""c1a257"">бардовской реакцией</font>!"
+Ln\ayylmao.lsx;AMER_BardCombatText6;"Slow removed by <font color=""c1a257"">Bardic Reaction</font>!";"Замедление снято <font color=""c1a257"">бардовской реакцией</font>!"
+Ln\ayylmao.lsx;AMER_BardCombatText10;"Charm removed by <font color=""c1a257"">Bardic Reaction</font>!";"Очарование снято <font color=""c1a257"">бардовской реакцией</font>!"
+Ln\ayylmao.lsx;AMER_BardCombatText8;"Invisibility reapplied by <font color=""c1a257"">Bardic Reaction</font>!";"Невидимость восстановлена <font color=""c1a257"">бардовской реакцией</font>!"
+Ln\ayylmao.lsx;AMER_BardCombatText9;"Shield Specialist modified by <font color=""c1a257"">Bardic Reaction</font>!";"Блок щитом изменён <font color=""c1a257"">бардовской реакцией</font>!"
+Ln\ayylmao.lsx;AMER_BardCombatText7;"Knocked Down removed by <font color=""c1a257"">Bardic Reaction</font>!";"Нокдаун снят <font color=""c1a257"">бардовской реакцией</font>!"
+Ln\ayylmao.lsx;AMER_BardCombatText11;"Haste countered by <font color=""c1a257"">Bardic Reaction</font>!";"Ускорение нейтрализовано <font color=""c1a257"">бардовской реакцией</font>!"
+Ln\ayylmao.lsx;AMER_BardCombatText12;"Hit Chance reduced by <font color=""c1a257"">Bardic Reaction</font>!";"Шанс попадания уменьшен <font color=""c1a257"">бардовской реакцией</font>!"
+Ln\ayylmao.lsx;AMER_SKILLBOOK_ColdSnap;Cold Snap Skillbook;Книга навыка «Морозный щелчок»
+Ln\ayylmao.lsx;AMER_SKILL_ColdSnap_DisplayName;Cold Snap;Морозный щелчок
+Ln\ayylmao.lsx;AMER_SKILL_ColdSnap_Description;Your target crystallizes and cracks, suffering [2] damage. 100% extra damage is dealt if the target is Wet or Chilled, while 200% extra is suffered if Frozen.;Цель кристаллизуется и трескается, получая [2] урона. Если цель находится в состоянии сырости или холода, урон увеличивается на 100%, а если заморожена — на 200%.
 Ln\ayylmao.lsx;AMER_SKILL_ColdSnap_StatsDescription;"<p align=""left""><font color=""ff9500"" size=19 face=""Copperplate Gothic Light"">   RECOMMENDED</font><br><font color=cc7700"" face=""Copperplate Gothic Light"">    •    11 Intelligence<br>    •    4 Hydrosophist<br>    •    Cooldown -4 at 15 Intelligence</font><br><br><font face=""Copperplate Gothic Bold"">Range: [1]<br>Ice is created beneath the target.<br>Removes Wet, Chilled, and Frozen from the target.</font></p>";
-Ln\ayylmao.lsx;AMER_ApplyColdSnap;Cold Snap;Внезапное похолодание
-Ln\ayylmao.lsx;AMER_SKILLBOOK_AwesomePresence;Awesome Presence Skillbook;
-Ln\ayylmao.lsx;AMER_SKILL_AwesomePresence_DisplayName;Awesome Presence;
-Ln\ayylmao.lsx;AMER_SKILL_AwesomePresence_Description;You are a paragon of war, your presence awe-inspiring. The target is emboldened if allied, or Feared if hostile. Effect is greater with corpses nearby.;
+Ln\ayylmao.lsx;AMER_ApplyColdSnap;Cold Snap;Морозный щелчок
+Ln\ayylmao.lsx;AMER_SKILLBOOK_AwesomePresence;Awesome Presence Skillbook;Книга навыка «Грозная поступь»
+Ln\ayylmao.lsx;AMER_SKILL_AwesomePresence_DisplayName;Awesome Presence;Грозная поступь
+Ln\ayylmao.lsx;AMER_SKILL_AwesomePresence_Description;You are a paragon of war, your presence awe-inspiring. The target is emboldened if allied, or Feared if hostile. Effect is greater with corpses nearby.;Вы — воплощение воинской доблести, ваше присутствие внушает трепет. Союзники обретают отвагу, а враги впадают в страх. Эффект усиливается, если поблизости есть трупы.
 Ln\ayylmao.lsx;AMER_SKILL_AwesomePresence_StatsDescription;"<p align=""left""><font color=""ff9500"" size=19 face=""Copperplate Gothic Light"">   RECOMMENDED</font><br><font color=cc7700"" face=""Copperplate Gothic Light"">    •    11 Strength<br>    •    4 Soldier<br>    •    Cooldown -4 at 15 Strength<br><br></font><font face=""Copperplate Gothic Bold"">Range: [1]<br>Cleanses Fear and Charm from allies.<br>Effect increases for each corpse within 5.0m, up to 3.</font><br><br>If cast on an enemy, Willpower is reduced by 1, 2, or 4. If cast on an ally, one corpse cleanses Curse and grants Encourage; two cleanse Weak and Slow, and grant Fortified; three cleanse Enervate, Borrowed Time, and Balance, and grant Bless, Haste, and Rage.</p>";
-Ln\ayylmao.lsx;AMER_AwesomePresence1;"<font color=""f59000"">Awesome Presence</font>";
-Ln\ayylmao.lsx;AMER_AwesomePresence2;"<font color=""f59000"">Awesome Presence</font>";
-Ln\ayylmao.lsx;AMER_AwesomePresence3;"<font color=""f59000"">Awesome Presence</font>";
-Ln\ayylmao.lsx;AMER_SKILLBOOK_CreepingOoze;Creeping Ooze Skillbook;
-Ln\ayylmao.lsx;AMER_SKILL_CreepingOoze_DisplayName;Creeping Ooze;
+Ln\ayylmao.lsx;AMER_AwesomePresence1;"<font color=""f59000"">Awesome Presence</font>";"<font color=""f59000"">Грозная поступь</font>"
+Ln\ayylmao.lsx;AMER_AwesomePresence2;"<font color=""f59000"">Awesome Presence</font>";"<font color=""f59000"">Грозная поступь</font>"
+Ln\ayylmao.lsx;AMER_AwesomePresence3;"<font color=""f59000"">Awesome Presence</font>";"<font color=""f59000"">Грозная поступь</font>"
+Ln\ayylmao.lsx;AMER_SKILLBOOK_CreepingOoze;Creeping Ooze Skillbook;Книга навыка «Ползучая слизь»
+Ln\ayylmao.lsx;AMER_SKILL_CreepingOoze_DisplayName;Creeping Ooze;Ползучая слизь
 Ln\ayylmao.lsx;AMER_SKILL_CreepingOoze_StatsDescription;"<p align=""left""><font color=""ff9500"" size=19 face=""Copperplate Gothic Light"">   RECOMMENDED</font><br><font color=cc7700"" face=""Copperplate Gothic Light"">    •    8 Intelligence<br>    •    Cooldown -4 at 15 Intelligence</font><br><br><font face=""Copperplate Gothic Bold"">Range: [1]<br>Radius: [2]</font><br><br>Ooze Poisons characters and will explode when ignited.<br><br>Poisoned deals poison damage over time. Poisoned targets lose 15% Poison Resistance every turn, up to -45%.</p>";
-Ln\ayylmao.lsx;AMER_SKILL_CreepingOoze_Description;Coat the target surface with a viscous, poisonous Ooze that extends under neighboring characters within 2.5m. This expansion continues from target-to-target.;
+Ln\ayylmao.lsx;AMER_SKILL_CreepingOoze_Description;Coat the target surface with a viscous, poisonous Ooze that extends under neighboring characters within 2.5m. This expansion continues from target-to-target.;Покрывает выбранную поверхность вязкой ядовитой слизью, которая расползается под всеми персонажами в радиусе 2,5 м. Слизь продолжает распространяться от цели к цели.
 Ln\ayylmao.lsx;AMER_STATUS_DrainWillpower2;"<font color=""9b26de"">Drain Willpower</font>";"<font color=""9b26de"">Истощение воли</font>"
-Ln\ayylmao.lsx;AMER_STATUS_DrainWillpowerFail;"is <font color=""9b26de"">Willpower Drained</font>.";"<font color=""9b26de"">теряет волю</font>."
-Ln\ayylmao.lsx;AMER_STATUS_DrainWillpowerSave;"partially resisted <font color=""9b26de"">Drain Willpower</font>.";"пытается сопротивляться <font color=""9b26de"">истощению воли</font>."
+Ln\ayylmao.lsx;AMER_STATUS_DrainWillpowerFail;"is <font color=""9b26de"">Willpower Drained</font>.";"подвергается <font color=""9b26de"">истощению воли</font>."
+Ln\ayylmao.lsx;AMER_STATUS_DrainWillpowerSave;"partially resisted <font color=""9b26de"">Drain Willpower</font>.";"частично сопротивляется <font color=""9b26de"">истощению воли</font>."
 Ln\ayylmao.lsx;AMER_STATUS_DrainWillpower1;"<font color=""9b26de"">Partial Drain Willpower</font>";"<font color=""9b26de"">Малое истощение воли</font>"
 Ln\ayylmao.lsx;AMER_STATUS_ApplyDrainWillpower;"<font color=""9b26de"">Drain Willpower</font>";"<font color=""9b26de"">Истощение воли</font>"
-Ln\ayylmao.lsx;Target_DrainWillpower_Description;Tarnish a target's presence of mind, reducing its Willpower by [2]. Those who resist the effect are still compromised to a lesser extent.;
-Ln\ayylmao.lsx;AMER_STATUS_SoulsapFail;"is <font color=""9b26de"">Soulsapped</font>.";
-Ln\ayylmao.lsx;AMER_STATUS_SoulsapSave1;"partially resisted <font color=""9b26de"">Soulsap</font>.";
-Ln\ayylmao.lsx;AMER_STATUS_SoulsapSave2;"mostly resisted <font color=""9b26de"">Soulsap</font>.";
-Ln\ayylmao.lsx;AMER_STATUS_ApplySoulsap;"<font color=""9b26de"">Soulsap</font>";
-Ln\ayylmao.lsx;AMER_STATUS_Soulsap1;"<font color=""9b26de"">Partial Soulsap</font>";
-Ln\ayylmao.lsx;AMER_STATUS_Soulsap2;"<font color=""9b26de"">Partial Soulsap</font>";
-Ln\ayylmao.lsx;AMER_STATUS_Soulsap3;"<font color=""9b26de"">Soulsap</font>";
-Ln\ayylmao.lsx;AMER_ApplyAwesomePresence;"<font color=""f59000"">Awesome Presence</font>";
-Ln\ayylmao.lsx;Projectile_Charm_Description;Your target becomes instantly enthralled by you, carrying out any desire unquestioningly.;
-Ln\ayylmao.lsx;Projectile_Silence_Description;Rob your target of the ability to produce sound, leaving them unable to perform special skills.;
-Ln\ayylmao.lsx;AMER_Test;Epic Testing;
-Ln\ayylmao.lsx;Subterranean Passage;Subterranean Passage;
-Ln\ayylmao.lsx;Forgotten Waste;Unknown Kadath;
-Ln\ayylmao.lsx;Snowbound Ledge;Snowbound Ledge;
-Ln\ayylmao.lsx;Tower of Ascension;Tower of Ascension;
-Ln\ayylmao.lsx;Snow Canyon;Snowblind Approach;
-Ln\ayylmao.lsx;AMER_CON_RespecPotion;"<font color=""c7a758"">Source Hunter's Adaptation</font>";
+Ln\ayylmao.lsx;Target_DrainWillpower_Description;Tarnish a target's presence of mind, reducing its Willpower by [2]. Those who resist the effect are still compromised to a lesser extent.;Омрачает разум цели, снижая её силу воли на [2]. Даже те, кто сопротивляется эффекту, частично подвержены его влиянию.
+Ln\ayylmao.lsx;AMER_STATUS_SoulsapFail;"is <font color=""9b26de"">Soulsapped</font>.";"подвергается <font color=""9b26de"">иссушению души</font>."
+Ln\ayylmao.lsx;AMER_STATUS_SoulsapSave1;"partially resisted <font color=""9b26de"">Soulsap</font>.";"частично сопротивляется <font color=""9b26de"">иссушению души</font>."
+Ln\ayylmao.lsx;AMER_STATUS_SoulsapSave2;"mostly resisted <font color=""9b26de"">Soulsap</font>.";"в основном сопротивляется <font color=""9b26de"">иссушению души</font>."
+Ln\ayylmao.lsx;AMER_STATUS_ApplySoulsap;"<font color=""9b26de"">Soulsap</font>";"<font color=""9b26de"">Иссушение души</font>"
+Ln\ayylmao.lsx;AMER_STATUS_Soulsap1;"<font color=""9b26de"">Partial Soulsap</font>";"<font color=""9b26de"">Малое иссушение души</font>"
+Ln\ayylmao.lsx;AMER_STATUS_Soulsap2;"<font color=""9b26de"">Partial Soulsap</font>";"<font color=""9b26de"">Малое иссушение души</font>"
+Ln\ayylmao.lsx;AMER_STATUS_Soulsap3;"<font color=""9b26de"">Soulsap</font>";"<font color=""9b26de"">Иссушение души</font>"
+Ln\ayylmao.lsx;AMER_ApplyAwesomePresence;"<font color=""f59000"">Awesome Presence</font>";"<font color=""f59000"">Грозная поступь</font>"
+Ln\ayylmao.lsx;Projectile_Charm_Description;Your target becomes instantly enthralled by you, carrying out any desire unquestioningly.;Ваша цель порабощена и беспрекословно исполняет любые ваши желания.
+Ln\ayylmao.lsx;Projectile_Silence_Description;Rob your target of the ability to produce sound, leaving them unable to perform special skills.;Лишает цель способности издавать звуки, не позволяя ей использовать особые навыки.
+Ln\ayylmao.lsx;AMER_Test;Epic Testing;Былинное тестирование
+Ln\ayylmao.lsx;Subterranean Passage;Subterranean Passage;Подземный проход
+Ln\ayylmao.lsx;Forgotten Waste;Unknown Kadath;Неведомый Кадат
+Ln\ayylmao.lsx;Snowbound Ledge;Snowbound Ledge;Заснеженный уступ
+Ln\ayylmao.lsx;Tower of Ascension;Tower of Ascension;Башня Вознесения
+Ln\ayylmao.lsx;Snow Canyon;Snowblind Approach;Тропа снежной слепоты
+Ln\ayylmao.lsx;AMER_CON_RespecPotion;"<font color=""c7a758"">Source Hunter's Adaptation</font>";"<font color=""c7a758"">Адаптация искателя Истока</font>"
 Ln\ayylmao.lsx;AMER_ThickSkin1;Thick Skin;
 Ln\ayylmao.lsx;AMER_ThickSkin2;Thick Skin;
 Ln\ayylmao.lsx;AMER_ThickSkin3;Thick Skin;
 Ln\ayylmao.lsx;AMER_ThickSkin4;Thick Skin;
 Ln\ayylmao.lsx;AMER_ThickSkin5;Thick Skin;
-Ln\ayylmao.lsx;AMER_AngelCombatText;"was healed by an <font color=""3ba8f0"">Angel</font> reaction.";
-Ln\ayylmao.lsx;AMER_DemonCombatText;"was damaged by a <font color=""c80000"">Demon</font> reaction.";
+Ln\ayylmao.lsx;AMER_AngelCombatText;"was healed by an <font color=""3ba8f0"">Angel</font> reaction.";"получает исцеление от <font color=""3ba8f0"">ангельской</font> реакции."
+Ln\ayylmao.lsx;AMER_DemonCombatText;"was damaged by a <font color=""c80000"">Demon</font> reaction.";"получает урон от <font color=""c80000"">демонической</font> реакции."
 Ln\ayylmao.lsx;AMER_BOOK_Ossurot;"*You peel away the damp, red cover; revealing a bulbous mass of flesh within. A low, rumbling wail finds its way to your ears as the surface of flesh before you contorts, tears, and oozses into two words.*<br><br><br><br><br><font color=""c80000"" size=50 face=""Copperplate Gothic Light"">H   E LL    O FR   I E<br>           N<br>                 D</font><NewPage>*As you stare, the mass begins to shift again, reforming into new text.*<br><br><br><br><br><font color=""c80000"" size=50 face=""Copperplate Gothic Light"">I        I          I<br>   I     I<br>I DO see you, WEARY traveler!<NewPage><font color=""c80000"" size=50 face=""Copperplate Gothic Light"">                 You<br></font><font color=""c80000"" size=6>        I want you. I WILL have you. Sweet, succulent, supple CORPSE. I will make you my HOME I will claim your SANITY I will consume EVERY INCH EVERY SPLINTER. SOUL. I NEED THE SOUL.</font><br><font color=""c80000"" size=50 face=""Copperplate Gothic Light"">are cold? Thirsty?... Hungry?</font><font color=""c80000"" size=6>Walk forward, MEAT. Come, OH YES COME, COME foward COME meet me, MEAT. I need so so so so so so SO SO SO FEW NOW. Oh... Your sweet seat, your flickering, bright, leaking soul aloft before me...</font><NewPage>*The flesh begins to bubble violently at its edges; large portions loosing and falling to your feet. The everpresent wail begins to fluctuate in pitch as more text takes shape before you.*<br><br><br><font color=""c80000"" size=50 face=""Copperplate Gothic Light"">Step forward, friend, I can see to your needs.</font><NewPage><font color=""c80000"" size=50 face=""Copperplate Gothic Light"">My name is...</font><font color=""c80000"" size=6>DON'T say it PATIENCE WHY just take it! Take the SOUL I- I I I I neeeed SO CLOSE</font><font color=""c80000"" size=50 face=""Copperplate Gothic Light"">Ossoras... Yes, it is so....</font><NewPage><font color=""c80000"" size=50 face=""Copperplate Gothic Light"">I Am<br>      Am<br>            I am so alone...</font><br><font color=""c80000"" size=6>TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE ITTAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT</font><NewPage><font color=""c80000"" size=6>TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE ITTAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT TAKE IT</font><NewPage>*Tiny hands and yawning maws begin to take form within the text and reach, fruitlessly, toward you. Laughter erupts around you, then- immpossible, otherworldly tones assault you as the book quivers and jolts violently before slamming shut; ejecting a veritable slaw of sinew and ichor across the floor.*<br><br><br>*Silence.*";
-Ln\ayylmao.lsx;AMER_ApplyCreepingOoze;Creeping Ooze;
+Ln\ayylmao.lsx;AMER_ApplyCreepingOoze;Creeping Ooze;Ползучая слизь
 Ln\ayylmao.lsx;AMER_PERC_Crit1;Perception;Восприятие
 Ln\ayylmao.lsx;AMER_SKILL_EMPOWERED_SpikedShell_StatsDescription;"<p align=""left""><font color=""ff9500"" size=19 face=""Copperplate Gothic Light"">   RECOMMENDED</font><br><font color=cc7700"" face=""Copperplate Gothic Light"">    •    Cooldown -2 at 15 Strength</font><br><br><font color=""00ffff"" face=""Copperplate Gothic Bold"">Reflect 35% of all damage taken to attackers as piercing.</font><br><br>Lasts until cancelled or replaced by another stance.</p>";
 Ln\ayylmao.lsx;AMER_SKILL_EMPOWERED_SpikedShell_DisplayName;Empowered Spiked Shell;

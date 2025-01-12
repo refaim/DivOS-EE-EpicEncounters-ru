@@ -13,7 +13,7 @@
 					<attribute id="UUID" type="22" value="SKILLBOOST_ImmolationStatus" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Turn a nearby target and enemies within [3] meters of it to stone, dealing [2] damage. Creates an oil surface beneath the primary target." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Превращает в камень выбранную цель и врагов в радиусе [3] метров от неё, нанося [2] урона. Создаёт лужу масла под целью." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
@@ -153,7 +153,7 @@
 					<attribute id="UUID" type="22" value="Shout_BarbedCoat_Description" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Spiked Shell" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Шипастый панцирь" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
@@ -272,7 +272,7 @@
 					<attribute id="UUID" type="22" value="Shout_SurvivorsKarma_StatsDescription" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Karma" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Карма" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
@@ -286,42 +286,42 @@
 					<attribute id="UUID" type="22" value="Rain_RainOfArrows_Description" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;E5FA00&quot;&gt;Chain Bonus x 1!&lt;/font&gt;" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;E5FA00&quot;&gt;Комбо-очки x1!&lt;/font&gt;" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_ChainOne" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;FADD00&quot;&gt;Chain Bonus x 2!&lt;/font&gt;" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;E5FA00&quot;&gt;Комбо-очки x2!&lt;/font&gt;" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_ChainTwo" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;FAA300&quot;&gt;Chain Bonus x 3!&lt;/font&gt;" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;E5FA00&quot;&gt;Комбо-очки x3!&lt;/font&gt;" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_ChainThree" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;FA7000&quot;&gt;Chain Bonus x 4!&lt;/font&gt;" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;E5FA00&quot;&gt;Комбо-очки x4!&lt;/font&gt;" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_ChainFour" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;FA2E00&quot;&gt;Chain Bonus x 5!&lt;/font&gt;" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;E5FA00&quot;&gt;Комбо-очки x5!&lt;/font&gt;" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_ChainFive" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Chain Finisher" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Комбо-финишер" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
@@ -342,14 +342,14 @@
 					<attribute id="UUID" type="22" value="Target_PreciseIncision_Description" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Chain Finisher" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Комбо-финишер" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_ApplyPreciseIncision" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Chain Finisher" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Комбо-финишер" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
@@ -391,49 +391,49 @@
 					<attribute id="UUID" type="22" value="AMER_LacerateHeal" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Chain Finisher" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Комбо-финишер" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_ApplyLacerate" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c80000&quot;&gt;Backstab! Damage times 2.3!&lt;/font&gt;" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c80000&quot;&gt;Удар в спину! Урон увеличен в 2.3 раза!&lt;/font&gt;" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_BackstabBonus3" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c80000&quot;&gt;Backstab! Damage times 2.6!&lt;/font&gt;" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c80000&quot;&gt;Удар в спину! Урон увеличен в 2.6 раза!&lt;/font&gt;" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_BackstabBonus4" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c80000&quot;&gt;Backstab! Damage times 2.9!&lt;/font&gt;" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c80000&quot;&gt;Удар в спину! Урон увеличен в 2.9 раза!&lt;/font&gt;" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_BackstabBonus5" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c80000&quot;&gt;Backstab! Damage times 3.2!&lt;/font&gt;" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c80000&quot;&gt;Удар в спину! Урон увеличен в 3.2 раза!&lt;/font&gt;" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_BackstabBonus6" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c80000&quot;&gt;Backstab! Damage times 3.5!&lt;/font&gt;" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c80000&quot;&gt;Удар в спину! Урон увеличен в 3.5 раза!&lt;/font&gt;" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_BackstabBonus7" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c80000&quot;&gt;Backstab! Damage times 2!&lt;/font&gt;" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c80000&quot;&gt;Удар в спину! Урон увеличен в 2 раза!&lt;/font&gt;" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
@@ -881,7 +881,7 @@
 					<attribute id="UUID" type="22" value="SKILLBOOK_InvisibilityTarget" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Spiked Shell Skillbook" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Книга навыка «Шипастый панцирь»" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
@@ -902,28 +902,28 @@
 					<attribute id="UUID" type="22" value="Target_TargetedPerception_DisplayName" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Searing light clarifies a target's vision, granting a temporary perception bonus and curing Blind." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Обжигающий свет проясняет зрение цели, временно повышая восприятие и снимая слепоту." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="Target_TargetedPerception_Description" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Summon Toxic Horror" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Призыв ядовитого ужаса" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="Summon_Ooze_DisplayName" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Conjure forth a bubbling, poisonous ooze at target point to do your bidding." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Призывает в указанную точку бурлящую ядовитую слизь, которая будет выполнять ваши приказы." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="Summon_Ooze_Description" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Summon Toxic Horror Skillbook" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Книга навыка «Призыв ядовитого ужаса»" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
@@ -937,35 +937,35 @@
 					<attribute id="UUID" type="22" value="Target_BanishSummon_DisplayName" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="In banishing a summoned creature, it is torn apart from within, suffering immense damage." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="При изгнании призванное существо разрывается изнутри, получая огромный урон." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="Target_BanishSummon_Description" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Spiked Shell" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Шипастый панцирь" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="SKILLBOOST_BarbedCoat" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Fade" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Растворение" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="SKILLBOOST_Blink" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Fade" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Растворение" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="Shout_Blink_DisplayName" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Your physicality blends and fades into the shadows, reducing all physical damage dealt to you." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Ваша плоть растворяется в тенях, уменьшая весь получаемый физический урон." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
@@ -979,42 +979,42 @@
 					<attribute id="UUID" type="22" value="AMER_RezSickness" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Fade Skillbook" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Книга навыка «Растворение»" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="SKILLBOOK_Blink" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Raise icy crystals to block an area, enemies caught inside the crystals may be frozen and take [1] damage." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Поднимает ледяные кристаллы, преграждающие путь. Враги, оказавшиеся внутри кристаллов, получают [1] урона и могут быть заморожены." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="Wall_Ice_Description" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Rock the earth with powerful tremors, knocking down characters and spewing oil out onto the battlefield at random locations. deals [1] damage." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Сотрясает землю мощными толчками, сбивая персонажей с ног и выбрасывая на поле боя лужи масла в случайных местах. Наносит [1] урона." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="Quake_Earthquake_Description" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Conjure a subterranian beast to spew oil and rock onto the battlefield, dealing [1] damage to all targets in the affected cone. Creates an oil surface. Has a chance to petrify." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Призывает подземного зверя, который извергает на поле боя масло и камни, нанося урон [1] всем целям в конусе поражения. Создаёт масляную поверхность. Может обратить в камень." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="Cone_EarthSpray_Description" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Call forth a spirit of frost to freeze and deal [1] damage to all targets in a [2] degree, [3] long cone; twice." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Призывает духа мороза, который дважды замораживает все цели и наносит [1] урона в конусе длиной [3] с углом в [2] градусов." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="Cone_WinterbreathMedium_Description" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="A bright, radiant light emanates from your hands and clings to those affected, making them more susceptible to affliction." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Яркий, лучистый свет исходит из ваших рук и окутывает задетых им существ, делая их более уязвимыми к негативным эффектам." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
@@ -1553,14 +1553,14 @@
 					<attribute id="UUID" type="22" value="AMER_TwoHand8" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c80000&quot;&gt;Backstab! Damage times 3.8!&lt;/font&gt;" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c80000&quot;&gt;Удар в спину! Урон увеличен в 3.8 раза!&lt;/font&gt;" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_BackstabBonus8" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c80000&quot;&gt;Backstab! Damage times 4.2!&lt;/font&gt;" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c80000&quot;&gt;Удар в спину! Урон увеличен в 4.2 раза!&lt;/font&gt;" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
@@ -1574,105 +1574,105 @@
 					<attribute id="UUID" type="22" value="AMER_BullyPenalty" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Crossbow Mastery" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Владение арбалетом" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CrossbowArmor5" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Crossbow Mastery" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Владение арбалетом" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CrossbowArmor1" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Crossbow Mastery" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Владение арбалетом" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CrossbowArmor3" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Crossbow Mastery" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Владение арбалетом" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CrossbowArmor2" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Crossbow Mastery" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Владение арбалетом" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CrossbowArmor6" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Crossbow Mastery" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Владение арбалетом" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CrossbowArmor4" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Crossbow Mastery" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Владение арбалетом" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CrossbowArmor7" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Crossbow Mastery" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Владение арбалетом" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CrossbowArmor8" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Crossbow Mastery" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Владение арбалетом" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CrossbowArmor10-2" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Crossbow Mastery" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Владение арбалетом" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CrossbowArmor20-2" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Crossbow Mastery" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Владение арбалетом" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CrossbowArmor10-3" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Crossbow Mastery" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Владение арбалетом" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CrossbowArmor20-3" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Spotted a hidden enemy!" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Замечен скрытый враг!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_InvisSpotted" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c80000&quot;&gt;Detected!&lt;/font&gt;" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c80000&quot;&gt;Замечен!&lt;/font&gt;" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_Detected" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="was revealed by a perceptive enemy." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="замечен бдительным врагом." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
@@ -2491,7 +2491,7 @@
 					<attribute id="UUID" type="22" value="Rain_RainOfArrows_StatsDescription" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Bind the life of your enemies to yourself; all targets affected take equivalent damage whenever you do." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Связывает жизнь ваших врагов с вашей; все пораженные цели получают такой же урон, что и вы." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
@@ -3240,14 +3240,14 @@
 					<attribute id="UUID" type="22" value="Projectile_SplittingArrow_DisplayName" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Erosion" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Разъедание" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_SKILL_Erosion_DisplayName" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Water bubbles and seeps forth from flesh and bone, splintering away what was once whole." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Вода просачивается сквозь плоть и кости, разрушая некогда целое на части." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
@@ -3261,35 +3261,35 @@
 					<attribute id="UUID" type="22" value="AMER_SKILL_Erosion_StatsDescription" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c7a758&quot;&gt;Erosion Skillbook&lt;/font&gt;" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c7a758&quot;&gt;Книга навыка «Разъедание»&lt;/font&gt;" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_SKILLBOOK_Erosion" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;b27756&quot;&gt;Eroded&lt;/font&gt;" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;b27756&quot;&gt;Разъеден&lt;/font&gt;" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_Erosion" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Erosion" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Разъедание" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_ApplyErosion" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Borrowed Time" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Заёмное время" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_SKILL_BorrowedTime_DisplayName" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Bend time and slow those around you, gaining the difference yourself." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Искривляет время, замедляя окружающих и присваивая себе разницу." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
@@ -3303,84 +3303,84 @@
 					<attribute id="UUID" type="22" value="AMER_SKILL_BorrowedTime_StatsDescription" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c7a758&quot;&gt;Borrowed Time Skillbook&lt;/font&gt;" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c7a758&quot;&gt;Книга навыка «Заёмное время»&lt;/font&gt;" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_SKILLBOOK_BorrowedTime" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Borrowed Time" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Заёмное время" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_STATUS_ApplyBorrowedTime" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;7b70d2&quot;&gt;Borrowed Time I&lt;/font&gt;" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;7b70d2&quot;&gt;Заёмное время I&lt;/font&gt;" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_STATUS_BorrowedTime1" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;7b70d2&quot;&gt;Borrowed Time II&lt;/font&gt;" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;7b70d2&quot;&gt;Заёмное время II&lt;/font&gt;" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_STATUS_BorrowedTime2" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;7b70d2&quot;&gt;Borrowed Time III&lt;/font&gt;" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;7b70d2&quot;&gt;Заёмное время III&lt;/font&gt;" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_STATUS_BorrowedTime3" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;7b70d2&quot;&gt;Borrowed Time IV&lt;/font&gt;" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;7b70d2&quot;&gt;Заёмное время IV&lt;/font&gt;" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_STATUS_BorrowedTime4" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;7b70d2&quot;&gt;Borrowed Time V&lt;/font&gt;" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;7b70d2&quot;&gt;Заёмное время V&lt;/font&gt;" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_STATUS_BorrowedTime5" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;7b70d2&quot;&gt;Borrowed Time&lt;/font&gt;" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;7b70d2&quot;&gt;Заёмное время&lt;/font&gt;" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_STATUS_BorrowedTimeSlow" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="is still &lt;font color=&quot;7b70d2&quot;&gt;Time-Borrowed&lt;/font&gt;." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="всё ещё под действием &lt;font color=&quot;7b70d2&quot;&gt;временного займа&lt;/font&gt;." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_STATUS_BorrowedTimeStill" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="is no longer &lt;font color=&quot;7b70d2&quot;&gt;Time-Borrowed&lt;/font&gt;." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="больше не под действием &lt;font color=&quot;7b70d2&quot;&gt;временного займа&lt;/font&gt;." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_STATUS_BorrowedTimeNoLonger" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="is &lt;font color=&quot;7b70d2&quot;&gt;Time-Borrowed&lt;/font&gt;." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="под действием &lt;font color=&quot;7b70d2&quot;&gt;временного займа&lt;/font&gt;." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_STATUS_BorrowedTimeFail" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="saved against &lt;font color=&quot;7b70d2&quot;&gt;Borrowed Time&lt;/font&gt;." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="сопротивляется действию &lt;font color=&quot;7b70d2&quot;&gt;«Заёмного времени»&lt;/font&gt;." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
@@ -3429,7 +3429,7 @@
 					<attribute id="UUID" type="22" value="AMER_SKILL_Despair_DisplayName" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Fill the target with an immense sense of hopelessness and despair, making it Mute, Slow, and Weak." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Наполняет цель чувством безысходности и отчаяния, замедляя её, ослабляя и погружая в немоту." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
@@ -3450,28 +3450,28 @@
 					<attribute id="UUID" type="22" value="AMER_SKILLBOOK_Despair" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;e9d23d&quot;&gt;Stone Curse&lt;/font&gt;" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;e9d23d&quot;&gt;Каменное проклятие&lt;/font&gt;" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_STATUS_ApplyAmberPrison" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c7a758&quot;&gt;Stone Curse Skillbook&lt;/font&gt;" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c7a758&quot;&gt;Книга навыка «Каменное проклятие»&lt;/font&gt;" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_SKILLBOOK_AmberPrison" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Stone Curse" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Каменное проклятие" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_SKILL_AmberPrison_DisplayName" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="A vicious curse that slowly turns a target to stone from within, dealing [2] damage and increasingly hindering the afflicted each turn before eventual petrification." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Жестокое проклятие, которое медленно обращает цель в камень изнутри, нанося [2] урона каждый ход и всё сильнее сковывая жертву до полного окаменения." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
@@ -3485,56 +3485,56 @@
 					<attribute id="UUID" type="22" value="AMER_SKILL_AmberPrison_StatsDescription" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;e9d23d&quot;&gt;Stone Curse&lt;/font&gt;" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;e9d23d&quot;&gt;Каменное проклятие&lt;/font&gt;" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_STATUS_AmberPrisonSlow" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="is &lt;font color=&quot;e9d23d&quot;&gt;Stone Cursed&lt;/font&gt;." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="под действием &lt;font color=&quot;e9d23d&quot;&gt;«Каменного проклятия»&lt;/font&gt;." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_STATUS_AmberPrisonFail" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="saved against &lt;font color=&quot;e9d23d&quot;&gt;Stone Curse&lt;/font&gt;." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="сопротивляется &lt;font color=&quot;e9d23d&quot;&gt;«Каменному проклятию»&lt;/font&gt;." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_STATUS_AmberPrisonSave" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="is still &lt;font color=&quot;e9d23d&quot;&gt;Stone Cursed&lt;/font&gt;." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="всё ещё под действием &lt;font color=&quot;e9d23d&quot;&gt;«Каменного проклятия»&lt;/font&gt;." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_STATUS_AmberPrisonStill" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="is no longer &lt;font color=&quot;e9d23d&quot;&gt;Stone Cursed&lt;/font&gt;." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="больше не под действием &lt;font color=&quot;e9d23d&quot;&gt;«Каменного проклятия»&lt;/font&gt;." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_STATUS_AmberPrisonNoLonger" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Petrified" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Окаменение" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="Stats_Petrified" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;e9d23d&quot;&gt;Stone Curse&lt;/font&gt;" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;e9d23d&quot;&gt;Каменное проклятие&lt;/font&gt;" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_STATUS_AmberPrisonSlow2" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;e9d23d&quot;&gt;Stone Curse&lt;/font&gt;" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;e9d23d&quot;&gt;Каменное проклятие&lt;/font&gt;" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
@@ -3709,7 +3709,7 @@
 					<attribute id="UUID" type="22" value="AMER_SKILLBOOK_Cauterize" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Sear away scar and burn together tissue, dealing [2] damage before greatly healing the target and removing Bleeding and Decaying Touch. If targeting enemies, no healing occurs unless they are a Zombie or afflicted with Decaying Touch." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Выжигает шрамы и сращивает ткани, нанося [2] урона, после чего восстанавливает цели значительное количество здоровья, исцеляя кровотечение и гниение. При использовании на врагах лечит только зомби или поражённых гниением." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
@@ -3989,392 +3989,392 @@
 					<attribute id="UUID" type="22" value="Target_StunStart_Description" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c1a257&quot;&gt;Lucky&lt;/font&gt;" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c1a257&quot;&gt;Удача&lt;/font&gt;" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_STATUS_Lucky" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Lucky!" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Удача!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_LuckyCharm_Armor1" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Lucky!" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Удача!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_LuckyCharm_HitChance1" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Lucky!" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Удача!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_LuckyCharm_CritChance1" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Lucky!" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Удача!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_LuckyCharm_Damage1" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Lucky!" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Удача!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_LuckyCharm_Resist1" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Lucky!" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Удача!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_LuckyCharm_Heal1" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Lucky!" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Удача!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_LuckyCharm_AP1" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Lucky!" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Удача!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_LuckyCharm_Initiative1" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Lucky!" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Удача!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_LuckyCharm_MoveSpeed1" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Lucky!" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Удача!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_LuckyCharm_Sight1" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Lucky!" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Удача!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_LuckyCharm_Armor2" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Lucky!" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Удача!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_LuckyCharm_HitChance2" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Lucky!" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Удача!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_LuckyCharm_CritChance2" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Lucky!" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Удача!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_LuckyCharm_Damage2" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Lucky!" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Удача!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_LuckyCharm_Resist2" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Lucky!" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Удача!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_LuckyCharm_Heal2" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Lucky!" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Удача!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_LuckyCharm_AP2" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Lucky!" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Удача!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_LuckyCharm_Initiative2" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Lucky!" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Удача!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_LuckyCharm_MoveSpeed2" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Lucky!" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Удача!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_LuckyCharm_Sight2" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Lucky!" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Удача!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_LuckyCharm_Shield2" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Lucky!" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Удача!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_LuckyCharm_Strength2" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Lucky!" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Удача!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_LuckyCharm_Dexterity2" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Lucky!" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Удача!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_LuckyCharm_Intelligence2" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Lucky!" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Удача!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_LuckyCharm_Perception2" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Lucky!" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Удача!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_LuckyCharm_StatusRemoval2" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Lucky!" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Удача!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_LuckyCharm_Armor3" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Lucky!" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Удача!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_LuckyCharm_HitChance3" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Lucky!" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Удача!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_LuckyCharm_CritChance3" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Lucky!" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Удача!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_LuckyCharm_Damage3" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Lucky!" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Удача!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_LuckyCharm_Resist3" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Lucky!" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Удача!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_LuckyCharm_Heal3" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Lucky!" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Удача!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_LuckyCharm_AP3" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Lucky!" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Удача!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_LuckyCharm_Initiative3" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Lucky!" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Удача!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_LuckyCharm_MoveSpeed3" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Lucky!" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Удача!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_LuckyCharm_Sight3" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Lucky!" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Удача!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_LuckyCharm_Shield3" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Lucky!" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Удача!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_LuckyCharm_Strength3" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Lucky!" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Удача!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_LuckyCharm_Dexterity3" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Lucky!" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Удача!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_LuckyCharm_Intelligence3" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Lucky!" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Удача!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_LuckyCharm_Perception3" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Lucky!" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Удача!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_LuckyCharm_Constitution3" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Lucky!" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Удача!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_LuckyCharm_Grit3" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Lucky!" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Удача!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_LuckyCharm_Willpower3" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Lucky!" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Удача!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_LuckyCharm_StatusRemoval3" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Lucky Charm" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Удачливость" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_LuckyCharm_BaseCrit1" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Lucky Charm" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Удачливость" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_LuckyCharm_BaseCrit2" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Lucky Charm" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Удачливость" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_LuckyCharm_BaseCrit3" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Lucky Charm" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Удачливость" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_LuckyCharm_BaseCrit4" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Lucky Charm" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Удачливость" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_LuckyCharm_BaseCrit5" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Lucky Charm" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Удачливость" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_LuckyCharm_BaseCrit6" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Lucky Charm" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Удачливость" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_LuckyCharm_BaseCrit7" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Lucky Charm" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Удачливость" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_LuckyCharm_BaseCrit8" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Lucky Charm" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Удачливость" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_LuckyCharm_BaseCrit9" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Lucky Charm" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Удачливость" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
@@ -4808,7 +4808,7 @@
 					<attribute id="UUID" type="22" value="AMER_Charisma_BlockDebuff2" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="*Most of the pages are long-decayed and coated in a thick fungal coat; it is difficult to find any legible text.*&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;NewPage&gt;...Those fanatics will be the end of us all...&lt;NewPage&gt;...I will hide us, what else can I do?&lt;NewPage&gt;...Everyone is changing...&lt;NewPage&gt;I can no longer leave." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="*большинство страниц давно истлели и покрыты толстым слоем грибка; мало что удаётся прочитать*&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;NewPage&gt;...Эти фанатики погубят всех нас...&lt;NewPage&gt;...Я спрячу нас, что ещё мне остаётся?&lt;NewPage&gt;...Все меняются...&lt;NewPage&gt;Я больше не могу выйти." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
@@ -5249,21 +5249,21 @@
 					<attribute id="UUID" type="22" value="AMER_SKILL_Soothe_StatsDescription" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Водопад" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Потоп" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_SKILL_Deluge_DisplayName" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Книга навыка «Водопад»" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Книга навыка «Потоп»" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_SKILLBOOK_Deluge" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Release a crushing torrent of water over the target area, dealing [1] damage five times and causing Wet to any within the radius." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Обрушивает сокрушительный поток воды на указанную область, нанося [1] урона пять раз и накладывая эффект «Сырость» на всех в радиусе действия." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
@@ -5277,14 +5277,14 @@
 					<attribute id="UUID" type="22" value="AMER_SKILL_Deluge_StatsDescription" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Иней" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Изморозь" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_SKILL_Rime_DisplayName" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="The area beneath your target is continuously frozen as it moves, making movement difficult if it is not accustomed to treading on ice. If cast on an ally, the target cannot slip while affected." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Под целью по мере её движения намерзает лёд, из-за чего непривычные к хождению по льду существа с трудом удерживают равновесие. Если применить на союзника, тот не поскользнется, пока действует эффект." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
@@ -5298,63 +5298,63 @@
 					<attribute id="UUID" type="22" value="AMER_SKILL_Rime_StatsDescription" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Книга навыка «Иней»" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Книга навыка «Изморозь»" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_SKILLBOOK_Rime" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;3ba8f0&quot;&gt;Иней&lt;/font&gt;" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;3ba8f0&quot;&gt;Изморозь&lt;/font&gt;" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_STATUS_EnemyRime" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;3ba8f0&quot;&gt;Иней&lt;/font&gt;" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;3ba8f0&quot;&gt;Изморозь&lt;/font&gt;" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_STATUS_FriendRime" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Иней" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Изморозь" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_STATUS_ApplyRime" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="всё ещё покрыт &lt;font color=&quot;3ba8f0&quot;&gt;инеем&lt;/font&gt;." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="всё ещё в &lt;font color=&quot;3ba8f0&quot;&gt;изморози&lt;/font&gt;." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_STATUS_RimeStill" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="больше не покрыт &lt;font color=&quot;3ba8f0&quot;&gt;инеем&lt;/font&gt;." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="больше не в &lt;font color=&quot;3ba8f0&quot;&gt;изморози&lt;/font&gt;." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_STATUS_RimeNoLonger" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="покрыт &lt;font color=&quot;3ba8f0&quot;&gt;инеем&lt;/font&gt;." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="покрыт &lt;font color=&quot;3ba8f0&quot;&gt;изморозью&lt;/font&gt;." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_STATUS_RimeFail" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="сопротивляется &lt;font color=&quot;3ba8f0&quot;&gt;инею&lt;/font&gt;." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="сопротивляется &lt;font color=&quot;3ba8f0&quot;&gt;изморози&lt;/font&gt;." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_STATUS_RimeSave" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;9b26de&quot;&gt;Decaying Touch&lt;/font&gt;" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;9b26de&quot;&gt;Гниение&lt;/font&gt;" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
@@ -5382,7 +5382,7 @@
 					<attribute id="UUID" type="22" value="SKILLBOOK_FingerOfDeath" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c80000&quot;&gt;Fatality&lt;/font&gt;" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c80000&quot;&gt;Смертельный удар&lt;/font&gt;" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
@@ -5396,7 +5396,7 @@
 					<attribute id="UUID" type="22" value="Target_Fatality_DisplayName" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Deliver a series of 5 vicious attacks to your target, each dealing [2] damage." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Обрушивает на цель серию из 5 беспощадных атак, каждая из которых наносит [2] урона." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
@@ -5592,14 +5592,14 @@
 					<attribute id="UUID" type="22" value="Target_EyeGouge_StatsDescription" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Cruelty" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Жестокость" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_SKILL_Cruelty_DisplayName" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Your thoughts fill with malice and terrible intent, your foes weaknesses are revealed; now, you exploit them. Every instance of piercing damage you deal reduces the armor of your targets and causes Bleeding." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Ваши мысли наполняются злобой и жаждой крови, обнажая слабости врагов, которыми вы немедленно пользуетесь. Ваш колющий урон снижает броню цели и вызывает кровотечение." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
@@ -5620,56 +5620,56 @@
 					<attribute id="UUID" type="22" value="AMER_SKILLBOOK_Cruelty" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Cruelty" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Жестокость" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_Cruelty" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c80000&quot;&gt;Cruelty&lt;/font&gt;" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c80000&quot;&gt;Жестокость&lt;/font&gt;" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CrueltyDebuff" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c80000&quot;&gt;Cruelty&lt;/font&gt;" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c80000&quot;&gt;Жестокость&lt;/font&gt;" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CrueltyArmorPen4" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c80000&quot;&gt;Cruelty&lt;/font&gt;" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c80000&quot;&gt;Жестокость&lt;/font&gt;" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CrueltyArmorPen8" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c80000&quot;&gt;Cruelty&lt;/font&gt;" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c80000&quot;&gt;Жестокость&lt;/font&gt;" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CrueltyArmorPen16" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c80000&quot;&gt;Cruelty&lt;/font&gt;" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c80000&quot;&gt;Жестокость&lt;/font&gt;" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CrueltyArmorPen20" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c80000&quot;&gt;Cruelty&lt;/font&gt;" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c80000&quot;&gt;Жестокость&lt;/font&gt;" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_CrueltyArmorPen40" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c80000&quot;&gt;Cruelty&lt;/font&gt;" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c80000&quot;&gt;Жестокость&lt;/font&gt;" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
@@ -5746,14 +5746,14 @@
 					<attribute id="UUID" type="22" value="AMER_TEST_1" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Heat Metal" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Плавильная печь" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_SKILL_HeatMetal_DisplayName" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Concentrate on the armor of your target, causing rapid vibrations and heating it to an extreme temperature. [2] damage is dealt from the heat, increasing against those who are heavily armored." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Заставляет доспех цели вибрировать и раскаляет его до невыносимой температуры. Наносит урон [2] от жара. Хорошо бронированные противники получают больше урона." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
@@ -5767,14 +5767,14 @@
 					<attribute id="UUID" type="22" value="AMER_SKILL_HeatMetal_StatsDescription" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Heat Metal" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Плавильная печь" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_ApplyHeatMetal" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Heat Metal Skillbook" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Книга навыка «Плавильная печь»" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
@@ -5788,7 +5788,7 @@
 					<attribute id="UUID" type="22" value="AMER_SKILL_Boil_DisplayName" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Boil the water that surrounds your target, causing [2] damage. 150% extra damage is dealt if the target is Wet or standing in water; or 300% if both." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Заставляет воду вокруг цели вскипеть, нанося [2] урона. Наносит на 150% больше урона, если цель мокрая или стоит в воде, или на 300%, если и то, и другое." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
@@ -5816,49 +5816,49 @@
 					<attribute id="UUID" type="22" value="AMER_ApplyBoil" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;5fbd00&quot;&gt;Balance&lt;/font&gt;" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;5fbd00&quot;&gt;Паразит&lt;/font&gt;" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_STATUS_Balance" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="is still &lt;font color=&quot;5fbd00&quot;&gt;Balanced&lt;/font&gt;." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="всё ещё страдает от &lt;font color=&quot;5fbd00&quot;&gt;паразита&lt;/font&gt;." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_STATUS_BalanceStill" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="is no longer &lt;font color=&quot;5fbd00&quot;&gt;Balanced&lt;/font&gt;." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="больше не страдает от &lt;font color=&quot;5fbd00&quot;&gt;паразита&lt;/font&gt;." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_STATUS_BalanceNoLonger" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="is &lt;font color=&quot;5fbd00&quot;&gt;Balanced&lt;/font&gt;." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="под воздействием &lt;font color=&quot;5fbd00&quot;&gt;паразита&lt;/font&gt;." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_STATUS_BalanceFail" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="saved against &lt;font color=&quot;5fbd00&quot;&gt;Balance&lt;/font&gt;." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="сопротивляется &lt;font color=&quot;5fbd00&quot;&gt;паразиту&lt;/font&gt;." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_STATUS_BalanceSave" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Balance" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Паразит" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_SKILL_Balance_DisplayName" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Conjure a poisonous parasite within your target, who deals [2] damage, poisons, and heals your nearby allies each turn." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Призывает ядовитого паразита внутри цели, который наносит [2] урона, отравляет её и исцеляет ваших союзников поблизости каждый ход." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
@@ -5872,14 +5872,14 @@
 					<attribute id="UUID" type="22" value="AMER_SKILL_Balance_StatsDescription" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Balance" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Паразит" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_STATUS_ApplyBalance" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c7a758&quot;&gt;Balance Skillbook&lt;/font&gt;" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c7a758&quot;&gt;Книга навыка «Паразит»&lt;/font&gt;" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
@@ -5893,217 +5893,217 @@
 					<attribute id="UUID" type="22" value="AMER_SKILL_Fallow_StatsDescription" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Drain the energy of your target to seal its wounds. Drains up to 4 AP from an ally, if it is available; each point of AP drained restores 4% of the target's maximum vitality +2% per Intelligence above recommended. If cast on an enemy, all stored AP is drained and no additional healing occurs." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Вытягивает энергию из цели, чтобы залечить её раны. Забирает до 4 ОД у союзника, если они доступны; каждое поглощённое очко действия восстанавливает 4% от максимального здоровья цели +2% за каждое очко Интеллекта выше рекомендуемого. При использовании на врагах поглощает все накопленные ОД без эффекта исцеления." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_SKILL_Fallow_Description" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Fallow" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Опустошение" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_SKILL_Fallow_DisplayName" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c7a758&quot;&gt;Fallow Skillbook&lt;/font&gt;" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c7a758&quot;&gt;Книга навыка «Опустошение»&lt;/font&gt;" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_SKILLBOOK_Fallow" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Fallow" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Опустошение" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_ApplyFallow" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="maximum Crushing Resistance" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="макс. сопротивление дробящему урону" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_RES_Crushing1" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="maximum Crushing Resistance" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="макс. сопротивление дробящему урону" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_RES_Crushing2" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="maximum Crushing Resistance" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="макс. сопротивление дробящему урону" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_RES_Crushing4" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="maximum Crushing Resistance" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="макс. сопротивление дробящему урону" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_RES_Crushing8" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="maximum Crushing Resistance" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="макс. сопротивление дробящему урону" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_RES_Crushing16" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="maximum Crushing Resistance" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="макс. сопротивление дробящему урону" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_RES_Crushing32" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="maximum Crushing Resistance" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="макс. сопротивление дробящему урону" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_RES_Crushing64" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="maximum Crushing Resistance" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="макс. сопротивление дробящему урону" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_RES_Crushing128" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="maximum Crushing Resistance" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="макс. сопротивление дробящему урону" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_RES_Crushing256" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="maximum Slashing Resistance" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="макс. сопротивление рубящему урону" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_RES_Slashing1" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="maximum Slashing Resistance" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="макс. сопротивление рубящему урону" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_RES_Slashing2" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="maximum Slashing Resistance" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="макс. сопротивление рубящему урону" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_RES_Slashing4" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="maximum Slashing Resistance" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="макс. сопротивление рубящему урону" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_RES_Slashing8" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="maximum Slashing Resistance" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="макс. сопротивление рубящему урону" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_RES_Slashing16" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="maximum Slashing Resistance" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="макс. сопротивление рубящему урону" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_RES_Slashing32" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="maximum Slashing Resistance" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="макс. сопротивление рубящему урону" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_RES_Slashing64" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="maximum Slashing Resistance" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="макс. сопротивление рубящему урону" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_RES_Slashing128" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="maximum Slashing Resistance" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="макс. сопротивление рубящему урону" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_RES_Slashing256" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="maximum Piercing Resistance" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="макс. сопротивление колющему урону" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_RES_Piercing1" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="maximum Piercing Resistance" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="макс. сопротивление колющему урону" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_RES_Piercing2" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="maximum Piercing Resistance" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="макс. сопротивление колющему урону" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_RES_Piercing4" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="maximum Piercing Resistance" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="макс. сопротивление колющему урону" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_RES_Piercing8" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="maximum Piercing Resistance" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="макс. сопротивление колющему урону" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_RES_Piercing16" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="maximum Piercing Resistance" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="макс. сопротивление колющему урону" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_RES_Piercing32" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="maximum Piercing Resistance" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="макс. сопротивление колющему урону" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_RES_Piercing64" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="maximum Piercing Resistance" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="макс. сопротивление колющему урону" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_RES_Piercing128" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="maximum Piercing Resistance" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="макс. сопротивление колющему урону" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
@@ -6320,343 +6320,343 @@
 					<attribute id="UUID" type="22" value="AMER_LuckyCombatText19" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="0 &lt;font color=&quot;3ba8f0&quot;&gt;Angel&lt;/font&gt; reactions remaining." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Не осталось &lt;font color=&quot;3ba8f0&quot;&gt;ангельских&lt;/font&gt; реакций." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_Angel_Reactions0" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="1 &lt;font color=&quot;3ba8f0&quot;&gt;Angel&lt;/font&gt; reaction remaining." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Осталась 1 &lt;font color=&quot;3ba8f0&quot;&gt;ангельская&lt;/font&gt; реакция." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_Angel_Reactions1" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="2 &lt;font color=&quot;3ba8f0&quot;&gt;Angel&lt;/font&gt; reactions remaining." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Осталось 2 &lt;font color=&quot;3ba8f0&quot;&gt;ангельских&lt;/font&gt; реакции." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_Angel_Reactions2" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="3 &lt;font color=&quot;3ba8f0&quot;&gt;Angel&lt;/font&gt; reactions remaining." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Осталось 3 &lt;font color=&quot;3ba8f0&quot;&gt;ангельских&lt;/font&gt; реакции." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_Angel_Reactions3" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Maximum &lt;font color=&quot;3ba8f0&quot;&gt;Angel&lt;/font&gt; reactions are stored." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Накоплен максимум &lt;font color=&quot;3ba8f0&quot;&gt;ангельских&lt;/font&gt; реакций." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_Angel_Recovered0" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="1 &lt;font color=&quot;3ba8f0&quot;&gt;Angel&lt;/font&gt; reaction is recovered." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Восстановлена 1 &lt;font color=&quot;3ba8f0&quot;&gt;ангельская&lt;/font&gt; реакция." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_Angel_Recovered1" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="2 &lt;font color=&quot;3ba8f0&quot;&gt;Angel&lt;/font&gt; reactions are recovered." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Восстановлено 2 &lt;font color=&quot;3ba8f0&quot;&gt;ангельских&lt;/font&gt; реакции." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_Angel_Recovered2" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="0 &lt;font color=&quot;c80000&quot;&gt;Demon&lt;/font&gt; reactions remaining." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Не осталось &lt;font color=&quot;c80000&quot;&gt;демонических&lt;/font&gt; реакций." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_Demon_Reactions0" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="1 &lt;font color=&quot;c80000&quot;&gt;Demon&lt;/font&gt; reaction remaining." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Осталась 1 &lt;font color=&quot;c80000&quot;&gt;демоническая&lt;/font&gt; реакция." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_Demon_Reactions1" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="2 &lt;font color=&quot;c80000&quot;&gt;Demon&lt;/font&gt; reactions remaining." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Осталось 2 &lt;font color=&quot;c80000&quot;&gt;демонических&lt;/font&gt; реакции." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_Demon_Reactions2" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="3 &lt;font color=&quot;c80000&quot;&gt;Demon&lt;/font&gt; reactions remaining." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Осталось 3 &lt;font color=&quot;c80000&quot;&gt;демонических&lt;/font&gt; реакции." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_Demon_Reactions3" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Maximum &lt;font color=&quot;c80000&quot;&gt;Demon&lt;/font&gt; reactions are stored." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Накоплен максимум &lt;font color=&quot;c80000&quot;&gt;демонических&lt;/font&gt; реакций." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_Demon_Recovered0" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="1 &lt;font color=&quot;c80000&quot;&gt;Demon&lt;/font&gt; reaction is recovered." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Восстановлена 1 &lt;font color=&quot;c80000&quot;&gt;демоническая&lt;/font&gt; реакция." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_Demon_Recovered1" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="2 &lt;font color=&quot;c80000&quot;&gt;Demon&lt;/font&gt; reactions are recovered." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Восстановлено 2 &lt;font color=&quot;c80000&quot;&gt;демонических&lt;/font&gt; реакции." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_Demon_Recovered2" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Maximum &lt;font color=&quot;5fbd00&quot;&gt;Predator&lt;/font&gt; reactions are stored." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Накоплено максимум реакций &lt;font color=&quot;5fbd00&quot;&gt;хищника&lt;/font&gt;." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_Predator_Recovered0" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="1 &lt;font color=&quot;5fbd00&quot;&gt;Predator&lt;/font&gt; reaction is recovered." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Восстановлена 1 реакция &lt;font color=&quot;5fbd00&quot;&gt;хищника&lt;/font&gt;." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_Predator_Recovered1" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="2 &lt;font color=&quot;5fbd00&quot;&gt;Predator&lt;/font&gt; reactions are recovered." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Восстановлено 2 реакции &lt;font color=&quot;5fbd00&quot;&gt;хищника&lt;/font&gt;." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_Predator_Recovered2" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="0 &lt;font color=&quot;5fbd00&quot;&gt;Predator&lt;/font&gt; reactions remaining." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Не осталось реакций &lt;font color=&quot;5fbd00&quot;&gt;хищника&lt;/font&gt;." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_Predator_Reactions0" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="1 &lt;font color=&quot;5fbd00&quot;&gt;Predator&lt;/font&gt; reaction remaining." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Осталась 1 реакция &lt;font color=&quot;5fbd00&quot;&gt;хищника&lt;/font&gt;." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_Predator_Reactions1" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="2 &lt;font color=&quot;5fbd00&quot;&gt;Predator&lt;/font&gt; reactions remaining." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Осталось 2 реакции &lt;font color=&quot;5fbd00&quot;&gt;хищника&lt;/font&gt;." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_Predator_Reactions2" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="3 &lt;font color=&quot;5fbd00&quot;&gt;Predator&lt;/font&gt; reactions remaining." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Осталось 3 реакции &lt;font color=&quot;5fbd00&quot;&gt;хищника&lt;/font&gt;." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_Predator_Reactions3" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c1a257&quot;&gt;Blessed&lt;/font&gt;" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c1a257&quot;&gt;Благословление&lt;/font&gt;" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_STATUS_ApplyBless" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="0 &lt;font color=&quot;c1a257&quot;&gt;Bard&lt;/font&gt; reactions remaining." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Не осталось &lt;font color=&quot;c1a257&quot;&gt;бардовских&lt;/font&gt; реакций." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_Bard_Reactions0" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="1 &lt;font color=&quot;c1a257&quot;&gt;Bard&lt;/font&gt; reaction remaining." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Осталась 1 &lt;font color=&quot;c1a257&quot;&gt;бардовская&lt;/font&gt; реакция." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_Bard_Reactions1" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="2 &lt;font color=&quot;c1a257&quot;&gt;Bard&lt;/font&gt; reactions remaining." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Осталось 2 &lt;font color=&quot;c1a257&quot;&gt;бардовские&lt;/font&gt; реакции." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_Bard_Reactions2" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="3 &lt;font color=&quot;c1a257&quot;&gt;Bard&lt;/font&gt; reactions remaining." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Осталось 3 &lt;font color=&quot;c1a257&quot;&gt;бардовские&lt;/font&gt; реакции." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_Bard_Reactions3" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="4 &lt;font color=&quot;c1a257&quot;&gt;Bard&lt;/font&gt; reactions remaining." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Осталось 4 &lt;font color=&quot;c1a257&quot;&gt;бардовские&lt;/font&gt; реакции." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_Bard_Reactions4" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="5 &lt;font color=&quot;c1a257&quot;&gt;Bard&lt;/font&gt; reactions remaining." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Осталось 5 &lt;font color=&quot;c1a257&quot;&gt;бардовских&lt;/font&gt; реакций." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_Bard_Reactions5" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="6 &lt;font color=&quot;c1a257&quot;&gt;Bard&lt;/font&gt; reactions remaining." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Осталось 6 &lt;font color=&quot;c1a257&quot;&gt;бардовских&lt;/font&gt; реакций." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_Bard_Reactions6" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="7 &lt;font color=&quot;c1a257&quot;&gt;Bard&lt;/font&gt; reactions remaining." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Осталось 7 &lt;font color=&quot;c1a257&quot;&gt;бардовских&lt;/font&gt; реакций." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_Bard_Reactions7" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Maximum &lt;font color=&quot;c1a257&quot;&gt;Bard&lt;/font&gt; reactions are stored." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Накоплен максимум &lt;font color=&quot;c1a257&quot;&gt;бардовских&lt;/font&gt; реакций." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_Bard_Recovered0" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="1 &lt;font color=&quot;c1a257&quot;&gt;Bard&lt;/font&gt; reaction is recovered." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Восстановлена 1 &lt;font color=&quot;c1a257&quot;&gt;бардовская&lt;/font&gt; реакция." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_Bard_Recovered1" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="2 &lt;font color=&quot;c1a257&quot;&gt;Bard&lt;/font&gt; reactions are recovered." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Восстановлено 2 &lt;font color=&quot;c1a257&quot;&gt;бардовские&lt;/font&gt; реакции." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_Bard_Recovered2" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Hit Chance increased by &lt;font color=&quot;c1a257&quot;&gt;Bardic Reaction&lt;/font&gt;!" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Шанс попадания увеличен &lt;font color=&quot;c1a257&quot;&gt;бардовской реакцией&lt;/font&gt;!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_BardCombatText0" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Air Resistance increased by &lt;font color=&quot;c1a257&quot;&gt;Bardic Reaction&lt;/font&gt;!" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Сопротивление воздуху увеличено &lt;font color=&quot;c1a257&quot;&gt;бардовской реакцией&lt;/font&gt;!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_BardCombatText1" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Water Resistance increased by &lt;font color=&quot;c1a257&quot;&gt;Bardic Reaction&lt;/font&gt;!" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Сопротивление воде увеличено &lt;font color=&quot;c1a257&quot;&gt;бардовской реакцией&lt;/font&gt;!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_BardCombatText2" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Fire Resistance increased by &lt;font color=&quot;c1a257&quot;&gt;Bardic Reaction&lt;/font&gt;!" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Сопротивление огню увеличено &lt;font color=&quot;c1a257&quot;&gt;бардовской реакцией&lt;/font&gt;!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_BardCombatText3" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Earth Resistance increased by &lt;font color=&quot;c1a257&quot;&gt;Bardic Reaction&lt;/font&gt;!" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Сопротивление земле увеличено &lt;font color=&quot;c1a257&quot;&gt;бардовской реакцией&lt;/font&gt;!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_BardCombatText4" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Fear removed by &lt;font color=&quot;c1a257&quot;&gt;Bardic Reaction&lt;/font&gt;!" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Страх снят &lt;font color=&quot;c1a257&quot;&gt;бардовской реакцией&lt;/font&gt;!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_BardCombatText5" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Slow removed by &lt;font color=&quot;c1a257&quot;&gt;Bardic Reaction&lt;/font&gt;!" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Замедление снято &lt;font color=&quot;c1a257&quot;&gt;бардовской реакцией&lt;/font&gt;!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_BardCombatText6" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Charm removed by &lt;font color=&quot;c1a257&quot;&gt;Bardic Reaction&lt;/font&gt;!" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Очарование снято &lt;font color=&quot;c1a257&quot;&gt;бардовской реакцией&lt;/font&gt;!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_BardCombatText10" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Invisibility reapplied by &lt;font color=&quot;c1a257&quot;&gt;Bardic Reaction&lt;/font&gt;!" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Невидимость восстановлена &lt;font color=&quot;c1a257&quot;&gt;бардовской реакцией&lt;/font&gt;!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_BardCombatText8" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Shield Specialist modified by &lt;font color=&quot;c1a257&quot;&gt;Bardic Reaction&lt;/font&gt;!" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Блок щитом изменён &lt;font color=&quot;c1a257&quot;&gt;бардовской реакцией&lt;/font&gt;!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_BardCombatText9" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Knocked Down removed by &lt;font color=&quot;c1a257&quot;&gt;Bardic Reaction&lt;/font&gt;!" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Нокдаун снят &lt;font color=&quot;c1a257&quot;&gt;бардовской реакцией&lt;/font&gt;!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_BardCombatText7" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Haste countered by &lt;font color=&quot;c1a257&quot;&gt;Bardic Reaction&lt;/font&gt;!" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Ускорение нейтрализовано &lt;font color=&quot;c1a257&quot;&gt;бардовской реакцией&lt;/font&gt;!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_BardCombatText11" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Hit Chance reduced by &lt;font color=&quot;c1a257&quot;&gt;Bardic Reaction&lt;/font&gt;!" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Шанс попадания уменьшен &lt;font color=&quot;c1a257&quot;&gt;бардовской реакцией&lt;/font&gt;!" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_BardCombatText12" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Книга навыка «Внезапное похолодание»" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Книга навыка «Морозный щелчок»" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_SKILLBOOK_ColdSnap" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Внезапное похолодание" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Морозный щелчок" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_SKILL_ColdSnap_DisplayName" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Your target crystallizes and cracks, suffering [2] damage. 100% extra damage is dealt if the target is Wet or Chilled, while 200% extra is suffered if Frozen." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Цель кристаллизуется и трескается, получая [2] урона. Если цель находится в состоянии сырости или холода, урон увеличивается на 100%, а если заморожена — на 200%." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
@@ -6670,28 +6670,28 @@
 					<attribute id="UUID" type="22" value="AMER_SKILL_ColdSnap_StatsDescription" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Внезапное похолодание" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Морозный щелчок" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_ApplyColdSnap" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Awesome Presence Skillbook" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Книга навыка «Грозная поступь»" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_SKILLBOOK_AwesomePresence" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Awesome Presence" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Грозная поступь" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_SKILL_AwesomePresence_DisplayName" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="You are a paragon of war, your presence awe-inspiring. The target is emboldened if allied, or Feared if hostile. Effect is greater with corpses nearby." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Вы — воплощение воинской доблести, ваше присутствие внушает трепет. Союзники обретают отвагу, а враги впадают в страх. Эффект усиливается, если поблизости есть трупы." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
@@ -6705,35 +6705,35 @@
 					<attribute id="UUID" type="22" value="AMER_SKILL_AwesomePresence_StatsDescription" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;f59000&quot;&gt;Awesome Presence&lt;/font&gt;" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;f59000&quot;&gt;Грозная поступь&lt;/font&gt;" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_AwesomePresence1" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;f59000&quot;&gt;Awesome Presence&lt;/font&gt;" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;f59000&quot;&gt;Грозная поступь&lt;/font&gt;" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_AwesomePresence2" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;f59000&quot;&gt;Awesome Presence&lt;/font&gt;" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;f59000&quot;&gt;Грозная поступь&lt;/font&gt;" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_AwesomePresence3" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Creeping Ooze Skillbook" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Книга навыка «Ползучая слизь»" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_SKILLBOOK_CreepingOoze" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Creeping Ooze" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Ползучая слизь" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
@@ -6747,7 +6747,7 @@
 					<attribute id="UUID" type="22" value="AMER_SKILL_CreepingOoze_StatsDescription" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Coat the target surface with a viscous, poisonous Ooze that extends under neighboring characters within 2.5m. This expansion continues from target-to-target." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Покрывает выбранную поверхность вязкой ядовитой слизью, которая расползается под всеми персонажами в радиусе 2,5 м. Слизь продолжает распространяться от цели к цели." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
@@ -6761,14 +6761,14 @@
 					<attribute id="UUID" type="22" value="AMER_STATUS_DrainWillpower2" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;9b26de&quot;&gt;теряет волю&lt;/font&gt;." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="подвергается &lt;font color=&quot;9b26de&quot;&gt;истощению воли&lt;/font&gt;." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_STATUS_DrainWillpowerFail" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="пытается сопротивляться &lt;font color=&quot;9b26de&quot;&gt;истощению воли&lt;/font&gt;." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="частично сопротивляется &lt;font color=&quot;9b26de&quot;&gt;истощению воли&lt;/font&gt;." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
@@ -6789,126 +6789,126 @@
 					<attribute id="UUID" type="22" value="AMER_STATUS_ApplyDrainWillpower" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Tarnish a target's presence of mind, reducing its Willpower by [2]. Those who resist the effect are still compromised to a lesser extent." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Омрачает разум цели, снижая её силу воли на [2]. Даже те, кто сопротивляется эффекту, частично подвержены его влиянию." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="Target_DrainWillpower_Description" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="is &lt;font color=&quot;9b26de&quot;&gt;Soulsapped&lt;/font&gt;." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="подвергается &lt;font color=&quot;9b26de&quot;&gt;иссушению души&lt;/font&gt;." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_STATUS_SoulsapFail" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="partially resisted &lt;font color=&quot;9b26de&quot;&gt;Soulsap&lt;/font&gt;." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="частично сопротивляется &lt;font color=&quot;9b26de&quot;&gt;иссушению души&lt;/font&gt;." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_STATUS_SoulsapSave1" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="mostly resisted &lt;font color=&quot;9b26de&quot;&gt;Soulsap&lt;/font&gt;." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="в основном сопротивляется &lt;font color=&quot;9b26de&quot;&gt;иссушению души&lt;/font&gt;." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_STATUS_SoulsapSave2" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;9b26de&quot;&gt;Soulsap&lt;/font&gt;" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;9b26de&quot;&gt;Иссушение души&lt;/font&gt;" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_STATUS_ApplySoulsap" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;9b26de&quot;&gt;Partial Soulsap&lt;/font&gt;" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;9b26de&quot;&gt;Малое иссушение души&lt;/font&gt;" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_STATUS_Soulsap1" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;9b26de&quot;&gt;Partial Soulsap&lt;/font&gt;" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;9b26de&quot;&gt;Малое иссушение души&lt;/font&gt;" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_STATUS_Soulsap2" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;9b26de&quot;&gt;Soulsap&lt;/font&gt;" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;9b26de&quot;&gt;Иссушение души&lt;/font&gt;" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_STATUS_Soulsap3" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;f59000&quot;&gt;Awesome Presence&lt;/font&gt;" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;f59000&quot;&gt;Грозная поступь&lt;/font&gt;" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_ApplyAwesomePresence" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Your target becomes instantly enthralled by you, carrying out any desire unquestioningly." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Ваша цель порабощена и беспрекословно исполняет любые ваши желания." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="Projectile_Charm_Description" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Rob your target of the ability to produce sound, leaving them unable to perform special skills." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Лишает цель способности издавать звуки, не позволяя ей использовать особые навыки." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="Projectile_Silence_Description" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Epic Testing" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Былинное тестирование" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_Test" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Subterranean Passage" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Подземный проход" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="Subterranean Passage" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Unknown Kadath" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Неведомый Кадат" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="Forgotten Waste" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Snowbound Ledge" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Заснеженный уступ" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="Snowbound Ledge" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Tower of Ascension" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Башня Вознесения" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="Tower of Ascension" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Snowblind Approach" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Тропа снежной слепоты" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="Snow Canyon" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c7a758&quot;&gt;Source Hunter's Adaptation&lt;/font&gt;" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="&lt;font color=&quot;c7a758&quot;&gt;Адаптация искателя Истока&lt;/font&gt;" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
@@ -6950,14 +6950,14 @@
 					<attribute id="UUID" type="22" value="AMER_ThickSkin5" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="was healed by an &lt;font color=&quot;3ba8f0&quot;&gt;Angel&lt;/font&gt; reaction." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="получает исцеление от &lt;font color=&quot;3ba8f0&quot;&gt;ангельской&lt;/font&gt; реакции." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
 					<attribute id="UUID" type="22" value="AMER_AngelCombatText" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="was damaged by a &lt;font color=&quot;c80000&quot;&gt;Demon&lt;/font&gt; reaction." />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="получает урон от &lt;font color=&quot;c80000&quot;&gt;демонической&lt;/font&gt; реакции." />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
@@ -6971,7 +6971,7 @@
 					<attribute id="UUID" type="22" value="AMER_BOOK_Ossurot" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Creeping Ooze" />
+					<attribute handle="ls::TranslatedStringRepository::s_HandleUnknown" id="Content" type="28" value="Ползучая слизь" />
 					<attribute id="ExtraData" type="23" value="" />
 					<attribute id="Speaker" type="22" value="" />
 					<attribute id="Stub" type="19" value="True" />
