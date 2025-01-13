@@ -1,0 +1,1753 @@
+//===============================================//
+//                                               //
+//          V E N D O R   C L E A N U P          //
+//                                               //
+//     Written by Matteo "Ameranth" T. (2017)    //
+//===============================================//
+INIT
+CHARACTER:__Me
+FIXEDSTRING:%AMER_VendorCleanup_WhichStat
+STRING:%AMER_VendorCleanup_Element
+INT:%AMER_VendorCleanup_ItemLevelLimit
+INT:%AMER_VendorCleanup_DoCleanup
+	
+//------------------------
+EVENTS
+//Vendor cleanup functions by iterating through vendor inventory for objects
+//with specific item stats. When these are found, they are continuously
+//removed until none of this stat remain (or the script action limit is reached).
+//For magic item bases, only items up to two levels lower than the player are
+//removed, such that no potentially important items are destroyed. Item level
+//is made known by organizing item stat data in arrays, where the index can then 
+//simulate the item level. This was a nightmare to implement.
+EVENT VendorCleanupOnInit
+ON
+	OnInit
+ACTIONS
+	CallFunction("AMER_VendorCleanup_CleanupStart")
+	
+	
+	
+EVENT VendorCleanupRemoveItem
+VARS
+	ITEM:_Item
+ON
+	OnFunction("AMER_VendorCleanup_RemoveItem")
+ACTIONS
+	WHILE "c1"
+		ItemGetFromInventory(_Item, __Me, %AMER_VendorCleanup_WhichStat)
+	DO
+		CharacterRemoveFromInventory(__Me, %AMER_VendorCleanup_WhichStat, 1)
+		//ItemTeleportTo(_Item, __Me)
+		//ItemDestroy(_Item)
+	ENDWHILE
+	
+	
+	
+EVENT VendorCleanupCleanupStart
+VARS
+	CHARACTER:_Player
+	FLOAT:_SourceLevel
+ON
+	OnFunction("AMER_VendorCleanup_CleanupStart")
+ACTIONS
+	IF "c1&c2"
+		GetPlayerByIndex(_Player, INT:0)
+		CharacterGetStat(_SourceLevel, _Player, Level)
+	THEN
+		//Don't clean magic items until the player has surpassed its level by 2.
+		//Since item levels slow down past player level 20 (1 ilvl per plvl), we
+		//need to adjust the level accordingly. Additionally, never clean items
+		//that are ilvl 24 or higher, since they are the best possible items.
+		Cast(%AMER_VendorCleanup_ItemLevelLimit, _SourceLevel)
+		IF "c1"
+			IsGreaterThen(%AMER_VendorCleanup_ItemLevelLimit, 20)
+		THEN
+			Subtract(%AMER_VendorCleanup_ItemLevelLimit, 20)
+			Divide(%AMER_VendorCleanup_ItemLevelLimit, 2)
+			Add(%AMER_VendorCleanup_ItemLevelLimit, 20)
+			Subtract(%AMER_VendorCleanup_ItemLevelLimit, 1)	//divided difference by 2 first.
+			IF "c1"
+				IsGreaterThen(%AMER_VendorCleanup_ItemLevelLimit, 22)
+			THEN
+				Set(%AMER_VendorCleanup_ItemLevelLimit, 22)
+			ENDIF
+		ELSE
+			Subtract(%AMER_VendorCleanup_ItemLevelLimit, 2)
+		ENDIF
+		//ItemTeleportTo(_Item, __Me)
+		//ItemDestroy(_Item)
+		
+		CallFunction("AMER_VendorCleanup_Weapons")
+		CallFunction("AMER_VendorCleanup_Armor")
+		
+		CallFunction("AMER_VendorCleanup_Misc1")
+		CallFunction("AMER_VendorCleanup_Misc2")
+		CallFunction("AMER_VendorCleanup_Misc3")
+		CallFunction("AMER_VendorCleanup_Misc4")
+		CallFunction("AMER_VendorCleanup_Misc5")
+		CallFunction("AMER_VendorCleanup_Misc6")
+		
+		CallFunction("AMER_VendorCleanup_CraftedA")
+		CallFunction("AMER_VendorCleanup_CraftedB")
+		CallFunction("AMER_VendorCleanup_CraftedC")
+		CallFunction("AMER_VendorCleanup_CraftedD")
+		CallFunction("AMER_VendorCleanup_CraftedE")
+	ENDIF
+	
+	
+	
+EVENT VendorCleanupWeapons
+ON
+	OnFunction("AMER_VendorCleanup_Weapons")
+ACTIONS
+	CallFunction("AMER_VendorCleanup_1hSwordsA")
+	CallFunction("AMER_VendorCleanup_1hSwordsB")
+	CallFunction("AMER_VendorCleanup_1hAxesA")
+	CallFunction("AMER_VendorCleanup_1hAxesB")
+	CallFunction("AMER_VendorCleanup_1hClubsA")
+	CallFunction("AMER_VendorCleanup_1hClubsB")
+	CallFunction("AMER_VendorCleanup_DaggersA")
+	CallFunction("AMER_VendorCleanup_DaggersB")
+	CallFunction("AMER_VendorCleanup_2hSwordsA")
+	CallFunction("AMER_VendorCleanup_2hSwordsB")
+	CallFunction("AMER_VendorCleanup_2hAxesA")
+	CallFunction("AMER_VendorCleanup_2hAxesB")
+	CallFunction("AMER_VendorCleanup_2hClubs")
+	CallFunction("AMER_VendorCleanup_SpearsA")
+	CallFunction("AMER_VendorCleanup_SpearsB")
+	CallFunction("AMER_VendorCleanup_BowsA")
+	CallFunction("AMER_VendorCleanup_BowsB")
+	CallFunction("AMER_VendorCleanup_CrossBowsA")
+	CallFunction("AMER_VendorCleanup_CrossBowsB")
+	CallFunction("AMER_VendorCleanup_ShieldsA")
+	CallFunction("AMER_VendorCleanup_ShieldsB")
+	CallFunction("AMER_VendorCleanup_ShieldsC")
+	
+	Set(%AMER_VendorCleanup_Element, "Fire")
+	CallFunction("AMER_VendorCleanup_StavesA")
+	Set(%AMER_VendorCleanup_Element, "Fire")
+	CallFunction("AMER_VendorCleanup_StavesB")
+	Set(%AMER_VendorCleanup_Element, "Water")
+	CallFunction("AMER_VendorCleanup_StavesA")
+	Set(%AMER_VendorCleanup_Element, "Water")
+	CallFunction("AMER_VendorCleanup_StavesB")
+	Set(%AMER_VendorCleanup_Element, "Earth")
+	CallFunction("AMER_VendorCleanup_StavesA")
+	Set(%AMER_VendorCleanup_Element, "Earth")
+	CallFunction("AMER_VendorCleanup_StavesB")
+	Set(%AMER_VendorCleanup_Element, "Air")
+	CallFunction("AMER_VendorCleanup_StavesA")
+	Set(%AMER_VendorCleanup_Element, "Air")
+	CallFunction("AMER_VendorCleanup_StavesB")
+	CallFunction("AMER_VendorCleanup_ShadowStaves")
+	
+	Set(%AMER_VendorCleanup_Element, "Fire")
+	CallFunction("AMER_VendorCleanup_WandsA")
+	Set(%AMER_VendorCleanup_Element, "Fire")
+	CallFunction("AMER_VendorCleanup_WandsB")
+	Set(%AMER_VendorCleanup_Element, "Water")
+	CallFunction("AMER_VendorCleanup_WandsA")
+	Set(%AMER_VendorCleanup_Element, "Water")
+	CallFunction("AMER_VendorCleanup_WandsB")
+	Set(%AMER_VendorCleanup_Element, "Earth")
+	CallFunction("AMER_VendorCleanup_WandsA")
+	Set(%AMER_VendorCleanup_Element, "Earth")
+	CallFunction("AMER_VendorCleanup_WandsB")
+	Set(%AMER_VendorCleanup_Element, "Air")
+	CallFunction("AMER_VendorCleanup_WandsA")
+	Set(%AMER_VendorCleanup_Element, "Air")
+	CallFunction("AMER_VendorCleanup_WandsB")
+	CallFunction("AMER_VendorCleanup_ShadowWands")
+	
+	
+	
+EVENT VendorCleanupArmor
+ON
+	OnFunction("AMER_VendorCleanup_Armor")
+ACTIONS
+	CallFunction("AMER_VendorCleanup_ChestClothA")
+	CallFunction("AMER_VendorCleanup_ChestClothB")
+	CallFunction("AMER_VendorCleanup_ChestRobesA")
+	CallFunction("AMER_VendorCleanup_ChestRobesB")
+	CallFunction("AMER_VendorCleanup_ChestLeatherA")
+	CallFunction("AMER_VendorCleanup_ChestLeatherB")
+	CallFunction("AMER_VendorCleanup_ChestChainA")
+	CallFunction("AMER_VendorCleanup_ChestChainB")
+	CallFunction("AMER_VendorCleanup_ChestPlateA")
+	CallFunction("AMER_VendorCleanup_ChestPlateB")
+	CallFunction("AMER_VendorCleanup_SarongsA")
+	CallFunction("AMER_VendorCleanup_SarongsB")
+	CallFunction("AMER_VendorCleanup_ChestLeatherA")
+	CallFunction("AMER_VendorCleanup_ChestLeatherB")
+	CallFunction("AMER_VendorCleanup_BeltsA")
+	CallFunction("AMER_VendorCleanup_BeltsB")
+	CallFunction("AMER_VendorCleanup_BootsLeatherA")
+	CallFunction("AMER_VendorCleanup_BootsLeatherB")
+	CallFunction("AMER_VendorCleanup_BootsMetal")
+	CallFunction("AMER_VendorCleanup_GlovesA")
+	CallFunction("AMER_VendorCleanup_GlovesB")
+	CallFunction("AMER_VendorCleanup_GlovesMetal")
+	CallFunction("AMER_VendorCleanup_HelmetClothA")
+	CallFunction("AMER_VendorCleanup_HelmetClothB")
+	CallFunction("AMER_VendorCleanup_HelmetLeather")
+	CallFunction("AMER_VendorCleanup_HelmetMetalA")
+	CallFunction("AMER_VendorCleanup_HelmetMetalB")
+	CallFunction("AMER_VendorCleanup_RingsA")
+	CallFunction("AMER_VendorCleanup_RingsB")
+	CallFunction("AMER_VendorCleanup_AmuletsA")
+	CallFunction("AMER_VendorCleanup_AmuletsB")
+	
+	
+	
+//=============================================================//
+//                       C R A F T E D                         //
+//=============================================================//
+EVENT VendorCleanupRemoveCraftedA
+VARS
+	INT:_Count
+ON
+	OnFunction("AMER_VendorCleanup_CraftedA")
+ACTIONS
+	Set(_Count, INT:0)
+	WHILE "c1"
+		IsLessThen(_Count, 14)
+	DO 
+		GetElement(%AMER_VendorCleanup_WhichStat, _Count, WPN_Crafted2HAxe_02, WPN_Crafted2HAxe_03, WPN_Crafted2HAxe_04, WPN_Crafted2HAxe_05, WPN_Crafted2HSword_01, WPN_Crafted2HSword_02, WPN_Crafted2HSword_03, WPN_Crafted2HSword_04, WPN_Crafted2HSword_05, WPN_CraftedSpear_01, WPN_CraftedSpear_02, WPN_CraftedSpear_03, WPN_CraftedSpear_04, WPN_CraftedSpear_05)
+		CallFunction("AMER_VendorCleanup_RemoveItem")
+		
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+EVENT VendorCleanupRemoveCraftedB
+VARS
+	INT:_Count
+ON
+	OnFunction("AMER_VendorCleanup_CraftedB")
+ACTIONS
+	Set(_Count, INT:0)
+	WHILE "c1"
+		IsLessThen(_Count, 16)
+	DO 
+		GetElement(%AMER_VendorCleanup_WhichStat, _Count, WPN_CraftedQuarterstaff_01_Earth, WPN_CraftedQuarterstaff_02_Earth, WPN_CraftedQuarterstaff_03_Earth, WPN_CraftedQuarterstaff_04_Earth, WPN_CraftedQuarterstaff_01_Air, WPN_CraftedQuarterstaff_02_Air, WPN_CraftedQuarterstaff_03_Air, WPN_CraftedQuarterstaff_04_Air, WPN_CraftedQuarterstaff_01_Fire, WPN_CraftedQuarterstaff_02_Fire, WPN_CraftedQuarterstaff_03_Fire, WPN_CraftedQuarterstaff_04_Fire, WPN_CraftedQuarterstaff_01_Water, WPN_CraftedQuarterstaff_02_Water, WPN_CraftedQuarterstaff_03_Water, WPN_CraftedQuarterstaff_04_Water)
+		CallFunction("AMER_VendorCleanup_RemoveItem")
+		
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+EVENT VendorCleanupRemoveCraftedC
+VARS
+	INT:_Count
+ON
+	OnFunction("AMER_VendorCleanup_CraftedC")
+ACTIONS
+	Set(_Count, INT:0)
+	WHILE "c1"
+		IsLessThen(_Count, 13)
+	DO 
+		GetElement(%AMER_VendorCleanup_WhichStat, _Count, WPN_CraftedBow_01, WPN_CraftedBow_02, WPN_CraftedBow_03, WPN_CraftedBow_04, WPN_CraftedBow_05, WPN_CraftedCrossbow_02, WPN_CraftedCrossbow_03, WPN_CraftedCrossbow_04, WPN_CraftedCrossbow_05, ARM_CraftedLeatherTorso_01, ARM_CraftedLeatherTorso_02, ARM_CraftedLeatherTorso_03, ARM_CraftedLeatherTorso_04)
+		CallFunction("AMER_VendorCleanup_RemoveItem")
+		
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+EVENT VendorCleanupRemoveCraftedD
+VARS
+	INT:_Count
+ON
+	OnFunction("AMER_VendorCleanup_CraftedD")
+ACTIONS
+	Set(_Count, INT:0)
+	WHILE "c1"
+		IsLessThen(_Count, 15)
+	DO 
+		GetElement(%AMER_VendorCleanup_WhichStat, _Count, ARM_CraftedMetalTorso_01, ARM_CraftedMetalTorso_02, ARM_CraftedMetalTorso_03, ARM_CraftedRobe_01, ARM_CraftedClothBoots_01, ARM_CraftedClothBoots_02, ARM_CraftedClothBoots_03, ARM_CraftedMetalBoots_01, ARM_CraftedMetalBoots_02, ARM_CraftedMetalBoots_03, WPN_CraftedSword_01, WPN_CraftedSword_02, WPN_CraftedSword_03, WPN_CraftedSword_04, WPN_CraftedSword_05)
+		CallFunction("AMER_VendorCleanup_RemoveItem")
+		
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+EVENT VendorCleanupRemoveCraftedE
+VARS
+	INT:_Count
+ON
+	OnFunction("AMER_VendorCleanup_CraftedE")
+ACTIONS
+	Set(_Count, INT:0)
+	WHILE "c1"
+		IsLessThen(_Count, 15)
+	DO 
+		GetElement(%AMER_VendorCleanup_WhichStat, _Count, WPN_CraftedAxe_01, WPN_CraftedAxe_02, WPN_CraftedAxe_03, WPN_CraftedAxe_04, WPN_CraftedAxe_05, WPN_CraftedDagger_01, WPN_CraftedDagger_02, WPN_CraftedDagger_03, WPN_CraftedDagger_04, WPN_CraftedDagger_05, ARM_CraftedClothBoots_01, ARM_CraftedClothBoots_02, ARM_CraftedLeatherBoots_01, ARM_CraftedLeatherBoots_02, ARM_CraftedLeatherBoots_03)
+		CallFunction("AMER_VendorCleanup_RemoveItem")
+		
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+EVENT VendorCleanupRemoveCraftedF
+VARS
+	INT:_Count
+ON
+	OnFunction("AMER_VendorCleanup_CraftedF")
+ACTIONS
+	Set(_Count, INT:0)
+	WHILE "c1"
+		IsLessThen(_Count, 5)
+	DO 
+		GetElement(%AMER_VendorCleanup_WhichStat, _Count, ARM_CraftedClothTorso_01, ARM_CraftedClothTorso_02, ARM_CraftedClothTorso_03, ARM_CraftedClothTorso_04, ARM_CraftedClothTorso_05)
+		CallFunction("AMER_VendorCleanup_RemoveItem")
+		
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+	
+//=============================================================//
+//                        W E A P O N S                        //
+//=============================================================//
+EVENT VendorCleanupRemove1hSwordsA
+VARS
+	INT:_Count
+	INT:_Limit
+ON
+	OnFunction("AMER_VendorCleanup_1hSwordsA")
+ACTIONS
+	Set(_Limit, %AMER_VendorCleanup_ItemLevelLimit)
+	IF "c1"
+		IsGreaterThen(_Limit, 13)
+	THEN
+		Set(_Limit, 13)
+	ENDIF
+	
+	Set(_Count, INT:0)
+	WHILE "c1"
+		IsLessThen(_Count, _Limit)
+	DO 
+		GetElement(%AMER_VendorCleanup_WhichStat, _Count, WPN_Sword_A_Training_Sword, WPN_ShortSword, WPN_LongSword, WPN_BastardSword, WPN_BastardSword_B, WPN_BastardSword_C, WPN_Scimitar, WPN_Scimitar_B, WPN_Scimitar_C, WPN_Goblins_Sword_A, WPN_Goblins_Sword_A_B, WPN_Goblins_Sword_B_B, WPN_Cyclops_Sword_B)
+		CallFunction("AMER_VendorCleanup_RemoveItem")
+		
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+EVENT VendorCleanupRemove1hSwordsB
+VARS
+	INT:_Count
+	INT:_Index
+ON
+	OnFunction("AMER_VendorCleanup_1hSwordsB")
+ACTIONS
+	Set(_Index, INT:0)
+	Set(_Count, INT:13)
+	WHILE "c1"
+		IsLessThen(_Count, %AMER_VendorCleanup_ItemLevelLimit)
+	DO 
+		GetElement(%AMER_VendorCleanup_WhichStat, _Index, WPN_Cyclops_Sword_C, WPN_DarkMinions_SmallSword, WPN_DarkMinions_BigSword_B, WPN_DarkMinions_BigSword_C, WPN_Orcs_Warrior_Sword_A, WPN_Orcs_Warrior_Sword_B, WPN_Orcs_Warrior_Sword_C, WPN_AMER_DarkMinions_BigSword_D, WPN_AMER_DarkMinions_BigSword_E, WPN_AMER_DarkMinions_BigSword_F)
+		CallFunction("AMER_VendorCleanup_RemoveItem")
+		
+		GetElement(%AMER_VendorCleanup_WhichStat, _Index, WPN_Sword_Tenebrium_A, WPN_Sword_Tenebrium_B, WPN_Sword_Tenebrium_C, WPN_Sword_Tenebrium_D, WPN_Sword_Tenebrium_E, WPN_Sword_Tenebrium_F, WPN_Sword_Tenebrium_G, WPN_AMER_Sword_Tenebrium_H, WPN_AMER_Sword_Tenebrium_I, WPN_AMER_Sword_Tenebrium_J)
+		CallFunction("AMER_VendorCleanup_RemoveItem")
+		
+		Add(_Index, INT:1)
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+	
+	
+EVENT VendorCleanupRemove1hAxesA
+VARS
+	INT:_Count
+	INT:_Limit
+ON
+	OnFunction("AMER_VendorCleanup_1hAxesA")
+ACTIONS
+	Set(_Limit, %AMER_VendorCleanup_ItemLevelLimit)
+	IF "c1"
+		IsGreaterThen(_Limit, 13)
+	THEN
+		Set(_Limit, 13)
+	ENDIF
+	
+	Set(_Count, INT:0)
+	WHILE "c1"
+		IsLessThen(_Count, _Limit)
+	DO 
+		GetElement(%AMER_VendorCleanup_WhichStat, _Count, WPN_SmallHandAxeTool_1H_B, WPN_ShepherdsAxe_1H, WPN_HatchetTool_1H, WPN_WoodMaulTool_1H, WPN_Axe_B_1_Cleaver_B, WPN_Axe_B_1_Cleaver_C, WPN_Axe_B_1_Cleaver_D, WPN_BeardedAxe_1H, WPN_BeardedAxe_1H_B, WPN_BattleAxe_1H, WPN_Axe_A_1_Axe, WPN_Axe_A_1_Axe_B, WPN_Axe_A_1_Axe_C)
+		CallFunction("AMER_VendorCleanup_RemoveItem")
+		
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+EVENT VendorCleanupRemove1hAxesB
+VARS
+	INT:_Count
+	INT:_Index
+ON
+	OnFunction("AMER_VendorCleanup_1hAxesB")
+ACTIONS
+	Set(_Index, INT:0)
+	Set(_Count, INT:13)
+	WHILE "c1"
+		IsLessThen(_Count, %AMER_VendorCleanup_ItemLevelLimit)
+	DO 
+		GetElement(%AMER_VendorCleanup_WhichStat, _Index, WPN_BattleAxe_1H_E, WPN_BattleAxe_1H_F, WPN_BattleAxe_1H_G, WPN_DarkMinions_SingleAxe, WPN_DarkMinions_SingleAxe_B, WPN_DarkMinions_DoubleAxe, WPN_DarkMinions_DoubleAxe_B, WPN_AMER_DarkMinions_DoubleAxe_C, WPN_AMER_DarkMinions_DoubleAxe_D, WPN_AMER_DarkMinions_DoubleAxe_E)
+		CallFunction("AMER_VendorCleanup_RemoveItem")
+		
+		GetElement(%AMER_VendorCleanup_WhichStat, _Index, WPN_Blackrock_Axe_A, WPN_Blackrock_Axe_B, WPN_Blackrock_Axe_C, WPN_Blackrock_Axe_D, WPN_Blackrock_Axe_E, WPN_Blackrock_Axe_F, WPN_Blackrock_Axe_G, WPN_AMER_Blackrock_Axe_H, WPN_AMER_Blackrock_Axe_I, WPN_AMER_Blackrock_Axe_J)
+		CallFunction("AMER_VendorCleanup_RemoveItem")
+		
+		Add(_Index, INT:1)
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+	
+	
+EVENT VendorCleanupRemove1hClubsA
+VARS
+	INT:_Count
+	INT:_Limit
+ON
+	OnFunction("AMER_VendorCleanup_1hClubsA")
+ACTIONS
+	Set(_Limit, %AMER_VendorCleanup_ItemLevelLimit)
+	IF "c1"
+		IsGreaterThen(_Limit, 13)
+	THEN
+		Set(_Limit, 13)
+	ENDIF
+	
+	Set(_Count, INT:0)
+	WHILE "c1"
+		IsLessThen(_Count, _Limit)
+	DO 
+		GetElement(%AMER_VendorCleanup_WhichStat, _Count, WPN_Cudgel, WPN_Cudgel_B, WPN_Cudgel_C, WPN_Gada, WPN_Gada_B, WPN_KnobbedMace, WPN_KnobbedMace_B, WPN_KnobbedMace_C, WPN_Human_Normal_Mace_A, WPN_Human_Normal_Mace_B, WPN_Human_Normal_Mace_C, WPN_SpikedClub, WPN_SpikedClub_C)
+		CallFunction("AMER_VendorCleanup_RemoveItem")
+		
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+EVENT VendorCleanupRemove1hClubsB
+VARS
+	INT:_Count
+	INT:_Index
+ON
+	OnFunction("AMER_VendorCleanup_1hClubsB")
+ACTIONS
+	Set(_Index, INT:0)
+	Set(_Count, INT:13)
+	WHILE "c1"
+		IsLessThen(_Count, %AMER_VendorCleanup_ItemLevelLimit)
+	DO 
+		GetElement(%AMER_VendorCleanup_WhichStat, _Index, WPN_SpikedClub_D, WPN_FlangedMace, WPN_FlangedMace_B, WPN_FlangedMace_C, WPN_MorningStar_C, WPN_MorningStar_D, WPN_Human_Normal_WarHammer_B_A, WPN_AMER_Human_Normal_WarHammer_B_A, WPN_AMER_Human_Normal_WarHammer_B_B, WPN_AMER_Human_Normal_WarHammer_B_C)
+		CallFunction("AMER_VendorCleanup_RemoveItem")
+		
+		GetElement(%AMER_VendorCleanup_WhichStat, _Index, WPN_Blackrock_Hammer_A, WPN_Blackrock_Hammer_B, WPN_Blackrock_Hammer_C, WPN_Blackrock_Hammer_D, WPN_Blackrock_Hammer_E, WPN_Blackrock_Hammer_F, WPN_Blackrock_Hammer_G, WPN_AMER_Blackrock_Hammer_H, WPN_AMER_Blackrock_Hammer_I, WPN_AMER_Blackrock_Hammer_J)
+		CallFunction("AMER_VendorCleanup_RemoveItem")
+		
+		Add(_Index, INT:1)
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+	
+	
+EVENT VendorCleanupRemoveDaggersA
+VARS
+	INT:_Count
+	INT:_Limit
+ON
+	OnFunction("AMER_VendorCleanup_DaggersA")
+ACTIONS
+	Set(_Limit, %AMER_VendorCleanup_ItemLevelLimit)
+	IF "c1"
+		IsGreaterThen(_Limit, 13)
+	THEN
+		Set(_Limit, 13)
+	ENDIF
+	
+	Set(_Count, INT:0)
+	WHILE "c1"
+		IsLessThen(_Count, _Limit)
+	DO 
+		GetElement(%AMER_VendorCleanup_WhichStat, _Count, WPN_FightingKnife_B, WPN_FightingKnife, WPN_Dagger_A_Dagger, WPN_Poniard_B, WPN_Rondel, WPN_Rondel_B, WPN_PushDagger, WPN_PushDagger_B, WPN_PushDagger_C, WPN_LongDagger_A, WPN_LongDagger_B, WPN_LongDagger_C, WPN_Rapier_A)
+		CallFunction("AMER_VendorCleanup_RemoveItem")
+		
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+EVENT VendorCleanupRemoveDaggersB
+VARS
+	INT:_Count
+	INT:_Index
+ON
+	OnFunction("AMER_VendorCleanup_DaggersB")
+ACTIONS
+	Set(_Index, INT:0)
+	Set(_Count, INT:13)
+	WHILE "c1"
+		IsLessThen(_Count, %AMER_VendorCleanup_ItemLevelLimit)
+	DO 
+		GetElement(%AMER_VendorCleanup_WhichStat, _Index, WPN_Rapier_B, WPN_Rapier_C, WPN_Mercygiver, WPN_Mercygiver_B, WPN_Mercygiver_C, WPN_Estoc, WPN_Estoc_B, WPN_AMER_Mercygiver_D, WPN_AMER_Mercygiver_E, WPN_AMER_Mercygiver_F)
+		CallFunction("AMER_VendorCleanup_RemoveItem")
+		
+		GetElement(%AMER_VendorCleanup_WhichStat, _Index, WPN_Blackrock_DaggerPush_A, WPN_Blackrock_DaggerPush_B, WPN_Blackrock_DaggerPush_C, WPN_Blackrock_DaggerPush_D, WPN_Blackrock_DaggerPush_E, WPN_Blackrock_DaggerPush_F, WPN_Blackrock_DaggerPush_G, WPN_Blackrock_DaggerPush_H, WPN_Blackrock_DaggerPush_I, WPN_Blackrock_DaggerPush_J)
+		CallFunction("AMER_VendorCleanup_RemoveItem")
+		
+		Add(_Index, INT:1)
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+	
+	
+EVENT VendorCleanupRemove2hSwordsA
+VARS
+	INT:_Count
+	INT:_Limit
+ON
+	OnFunction("AMER_VendorCleanup_2hSwordsA")
+ACTIONS
+	Set(_Limit, %AMER_VendorCleanup_ItemLevelLimit)
+	IF "c1"
+		IsGreaterThen(_Limit, 13)
+	THEN
+		Set(_Limit, 13)
+	ENDIF
+	
+	Set(_Count, INT:0)
+	WHILE "c1"
+		IsLessThen(_Count, _Limit)
+	DO 
+		GetElement(%AMER_VendorCleanup_WhichStat, _Count, WPN_DecorationSword_2H, WPN_PracticeSword2H, WPN_PracticeSword2H_B, WPN_HeadingSword2H,WPN_ HeadingSword2H_B, WPN_CeremonialSword_2H, WPN_CeremonialSword_2H_B, WPN_HeadingSword2H_C, WPN_Claymore_2H, WPN_Claymore_2H_B, WPN_Claymore_2H_C, WPN_Claymore_2H_D, WPN_Claymore_2H_E)
+		CallFunction("AMER_VendorCleanup_RemoveItem")
+		
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+EVENT VendorCleanupRemove2hSwordsB
+VARS
+	INT:_Count
+	INT:_Index
+ON
+	OnFunction("AMER_VendorCleanup_2hSwordsB")
+ACTIONS
+	Set(_Index, INT:0)
+	Set(_Count, INT:13)
+	WHILE "c1"
+		IsLessThen(_Count, %AMER_VendorCleanup_ItemLevelLimit)
+	DO 
+		GetElement(%AMER_VendorCleanup_WhichStat, _Index, WPN_Claymore_2H_F, WPN_Claymore_2H_G, WPN_Claymore_2H_H, WPN_Flammenschwert, WPN_Flammenschwert_B, WPN_Flammenschwert_C, WPN_Flammenschwert_D, WPN_AMER_Flammenschwert_E, WPN_AMER_Flammenschwert_F, WPN_AMER_Flammenschwert_G)
+		CallFunction("AMER_VendorCleanup_RemoveItem")
+		
+		GetElement(%AMER_VendorCleanup_WhichStat, _Index, WPN_Blackrock_2H_Sword_A, WPN_Blackrock_2H_Sword_B, WPN_Blackrock_2H_Sword_C, WPN_Blackrock_2H_Sword_D, WPN_Blackrock_2H_Sword_E, WPN_Blackrock_2H_Sword_F, WPN_Blackrock_2H_Sword_G, WPN_AMER_Blackrock_2H_Sword_H, WPN_AMER_Blackrock_2H_Sword_I, WPN_AMER_Blackrock_2H_Sword_J)
+		CallFunction("AMER_VendorCleanup_RemoveItem")
+		
+		Add(_Index, INT:1)
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+	
+	
+EVENT VendorCleanupRemove2hAxesA
+VARS
+	INT:_Count
+	INT:_Limit
+ON
+	OnFunction("AMER_VendorCleanup_2hAxesA")
+ACTIONS
+	Set(_Limit, %AMER_VendorCleanup_ItemLevelLimit)
+	IF "c1"
+		IsGreaterThen(_Limit, 13)
+	THEN
+		Set(_Limit, 13)
+	ENDIF
+	
+	Set(_Count, INT:0)
+	WHILE "c1"
+		IsLessThen(_Count, _Limit)
+	DO 
+		GetElement(%AMER_VendorCleanup_WhichStat, _Count, WPN_WoodMaulTool_2H, WPN_2H_Axe_A, WPN_2H_Axe_B, WPN_Human_Normal_2H_Axe_A, WPN_Human_Normal_2H_Axe_B, WPN_Human_Normal_Scythe_A, WPN_Human_Normal_Scythe_B, WPN_Human_Normal_Scythe_C, WPN_Glaive_2H, WPN_Glaive_2H_B, WPN_Glaive_2H_C, WPN_PoleCleaver_2H, WPN_PoleCleaver_2H_B)
+		CallFunction("AMER_VendorCleanup_RemoveItem")
+		
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+EVENT VendorCleanupRemove2hAxesB
+VARS
+	INT:_Count
+	INT:_Index
+ON
+	OnFunction("AMER_VendorCleanup_2hAxesB")
+ACTIONS
+	Set(_Index, INT:0)
+	Set(_Count, INT:13)
+	WHILE "c1"
+		IsLessThen(_Count, %AMER_VendorCleanup_ItemLevelLimit)
+	DO 
+		GetElement(%AMER_VendorCleanup_WhichStat, _Index, WPN_PoleCleaver_2H_C, WPN_PeasantsBlackBillPolearm_2H, WPN_Bardiche_2H, WPN_Fauchard_2H, WPN_Fauchard_2H_B, WPN_Cyclops_Staff_A_Scythe, WPN_Cyclops_Staff_A_Scythe_B, WPN_AMER_Cyclops_Staff_A_Scythe_C, WPN_AMER_Cyclops_Staff_A_Scythe_D, WPN_AMER_Cyclops_Staff_A_Scythe_E)
+		CallFunction("AMER_VendorCleanup_RemoveItem")
+		
+		GetElement(%AMER_VendorCleanup_WhichStat, _Index, WPN_Blackrock_2H_Axe_A, WPN_Blackrock_2H_Axe_B, WPN_Blackrock_2H_Axe_C, WPN_Blackrock_Scythe_A, WPN_Blackrock_Scythe_B, WPN_Blackrock_Scythe_C, WPN_Blackrock_Scythe_D, WPN_AMER_Blackrock_Scythe_E, WPN_AMER_Blackrock_Scythe_F, WPN_AMER_Blackrock_Scythe_G)
+		CallFunction("AMER_VendorCleanup_RemoveItem")
+		
+		Add(_Index, INT:1)
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+	
+	
+EVENT VendorCleanupRemove2hClubs
+VARS
+	INT:_Count
+	INT:_Index
+ON
+	OnFunction("AMER_VendorCleanup_2hClubs")
+ACTIONS
+	Set(_Index, INT:0)
+	Set(_Count, INT:15) //2h clubs start at level 16, Tenebrium only.
+	WHILE "c1"
+		IsLessThen(_Count, %AMER_VendorCleanup_ItemLevelLimit)
+	DO 
+		GetElement(%AMER_VendorCleanup_WhichStat, _Index, WPN_Blackrock_2H_Hammer_A, WPN_Blackrock_2H_Hammer_B, WPN_Blackrock_2H_Hammer_C, WPN_Blackrock_2H_Hammer_D, WPN_Blackrock_2H_Hammer_E, WPN_AMER_Blackrock_2H_Hammer_F, WPN_AMER_Blackrock_2H_Hammer_G, WPN_AMER_Blackrock_2H_Hammer_H)
+		CallFunction("AMER_VendorCleanup_RemoveItem")
+		
+		Add(_Index, INT:1)
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+	
+	
+EVENT VendorCleanupRemoveSpearsA
+VARS
+	INT:_Count
+	INT:_Limit
+ON
+	OnFunction("AMER_VendorCleanup_SpearsA")
+ACTIONS
+	Set(_Limit, %AMER_VendorCleanup_ItemLevelLimit)
+	IF "c1"
+		IsGreaterThen(_Limit, 13)
+	THEN
+		Set(_Limit, 13)
+	ENDIF
+	
+	Set(_Count, INT:0)
+	WHILE "c1"
+		IsLessThen(_Count, _Limit)
+	DO 
+		GetElement(%AMER_VendorCleanup_WhichStat, _Count, WPN_Pitchfork, WPN_Spear, WPN_Spear_A, WPN_Spear_B, WPN_Spear_C, WPN_Spear_D, WPN_Spear_E, WPN_Lance, WPN_Lance_B, WPN_Lance_C, WPN_Menaulion, WPN_Imps_2H_Spear_A, WPN_Imps_2H_Spear_B)
+		CallFunction("AMER_VendorCleanup_RemoveItem")
+		
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+EVENT VendorCleanupRemoveSpearsB
+VARS
+	INT:_Count
+	INT:_Index
+ON
+	OnFunction("AMER_VendorCleanup_SpearsB")
+ACTIONS
+	Set(_Index, INT:0)
+	Set(_Count, INT:13)
+	WHILE "c1"
+		IsLessThen(_Count, %AMER_VendorCleanup_ItemLevelLimit)
+	DO 
+		GetElement(%AMER_VendorCleanup_WhichStat, _Index, WPN_Imps_2H_Spear_C, WPN_Imps_2H_Spear_D, WPN_Trident, WPN_Trident_B, WPN_Trident_C, WPN_Trident_D, WPN_Trident_E, WPN_AMER_Trident_F, WPN_AMER_Trident_G, WPN_AMER_Trident_H)
+		CallFunction("AMER_VendorCleanup_RemoveItem")
+		
+		GetElement(%AMER_VendorCleanup_WhichStat, _Index, WPN_Blackrock_2H_Spear_A, WPN_Blackrock_2H_Spear_B, WPN_Blackrock_2H_Spear_C, WPN_Blackrock_2H_Spear_D, WPN_Blackrock_2H_Spear_E, WPN_Blackrock_2H_Spear_F, WPN_Blackrock_2H_Spear_G, WPN_AMER_Blackrock_2H_Spear_H, WPN_AMER_Blackrock_2H_Spear_I, WPN_AMER_Blackrock_2H_Spear_J)
+		CallFunction("AMER_VendorCleanup_RemoveItem")
+		
+		Add(_Index, INT:1)
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+	
+	
+EVENT VendorCleanupRemoveBowsA
+VARS
+	INT:_Count
+	INT:_Limit
+ON
+	OnFunction("AMER_VendorCleanup_BowsA")
+ACTIONS
+	Set(_Limit, %AMER_VendorCleanup_ItemLevelLimit)
+	IF "c1"
+		IsGreaterThen(_Limit, 13)
+	THEN
+		Set(_Limit, 13)
+	ENDIF
+	
+	Set(_Count, INT:0)
+	WHILE "c1"
+		IsLessThen(_Count, _Limit)
+	DO 
+		GetElement(%AMER_VendorCleanup_WhichStat, _Count, WPN_StandardIssueBow, WPN_StandardIssueBow_B, WPN_StandardIssueBow_C, WPN_ShortBow, WPN_ShortBow_B, WPN_ShortBow_C, WPN_OakFlatBow, WPN_Longbow, WPN_Longbow_B, WPN_Longbow_C, WPN_YewLongbow, WPN_YewLongbow_B, WPN_YewLongbow_C)
+		CallFunction("AMER_VendorCleanup_RemoveItem")
+		
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+EVENT VendorCleanupRemoveBowsB
+VARS
+	INT:_Count
+	INT:_Index
+ON
+	OnFunction("AMER_VendorCleanup_BowsB")
+ACTIONS
+	Set(_Index, INT:0)
+	Set(_Count, INT:13)
+	WHILE "c1"
+		IsLessThen(_Count, %AMER_VendorCleanup_ItemLevelLimit)
+	DO 
+		GetElement(%AMER_VendorCleanup_WhichStat, _Index, WPN_YewLongbow_D, WPN_YewLongbow_E, WPN_YewLongbow_F, WPN_YewLongbow_G, WPN_Goblins_Bow_A_Hunter, WPN_Bow_A_1_Composite_Bow, WPN_Bow_A_1_Composite_Bow_B, WPN_AMER_Bow_A_1_Composite_Bow_C, WPN_AMER_Bow_A_1_Composite_Bow_D, WPN_AMER_Bow_A_1_Composite_Bow_E)
+		CallFunction("AMER_VendorCleanup_RemoveItem")
+		
+		GetElement(%AMER_VendorCleanup_WhichStat, _Index, WPN_Blackrock_Bow_A, WPN_Blackrock_Bow_B, WPN_Blackrock_Bow_C, WPN_Blackrock_Bow_D, WPN_Blackrock_Bow_E, WPN_Blackrock_Bow_F, WPN_Blackrock_Bow_G, WPN_AMER_Blackrock_Bow_H, WPN_AMER_Blackrock_Bow_I, WPN_AMER_Blackrock_Bow_J)
+		CallFunction("AMER_VendorCleanup_RemoveItem")
+		
+		Add(_Index, INT:1)
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+	
+	
+EVENT VendorCleanupRemoveCrossBowsA
+VARS
+	INT:_Count
+	INT:_Limit
+ON
+	OnFunction("AMER_VendorCleanup_CrossBowsA")
+ACTIONS
+	Set(_Limit, %AMER_VendorCleanup_ItemLevelLimit)
+	IF "c1"
+		IsGreaterThen(_Limit, 13)
+	THEN
+		Set(_Limit, 13)
+	ENDIF
+	
+	Set(_Count, INT:0)
+	WHILE "c1"
+		IsLessThen(_Count, _Limit)
+	DO 
+		//Crossbow is missing item levels 7 and 11, so we use doubles of the precursing item levels to maintain the algorithm.
+		GetElement(%AMER_VendorCleanup_WhichStat, _Count, WPN_Lightcrossbow, WPN_Lightcrossbow_B, WPN_Regularcrossbow, WPN_Regularcrossbow_B, WPN_Heavycrossbow, WPN_Heavycrossbow_B, WPN_Heavycrossbow_B, WPN_Steelcrossbow, WPN_Steelcrossbow_B, WPN_Arbalest, WPN_Arbalest, WPN_Arbalest_B, WPN_Arbalest_C)
+		CallFunction("AMER_VendorCleanup_RemoveItem")
+		
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+EVENT VendorCleanupRemoveCrossBowsB
+VARS
+	INT:_Count
+	INT:_Index
+ON
+	OnFunction("AMER_VendorCleanup_CrossBowsB")
+ACTIONS
+	Set(_Index, INT:0)
+	Set(_Count, INT:13)
+	WHILE "c1"
+		IsLessThen(_Count, %AMER_VendorCleanup_ItemLevelLimit)
+	DO 
+		GetElement(%AMER_VendorCleanup_WhichStat, _Index, WPN_Arbalest_D, WPN_Arbalest_E, WPN_Arbalest_F, WPN_Arbalest_G, WPN_Arbalest_H, WPN_Arbalest_I, WPN_Arbalest_J, WPN_AMER_Arbalest_K, WPN_AMER_Arbalest_L, WPN_AMER_Arbalest_M)
+		CallFunction("AMER_VendorCleanup_RemoveItem")
+		
+		GetElement(%AMER_VendorCleanup_WhichStat, _Index, WPN_Blackrock_Crossbow_A, WPN_Blackrock_Crossbow_B, WPN_Blackrock_Crossbow_C, WPN_Blackrock_Crossbow_D, WPN_Blackrock_Crossbow_E, WPN_Blackrock_Crossbow_F, WPN_Blackrock_Crossbow_G, WPN_AMER_Blackrock_Crossbow_H, WPN_AMER_Blackrock_Crossbow_I, WPN_AMER_Blackrock_Crossbow_J)
+		CallFunction("AMER_VendorCleanup_RemoveItem")
+		
+		Add(_Index, INT:1)
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+	
+	
+EVENT VendorCleanupRemoveShieldsA
+VARS
+	INT:_Count
+	INT:_Limit
+ON
+	OnFunction("AMER_VendorCleanup_ShieldsA")
+ACTIONS
+	Set(_Limit, %AMER_VendorCleanup_ItemLevelLimit)
+	//There are lots of shields, overload the first array
+	//from 13 to 14.
+	IF "c1"
+		IsGreaterThen(_Limit, 14)
+	THEN
+		Set(_Limit, 14)
+	ENDIF
+	
+	Set(_Count, INT:0)
+	WHILE "c1"
+		IsLessThen(_Count, _Limit)
+	DO 
+		//Shields .
+		GetElement(%AMER_VendorCleanup_WhichStat, _Count, WPN_Wood_Shield_A, WPN_Wood_Shield_C, WPN_Human_Normal_Shield_A, WPN_Wood_Shield_E, WPN_Human_Normal_Shield_B, WPN_Wood_Shield_G, WPN_Human_Normal_Shield_C, WPN_Wood_Shield_I, WPN_Human_Normal_Shield_D, WPN_Human_Normal_Shield_E, WPN_Metal_Shield_B, WPN_Wollocks_Shield_A, WPN_Metal_Shield_C, WPN_Metal_Shield_D)
+		CallFunction("AMER_VendorCleanup_RemoveItem")
+		
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+EVENT VendorCleanupRemoveShieldsB
+VARS
+	INT:_Count
+	INT:_Index
+ON
+	OnFunction("AMER_VendorCleanup_ShieldsB")
+ACTIONS
+	Set(_Index, INT:0)
+	Set(_Count, INT:13)
+	WHILE "c1"
+		IsLessThen(_Count, %AMER_VendorCleanup_ItemLevelLimit)
+	DO 
+		GetElement(%AMER_VendorCleanup_WhichStat, _Index, WPN_Metal_Shield_E, WPN_Metal_Shield_F, WPN_Metal_Shield_G, WPN_Royal_Shield_D, WPN_Royal_Shield_E, WPN_Royal_Shield_F, WPN_AMER_Royal_Shield_G, WPN_AMER_Royal_Shield_H, WPN_AMER_Royal_Shield_I, WPN_AMER_Royal_Shield_J)
+		CallFunction("AMER_VendorCleanup_RemoveItem")
+		
+		Add(_Index, INT:1)
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+EVENT VendorCleanupRemoveShieldsC
+VARS
+	INT:_Count
+	INT:_Index
+ON
+	OnFunction("AMER_VendorCleanup_ShieldsC")
+ACTIONS
+	Set(_Index, INT:0)
+	Set(_Count, INT:15)	//Tenebrium shields start at level 16.
+	WHILE "c1"
+		IsLessThen(_Count, %AMER_VendorCleanup_ItemLevelLimit)
+	DO 
+		GetElement(%AMER_VendorCleanup_WhichStat, _Index, WPN_Blackrock_Shield_A_A, WPN_Blackrock_Shield_A_B, WPN_Blackrock_Shield_A_C, WPN_Blackrock_Shield_B_A, WPN_Blackrock_Shield_B_B, WPN_AMER_Blackrock_Shield_B_C, WPN_AMER_Blackrock_Shield_B_D, WPN_AMER_Blackrock_Shield_B_E)
+		CallFunction("AMER_VendorCleanup_RemoveItem")
+		
+		Add(_Index, INT:1)
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+	
+	
+EVENT VendorCleanupRemoveStavesA
+VARS
+	INT:_Count
+	INT:_Limit
+	STRING:_Str
+	STRING:_StaffStr
+ON
+	OnFunction("AMER_VendorCleanup_StavesA")
+ACTIONS
+	Set(_Limit, %AMER_VendorCleanup_ItemLevelLimit)
+	IF "c1"
+		IsGreaterThen(_Limit, 13)
+	THEN
+		Set(_Limit, 13)
+	ENDIF
+	
+	Set(_Count, INT:0)
+	WHILE "c1"
+		IsLessThen(_Count, _Limit)
+	DO 
+		GetElement(_Str, _Count, "WPN_Quarterstaff_[1]", "WPN_Quarterstaff_B_[1]", "WPN_Quarterstaff_C_[1]", "WPN_Quarterstaff_D_[1]", "WPN_Quarterstaff_E_[1]", "WPN_Quarterstaff_F_[1]", "WPN_Quarterstaff_G_[1]", "WPN_Quarterstaff_H_[1]", "WPN_Quarterstaff_I_[1]", "WPN_Quarterstaff_J_[1]", "WPN_Quarterstaff_K_[1]", "WPN_Quarterstaff_L_[1]", "WPN_Quarterstaff_M_[1]")
+		
+		Print(_StaffStr, _Str, %AMER_VendorCleanup_Element)
+		Cast(%AMER_VendorCleanup_WhichStat, _StaffStr)
+		CallFunction("AMER_VendorCleanup_RemoveItem")
+		
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+EVENT VendorCleanupRemoveStavesB
+VARS
+	INT:_Count
+	INT:_Index
+	STRING:_Str
+	STRING:_StaffStr
+ON
+	OnFunction("AMER_VendorCleanup_StavesB")
+ACTIONS
+	Set(_Index, INT:0)
+	Set(_Count, INT:13)
+	WHILE "c1"
+		IsLessThen(_Count, %AMER_VendorCleanup_ItemLevelLimit)
+	DO 
+		GetElement(_Str, _Index, "WPN_Quarterstaff_N_[1]", "WPN_Quarterstaff_O_[1]", "WPN_Goblins_Staff_A_BlueGlowStaff_[1]", "WPN_Goblins_Staff_A_BlueGlowStaff_B_[1]", "WPN_Orcs_Shaman_Staff_A_Fighting_Staff_[1]", "WPN_Wollocks_Staff_A_SkullHorns_[1]", "WPN_Cyclops_Staff_B_Fighting_Staff_[1]", "WPN_AMER_Goblins_Staff_A_BlueGlowStaff_C_[1]", "WPN_AMER_Goblins_Staff_A_BlueGlowStaff_D_[1]", "WPN_AMER_Goblins_Staff_A_BlueGlowStaff_E_[1]")
+		
+		Print(_StaffStr, _Str, %AMER_VendorCleanup_Element)
+		Cast(%AMER_VendorCleanup_WhichStat, _StaffStr)
+		CallFunction("AMER_VendorCleanup_RemoveItem")
+		
+		Add(_Index, INT:1)
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+EVENT VendorCleanupRemoveShadowStaves
+VARS
+	INT:_Count
+	INT:_Index
+	STRING:_Str
+	STRING:_StaffStr
+ON
+	OnFunction("AMER_VendorCleanup_ShadowStaves")
+ACTIONS
+	Set(_Index, INT:0)
+	Set(_Count, INT:13)
+	WHILE "c1"
+		IsLessThen(_Count, %AMER_VendorCleanup_ItemLevelLimit)
+	DO 
+		GetElement(%AMER_VendorCleanup_WhichStat, _Index, AMER_WPN_Quarterstaff_N_Shadow, AMER_WPN_Quarterstaff_O_Shadow, AMER_WPN_Goblins_Staff_A_BlueGlowStaff_Shadow, AMER_WPN_Goblins_Staff_A_BlueGlowStaff_B_Shadow, AMER_WPN_Orcs_Shaman_Staff_A_Fighting_Staff_Shadow, AMER_WPN_Wollocks_Staff_A_SkullHorns_Shadow, AMER_WPN_Cyclops_Staff_B_Fighting_Staff_Shadow, AMER_WPN_Goblins_Staff_A_BlueGlowStaff_C_Shadow, AMER_WPN_Goblins_Staff_A_BlueGlowStaff_D_Shadow, AMER_WPN_Goblins_Staff_A_BlueGlowStaff_E_Shadow)
+		CallFunction("AMER_VendorCleanup_RemoveItem")
+		
+		Add(_Index, INT:1)
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+	
+	
+	
+	
+EVENT VendorCleanupRemoveWandsA
+VARS
+	INT:_Count
+	INT:_Limit
+	STRING:_Str
+	STRING:_StaffStr
+ON
+	OnFunction("AMER_VendorCleanup_WandsA")
+ACTIONS
+	Set(_Limit, %AMER_VendorCleanup_ItemLevelLimit)
+	IF "c1"
+		IsGreaterThen(_Limit, 13)
+	THEN
+		Set(_Limit, 13)
+	ENDIF
+	
+	Set(_Count, INT:0)
+	WHILE "c1"
+		IsLessThen(_Count, _Limit)
+	DO 
+		GetElement(_Str, _Count, "WPN_Wand_[1]", "WPN_Wand_[1]_A", "WPN_Wand_[1]_B", "WPN_Wand_[1]_B2", "WPN_Wand_[1]_C", "WPN_Wand_[1]_C2", "WPN_Wand_[1]_D", "WPN_Wand_[1]_E", "WPN_Wand_[1]_F", "WPN_Wand_[1]_G", "WPN_Wand_[1]_H", "WPN_Wand_[1]_I", "WPN_Wand_[1]_J")
+		
+		Print(_StaffStr, _Str, %AMER_VendorCleanup_Element)
+		Cast(%AMER_VendorCleanup_WhichStat, _StaffStr)
+		CallFunction("AMER_VendorCleanup_RemoveItem")
+		
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+EVENT VendorCleanupRemoveWandsB
+VARS
+	INT:_Count
+	INT:_Index
+	STRING:_Str
+	STRING:_StaffStr
+ON
+	OnFunction("AMER_VendorCleanup_WandsB")
+ACTIONS
+	Set(_Index, INT:0)
+	Set(_Count, INT:13)
+	WHILE "c1"
+		IsLessThen(_Count, %AMER_VendorCleanup_ItemLevelLimit)
+	DO 
+		GetElement(_Str, _Index, "WPN_Wand_[1]_K", "WPN_Wand_[1]_L", "WPN_Wand_[1]_M", "WPN_Wand_[1]_N", "WPN_Wand_[1]_O", "WPN_Wand_[1]_P", "WPN_Wand_[1]_Q", "WPN_AMER_Wand_[1]_R", "WPN_AMER_Wand_[1]_S", "WPN_AMER_Wand_[1]_T")
+		
+		Print(_StaffStr, _Str, %AMER_VendorCleanup_Element)
+		Cast(%AMER_VendorCleanup_WhichStat, _StaffStr)
+		CallFunction("AMER_VendorCleanup_RemoveItem")
+		
+		Add(_Index, INT:1)
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+EVENT VendorCleanupRemoveShadowWands
+VARS
+	INT:_Count
+	INT:_Index
+	STRING:_Str
+	STRING:_StaffStr
+ON
+	OnFunction("AMER_VendorCleanup_ShadowWands")
+ACTIONS
+	Set(_Index, INT:0)
+	Set(_Count, INT:13)
+	WHILE "c1"
+		IsLessThen(_Count, %AMER_VendorCleanup_ItemLevelLimit)
+	DO 
+		GetElement(%AMER_VendorCleanup_WhichStat, _Index, WPN_Wand_Shadow, WPN_Wand_Shadow_B, WPN_Wand_Shadow_C, WPN_Wand_Shadow_D, WPN_Wand_Shadow_E, WPN_Wand_Shadow_F, WPN_Wand_Shadow_G, WPN_AMER_Wand_Shadow_H, WPN_AMER_Wand_Shadow_I, WPN_AMER_Wand_Shadow_J)
+		CallFunction("AMER_VendorCleanup_RemoveItem")
+		
+		Add(_Index, INT:1)
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+	
+	
+//=========================================================//
+//                        A R M O R                        //
+//=========================================================//
+EVENT VendorCleanupRemoveChestClothA
+VARS
+	INT:_Count
+	INT:_Limit
+ON
+	OnFunction("AMER_VendorCleanup_ChestClothA")
+ACTIONS
+	Set(_Limit, %AMER_VendorCleanup_ItemLevelLimit)
+	IF "c1"
+		IsGreaterThen(_Limit, 13)
+	THEN
+		Set(_Limit, 13)
+	ENDIF
+	
+	Set(_Count, INT:0)
+	WHILE "c1"
+		IsLessThen(_Count, _Limit)
+	DO 
+		GetElement(%AMER_VendorCleanup_WhichStat, _Count, ARM_Rags, ARM_Shirt, ARM_Cloth_A_Torso, ARM_Cloth_B_Torso, ARM_Cloth_C_Torso, ARM_Cloth_D_Torso, ARM_Cloth_E_Torso, ARM_Cloth_F_Torso, ARM_Cloth_G_Torso, ARM_ThinCanvasGambeson, ARM_ThickCanvasGambeson, ARM_ThinLeatherGambeson, ARM_ThickLeatherGambeson)
+		CallFunction("AMER_VendorCleanup_RemoveItem")
+		
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+EVENT VendorCleanupRemoveChestClothB
+VARS
+	INT:_Count
+	INT:_Index
+ON
+	OnFunction("AMER_VendorCleanup_ChestClothB")
+ACTIONS
+	Set(_Index, INT:0)
+	Set(_Count, INT:13)
+	WHILE "c1"
+		IsLessThen(_Count, %AMER_VendorCleanup_ItemLevelLimit)
+	DO 
+		GetElement(%AMER_VendorCleanup_WhichStat, _Index, ARM_PaddedLeatherGambeson, ARM_RivetedCanvasBrigandine, ARM_ThinCanvasGambeson_B, ARM_ThickCanvasGambeson_B, ARM_ThickLeatherGambeson_B, ARM_PaddedLeatherGambeson_B, ARM_RivetedCanvasBrigandine_B, ARM_AMER_RivetedCanvasBrigandine_C, ARM_AMER_RivetedCanvasBrigandine_D, ARM_AMER_RivetedCanvasBrigandine_E)
+		CallFunction("AMER_VendorCleanup_RemoveItem")
+		
+		Add(_Index, INT:1)
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+	
+	
+EVENT VendorCleanupRemoveChestRobesA
+VARS
+	INT:_Count
+	INT:_Limit
+ON
+	OnFunction("AMER_VendorCleanup_ChestRobesA")
+ACTIONS
+	Set(_Limit, %AMER_VendorCleanup_ItemLevelLimit)
+	IF "c1"
+		IsGreaterThen(_Limit, 13)
+	THEN
+		Set(_Limit, 13)
+	ENDIF
+	
+	Set(_Count, INT:0)
+	WHILE "c1"
+		IsLessThen(_Count, _Limit)
+	DO 
+		GetElement(%AMER_VendorCleanup_WhichStat, _Count, ARM_Coat, ARM_Robe_A_Torso, ARM_Robe_B_Torso, ARM_Robe_C_Torso, ARM_Robe_D_Torso, ARM_Robe_E_Torso, ARM_Robe_F_Torso, ARM_Robe_G_Torso, ARM_Robe_H_Torso, ARM_Robe_I_Torso, ARM_Robe_J_Torso, ARM_Robe_K_Torso, ARM_Robe_L_Torso)
+		CallFunction("AMER_VendorCleanup_RemoveItem")
+		
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+EVENT VendorCleanupRemoveChestRobesB
+VARS
+	INT:_Count
+	INT:_Index
+ON
+	OnFunction("AMER_VendorCleanup_ChestRobesB")
+ACTIONS
+	Set(_Index, INT:0)
+	Set(_Count, INT:13)
+	WHILE "c1"
+		IsLessThen(_Count, %AMER_VendorCleanup_ItemLevelLimit)
+	DO 
+		GetElement(%AMER_VendorCleanup_WhichStat, _Index, ARM_Robe_M_Torso, ARM_Robe_N_Torso, ARM_Robe_O_Torso, ARM_Robe_P_Torso, ARM_Robe_Q_Torso, ARM_Robe_R_Torso, ARM_Robe_S_Torso, ARM_AMER_Robe_T_Torso, ARM_AMER_Robe_U_Torso, ARM_AMER_Robe_V_Torso)
+		CallFunction("AMER_VendorCleanup_RemoveItem")
+		
+		Add(_Index, INT:1)
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+	
+	
+EVENT VendorCleanupRemoveChestLeatherA
+VARS
+	INT:_Count
+	INT:_Limit
+ON
+	OnFunction("AMER_VendorCleanup_ChestLeatherA")
+ACTIONS
+	Set(_Limit, %AMER_VendorCleanup_ItemLevelLimit)
+	IF "c1"
+		IsGreaterThen(_Limit, 13)
+	THEN
+		Set(_Limit, 13)
+	ENDIF
+	
+	Set(_Count, INT:0)
+	WHILE "c1"
+		IsLessThen(_Count, _Limit)
+	DO 
+		GetElement(%AMER_VendorCleanup_WhichStat, _Count, ARM_Leather_C_Torso_A, ARM_Leather_Body_A, ARM_Leather_A_Torso, ARM_Leather_B_Torso, ARM_Leather_C_Torso, ARM_Leather_D_Torso, ARM_Leather_E_Torso, ARM_Leather_F_Torso, ARM_BoiledLeatherRingArmor, ARM_Leather_G_Torso, ARM_RivetedLeatherBrigandine, ARM_Leather_H_Torso, ARM_Leather_I_Torso)
+		CallFunction("AMER_VendorCleanup_RemoveItem")
+		
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+EVENT VendorCleanupRemoveChestLeatherB
+VARS
+	INT:_Count
+	INT:_Index
+ON
+	OnFunction("AMER_VendorCleanup_ChestLeatherB")
+ACTIONS
+	Set(_Index, INT:0)
+	Set(_Count, INT:13)
+	WHILE "c1"
+		IsLessThen(_Count, %AMER_VendorCleanup_ItemLevelLimit)
+	DO 
+		GetElement(%AMER_VendorCleanup_WhichStat, _Index, ARM_Leather_J_Torso, ARM_Leather_K_Torso, ARM_Leather_L_Torso, ARM_Leather_M_Torso, ARM_Leather_N_Torso, ARM_Leather_O_Torso, ARM_Leather_P_Torso, ARM_Leather_Q_Torso, ARM_AMER_Leather_R_Torso, ARM_AMER_Leather_S_Torso, ARM_AMER_Leather_T_Torso)
+		CallFunction("AMER_VendorCleanup_RemoveItem")
+		
+		Add(_Index, INT:1)
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+	
+	
+EVENT VendorCleanupRemoveChestChainA
+VARS
+	INT:_Count
+	INT:_Limit
+ON
+	OnFunction("AMER_VendorCleanup_ChestChainA")
+ACTIONS
+	Set(_Limit, %AMER_VendorCleanup_ItemLevelLimit)
+	IF "c1"
+		IsGreaterThen(_Limit, 13)
+	THEN
+		Set(_Limit, 13)
+	ENDIF
+	
+	Set(_Count, INT:0)
+	WHILE "c1"
+		IsLessThen(_Count, _Limit)
+	DO 
+		GetElement(%AMER_VendorCleanup_WhichStat, _Count, ARM_Chain_Body_Sourcehunter, ARM_Chain_Body_B, ARM_Chain_Body_C, ARM_Chain_Body_C_B, ARM_Chain_Body_D, ARM_Chain_Body_E, ARM_Chain_Body_F, ARM_Chain_Body_G, ARM_RivetedScaleArmor, ARM_RivetedScaleArmor_B, ARM_LacedScaleArmor, ARM_LacedScaleArmor_B, ARM_RoundedScaleArmor)
+		CallFunction("AMER_VendorCleanup_RemoveItem")
+		
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+EVENT VendorCleanupRemoveChestChainB
+VARS
+	INT:_Count
+	INT:_Index
+ON
+	OnFunction("AMER_VendorCleanup_ChestChainB")
+ACTIONS
+	Set(_Index, INT:0)
+	Set(_Count, INT:13)
+	WHILE "c1"
+		IsLessThen(_Count, %AMER_VendorCleanup_ItemLevelLimit)
+	DO 
+		GetElement(%AMER_VendorCleanup_WhichStat, _Index, ARM_RoundedScaleArmor_B, ARM_DragonScaleArmor, ARM_Chain_Body_H, ARM_RivetedScaleArmor_C, ARM_LacedScaleArmor_C, ARM_RoundedScaleArmor_C, ARM_DragonScaleArmor_B, ARM_AMER_DragonScaleArmor_C, ARM_AMER_DragonScaleArmor_D, ARM_AMER_DragonScaleArmor_E)
+		CallFunction("AMER_VendorCleanup_RemoveItem")
+		
+		Add(_Index, INT:1)
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+	
+	
+EVENT VendorCleanupRemoveChestPlateA
+VARS
+	INT:_Count
+	INT:_Limit
+ON
+	OnFunction("AMER_VendorCleanup_ChestPlateA")
+ACTIONS
+	Set(_Limit, %AMER_VendorCleanup_ItemLevelLimit)
+	IF "c1"
+		IsGreaterThen(_Limit, 13)
+	THEN
+		Set(_Limit, 13)
+	ENDIF
+	
+	Set(_Count, INT:0)
+	WHILE "c1"
+		IsLessThen(_Count, _Limit)
+	DO 
+		GetElement(%AMER_VendorCleanup_WhichStat, _Count, ARM_SourceHunter_Breast, ARM_Metal_A_Torso, ARM_Metal_B_Torso, ARM_Metal_C_Torso, ARM_Metal_D_Torso, ARM_Metal_E_Torso, ARM_Metal_F_Torso, ARM_Metal_G_Torso, ARM_Metal_H_Torso, ARM_Plate_Body_A, ARM_Plate_Body_B, ARM_Plate_Body_C, ARM_Plate_Body_D)
+		CallFunction("AMER_VendorCleanup_RemoveItem")
+		
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+EVENT VendorCleanupRemoveChestPlateB
+VARS
+	INT:_Count
+	INT:_Index
+ON
+	OnFunction("AMER_VendorCleanup_ChestPlateB")
+ACTIONS
+	Set(_Index, INT:0)
+	Set(_Count, INT:13)
+	WHILE "c1"
+		IsLessThen(_Count, %AMER_VendorCleanup_ItemLevelLimit)
+	DO 
+		GetElement(%AMER_VendorCleanup_WhichStat, _Index, ARM_Plate_Body_E, ARM_Plate_Body_F, ARM_Plate_Body_G, ARM_Plate_Body_H, ARM_Plate_Body_I, ARM_Plate_Body_J, ARM_Plate_Body_K, ARM_AMER_Plate_Body_L, ARM_AMER_Plate_Body_M, ARM_AMER_Plate_Body_N)
+		CallFunction("AMER_VendorCleanup_RemoveItem")
+		
+		Add(_Index, INT:1)
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+	
+	
+EVENT VendorCleanupRemoveSarongsA
+VARS
+	INT:_Count
+	INT:_Index
+	INT:_Limit
+ON
+	OnFunction("AMER_VendorCleanup_SarongsA")
+ACTIONS
+	Set(_Limit, %AMER_VendorCleanup_ItemLevelLimit)
+	IF "c1"
+		IsGreaterThen(_Limit, 19)
+	THEN
+		Set(_Limit, 19)
+	ENDIF
+	
+	Set(_Index, INT:0)
+	Set(_Count, INT:6)	//Sarongs start at level 7.
+	WHILE "c1"
+		IsLessThen(_Count, _Limit)
+	DO 
+		GetElement(%AMER_VendorCleanup_WhichStat, _Index, ARM_Garment, ARM_Garment_A, ARM_Garment_B, ARM_Garment_C, ARM_Garment_D, ARM_Garment_E, ARM_Garment_F, ARM_Garment_G, ARM_Garment_H, ARM_Garment_I, ARM_Garment_J, ARM_Garment_K, ARM_Garment_L)
+		CallFunction("AMER_VendorCleanup_RemoveItem")
+		
+		Add(_Index, INT:1)
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+EVENT VendorCleanupRemoveSarongsB
+VARS
+	INT:_Count
+	INT:_Index
+ON
+	OnFunction("AMER_VendorCleanup_SarongsB")
+ACTIONS
+	Set(_Index, INT:0)
+	Set(_Count, INT:18)
+	WHILE "c1"
+		IsLessThen(_Count, %AMER_VendorCleanup_ItemLevelLimit)
+	DO 
+		GetElement(%AMER_VendorCleanup_WhichStat, _Index, ARM_Garment_M, ARM_AMER_Garment_N, ARM_AMER_Garment_O, ARM_AMER_Garment_P, ARM_AMER_Garment_Q)
+		CallFunction("AMER_VendorCleanup_RemoveItem")
+		
+		Add(_Index, INT:1)
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+	
+	
+EVENT VendorCleanupRemoveBeltsA
+VARS
+	INT:_Count
+	INT:_Index
+	INT:_Limit
+ON
+	OnFunction("AMER_VendorCleanup_BeltsA")
+ACTIONS
+	Set(_Limit, %AMER_VendorCleanup_ItemLevelLimit)
+	IF "c1"
+		IsGreaterThen(_Limit, 18)
+	THEN
+		Set(_Limit, 18)
+	ENDIF
+	
+	Set(_Index, INT:0)
+	Set(_Count, INT:5)	//Belts start at level 6
+	WHILE "c1"
+		IsLessThen(_Count, _Limit)
+	DO 
+		GetElement(%AMER_VendorCleanup_WhichStat, _Index, ARM_Sash_B, ARM_Sash_C, ARM_Leather_Belt_A, ARM_Leather_Belt_B, ARM_Leather_Belt_C, ARM_Spikedbelt, ARM_Chain_Belt_A, ARM_Heavychainbelt, ARM_Heavychainbelt_B, ARM_Plate_Belt_A, ARM_Plate_Belt_B, ARM_Plate_Belt_C, ARM_Plate_Belt_D)
+		CallFunction("AMER_VendorCleanup_RemoveItem")
+		
+		Add(_Index, INT:1)
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+EVENT VendorCleanupRemoveBeltsB
+VARS
+	INT:_Count
+	INT:_Index
+ON
+	OnFunction("AMER_VendorCleanup_BeltsB")
+ACTIONS
+	Set(_Index, INT:0)
+	Set(_Count, INT:18)
+	WHILE "c1"
+		IsLessThen(_Count, %AMER_VendorCleanup_ItemLevelLimit)
+	DO 
+		GetElement(%AMER_VendorCleanup_WhichStat, _Index, ARM_Plate_Belt_F, ARM_AMER_Plate_Belt_G, ARM_AMER_Plate_Belt_H, ARM_AMER_Plate_Belt_I)
+		CallFunction("AMER_VendorCleanup_RemoveItem")
+		
+		Add(_Index, INT:1)
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+	
+	
+EVENT VendorCleanupRemoveBootsLeatherA
+VARS
+	INT:_Count
+	INT:_Limit
+ON
+	OnFunction("AMER_VendorCleanup_BootsLeatherA")
+ACTIONS
+	Set(_Limit, %AMER_VendorCleanup_ItemLevelLimit)
+	IF "c1"
+		IsGreaterThen(_Limit, 13)
+	THEN
+		Set(_Limit, 13)
+	ENDIF
+	
+	Set(_Count, INT:0)
+	WHILE "c1"
+		IsLessThen(_Count, _Limit)
+	DO 
+		GetElement(%AMER_VendorCleanup_WhichStat, _Count, ARM_SourceHunter_Boots, ARM_Cloth_Boots, ARM_Cloth_A_Boots, ARM_Cloth_B_Boots, ARM_Cloth_C_Boots, ARM_Leather_A_Boots, ARM_Leather_B_Boots, ARM_Leather_Boots_A, ARM_Leather_Boots_B, ARM_Leather_Boots_C, ARM_Leather_Boots_D, ARM_Leather_Boots_E, ARM_Leather_Boots_F)
+		CallFunction("AMER_VendorCleanup_RemoveItem")
+		
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+EVENT VendorCleanupRemoveBootsLeatherB
+VARS
+	INT:_Count
+	INT:_Index
+ON
+	OnFunction("AMER_VendorCleanup_BootsLeatherB")
+ACTIONS
+	Set(_Index, INT:0)
+	Set(_Count, INT:13)
+	WHILE "c1"
+		IsLessThen(_Count, %AMER_VendorCleanup_ItemLevelLimit)
+	DO 
+		GetElement(%AMER_VendorCleanup_WhichStat, _Index, ARM_Leather_Boots_G, ARM_Leather_Boots_H, ARM_Leather_Boots_I, ARM_Leather_Boots_J, ARM_Leather_Boots_K, ARM_Leather_Boots_L, ARM_Leather_Boots_M, ARM_AMER_Leather_Boots_N, ARM_AMER_Leather_Boots_O, ARM_AMER_Leather_Boots_P)
+		CallFunction("AMER_VendorCleanup_RemoveItem")
+		
+		Add(_Index, INT:1)
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+	
+	
+EVENT VendorCleanupRemoveBootsMetal
+VARS
+	INT:_Count
+	INT:_Index
+ON
+	OnFunction("AMER_VendorCleanup_BootsMetal")
+ACTIONS
+	Set(_Index, INT:0)
+	Set(_Count, INT:9)	//Metal boots start at level 10
+	WHILE "c1"
+		IsLessThen(_Count, %AMER_VendorCleanup_ItemLevelLimit)
+	DO 
+		GetElement(%AMER_VendorCleanup_WhichStat, _Index, ARM_Chain_Boots_A, ARM_Chain_Boots_B, ARM_Chain_Boots_C, ARM_Chain_Boots_D, ARM_Metal_A_Boots, ARM_Metal_B_Boots,ARM_Metal_C_Boots, ARM_Metal_D_Boots, ARM_Plate_Boots_A, ARM_Plate_Boots_B, ARM_Plate_Boots_C, ARM_AMER_Plate_Boots_D, ARM_AMER_Plate_Boots_F, ARM_AMER_Plate_Boots_G)
+		CallFunction("AMER_VendorCleanup_RemoveItem")
+		
+		Add(_Index, INT:1)
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+	
+	
+EVENT VendorCleanupRemoveGlovesA
+VARS
+	INT:_Count
+	INT:_Limit
+ON
+	OnFunction("AMER_VendorCleanup_GlovesA")
+ACTIONS
+	Set(_Limit, %AMER_VendorCleanup_ItemLevelLimit)
+	IF "c1"
+		IsGreaterThen(_Limit, 13)
+	THEN
+		Set(_Limit, 13)
+	ENDIF
+	
+	Set(_Count, INT:0)
+	WHILE "c1"
+		IsLessThen(_Count, _Limit)
+	DO 
+		GetElement(%AMER_VendorCleanup_WhichStat, _Count, ARM_Leather_C_Bracers_A, ARM_Cloth_A_Bracers, ARM_Cloth_B_Bracers, ARM_Cloth_C_Bracers, ARM_Leather_Gloves_A, ARM_Leather_A_Bracers, ARM_Leather_B_Bracers, ARM_Leather_C_Bracers, ARM_Leather_D_Bracers, ARM_Leather_E_Bracers, ARM_Leather_F_Bracers, ARM_Leather_G_Bracers, ARM_Leather_H_Bracers)
+		CallFunction("AMER_VendorCleanup_RemoveItem")
+		
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+EVENT VendorCleanupRemoveGlovesB
+VARS
+	INT:_Count
+	INT:_Index
+ON
+	OnFunction("AMER_VendorCleanup_GlovesB")
+ACTIONS
+	Set(_Index, INT:0)
+	Set(_Count, INT:13)
+	WHILE "c1"
+		IsLessThen(_Count, %AMER_VendorCleanup_ItemLevelLimit)
+	DO 
+		GetElement(%AMER_VendorCleanup_WhichStat, _Index, ARM_Leather_I_Bracers, ARM_Leather_J_Bracers, ARM_Leather_K_Bracers, ARM_Leather_L_Bracers, ARM_Leather_M_Bracers, ARM_Leather_N_Bracers, ARM_Leather_O_Bracers, ARM_Leather_P_Bracers, ARM_AMER_Leather_Q_Bracers, ARM_AMER_Leather_R_Bracers, ARM_AMER_Leather_S_Bracers)
+		CallFunction("AMER_VendorCleanup_RemoveItem")
+		
+		Add(_Index, INT:1)
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+	
+	
+EVENT VendorCleanupRemoveGlovesMetal
+VARS
+	INT:_Count
+	INT:_Index
+ON
+	OnFunction("AMER_VendorCleanup_GlovesMetal")
+ACTIONS
+	Set(_Index, INT:0)
+	Set(_Count, INT:7)	//Metal gloves start at level 8
+	WHILE "c1"
+		IsLessThen(_Count, %AMER_VendorCleanup_ItemLevelLimit)
+	DO 
+		GetElement(%AMER_VendorCleanup_WhichStat, _Index, ARM_Chain_Gloves_A, ARM_Chain_Gloves_B, ARM_Metal_A_Bracers, ARM_Metal_B_Bracers, ARM_Plate_Gloves_A, ARM_Plate_Gloves_B, ARM_Metal_C_Bracers, ARM_Metal_D_Bracers, ARM_Chain_Gloves_C, ARM_Chain_Gloves_D, ARM_Metal_E_Bracers, ARM_Metal_F_Bracers, ARM_Plate_Gloves_C, ARM_AMER_Plate_Gloves_D, ARM_AMER_Plate_Gloves_E, ARM_AMER_Plate_Gloves_F)
+		CallFunction("AMER_VendorCleanup_RemoveItem")
+		
+		Add(_Index, INT:1)
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+	
+	
+EVENT VendorCleanupRemoveHelmetClothA
+VARS
+	INT:_Count
+	INT:_Limit
+ON
+	OnFunction("AMER_VendorCleanup_HelmetClothA")
+ACTIONS
+	Set(_Limit, %AMER_VendorCleanup_ItemLevelLimit)
+	IF "c1"
+		IsGreaterThen(_Limit, 13)
+	THEN
+		Set(_Limit, 13)
+	ENDIF
+	
+	Set(_Count, INT:0)
+	WHILE "c1"
+		IsLessThen(_Count, _Limit)
+	DO 
+		GetElement(%AMER_VendorCleanup_WhichStat, _Count, ARM_Cloth_A_Helmet, ARM_Cloth_B_Helmet, ARM_Cloth_C_Helmet, ARM_Cloth_D_Helmet, ARM_Cloth_E_Helmet, ARM_Cloth_F_Helmet, ARM_Leather_Helmet_A, ARM_Leather_A_Helmet, ARM_Leather_B_Helmet, ARM_Leather_C_Helmet, ARM_Leather_D_Helmet, ARM_Leather_E_Helmet, ARM_Leather_F_Helmet)
+		CallFunction("AMER_VendorCleanup_RemoveItem")
+		
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+EVENT VendorCleanupRemoveHelmetClothB
+VARS
+	INT:_Count
+	INT:_Index
+ON
+	OnFunction("AMER_VendorCleanup_HelmetClothB")
+ACTIONS
+	Set(_Index, INT:0)
+	Set(_Count, INT:13)
+	WHILE "c1"
+		IsLessThen(_Count, %AMER_VendorCleanup_ItemLevelLimit)
+	DO 
+		GetElement(%AMER_VendorCleanup_WhichStat, _Index, ARM_Leather_G_Helmet, ARM_Leather_H_Helmet, ARM_Leather_I_Helmet, ARM_Leather_J_Helmet, ARM_Leather_K_Helmet, ARM_Leather_L_Helmet, ARM_Leather_M_Helmet, ARM_AMER_Leather_N_Helmet, ARM_AMER_Leather_O_Helmet, ARM_AMER_Leather_P_Helmet)
+		CallFunction("AMER_VendorCleanup_RemoveItem")
+		
+		Add(_Index, INT:1)
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+	
+	
+EVENT VendorCleanupRemoveHelmetLeather
+VARS
+	INT:_Count
+	INT:_Index
+ON
+	OnFunction("AMER_VendorCleanup_HelmetLeather")
+ACTIONS
+	Set(_Index, INT:0)
+	Set(_Count, INT:15)	//Leather helmets start at 16
+	WHILE "c1"
+		IsLessThen(_Count, %AMER_VendorCleanup_ItemLevelLimit)
+	DO 
+		GetElement(%AMER_VendorCleanup_WhichStat, _Index, ARM_Leather_Mask_Helmet_A, ARM_Leather_Mask_Helmet_B, ARM_Leather_Mask_Helmet_C, ARM_Leather_Mask_Helmet_D, ARM_Leather_Mask_Helmet_E, ARM_AMER_Leather_Mask_Helmet_F, ARM_AMER_Leather_Mask_Helmet_G, ARM_AMER_Leather_Mask_Helmet_H)
+		CallFunction("AMER_VendorCleanup_RemoveItem")
+		
+		Add(_Index, INT:1)
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+	
+	
+EVENT VendorCleanupRemoveHelmetMetalA
+VARS
+	INT:_Count
+	INT:_Index
+	INT:_Limit
+ON
+	OnFunction("AMER_VendorCleanup_HelmetMetalA")
+ACTIONS
+	Set(_Limit, %AMER_VendorCleanup_ItemLevelLimit)
+	IF "c1"
+		IsGreaterThen(_Limit, 18)
+	THEN
+		Set(_Limit, 18)
+	ENDIF
+	
+	Set(_Index, INT:0)
+	Set(_Count, INT:5)	//Metal Helmets start at level 6
+	WHILE "c1"
+		IsLessThen(_Count, _Limit)
+	DO 
+		GetElement(%AMER_VendorCleanup_WhichStat, _Index, ARM_Metal_A_Helmet, ARM_Metal_B_Helmet, ARM_Chain_Helmet_A, ARM_Plate_Helmet_A, ARM_Metal_C_Helmet, ARM_Metal_D_Helmet, ARM_Metal_E_Helmet, ARM_Metal_F_Helmet, ARM_Metal_G_Helmet, ARM_Metal_H_Helmet, ARM_Metal_I_Helmet, ARM_Metal_J_Helmet, ARM_Metal_K_Helmet)
+		CallFunction("AMER_VendorCleanup_RemoveItem")
+		
+		Add(_Index, INT:1)
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+EVENT VendorCleanupRemoveHelmetMetalB
+VARS
+	INT:_Count
+	INT:_Index
+ON
+	OnFunction("AMER_VendorCleanup_HelmetMetalB")
+ACTIONS
+	Set(_Index, INT:0)
+	Set(_Count, INT:18)
+	WHILE "c1"
+		IsLessThen(_Count, %AMER_VendorCleanup_ItemLevelLimit)
+	DO 
+		GetElement(%AMER_VendorCleanup_WhichStat, _Index, ARM_Metal_L_Helmet, ARM_Metal_M_Helmet, ARM_AMER_Metal_N_Helmet, ARM_AMER_Metal_O_Helmet, ARM_AMER_Metal_P_Helmet)
+		CallFunction("AMER_VendorCleanup_RemoveItem")
+		
+		Add(_Index, INT:1)
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+	
+	
+EVENT VendorCleanupRemoveRingsA
+VARS
+	INT:_Count
+	INT:_Index
+	INT:_Limit
+ON
+	OnFunction("AMER_VendorCleanup_RingsA")
+ACTIONS
+	Set(_Limit, %AMER_VendorCleanup_ItemLevelLimit)
+	IF "c1"
+		IsGreaterThen(_Limit, 14)
+	THEN
+		Set(_Limit, 14)
+	ENDIF
+	
+	Set(_Index, INT:0)
+	Set(_Count, INT:1)	//Rings start at level 2
+	WHILE "c1"
+		IsLessThen(_Count, _Limit)
+	DO 
+		GetElement(%AMER_VendorCleanup_WhichStat, _Index, ARM_Copper_Ring, ARM_Copper_Ring_B, ARM_Copper_Ring_C, ARM_Copper_Ring_D, ARM_Silver_Ring, ARM_Gold_Ring, ARM_Gold_Ring_B, ARM_Gold_Ring_C, ARM_Copper_Ring_E, ARM_Silver_Ring_B, ARM_Gold_Ring_D, ARM_Gold_Ring_E, ARM_Gold_Ring_F)
+		CallFunction("AMER_VendorCleanup_RemoveItem")
+		
+		Add(_Index, INT:1)
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+EVENT VendorCleanupRemoveRingsB
+VARS
+	INT:_Count
+	INT:_Index
+ON
+	OnFunction("AMER_VendorCleanup_RingsB")
+ACTIONS
+	Set(_Index, INT:0)
+	Set(_Count, INT:14)
+	WHILE "c1"
+		IsLessThen(_Count, %AMER_VendorCleanup_ItemLevelLimit)
+	DO 
+		GetElement(%AMER_VendorCleanup_WhichStat, _Index, ARM_Gold_Ring_G, ARM_Gold_Ring_H, ARM_Gold_Ring_I, ARM_Gold_Ring_J, ARM_Gold_Ring_K, ARM_Gold_Ring_L, ARM_AMER_Gold_Ring_M, ARM_AMER_Gold_Ring_N, ARM_AMER_Gold_Ring_O)
+		CallFunction("AMER_VendorCleanup_RemoveItem")
+		
+		Add(_Index, INT:1)
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+	
+	
+EVENT VendorCleanupRemoveAmuletsA
+VARS
+	INT:_Count
+	INT:_Index
+	INT:_Limit
+ON
+	OnFunction("AMER_VendorCleanup_AmuletsA")
+ACTIONS
+	Set(_Limit, %AMER_VendorCleanup_ItemLevelLimit)
+	IF "c1"
+		IsGreaterThen(_Limit, 17)
+	THEN
+		Set(_Limit, 17)
+	ENDIF
+	
+	Set(_Index, INT:0)
+	Set(_Count, INT:4)	//Amulets start at level 5
+	WHILE "c1"
+		IsLessThen(_Count, _Limit)
+	DO 
+		GetElement(%AMER_VendorCleanup_WhichStat, _Index, ARM_Copper_Amulet, ARM_Copper_Amulet_B, ARM_Copper_Amulet_C, ARM_Copper_Amulet_D, ARM_Copper_Amulet_E, ARM_Copper_Amulet_F, ARM_Copper_Amulet_G, ARM_Copper_Amulet_H, ARM_Silver_Amulet, ARM_Silver_Amulet_B, ARM_Silver_Amulet_C, ARM_Silver_Amulet_D, ARM_Silver_Amulet_E)
+		CallFunction("AMER_VendorCleanup_RemoveItem")
+		
+		Add(_Index, INT:1)
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+EVENT VendorCleanupRemoveAmuletsB
+VARS
+	INT:_Count
+	INT:_Index
+ON
+	OnFunction("AMER_VendorCleanup_AmuletsB")
+ACTIONS
+	Set(_Index, INT:0)
+	Set(_Count, INT:17)
+	WHILE "c1"
+		IsLessThen(_Count, %AMER_VendorCleanup_ItemLevelLimit)
+	DO 
+		GetElement(%AMER_VendorCleanup_WhichStat, _Index, ARM_Gold_Amulet, ARM_Gold_Amulet_B, ARM_Gold_Amulet_C, ARM_AMER_Gold_Amulet_D, ARM_AMER_Gold_Amulet_E, ARM_AMER_Gold_Amulet_F)
+		CallFunction("AMER_VendorCleanup_RemoveItem")
+		
+		Add(_Index, INT:1)
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+	
+	
+//===================== M I S C E L L A N E O U S =========================//
+EVENT VendorCleanupRemoveMisc1
+VARS
+	INT:_Count
+ON
+	OnFunction("AMER_VendorCleanup_Misc1")
+ACTIONS
+	Set(_Count, INT:0)
+	WHILE "c1"
+		IsLessThen(_Count, 14)
+	DO 
+		GetElement(%AMER_VendorCleanup_WhichStat, _Count, FUR_Rich_Fork_A, FUR_Rich_Knife_A, FUR_Rich_Knife_B, FUR_Rich_Knife_C, FUR_Rich_Knife_D, FUR_Rich_Knife_E, FUR_Rich_Knife_F, FUR_Rich_Knife_G, FUR_Rich_Knife_H, FUR_Rich_Knife_I, FUR_Rich_Knife_J, FUR_Rich_Knife_K, FUR_Rich_Knife_L, FUR_Cutlery_Fork_A)
+		CallFunction("AMER_VendorCleanup_RemoveItem")
+		
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+EVENT VendorCleanupRemoveMisc2
+VARS
+	INT:_Count
+ON
+	OnFunction("AMER_VendorCleanup_Misc2")
+ACTIONS
+	Set(_Count, INT:0)
+	WHILE "c1"
+		IsLessThen(_Count, 14)
+	DO 
+		GetElement(%AMER_VendorCleanup_WhichStat, _Count, FUR_Rich_Knife_M, FUR_Rich_Knife_N, FUR_Rich_Knife_O, FUR_Rich_Knife_P, FUR_Rich_Knife_Q, FUR_Rich_Knife_R, FUR_Rich_Knife_S, FUR_Rich_Knife_T, FUR_PaperKnife, WPN_PocketKnife, FUR_Cutlery_Knife_A, WPN_LeatherShield, WPN_KiteShield_B, WPN_SourceHunter_Shield)
+		CallFunction("AMER_VendorCleanup_RemoveItem")
+		
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+EVENT VendorCleanupRemoveMisc3
+VARS
+	INT:_Count
+ON
+	OnFunction("AMER_VendorCleanup_Misc3")
+ACTIONS
+	Set(_Count, INT:0)
+	WHILE "c1"
+		IsLessThen(_Count, 13)
+	DO 
+		GetElement(%AMER_VendorCleanup_WhichStat, _Count, FUR_Rich_Plate_A, FUR_Painting, FUR_Painting_Pig, FUR_Painting_Landscape, FUR_Painting_Casual_F_C, FUR_Painting_Casual_Hat_A, FUR_Painting_Casual_B, FUR_Painting_Casual_Beard, FUR_Painting_Female_A, FUR_Painting_Female_B, FUR_Painting_Male_A, FUR_Painting_Casual_F_G, FUR_Painting_Casual_Beard_B)
+		CallFunction("AMER_VendorCleanup_RemoveItem")
+		
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+EVENT VendorCleanupRemoveMisc4
+VARS
+	INT:_Count
+ON
+	OnFunction("AMER_VendorCleanup_Misc4")
+ACTIONS
+	Set(_Count, INT:0)
+	WHILE "c1"
+		IsLessThen(_Count, 13)
+	DO 
+		GetElement(%AMER_VendorCleanup_WhichStat, _Count, ITEM_EmptyCupGold_B, ITEM_EmptyCupGold_C, ITEM_EmptyCupGold, ITEM_EmptyCupGold_D, ITEM_EmptyCupGold_E, ITEM_EmptyCupGold_F, ITEM_EmptyCupGold_G, ITEM_EmptyCupGold_H, ITEM_EmptyCupGold_I, ITEM_EmptyCupGold_J, ITEM_EmptyCupGold_K, ITEM_EmptyCupGold_L, ITEM_EmptyCupGold_M)
+		CallFunction("AMER_VendorCleanup_RemoveItem")
+		
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+EVENT VendorCleanupRemoveMisc5
+VARS
+	INT:_Count
+ON
+	OnFunction("AMER_VendorCleanup_Misc5")
+ACTIONS
+	Set(_Count, INT:0)
+	WHILE "c1"
+		IsLessThen(_Count, 13)
+	DO 
+		GetElement(%AMER_VendorCleanup_WhichStat, _Count, ITEM_SpoonGold_B, ITEM_SpoonGold_C, ITEM_SpoonGold, ITEM_SpoonGold_D, ITEM_SpoonGold_E, ITEM_SpoonGold_F, ITEM_SpoonGold_G, ITEM_SpoonGold_H, ITEM_SpoonGold_I, ITEM_SpoonGold_J, ITEM_SpoonGold_K, ITEM_SpoonGold_L, ITEM_SpoonGold_M)
+		CallFunction("AMER_VendorCleanup_RemoveItem")
+		
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+EVENT VendorCleanupRemoveMisc6
+VARS
+	INT:_Count
+ON
+	OnFunction("AMER_VendorCleanup_Misc6")
+ACTIONS
+	Set(_Count, INT:0)
+	WHILE "c1"
+		IsLessThen(_Count, 14)
+	DO 
+		GetElement(%AMER_VendorCleanup_WhichStat, _Count, ITEM_EmptyCupGold_N, ITEM_EmptyCupGold_O, ITEM_EmptyCupGold_P, ITEM_EmptyCupGold_Q, ITEM_EmptyCupGold_R, ITEM_EmptyCupGold_S, ITEM_EmptyCupGold_T, ITEM_SpoonGold_N, ITEM_SpoonGold_O, ITEM_SpoonGold_P, ITEM_SpoonGold_Q, ITEM_SpoonGold_R, ITEM_SpoonGold_S, ITEM_SpoonGold_T)
+		CallFunction("AMER_VendorCleanup_RemoveItem")
+		
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+	
+	
+	
+	
+	
+//===============================================//
+//                                               //
+//          V E N D O R   C L E A N U P          //
+//                                               //
+//===============================================//

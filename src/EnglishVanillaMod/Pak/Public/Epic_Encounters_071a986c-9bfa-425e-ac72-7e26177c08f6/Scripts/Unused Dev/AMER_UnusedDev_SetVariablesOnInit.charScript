@@ -1,0 +1,60 @@
+//===============================================//
+//                                               //
+//   S E T   V A R I A B L E S   O N   I N I T   //
+//                                               //
+//     Written by Matteo "Ameranth" T. (2016)    //
+//===============================================//
+INIT
+CHARACTER:__Me
+EXTERN FIXEDSTRING:%AMER_VarOnInit_Variable1 = "NONE"
+EXTERN FIXEDSTRING:%AMER_VarOnInit_Variable2 = "NONE"
+EXTERN FIXEDSTRING:%AMER_VarOnInit_Variable3 = "NONE"
+EXTERN FIXEDSTRING:%AMER_VarOnInit_Variable4 = "NONE"
+EXTERN FIXEDSTRING:%AMER_VarOnInit_Variable5 = "NONE"
+EXTERN FIXEDSTRING:%AMER_VarOnInit_Variable6 = "NONE"
+EXTERN INT:%AMER_VarOnInit_Value1 = null
+EXTERN INT:%AMER_VarOnInit_Value2 = null
+EXTERN INT:%AMER_VarOnInit_Value3 = null
+EXTERN INT:%AMER_VarOnInit_Value4 = null
+EXTERN INT:%AMER_VarOnInit_Value5 = null
+EXTERN INT:%AMER_VarOnInit_Value6 = null
+	
+EVENTS
+EVENT SetVariablesOnInit
+VARS
+//===============================//
+	INT:_SupportedVariables = 6
+//===============================//
+	INT:_Count
+	INT:_Value
+	STRING:_Str
+	FIXEDSTRING:_VarRef
+	FIXEDSTRING:_ValueRef
+	FIXEDSTRING:_SetVar
+ON
+	OnInit()
+ACTIONS
+	Set(_Count, INT:1)	//Start at index 1 to match variable naming scheme
+	WHILE "!c1"
+		IsGreaterThen(_Count, _SupportedVariables)	// <= to match the variable naming scheme.
+	DO
+		Print(_Str, "AMER_VarOnInit_Variable[1]", _Count)
+		Cast(_VarRef, _Str)
+		Print(_Str, "AMER_VarOnInit_Value[1]", _Count)
+		Cast(_ValueRef, _Str)
+		IF "c1&c2&!c3&!c4"
+			GetVar(_SetVar, __Me, _VarRef)
+			GetVar(_Value, __Me, _ValueRef)
+			IsEqual(_SetVar, "NONE")
+			IsEqual(_Value, null)
+		THEN
+			SetVar(__Me, _SetVar, _Value)
+		ENDIF
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+//===============================================//
+//                                               //
+//   S E T   V A R I A B L E S   O N   I N I T   //
+//                                               //
+//===============================================//

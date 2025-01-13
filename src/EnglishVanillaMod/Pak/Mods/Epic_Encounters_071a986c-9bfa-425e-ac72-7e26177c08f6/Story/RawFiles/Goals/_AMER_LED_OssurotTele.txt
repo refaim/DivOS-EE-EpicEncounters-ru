@@ -1,0 +1,32 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+TriggerRegisterForPlayers(TRIGGER_AMER_LED_REGION_OssurotTele);
+ItemSetOnstage(ITEM_AMER_LED_OssurotExitPlane01, 0);
+ItemSetOnstage(ITEM_AMER_LED_OssurotExitPlane02, 0);
+KBSECTION
+IF
+	CharacterEnteredTrigger(_Char, TRIGGER_AMER_LED_REGION_OssurotTele)
+THEN
+	//CharacterTeleportToTrigger(_Char, TRIGGER_LED_Point_OssurotTomb_Enter, "AMER_LED_OssurotTele");
+	CharacterTeleportPartyToTrigger(_Char, TRIGGER_LED_Point_OssurotTomb_Enter, "AMER_LED_OssurotTele");
+	CharacterPlayHUDSound(_Char, "Env_Waypoint_Use");
+
+
+IF
+	CharacterEvent(_Char, "AMER_LED_OssurotActivateExit")
+THEN
+	TriggerRegisterForPlayers(TRIGGER_AMER_LED_REGION_OssurotPortalExit);
+	ItemSetOnstage(ITEM_AMER_LED_OssurotExitPlane01, 1);
+	ItemSetOnstage(ITEM_AMER_LED_OssurotExitPlane02, 1);
+
+IF
+	CharacterEnteredTrigger(_Char, TRIGGER_AMER_LED_REGION_OssurotPortalExit)
+THEN
+	//CharacterTeleportToTrigger(_Char, TRIGGER_LED_Point_OssurotBridge_Leaving, "AMER_LED_OssurotTele");
+	CharacterTeleportPartyToTrigger(_Char, TRIGGER_LED_Point_OssurotBridge_Leaving, "AMER_LED_OssurotTele");
+	CharacterPlayHUDSound(_Char, "Env_Waypoint_Use");
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "__Start"

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<save>
+    <header version="2" time="1430204883" />
+    <version major="1" minor="3" revision="1" build="3" />
+    <region id="CharacterCreationClass">
+        <node id="root">
+            <attribute id="Armour" value="" type="22" />
+            <attribute id="Boots" value="" type="22" />
+            <attribute id="ClassDescription" value="Locksmith and ranged combat specialist" handle="h2c332bdbg055bg4d01g9e16g8aa15e9f9d96" type="28" />
+            <attribute id="ClassLongDescription" value="The spoiled son of a successful locksmith, Kyle gave up the lucrative family trade to become an adventurer. Not eager to put himself in harm’s way, he prefers to hire himself out as a &apos;specialist&apos;, letting others charge into combat while he stays behind the lines with his trusty crossbow. In spite of his abrasive personality, Kyle’s knowledge of locks and traps usually keeps him employed, although he rarely stays with any one group for long." handle="h537ec8aeg1f31g4fc3g8d9ag6bd6233903d9" type="28" />
+            <attribute id="ClassName" value="Wayfarer" handle="h20af4b93gbe46g4f30gaaa2g183b7f903a13" type="28" />
+            <attribute id="ClassType" value="Wayfarer" type="22" />
+            <attribute id="ExtraEquipmentSet" value="" type="22" />
+            <attribute id="Gloves" value="" type="22" />
+            <attribute id="Leggings" value="" type="22" />
+            <attribute id="SkillSet" value="" type="22" />
+            <attribute id="Voice" value="0" type="5" />
+            <children>
+                <node id="AbilityChanges">
+                    <children>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="RangerLore" type="23" />
+                            <attribute id="AmountIncreased" value="1" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="Crossbow" type="23" />
+                            <attribute id="AmountIncreased" value="1" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="Sneaking" type="23" />
+                            <attribute id="AmountIncreased" value="2" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="Pickpocket" type="23" />
+                            <attribute id="AmountIncreased" value="1" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="DualWielding" type="23" />
+                            <attribute id="AmountIncreased" value="2" type="4" />
+                        </node>
+                    </children>
+                </node>
+                <node id="AttributeChanges">
+                    <children>
+                        <node id="AttributeChange">
+                            <attribute id="AmountIncreased" value="4" type="4" />
+                            <attribute id="Attribute" value="DEX" type="23" />
+                        </node>
+                        <node id="AttributeChange">
+                            <attribute id="AmountIncreased" value="1" type="4" />
+                            <attribute id="Attribute" value="SPD" type="23" />
+                        </node>
+                        <node id="AttributeChange">
+                            <attribute id="AmountIncreased" value="2" type="4" />
+                            <attribute id="Attribute" value="PER" type="23" />
+                        </node>
+                    </children>
+                </node>
+                <node id="HenchManData">
+                    <attribute id="HairColor" value="0" type="5" />
+                    <attribute id="HairType" value="2" type="5" />
+                    <attribute id="HeadType" value="5" type="5" />
+                    <attribute id="ID" value="70d89088-6f0d-4a59-a9cc-f4c6f1de6b0a" type="22" />
+                    <attribute id="Icon" value="0" type="5" />
+                    <attribute id="IsMale" value="1" type="19" />
+                    <attribute id="Level" value="5" type="4" />
+                    <attribute id="Name" value="Kyle Miller" type="30" />
+                    <attribute id="Race" value="0" type="5" />
+                    <attribute id="SkinColor" value="2" type="5" />
+                    <children>
+                        <node id="Skills">
+                            <attribute id="Object" value="Projectile_Ricochet" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="Target_FirstAid" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="Target_Doctor" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="Target_TreatPoisoning" type="22" />
+                        </node>
+                    </children>
+                </node>
+                <node id="TalentsAdded">
+                    <children>
+                        <node id="TalentAdded">
+                            <attribute id="Talent" value="LightStep" type="23" />
+                        </node>
+                        <node id="TalentAdded">
+                            <attribute id="Talent" value="Scientist" type="23" />
+                        </node>
+                        <node id="TalentAdded">
+                            <attribute id="Talent" value="MrKnowItAll" type="23" />
+                        </node>
+                    </children>
+                </node>
+            </children>
+        </node>
+    </region>
+</save>

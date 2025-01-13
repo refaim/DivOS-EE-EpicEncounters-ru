@@ -1,0 +1,184 @@
+#TEMPLATE "_SKILL_Base" : Target_Infect
+	
+INIT
+CHARACTER:__Me
+FLOAT:%SkillTargetScore_Target_Infect=-1000000
+// [GLOBAL_VARS]
+EXTERN INT:%Target_Infect_IAmStationary = 0
+// [~GLOBAL_VARS]
+	
+EVENTS
+	
+// [EVENTS]
+// [~EVENTS]
+	
+// Calculate the priority of the skill
+EVENT CalculateScore_Target_Infect
+VARS
+	// [CALC_VARS]
+	FLOAT:_SkillRangeMin
+	FLOAT:_SkillRangeMax
+	FLOAT3:_TargetPos
+	// [~CALC_VARS]
+ON
+	OnFunction("CalculateScore_Target_Infect")
+ACTIONS
+	Set(%SkillTargetScore_Target_Infect, -1000000)
+
+	// [CALC_ACTIONS_PRE]
+	// [~CALC_ACTIONS_PRE]
+	// [CALC_ACTIONS]
+	IterateCharactersInCombat(__Me, "CalculateTarget_Target_Infect", Highest, Vitality)
+	IF "!c1"
+		IsEqual(%SkillTargetChar_Target_Infect, null)
+	THEN
+		Add(%ActionScore_Target_Infect, %SkillTargetScore_Target_Infect)
+	ENDIF
+	// [~CALC_ACTIONS]
+	
+	
+	
+	
+// Calculate the character we should attack
+EVENT CalculateTarget_Target_Infect
+VARS	
+	CHARACTER:_Char
+	// [CALC_TARGET_VARS]
+	INT:_ClassScore_Target_Infect
+	FLOAT:_StatResistance
+	FLOAT:_Score
+	FLOAT:_SkillRangeMin
+	FLOAT:_SkillRangeMax
+	FLOAT:_DistanceToChar
+	FLOAT:_DistanceScore
+	FLOAT:_SaveScore
+	FLOAT:_Vitality
+	INT:_SaveAmount
+	INT:_AllyCount
+	ABILITY:_SaveType = BodyBuilding
+	// [~CALC_TARGET_VARS]
+ON
+	OnIterateCharacter(_Char, "CalculateTarget_Target_Infect")	
+ACTIONS
+	// [CALC_CHAR_TARGET_ACTIONS_PRE]
+	Set(_Score, 0.0)
+	// [~CALC_CHAR_TARGET_ACTIONS_PRE]
+	// [CALC_CHAR_TARGET_ACTIONS]
+	IF "c1"
+	    CharacterIsEnemy(__Me, _Char)
+	THEN
+		IF "!c1"
+			CharacterIsDead(_Char)
+		THEN
+			IF "!c1&!c2"
+			    CharacterHasStatus(_Char, INVISIBLE)
+			    CharacterHasStatus(_Char, SNEAKING)
+			THEN
+				IF "!c1&!c2"
+					CharacterHasStatus(_Char, INFECTIOUS_DISEASED)
+					CharacterHasStatus(_Char, DISEASED)
+				THEN
+					IF "!c1"
+						CharacterHasStatus(_Char, CHARMED)
+					THEN
+						IF "!c1"
+							CharacterHasStatus(_Char, INVULNERABLE)
+						THEN
+							//Kill range calculation
+							IF "c1"
+								CharacterGetStat(_Vitality,  _Char, Vitality)
+							THEN
+								//Favor high vitality targets.
+								Multiply(_Vitality, 2.0)
+								Add(_Score, _Vitality)
+							ENDIF
+							
+							//Marked.
+						    IF "c1"
+								CharacterHasStatus(_Char, AGGRO_MARKED)
+						    THEN
+								Add(_Score, 1.0)
+						    ENDIF
+							
+							//Clustered enemies calculation
+							IF "c1"
+								CharacterCount(_AllyCount, _Char, 5.0, Ally)
+							THEN
+								Add(_Score, _AllyCount)
+							ENDIF
+								
+							//Summons are worth less.
+							IF "c1"
+								CharacterIsSummon(_Char)
+							THEN
+								Add(_Score, -5.0)
+							ENDIF
+				
+							// Range score calculation
+							IF "c1&c2"
+								CharacterGetSkillRange(_SkillRangeMin, _SkillRangeMax, __Me, Target_Infect)
+								GetDistance(_DistanceToChar, __Me, _Char)
+							THEN
+								Set(_DistanceScore, _DistanceToChar)
+								IF "c1"
+									IsGreaterThen(_DistanceScore, _SkillRangeMax)
+								THEN
+									IF "c1"
+										IsEqual(%Target_Infect_IAmStationary, INT:0)
+									THEN
+										Subtract(_DistanceScore, _SkillRangeMax)
+										Multiply(_DistanceScore, -1.0)
+									ELSE
+										Add(_Score, -9000000)
+									ENDIF
+								ELIF "c1"
+									IsLessThen(_DistanceScore, _SkillRangeMin)
+								THEN
+									IF "c1"
+										IsEqual(%Target_Infect_IAmStationary, INT:0)
+									THEN
+										Subtract(_DistanceScore, _SkillRangeMin)
+										Multiply(_DistanceScore, 1.0)
+									ELSE
+										Add(_Score, -9000000)
+									ENDIF
+								ELSE 
+									Set(_DistanceScore, 0.0)
+								ENDIF
+								Add(_Score, _DistanceScore)
+							ENDIF
+							
+							// Can see score calculation
+							IF "!c1"
+								CharacterCanSee(__Me, _Char)
+							THEN
+								IF "c1"
+									IsEqual(%Target_Infect_IAmStationary, INT:0)
+								THEN
+									Add(_Score, -10.0)
+								ELSE
+									Add(_Score, -9000000)
+								ENDIF
+							ENDIF
+							
+							IF "c1"
+								IsGreaterThen(_Score, %SkillTargetScore_Target_Infect)
+							THEN
+								Set(%SkillTargetChar_Target_Infect, _Char)
+								Set(%SkillTargetScore_Target_Infect, _Score)
+							ENDIF
+						ENDIF
+					ENDIF
+				ENDIF
+			ENDIF
+		ENDIF
+	ENDIF
+	// [~CALC_CHAR_TARGET_ACTIONS]
+	
+	
+	
+	
+	
+	
+	
+	

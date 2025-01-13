@@ -20,24 +20,35 @@ jobs:
           python-version: '3.10'
           architecture: x64
 
-      - name: Pack Vanilla
+      - name: Pack default
         shell: cmd
         run: ./pack.cmd
 
-      - name: Upload Vanilla
+      - name: Upload default
         uses: actions/upload-artifact@v4
         with:
           name: EpicEncountersRu_v1.1.9.5c
           path: output\
           if-no-files-found: error
 
-      - name: Pack Custom
+      - name: Pack with additional crafting recipes
         shell: cmd
-        run: ./pack.cmd --custom
+        run: ./pack.cmd --with-additional-crafting-recipes
 
-      - name: Upload Custom
+      - name: Upload with additional crafting recipes
         uses: actions/upload-artifact@v4
         with:
           name: EpicEncountersRu_v1.1.9.5c_WithAdditionalCraftingRecipes
+          path: output\
+          if-no-files-found: error
+
+      - name: Pack without increased enemy vitality
+        shell: cmd
+        run: ./pack.cmd --without-increased-enemy-vitality
+
+      - name: Upload without increased enemy vitality
+        uses: actions/upload-artifact@v4
+        with:
+          name: EpicEncountersRu_v1.1.9.5c_WithoutIncreasedEnemyVitality
           path: output\
           if-no-files-found: error

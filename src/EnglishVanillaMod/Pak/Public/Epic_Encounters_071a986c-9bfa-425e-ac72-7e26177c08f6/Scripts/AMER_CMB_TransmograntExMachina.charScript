@@ -1,0 +1,112 @@
+//===============================================//
+//                                               //
+// T R A N S M O G R A N T   E X   M A C H I N A //
+//                                               //
+//     Written by Matteo "Ameranth" T. (2016)    //
+//===============================================//
+INIT
+CHARACTER:__Me
+EXTERN INT:%AMER_TransmograntExMachina_RetreatPriority = 700
+EXTERN TRIGGER:%AMER_TransmograntExMachina_RetreatTrigger1 = null
+EXTERN TRIGGER:%AMER_TransmograntExMachina_RetreatTrigger2 = null
+EXTERN TRIGGER:%AMER_TransmograntExMachina_RetreatTrigger3 = null
+EXTERN TRIGGER:%AMER_TransmograntExMachina_RetreatTrigger4 = null
+INT:%AMER_TransmograntExMachina_RetreatFinished = 0
+	
+EVENTS
+EVENT TransmograntExMachinaInit
+ON
+	OnInit()
+ACTIONS
+	CharacterApplyStatus(__Me, HASTED, -1, 1)
+	
+	
+	
+EVENT TransmograntExMachinaCombatStarted
+ON
+	OnCombatStarted()
+ACTIONS
+	IF "c1"
+		IsEqual(%AMER_TransmograntExMachina_RetreatFinished, INT:0)
+	THEN
+		StartTimer("TransmograntExMachina_RetreatCheck", 0.75, -1)
+	ENDIF
+	
+	
+	
+EVENT TransmograntExMachinaCombatEnded
+ON
+	OnCombatEnded()
+ACTIONS
+	StopTimer("TransmograntExMachina_RetreatCheck")
+	
+	
+	
+EVENT TransmograntExMachinaTurnEnded
+ON
+	OnTurnEnded()
+ACTIONS
+	SetPriority(TransmograntExMachinaRetreat, 0)
+	
+	
+	
+	
+EVENT TransmograntExMachinaRetreatCheck
+VARS
+//======================//
+	FLOAT:_RunAP = 7.0
+//======================//
+	FLOAT:_AP
+ON
+	OnTimer("TransmograntExMachina_RetreatCheck")
+ACTIONS
+	IF "c1&!c2"
+		CharacterGetStat(_AP, __Me, ActionPoints)
+		IsGreaterThen(_AP, _RunAP)
+	THEN
+		SetPriority(TransmograntExMachinaRetreat, %AMER_TransmograntExMachina_RetreatPriority)
+	ENDIF
+	
+	
+	
+//===================BEHAVIOR====================//
+BEHAVIOUR
+//Run to a retreat point, demonstrating to the
+//player that a new area is open to explore.
+REACTION TransmograntExMachinaRetreat, 0
+USAGE COMBAT
+VARS
+	FLOAT:_Distance
+	TRIGGER:_TargetTrigger
+ACTIONS
+	IF "c1&c2"
+		GetDistance(_Distance, __Me, %AMER_TransmograntExMachina_RetreatTrigger1)
+		IsLessThen(_Distance, 4.0)
+	THEN
+		Set(_TargetTrigger, %AMER_TransmograntExMachina_RetreatTrigger2)
+	ELIF "c1&c2"
+		GetDistance(_Distance, __Me, %AMER_TransmograntExMachina_RetreatTrigger2)
+		IsLessThen(_Distance, 4.0)
+	THEN
+		Set(_TargetTrigger, %AMER_TransmograntExMachina_RetreatTrigger3)
+	ELIF "c1&c2"
+		GetDistance(_Distance, __Me, %AMER_TransmograntExMachina_RetreatTrigger3)
+		IsLessThen(_Distance, 4.0)
+	THEN
+		Set(_TargetTrigger, %AMER_TransmograntExMachina_RetreatTrigger4)
+		StopTimer("TransmograntExMachina_RetreatCheck")
+		Set(%AMER_TransmograntExMachina_RetreatFinished, INT:1)
+	ELSE
+		Set(_TargetTrigger, %AMER_TransmograntExMachina_RetreatTrigger1)
+	ENDIF
+	
+	CharacterMoveTo(_TargetTrigger, 1)
+	
+	SetPriority(TransmograntExMachinaRetreat, 0)
+	
+	
+//===============================================//
+//                                               //
+// T R A N S M O G R A N T   E X   M A C H I N A //
+//                                               //
+//===============================================//

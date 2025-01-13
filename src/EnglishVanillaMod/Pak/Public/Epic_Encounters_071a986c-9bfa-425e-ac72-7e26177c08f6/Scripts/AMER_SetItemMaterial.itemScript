@@ -1,0 +1,37 @@
+//===============================================//
+//                                               //
+//        S E T   I T E M   M A T E R I A L      //
+//                                               //
+//     Written by Matteo "Ameranth" T. (2016)    //
+//===============================================//
+INIT
+ITEM:__Me
+EXTERN FIXEDSTRING:%AMER_MaterialOnInit = ""
+EXTERN INT:%AMER_ApplyToBody = 1
+EXTERN INT:%AMER_ApplyToWeapon = 1
+EXTERN INT:%AMER_ApplyToArmor = 1
+EXTERN INT:%AMER_UseNormalMap = 0
+EXTERN INT:%AMER_MaterialOverlay = 0
+EXTERN INT:%AMER_MaterialFading = 0
+
+EVENTS
+EVENT SetItemMaterialOnInit
+ON
+	OnInit()
+ACTIONS
+	SetMaterial(__Me, %AMER_MaterialOnInit, -1, %AMER_ApplyToBody, %AMER_ApplyToArmor, %AMER_ApplyToWeapon, %AMER_UseNormalMap, %AMER_MaterialOverlay, %AMER_MaterialFading)
+	
+	
+	
+EVENT SetItemMaterialOnActivate
+//Reapplies the material if an item is dropped, also.
+ON
+	OnActivate()
+ACTIONS
+	SetMaterial(__Me, %AMER_MaterialOnInit, -1, %AMER_ApplyToBody, %AMER_ApplyToArmor, %AMER_ApplyToWeapon, %AMER_UseNormalMap, %AMER_MaterialOverlay, %AMER_MaterialFading)
+	
+//===============================================//
+//                                               //
+//        S E T   I T E M   M A T E R I A L      //
+//                                               //
+//===============================================//

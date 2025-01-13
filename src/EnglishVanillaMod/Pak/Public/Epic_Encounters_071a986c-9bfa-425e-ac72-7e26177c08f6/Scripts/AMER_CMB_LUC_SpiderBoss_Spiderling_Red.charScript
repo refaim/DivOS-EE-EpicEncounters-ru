@@ -1,0 +1,17 @@
+INIT
+	CHARACTER:__Me
+
+//-----------------------
+EVENTS 	
+EVENT ExplodeOnDeath
+VARS
+	DAMAGE:_Type
+	CHARACTER:_CharSource
+ON
+	OnDie(__Me, _Type, _CharSource, _)
+ACTIONS
+	IF "c1"
+		IsInCombat(__Me)
+	THEN
+		ExplodeAt(__Me,Projectile_SuicideBomberExplosion,-1,__Me)
+	ENDIF

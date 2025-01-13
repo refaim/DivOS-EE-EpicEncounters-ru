@@ -1,0 +1,273 @@
+//===============================================//
+//                                               //
+//             S H A D O W   B O S S             //
+//                                               //
+//     Written by Matteo "Ameranth" T. (2016)    //
+//===============================================//
+INIT
+CHARACTER:__Me
+EXTERN INT:%AMER_ShadowBoss_Priority_CreepingShadows = 900
+EXTERN TRIGGER:%AMER_ShadowBoss_PointGUID1 = "NONE"
+EXTERN TRIGGER:%AMER_ShadowBoss_PointGUID2 = "NONE"
+EXTERN TRIGGER:%AMER_ShadowBoss_PointGUID3 = "NONE"
+EXTERN TRIGGER:%AMER_ShadowBoss_PointGUID4 = "NONE"
+EXTERN TRIGGER:%AMER_ShadowBoss_PointGUID5 = "NONE"
+EXTERN TRIGGER:%AMER_ShadowBoss_PointGUID6 = "NONE"
+EXTERN TRIGGER:%AMER_ShadowBoss_PointGUID7 = "NONE"
+EXTERN TRIGGER:%AMER_ShadowBoss_PointGUID8 = "NONE"
+EXTERN TRIGGER:%AMER_ShadowBoss_PointGUID9 = "NONE"
+EXTERN TRIGGER:%AMER_ShadowBoss_PointGUID10 = "NONE"
+EXTERN TRIGGER:%AMER_ShadowBoss_PointGUID11 = "NONE"
+EXTERN TRIGGER:%AMER_ShadowBoss_PointGUID12 = "NONE"
+EXTERN TRIGGER:%AMER_ShadowBoss_PointGUID13 = "NONE"
+EXTERN TRIGGER:%AMER_ShadowBoss_PointGUID14 = "NONE"
+EXTERN TRIGGER:%AMER_ShadowBoss_PointGUID15 = "NONE"
+EXTERN TRIGGER:%AMER_ShadowBoss_HideSpot = "NONE"
+EXTERN CHARACTERTEMPLATE:%AMER_ShadowBoss_RootGUID = "NONE"
+EXTERN CHARACTER:%AMER_ShadowBoss_Vampire1 = null
+EXTERN CHARACTER:%AMER_ShadowBoss_Vampire2 = null
+EXTERN ITEM:%AMER_ShadowBoss_Anchor = null
+	
+	
+	
+EVENTS
+EVENT ShadowBossInitialize
+ON
+	OnInit()
+ACTIONS
+	IF "!c1"
+		IsEqual(%AMER_ShadowBoss_Anchor, null)
+	THEN
+		ItemSetOnStage(%AMER_ShadowBoss_Anchor, INT:0)
+	ENDIF
+	CharacterAddSkill(AMER_SKILL_EnemyCreepingShadows)
+	//SetPriority(ShadowBossCreepingShadows, %AMER_ShadowBoss_Priority_CreepingShadows)
+	
+	
+	
+EVENT ShadowBossOnTurn
+VARS
+	FLOAT:_Distance
+ON
+	OnTurn()
+ACTIONS
+	//Make sure I don't ever get stuck in my hiding spot.
+	IF "c1&c2"
+		GetDistance(_Distance, __Me, %AMER_ShadowBoss_HideSpot)
+		IsLessThen(_Distance, 1)
+	THEN
+		TeleportTo(__Me, %AMER_ShadowBoss_PointGUID1)
+		PlayEffectAt(__Me, "FX_GP_TeleportSmoke_A")
+	ENDIF
+	//Destroy all mirages on the battlefield.
+	IterateCharactersNear(__Me, 40.0, "AMER_ShadowBoss_RemoveMirages")
+	
+	SetPriority(ShadowBossCreepingShadows, %AMER_ShadowBoss_Priority_CreepingShadows)
+	
+	StartTimer("AMER_ShadowBoss_MirageCheck", 0.50, -1)
+	//SetPriority(ShadowBossMirage, 100)
+	
+	
+	
+EVENT ShadowBossMirageCheck
+VARS
+//=====================//
+	FLOAT:_MirageAP = 4
+//=====================//
+	FLOAT:_AP
+ON
+	OnTimer("AMER_ShadowBoss_MirageCheck")
+ACTIONS
+	IF "c1&!c2"
+		CharacterGetStat(_AP, __Me, ActionPoints)
+		IsGreaterThen(_AP, _MirageAP)
+	THEN
+		StopTimer("AMER_ShadowBoss_MirageCheck")
+		SetPriority(ShadowBossMirage, 10000)
+	ENDIF
+	
+	
+	
+EVENT ShadowBossCombatEnded
+ON
+	OnCombatEnded()
+ACTIONS
+	//Return me to my starting spot and resurrect my
+	//vampires if combatends while I am still alive.
+	IF "!c1"
+		CharacterIsDead(__Me)
+	THEN
+		TeleportTo(__Me, %AMER_ShadowBoss_PointGUID1)
+		PlayEffectAt(__Me, "FX_GP_TeleportSmoke_A")
+		
+		IF "!c1"
+			IsEqual(%AMER_ShadowBoss_Vampire1, null)
+		THEN
+			IF "c1"
+				CharacterIsDead(%AMER_ShadowBoss_Vampire1)
+			THEN
+				CharacterResurrect(%AMER_ShadowBoss_Vampire1, INT:100)
+			ENDIF
+		ENDIF
+		
+		IF "!c1"
+			IsEqual(%AMER_ShadowBoss_Vampire2, null)
+		THEN
+			IF "c1"
+				CharacterIsDead(%AMER_ShadowBoss_Vampire2)
+			THEN
+				CharacterResurrect(%AMER_ShadowBoss_Vampire2, INT:100)
+			ENDIF
+		ENDIF
+	ELSE
+		//Reveal my anchor when combat ends and I am dead.
+		IF "!c1"
+			IsEqual(%AMER_ShadowBoss_Anchor, null)
+		THEN
+			ItemSetOnStage(%AMER_ShadowBoss_Anchor, INT:1)
+			Set(%AMER_ShadowBoss_Anchor, null)
+		ENDIF
+	ENDIF
+	
+	//Destroy all mirages on the battlefield.
+	IterateCharactersNear(__Me, 40.0, "AMER_ShadowBoss_RemoveMirages")
+	
+	
+	
+EVENT ShadowBossRemoveMirages
+VARS
+//=====================//
+	CHARACTERTEMPLATE:_MirageRoot = "AMER_CHAR_Shadow_NightwalkerFake_114bd6a4-7dda-4d46-ba70-88f3040afc95"
+//=====================//
+	CHARACTER:_Char
+	CHARACTERTEMPLATE:_Root
+	INT:_IsRealBoss = 0
+ON
+	OnIterateCharacter(_Char, "AMER_ShadowBoss_RemoveMirages")
+ACTIONS
+	IF "c1&c2"
+		CharacterGetTemplate(_Char, _Root)
+		IsEqual(_Root, _MirageRoot)
+	THEN
+		SetVar(_Char, "AMER_ShadowBossMirage_RemoveSelf", INT:1)
+	ENDIF
+	
+	
+	
+//===================BEHAVIOR====================//
+BEHAVIOUR
+	
+REACTION ShadowBossCreepingShadows, 0
+USAGE COMBAT
+VARS
+	CHARACTER:_Char
+	FLOAT:_MaxRange
+CHECK "c1&c2&c3"
+	CharacterGetSkillRange(_, _MaxRange, __Me, AMER_SKILL_EnemyCreepingShadows)
+	CharacterCanCast(__Me, AMER_SKILL_EnemyCreepingShadows)
+	CharacterGet(_Char, __Me, _MaxRange, Lowest, Distance, Enemy)
+ACTIONS
+	CharacterUseSkill(AMER_SKILL_EnemyCreepingShadows, __Me)
+	SetPriority(ShadowBossCreepingShadows, 0)
+INTERRUPT
+ON
+	OnNoReactionFound()
+ACTIONS
+	DelayReaction(ShadowBossCreepingShadows, 2)
+	
+	
+	
+REACTION ShadowBossMirage, 0
+USAGE ALL
+VARS
+//===========================//
+	FLOAT:_Delay = 1
+	FLOAT:_SleepBase = 0.1
+	FLOAT:_SleepAfter = 1.5
+	//FLOAT:_SleepRandom = 0.2
+	INT:_MirageCount = 13			//A random Mirage should be the "real" one.
+//===========================//
+	CHARACTER:_Spawn
+	FLOAT:_SourceLevel
+	FLOAT:_TotalSleep
+	FLOAT:_AP
+	INT:_Count
+	INT:_RealSpawn
+	INT:_Level
+	INT:_Handle
+	INT:_Chain
+	TRIGGER:_Point
+	FIXEDSTRING:_WhichHandle
+ACTIONS
+	//Don't do this if disabled.
+	IF "!c1&!c2&!c3&!c4&!c5&!c6&c7"
+		CharacterHasStatus(__Me, CHARMED)
+		CharacterHasStatus(__Me, FROZEN)
+		CharacterHasStatus(__Me, STUNNED)
+		CharacterHasStatus(__Me, KNOCKED_DOWN)
+		CharacterHasStatus(__Me, PETRIFIED)
+		CharacterHasStatus(__Me, FEAR)
+		IsInCombat(__Me)
+	THEN
+		SetVar(__Me, "AMER_TimeoutDetection", INT:-10)	//Casting animations warrant extra time.
+		
+		//Play an animation as I become invisible, place me at
+		//the hiding spot.
+		DisplayCombatInfoText(__Me, "AMER_CMB_ShadowBoss_Mirage", 1)
+		DisplayText(__Me, "AMER_BLANK", 1)
+		CharacterPlayLoopEffect(_Handle, __Me, "FX_Skills_WitchCraft_Summon_Prepare_A")
+		CharacterApplyStatus(__Me, INVISIBLE, 0)
+		CharacterPlayAnimation("cast_self_start",1,1)
+		CharacterPlayAnimation("cast_self_loop",1,1)
+		CharacterPlayAnimation("cast_self_cast",1,0)
+		CharacterTeleportTo(%AMER_ShadowBoss_HideSpot)
+		StopLoopEffect(_Handle)
+		
+		//Figure out which loop iteration should make the real guy.
+		GetRandomBetween(_RealSpawn, INT:1, _MirageCount)
+		Subtract(_RealSpawn, INT:1)	//index starts at zero.
+		Set(_Count, INT:0)
+		WHILE "c1"
+			IsLessThen(_Count, _MirageCount)
+		DO
+			//Get a random point to place the spawn/me at.
+			GetRandom(_Point, %AMER_ShadowBoss_PointGUID1, %AMER_ShadowBoss_PointGUID2, %AMER_ShadowBoss_PointGUID3, %AMER_ShadowBoss_PointGUID4, %AMER_ShadowBoss_PointGUID5, %AMER_ShadowBoss_PointGUID6, %AMER_ShadowBoss_PointGUID7, %AMER_ShadowBoss_PointGUID8, %AMER_ShadowBoss_PointGUID9, %AMER_ShadowBoss_PointGUID10, %AMER_ShadowBoss_PointGUID11, %AMER_ShadowBoss_PointGUID12, %AMER_ShadowBoss_PointGUID13, %AMER_ShadowBoss_PointGUID14, %AMER_ShadowBoss_PointGUID15)
+			IF "c1"
+				CharacterGetStat(_SourceLevel, __Me, Level)
+			THEN
+				Cast(_Level, _SourceLevel)
+				SpawnCharacter(_Spawn, %AMER_ShadowBoss_RootGUID, _Point, 0, 1, __Me, _Level)
+				//SetVisible(_Spawn, INT:0)
+				
+				//If this mirage is supposed to be the "real" one, set its
+				//variable to denote it as such and let it know who I am.
+				IF "c1"
+					IsEqual(_Count, _RealSpawn)
+				THEN
+					SetVar(_Spawn, "AMER_ShadowBossMirage_CorrectMirage", INT:1)
+					SetVar(_Spawn, "AMER_ShadowBossMirage_Boss", __Me)
+				ENDIF
+			ENDIF
+			
+			PlayLoopEffectAt(_Handle, _Spawn, "FX_Skills_WitchCraft_Summon_Prepare_A")
+			PlayEffectAt(_Spawn, "FX_Skills_WitchCraft_Summon_Summon_A")
+			
+			Sleep(_SleepBase)
+			
+			StopLoopEffect(_Handle)
+			
+			Add(_Count, INT:1)
+		ENDWHILE
+		Sleep(_SleepAfter)
+	ENDIF
+	
+	CharacterEndTurn()
+	SetPriority(ShadowBossMirage, INT:0)
+	
+	
+	
+//===============================================//
+//                                               //
+//             S H A D O W   B O S S             //
+//                                               //
+//===============================================//

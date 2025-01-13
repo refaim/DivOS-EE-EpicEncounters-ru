@@ -1,0 +1,40 @@
+//===============================================//
+//                                               //
+//             K I L L   S P H E R E             //
+//                                               //
+//     Written by Matteo "Ameranth" T. (2016)    //
+//===============================================//
+INIT
+ITEM:__Me
+CHARACTER:%AMER_KillSphere_User
+	
+EVENTS
+EVENT KillSphereOnUse
+VARS
+	CHARACTER:_Char
+ON
+	OnUseItem(_Char, __Me)
+ACTIONS
+	CharacterPlayEffect(_Char, "FX_Skills_WitchCraft_GrenadeTerror_Impact_A")
+	Set(%AMER_KillSphere_User, _Char)
+	IterateCharactersInCombat(_Char, "AMER_KillSphere_FindEnemies")
+	
+	
+	
+EVENT KillSphereFindEnemies
+VARS
+	CHARACTER:_Char
+ON
+	OnIterateCharacter(_Char, "AMER_KillSphere_FindEnemies")
+ACTIONS
+	IF "c1"
+		CharacterIsEnemy(%AMER_KillSphere_User, _Char)
+	THEN
+		CharacterPlayEffect(_Char, "FX_Skills_WitchCraft_DestroySummon_Impact_A")
+		CharacterDie(_Char, Piercing)
+	ENDIF
+//===============================================//
+//                                               //
+//             K I L L   S P H E R E             //
+//                                               //
+//===============================================//

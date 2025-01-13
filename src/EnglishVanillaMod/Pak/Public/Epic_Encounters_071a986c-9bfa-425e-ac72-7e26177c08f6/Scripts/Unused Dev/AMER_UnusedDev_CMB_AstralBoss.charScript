@@ -1,0 +1,527 @@
+//===============================================//
+//                                               //
+//             A S T R A L   B O S S             //
+//                                               //
+//           Original script by Larian           //
+//     Modified by Matteo "Ameranth" T. (2016)   //
+//===============================================//
+INIT
+	CHARACTER:__Me
+	
+	EXTERN TRIGGER:%AMER_AstralBoss_Point00 = null
+	EXTERN TRIGGER:%AMER_AstralBoss_Point01 = null
+	EXTERN TRIGGER:%AMER_AstralBoss_Point02 = null
+	EXTERN TRIGGER:%AMER_AstralBoss_Point03 = null
+	EXTERN ITEM:%AMER_AstralBoss_Anchor = null
+	TRIGGER:%AMER_AstralBoss_VacantPoint0
+	TRIGGER:%AMER_AstralBoss_VacantPoint1
+	TRIGGER:%AMER_AstralBoss_VacantPoint2
+	TRIGGER:%AMER_AstralBoss_VacantPoint3
+	INT:%AMER_AstralBoss_DetectedCharacters = 0
+	INT:%AMER_AstralBoss_TPSpotTaken_00 = 0
+	INT:%AMER_AstralBoss_TPSpotTaken_01 = 0
+	INT:%AMER_AstralBoss_TPSpotTaken_02 = 0
+	INT:%AMER_AstralBoss_TPSpotTaken_03 = 0
+	
+	
+//==============EVENTS=============//
+EVENTS
+EVENT AstralBossOnDeath
+//Astral Dragon has an unfinished death animation because the base
+//game cuts to a cinematic as it dies instead. Due to this, we need
+//to do something to cover it up.
+ON
+	OnCharacterStatus(__Me, DYING)
+ACTIONS
+	StartTimer("AMER_AstralBoss_DeathTimer", 2.5, 0)
+	
+	
+	
+EVENT AstralBossDelayedDeathActions
+ON
+	OnTimer("AMER_AstralBoss_DeathTimer")
+ACTIONS
+	PlayEffectAt(__Me, "FX_Skills_Fire_GrenadeMolotov_Impact_A")
+	PlayEffectAt(__Me, "FX_Skills_Earth_GrenadeTremor_Impact_A")
+	CharacterDestroy(__Me)
+	
+	
+	
+EVENT AstralBossOnInit
+ON
+	OnInit()
+ACTIONS
+	CharacterAddSkill("Cone_EnemyDragonConeAir")
+	CharacterAddSkill("Cone_EnemyDragonConeVoid")
+	CharacterAddSkill("Cone_EnemyDragonConeFire")
+	CharacterAddSkill("Projectile_EnemyDragonProjectile")
+	CharacterAddSkill("Projectile_EnemyDragonProjectileAir")
+	CharacterAddSkill("Projectile_EnemyDragonProjectileFire")
+	CharacterAddSkill("Shout_EnemyFear")
+	CharacterAddSkill("Shout_EnemySlowMass")
+	CharacterApplyStatus(__Me, ETHEREAL_SOLES, -1, 1)
+	SetVisible(__Me, INT:0)
+	
+	IF "!c1"
+		IsEqual(%AMER_AstralBoss_Anchor, null)
+	THEN
+		ItemSetOnStage(%AMER_AstralBoss_Anchor, INT:0)
+	ENDIF
+	
+	
+	
+EVENT AstralBossCombatStart
+ON
+	OnCombatStarted()
+ACTIONS
+	SetPriority(AMER_AstralBoss_MakeAnEntrance, INT:10000)
+	
+	
+	
+EVENT AstralBossCombatEnded
+ON
+	OnCombatEnded()
+ACTIONS
+	IF "c1"
+		CharacterIsDead(__Me)
+	THEN
+	//Reveal my anchor when combat ends and I am dead.
+		IF "!c1"
+			IsEqual(%AMER_AstralBoss_Anchor, null)
+		THEN
+			ItemSetOnStage(%AMER_AstralBoss_Anchor, INT:1)
+			Set(%AMER_AstralBoss_Anchor, null)
+		ENDIF
+	ENDIF
+	
+	
+	
+EVENT AstralBossOnTurn
+ON
+	OnTurn()
+ACTIONS
+	//Reset priorities.
+	//SetPriority(AMER_AstralBoss_MassSlow, 300)
+	//SetPriority(AMER_AstralBoss_Fear, 500)
+	SetPriority(AMER_AstralBoss_CloseRange, 400)
+	SetPriority(AMER_AstralBoss_LongRange, 350)
+	SetPriority(AMER_AstralBoss_Physical, 300)
+	
+	//Should I move to another location?
+	IF "c1"
+		IsRandom(0.5)
+	THEN
+		SetPriority(AMER_AstralBoss_Teleport, 1000)
+	ENDIF
+	
+	
+	
+EVENT AstralBossCheckTeleSpots
+VARS
+//=============================//
+	INT:_SupportedPoints = 4
+	FLOAT:_CollisionRadius = 5
+//=============================//
+	INT:_Count
+	INT:_AlreadyFlagged
+	CHARACTER:_Char
+	TRIGGER:_WhichPoint
+	FIXEDSTRING:_WhichVar
+ON
+	OnIterateCharacter(_Char, "AMER_AstralBoss_CheckTPSpots")
+ACTIONS
+	Set(_Count, INT:0)
+	WHILE "c1"
+		IsLessThen(_Count, _SupportedPoints)
+	DO
+		//Get the corresponding point.
+		GetElement(_WhichPoint, _Count, %AMER_AstralBoss_Point00, %AMER_AstralBoss_Point01, %AMER_AstralBoss_Point02, %AMER_AstralBoss_Point03)
+		GetElement(_WhichVar, _Count, "AMER_AstralBoss_TPSpotTaken_00", "AMER_AstralBoss_TPSpotTaken_01", "AMER_AstralBoss_TPSpotTaken_02", "AMER_AstralBoss_TPSpotTaken_03")
+		
+		//Before going further in considering this point, check
+		//to see if we already know that this point is occupied.
+		IF "c1&c2"
+			GetVar(_AlreadyFlagged, __Me, _WhichVar)
+			IsEqual(_AlreadyFlagged, INT:0)
+		THEN
+			//Make sure the point was not null.
+			IF "!c1"
+				IsEqual(_WhichPoint, null)
+			THEN
+				//If I *DO* find a character in range of the point,
+				//then I know that the point is taken.
+				IF "c1"
+					CharacterGet(_Char, _WhichPoint, _CollisionRadius, Lowest, Distance)
+				THEN
+					SetVar(__Me, _WhichVar, INT:1)
+				ENDIF
+			ENDIF
+		ENDIF
+		
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+	
+	
+EVENT AstralBossKnockdownDelay
+VARS
+//=============================//
+	FLOAT:_KnockdownRadius = 8
+//=============================//
+ON
+	OnTimer("AMER_AstralBoss_KnockdownDelay")
+ACTIONS
+	IterateCharactersNear(__Me, _KnockdownRadius, "AMER_AstralBoss_ApplyKD")
+	
+	
+	
+EVENT AstralBossFearDelay
+VARS
+//=============================//
+	FLOAT:_FearRadius = 18
+//=============================//
+ON
+	OnTimer("AMER_AstralBoss_FearDelay")
+ACTIONS
+	IterateCharactersNear(__Me, _FearRadius, "AMER_AstralBoss_ApplyFear")
+	
+	
+	
+EVENT AstralBossVisibleDelay
+ON
+	OnTimer("AMER_AstralBoss_VisibleDelay")
+ACTIONS
+	SetVisible(__Me, INT:1)
+		
+		
+		
+EVENT AstralBossApplyKnockdown
+VARS
+	CHARACTER:_Char
+ON
+	OnIterateCharacter(_Char, "AMER_AstralBoss_ApplyKD")
+ACTIONS
+	IF "c1&!c2"
+		CharacterIsEnemy(__Me, _Char)
+		IsEqual(_Char, __Me)	
+	THEN
+		CharacterConsume(_Char, "AMER_CMB_Dragon_CrushingAttack")
+	ENDIF
+		
+		
+		
+EVENT AstralBossFearChars
+VARS
+	CHARACTER:_Char
+ON
+	OnIterateCharacter(_Char, "AMER_AstralBoss_ApplyFear")
+ACTIONS
+	IF "c1&!c2"
+		CharacterIsEnemy(__Me, _Char)
+		IsEqual(_Char, __Me)	
+	THEN
+		CharacterApplyStatus(_Char, FEAR, 2)
+	ENDIF
+	
+	
+	
+//======================B E H A V I O R======================//
+BEHAVIOUR 
+	
+REACTION AMER_AstralBoss_MassSlow, 450
+USAGE COMBAT
+VARS
+	CHARACTER:_Character
+	FLOAT:_MaxRange
+CHECK "c1&c2&c3"
+	CharacterGetSkillRange(_, _MaxRange, __Me, "Shout_EnemySlowMass")	//c1
+	CharacterCanCast(__Me, "Shout_EnemySlowMass")						//c2
+	CharacterGet(_Character, __Me, _MaxRange, Lowest, Distance, Enemy)	//c3
+ACTIONS
+	CharacterUseSkill("Shout_EnemySlowMass", __Me)
+	
+	
+	
+REACTION AMER_AstralBoss_Fear, 500
+USAGE COMBAT
+VARS
+	CHARACTER:_Character
+	FLOAT:_MaxRange
+CHECK "c1&c2&c3"
+	CharacterCanCast(__Me, "Shout_EnemyFear")
+	CharacterGetSkillRange(_, _MaxRange, __Me, "Shout_EnemyFear")
+	CharacterGet(_Character, __Me, _MaxRange, Lowest, Distance, Enemy)
+ACTIONS
+	CharacterUseSkill("Shout_EnemyFear", __Me)
+	
+	
+	
+REACTION AMER_AstralBoss_CloseRange, 400
+USAGE COMBAT
+VARS
+	CHARACTER:_Character
+	FLOAT:_MaxRange
+	FLOAT:_Rand
+	FLOAT:_FireRes
+	FLOAT:_WaterRes
+	FLOAT:_AirRes
+	FLOAT:_EarthRes
+CHECK "(c1|c2|c3)&c4&c5&c6&c7&c8&c9"
+	CharacterCanCast(__Me, "Cone_EnemyDragonConeFire")					//c1
+	CharacterCanCast(__Me, "Cone_EnemyDragonConeAir")					//c2
+	CharacterCanCast(__Me, "Cone_EnemyDragonConeVoid")					//c3
+	CharacterGetSkillRange(_, _MaxRange,__Me, "Cone_EnemyDragonConeFire")	//c4
+	CharacterGet(_Character, __Me, _MaxRange, Lowest, Distance, Enemy)		//c5
+	CharacterGetStat(_FireRes, _Character, FireResistance)					//c6
+	CharacterGetStat(_WaterRes, _Character, WaterResistance)				//c7
+	CharacterGetStat(_AirRes, _Character, AirResistance)					//c8
+	CharacterGetStat(_EarthRes, _Character, EarthResistance)				//c9
+ACTIONS
+	IF "c1&c2"
+		CharacterCanCast(__Me, "Cone_EnemyDragonConeFire")
+		IsLessThen(_FireRes, 100)
+	THEN
+		CharacterUseSkill("Cone_EnemyDragonConeFire", _Character)
+	ELIF "c1&c2"
+		CharacterCanCast(__Me, "Cone_EnemyDragonConeAir")
+		IsLessThen(_AirRes, 100)
+	THEN
+		CharacterUseSkill("Cone_EnemyDragonConeAir", _Character)
+	ELIF "c1"
+		CharacterCanCast(__Me,"Cone_EnemyDragonConeVoid")
+	THEN
+		CharacterUseSkill("Cone_EnemyDragonConeVoid", _Character)
+	ELIF "c1"
+		CharacterInWeaponRange(__Me, _Character)
+	THEN
+		CharacterAttackWithoutMove(_Character)
+	ELSE
+		SetPriority(AMER_AstralBoss_CloseRange, 0)
+	ENDIF
+	
+	
+	
+REACTION AMER_AstralBoss_LongRange, 350
+USAGE COMBAT
+VARS
+	CHARACTER:_Character
+	FLOAT:_Rand
+	FLOAT:_MaxRange
+	FLOAT:_FireRes
+	FLOAT:_WaterRes
+	FLOAT:_AirRes
+	FLOAT:_EarthRes
+CHECK "(c1|c2|c3)&c4&c5&c6&c7&c8&c9"
+	CharacterCanCast(__Me,"Projectile_EnemyDragonProjectileFire")				//c1
+	CharacterCanCast(__Me,"Projectile_EnemyDragonProjectileAir")				//c2
+	CharacterCanCast(__Me,"Projectile_EnemyDragonProjectile")					//c3
+	CharacterGetSkillRange(_,_MaxRange,__Me,"Projectile_EnemyDragonProjectile")	//c4
+	CharacterGet(_Character,__Me,_MaxRange,Lowest,Distance,PlayerNoSummon)		//c5
+	CharacterGetStat(_FireRes,_Character,FireResistance)						//c6
+	CharacterGetStat(_WaterRes,_Character,WaterResistance)						//c7
+	CharacterGetStat(_AirRes,_Character,AirResistance)							//c8
+	CharacterGetStat(_EarthRes,_Character,EarthResistance)						//c9
+ACTIONS
+	IF "c1"
+		CharacterCanCast(__Me,"Projectile_EnemyDragonProjectileFire")
+	THEN
+		IF "!c1"
+			IsGreaterThen(_FireRes,99)
+		THEN
+			CharacterUseSkill("Projectile_EnemyDragonProjectileFire",_Character)
+		ENDIF
+	ELIF "c1"
+		CharacterCanCast(__Me,"Projectile_EnemyDragonProjectileAir")
+	THEN
+		IF "!c1"
+			IsGreaterThen(_AirRes,99)
+		THEN
+			CharacterUseSkill("Projectile_EnemyDragonProjectileAir",_Character)
+		ENDIF
+	ELIF "c1"
+		CharacterCanCast(__Me,"Projectile_EnemyDragonProjectile")
+	THEN
+		CharacterUseSkill("Projectile_EnemyDragonProjectile",_Character)
+	ELSE
+		//SetPriority(AMER_AstralBoss_TeleportToEnemy, 900)
+		SetPriority(AMER_AstralBoss_LongRange, 0)
+	ENDIF
+	
+	IF "c1"
+		IsRandom(0.3)
+	THEN
+		//SetPriority(AMER_AstralBoss_TeleportToEnemy, 900)
+		SetPriority(AMER_AstralBoss_LongRange,0)
+	ENDIF
+INTERRUPT
+	Reset()
+	
+	
+	
+REACTION AMER_AstralBoss_TeleportToEnemy, 330
+USAGE COMBAT
+VARS
+//=============================//
+	FLOAT:_MeleeRange = 4
+	FLOAT:_KnockdownDelay = .8
+	FLOAT3:_Position
+//=============================//
+	CHARACTER:_Char
+CHECK "!c1&!c2&!c3&!c4&!c5&!c6"
+	CharacterGet(_Char, __Me, _MeleeRange, Lowest, Distance, Enemy)	//c1
+	CharacterHasStatus(__Me,"CHARMED")		//c2
+	CharacterHasStatus(__Me,"FROZEN")		//c3
+	CharacterHasStatus(__Me,"STUNNED")		//c4
+	CharacterHasStatus(__Me,"PETRIFIED")	//c5
+	CharacterHasStatus(__Me,"KNOCKED_DOWN")	//c6
+ACTIONS
+	IF "c1"
+		CharacterGet(_Char, __Me, 30, Highest, Distance, PlayerNoSummon)
+	THEN
+		GetPosition(_Char, _Position)
+		IF "c1"
+			FindValidPosition(_Position, 8.0, __Me)
+		THEN
+			//Play a short special effect
+			CharacterPlayEffect(__Me, "FX_Skills_Air_Teleport_Prepare_A")
+			//Sleep(0.5)
+			
+			//Play the fly animation and teleport.
+			CharacterPlayAnimation("Fly_01", 1, 1)
+			CharacterTeleportTo(_Char)
+			StartTimer("AMER_AstralBoss_KnockdownDelay", _KnockdownDelay, 0)
+			CharacterPlayAnimation("Dive_01", 1, 1)
+			
+			//Reprioritize melee behaviors.
+			CharacterResetCombatTimeout(__Me)
+			SetPriority(AMER_AstralBoss_CloseRange, 400)
+			SetPriority(AMER_AstralBoss_Physical, 300)
+		ENDIF
+	ENDIF
+	//SetPriority(AMER_AstralBoss_TeleportToEnemy, 0)
+INTERRUPT
+	Reset()
+	
+	
+REACTION AMER_AstralBoss_Teleport, 0
+USAGE COMBAT
+VARS
+//=============================//
+	INT:_SupportedPoints = 4
+	FLOAT:_KnockdownDelay = .8
+//=============================//
+	INT:_Count
+	INT:_IsTaken
+	INT:_VacantPoints
+	INT:_RandomIndex
+	TRIGGER:_WhichPoint
+	FIXEDSTRING:_WhichVar
+CHECK "!c1&!c2&!c3&!c4&!c5"
+	CharacterHasStatus(__Me,"CHARMED")		//!c1
+	CharacterHasStatus(__Me,"FROZEN")		//!c2
+	CharacterHasStatus(__Me,"STUNNED")		//!c3
+	CharacterHasStatus(__Me,"PETRIFIED")	//!c4
+	CharacterHasStatus(__Me,"KNOCKED_DOWN")	//!c5
+ACTIONS
+	//Determine if any of the teleport locations are taken. If any characters
+	//are found too near a spot, it is taken.
+	Set(%AMER_AstralBoss_TPSpotTaken_00, 0)
+	Set(%AMER_AstralBoss_TPSpotTaken_01, 0)
+	Set(%AMER_AstralBoss_TPSpotTaken_02, 0)
+	Set(%AMER_AstralBoss_TPSpotTaken_03, 0)
+	IterateCharactersInCombat(__Me, "AMER_AstralBoss_CheckTPSpots", Lowest, Distance)
+	
+	//Initialize an array of vacant points.
+	Set(_VacantPoints, INT:0)
+	Set(_Count, INT:0)
+	WHILE "c1"
+		IsLessThen(_Count, _SupportedPoints)
+	DO
+		GetElement(_IsTaken, _Count, %AMER_AstralBoss_TPSpotTaken_00, %AMER_AstralBoss_TPSpotTaken_01, %AMER_AstralBoss_TPSpotTaken_02, %AMER_AstralBoss_TPSpotTaken_03)
+		GetElement(_WhichPoint, _Count, %AMER_AstralBoss_Point00, %AMER_AstralBoss_Point01, %AMER_AstralBoss_Point02, %AMER_AstralBoss_Point03)
+		IF "c1"
+			IsEqual(_IsTaken, INT:0)
+		THEN
+			GetElement(_WhichVar, _VacantPoints, "AMER_AstralBoss_VacantPoint0", "AMER_AstralBoss_VacantPoint1", "AMER_AstralBoss_VacantPoint2", "AMER_AstralBoss_VacantPoint3")
+			SetVar(__Me, _WhichVar, _WhichPoint)
+			Add(_VacantPoints, INT:1)
+		ENDIF
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+	//If there was some number of vacant points, get a random one
+	//from the array of vacant points. Play animations, teleport
+	//me there, then do knockdown.
+	IF "c1"
+		IsGreaterThen(_VacantPoints, INT:0)
+	THEN
+		GetRandomBetween(_RandomIndex, INT:1, _VacantPoints)
+		Subtract(_RandomIndex, INT:1)	//Index starts at zero.
+		GetElement(_WhichPoint, _RandomIndex, %AMER_AstralBoss_VacantPoint0, %AMER_AstralBoss_VacantPoint1, %AMER_AstralBoss_VacantPoint2, %AMER_AstralBoss_VacantPoint3)
+		
+		//Play animation
+		CharacterPlayEffect(__Me,"FX_Skills_Air_Teleport_Prepare_A")
+		CharacterPlayAnimation("Fly_01", 1, 1)
+		CharacterTeleportTo(_WhichPoint)
+		StartTimer("AMER_AstralBoss_KnockdownDelay", _KnockdownDelay, 0)
+		CharacterPlayAnimation("Dive_01", 1, 1)
+	ENDIF
+	
+	CharacterResetCombatTimeout(__Me)
+	SetPriority("AMER_AstralBoss_Teleport",0)
+INTERRUPT
+	Reset()
+	
+	
+	
+REACTION AMER_AstralBoss_Physical, 300
+USAGE COMBAT
+VARS
+//=============================//
+	FLOAT:_MeleeRange = 4
+//=============================//
+	CHARACTER:_Char
+CHECK "c1&c2"
+	CharacterGet(_Char, __Me, _MeleeRange, Lowest, Distance, Enemy)
+	CharacterInWeaponRange(__Me, _Char)
+ACTIONS
+	CharacterAttackWithoutMove(_Char)
+	/*
+	IF "c1"
+		IsRandom(0.7)
+	THEN
+		CharacterAttackWithoutMove(_Char)
+	ELSE
+		SetPriority("AMER_AstralBoss_Physical", 0)
+	ENDIF
+	*/
+	
+	
+	
+REACTION AMER_AstralBoss_Animation, 1000
+USAGE WAITING
+ACTIONS
+	Sleep(1)
+	
+	
+	
+REACTION AMER_AstralBoss_MakeAnEntrance, 0
+USAGE ALL
+VARS
+//=============================//
+	FLOAT:_KnockdownDelay = 4.05
+	FLOAT:_FearDelay = 6.6
+	FLOAT:_AfterLandSleep = 1
+//=============================//
+ACTIONS
+	StartTimer("AMER_AstralBoss_VisibleDelay", 0.5, 0)	//Small delay before becoming visible so there isn't any graphical oddities.
+	StartTimer("AMER_AstralBoss_KnockdownDelay", _KnockdownDelay, 0)	//Try to synchronize the Knockdown with the landing animation.
+	StartTimer("AMER_AstralBoss_FearDelay", _FearDelay, 0)	//Try to synchronize the Fear with the after-landing roar animation.
+	CharacterPlayAnimation("spawn", 1, 1)
+	Sleep(_AfterLandSleep)
+	SetPriority(AMER_AstralBoss_MakeAnEntrance, 0)
+//===============================================//
+//                                               //
+//             A S T R A L   B O S S             //
+//                                               //
+//===============================================//

@@ -1,0 +1,40 @@
+//===============================================//
+//                                               //
+//      I T E M   S E T   O F F   S T A G E      //
+//                                               //
+//     Written by Matteo "Ameranth" T. (2017)    //
+//===============================================//
+INIT
+ITEM:__Me
+EXTERN INT:%AMER_ItemSetOffStage_CasualOnly = 0
+EXTERN INT:%AMER_ItemSetOffStage_HardcoreOnly = 0
+	
+EVENTS
+EVENT ItemSetOffStage
+ON
+	OnInit()
+ACTIONS
+	IF "c1"
+		IsEqual(%AMER_ItemSetOffStage_CasualOnly, INT:1)
+	THEN
+		IF "c1"
+			IsCasual()
+		THEN
+			ItemSetOnStage(__Me, 0)
+		ENDIF
+	ELIF "c1"
+		IsEqual(%AMER_ItemSetOffStage_HardcoreOnly, INT:1)
+	THEN
+		IF "c1"
+			IsHardcore()
+		THEN
+			ItemSetOnStage(__Me, 0)
+		ENDIF
+	ELSE
+		ItemSetOnStage(__Me, 0)
+	ENDIF
+//===============================================//
+//                                               //
+//      I T E M   S E T   O F F   S T A G E      //
+//                                               //
+//===============================================//

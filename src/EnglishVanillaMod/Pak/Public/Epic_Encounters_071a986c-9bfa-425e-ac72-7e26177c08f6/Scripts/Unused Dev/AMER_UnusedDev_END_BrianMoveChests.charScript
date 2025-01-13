@@ -1,0 +1,19 @@
+INIT
+	CHARACTER:__Me
+	INT:%AMER_BrianMoveChests_Done = 0
+//--------
+EVENTS
+EVENT BrianMoveChestsActivate
+ON
+	OnDie(CHARACTER:DarkMinions_PinkKnight_01_Master_3e42f6d0-9a06-4d38-b445-ddc171220a1d, _, _, _)
+ACTIONS
+	IF "c1"
+		IsEqual(%AMER_BrianMoveChests_Done, INT:0)
+	THEN
+		Set(%AMER_BrianMoveChests_Done, 1)
+		TeleportTo(ITEM:HOM_Chest_Object_P1_e749d06f-5415-4d73-9889-a8fa1e60ae29, TRIGGER:AMER_Point_END_HisChestMove_e93212c5-bb72-486b-9f54-fb5830597d98, 1)
+		PlayEffectAt(TRIGGER:AMER_Point_END_HisChestMove_e93212c5-bb72-486b-9f54-fb5830597d98, "FX_GP_TeleportSmoke_A")
+		TeleportTo(ITEM:HOM_Chest_Object_P2_f0e77375-d981-41b3-bfe5-1b20c2e3ac85, TRIGGER:AMER_Point_END_HerChestMove_256e98e4-6e85-47da-877e-98e3b5fd0742, 1)
+		PlayEffectAt(TRIGGER:AMER_Point_END_HerChestMove_256e98e4-6e85-47da-877e-98e3b5fd0742, "FX_GP_TeleportSmoke_A")
+	ENDIF
+	

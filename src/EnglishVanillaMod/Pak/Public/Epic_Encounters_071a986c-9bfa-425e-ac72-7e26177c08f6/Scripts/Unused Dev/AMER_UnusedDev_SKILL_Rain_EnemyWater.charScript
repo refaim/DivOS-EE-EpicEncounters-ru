@@ -1,0 +1,67 @@
+#TEMPLATE "_SKILL_Base" : Rain_EnemyWater
+
+INIT
+CHARACTER:__Me
+// [GLOBAL_VARS]
+EXTERN FLOAT:%AMER_SKILL_Rain_EnemyWater_DouseCheckRange = 6.0
+// [~GLOBAL_VARS]
+
+EVENTS
+
+// [EVENTS]
+// [~EVENTS]
+
+// Calculate the priority of the skill
+EVENT CalculateScore_Rain_EnemyWater
+VARS
+	// [CALC_VARS]
+	FLOAT:_Score
+	FLOAT:_MaxRange
+	FLOAT:_Radius
+	FLOAT3:_TargetPos
+	// [~CALC_VARS]
+ON
+	OnFunction("CalculateScore_Rain_EnemyWater")
+ACTIONS	
+	// [CALC_ACTIONS_PRE]
+	Set(_Score, 0.0)
+	// [~CALC_ACTIONS_PRE]
+	// [CALC_ACTIONS]
+	IF "c1&c2"
+		CharacterGetSkillRange(_, _MaxRange, __Me, "Rain_EnemyWater")
+		CharacterGetSkillImpactRange(_Radius, __Me, "Rain_EnemyWater")
+	THEN
+		IF "c1"
+			CharacterHasStatus(__Me, BURNING)
+		THEN
+			Set(_MaxRange, _Radius)
+			Subtract(_MaxRange, 0.5)
+		ENDIF
+		
+		IF "c1"
+			FindSurface(_TargetPos, __Me, -1, %AMER_SKILL_Rain_EnemyWater_DouseCheckRange, Fire, __Me, -1, -1, 3)
+		THEN
+			Set(%SkillTargetPos_Rain_EnemyWater, _TargetPos)
+			Add(%ActionScore_Rain_EnemyWater, 15.0)
+		ELIF "c1"
+			FindPosition(_TargetPos, __Me, _MaxRange, _Radius, __Me, -1, -1, 3, -1)
+		THEN
+			Set(%SkillTargetPos_Rain_EnemyWater, _TargetPos)
+			Add(%ActionScore_Rain_EnemyWater, 15.0)
+		ELIF "c1"
+			FindPosition(_TargetPos, __Me, _MaxRange, _Radius, __Me, -1, -1, 2, -1)
+		THEN
+			Set(%SkillTargetPos_Rain_EnemyWater, _TargetPos)
+			Add(%ActionScore_Rain_EnemyWater, 15.0)
+		ELIF "c1"
+			FindPosition(_TargetPos, __Me, _MaxRange, _Radius, __Me, -1, -1, 1, -1)
+		THEN
+			Set(%SkillTargetPos_Rain_EnemyWater, _TargetPos)
+			Add(%ActionScore_Rain_EnemyWater, 15.0)
+		ENDIF
+	ENDIF
+	// [~CALC_ACTIONS]
+
+	
+
+	

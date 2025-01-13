@@ -1,0 +1,68 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+DB_WST_GrislyOfferingAppear(CHARACTER_AMER_WST_AspectOfCarnage01, TRIGGER_AMER_WST_Point_GrislyOfferingAppear01);
+DB_WST_GrislyOfferingAppear(CHARACTER_AMER_WST_AspectOfCarnage02, TRIGGER_AMER_WST_Point_GrislyOfferingAppear02);
+DB_WST_GrislyOfferingAppear(CHARACTER_AMER_WST_AspectOfCarnage03, TRIGGER_AMER_WST_Point_GrislyOfferingAppear03);
+DB_WST_GrislyOfferingAppear(CHARACTER_AMER_WST_AspectOfCarnage04, TRIGGER_AMER_WST_Point_GrislyOfferingAppear04);
+
+DB_WST_CarnageKeepers(4);
+KBSECTION
+IF
+CharacterDied(CHARACTER_AMER_WST_AspectOfCarnage01)
+AND
+DB_WST_GrislyOfferingAppear(CHARACTER_AMER_WST_AspectOfCarnage01, _Trigger)
+THEN
+DB_WST_GrislyOfferingAppearWhere(_Trigger);
+PROC_WST_CarnageUpdate();
+
+IF
+CharacterDied(CHARACTER_AMER_WST_AspectOfCarnage02)
+AND
+DB_WST_GrislyOfferingAppear(CHARACTER_AMER_WST_AspectOfCarnage02, _Trigger)
+THEN
+DB_WST_GrislyOfferingAppearWhere(_Trigger);
+PROC_WST_CarnageUpdate();
+
+IF
+CharacterDied(CHARACTER_AMER_WST_AspectOfCarnage03)
+AND
+DB_WST_GrislyOfferingAppear(CHARACTER_AMER_WST_AspectOfCarnage03, _Trigger)
+THEN
+DB_WST_GrislyOfferingAppearWhere(_Trigger);
+PROC_WST_CarnageUpdate();
+
+IF
+CharacterDied(CHARACTER_AMER_WST_AspectOfCarnage04)
+AND
+DB_WST_GrislyOfferingAppear(CHARACTER_AMER_WST_AspectOfCarnage04, _Trigger)
+THEN
+DB_WST_GrislyOfferingAppearWhere(_Trigger);
+PROC_WST_CarnageUpdate();
+
+
+
+PROC
+PROC_WST_CarnageUpdate()
+AND
+DB_WST_CarnageKeepers(_Remain)
+AND
+IntegerSubtract(_Remain, 1, _NewRemain)
+THEN
+DB_WST_CarnageKeepers(_NewRemain);
+PROC_WST_RevealOffering((INTEGER)_NewRemain);
+
+
+
+PROC
+PROC_WST_RevealOffering((INTEGER)_Remain)
+AND
+_Remain == 0
+AND
+DB_WST_GrislyOfferingAppearWhere((TRIGGER)_Trigger)
+THEN
+ItemTeleportToTrigger(ITEM_AMER_KEY_GrislyOffering, _Trigger);
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "__Start"

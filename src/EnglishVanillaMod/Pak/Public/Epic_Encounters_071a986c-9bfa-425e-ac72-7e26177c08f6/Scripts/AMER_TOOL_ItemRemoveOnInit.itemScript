@@ -1,0 +1,40 @@
+//===============================================//
+//                                               //
+//     I T E M   R E M O V E   O N   I N I T     //
+//                                               //
+//     Written by Matteo "Ameranth" T. (2017)    //
+//===============================================//
+INIT
+ITEM:__Me
+EXTERN INT:%AMER_ItemRemoveOnInit_CasualOnly = 0
+EXTERN INT:%AMER_ItemRemoveOnInit_HardcoreOnly = 0
+	
+EVENTS
+EVENT ItemRemoveOnInit
+ON
+	OnInit()
+ACTIONS
+	IF "c1"
+		IsEqual(%AMER_ItemRemoveOnInit_CasualOnly, INT:1)
+	THEN
+		IF "c1"
+			IsCasual()
+		THEN
+			ItemDestroy(__Me)
+		ENDIF
+	ELIF "c1"
+		IsEqual(%AMER_ItemRemoveOnInit_HardcoreOnly, INT:1)
+	THEN
+		IF "c1"
+			IsHardcore()
+		THEN
+			ItemDestroy(__Me)
+		ENDIF
+	ELSE
+		ItemDestroy(__Me)
+	ENDIF
+//===============================================//
+//                                               //
+//     I T E M   R E M O V E   O N   I N I T     //
+//                                               //
+//===============================================//

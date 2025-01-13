@@ -1,0 +1,235 @@
+//===============================================//
+//                                               //
+//              H U N T M A S T E R              //
+//                                               //
+//     Written by Matteo "Ameranth" T. (2016)    //
+//===============================================//
+INIT
+CHARACTER:__Me
+EXTERN TRIGGER:%AMER_Huntmaster_PointTrigger1 = null
+EXTERN TRIGGER:%AMER_Huntmaster_PointTrigger2 = null
+EXTERN TRIGGER:%AMER_Huntmaster_PointTrigger3 = null
+EXTERN TRIGGER:%AMER_Huntmaster_PointTrigger4 = null
+EXTERN TRIGGER:%AMER_Huntmaster_PointTrigger5 = null
+EXTERN TRIGGER:%AMER_Huntmaster_PointTrigger6 = null
+EXTERN TRIGGER:%AMER_Huntmaster_PointTrigger7 = null
+EXTERN TRIGGER:%AMER_Huntmaster_PointTrigger8 = null
+EXTERN TRIGGER:%AMER_Huntmaster_PointTrigger9 = null
+EXTERN CHARACTERTEMPLATE:%AMER_Huntmaster_RootGUID1 = null
+EXTERN CHARACTER:%AMER_Huntmaster_Horror1 = null
+EXTERN CHARACTER:%AMER_Huntmaster_Horror2 = null
+EXTERN INT:%AMER_Huntmaster_UsedPoints = 9
+INT:%AMER_Huntmaster_TurnCount
+INT:%AMER_Huntmaster_SummonCooldown = 2
+INT:%AMER_Huntmaster_SummonInitialDelay = 0
+INT:%AMER_Huntmaster_SummonCountdown
+FLOAT3:%AMER_Huntmaster_SpawnPoint
+	
+EVENTS
+EVENT HuntmasterCombatStart
+ON
+	OnCombatStarted()
+ACTIONS
+	Set(%AMER_Huntmaster_TurnCount, INT:0)
+	Set(%AMER_Huntmaster_SummonCountdown, %AMER_Huntmaster_SummonCooldown)
+	Add(%AMER_Huntmaster_SummonCountdown, %AMER_Huntmaster_SummonInitialDelay)
+	
+	
+	
+EVENT HuntmasterCombatEnded
+ON
+	OnCombatEnded()
+ACTIONS
+	//If combat ended and I am not dead, reset the fight.
+	IF "!c1"
+		CharacterIsDead(__Me)
+	THEN
+		IF "c1"
+			CharacterIsDead(%AMER_Huntmaster_Horror1)
+		THEN
+			CharacterResurrect(%AMER_Huntmaster_Horror1)
+		ENDIF
+		IF "c1"
+			CharacterIsDead(%AMER_Huntmaster_Horror2)
+		THEN
+			CharacterResurrect(%AMER_Huntmaster_Horror2)
+		ENDIF
+		IterateCharactersNear(__Me, 30.0, "AMER_Huntmaster_ClearSummons")
+	ENDIF
+	
+	
+	
+EVENT HuntmasterClearSummons
+VARS
+//===========================//
+	CHARACTERTEMPLATE:_SummonRoot = "AMER_CHAR_Lost_HuntmasterSpawn_3f253d2d-4c5c-4db3-99df-f30701fda94e"
+//===========================//
+	CHARACTERTEMPLATE:_Root
+	CHARACTER:_Char
+ON
+	OnIterateCharacter(_Char, "AMER_Huntmaster_ClearSummons")
+ACTIONS
+	IF "c1&c2"
+		CharacterGetTemplate(_Char, _Root)
+		IsEqual(_Root, _SummonRoot)
+	THEN
+		CharacterDestroy(_Char)
+	ENDIF
+	
+	
+	
+EVENT HuntmasterOnTurn
+ON
+	OnTurn()
+ACTIONS
+	Add(%AMER_Huntmaster_TurnCount, INT:1)
+	Subtract(%AMER_Huntmaster_SummonCountdown, INT:1)
+	
+	IF "!c1"
+		IsGreaterThen(%AMER_Huntmaster_SummonCountdown, INT:0)
+	THEN
+		SetPriority(HuntmasterCallSummons, 1000)
+		Set(%AMER_Huntmaster_SummonCountdown, %AMER_Huntmaster_SummonCooldown)
+	ENDIF
+	
+	
+	
+EVENT HuntmasterDoSummons
+VARS
+//===========================//
+	INT:_MaximumSummons = 4
+	INT:_BaseSpawns = 1
+	FLOAT:_SummonDelayMin = 0.5
+	FLOAT:_SummonDelayMax = 2.5
+//===========================//
+	INT:_AdditionalSpawns
+	INT:_SpawnAmount
+	INT:_Count
+	FLOAT:_Delay
+ON
+	OnFunction("AMER_Huntmaster_DoSummons")
+ACTIONS
+		
+	//Calculate how many guys I get to make.
+	Set(_AdditionalSpawns, %AMER_Huntmaster_TurnCount)
+	Divide(_AdditionalSpawns, %AMER_Huntmaster_SummonCooldown)
+	Set(_SpawnAmount, _BaseSpawns)
+	Add(_SpawnAmount, _AdditionalSpawns)
+		
+	Set(_Count, INT:0)
+	WHILE "c1&c2"
+		IsLessThen(_Count, _MaximumSummons)
+		IsLessThen(_Count, _SpawnAmount)
+	DO
+		//Get a random index for which location to spawn at.
+		Set(%AMER_Huntmaster_SpawnPoint, null)
+		CallFunction("AMER_Huntmaster_FindSummonPoint")
+			
+		//If no valid point was found, spawn on __Me instead.
+		IF "c1"
+			IsEqual(%AMER_Huntmaster_SpawnPoint, null)
+		THEN
+			GetPosition(__Me, %AMER_Huntmaster_SpawnPoint)
+		ENDIF
+			
+		//Summon after a random delay.
+		GetRandomBetween(_Delay, _SummonDelayMin, _SummonDelayMax)
+		StartTimer("AMER_Huntmaster_SummonDelay", _Delay, 0)
+			
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+	
+EVENT HuntmasterFindSummonPoint
+VARS
+//======================================//
+	FLOAT:_MaxDistanceFromPlayer = 15.0
+//======================================//
+	INT:_Count
+	FLOAT:_Rand
+	STRING:_Str
+	FIXEDSTRING:_Var
+	TRIGGER:_Point
+	CHARACTER:_Char
+ON
+	OnFunction("AMER_Huntmaster_FindSummonPoint")
+ACTIONS
+	//Start from 1 to match variable naming scheme.
+	Set(_Count, INT:1)
+	WHILE "!c1"
+		IsGreaterThen(_Count, %AMER_Huntmaster_UsedPoints)
+	DO
+		Print(_Str, "AMER_Huntmaster_PointTrigger[1]", _Count)
+		Cast(_Var, _Str)
+		
+		//Only consider points that have a player within _MaxDistanceFromPlayer.
+		IF "c1&c2"
+			GetVar(_Point, __Me, _Var)
+			CharacterGet(_Char, _Point, _MaxDistanceFromPlayer, Lowest, Distance, Enemy)
+		THEN
+			//The first valid point is always recorded.
+			IF "c1"
+				IsEqual(%AMER_Huntmaster_SpawnPoint, null)
+			THEN
+				GetPosition(_Point, %AMER_Huntmaster_SpawnPoint)
+			ELSE
+				//Subsequent valid points have a chance to overwrite the existing
+				//point, which provides an element of randomness to where the summons
+				//are spawned.
+				Cast(_Rand, _Count)
+				Divide(_Rand, %AMER_Huntmaster_UsedPoints)
+				IF "c1"
+					IsRandom(_Rand)
+				THEN
+					GetPosition(_Point, %AMER_Huntmaster_SpawnPoint)
+				ENDIF
+			ENDIF
+		ENDIF
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+	
+	
+EVENT HuntmasterSummonDelay
+VARS
+	INT:_Level
+	FLOAT:_SourceLevel
+	CHARACTER:_Spawn
+ON
+	OnTimer("AMER_Huntmaster_SummonDelay")
+ACTIONS
+	IF "c1"
+		CharacterGetStat(_SourceLevel, __Me, Level)
+	THEN
+		Cast(_Level, _SourceLevel)
+		SpawnCharacter(_Spawn, %AMER_Huntmaster_RootGUID1, %AMER_Huntmaster_SpawnPoint, 1, 1, __Me, _Level)
+		CharacterPlayEffect(_Spawn, "FX_Skills_Rogue_CloackDagger_Land_A")
+		CharacterPlayEffect(_Spawn, "FX_Skills_Water_GrenadeFrost_Impact_A")
+	ENDIF
+	
+	
+	
+//===================BEHAVIOR====================//
+BEHAVIOUR
+REACTION HuntmasterCallSummons, 0
+USAGE COMBAT
+VARS
+//===========================//
+	FLOAT:_Sleep = 4
+//===========================//
+ACTIONS
+	//Give a delay to making new spawns, so the animations are separated.
+	CallFunction("AMER_Huntmaster_DoSummons")
+	
+	CharacterPlayEffect(__Me, "FX_Skills_Warrior_Enemy_Inspire_Cast_A")
+	CharacterPlayAnimation("cast_shout_cast")
+	Sleep(_Sleep)
+	SetPriority(HuntmasterCallSummons, INT:0)
+	
+	
+	
+//===============================================//
+//                                               //
+//              H U N T M A S T E R              //
+//                                               //
+//===============================================//

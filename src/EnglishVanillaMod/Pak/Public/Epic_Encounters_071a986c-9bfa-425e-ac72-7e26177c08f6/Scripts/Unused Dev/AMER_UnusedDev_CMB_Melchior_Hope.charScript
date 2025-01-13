@@ -1,0 +1,51 @@
+//===============================================//
+//                                               //
+//         M E L C H I O R ' S   H O P E         //
+//                                               //
+//     Written by Matteo "Ameranth" T. (2016)    //
+//===============================================//
+INIT
+CHARACTER:__Me
+EXTERN CHARACTER:%AMER_MelchiorHope_Ignorance = null
+EXTERN TRIGGER:%AMER_MelchiorHope_HidingSpot = null
+INT:%AMER_MelchiorHope_FaceIgnorance = 0
+INT:%AMER_MelchiorHope_BlockInstances = 2
+	
+EVENTS
+EVENT MelchiorHopeDieWhenDamaged
+VARS
+	FLOAT:_Damage
+	CHARACTER:_Char
+ON
+	OnDamage(_, _Damage, _Char, _)
+ACTIONS
+	IF "!c1&!c2"
+		IsEqual(_Damage, 0)		//Did attack miss or get blocked?
+		IsEqual(_Char, null)	//Damage must have a source
+	THEN
+		Subtract(%AMER_MelchiorHope_BlockInstances, INT:1)
+		IF "c1"
+			IsEqual(%AMER_MelchiorHope_BlockInstances, INT:0)
+		THEN
+			PlayEffectAt(__Me, "FX_Skills_Air_NetherSwap_Reappear_A")
+			TeleportTo(__Me, %AMER_MelchiorHope_HidingSpot, 1)
+		ENDIF
+	ENDIF
+	
+	
+	
+BEHAVIOUR
+REACTION MelchiorHopeFaceIgnorance, 10000
+USAGE ALL
+CHECK "c1"
+	IsEqual(%AMER_MelchiorHope_FaceIgnorance, INT:1)
+VARS
+ACTIONS
+	CharacterLookAt(%AMER_MelchiorHope_Ignorance)
+	Set(%AMER_MelchiorHope_FaceIgnorance, INT:0)
+	
+//===============================================//
+//                                               //
+//         M E L C H I O R ' S   H O P E         //
+//                                               //
+//===============================================//

@@ -1,0 +1,860 @@
+//===============================================//
+//                                               //
+//    M E L C H I O R ' S   I G N O R A N C E    //
+//                                               //
+//     Written by Matteo "Ameranth" T. (2016)    //
+//===============================================//
+INIT
+CHARACTER:__Me
+EXTERN TRIGGER:%AMER_MelchiorIgnorance_BlockerLocation0 = null
+EXTERN TRIGGER:%AMER_MelchiorIgnorance_BlockerLocation1 = null
+EXTERN TRIGGER:%AMER_MelchiorIgnorance_BlockerLocation2 = null
+EXTERN TRIGGER:%AMER_MelchiorIgnorance_BlockerLocation3 = null
+EXTERN TRIGGER:%AMER_MelchiorIgnorance_BlockerLocation4 = null
+EXTERN TRIGGER:%AMER_MelchiorIgnorance_BlockerLocation5 = null
+EXTERN TRIGGER:%AMER_MelchiorIgnorance_BlockerLocation6 = null
+EXTERN TRIGGER:%AMER_MelchiorIgnorance_BlockerLocation7 = null
+EXTERN TRIGGER:%AMER_MelchiorIgnorance_BlockerLocation8 = null
+EXTERN TRIGGER:%AMER_MelchiorIgnorance_BlockerLocation9 = null
+EXTERN TRIGGER:%AMER_MelchiorIgnorance_BlockerLocation10 = null
+EXTERN TRIGGER:%AMER_MelchiorIgnorance_BlockerLocation11 = null
+EXTERN TRIGGER:%AMER_MelchiorIgnorance_BlockerLocation12 = null
+EXTERN TRIGGER:%AMER_MelchiorIgnorance_BlockerLocation13 = null
+EXTERN TRIGGER:%AMER_MelchiorIgnorance_BlockerLocation14 = null
+EXTERN TRIGGER:%AMER_MelchiorIgnorance_BlockerLocation15 = null
+EXTERN TRIGGER:%AMER_MelchiorIgnorance_BlockerLocation16 = null
+EXTERN TRIGGER:%AMER_MelchiorIgnorance_BlockerLocation17 = null
+EXTERN TRIGGER:%AMER_MelchiorIgnorance_BlockerLocation18 = null
+EXTERN TRIGGER:%AMER_MelchiorIgnorance_BlockerLocation19 = null
+EXTERN TRIGGER:%AMER_MelchiorIgnorance_BlockerLocation20 = null
+EXTERN TRIGGER:%AMER_MelchiorIgnorance_BlockerLocation21 = null
+EXTERN TRIGGER:%AMER_MelchiorIgnorance_BlockerLocation22 = null
+EXTERN TRIGGER:%AMER_MelchiorIgnorance_BlockerLocation23 = null
+EXTERN TRIGGER:%AMER_MelchiorIgnorance_BlockerLocation24 = null
+EXTERN TRIGGER:%AMER_MelchiorIgnorance_BlockerLocation25 = null
+EXTERN TRIGGER:%AMER_MelchiorIgnorance_BlockerLocation26 = null
+EXTERN TRIGGER:%AMER_MelchiorIgnorance_BlockerLocation27 = null
+EXTERN TRIGGER:%AMER_MelchiorIgnorance_BlockerLocation28 = null
+EXTERN TRIGGER:%AMER_MelchiorIgnorance_BlockerLocation29 = null
+EXTERN CHARACTER:%AMER_MelchiorIgnorance_Hope0 = null
+EXTERN CHARACTER:%AMER_MelchiorIgnorance_Hope1 = null
+EXTERN CHARACTER:%AMER_MelchiorIgnorance_Hope2 = null
+EXTERN CHARACTER:%AMER_MelchiorIgnorance_Hope3 = null
+EXTERN CHARACTER:%AMER_MelchiorIgnorance_Hope4 = null
+EXTERN CHARACTER:%AMER_MelchiorIgnorance_Hope5 = null
+EXTERN CHARACTER:%AMER_MelchiorIgnorance_Hope6 = null
+EXTERN CHARACTER:%AMER_MelchiorIgnorance_Hope7 = null
+EXTERN CHARACTER:%AMER_MelchiorIgnorance_Hope8 = null
+EXTERN CHARACTER:%AMER_MelchiorIgnorance_Hope9 = null
+EXTERN CHARACTER:%AMER_MelchiorIgnorance_Hope10 = null
+EXTERN CHARACTER:%AMER_MelchiorIgnorance_Hope11 = null
+EXTERN CHARACTER:%AMER_MelchiorIgnorance_Hope12 = null
+EXTERN CHARACTER:%AMER_MelchiorIgnorance_Hope13 = null
+EXTERN CHARACTER:%AMER_MelchiorIgnorance_Hope14 = null
+EXTERN CHARACTER:%AMER_MelchiorIgnorance_Hope15 = null
+EXTERN CHARACTER:%AMER_MelchiorIgnorance_Hope16 = null
+EXTERN CHARACTER:%AMER_MelchiorIgnorance_Hope17 = null
+EXTERN CHARACTER:%AMER_MelchiorIgnorance_Hope18 = null
+EXTERN CHARACTER:%AMER_MelchiorIgnorance_Hope19 = null
+EXTERN CHARACTER:%AMER_MelchiorIgnorance_Hope20 = null
+EXTERN CHARACTER:%AMER_MelchiorIgnorance_Hope21 = null
+EXTERN CHARACTER:%AMER_MelchiorIgnorance_Hope22 = null
+EXTERN CHARACTER:%AMER_MelchiorIgnorance_Hope23 = null
+EXTERN CHARACTER:%AMER_MelchiorIgnorance_Hope24 = null
+EXTERN CHARACTER:%AMER_MelchiorIgnorance_Hope25 = null
+EXTERN CHARACTER:%AMER_MelchiorIgnorance_Hope26 = null
+EXTERN CHARACTER:%AMER_MelchiorIgnorance_Hope27 = null
+EXTERN CHARACTER:%AMER_MelchiorIgnorance_Vision0 = null
+EXTERN CHARACTER:%AMER_MelchiorIgnorance_Vision1 = null
+EXTERN ITEM:%AMER_MelchiorIgnorance_Pillar1 = null
+EXTERN ITEM:%AMER_MelchiorIgnorance_Pillar2 = null
+EXTERN ITEM:%AMER_MelchiorIgnorance_Pillar3 = null
+INT:%AMER_MelchiorIgnorance_Level = INT:0
+INT:%AMER_MelchiorIgnorance_SpawnIndex
+INT:%AMER_MelchiorIgnorance_VisionIndex1
+INT:%AMER_MelchiorIgnorance_VisionIndex2
+INT:%AMER_MelchiorIgnorance_LinkSFXChoke = 0
+INT:%AMER_MelchiorIgnorance_HopeSpeechChoke = 0
+INT:%AMER_MelchiorIgnorance_TargetSneaking = 0
+INT:%AMER_MelchiorIgnorance_BuffStacks = 0
+INT:%AMER_MelchiorIgnorance_FirstTurn = 0
+INT:%AMER_MelchiorIgnorance_Pillar1State = 3
+INT:%AMER_MelchiorIgnorance_Pillar2State = 5
+INT:%AMER_MelchiorIgnorance_Pillar3State = 1
+FLOAT:%AMER_MelchiorIgnorance_RainsFired = 0.0
+FLOAT:%AMER_MelchiorIgnorance_MaximumVitality
+FLOAT:%AMER_MelchiorIgnorance_PreviousAP
+CHARACTER:%AMER_MelchiorIgnorance_TurnOwner = null
+CHARACTER:%AMER_MelchiorIgnorance_RainTarget = null
+CHARACTER:%AMER_MelchiorIgnorance_HopeLastSpoke = null
+CHARACTER:%AMER_MelchiorIgnorance_NearbyHope = null
+FLOAT3:%AMER_DoScaledSFX_Point = null
+FIXEDSTRING:%AMER_DoScaledSFX_Effect = "FX_Skills_Air_NetherSwap_Disappear_A"
+FLOAT:%AMER_DoScaledSFX_Scale = 0.7
+	
+	
+EVENTS
+EVENT MelchiorIgnoranceInit
+ON
+	OnInit()
+ACTIONS
+	IF "!c1"
+		CharacterGetStat(%AMER_MelchiorIgnorance_MaximumVitality, __Me, VitalityPoints)
+	THEN
+		Set(%AMER_MelchiorIgnorance_MaximumVitality, 40000.0)
+	ENDIF
+	IF "!c1"
+		CharacterHasStatus(__Me, CONSUME, "AMER_CMB_MelchiorIgnorance_SpikedShell")
+	THEN
+		AddStatusInfluence(__Me, CONSUME, 1, "AMER_CMB_MelchiorIgnorance_SpikedShell", 0)
+	ENDIF
+	IF "!c1"
+		CharacterHasStatus(__Me, CONSUME, "AMER_CMB_MelchiorIgnorance_Blind")
+	THEN
+		AddStatusInfluence(__Me, CONSUME, 1, "AMER_CMB_MelchiorIgnorance_Blind", 0)
+	ENDIF
+	CharacterAddSkill(AMER_SKILL_EnemyMelchiorIgnoranceRain)
+	//CharacterAddSkill(AMER_SKILL_EnemyMelchiorIgnoranceSpray)
+	
+	
+	
+EVENT MelchiorIgnoranceDie
+ON
+	OnDie(__Me, _, _, _)
+ACTIONS
+	DisplayText(__Me, "AMER_CMB_MelchiorIgnorance_Die1", 5.0)
+	//Remove the extra dudes when the fight is over.
+	IterateCharactersNear(__Me, 30.0, "AMER_MelchiorIgnorance_RemoveBlockers")
+	
+	
+	
+EVENT MelchiorIgnoranceCombatEnded
+VARS
+//===============================//
+	FIXEDSTRING:_PillarBaseMaterial = "012c2c41-f866-40bf-9c59-a0e19a9f7fb3"
+//===============================//
+	STRING:_Str
+	FIXEDSTRING:_WhichEffect
+ON
+	OnCombatEnded()
+ACTIONS
+	IF "!c1"
+		CharacterIsDead(__Me)
+	THEN
+		DisplayCombatInfoText(__Me, "AMER_CMB_MelchiorIgnorance_Wipe", 3.5)
+		
+		//Heal me up to reset the fight.
+		SetHealth(__Me, 1.0)
+		//Destroy lingering blockers.
+		IterateCharactersNear(__Me, 30.0, "AMER_MelchiorIgnorance_RemoveBlockers")
+		StopTimer("AMER_MelchiorIgnorance_HopeSpeech")
+		//Reset Rain of Arrows in case combat ended while it was prioritized.
+		SetPriority(MelchiorIgnoranceRainOfArrows, 0)
+		//Reset Buff stacks
+		Print(_Str, "AMER_CMB_MelchiorIgnorance_Buff[1]", %AMER_MelchiorIgnorance_BuffStacks)
+		Cast(_WhichEffect, _Str)
+		RemoveStatusInfluence(__Me, CONSUME, 1, _WhichEffect, 0)
+		Set(%AMER_MelchiorIgnorance_BuffStacks, INT:0)
+	ENDIF
+	//Reset Pillars
+	Set(%AMER_MelchiorIgnorance_Pillar1State, INT:3)
+	Set(%AMER_MelchiorIgnorance_Pillar2State, INT:5)
+	Set(%AMER_MelchiorIgnorance_Pillar3State, INT:1)
+	SetMaterial(%AMER_MelchiorIgnorance_Pillar1, _PillarBaseMaterial, 0, 1, 1, 1)
+	SetMaterial(%AMER_MelchiorIgnorance_Pillar2, _PillarBaseMaterial, 0, 1, 1, 1)
+	SetMaterial(%AMER_MelchiorIgnorance_Pillar3, _PillarBaseMaterial, 0, 1, 1, 1)
+	ItemSetOnStage(%AMER_MelchiorIgnorance_Pillar1, INT:1)
+	ItemSetOnStage(%AMER_MelchiorIgnorance_Pillar2, INT:1)
+	ItemSetOnStage(%AMER_MelchiorIgnorance_Pillar3, INT:1)
+	
+	IterateParty("AMER_MelchiorIgnorance_RemoveCombatEffects")
+	
+	
+	
+EVENT MelchiorIgnoranceRemoveCombatEffects
+VARS
+	CHARACTER:_Char
+ON
+	OnIterateCharacter(_Char, "AMER_MelchiorIgnorance_RemoveCombatEffects")
+ACTIONS
+	IF "!c1"
+		IsEqual(_Char, __Me)
+	THEN
+		RemoveStatusInfluence(_Char, CONSUME, 1, "AMER_CMB_MelchiorIgnorance_AstralWinds", 0)
+	ENDIF
+	
+	
+	
+EVENT MelchiorIgnoranceCombatStarted
+ON
+	OnCombatStarted()
+ACTIONS
+	//Initialize timer to detect when Hope should say something
+	StartTimer("AMER_MelchiorIgnorance_HopeSpeech", 0.50, -1)
+	//Reset the number of times Rain of Arrows was used.
+	Set(%AMER_MelchiorIgnorance_RainsFired, 0.0)
+	//Blind the players.
+	IterateParty("AMER_MelchiorIgnorance_CombatEffects")
+	
+	
+	
+EVENT MelchiorIgnoranceCombatEffects
+VARS
+	CHARACTER:_Char
+ON
+	OnIterateCharacter(_Char, "AMER_MelchiorIgnorance_CombatEffects")
+ACTIONS
+	IF "!c1"
+		IsEqual(_Char, __Me)
+	THEN
+		//CharacterApplyStatus(_Char, BLIND, -1, 1)
+		AddStatusInfluence(_Char, CONSUME, 1, "AMER_CMB_MelchiorIgnorance_AstralWinds", 0)
+	ENDIF
+	
+	
+	
+EVENT MelchiorIgnoranceOnTurn
+VARS
+//===============================//
+	FLOAT:_RainThreshold = 0.2
+	//FLOAT:_SprayThreshold = 1.1 //0.3
+//===============================//
+	FLOAT:_Vitality
+	FLOAT:_RainVitality
+	FLOAT:_SourceLevel
+ON
+	OnTurn()
+ACTIONS
+	//Get my level on my first turn since story
+	//might scale me up when combat starts.
+	IF "c1"
+		IsEqual(%AMER_MelchiorIgnorance_Level, INT:0)
+	THEN
+		IF "c1"
+			CharacterGetStat(_SourceLevel, __Me, Level)
+		THEN
+			Cast(%AMER_MelchiorIgnorance_Level, _SourceLevel)
+		ENDIF
+	ENDIF
+	
+	Subtract(%AMER_MelchiorIgnorance_Pillar1State, INT:1)
+	Subtract(%AMER_MelchiorIgnorance_Pillar2State, INT:1)
+	Subtract(%AMER_MelchiorIgnorance_Pillar3State, INT:1)
+	IF "c1"
+		IsEqual(%AMER_MelchiorIgnorance_Pillar1State, INT:-1)
+	THEN
+		Set(%AMER_MelchiorIgnorance_Pillar1State, INT:5)
+	ENDIF
+	IF "c1"
+		IsEqual(%AMER_MelchiorIgnorance_Pillar2State, INT:-1)
+	THEN
+		Set(%AMER_MelchiorIgnorance_Pillar2State, INT:5)
+	ENDIF
+	IF "c1"
+		IsEqual(%AMER_MelchiorIgnorance_Pillar3State, INT:-1)
+	THEN
+		Set(%AMER_MelchiorIgnorance_Pillar3State, INT:5)
+	ENDIF
+	
+	IF "c1"
+		CharacterGetStat(_Vitality, __Me, Vitality)
+	THEN
+		Set(_RainVitality, 1.0)
+		Add(_RainVitality, %AMER_MelchiorIgnorance_RainsFired)
+		Multiply(_RainVitality, _RainThreshold)
+		Subtract(_RainVitality, 1.0)
+		Multiply(_RainVitality, -1.0)
+		
+		//IF "c1"
+		//	IsLessThen(_Vitality, _SprayThreshold)
+		//THEN
+		//	SetPriority(MelchiorIgnoranceSpray, 10002)
+		//ENDIF
+		IF "c1"
+			IsLessThen(_Vitality, _RainVitality)
+		THEN
+			SetPriority(MelchiorIgnoranceRainOfArrows, 10001)
+		ENDIF
+	ENDIF
+	
+	
+	/*
+EVENT MelchiorIgnoranceVitalityChanged
+VARS
+//===============================//
+	FLOAT:_VitalityThreshold = 0.2
+	FLOAT:_SprayThreshold = 0.3
+//===============================//
+	FLOAT:_Vitality
+	FLOAT:_TriggerVitality
+ON
+	OnVitalityChanged(_Vitality)
+ACTIONS
+	Set(_TriggerVitality, 1.0)
+	Add(_TriggerVitality, %AMER_MelchiorIgnorance_RainsFired)
+	Multiply(_TriggerVitality, _VitalityThreshold)
+	Subtract(_TriggerVitality, 1.0)
+	Multiply(_TriggerVitality, -1.0)
+	
+	IF "c1"
+		IsLessThen(_Vitality, _SprayThreshold)
+	THEN
+		SetPriority(MelchiorIgnoranceSpray, 10002)
+	ENDIF
+	IF "c1"
+		IsLessThen(_Vitality, _TriggerVitality)
+	THEN
+		SetPriority(MelchiorIgnoranceRainOfArrows, 10001)
+	ENDIF
+	*/
+	
+	
+	
+EVENT MelchiorIgnoranceTurnEnded
+ON
+	OnTurnEnded()
+ACTIONS
+	//Find who is in the next active turn, start scanning
+	//for changes in AP.
+	StartTimer("AMER_MelchiorIgnorance_StartAPScanDelay", 0.3, -1)
+	
+	
+	
+EVENT MelchiorIgnoranceFindHopeNearby
+VARS
+//===============================//
+	CHARACTERTEMPLATE:_HopeRoot = "AMER_CHAR_Melchior_Hope_5b1d58fe-76d5-4691-b342-78cf9b7e2204"
+//===============================//
+	CHARACTER:_Char
+	CHARACTERTEMPLATE:_Root
+ON
+	OnIterateCharacter(_Char, "AMER_MelchiorIgnorance_FindHopeNearby")
+ACTIONS
+	IF "c1"
+		IsEqual(%AMER_MelchiorIgnorance_NearbyHope, null)
+	THEN
+		IF "c1&c2"
+			CharacterGetTemplate(_Char, _Root)
+			IsEqual(_Root, _HopeRoot)
+		THEN
+			Set(%AMER_MelchiorIgnorance_NearbyHope, _Char)
+		ENDIF
+	ENDIF
+	
+	
+	
+EVENT MelchiorIgnoranceHopeSpeech
+VARS
+//===============================//
+	INT:_SupportedLines = 11
+	INT:_ChokeIterations = 4
+//===============================//
+	INT:_SpokeRecently
+	INT:_Rand
+	STRING:_Str
+	FIXEDSTRING:_WhichText
+	CHARACTER:_HopeLastSpoke = null
+ON
+	OnTimer("AMER_MelchiorIgnorance_HopeSpeech")
+ACTIONS
+	IF "c1"
+		//If a player is moving past many Hopes, this will prevent them
+		//from spamming their lines.
+		IsEqual(%AMER_MelchiorIgnorance_HopeSpeechChoke, _ChokeIterations)
+	THEN
+		IF "!c1"
+			IsEqual(%AMER_MelchiorIgnorance_TurnOwner, null)
+		THEN
+			Set(%AMER_MelchiorIgnorance_NearbyHope, null)
+			IterateCharactersNear(%AMER_MelchiorIgnorance_TurnOwner, 1.5, "AMER_MelchiorIgnorance_FindHopeNearby")
+			
+			IF "!c1&!c2"
+				//Only a Hope who wasn't the last one to speak should speak.
+				//This will prevent Hope from speaking constantly when the
+				//player has decided to stand next to one.
+				IsEqual(%AMER_MelchiorIgnorance_NearbyHope, _HopeLastSpoke)
+				IsEqual(%AMER_MelchiorIgnorance_NearbyHope, null)
+			THEN
+				Set(_HopeLastSpoke, %AMER_MelchiorIgnorance_NearbyHope)
+				Set(%AMER_MelchiorIgnorance_HopeSpeechChoke, INT:0)
+					
+				GetRandomBetween(_Rand, INT:1, _SupportedLines)
+				Print(_Str, "AMER_CMB_MelchiorHope_Proximity[1]", _Rand)
+				Cast(_WhichText, _Str)
+				DisplayCombatInfoText(%AMER_MelchiorIgnorance_NearbyHope, _WhichText, 3.0)
+			ENDIF
+		ENDIF
+	ELSE
+		Add(%AMER_MelchiorIgnorance_HopeSpeechChoke, INT:1)
+	ENDIF
+	
+	
+	
+	
+EVENT MelchiorIgnoranceStartAPScanDelay
+ON
+	OnTimer("AMER_MelchiorIgnorance_StartAPScanDelay")
+ACTIONS
+	IterateCharactersInCombat(__Me, "AMER_MelchiorIgnorance_FindTurnOwner")
+	
+	
+	
+EVENT MelchiorIgnoranceFindTurnOwner
+VARS
+	CHARACTER:_Char
+ON
+	OnIterateCharacter(_Char, "AMER_MelchiorIgnorance_FindTurnOwner")
+ACTIONS
+	IF "c1"
+		CharacterIsInActiveTurn(_Char)
+	THEN
+		IF "!c1"
+			IsEqual(_Char, __Me)
+		THEN
+			Set(%AMER_MelchiorIgnorance_PreviousAP, -1.0)
+			StopTimer("AMER_MelchiorIgnorance_StartAPScanDelay")
+			Set(%AMER_MelchiorIgnorance_TurnOwner, _Char)
+			Set(%AMER_MelchiorIgnorance_RainTarget, _Char)
+			
+			IF "c1"
+				CharacterHasStatus(_Char, SNEAKING)
+			THEN
+				Set(%AMER_MelchiorIgnorance_TargetSneaking, INT:1)
+			ELSE
+				Set(%AMER_MelchiorIgnorance_TargetSneaking, INT:0)
+			ENDIF
+			
+			StartTimer("AMER_MelchiorIgnorance_ScanAP", 0.25, -1)
+		ENDIF
+	ENDIF
+	
+	
+	
+EVENT MelchiorIgnoranceScanAP
+VARS
+//===============================//
+	INT:_SupportedSneakStartedLines = 4
+	INT:_SupportedSneakEndedLines = 4
+	INT:_SupportedInvisLines = 4
+	FIXEDSTRING:_Stop = "STOP"
+//===============================//
+	FLOAT:_AP
+	CHARACTER:_Char
+	STRING:_Str
+	FIXEDSTRING:_WhichText
+	INT:_Rand
+ON
+	OnTimer("AMER_MelchiorIgnorance_ScanAP")
+ACTIONS
+	Set(_Char, %AMER_MelchiorIgnorance_TurnOwner)
+	
+	IF "c1"
+		CharacterIsInActiveTurn(_Char)
+	THEN
+		//I needed to do this because getting the first AP value from
+		//the FindTurnOwner iterator was sometimes getting the value
+		//before gaining turn AP. This way it will always be handled.
+		IF "c1"
+			IsEqual(%AMER_MelchiorIgnorance_PreviousAP, -1.0)
+		THEN
+			IF "c1"
+				CharacterGetStat(_AP, _Char, ActionPoints)
+			THEN
+				Set(%AMER_MelchiorIgnorance_PreviousAP, _AP)
+			ENDIF
+		ENDIF
+		
+		IF "c1"
+			IsEqual(%AMER_MelchiorIgnorance_TargetSneaking, INT:0)
+		THEN
+			IF "!c1"
+				CharacterHasStatus(_Char, SNEAKING)
+			THEN
+				IF "c1"
+					CharacterGetStat(_AP, _Char, ActionPoints)
+				THEN
+					//If the target is invisible, taunt them.
+					IF "c1"
+						CharacterHasStatus(_Char, INVISIBLE)
+					THEN
+						GetRandomBetween(_Rand, INT:1, _SupportedInvisLines)
+						Print(_Str, "AMER_CMB_MelchiorIgnorance_Invis[1]", _Rand)
+						Cast(_WhichText, _Str)
+						DisplayCombatInfoText(__Me, _WhichText, 3.0)
+					ENDIF
+					
+					//Shoot the player if AP has changed.
+					IF "!c1"
+						IsEqual(_AP, %AMER_MelchiorIgnorance_PreviousAP)
+					THEN
+						Set(%AMER_MelchiorIgnorance_PreviousAP, _AP)
+						StopTimer("AMER_ResetFreeAttack")
+						StartTimer("AMER_ResetFreeAttack", 1.0, 0)
+						//CharacterStopAnimation()
+						SetVar(__Me, "AMER_PlayAnimation", _Stop)
+						//ShootLocalProjectileAt(AMER_SKILL_EnemyMelchiorIgnoranceDefault, __Me, null, _Char)
+						SetVar(__Me, "AMER_FreeAttackTarget", _Char)
+					ENDIF
+				ENDIF
+			ELSE
+				//Target has started sneaking.
+				Set(%AMER_MelchiorIgnorance_TargetSneaking, INT:1)
+				
+				GetRandomBetween(_Rand, INT:1, _SupportedSneakStartedLines)
+				Print(_Str, "AMER_CMB_MelchiorIgnorance_SneakStarted[1]", _Rand)
+				Cast(_WhichText, _Str)
+				DisplayCombatInfoText(__Me, _WhichText, 3.0)
+			ENDIF
+		ELIF "!c1"
+			CharacterHasStatus(_Char, SNEAKING)
+		THEN
+			//Target has stopped sneaking.
+			Set(%AMER_MelchiorIgnorance_TargetSneaking, INT:0)
+			
+			GetRandomBetween(_Rand, INT:1, _SupportedSneakEndedLines)
+			Print(_Str, "AMER_CMB_MelchiorIgnorance_SneakEnded[1]", _Rand)
+			Cast(_WhichText, _Str)
+			DisplayCombatInfoText(__Me, _WhichText, 2.0)
+				
+			//Shoot the player if AP has changed.
+			IF "!c1"
+				IsEqual(_AP, %AMER_MelchiorIgnorance_PreviousAP)
+			THEN
+				Set(%AMER_MelchiorIgnorance_PreviousAP, _AP)
+				StopTimer("AMER_ResetFreeAttack")
+				StartTimer("AMER_ResetFreeAttack", 1.0, 0)
+				//CharacterStopAnimation()
+				SetVar(__Me, "AMER_PlayAnimation", _Stop)
+				SetVar(__Me, "AMER_FreeAttackTarget", _Char)
+			ENDIF
+		ENDIF
+	ELSE
+		//If our known turn owner is no longer in the active turn,
+		//scan to find whoever is.
+		StopTimer("AMER_MelchiorIgnorance_ScanAP")
+		Set(%AMER_MelchiorIgnorance_TurnOwner, null)
+		StartTimer("AMER_MelchiorIgnorance_StartAPScanDelay", 0.3, -1)
+	ENDIF
+	
+	
+	
+EVENT MelchiorIgnoranceSpawnIndex
+VARS
+//===============================//
+	CHARACTERTEMPLATE:_VisionRoot = "AMER_CHAR_Melchior_Ignorance_Vision_190fd55c-c2dd-4d29-b36e-999c945223ca"
+	CHARACTERTEMPLATE:_HopeRoot = "AMER_CHAR_Melchior_Hope_5b1d58fe-76d5-4691-b342-78cf9b7e2204"
+	//FLOAT:_SpawnSleepPaddingMin = 0.0
+	//FLOAT:_SpawnSleepPaddingMax = 0.15
+//===============================//
+	TRIGGER:_Point
+	ITEM:_Pillar
+	FLOAT3:_Position
+	FLOAT:_RandX
+	FLOAT:_RandZ
+	FLOAT:_PosX
+	FLOAT:_PosZ
+	CHARACTER:_Spawn
+	INT:_HopeCount = 0
+	INT:_VisionCount = 0
+	STRING:_Str
+	FIXEDSTRING:_WhichVar
+ON
+	OnFunction("AMER_MelchiorIgnorance_SpawnIndex")
+	//OnTimer("AMER_MelchiorIgnorance_SpawnIndex")
+ACTIONS
+	//Construct and retrive the corresponding point.
+	Print(_Str, "AMER_MelchiorIgnorance_BlockerLocation[1]", %AMER_MelchiorIgnorance_SpawnIndex)
+	Cast(_WhichVar, _Str)
+	IF "c1"
+		GetVar(_Point, __Me, _WhichVar)
+	THEN
+		//Spawn the blockers with random offsets.
+		GetPosition(_Point, _Position)
+		IF "c1&c2"
+			GetX(_Position, _PosX)
+			GetZ(_Position, _PosZ)
+		THEN
+			GetRandomBetween(_RandX, -2.5, 2.5)
+			GetRandomBetween(_RandZ, -2.5, 2.5)
+			Add(_PosX, _RandX)
+			Add(_PosZ, _RandZ)
+			SetX(_Position, _PosX)
+			SetZ(_Position, _PosZ)
+			IF "!c1"
+				FindValidPosition(_Position, 6.0, __Me)
+			THEN
+				GetPosition(_Point, _Position)
+			ENDIF
+		ENDIF
+		
+		//Clear surface for the spawns.
+		IF "!c1"
+			IsSurface(_Position, 1.0, None)
+		THEN
+			CreateSurfaceAt(_Position, None, 1.0, 1)
+		ENDIF
+		
+		//Used for calling the story function AMER_DoScaledSFX.
+		Set(%AMER_DoScaledSFX_Point, _Position)
+		
+		IF "c1|c2"
+			IsEqual(%AMER_MelchiorIgnorance_VisionIndex1, %AMER_MelchiorIgnorance_SpawnIndex)
+			IsEqual(%AMER_MelchiorIgnorance_VisionIndex2, %AMER_MelchiorIgnorance_SpawnIndex)
+		THEN
+			//When spawning a vision, need to let it know who I am
+			//and what my maximum vitality is.
+			//ItemTeleportTo(_Pillar, _Position)
+			Print(_Str, "AMER_MelchiorIgnorance_Vision[1]", _VisionCount)
+			Cast(_WhichVar, _Str)
+			IF "c1"
+				GetVar(_Spawn, __Me, _WhichVar)
+			THEN
+			//SpawnCharacter(_Spawn, _VisionRoot, _Position, 0, 1, __Me, %AMER_MelchiorIgnorance_Level)
+				//SetVar(_Spawn, "AMER_VisionOfIgnorance_Ignorance", __Me)
+				RemoveStatusInfluence(_Spawn, UNHEALABLE, 1, "", 0)
+				SetHealth(_Spawn, 1.0)
+				AddStatusInfluence(_Spawn, UNHEALABLE, 1, "", 0)
+				SetVar(_Spawn, "AMER_VisionOfIgnorance_IgnoranceMaximumVitality", %AMER_MelchiorIgnorance_MaximumVitality)
+				SetVar(_Spawn, "AMER_VisionOfIgnorance_SpeechChoke", INT:0)
+				SetVar(_Spawn, "AMER_VisionOfIgnorance_FaceIgnorance", INT:1)
+				//TeleportTo(_Pillar, _Position, 1)
+				TeleportTo(_Spawn, _Position, 1)
+				
+				Set(%AMER_DoScaledSFX_Effect, "FX_Skills_Fire_GrenadeMolotov_Impact_A")
+				CharacterEvent(__Me, "AMER_DoScaledSFX")
+				//PlayEffectAt(_Position, "FX_Skills_Fire_GrenadeMolotov_Impact_A")
+				Add(_VisionCount, INT:1)
+			ENDIF
+		ELSE
+			Print(_Str, "AMER_MelchiorIgnorance_Hope[1]", _HopeCount)
+			Cast(_WhichVar, _Str)
+			IF "c1"
+				GetVar(_Spawn, __Me, _WhichVar)
+			THEN
+				//SpawnCharacter(_Spawn, _HopeRoot, _Position, 0, 1, __Me, %AMER_MelchiorIgnorance_Level)
+				SetHealth(_Spawn, 1.0)
+				SetVar(_Spawn, "AMER_MelchiorHope_FaceIgnorance", INT:1)
+				SetVar(_Spawn, "AMER_MelchiorHope_BlockInstances", INT:2)
+				//TeleportTo(_Pillar, _Position, 1)
+				TeleportTo(_Spawn, _Position, 1)
+				Set(%AMER_DoScaledSFX_Effect, "FX_Skills_Air_NetherSwap_Disappear_A")
+				CharacterEvent(__Me, "AMER_DoScaledSFX")
+				//SpawnItem("2m_Church_A_Pillar_A_Item_7a0e605e-f17d-4d69-952c-7e4e1c69c76d", _Position, _)
+				//PlayEffectAt(_Position, "FX_Skills_Air_NetherSwap_Disappear_A")
+				Add(_HopeCount, INT:1)
+			ENDIF
+		ENDIF
+		
+		//Reset hope/vision counters when the 30 iterations are done.
+		IF "c1"
+			IsEqual(%AMER_MelchiorIgnorance_SpawnIndex, INT:29)
+		THEN
+			Set(_HopeCount, INT:0)
+			Set(_VisionCount, INT:0)
+		ENDIF
+	ENDIF
+	Add(%AMER_MelchiorIgnorance_SpawnIndex, INT:1)
+	
+	
+	
+EVENT MelchiorIgnoranceRemoveBlockers
+VARS
+//===============================//
+	CHARACTERTEMPLATE:_VisionRoot = "AMER_CHAR_Melchior_Ignorance_Vision_190fd55c-c2dd-4d29-b36e-999c945223ca"
+	CHARACTERTEMPLATE:_HopeRoot = "AMER_CHAR_Melchior_Hope_5b1d58fe-76d5-4691-b342-78cf9b7e2204"
+//===============================//
+	CHARACTER:_Char
+	CHARACTERTEMPLATE:_Root
+	TRIGGER:_Point
+	FLOAT3:_Position
+ON
+	OnIterateCharacter(_Char, "AMER_MelchiorIgnorance_RemoveBlockers")
+ACTIONS
+	IF "c1"
+		CharacterGetTemplate(_Char, _Root)
+	THEN
+		IF "c1|c2"
+			IsEqual(_Root, _VisionRoot)
+			IsEqual(_Root, _HopeRoot)
+		THEN
+			//GetPosition(_Char, _Position)
+			//Set(%AMER_DoScaledSFX_Point, _Position)
+			//Set(%AMER_DoScaledSFX_Effect, "FX_Skills_Air_NetherSwap_Disappear_A")
+			//CharacterEvent(__Me, "AMER_DoScaledSFX")
+			//PlayEffectAt(_Char, "FX_Skills_Air_NetherSwap_Disappear_A")
+			IF "c1"
+				GetVar(_Point, _Char, "AMER_MelchiorHope_HidingSpot")
+			THEN
+				TeleportTo(_Char, _Point, 1)
+			ENDIF
+			IF "c1"
+				GetVar(_Point, _Char, "AMER_VisionOfIgnorance_HidingSpot")
+			THEN
+				TeleportTo(_Char, _Point, 1)
+			ENDIF
+		ENDIF
+	ENDIF
+	
+	
+	
+//===================BEHAVIOR====================//
+BEHAVIOUR
+REACTION MelchiorIgnoranceSpawnBlockers, 10000
+USAGE COMBAT
+VARS
+//===============================//
+	INT:_SupportedSpawns = 30
+	INT:_SupportedTurnLines = 5
+	FLOAT:_SpawnDelayMin = 0.0
+	FLOAT:_SpawnDelayMax = 0.07
+	FIXEDSTRING:_FadingPillarMaterial = "d96fdcdd-5291-4466-96c0-1f9b9a0fd239"
+	FIXEDSTRING:_PillarBaseMaterial = "012c2c41-f866-40bf-9c59-a0e19a9f7fb3"
+	STRING:_PillarFadeEffect = "FX_Skills_Air_Teleport_Disappear_A"
+//===============================//
+	FLOAT:_Delay
+	INT:_Count
+	INT:_HalfSupported
+	INT:_Rand
+	INT:_Handle
+	ITEM:_Pillar
+	STRING:_Str
+	FIXEDSTRING:_WhichText
+ACTIONS
+	//Destroy lingering blockers.
+	//IterateCharactersNear(__Me, 30.0, "AMER_MelchiorIgnorance_RemoveBlockers")
+	
+	Sleep(0.75)
+	
+	CharacterPlayLoopEffect(_Handle, __Me, "FX_Skills_WitchCraft_Summon_Prepare_A")
+	//CharacterPlayAnimation("cast_self_start",1,1)
+	CharacterPlayAnimation("cast_self_loop",0,0)
+	
+	Sleep(0.3)
+	
+	IF "c1"
+		IsEqual(%AMER_MelchiorIgnorance_FirstTurn, INT:0)
+	THEN
+		DisplayCombatInfoText(__Me, "AMER_CMB_MelchiorIgnorance_FirstTurn1", 3.5)
+		Set(%AMER_MelchiorIgnorance_FirstTurn, INT:1)
+	ELSE
+		GetRandomBetween(_Rand, INT:1, _SupportedTurnLines)
+		Print(_Str, "AMER_CMB_MelchiorIgnorance_Turn[1]", _Rand)
+		Cast(_WhichText, _Str)
+		DisplayCombatInfoText(__Me, _WhichText, 3.5)
+	ENDIF
+	
+	Sleep(1.0)
+	
+	//Find a random location for the two Visions; ensure that
+	//they cannot be the same by using only one half of indexes
+	//for either.
+	Set(_HalfSupported, _SupportedSpawns)
+	Divide(_HalfSupported, INT:2)
+	GetRandomBetween(%AMER_MelchiorIgnorance_VisionIndex2, _HalfSupported, _SupportedSpawns)
+	Subtract(_HalfSupported, INT:1)
+	GetRandomBetween(%AMER_MelchiorIgnorance_VisionIndex1, INT:0, _HalfSupported)
+	
+	Set(%AMER_MelchiorIgnorance_SpawnIndex, INT:0)
+	//With such a large number of loop iterations to complete,
+	//very little can be done directly within.
+	WHILE "c1"
+		IsLessThen(%AMER_MelchiorIgnorance_SpawnIndex, _SupportedSpawns)
+	DO
+		//To avoid hitting the action limit, outsource the actions
+		//of this loop to another function.
+		//Sleep(%AMER_MelchiorIgnorance_SpawnSleepPadding)
+		//GetRandomBetween(_Delay, _SpawnDelayMin, _SpawnDelayMax)
+		//Sleep(_Delay)
+		//StartTimer("AMER_MelchiorIgnorance_SpawnIndex", _Delay, 0)
+		CallFunction("AMER_MelchiorIgnorance_SpawnIndex")
+	ENDWHILE
+	
+	Set(_Count, INT:0)
+	WHILE "c1"
+		IsLessThen(_Count, INT:3)
+	DO
+		GetElement(_Pillar, _Count, %AMER_MelchiorIgnorance_Pillar1, %AMER_MelchiorIgnorance_Pillar2, %AMER_MelchiorIgnorance_Pillar3)
+		GetElement(_Rand, _Count, %AMER_MelchiorIgnorance_Pillar1State, %AMER_MelchiorIgnorance_Pillar2State, %AMER_MelchiorIgnorance_Pillar3State)
+		IF "c1"
+			IsEqual(_Rand, INT:2)
+		THEN
+			ItemSetOnStage(_Pillar, INT:0)
+			PlayEffectAt(_Pillar, _PillarFadeEffect)
+		ELIF "c1"
+			IsEqual(_Rand, INT:3)
+		THEN
+			SetMaterial(_Pillar, _FadingPillarMaterial, -1, 1, 1, 1)
+		ELIF "c1"
+			IsEqual(_Rand, INT:5)
+		THEN
+			ItemSetOnStage(_Pillar, INT:1)
+			SetMaterial(_Pillar, _PillarBaseMaterial, 0, 1, 1, 1)
+			PlayEffectAt(_Pillar, _PillarFadeEffect)
+		ENDIF
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+	Sleep(0.85)
+	
+	CharacterStopAnimation()
+	
+	Sleep(0.15)
+	
+	StopLoopEffect(_Handle)
+	
+	Sleep(0.6)
+	
+	CharacterEndTurn()
+	
+	
+	
+REACTION MelchiorIgnoranceRainOfArrows, 0
+USAGE ALL
+VARS
+//===============================//
+	INT:_SupportedRainLines = 6
+//===============================//
+	STRING:_Str
+	FIXEDSTRING:_WhichText
+	INT:_Rand
+ACTIONS
+	GetRandomBetween(_Rand, INT:1, _SupportedRainLines)
+	Print(_Str, "AMER_CMB_MelchiorIgnorance_Rain[1]", _Rand)
+	Cast(_WhichText, _Str)
+	DisplayCombatInfoText(__Me, _WhichText, 3.0)
+	
+	CharacterUseSkill(AMER_SKILL_EnemyMelchiorIgnoranceRain, %AMER_MelchiorIgnorance_RainTarget)
+	Add(%AMER_MelchiorIgnorance_RainsFired, 1.0)
+	
+	SetPriority(MelchiorIgnoranceRainOfArrows, 0)
+	
+	
+	/*
+REACTION MelchiorIgnoranceSpray, 0
+USAGE ALL
+VARS
+//===============================//
+	INT:_SupportedSprayLines = 3
+//===============================//
+	STRING:_Str
+	FIXEDSTRING:_WhichText
+	INT:_Rand
+	FLOAT3:_Position
+ACTIONS
+	GetRandomBetween(_Rand, INT:1, _SupportedSprayLines)
+	Print(_Str, "AMER_CMB_MelchiorIgnorance_Spray[1]", _Rand)
+	Cast(_WhichText, _Str)
+	DisplayCombatInfoText(__Me, _WhichText, 3.0)
+	
+	GetPosition(__Me, _Position)
+	CharacterUseSkill(AMER_SKILL_EnemyMelchiorIgnoranceSpray, _Position)
+	
+	SetPriority(MelchiorIgnoranceSpray, 0)
+	*/
+	
+	
+//===============================================//
+//                                               //
+//    M E L C H I O R ' S   I G N O R A N C E    //
+//                                               //
+//===============================================//

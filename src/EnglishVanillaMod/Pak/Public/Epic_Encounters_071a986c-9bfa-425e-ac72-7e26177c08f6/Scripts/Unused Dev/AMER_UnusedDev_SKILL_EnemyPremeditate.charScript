@@ -1,0 +1,36 @@
+#TEMPLATE "_SKILL_Base" : AMER_SKILL_Premeditate
+
+INIT
+CHARACTER:__Me
+FLOAT:%SkillTargetScore_AMER_SKILL_Premeditate=-1000000
+// [GLOBAL_VARS]
+// [~GLOBAL_VARS]
+
+EVENTS
+
+// [EVENTS]
+// [~EVENTS]
+
+// Calculate the priority of the skill
+EVENT CalculateScore_AMER_SKILL_Premeditate
+VARS
+	// [CALC_VARS]
+	INT:_Chain
+	// [~CALC_VARS]
+ON
+	OnFunction("CalculateScore_AMER_SKILL_Premeditate")
+ACTIONS
+	Set(%SkillTargetScore_AMER_SKILL_Premeditate, -1000000)
+
+	// [CALC_ACTIONS_PRE]
+	// [~CALC_ACTIONS_PRE]
+	// [CALC_ACTIONS]
+	IF "c1&c2"
+		GetVar(_Chain, __Me, "AMER_Chain")
+		IsLessThen(_Chain, INT:4)
+	THEN
+		Set(%SkillTargetScore_AMER_SKILL_Premeditate, 10)
+		Set(%SkillTargetChar_AMER_SKILL_Premeditate, __Me)
+		Add(%ActionScore_AMER_SKILL_Premeditate, %SkillTargetScore_AMER_SKILL_Premeditate)
+	ENDIF
+	// [~CALC_ACTIONS]

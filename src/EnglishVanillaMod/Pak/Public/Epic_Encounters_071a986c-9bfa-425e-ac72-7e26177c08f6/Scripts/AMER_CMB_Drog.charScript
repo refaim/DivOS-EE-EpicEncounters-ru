@@ -1,0 +1,290 @@
+//===============================================//
+//                                               //
+//                   D R O G                     //
+//                                               //
+//     Created by Matteo "Ameranth" T. (2017)    //
+//===============================================//
+INIT
+	CHARACTER:__Me
+	
+	
+//==============EVENTS=============//
+EVENTS
+EVENT DrogOnDeath
+//Astral Dragon has an unfinished death animation because the base
+//game cuts to a cinematic as it dies instead. Due to this, we need
+//to do something to cover it up.
+ON
+	OnCharacterStatus(__Me, DYING)
+ACTIONS
+	StartTimer("AMER_Drog_DeathTimer", 2.5, 0)
+	
+	
+	
+EVENT DrogDelayedDeathActions
+ON
+	OnTimer("AMER_Drog_DeathTimer")
+ACTIONS
+	PlayEffectAt(__Me, "FX_Skills_Fire_GrenadeMolotov_Impact_A")
+	PlayEffectAt(__Me, "FX_Skills_Earth_GrenadeTremor_Impact_A")
+	CharacterDestroy(__Me)
+	
+	
+	
+EVENT DrogOnInit
+ON
+	OnInit()
+ACTIONS
+	CharacterAddSkill("Cone_EnemyDragonConeFire")
+	CharacterAddSkill("Projectile_EnemyDragonProjectileFire")
+	CharacterApplyStatus(__Me, ETHEREAL_SOLES, -1, 1)
+	
+	
+	/*
+EVENT DrogCombatStart
+ON
+	OnCombatStarted()
+ACTIONS
+	//SetPriority(AMER_Drog_MakeAnEntrance, INT:10000)
+	*/
+	
+	
+	
+EVENT DrogOnTurn
+ON
+	OnTurn()
+ACTIONS
+	//Reset priorities.
+	SetPriority(AMER_Drog_CloseRange, 400)
+	SetPriority(AMER_Drog_LongRange, 350)
+	SetPriority(AMER_Drog_Physical, 300)
+	
+	//Should I move to another location?
+	IF "c1"
+		IsRandom(0.5)
+	THEN
+		SetPriority(AMER_Drog_Teleport, 1000)
+	ENDIF
+	
+	
+	
+EVENT DrogKnockdownDelay
+ON
+	OnTimer("AMER_Drog_KnockdownDelay")
+ACTIONS
+	CreateSurfaceAt(__Me, Fire, 3.0, 6)
+	IterateCharactersNear(__Me, 8.0, "AMER_Drog_ApplyKD")
+	
+	
+	
+EVENT DrogFearDelay
+ON
+	OnTimer("AMER_Drog_FearDelay")
+ACTIONS
+	IterateCharactersNear(__Me, 18.0, "AMER_Drog_ApplyFear")
+	
+	
+	
+EVENT DrogVisibleDelay
+ON
+	OnTimer("AMER_Drog_VisibleDelay")
+ACTIONS
+	SetVisible(__Me, INT:1)
+		
+		
+		
+EVENT DrogApplyKnockdown
+VARS
+	CHARACTER:_Char
+ON
+	OnIterateCharacter(_Char, "AMER_Drog_ApplyKD")
+ACTIONS
+	IF "c1"
+		CharacterIsEnemy(__Me, _Char)
+	THEN
+		CharacterConsume(_Char, "AMER_CMB_Dragon_CrushingAttack")
+	ENDIF
+		
+		
+		
+EVENT DrogFearChars
+VARS
+	CHARACTER:_Char
+ON
+	OnIterateCharacter(_Char, "AMER_Drog_ApplyFear")
+ACTIONS
+	IF "c1"
+		CharacterIsEnemy(__Me, _Char)
+	THEN
+		CharacterApplyStatus(_Char, FEAR, 2)
+	ENDIF
+	
+	
+	
+//======================B E H A V I O R======================//
+BEHAVIOUR
+REACTION AMER_Drog_CloseRange, 400
+USAGE COMBAT
+VARS
+	CHARACTER:_Character
+	FLOAT:_MaxRange
+	FLOAT:_Rand
+	FLOAT:_FireRes
+	FLOAT:_WaterRes
+	FLOAT:_AirRes
+	FLOAT:_EarthRes
+CHECK "(c1|c2|c3)&c4&c5&c6&c7&c8&c9"
+	CharacterCanCast(__Me, "Cone_EnemyDragonConeFire")					//c1
+	CharacterCanCast(__Me, "Cone_EnemyDragonConeAir")					//c2
+	CharacterCanCast(__Me, "Cone_EnemyDragonConeVoid")					//c3
+	CharacterGetSkillRange(_, _MaxRange,__Me, "Cone_EnemyDragonConeFire")	//c4
+	CharacterGet(_Character, __Me, _MaxRange, Lowest, Distance, Enemy)		//c5
+	CharacterGetStat(_FireRes, _Character, FireResistance)					//c6
+	CharacterGetStat(_WaterRes, _Character, WaterResistance)				//c7
+	CharacterGetStat(_AirRes, _Character, AirResistance)					//c8
+	CharacterGetStat(_EarthRes, _Character, EarthResistance)				//c9
+ACTIONS
+	IF "c1&c2"
+		CharacterCanCast(__Me, "Cone_EnemyDragonConeFire")
+		IsLessThen(_FireRes, 100)
+	THEN
+		CharacterUseSkill("Cone_EnemyDragonConeFire", _Character)
+	ELIF "c1"
+		CharacterInWeaponRange(__Me, _Character)
+	THEN
+		CharacterAttackWithoutMove(_Character)
+	ELSE
+		SetPriority(AMER_Drog_CloseRange, 0)
+	ENDIF
+	
+	
+	
+REACTION AMER_Drog_LongRange, 350
+USAGE COMBAT
+VARS
+	CHARACTER:_Character
+	FLOAT:_Rand
+	FLOAT:_MaxRange
+	FLOAT:_FireRes
+	FLOAT:_WaterRes
+	FLOAT:_AirRes
+	FLOAT:_EarthRes
+CHECK "(c1|c2|c3)&c4&c5&c6&c7&c8&c9"
+	CharacterCanCast(__Me,"Projectile_EnemyDragonProjectileFire")				//c1
+	CharacterCanCast(__Me,"Projectile_EnemyDragonProjectileAir")				//c2
+	CharacterCanCast(__Me,"Projectile_EnemyDragonProjectile")					//c3
+	CharacterGetSkillRange(_,_MaxRange,__Me,"Projectile_EnemyDragonProjectile")	//c4
+	CharacterGet(_Character,__Me,_MaxRange,Lowest,Distance,PlayerNoSummon)		//c5
+	CharacterGetStat(_FireRes,_Character,FireResistance)						//c6
+	CharacterGetStat(_WaterRes,_Character,WaterResistance)						//c7
+	CharacterGetStat(_AirRes,_Character,AirResistance)							//c8
+	CharacterGetStat(_EarthRes,_Character,EarthResistance)						//c9
+ACTIONS
+	IF "c1"
+		CharacterCanCast(__Me,"Projectile_EnemyDragonProjectileFire")
+	THEN
+		IF "!c1"
+			IsGreaterThen(_FireRes,99)
+		THEN
+			CharacterUseSkill("Projectile_EnemyDragonProjectileFire",_Character)
+		ENDIF
+	ELSE
+		//SetPriority(AMER_Drog_TeleportToEnemy, 900)
+		SetPriority(AMER_Drog_LongRange, 0)
+	ENDIF
+	
+	IF "c1"
+		IsRandom(0.3)
+	THEN
+		//SetPriority(AMER_Drog_TeleportToEnemy, 900)
+		SetPriority(AMER_Drog_LongRange,0)
+	ENDIF
+INTERRUPT
+	Reset()
+	
+	
+	
+REACTION AMER_Drog_TeleportToEnemy, 330
+USAGE COMBAT
+VARS
+//=============================//
+	FLOAT:_MeleeRange = 4
+	FLOAT:_KnockdownDelay = .8
+	FLOAT3:_Position
+//=============================//
+	CHARACTER:_Char
+CHECK "!c1&!c2&!c3&!c4&!c5&!c6"
+	CharacterGet(_Char, __Me, _MeleeRange, Lowest, Distance, Enemy)	//c1
+	CharacterHasStatus(__Me,"CHARMED")		//c2
+	CharacterHasStatus(__Me,"FROZEN")		//c3
+	CharacterHasStatus(__Me,"STUNNED")		//c4
+	CharacterHasStatus(__Me,"PETRIFIED")	//c5
+	CharacterHasStatus(__Me,"KNOCKED_DOWN")	//c6
+ACTIONS
+	IF "c1"
+		CharacterGet(_Char, __Me, 30, Highest, Distance, PlayerNoSummon)
+	THEN
+		GetPosition(_Char, _Position)
+		IF "c1"
+			FindValidPosition(_Position, 8.0, __Me)
+		THEN
+			//Play a short special effect
+			CharacterPlayEffect(__Me, "FX_Skills_Fire_PhoenixDive_Prepare_A")
+			//Sleep(0.5)
+			
+			//Play the fly animation and teleport.
+			CharacterPlayAnimation("Fly_01", 1, 1)
+			CharacterTeleportTo(_Char)
+			StartTimer("AMER_Drog_KnockdownDelay", _KnockdownDelay, 0)
+			CharacterPlayAnimation("Dive_01", 1, 1)
+			
+			//Reprioritize melee behaviors.
+			CharacterResetCombatTimeout(__Me)
+			SetPriority(AMER_Drog_CloseRange, 400)
+			SetPriority(AMER_Drog_Physical, 300)
+		ENDIF
+	ENDIF
+	//SetPriority(AMER_Drog_TeleportToEnemy, 0)
+INTERRUPT
+	Reset()
+	
+	
+	
+REACTION AMER_Drog_Physical, 300
+USAGE COMBAT
+VARS
+//=============================//
+	FLOAT:_MeleeRange = 4
+//=============================//
+	CHARACTER:_Char
+CHECK "c1&c2"
+	CharacterGet(_Char, __Me, _MeleeRange, Lowest, Distance, Enemy)
+	CharacterInWeaponRange(__Me, _Char)
+ACTIONS
+	CharacterAttackWithoutMove(_Char)
+	
+	
+	/*
+REACTION AMER_Drog_Animation, 1000
+USAGE WAITING
+ACTIONS
+	Sleep(1)
+	*/
+	
+	
+	
+REACTION AMER_Drog_MakeAnEntrance, 0
+USAGE ALL
+ACTIONS
+	StartTimer("AMER_Drog_VisibleDelay", 0.5, 0)	//Small delay before becoming visible so there isn't any graphical oddities.
+	StartTimer("AMER_Drog_KnockdownDelay", 4.05, 0)	//Try to synchronize the Knockdown with the landing animation.
+	StartTimer("AMER_Drog_FearDelay", 6.6, 0)	//Try to synchronize the Fear with the after-landing roar animation.
+	CreateSurfaceAt(__Me, Fire, 18.0, 6)
+	CharacterPlayAnimation("spawn", 1, 1)
+	Sleep(1.0)
+	SetPriority(AMER_Drog_MakeAnEntrance, 0)
+//===============================================//
+//                                               //
+//                   D R O G                     //
+//                                               //
+//===============================================//

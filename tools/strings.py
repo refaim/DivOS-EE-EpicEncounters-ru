@@ -168,8 +168,8 @@ def get_files_by_extension(directory, ext):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('mode', choices=['game_to_text', 'text_to_game'])
-    parser.add_argument('src', help='path to mod directory with Data folder for game_to_text, path to csv for text_to_game')
-    parser.add_argument('dst', help='path to csv for game_to_text, path to mod directory with Data folder for text_to_game')
+    parser.add_argument('src', help='path to mod directory for game_to_text, path to csv for text_to_game')
+    parser.add_argument('dst', help='path to csv for game_to_text, path to mod directory for text_to_game')
     args = parser.parse_args()
 
     if args.mode == 'game_to_text':
@@ -184,11 +184,11 @@ def main():
         mod_directory_path = args.dst
 
     lsx_directory_paths = [
-        ('Ln', os.path.join(mod_directory_path, 'Data', 'Mods', 'Epic_Encounters_071a986c-9bfa-425e-ac72-7e26177c08f6', 'Localization')),
-        ('Rt', os.path.join(mod_directory_path, 'Data', 'Public', 'Epic_Encounters_071a986c-9bfa-425e-ac72-7e26177c08f6', 'RootTemplates')),
+        ('Ln', os.path.join(mod_directory_path, 'Mods', 'Epic_Encounters_071a986c-9bfa-425e-ac72-7e26177c08f6', 'Localization')),
+        ('Rt', os.path.join(mod_directory_path, 'Public', 'Epic_Encounters_071a986c-9bfa-425e-ac72-7e26177c08f6', 'RootTemplates')),
     ]
 
-    stats_txt_directory_path = os.path.join(mod_directory_path, 'Data', 'Public', 'Epic_Encounters_071a986c-9bfa-425e-ac72-7e26177c08f6', 'Stats', 'Generated', 'Data')
+    stats_txt_directory_path = os.path.join(mod_directory_path, 'Public', 'Epic_Encounters_071a986c-9bfa-425e-ac72-7e26177c08f6', 'Stats', 'Generated', 'Data')
     assert os.path.isdir(stats_txt_directory_path)
 
     def get_file_key(file_path, directory_code):

@@ -1,0 +1,133 @@
+//===============================================//
+//                                               //
+//           R E U S A B L E   B O O K           //
+//                                               //
+//     Written by Matteo "Ameranth" T. (2017)    //
+//===============================================//
+INIT
+ITEM:__Me
+EXTERN SKILL:%AMER_ReusableBook_WhichSkill = null
+CHARACTER:%AMER_ReusableBook_User
+INT:%AMER_ReusableBook_UsedOnce = 0
+INT:%AMER_ReusableBook_HasGold = 0
+	
+EVENTS
+EVENT ReusableBookOnUse
+VARS
+	CHARACTER:_Char
+	ITEM:_Item
+	FLOAT:_BookValue
+	FLOAT:_Gold
+ON
+	OnUseItem(_Char, __Me)
+ACTIONS
+	IF "!c1"
+		IsInCombat(_Char)
+	THEN
+		IF "c1"
+			IsEqual(%AMER_ReusableBook_UsedOnce, INT:1)
+		THEN
+			StatusText(_Char, "AMER_ChainOne")
+			IF "c1&c2&c3&!c4"
+				ItemGetFromInventory(_Item, _Char, "Small_Gold")
+				ItemGetStat(_BookValue, __Me, Value)
+				ItemGetStat(_Gold, _Item, Value)
+				IsLessThen(_Gold, _BookValue)
+			THEN
+				StatusText(_Char, "AMER_ChainTwo")
+				IF "c1"
+					CharacterCanCast(_Char, %AMER_ReusableBook_WhichSkill, 1)
+				THEN
+					Set(%AMER_ReusableBook_User, _Char)
+					StartTimer("AMER_ReusableBook_CheckIfLearned", 0.4, 0)
+					StatusText(_Char, "AMER_ChainThree")
+				ENDIF
+			ENDIF
+		ELSE
+			StatusText(_Char, "AMER_ExtraCrit")
+			Set(%AMER_ReusableBook_UsedOnce, INT:1)
+		ENDIF
+	ENDIF
+	
+	
+	
+EVENT ReusableBookCheckIfLearned
+ON
+	OnTimer("AMER_ReusableBook_CheckIfLearned")
+ACTIONS
+	IF "c1"
+		CharacterCanCast(%AMER_ReusableBook_User, %AMER_ReusableBook_WhichSkill, 1)
+	THEN
+		StatusText(%AMER_ReusableBook_User, "AMER_ChainFive")
+	ENDIF
+	
+	
+	
+EVENT ReusableBookHandleGold
+VARS
+//======================//
+	ITEM:_ConstantLocation = FUR_Chest_A_001_fecee3c2-3990-490c-b1a2-458043c0a531
+//======================//
+	INT:_Count
+	INT:_NewStackValue
+	ITEM:_Stack
+	FLOAT:_Gold
+	FLOAT:_StackValue
+	FLOAT:_BookValue
+ON
+	OnFunction("AMER_ReusableBook_HandleGold")
+ACTIONS
+	IF "c1"
+		ItemGetStat(_BookValue, __Me, Value)
+	THEN
+		Set(_Gold, 0.0)
+		Set(_Count, INT:0)
+		WHILE "c1&!c2"
+			IsLessThen(_Gold, _BookValue)
+			IsEqual(_Stack, null)
+		DO
+			IF "c1"
+				ItemGetFromInventory(_Stack, %AMER_ReusableBook_User, "Small_Gold")
+			THEN
+				IF "c1"
+					ItemGetStat(_StackValue, _Stack, Value)
+				THEN
+					//Add(_Gold, _StackValue)
+					IF "!c1"
+						IsLessThen(_StackValue, _BookValue)
+					THEN
+						Subtract(_StackValue, _BookValue)
+						Cast(_NewStackValue, _StackValue)
+						ItemSetAmount(_Stack, _NewStackValue)
+						IterateItemsNear(_ConstantLocation, 2.0, "AMER_ReusableBook_RemoveStacks")
+						Set(%AMER_ReusableBook_HasGold, INT:1)
+					ELSE
+						Subtract(_BookValue, _StackValue)
+						ItemTeleportTo(_Stack, _ConstantLocation)
+					ENDIF
+				ENDIF
+			ENDIF
+		ENDWHILE
+	ENDIF
+	
+	
+	
+EVENT ReusableBookRemoveStacks
+VARS
+//======================//
+	ITEMTEMPLATE:_Root = LOOT_Gold_Big_A_1c3c9c74-34a1-4685-989e-410dc080be6f
+//======================//
+	ITEM:_Stack
+ON
+	OnIterateItem(_Stack, "AMER_ReusableBook_RemoveStacks")
+ACTIONS
+	IF "c1"
+		ItemGetTemplate(_Stack, _Root)
+	THEN
+		ItemDestroy(_Stack)
+	ENDIF
+//===============================================//
+//                                               //
+//                 I T E M   S F X               //
+//                                               //
+//===============================================//

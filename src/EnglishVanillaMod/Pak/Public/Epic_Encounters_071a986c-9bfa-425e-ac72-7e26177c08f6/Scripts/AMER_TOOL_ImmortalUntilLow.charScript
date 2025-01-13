@@ -1,0 +1,37 @@
+//===============================================//
+//                                               //
+//      I M M O R T A L   U N T I L   L O W      //
+//                                               //
+//     Written by Matteo "Ameranth" T. (2016)    //
+//===============================================//
+INIT
+CHARACTER:__Me
+EXTERN FLOAT:%AMER_ImmortalUntilLow_Percentage = 0.01
+	
+EVENTS
+EVENT ImmortalUntilLowInit
+ON
+	OnInit()
+ACTIONS
+	CharacterSetImmortal(__Me, INT:1)
+	
+	
+	
+EVENT ImmortalUntilLowDamaged
+VARS
+	FLOAT:_Vitality
+ON
+	OnVitalityChanged(_Vitality)
+ACTIONS
+	IF "!c1"
+		IsGreaterThen(_Vitality, %AMER_ImmortalUntilLow_Percentage)
+	THEN
+		CharacterSetImmortal(__Me, INT:0)
+		CharacterDie(__Me)
+	ENDIF
+	
+//===============================================//
+//                                               //
+//      I M M O R T A L   U N T I L   L O W      //
+//                                               //
+//===============================================//

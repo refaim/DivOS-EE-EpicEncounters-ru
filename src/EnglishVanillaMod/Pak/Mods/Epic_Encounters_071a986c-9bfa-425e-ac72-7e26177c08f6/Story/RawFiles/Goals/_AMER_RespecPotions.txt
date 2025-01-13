@@ -1,0 +1,76 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+IF
+CharacterUsedItemTemplate(_Char, "AMER_CON_RespecPotion_ecad7c2f-658c-4826-99f1-0fd1bb2f066b",_)
+THEN
+ProcIncreaseCompMaxIfLonewolf(_Char);
+ProcAMERHandleRespec(_Char);
+ProcAMERRespec(_Char);
+
+IF
+CharacterUsedItemTemplate(_Char, "AMER_CON_RespecPotion_Vendor_f5102844-67e3-455d-af75-95f7affd4329",_)
+THEN
+ProcIncreaseCompMaxIfLonewolf(_Char);
+ProcAMERHandleRespec(_Char);
+ProcAMERRespec(_Char);
+
+
+
+//Force Moloch's respec to be handled also.
+PROC
+ProcHOMCheckRespec((CHARACTER)_Char)
+THEN
+ProcAMERHandleRespec(_Char);
+
+
+
+//Remove All Skilled Up's extra ability points.
+PROC
+ProcAMERHandleRespec((CHARACTER)_Char)
+AND
+CharacterHasTalent(_Char, "ExtraSkillPoints", 1)
+THEN
+CharacterAddAbilityPoint(_Char, -2);
+
+
+
+//Remove Lone Wolf's extra ability points and
+//extra talent point.
+PROC
+ProcAMERHandleRespec((CHARACTER)_Char)
+AND
+CharacterHasTalent(_Char, "LoneWolf", 1)
+AND
+CharacterGetLevel(_Char, _Level)
+AND
+IntegerSubtract(_Level, 1, _Points)
+AND
+IntegerProduct(_Points, -1, _RemovePoints)
+THEN
+CharacterAddAbilityPoint(_Char, _RemovePoints);
+CharacterAddTalentPoint(_Char, -1);
+
+
+
+//Player Extensions script will catch this event
+//and handle other clean-up.
+PROC
+ProcAMERHandleRespec((CHARACTER)_Char)
+THEN
+CharacterSetEvent(_Char, "AMER_Respec");
+
+
+
+PROC
+ProcAMERRespec((CHARACTER)_Char)
+AND
+CharacterAddToCharacterCreation(_Char,1,1)
+THEN
+CharacterPlayEffect(_Char,"FX_Skills_Air_Storm_Impact_A");
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "__Start"

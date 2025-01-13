@@ -1,0 +1,1048 @@
+//=================================================//
+//                                                 //
+//    P L A Y E R   I T E M   F U N C T I O N S    //
+//                                                 //
+//     Written by Matteo "Ameranth" T. (2017)      //
+//=================================================//
+INIT
+CHARACTER:__Me
+	
+//Used to track the frequency of weapon procs.
+INT:%AMER_InvisibleHealProcced = 0
+INT:%AMER_BlessHealProcced = 0
+	
+//Used to find a valid uptier target and understand the
+//level of the uptier shard being used.
+INT:%AMER_UptierTargetFound = 0
+INT:%AMER_UptierPower = 0
+	
+//Used to choke consume handling.
+INT:%AMER_PlayerConsumeChoke = 0
+	
+//Used to efficiently check if an artifact unique whose
+//buff is active is still equipped.
+INT:%AMER_CheckArtifactAmulet = -1
+INT:%AMER_CheckArtifactChest = -1
+	
+//Reusable global int. Used for:
+//Necromancer's Raiment corpse count @ turn end.
+INT:%AMER_ReusableItemAffixInt
+	
+	
+EVENTS
+EVENT PlayerItemFunctionsOnTurn
+//Functionality for item affixes on turn
+ON
+	OnFunction("AMER_PlayerItemFunctionsOnTurn")
+ACTIONS
+	//Reset item affix proc counters.
+	Set(%AMER_InvisibleHealProcced, INT:0)
+	Set(%AMER_BlessHealProcced, INT:0)
+	
+	//Zeal forces chain to reset.
+	IF "c1"
+		CharacterHasStatus(__Me, CONSUME, "AMER_UNI_Zeal")
+	THEN
+		SetVar(__Me, "AMER_Chain", INT:0)
+		CallFunction("AMER_SetChain")		// Reset chain counter if visible at turn start
+	ENDIF
+	
+EVENT PlayerItemFunctionsOnTurnEnd
+VARS
+	FIXEDSTRING:_WhichRoutine
+//Functionality for item affixes on ending a turn
+ON
+	OnFunction("AMER_PlayerItemFunctionsOnTurnEnd")
+ACTIONS
+	//Check for Artifact Unique Chestpiece routines.
+	IF "!c1"
+		IsEqual(%AMER_CheckArtifactChest, -1)
+	THEN
+		GetElement(_WhichRoutine, %AMER_CheckArtifactChest, null, null, null, null, null, null, null, "AMER_NecromancersRaimentOnTurnEnd", "AMER_TheVaultOnTurnEnd")
+		IF "!c1"
+			IsEqual(_WhichRoutine, null)
+		THEN
+			CallFunction(_WhichRoutine)
+		ENDIF
+	ENDIF
+	
+	
+	
+//===========================================================//
+//                Artifact Unique Buff Check                 //
+//===========================================================//
+//To prevent maintaining of an artifact unique's buff without
+//actually wearing it, we check if the buff spell is castable
+//from the heartbeat. If it is not, we can assume the item was
+//unequipped.
+EVENT ArtifactCheckAmulet
+VARS
+	SKILL:_WhichSkill
+	FIXEDSTRING:_WhichRoutine
+ON
+	OnFunction("AMER_ArtifactCheckAmulet")
+ACTIONS
+	IF "!c1"
+		IsEqual(%AMER_CheckArtifactAmulet, -1)
+	THEN
+		GetElement(_WhichSkill, %AMER_CheckArtifactAmulet, AMER_SKILL_UNI_Wendigo, AMER_SKILL_UNI_Seraph, AMER_SKILL_UNI_Ghostflame, AMER_SKILL_UNI_Arcturus)
+		GetElement(_WhichRoutine, %AMER_CheckArtifactAmulet, "AMER_OnDeactivateWendigo", "AMER_OnDeactivateSeraph", "AMER_OnDeactivateGhostflame", null)
+		IF "!c1"
+			CharacterCanCast(__Me, _WhichSkill)
+		THEN
+			Set(%AMER_CheckArtifactAmulet, -1)
+			CharacterConsume(__Me, AMER_UNI_RemoveArtifactAmulet)
+			IF "!c1"
+				IsEqual(_WhichRoutine, null)
+			THEN
+				CallFunction(_WhichRoutine)
+			ENDIF
+		ENDIF
+	ENDIF
+	
+EVENT ArtifactCheckChest
+VARS
+	SKILL:_WhichSkill
+	FIXEDSTRING:_WhichRoutine
+ON
+	OnFunction("AMER_ArtifactCheckChest")
+ACTIONS
+	IF "!c1"
+		IsEqual(%AMER_CheckArtifactChest, -1)
+	THEN
+		GetElement(_WhichSkill, %AMER_CheckArtifactChest, AMER_SKILL_UNI_Abyss_A, AMER_SKILL_UNI_Abyss_B, AMER_SKILL_UNI_Abyss_C, AMER_SKILL_UNI_Abyss_D, AMER_SKILL_UNI_Abyss_E, AMER_SKILL_UNI_Antediluvian, AMER_SKILL_UNI_Empyrean, AMER_SKILL_UNI_Necromancer, AMER_SKILL_UNI_Vault, AMER_SKILL_UNI_Urgency)
+		IF "!c1"
+			CharacterCanCast(__Me, _WhichSkill)
+		THEN
+			//If I can no longer cast the expected skill, assume
+			//that the item is no longer equipped.
+			GetElement(_WhichRoutine, %AMER_CheckArtifactChest, null, null, null, null, null, "AMER_OnDeactivateAntediluvian", null, null, null, "AMER_OnDeactivateUrgency")
+			
+			Set(%AMER_CheckArtifactChest, -1)
+			CharacterConsume(__Me, AMER_UNI_RemoveArtifactChest)
+			IF "!c1"
+				IsEqual(_WhichRoutine, null)
+			THEN
+				CallFunction(_WhichRoutine)
+			ENDIF
+		ELSE
+			//If I can still cast the expected skill, check if there
+			//is some upkeep routine to run.
+			GetElement(_WhichRoutine, %AMER_CheckArtifactChest, null, null, null, null, null, null, null, null, null, "AMER_UrgencyUpkeep")
+			IF "!c1"
+				IsEqual(_WhichRoutine, null)
+			THEN
+				CallFunction(_WhichRoutine)
+			ENDIF
+		ENDIF
+	ENDIF
+	
+	
+	
+//===========================================================//
+//                Artifact Unique Spell Casts                //
+//===========================================================//
+//Amulets:
+EVENT OnCast_Wendigo
+ON
+	OnSkillCast(__Me, AMER_SKILL_UNI_Wendigo)
+ACTIONS
+	Set(%AMER_CheckArtifactAmulet, 0)
+	CallFunction("AMER_OnActivateWendigo")
+	
+EVENT OnCast_Seraph
+ON
+	OnSkillCast(__Me, AMER_SKILL_UNI_Seraph)
+ACTIONS
+	Set(%AMER_CheckArtifactAmulet, 1)
+	CallFunction("AMER_OnActivateSeraph")
+	
+EVENT OnCast_Ghostflame
+ON
+	OnSkillCast(__Me, AMER_SKILL_UNI_Ghostflame)
+ACTIONS
+	Set(%AMER_CheckArtifactAmulet, 2)
+	CallFunction("AMER_OnActivateGhostflame")
+	
+EVENT OnCast_Arcturus
+ON
+	OnSkillCast(__Me, AMER_SKILL_UNI_Arcturus)
+ACTIONS
+	Set(%AMER_CheckArtifactAmulet, 3)
+	
+//Chestpieces:
+EVENT OnCast_Abyss_A
+ON
+	OnSkillCast(__Me, AMER_SKILL_UNI_Abyss_A)
+ACTIONS
+	Set(%AMER_CheckArtifactChest, 0)
+	
+EVENT OnCast_Abyss_B
+ON
+	OnSkillCast(__Me, AMER_SKILL_UNI_Abyss_B)
+ACTIONS
+	Set(%AMER_CheckArtifactChest, 1)
+	
+EVENT OnCast_Abyss_C
+ON
+	OnSkillCast(__Me, AMER_SKILL_UNI_Abyss_C)
+ACTIONS
+	Set(%AMER_CheckArtifactChest, 2)
+	
+EVENT OnCast_Abyss_D
+ON
+	OnSkillCast(__Me, AMER_SKILL_UNI_Abyss_D)
+ACTIONS
+	Set(%AMER_CheckArtifactChest, 3)
+	
+EVENT OnCast_Abyss_E
+ON
+	OnSkillCast(__Me, AMER_SKILL_UNI_Abyss_E)
+ACTIONS
+	Set(%AMER_CheckArtifactChest, 4)
+	
+EVENT OnCast_Antidiluvian
+ON
+	OnSkillCast(__Me, AMER_SKILL_UNI_Antediluvian)
+ACTIONS
+	Set(%AMER_CheckArtifactChest, 5)
+	CallFunction("AMER_OnActivateAntediluvian")
+	
+EVENT OnCast_Empyrean
+ON
+	OnSkillCast(__Me, AMER_SKILL_UNI_Empyrean)
+ACTIONS
+	Set(%AMER_CheckArtifactChest, 6)
+	
+EVENT OnCast_Necromancer
+ON
+	OnSkillCast(__Me, AMER_SKILL_UNI_Necromancer)
+ACTIONS
+	Set(%AMER_CheckArtifactChest, 7)
+	
+EVENT OnCast_Vault
+ON
+	OnSkillCast(__Me, AMER_SKILL_UNI_Vault)
+ACTIONS
+	Set(%AMER_CheckArtifactChest, 8)
+	
+EVENT OnCast_Urgency
+ON
+	OnSkillCast(__Me, AMER_SKILL_UNI_Urgency)
+ACTIONS
+	Set(%AMER_CheckArtifactChest, 9)
+	
+	
+	
+//===========================================================//
+//         Artifact Unique Activation/Deactivation           //
+//===========================================================//
+//Functions for special activation/deactivation routines of
+//artifact unique spells.
+EVENT OnDeactivateUrgency
+ON
+	OnFunction("AMER_OnDeactivateUrgency")
+ACTIONS
+	//Remove any lingering buffs from Urgency's effect.
+	CharacterConsume(__Me, AMER_UNI_RemoveUrgencyBuff)
+	
+EVENT OnActivateAntediluvian
+VARS
+	FLOAT:_MaxRes
+	INT:_Count
+	FIXEDSTRING:_WhichVar
+ON
+	OnFunction("AMER_OnActivateAntediluvian")
+ACTIONS
+	StatusText(__Me, "AMER_ChainOne")	//TEST
+	//Antediluvian adds +5% to all non-physical max resistances.
+	Set(_Count, INT:0)
+	WHILE "c1"
+		IsLessThen(_Count, 6)
+	DO
+		GetElement(_WhichVar, _Count, "AMER_MaxFireRes", "AMER_MaxWaterRes", "AMER_MaxAirRes", "AMER_MaxEarthRes", "AMER_MaxPoisonRes", "AMER_MaxShadowRes")
+		IF "c1"
+			GetVar(_MaxRes, __Me, _WhichVar)
+		THEN
+			Add(_MaxRes, 5.0)
+			SetVar(__Me, _WhichVar, _MaxRes)
+		ENDIF
+		
+		Add(_Count, 1)
+	ENDWHILE
+	
+EVENT OnDeactivateAntediluvian
+VARS
+	FLOAT:_MaxRes
+	INT:_Count
+	FIXEDSTRING:_WhichVar
+ON
+	OnFunction("AMER_OnDeactivateAntediluvian")
+ACTIONS
+	StatusText(__Me, "AMER_ChainFive")	//TEST
+	//Reduce non-physical maximum resistances by 5%.
+	Set(_Count, INT:0)
+	WHILE "c1"
+		IsLessThen(_Count, 6)
+	DO
+		GetElement(_WhichVar, _Count, "AMER_MaxFireRes", "AMER_MaxWaterRes", "AMER_MaxAirRes", "AMER_MaxEarthRes", "AMER_MaxPoisonRes", "AMER_MaxShadowRes")
+		IF "c1"
+			GetVar(_MaxRes, __Me, _WhichVar)
+		THEN
+			Subtract(_MaxRes, 5.0)
+			SetVar(__Me, _WhichVar, _MaxRes)
+		ENDIF
+		
+		Add(_Count, 1)
+	ENDWHILE
+	
+EVENT OnActivateWendigo
+VARS
+	INT:_Reactions
+ON
+	OnFunction("AMER_OnActivateWendigo")
+ACTIONS
+	IF "c1"
+		GetVar(_Reactions, __Me, "AMER_PredatorReactionRecovery")
+	THEN
+		Add(_Reactions, 1)
+		SetVar(__Me, "AMER_PredatorReactionRecovery", _Reactions)
+	ENDIF
+	
+EVENT OnDeactivateWendigo
+VARS
+	INT:_Reactions
+ON
+	OnFunction("AMER_OnDeactivateWendigo")
+ACTIONS
+	IF "c1"
+		GetVar(_Reactions, __Me, "AMER_PredatorReactionRecovery")
+	THEN
+		Subtract(_Reactions, 1)
+		SetVar(__Me, "AMER_PredatorReactionRecovery", _Reactions)
+	ENDIF
+	
+EVENT OnActivateSeraph
+VARS
+	INT:_Reactions
+ON
+	OnFunction("AMER_OnActivateSeraph")
+ACTIONS
+	IF "c1"
+		GetVar(_Reactions, __Me, "AMER_AngelReactionRecovery")
+	THEN
+		Add(_Reactions, 1)
+		SetVar(__Me, "AMER_AngelReactionRecovery", _Reactions)
+	ENDIF
+	
+EVENT OnDeactivateSeraph
+VARS
+	INT:_Reactions
+ON
+	OnFunction("AMER_OnDeactivateSeraph")
+ACTIONS
+	IF "c1"
+		GetVar(_Reactions, __Me, "AMER_AngelReactionRecovery")
+	THEN
+		Subtract(_Reactions, 1)
+		SetVar(__Me, "AMER_AngelReactionRecovery", _Reactions)
+	ENDIF
+	
+EVENT OnActivateGhostflame
+VARS
+	INT:_Reactions
+ON
+	OnFunction("AMER_OnActivateGhostflame")
+ACTIONS
+	IF "c1"
+		GetVar(_Reactions, __Me, "AMER_DemonReactionRecovery")
+	THEN
+		Add(_Reactions, 1)
+		SetVar(__Me, "AMER_DemonReactionRecovery", _Reactions)
+	ENDIF
+	
+EVENT OnDeactivateGhostflame
+VARS
+	INT:_Reactions
+ON
+	OnFunction("AMER_OnDeactivateGhostflame")
+ACTIONS
+	IF "c1"
+		GetVar(_Reactions, __Me, "AMER_DemonReactionRecovery")
+	THEN
+		Subtract(_Reactions, 1)
+		SetVar(__Me, "AMER_DemonReactionRecovery", _Reactions)
+	ENDIF
+	
+	
+	
+//===========================================================//
+//              Artifact Unique Uptiering Hook               //
+//===========================================================//
+EVENT UptierOnUse_B
+ON
+	OnSkillCast(__Me, AMER_SKILL_UNI_Uptier_B)
+ACTIONS
+	Set(%AMER_UptierPower, 2)
+	Set(%AMER_UptierTargetFound, INT:0)
+	IterateItemsNear(__Me, 5.5, "AMER_UptierFindTarget")
+	CallFunction("AMER_UptierCheckFailure")
+	
+EVENT UptierOnUse_C
+ON
+	OnSkillCast(__Me, AMER_SKILL_UNI_Uptier_C)
+ACTIONS
+	Set(%AMER_UptierPower, 3)
+	Set(%AMER_UptierTargetFound, INT:0)
+	IterateItemsNear(__Me, 5.5, "AMER_UptierFindTarget")
+	CallFunction("AMER_UptierCheckFailure")
+	
+EVENT UptierOnUse_D
+ON
+	OnSkillCast(__Me, AMER_SKILL_UNI_Uptier_D)
+ACTIONS
+	Set(%AMER_UptierPower, 4
+	Set(%AMER_UptierTargetFound, INT:0)
+	IterateItemsNear(__Me, 5.5, "AMER_UptierFindTarget")
+	CallFunction("AMER_UptierCheckFailure")
+	
+EVENT UptierOnUse_E
+ON
+	OnSkillCast(__Me, AMER_SKILL_UNI_Uptier_E)
+ACTIONS
+	Set(%AMER_UptierPower, 5)
+	Set(%AMER_UptierTargetFound, INT:0)
+	IterateItemsNear(__Me, 5.5, "AMER_UptierFindTarget")
+	CallFunction("AMER_UptierCheckFailure")
+	
+	
+	
+EVENT UptierCheckFailure
+VARS
+	FIXEDSTRING:_WhichStat
+ON
+	OnFunction("AMER_UptierCheckFailure")
+ACTIONS
+	IF "!c1"
+		IsEqual(%AMER_UptierTargetFound, INT:1)
+	THEN
+		//Refund shard if use was unsuccessful.
+		Subtract(%AMER_UptierPower, 2)	//Index starts at zero.
+		GetElement(_WhichStat, %AMER_UptierPower, AMER_LOOT_UNI_Shard_B, AMER_LOOT_UNI_Shard_C, AMER_LOOT_UNI_Shard_D, AMER_LOOT_UNI_Shard_E)
+		CharacterAddToInventory(__Me, _WhichStat, 1)
+		PlayEffectAt(__Me, "FX_Creatures_Skills_Dragon_Astral_LightningBall_Impact_A")
+		IF "c1"
+			IsEqual(%AMER_UptierTargetFound, INT:0)
+		THEN
+			//Display text for no Artifact found at all.
+			GetRandom(_WhichStat, "AMER_UNI_ArtifactFailedTarget_A", "AMER_UNI_ArtifactFailedTarget_B", "AMER_UNI_ArtifactFailedTarget_C")
+			DisplayText(__Me, _WhichStat, 3.5)
+		ENDIF
+	ENDIF
+	
+	
+	
+EVENT UptierFindTarget
+VARS
+	ITEM:_Item
+	INT:_Tier
+	FLOAT:_MyLevel
+	STRING:_OldStat
+	STRING:_NewStat
+	FIXEDSTRING:_WhichStat
+ON
+	OnIterateItem(_Item, "AMER_UptierFindTarget")
+ACTIONS
+	IF "c1"
+		IsEqual(%AMER_UptierTargetFound, INT:0)
+	THEN
+		IF "c1"
+			GetVar(_Tier, _Item, "AMER_ArtifactUptiering_MyTier")
+		THEN
+			IF "c1"
+				IsLessThen(_Tier, %AMER_UptierPower)
+			THEN
+				//Calculate target level.
+				Add(_Tier, 1)
+				Multiply(_Tier, 5)
+				
+				IF "c1&!c2"
+					CharacterGetStat(_MyLevel, __Me, Level)
+					IsGreaterThen(_Tier, _MyLevel) 
+				THEN
+					IF "c1"
+						GetVar(_OldStat, _Item, "AMER_ArtifactUptiering_Stat")
+					THEN
+						Set(%AMER_UptierTargetFound, 1)
+						
+						//Construct stat entry string.
+						Print(_NewStat, _OldStat, _Tier)
+						Cast(_WhichStat, _NewStat)
+						CharacterAddToInventory(__Me, _WhichStat, 1)
+		
+						StatusText(__Me, "AMER_UNI_ArtifactUptiered")
+		
+						PlayEffectAt(_Item, "FX_Skills_Air_Storm_Impact_A")
+						//PlayEffectAt(_Item, "FX_Creatures_Skills_Dragon_Astral_LightningBall_Impact_A")
+						PlayEffectAt(_Item, "FX_Skills_Air_NetherSwap_Disappear_A")
+						CharacterPlayEffect(__Me, "FX_Skills_Air_NetherSwap_Reappear_A")
+						
+						ItemDestroy(_Item)
+					ENDIF
+				ELSE
+					//Display text for failure due to player level too low.
+					GetRandom(_WhichStat, "AMER_UNI_ArtifactFailedLevel_A", "AMER_UNI_ArtifactFailedLevel_B", "AMER_UNI_ArtifactFailedLevel_C")
+					DisplayText(__Me, _WhichStat, 3.5)
+					Set(%AMER_UptierTargetFound, -1)
+				ENDIF
+			ELSE
+				//Display text for failure due to shard too low.
+				GetRandom(_WhichStat, "AMER_UNI_ArtifactFailedShard_A", "AMER_UNI_ArtifactFailedShard_B", "AMER_UNI_ArtifactFailedShard_C", "AMER_UNI_ArtifactFailedShard_D")
+				DisplayText(__Me, _WhichStat, 3.5)
+				Set(%AMER_UptierTargetFound, -1)
+			ENDIF
+		ENDIF
+	ENDIF
+	
+	
+	
+//===========================================================//
+//                  Player Consume Catch                     //
+//===========================================================//
+//Check for player-only item affix consume applicators.
+EVENT PlayerItemAffixConsumeCatch
+VARS
+	CHARACTER:_Char
+	FLOAT:_Vitality
+	FLOAT:_SourceLevel
+	INT:_Level
+	STRING:_Str
+	FIXEDSTRING:_WhichText
+ON
+	OnCharacterStatus(__Me, CONSUME)
+ACTIONS
+	IF "c1"
+		IsEqual(%AMER_PlayerConsumeChoke, INT:0)
+	THEN
+		Set(%AMER_PlayerConsumeChoke, 1)
+		StartTimer("AMER_PlayerItemAffixChoke", 0.2, 0)
+		
+		//Arrogance damages the wielder when attacking.
+		IF "c1"
+			CharacterHasStatus(__Me ,CONSUME, Whiplash)
+		THEN
+			CharacterConsume(__Me, RemoveWhiplash)
+			IF "c1"
+				CharacterGetStat(_Vitality, __Me, Vitality)
+			THEN
+				Subtract(_Vitality, 0.05)	//Whiplash costs 5% vitality.
+				IF "!c1"
+					IsGreaterThen(_Vitality, 0.00)
+				THEN
+					CharacterDie(__Me)
+				ELSE
+					SetHealth(__Me, _Vitality)
+				ENDIF
+			ENDIF
+		ENDIF
+		
+		//Sacrifice 
+		IF "c1"
+			CharacterHasStatus(__Me ,CONSUME, AMER_UNI_SacrificeProc)
+		THEN
+			CharacterConsume(__Me, AMER_UNI_RemoveSacrificeProc)
+			CallFunction("AMER_UNI_SacrificeProc")
+		ENDIF
+		
+		//Patience
+		IF "c1"
+			CharacterHasStatus(__Me ,CONSUME, AMER_UNI_PatienceProc)
+		THEN
+			CharacterConsume(__Me, AMER_UNI_RemovePatienceProc)
+			CallFunction("AMER_UNI_PatienceProc")
+		ENDIF
+		
+		//Pariah
+		IF "c1"
+			CharacterHasStatus(__Me, CONSUME, AMER_UNI_PariahProc)
+		THEN
+			CharacterConsume(__Me, AMER_UNI_RemovePariahProc)
+			CallFunction("AMER_UNI_PariahProc")
+		ENDIF
+		
+		//Cataclysm
+		IF "c1"
+			CharacterHasStatus(__Me ,CONSUME, AMER_UNI_CataclysmProc)
+		THEN
+			CharacterConsume(__Me, AMER_UNI_RemoveCataclysmProc)
+			IF "c1"
+				CharacterGetStat(_SourceLevel, __Me, Level)
+			THEN
+				Cast(_Level, _SourceLevel)
+				ExplodeAt(__Me, Projectile_Fireball, _Level, __Me)
+			ENDIF
+		ENDIF
+		
+		//Furin's Street Sweeper
+		IF "c1"
+			CharacterHasStatus(__Me ,CONSUME, AMER_UNI_FurinProc)
+		THEN
+			CharacterConsume(__Me, AMER_UNI_RemoveFurinProc)
+			CreateSurfaceAt(__Me, None, 3.0, 1)
+			IF "c1"
+				IsRandom(0.25)
+			THEN
+				GetRandomBetween(_Level, 1, 14)
+				Print(_Str, "AMER_UNI_FurinProcSpeech[1]", _Level)
+				Cast(_WhichText, _Str)
+				DisplayText(__Me, _WhichText, 3.0)
+			ENDIF
+		ENDIF
+		
+		//Leviathan
+		IF "c1"
+			CharacterHasStatus(__Me ,CONSUME, AMER_UNI_LeviathanProc)
+		THEN
+			CharacterConsume(__Me, AMER_UNI_RemoveLeviathanProc)
+			IF "!c1"
+				CharacterHasStatus(__Me, WET)
+			THEN
+				CharacterConsume(__Me, AMER_UNI_Leviathan)
+			ENDIF
+			
+			IF "c1"
+				IsRandom(0.25)
+			THEN
+				ExplodeAt(__Me, AMER_SCRIPTSKILL_Leviathan, -1, __Me)
+			ENDIF
+		ENDIF
+		
+		//Lodestone
+		IF "c1"
+			CharacterHasStatus(__Me ,CONSUME, AMER_UNI_LodestoneProc)
+		THEN
+			CharacterConsume(__Me, AMER_UNI_RemoveLodestoneProc)
+			Set(%AMER_ReusableItemAffixInt, INT:0)
+			IterateCharactersNear(__Me, 15.0, "AMER_LodestoneTeleportation", Random, Distance)
+		ENDIF
+	ENDIF
+	
+EVENT PlayerItemAffixChoke
+ON
+	OnTimer("AMER_PlayerItemAffixChoke")
+ACTIONS
+	Set(%AMER_PlayerConsumeChoke, INT:0)
+	
+	
+
+//===========================================================//
+//                    Item Affix Scripting                   //
+//===========================================================//
+//Credit to the wonderful Baardvaark for all of his work within
+//the actual stat files for these great item affixes.
+EVENT BlessHealBuff
+ON
+	OnCharacterStatus(__Me, BLESSED) 	
+ACTIONS
+	IF "c1"
+		CharacterHasStatus(__Me, CONSUME, BlessBuff)
+	THEN
+		IF "c1&!c2"
+			IsEqual(%AMER_BlessHealProcced, INT:0)
+			CharacterHasStatus(__Me, DECAYING_TOUCH)
+		THEN
+			CharacterHeal(__Me, 0.20)
+			Set(%AMER_InvisibleHealProcced, INT:1)
+		ENDIF
+	ENDIF
+
+EVENT InvisibleHealBuff
+ON
+	OnCharacterStatus(__Me,INVISIBLE)
+ACTIONS
+	IF "c1"
+		CharacterHasStatus(__Me, CONSUME, InvisibleHeal)
+	THEN
+		IF "c1&!c2"
+			IsEqual(%AMER_InvisibleHealProcced, INT:0)
+			CharacterHasStatus(__Me, DECAYING_TOUCH)
+		THEN
+			CharacterHeal(__Me, 0.20)
+			Set(%AMER_InvisibleHealProcced, INT:1)
+		ENDIF
+	ENDIF
+	
+EVENT PlayerWetApplied
+ON
+	OnCharacterStatus(__Me, WET)
+ACTIONS
+	//Dispel Leviathan when becoming Wet.
+	IF "c1"
+		CharacterHasStatus(__Me, CONSUME, AMER_UNI_Leviathan)
+	THEN
+		CharacterConsume(__Me, AMER_UNI_RemoveLeviathan)
+	ENDIF
+	
+EVENT PlayerBurningApplied
+ON
+	OnCharacterStatus(__Me, BURNING)
+ACTIONS
+	CallFunction("AMER_MasochismProc")
+	
+EVENT PlayerPoisonedApplied
+ON
+	OnCharacterStatus(__Me, POISONED)
+ACTIONS
+	CallFunction("AMER_MasochismProc")
+	
+EVENT PlayerBleedingApplied
+ON
+	OnCharacterStatus(__Me, BLEEDING)
+ACTIONS
+	CallFunction("AMER_MasochismProc")
+	
+EVENT PlayerFrozenApplied
+ON
+	OnCharacterStatus(__Me, FROZEN)
+ACTIONS
+	CallFunction("AMER_MasochismProc")
+	
+EVENT PlayerFearApplied
+ON
+	OnCharacterStatus(__Me, FEAR)
+ACTIONS
+	CallFunction("AMER_MasochismProc")
+	
+EVENT PlayerPetrifiedApplied
+ON
+	OnCharacterStatus(__Me, PETRIFIED)
+ACTIONS
+	CallFunction("AMER_MasochismProc")
+	
+EVENT PlayerCrippledApplied
+ON
+	OnCharacterStatus(__Me, CRIPPLED)
+ACTIONS
+	CallFunction("AMER_MasochismProc")
+	
+EVENT PlayerSlowedApplied
+ON
+	OnCharacterStatus(__Me, SLOWED)
+ACTIONS
+	CallFunction("AMER_MasochismProc")
+	
+EVENT PlayerStunnedApplied
+ON
+	OnCharacterStatus(__Me, STUNNED)
+ACTIONS
+	CallFunction("AMER_MasochismProc")
+	
+EVENT PlayerCharmedApplied
+ON
+	OnCharacterStatus(__Me, CHARMED)
+ACTIONS
+	CallFunction("AMER_MasochismProc")
+	
+EVENT PlayerKnockedDownApplied
+ON
+	OnCharacterStatus(__Me, KNOCKED_DOWN)
+ACTIONS
+	CallFunction("AMER_MasochismProc")
+	
+EVENT PlayerBlindApplied
+ON
+	OnCharacterStatus(__Me, BLIND)
+ACTIONS
+	CallFunction("AMER_MasochismProc")
+	
+EVENT PlayerDiseasedApplied
+ON
+	OnCharacterStatus(__Me, DISEASED)
+ACTIONS
+	CallFunction("AMER_MasochismProc")
+	
+EVENT PlayerMutedApplied
+ON
+	OnCharacterStatus(__Me, MUTED)
+ACTIONS
+	CallFunction("AMER_MasochismProc")
+	
+EVENT PlayerWeakApplied
+ON
+	OnCharacterStatus(__Me, WEAK)
+ACTIONS
+	CallFunction("AMER_MasochismProc")
+	
+EVENT MasochismProc
+ON
+	OnFunction("AMER_MasochismProc")
+ACTIONS
+	IF "c1"
+		CharacterHasStatus(__Me, CONSUME, Masochism)
+	THEN
+		IF "c1"
+			CharacterHasStatus(__Me, CONSUME, Masochism1)
+		THEN
+			CharacterConsume(__Me, Masochism2)
+		ELIF "c1"
+			CharacterHasStatus(__Me, CONSUME, Masochism2)
+		THEN
+			CharacterConsume(__Me, Masochism3)
+		ELIF "c1"
+			CharacterHasStatus(__Me, CONSUME, Masochism3)
+		THEN
+			CharacterConsume(__Me, Masochism4)
+		ELIF "c1"
+			CharacterHasStatus(__Me, CONSUME, Masochism4)
+		THEN
+			CharacterConsume(__Me, Masochism5)
+		ELIF "c1"
+			CharacterHasStatus(__Me, CONSUME, Masochism5)
+		THEN
+			CharacterConsume(__Me, Masochism5)
+		ELSE
+			CharacterConsume(__Me, Masochism1)
+		ENDIF
+	ENDIF
+	
+	
+	
+	
+//===========================================================//
+//             Player Artifact Unique Scripting              //
+//===========================================================//
+EVENT AMER_UNI_PariahProc
+VARS
+	FLOAT:_Vitality
+ON
+	OnFunction("AMER_UNI_PariahProc")
+ACTIONS
+	IF "c1"
+		CharacterGetStat(_Vitality, __Me, Vitality)
+	THEN
+		IF "c1"
+			CharacterHasStatus(__Me, CONSUME, AMER_UNI_PariahProc1)
+		THEN
+			CharacterConsume(__Me, AMER_UNI_PariahProc2)
+			Subtract(_Vitality, 0.40)
+		ELIF "c1"
+			CharacterHasStatus(__Me, CONSUME, AMER_UNI_PariahProc2)
+		THEN
+			CharacterConsume(__Me, AMER_UNI_PariahProc3)
+			Subtract(_Vitality, 0.30)
+		ELIF "c1"
+			CharacterHasStatus(__Me, CONSUME, AMER_UNI_PariahProc3)
+		THEN
+			CharacterConsume(__Me, AMER_UNI_PariahProc4)
+			Subtract(_Vitality, 0.20)
+		ELIF "c1"
+			CharacterHasStatus(__Me, CONSUME, AMER_UNI_PariahProc4)
+		THEN
+			CharacterConsume(__Me, AMER_UNI_PariahProc5)
+			Subtract(_Vitality, 0.10)
+		ELIF "c1"
+			CharacterHasStatus(__Me, CONSUME, AMER_UNI_PariahProc5)
+		THEN
+			CharacterConsume(__Me, AMER_UNI_PariahProc5)
+			Subtract(_Vitality, 0.05)
+		ELSE
+			CharacterConsume(__Me, AMER_UNI_PariahProc1)
+		ENDIF
+		IF "!c1"
+			IsGreaterThen(_Vitality, 0.00)
+		THEN
+			CharacterDie(__Me)
+		ELSE
+			SetHealth(__Me, _Vitality)
+		ENDIF
+	ENDIF
+	
+EVENT AMER_UNI_PatienceProc
+ON
+	OnFunction("AMER_UNI_PatienceProc")
+ACTIONS
+	IF "c1"
+		CharacterHasStatus(__Me, CONSUME, AMER_UNI_PatienceProc1)
+	THEN
+		CharacterConsume(__Me, AMER_UNI_PatienceProc2)
+	ELIF "c1"
+		CharacterHasStatus(__Me, CONSUME, AMER_UNI_PatienceProc2)
+	THEN
+		CharacterConsume(__Me, AMER_UNI_PatienceProc3)
+	ELIF "c1"
+		CharacterHasStatus(__Me, CONSUME, AMER_UNI_PatienceProc3)
+	THEN
+		CharacterConsume(__Me, AMER_UNI_PatienceProc4)
+	ELIF "c1"
+		CharacterHasStatus(__Me, CONSUME, AMER_UNI_PatienceProc4)
+	THEN
+		CharacterConsume(__Me, AMER_UNI_PatienceProc5)
+	ELIF "c1"
+		CharacterHasStatus(__Me, CONSUME, AMER_UNI_PatienceProc5)
+	THEN
+		CharacterConsume(__Me, AMER_UNI_PatienceProc5)
+	ELSE
+		CharacterConsume(__Me, AMER_UNI_PatienceProc1)
+	ENDIF
+	
+EVENT AMER_UNI_SacrificeProc
+ON
+	OnFunction("AMER_UNI_SacrificeProc")
+ACTIONS
+	IF "c1"
+		CharacterHasStatus(__Me, CONSUME, AMER_UNI_SacrificeProc1)
+	THEN
+		CharacterConsume(__Me, AMER_UNI_SacrificeProc2)
+	ELIF "c1"
+		CharacterHasStatus(__Me, CONSUME, AMER_UNI_SacrificeProc2)
+	THEN
+		CharacterConsume(__Me, AMER_UNI_SacrificeProc3)
+	ELIF "c1"
+		CharacterHasStatus(__Me, CONSUME, AMER_UNI_SacrificeProc3)
+	THEN
+		CharacterConsume(__Me, AMER_UNI_SacrificeProc4)
+	ELIF "c1"
+		CharacterHasStatus(__Me, CONSUME, AMER_UNI_SacrificeProc4)
+	THEN
+		CharacterConsume(__Me, AMER_UNI_SacrificeProc5)
+	ELIF "c1"
+		CharacterHasStatus(__Me, CONSUME, AMER_UNI_SacrificeProc5)
+	THEN
+		CharacterConsume(__Me, AMER_UNI_SacrificeProc5)
+	ELSE
+		CharacterConsume(__Me, AMER_UNI_SacrificeProc1)
+	ENDIF
+	
+EVENT UrgencyUpkeep
+//Grant bonuses based on how hurt the wearer is.
+VARS
+	POTION:_WhichPotion
+	FLOAT:_Vitality
+	INT:_Index
+ON
+	OnFunction("AMER_UrgencyUpkeep")
+ACTIONS
+	//Determine APRecovery to add.
+	IF "c1&c2"
+		CharacterGetStat(_Vitality, __Me, Vitality)
+		IsLessThen(_Vitality, 1.0)
+	THEN
+		//Vitality is returned as a percentage from 0.0 to 1.0.
+		//Multiply by 5.0 and cast to int, this gives ranges of
+		//99-80, 79-60, 59-40, 39-20, and 19-0 as indeces of
+		//4, 3, 2, 1, and 0. 100% vitality is disregarded.
+		Multiply(_Vitality, 5.0)
+		Cast(_Index, _Vitality)
+		GetElement(_WhichPotion, _Index, AMER_UNI_UrgencyBuff5, AMER_UNI_UrgencyBuff4, AMER_UNI_UrgencyBuff3, AMER_UNI_UrgencyBuff2, AMER_UNI_UrgencyBuff1)
+		CharacterConsume(__Me, _WhichPotion)
+	ENDIF
+	
+EVENT TheVaultOnTurnEnd
+//Grant 30% of current action points as action point
+//recovery on turn end.
+VARS
+	POTION:_WhichPotion
+	FLOAT:_APToAdd
+	INT:_Value
+	INT:_Count
+ON
+	OnFunction("AMER_TheVaultOnTurnEnd")
+ACTIONS
+	//Determine APRecovery to add.
+	IF "c1"
+		CharacterGetStat(_APToAdd, __Me, ActionPoints)
+	THEN
+		Multiply(_APToAdd, 0.3)
+	ENDIF
+	
+	//Can handle up to 15 bonus APR, so up to 50 held AP.
+	Set(_Count, 0)
+	Set(_Value, 8)
+	WHILE "c1&c2"
+		IsLessThen(_Count, 4)
+		IsGreaterThen(_APToAdd, 0.0)
+	DO
+		IF "!c1"
+			IsLessThen(_APToAdd, _Value)
+		THEN
+			Subtract(_APToAdd, _Value)
+			GetElement(_WhichPotion, _Count, AMER_UNI_Vault_AP8, AMER_UNI_Vault_AP4, AMER_UNI_Vault_AP2, AMER_UNI_Vault_AP1)
+			CharacterConsume(__Me, _WhichPotion)
+		ENDIF
+		Divide(_Value, 2)
+		Add(_Count, 1)
+	ENDWHILE
+	
+EVENT NecromancersRaimentOnTurnEnd
+//Gain 1 action point recovery per corpse within 3.5 meters
+//on turn end.
+VARS
+	POTION:_WhichPotion
+ON
+	OnFunction("AMER_NecromancersRaimentOnTurnEnd")
+ACTIONS
+	Set(%AMER_ReusableItemAffixInt, INT:0)
+	IterateCharactersNear(__Me, 3.5, "AMER_NecromancersRaimentCorpseCheck")
+	Subtract(%AMER_ReusableItemAffixInt, 1)	//index starts at zero.
+	IF "!c1"
+		IsLessThen(%AMER_ReusableItemAffixInt, INT:0)
+	THEN
+		GetElement(_WhichPotion, %AMER_ReusableItemAffixInt, AMER_UNI_NecromancerAP1, AMER_UNI_NecromancerAP2, AMER_UNI_NecromancerAP3)
+		CharacterConsume(__Me, _WhichPotion)
+	ENDIF
+	
+EVENT NecromancersRaimentCorpseCheck
+//Only bother counting corpses up to 3.
+VARS
+	CHARACTER:_Char
+ON
+	OnIterateCharacter(_Char, "AMER_NecromancersRaimentCorpseCheck")
+ACTIONS
+	IF "c1&c2"
+		IsLessThen(%AMER_ReusableItemAffixInt, 3)	//3 is maximum corpses.
+		CharacterIsDead(_Char)
+	THEN
+		PlayEffectAt(_Char, "FX_Skills_WitchCraft_TargetedCurse_Impact_A")
+		Add(%AMER_ReusableItemAffixInt, 1)
+	ENDIF
+	
+EVENT LodestoneTeleportation
+//Only bother counting corpses up to 3.
+VARS
+	CHARACTER:_Char
+	FLOAT3:_Pos
+ON
+	OnIterateCharacter(_Char, "AMER_LodestoneTeleportation")
+ACTIONS
+	IF "c1"
+		IsEqual(%AMER_ReusableItemAffixInt, INT:0)
+	THEN
+		IF "c1"
+			CharacterIsEnemy(_Char, __Me)
+		THEN
+			IF "!c1&!c2&!c3&!c4"
+				CharacterIsDead(_Char)
+				CharacterHasStatus(_Char, INVISIBLE)
+				CharacterHasStatus(_Char, SNEAKING)
+				CharacterHasStatus(_Char, INVULNERABLE)
+			THEN
+				GetPosition(_Char, _Pos)
+				IF "c1"
+					FindValidPosition(_Pos, 2.0, __Me)
+				THEN
+					Set(%AMER_ReusableItemAffixInt, 1)
+					PlayEffectAt(__Me, "FX_Skills_Air_NetherSwap_Disappear_A")
+					TeleportTo(__Me, _Pos)
+					PlayEffectAt(__Me, "FX_Skills_Air_NetherSwap_Reappear_A")
+				ENDIF
+			ENDIF
+		ENDIF
+	ENDIF
+	
+	
+	
+//=================================================//
+//                                                 //
+//    P L A Y E R   I T E M   F U N C T I O N S    //
+//                                                 //
+//=================================================//

@@ -1,0 +1,100 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+CharacterSetOnStage(CHARACTER_AMER_LED_Bridge_Vampire_Assassin02, 0);
+CharacterSetOnStage(CHARACTER_AMER_LED_Bridge_Vampire_Muse02, 0);
+CharacterSetOnStage(CHARACTER_AMER_LED_Bridge_Vampire_Muse03, 0);
+CharacterSetOnStage(CHARACTER_AMER_LED_Bridge_Vampire_Weaponmaster02, 0);
+ItemSetOnstage(ITEM_AMER_LED_VampireSmoke_000, 0);
+ItemSetOnstage(ITEM_AMER_LED_VampireSmoke_001, 0);
+ItemSetOnstage(ITEM_AMER_LED_VampireSmoke_002, 0);
+ItemSetOnstage(ITEM_AMER_LED_VampireSmoke_003, 0);
+
+DB_LED_RepositoryVampires(CHARACTER_AMER_LED_Bridge_Vampire_Assassin02);
+DB_LED_RepositoryVampires(CHARACTER_AMER_LED_Bridge_Vampire_Muse02);
+DB_LED_RepositoryVampires(CHARACTER_AMER_LED_Bridge_Vampire_Muse03);
+DB_LED_RepositoryVampires(CHARACTER_AMER_LED_Bridge_Vampire_Weaponmaster02);
+
+DB_LED_RepositoryVampiresCount(4);
+KBSECTION
+IF
+	ItemEvent(_, "AMER_LED_RepositoryTriggered")
+THEN
+	ItemSetOnstage(ITEM_AMER_LED_VampireSmoke_000, 1);
+	ItemSetOnstage(ITEM_AMER_LED_VampireSmoke_001, 1);
+	ItemSetOnstage(ITEM_AMER_LED_VampireSmoke_002, 1);
+	ItemSetOnstage(ITEM_AMER_LED_VampireSmoke_003, 1);
+	ItemMoveToTrigger(ITEM_AMER_LED_VampireSmoke_000, TRIGGER_LED_Point_OssurotBridge_Vampire01, 5.0, 0.0, 0);
+	ItemMoveToTrigger(ITEM_AMER_LED_VampireSmoke_001, TRIGGER_LED_Point_OssurotBridge_Vampire02, 5.0, 0.0, 0);
+	ItemMoveToTrigger(ITEM_AMER_LED_VampireSmoke_002, TRIGGER_LED_Point_OssurotBridge_Vampire03, 5.0, 0.0, 0);
+	ItemMoveToTrigger(ITEM_AMER_LED_VampireSmoke_003, TRIGGER_LED_Point_OssurotBridge_Vampire04, 5.0, 0.0, 0);
+	ItemRotateY(ITEM_LED_OssurotBridge_TombCover_000, 15.0, 1.0);
+	ItemRotateY(ITEM_LED_OssurotBridge_TombCover_001, 35.0, 1.0);
+	ItemRotateY(ITEM_LED_OssurotBridge_TombCover_002, 20.0, 1.0);
+	ItemRotateY(ITEM_LED_OssurotBridge_TombCover_003, 45.0, 1.0);
+	TimerLaunch("AMER_LED_RepositoryVampiresAppear", 6000);
+
+
+
+IF
+	TimerFinished("AMER_LED_RepositoryVampiresAppear")
+THEN
+	ItemMoveToTrigger(ITEM_AMER_LED_VampireSmoke_000, TRIGGER_LED_Point_OssurotBridge_Vampire01B, 5.0, 0.0, 0);
+	ItemMoveToTrigger(ITEM_AMER_LED_VampireSmoke_001, TRIGGER_LED_Point_OssurotBridge_Vampire02B, 5.0, 0.0, 0);
+	ItemMoveToTrigger(ITEM_AMER_LED_VampireSmoke_002, TRIGGER_LED_Point_OssurotBridge_Vampire03B, 5.0, 0.0, 0);
+	ItemMoveToTrigger(ITEM_AMER_LED_VampireSmoke_003, TRIGGER_LED_Point_OssurotBridge_Vampire04B, 5.0, 0.0, 0);
+	CharacterSetOnStage(CHARACTER_AMER_LED_Bridge_Vampire_Assassin02, 1);
+	CharacterSetOnStage(CHARACTER_AMER_LED_Bridge_Vampire_Muse02, 1);
+	CharacterSetOnStage(CHARACTER_AMER_LED_Bridge_Vampire_Muse03, 1);
+	CharacterSetOnStage(CHARACTER_AMER_LED_Bridge_Vampire_Weaponmaster02, 1);
+	PlayEffectAtCharacter("FX_Skills_WitchCraft_HorrificScream_Cast_A", CHARACTER_AMER_LED_Bridge_Vampire_Assassin02);
+	PlayEffectAtCharacter("FX_Skills_WitchCraft_HorrificScream_Cast_A", CHARACTER_AMER_LED_Bridge_Vampire_Muse02);
+	PlayEffectAtCharacter("FX_Skills_WitchCraft_HorrificScream_Cast_A", CHARACTER_AMER_LED_Bridge_Vampire_Muse03);
+	PlayEffectAtCharacter("FX_Skills_WitchCraft_HorrificScream_Cast_A", CHARACTER_AMER_LED_Bridge_Vampire_Weaponmaster02);
+
+
+IF
+CharacterDied(CHARACTER_AMER_LED_Bridge_Vampire_Assassin02)
+THEN
+PROC_LED_RepositoryVampiresUpdateCount();
+
+IF
+CharacterDied(CHARACTER_AMER_LED_Bridge_Vampire_Muse02)
+THEN
+PROC_LED_RepositoryVampiresUpdateCount();
+
+IF
+CharacterDied(CHARACTER_AMER_LED_Bridge_Vampire_Muse03)
+THEN
+PROC_LED_RepositoryVampiresUpdateCount();
+
+IF
+CharacterDied(CHARACTER_AMER_LED_Bridge_Vampire_Weaponmaster02)
+THEN
+PROC_LED_RepositoryVampiresUpdateCount();
+
+
+
+PROC
+PROC_LED_RepositoryVampiresUpdateCount()
+AND
+DB_LED_RepositoryVampiresCount(_Remain)
+AND
+IntegerSubtract(_Remain, 1, _NewRemain)
+THEN
+DB_LED_RepositoryVampiresCount(_NewRemain);
+PROC_LED_RevealOssurotDoor((INTEGER)_NewRemain);
+
+
+
+PROC
+PROC_LED_RevealOssurotDoor((INTEGER)_Remain)
+AND
+_Remain == 0
+THEN
+ItemSetVisible(ITEM_AMER_LED_OssurotDoor, 1);
+PlayEffectAtItem("FX_Skills_Fire_GrenadeMolotov_Impact_A", ITEM_AMER_LED_OssurotDoor);
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "__Start"

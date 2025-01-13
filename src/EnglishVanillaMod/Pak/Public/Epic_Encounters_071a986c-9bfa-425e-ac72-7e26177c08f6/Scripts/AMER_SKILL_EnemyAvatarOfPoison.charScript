@@ -1,0 +1,175 @@
+#TEMPLATE "_SKILL_Base" : Target_ImmuneToPoisoning
+	
+INIT
+CHARACTER:__Me
+FLOAT:%SkillTargetScore_Target_ImmuneToPoisoning=-1000000
+// [GLOBAL_VARS]
+FLOAT:%Target_ImmuneToPoisoning_MyInitiative
+// [~GLOBAL_VARS]
+	
+EVENTS
+	
+// [EVENTS]
+// [~EVENTS]
+	
+// Calculate the priority of the skill
+EVENT CalculateScore_Target_ImmuneToPoisoning
+VARS
+	// [CALC_VARS]
+	FLOAT:_SkillRangeMin
+	FLOAT:_SkillRangeMax
+	FLOAT3:_TargetPos
+	// [~CALC_VARS]
+ON
+	OnFunction("CalculateScore_Target_ImmuneToPoisoning")
+ACTIONS
+	Set(%SkillTargetScore_Target_ImmuneToPoisoning, -1000000)
+
+	// [CALC_ACTIONS_PRE]
+	// [~CALC_ACTIONS_PRE]
+	// [CALC_ACTIONS]
+	IF "c1"
+		CharacterGetStat(%Target_ImmuneToPoisoning_MyInitiative, __Me, Initiative)
+	THEN
+		IterateCharactersInCombat(__Me, "CalculateTarget_Target_ImmuneToPoisoning", Lowest, Vitality)
+		IF "!c1"
+			IsEqual(%SkillTargetChar_Target_ImmuneToPoisoning, null)
+		THEN
+			Add(%ActionScore_Target_ImmuneToPoisoning, %SkillTargetScore_Target_ImmuneToPoisoning)
+		ENDIF
+	ENDIF
+	// [~CALC_ACTIONS]
+	
+	
+	
+// Calculate the character we should target
+EVENT CalculateTarget_Target_ImmuneToPoisoning
+VARS	
+	CHARACTER:_Char
+	// [CALC_TARGET_VARS]
+	INT:_ClassScore_Target_ImmuneToPoisoning
+	FLOAT:_StatResistance
+	FLOAT:_Score
+	FLOAT:_SkillRangeMin
+	FLOAT:_SkillRangeMax
+	FLOAT:_DistanceToChar
+	FLOAT:_DistanceScore
+	FLOAT:_SaveScore
+	FLOAT:_Vitality
+	FLOAT:_TargetInit
+	// [~CALC_TARGET_VARS]
+ON
+	OnIterateCharacter(_Char, "CalculateTarget_Target_ImmuneToPoisoning")	
+ACTIONS
+	// [CALC_CHAR_TARGET_ACTIONS_PRE]
+	Set(_Score, 0.0)
+	// [~CALC_CHAR_TARGET_ACTIONS_PRE]
+	// [CALC_CHAR_TARGET_ACTIONS]
+	IF "!c1"
+		CharacterIsDead(_Char)
+	THEN
+		IF "c1"
+			CharacterIsAlly(__Me, _Char)
+		THEN
+			IF "!c1"
+				CharacterIsSummon(_Char)
+			THEN
+				IF "!c1"
+					CharacterHasStatus(_Char, CHARMED)
+				THEN
+					IF "c1"
+						CharacterHasStatus(_Char, POISONED)
+					THEN
+						//Triage score calculation
+						IF "c1"
+							CharacterGetStat(_Vitality, _Char, Vitality)
+						THEN
+							Multiply(_Vitality, -1.0)
+							Add(_Vitality, 1.0)
+							Multiply(_Vitality, 5.0)
+							Add(_Score, _Vitality)
+						ENDIF
+						
+						//Status calculation
+						IF "c1"
+							CharacterHasStatus(_Char, CONSUME, "AMER_STATUS_PoisonedResPenalty3")
+						THEN
+							Add(_Score, 3.0)
+						ELIF "c1"
+							CharacterHasStatus(_Char, CONSUME, "AMER_STATUS_PoisonedResPenalty2")
+						THEN
+							Add(_Score, 2.0)
+						ELIF "c1"
+							CharacterHasStatus(_Char, CONSUME, "AMER_STATUS_PoisonedResPenalty1")
+						THEN
+							Add(_Score, 1.0)
+						ENDIF
+						
+						//Surface calculation
+						IF "c1|c2"
+							IsInSurface(_Char, Ooze)
+							IsInSurface(_Char, CloudPoison)
+						THEN
+							Add(_Score, 3.0)
+						ENDIF
+						
+						//Worth more if target hasn't taken their turn yet.
+						IF "c1"
+							CharacterGetStat(_TargetInit, _Char, Initiative)
+						THEN
+							IF "c1"
+								IsLessThen(_TargetInit, %Target_ImmuneToPoisoning_MyInitiative)
+							THEN
+								Add(_Score, 1.0)
+							ENDIF
+						ENDIF
+						
+						// Range score calculation
+						IF "c1&c2"
+							CharacterGetSkillRange(_SkillRangeMin, _SkillRangeMax, __Me, Target_ImmuneToPoisoning)
+							GetDistance(_DistanceToChar, __Me, _Char)
+						THEN
+							Set(_DistanceScore, _DistanceToChar)
+							IF "c1"
+								IsGreaterThen(_DistanceScore, _SkillRangeMax)
+							THEN
+								Subtract(_DistanceScore, _SkillRangeMax)
+								Multiply(_DistanceScore, -1.0)
+							ELIF "c1"
+								IsLessThen(_DistanceScore, _SkillRangeMin)
+							THEN
+								Subtract(_DistanceScore, _SkillRangeMin)
+								Multiply(_DistanceScore, 1.0)
+							ELSE 
+								Set(_DistanceScore, 0.0)
+							ENDIF
+							Add(_Score, _DistanceScore)
+						ENDIF
+						
+						// Can see score calculation
+						IF "!c1"
+							CharacterCanSee(__Me, _Char)
+						THEN
+							Add(_Score, -10.0)
+						ENDIF
+						
+						IF "c1"
+							IsGreaterThen(_Score, %SkillTargetScore_Target_ImmuneToPoisoning)
+						THEN
+							Set(%SkillTargetChar_Target_ImmuneToPoisoning, _Char)
+							Set(%SkillTargetScore_Target_ImmuneToPoisoning, _Score)
+						ENDIF
+					ENDIF
+				ENDIF
+			ENDIF
+		ENDIF
+	ENDIF
+	// [~CALC_CHAR_TARGET_ACTIONS]
+	
+	
+	
+	
+	
+	
+	
+	

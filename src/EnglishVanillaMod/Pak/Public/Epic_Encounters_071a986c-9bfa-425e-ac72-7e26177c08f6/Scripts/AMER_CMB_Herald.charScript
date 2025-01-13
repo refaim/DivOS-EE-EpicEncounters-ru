@@ -1,0 +1,180 @@
+//===============================================//
+//                                               //
+//                  H E R A L D                  //
+//                                               //
+//     Written by Matteo "Ameranth" T. (2016)    //
+//===============================================//
+INIT
+CHARACTER:__Me
+EXTERN CHARACTER:%AMER_Herald_Titan1 = null
+EXTERN CHARACTER:%AMER_Herald_Titan2 = null
+EXTERN CHARACTER:%AMER_Herald_Titan3 = null
+EXTERN CHARACTER:%AMER_Herald_Titan4 = null
+EXTERN CHARACTER:%AMER_Herald_Titan5 = null
+EXTERN CHARACTER:%AMER_Herald_Titan6 = null
+EXTERN ITEM:%AMER_Herald_Statue1 = null
+EXTERN ITEM:%AMER_Herald_Statue2 = null
+EXTERN ITEM:%AMER_Herald_Statue3 = null
+EXTERN ITEM:%AMER_Herald_Statue4 = null
+EXTERN ITEM:%AMER_Herald_Statue5 = null
+EXTERN ITEM:%AMER_Herald_Statue6 = null
+EXTERN ITEM:%AMER_Herald_Ice1A = null
+EXTERN ITEM:%AMER_Herald_Ice1B = null
+EXTERN ITEM:%AMER_Herald_Ice2A = null
+EXTERN ITEM:%AMER_Herald_Ice2B = null
+EXTERN ITEM:%AMER_Herald_Ice3A = null
+EXTERN ITEM:%AMER_Herald_Ice3B = null
+EXTERN ITEM:%AMER_Herald_Ice4A = null
+EXTERN ITEM:%AMER_Herald_Ice4B = null
+EXTERN ITEM:%AMER_Herald_Ice5A = null
+EXTERN ITEM:%AMER_Herald_Ice5B = null
+EXTERN ITEM:%AMER_Herald_Ice6A = null
+EXTERN ITEM:%AMER_Herald_Ice6B = null
+//CHARACTER:%AMER_Herald_SetOnStage = null
+INT:%AMER_Herald_TurnCount
+INT:%AMER_Herald_Activations = 1
+	
+EVENTS
+EVENT HeraldInit
+ON
+	OnInit()
+ACTIONS
+	
+	
+	
+EVENT HeraldCombatStart
+VARS
+ON
+	OnCombatStarted()
+ACTIONS
+	Set(%AMER_Herald_TurnCount, INT:0)
+	
+	
+	
+EVENT HeraldDie
+ON
+	OnDie(__Me, _, _, _)
+ACTIONS
+	DisplayText(__Me, "AMER_CMB_Herald_Die1", 3.5)
+	
+	
+	
+EVENT HeraldCombatEnded
+ON
+	OnCombatEnded()
+ACTIONS
+	
+	
+	
+EVENT HeraldOnTurn
+VARS
+//========================//
+	INT:_ActivateTurn = 2
+//========================//
+ON
+	OnTurn()
+ACTIONS
+	IF "c1"
+		IsLessThen(%AMER_Herald_Activations, INT:6)
+	THEN
+		Add(%AMER_Herald_TurnCount, INT:1)
+		IF "c1|c2"
+			IsEqual(%AMER_Herald_TurnCount, _ActivateTurn)
+			IsEqual(%AMER_Herald_Activations, INT:1)
+		THEN
+			Set(%AMER_Herald_TurnCount, INT:0)
+			SetPriority(HeraldActivateColossi, 10000)
+		ENDIF
+	ENDIF
+	
+	
+	
+EVENT HeraldActivateColossiDelay
+ON
+	OnTimer("AMER_Herald_ActivateColossiDelay")
+ACTIONS
+	CallFunction("AMER_Herald_DoActivateColossi")
+	DisplayCombatInfoText(__Me, "AMER_CMB_Herald_FirstTurn1", 3.5)
+	
+	
+	
+EVENT HeraldDoActivateColossi
+VARS
+	CHARACTER:_WhichChar
+	ITEM:_WhichItem
+	FIXEDSTRING:_WhichVar
+	STRING:_Str
+ON
+	OnFunction("AMER_Herald_DoActivateColossi")
+ACTIONS
+	Print(_Str, "AMER_Herald_Titan[1]", %AMER_Herald_Activations)
+	Cast(_WhichVar, _Str)
+	IF "c1"
+		GetVar(_WhichChar, __Me, _WhichVar)
+	THEN
+		Print(_Str, "AMER_Herald_Ice[1]A", %AMER_Herald_Activations)
+		Cast(_WhichVar, _Str)
+		IF "c1"
+			GetVar(_WhichItem, __Me, _WhichVar)
+		THEN
+			ItemDie(_WhichItem)
+			Print(_Str, "AMER_Herald_Ice[1]B", %AMER_Herald_Activations)
+			Cast(_WhichVar, _Str)
+			IF "c1"
+				GetVar(_WhichItem, __Me, _WhichVar)
+			THEN
+				ItemDie(_WhichItem)
+				Print(_Str, "AMER_Herald_Statue[1]", %AMER_Herald_Activations)
+				Cast(_WhichVar, _Str)
+				IF "c1"
+					GetVar(_WhichItem, __Me, _WhichVar)
+				THEN
+					ItemSetOnStage(_WhichItem, INT:0)
+					//Set(%AMER_Herald_SetOnStage, _WhichChar)
+					CharacterEvent(_WhichChar, "AMER_SetCharOnStage")
+				ENDIF
+			ENDIF
+		ENDIF
+	ENDIF
+	Add(%AMER_Herald_Activations, INT:1)
+	
+	
+	
+//===================BEHAVIOR====================//
+BEHAVIOUR
+REACTION HeraldActivateColossi, 0
+USAGE COMBAT
+VARS
+//===========================//
+	INT:_ActivateColossiLines = 3
+//===========================//
+	STRING:_Str
+	FIXEDSTRING:_Text
+	INT:_Rand
+ACTIONS
+	GetRandomBetween(_Rand, INT:1, _ActivateColossiLines)
+	Print(_Str, "AMER_CMB_Herald_Activate[1]", _Rand)
+	Cast(_Text, _Str)
+	CharacterPlayEffect(__Me, "FX_Skills_Warrior_Enemy_Inspire_Cast_A")
+	CharacterPlayAnimation("skill_fear_cast")
+	IF "c1"
+		IsEqual(%AMER_Herald_Activations, INT:1)
+	THEN
+		DisplayCombatInfoText(__Me, "AMER_CMB_Herald_FirstTurn1", 3.5)
+	ELSE
+		DisplayCombatInfoText(__Me, _Text, 3.5)
+	ENDIF
+	Sleep(0.75)
+	CallFunction("AMER_Herald_DoActivateColossi")
+	Sleep(0.75)
+	CallFunction("AMER_Herald_DoActivateColossi")
+	Sleep(3.5)
+	SetPriority(HeraldActivateColossi, INT:0)
+	
+	
+	
+//===============================================//
+//                                               //
+//                  H E R A L D                  //
+//                                               //
+//===============================================//

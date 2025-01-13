@@ -1,0 +1,223 @@
+//===============================================//
+//                                               //
+//         P R I M O R D I A L   B O S S         //
+//                                               //
+//     Written by Matteo "Ameranth" T. (2016)    //
+//===============================================//
+INIT
+CHARACTER:__Me
+EXTERN TRIGGER:%AMER_PrimordialBoss_PointGUID1 = "NONE"
+EXTERN TRIGGER:%AMER_PrimordialBoss_PointGUID2 = "NONE"
+EXTERN TRIGGER:%AMER_PrimordialBoss_PointGUID3 = "NONE"
+EXTERN TRIGGER:%AMER_PrimordialBoss_PointGUID4 = "NONE"
+EXTERN TRIGGER:%AMER_PrimordialBoss_PointGUID5 = "NONE"
+EXTERN TRIGGER:%AMER_PrimordialBoss_PointGUID6 = "NONE"
+EXTERN TRIGGER:%AMER_PrimordialBoss_PointGUID7 = "NONE"
+EXTERN TRIGGER:%AMER_PrimordialBoss_PointGUID8 = "NONE"
+EXTERN TRIGGER:%AMER_PrimordialBoss_PointGUID9 = "NONE"
+EXTERN ITEM:%AMER_PrimordialBoss_Anchor = null
+INT:%AMER_PrimordialBoss_TurnCount
+INT:%AMER_PrimordialBoss_EatSpawnsCountdown
+INT:%AMER_PrimordialBoss_EatTextDone
+INT:%AMER_PrimordialBoss_EatAndSpawnCooldown = 3
+	
+EVENTS
+EVENT PrimordialBossInit
+ON
+	OnInit()
+ACTIONS
+	IF "!c1"
+		IsEqual(%AMER_PrimordialBoss_Anchor, null)
+	THEN
+		ItemSetOnStage(%AMER_PrimordialBoss_Anchor, INT:0)
+	ENDIF
+	
+	
+	
+EVENT PrimordialBossCombatStart
+VARS
+ON
+	OnCombatStarted()
+ACTIONS
+	Set(%AMER_PrimordialBoss_TurnCount, INT:0)
+	Set(%AMER_PrimordialBoss_EatSpawnsCountdown, %AMER_PrimordialBoss_EatAndSpawnCooldown)
+	StartTimer("AMER_PrimordialBoss_InitialSpawnDelay", 1.0, 0)
+	
+	
+	
+EVENT PrimordialBossInitialSpawnDelay
+ON
+	OnTimer("AMER_PrimordialBoss_InitialSpawnDelay")
+ACTIONS
+	CallFunction("AMER_PrimordialBoss_DoSpawns")
+	
+	
+	
+EVENT PrimordialBossCombatEnded
+ON
+	OnCombatEnded()
+ACTIONS
+	//Have __Me clean up any remaining spawns if combat ends and __Me
+	//is still alive.
+	IF "!c1"
+		CharacterIsDead(__Me)
+	THEN
+		IterateCharactersNear(__Me, 30, "AMER_PrimordialBoss_IterateToEat")
+	ELSE
+	//Reveal my anchor when combat ends and I am dead.
+		IF "!c1"
+			IsEqual(%AMER_PrimordialBoss_Anchor, null)
+		THEN
+			ItemSetOnStage(%AMER_PrimordialBoss_Anchor, INT:1)
+			Set(%AMER_PrimordialBoss_Anchor, null)
+		ENDIF
+	ENDIF
+	
+	
+	
+EVENT PrimordialBossOnTurn
+VARS
+ON
+	OnTurn()
+ACTIONS
+	Add(%AMER_PrimordialBoss_TurnCount, INT:1)
+	Subtract(%AMER_PrimordialBoss_EatSpawnsCountdown, INT:1)
+	
+	IF "!c1"
+		IsGreaterThen(%AMER_PrimordialBoss_EatSpawnsCountdown, INT:0)
+	THEN
+		SetPriority(PrimordialBossEatSpawns, 1000)
+		Set(%AMER_PrimordialBoss_EatSpawnsCountdown, %AMER_PrimordialBoss_EatAndSpawnCooldown)
+	ENDIF
+	
+	
+	
+EVENT PrimordialBossDoSpawns
+VARS
+//===========================//
+	INT:_SupportedSpawns = 9
+	INT:_BaseSpawns = 3
+	CHARACTERTEMPLATE:_SpawnRoot = "AMER_CHAR_Primordial_Crawler_45b62c49-f713-4ea6-a7c7-335b45f48113"
+	FIXEDSTRING:_SpawnMaterial = "76b2ab4a-401c-438b-b987-b8f54ec8c8eb"
+//===========================//
+	CHARACTER:_Spawn
+	INT:_AdditionalSpawns = 0
+	INT:_SpawnAmount
+	INT:_Count
+	TRIGGER:_Point
+	INT:_RandomIndex
+	FLOAT:_SourceLevel
+	INT:_Level
+	FLOAT3:_Position
+ON
+	OnFunction("AMER_PrimordialBoss_DoSpawns")
+ACTIONS
+	IF "c1"
+		CharacterGetStat(_SourceLevel, __Me, Level)
+	THEN
+		Cast(_Level, _SourceLevel)
+		
+		DisplayCombatInfoText(__Me, "AMER_CMB_PrimordialBoss_Spawn", FLOAT:1)
+		DisplayText(__Me, "AMER_BLANK", FLOAT:1)	//Don't let any text linger overhead.
+		
+		//Calculate how many guys I get to make.
+		Set(_AdditionalSpawns, %AMER_PrimordialBoss_TurnCount)
+		Divide(_AdditionalSpawns, %AMER_PrimordialBoss_EatAndSpawnCooldown)
+		Set(_SpawnAmount, _BaseSpawns)
+		Add(_SpawnAmount, _AdditionalSpawns
+		
+		Set(_Count, INT:0)
+		WHILE "c1&c2"
+			IsLessThen(_Count, _SupportedSpawns)
+			IsLessThen(_Count, _SpawnAmount)
+		DO
+			//Get a random index for which location to spawn at.
+			GetRandomBetween(_RandomIndex, INT:1, _SupportedSpawns)
+			Subtract(_RandomIndex, INT:1)	//index starts at zero.
+			
+			//Get the point corresponding to the index, play the
+			//animation and and spawn there.
+			GetElement(_Point, _RandomIndex, %AMER_PrimordialBoss_PointGUID1, %AMER_PrimordialBoss_PointGUID2, %AMER_PrimordialBoss_PointGUID3, %AMER_PrimordialBoss_PointGUID4, %AMER_PrimordialBoss_PointGUID5, %AMER_PrimordialBoss_PointGUID6, %AMER_PrimordialBoss_PointGUID7, %AMER_PrimordialBoss_PointGUID8, %AMER_PrimordialBoss_PointGUID9)
+			GetPosition(_Point, _Position)
+			ShootLocalProjectileAt(AMER_SCRIPTSKILL_PrimordialDummyProj, __Me, null, _Point)
+			SpawnCharacter(_Spawn, _SpawnRoot, _Position, 1, 1, __Me, _Level)
+			SetMaterial(_Spawn, _SpawnMaterial, -1, 1, 1, 1)
+			CharacterPlayEffect(_Spawn, "FX_Skills_Ranger_GrenadeMustardGas_Impact_A")
+			
+			Add(_Count, INT:1)
+		ENDWHILE
+	ENDIF
+	
+	
+	
+EVENT PrimordialBossStartSpawnDelay
+ON
+	OnTimer("AMER_PrimordialBoss_StartSpawnDelay")
+ACTIONS
+	CallFunction("AMER_PrimordialBoss_DoSpawns")
+	
+	
+	
+EVENT PrimordialBossIterateToEat
+VARS
+//===========================//
+	FLOAT:_HealPercentage = 0.15
+	CHARACTERTEMPLATE:_SpawnRoot = "AMER_CHAR_Primordial_Crawler_45b62c49-f713-4ea6-a7c7-335b45f48113"
+//===========================//
+	CHARACTERTEMPLATE:_Root
+	FLOAT3:_CharPosition
+	CHARACTER:_Char
+ON
+	OnIterateCharacter(_Char, "AMER_PrimordialBoss_IterateToEat")
+ACTIONS
+	IF "c1&c2"
+		CharacterGetTemplate(_Char, _Root)
+		IsEqual(_Root, _SpawnRoot)
+	THEN
+		//Display text for this ability, but only do it once, and only
+		//if any spawns are found to consume.
+		IF "c1"
+			IsEqual(%AMER_PrimordialBoss_EatTextDone, INT:0)
+		THEN
+			Set(%AMER_PrimordialBoss_EatTextDone, INT:1)
+			DisplayCombatInfoText(__Me, "AMER_CMB_PrimordialBoss_Consume", FLOAT:1)
+			DisplayText(__Me, "AMER_BLANK", FLOAT:1)	//Don't let text linger overhead.
+		ENDIF
+			
+		//Display projectile animation, remove spawn and heal __Me.
+		GetPosition(_Char, _CharPosition)
+		ShootWorldProjectileAt(AMER_SCRIPTSKILL_PrimordialDummyProj, _Char, _CharPosition, __Me)
+		ShootLocalProjectileAt(AMER_SCRIPTSKILL_PrimordialDummyProj, _Char, null, __Me)
+		CharacterDestroy(_Char)
+		CharacterHeal(__Me, _HealPercentage)
+	ENDIF
+	
+	
+	
+//===================BEHAVIOR====================//
+BEHAVIOUR
+REACTION PrimordialBossEatSpawns, 0
+USAGE COMBAT
+VARS
+//===========================//
+	FLOAT:_Delay = 1
+	FLOAT:_Sleep = 4
+//===========================//
+ACTIONS
+	Set(%AMER_PrimordialBoss_EatTextDone, INT:0)
+	IterateCharactersInCombat(__Me, "AMER_PrimordialBoss_IterateToEat")
+	
+	//Give a delay to making new spawns, so the animations are separated.
+	StartTimer("AMER_PrimordialBoss_StartSpawnDelay", _Delay, 0)
+	
+	CharacterPlayAnimation("skill_fear_cast")
+	Sleep(_Sleep)
+	SetPriority(PrimordialBossEatSpawns, INT:0)
+	
+	
+	
+//===============================================//
+//                                               //
+//         P R I M O R D I A L   B O S S         //
+//                                               //
+//===============================================//

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<save>
+    <header version="2" time="1427201041" />
+    <version major="1" minor="3" revision="1" build="3" />
+    <region id="CharacterCreationClass">
+        <node id="root">
+            <attribute id="Armour" value="" type="22" />
+            <attribute id="Boots" value="" type="22" />
+            <attribute id="ClassDescription" value="A man who reminds you of one of those wardrobes at home" handle="h78b21217g3e89g4c46g8fe1gb30dce4cf16c" type="28" />
+            <attribute id="ClassLongDescription" value="Pavel is a powerful warrior. Smart, clever, strong - he emerged victorious from many desperate battles without even a scratch. Some say there was  magic involved in his victory; after all, his best friend is the archmage Solomatin. But this is nothing more than a rumour." handle="h95b9be0bgf5d1g4033g9333g0f985733f266" type="28" />
+            <attribute id="ClassName" value="Fighter" handle="h25c6b204g60c5g4fc8gaba9g776afb043723" type="28" />
+            <attribute id="ClassType" value="Fighter" type="22" />
+            <attribute id="ExtraEquipmentSet" value="" type="22" />
+            <attribute id="Gloves" value="" type="22" />
+            <attribute id="Leggings" value="" type="22" />
+            <attribute id="SkillSet" value="" type="22" />
+            <attribute id="Voice" value="0" type="5" />
+            <children>
+                <node id="AbilityChanges">
+                    <children>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="WarriorLore" type="23" />
+                            <attribute id="AmountIncreased" value="1" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="TwoHanded" type="23" />
+                            <attribute id="AmountIncreased" value="2" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="ArmorMastery" type="23" />
+                            <attribute id="AmountIncreased" value="1" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="BodyBuilding" type="23" />
+                            <attribute id="AmountIncreased" value="2" type="4" />
+                        </node>
+                    </children>
+                </node>
+                <node id="AttributeChanges">
+                    <children>
+                        <node id="AttributeChange">
+                            <attribute id="AmountIncreased" value="3" type="4" />
+                            <attribute id="Attribute" value="STR" type="23" />
+                        </node>
+                        <node id="AttributeChange">
+                            <attribute id="AmountIncreased" value="1" type="4" />
+                            <attribute id="Attribute" value="DEX" type="23" />
+                        </node>
+                        <node id="AttributeChange">
+                            <attribute id="AmountIncreased" value="3" type="4" />
+                            <attribute id="Attribute" value="CON" type="23" />
+                        </node>
+                    </children>
+                </node>
+                <node id="HenchManData">
+                    <attribute id="HairColor" value="0" type="5" />
+                    <attribute id="HairType" value="2" type="5" />
+                    <attribute id="HeadType" value="1" type="5" />
+                    <attribute id="ID" value="bd1844b9-cf04-48e5-a063-987c4b79bafb" type="22" />
+                    <attribute id="Icon" value="3" type="5" />
+                    <attribute id="IsMale" value="1" type="19" />
+                    <attribute id="Level" value="4" type="4" />
+                    <attribute id="Name" value="Pavel Zakharoff" type="30" />
+                    <attribute id="Race" value="0" type="5" />
+                    <attribute id="SkinColor" value="2" type="5" />
+                    <children>
+                        <node id="Skills">
+                            <attribute id="Object" value="Target_StunStart" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="Target_HelpingHand" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="Rush_RushStart" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="Heal_CureWoundsKnight" type="22" />
+                        </node>
+                    </children>
+                </node>
+                <node id="TalentsAdded">
+                    <children>
+                        <node id="TalentAdded">
+                            <attribute id="Talent" value="Carry" type="23" />
+                        </node>
+                        <node id="TalentAdded">
+                            <attribute id="Talent" value="WhatARush" type="23" />
+                        </node>
+                        <node id="TalentAdded">
+                            <attribute id="Talent" value="FiveStarRestaurant" type="23" />
+                        </node>
+                    </children>
+                </node>
+            </children>
+        </node>
+    </region>
+</save>

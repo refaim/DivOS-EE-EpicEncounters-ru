@@ -1,0 +1,214 @@
+INIT
+	CHARACTER:__Me
+	INT:%EffectHandle
+	INT:%Shadow_FXHandle
+	INT:%Bool_Disabled=0
+	INT:%AmountOfAfflictedAllies
+
+//----------
+BEHAVIOUR
+REACTION Imal_Peace_Anim, 1000
+USAGE PEACE
+VARS
+	FIXEDSTRING:_Text
+ACTIONS
+	CharacterPlayAnimation("Loop_Cast_Low_01", 0, 1)
+	GetRandom(_Text, "DAF_AD_Imal1", "DAF_AD_Imal2", "DAF_AD_Imal3")
+	DisplayText(__Me, _Text, 4)
+	Sleep(20)
+
+REACTION Imal_HyperSummon, 0
+USAGE ALL
+VARS
+	INT:_Successes=0
+	INT:_Failures=0
+	CHARACTER:_Player
+	FLOAT3:_PosOffset
+	FLOAT3:_MyPosition
+	FLOAT:_Angle
+	FLOAT:_Dist
+	CHARACTER:_Summon
+	CHARACTER:_ImalDouble
+CHECK "c1&!(c2|c3|c4|c5|c6|c7)"
+	CharacterGet(_Player,__Me,30,Lowest,Distance,Enemy)			//c1
+	CharacterHasStatus(__Me,"CHARMED")							//!c2
+	CharacterHasStatus(__Me,"PETRIFIED")						//!c3
+	CharacterHasStatus(__Me,"FEAR")								//!c4
+	CharacterHasStatus(__Me,"STUNNED")							//!c5
+	CharacterHasStatus(__Me,"MUTED")							//!c6
+	CharacterHasStatus(__Me,"FEAR")								//!c7	
+ACTIONS
+	CharacterLookAt(_Player)
+	CharacterPlayAnimation("cast_shout_cast",0,0)
+	WHILE "c1&c2"
+		IsLessThen(_Successes,5)
+		IsLessThen(_Failures,30)
+	DO
+		IF "c1"
+			GetPosition(__Me,_MyPosition)
+		THEN
+			Set(_PosOffset,{1;0;0}) 
+			GetRandomBetween(_Angle,-270,90)
+			GetRandomBetween(_Dist,1,3.5)
+			RotateY(_PosOffset,_Angle)
+			Multiply(_PosOffset,_Dist)	
+			Add(_MyPosition,_PosOffset)
+		ENDIF
+		IF "c1"
+			FindValidPosition(_MyPosition,3)
+		THEN	
+			CharacterPlayEffect(__Me,"FX_Skills_Air_Summon_Prepare_A")
+			IF "c1"
+				IsEqual(_Successes,0)
+			THEN	
+				//Sleep(0.5)
+				PlayEffectAt(_MyPosition,"FX_Creatures_Shadow_Spawn_A")	
+				//Sleep(0.7)				
+				SpawnCharacter(_ImalDouble,"AMER_CHAR_DAF_Imal_Heal_0b5eb42b-225e-454c-8984-8c93e1298909",_MyPosition,1,1,__Me)			
+				//Sleep(0.5)
+				Add(_Successes,1)				
+			ELIF "c1"
+				IsEqual(_Successes,1)
+			THEN
+				//Sleep(0.5)			
+				PlayEffectAt(_MyPosition,"FX_Creatures_Shadow_Spawn_A")	
+				//CharacterPlayAnimation("emotion_insulting",0,0)
+				//Sleep(0.7)				
+				SpawnCharacter(_ImalDouble,"AMER_CHAR_DAF_Imal_Mage_940d26a5-b0e8-44fe-b74c-5ec38b3df6dd",_MyPosition,1,1,__Me)					
+				//Sleep(0.8)
+				Add(_Successes,1)
+			ELIF "c1"
+				IsEqual(_Successes,2)
+			THEN
+				//Sleep(0.5)			
+				PlayEffectAt(_MyPosition,"FX_Creatures_Shadow_Spawn_A")	
+				//Sleep(0.7)				
+				SpawnCharacter(_ImalDouble,"AMER_CHAR_DAF_Imal_Archer_087b178a-36d3-4fe7-ab21-606ad70680d9",_MyPosition,1,1,__Me)	
+				//Sleep(0.5)
+				Add(_Successes,1)	
+			ELIF "c1"
+				IsEqual(_Successes,3)
+			THEN
+				//Sleep(0.5)
+				//CharacterPlayAnimation("Revolt_02",0,0)
+				PlayEffectAt(_MyPosition,"FX_Creatures_Shadow_Spawn_A")	
+				//Sleep(0.7)				
+				SpawnCharacter(_ImalDouble,"AMER_CHAR_DAF_Imal_Tank_fe74443e-786a-43b1-8894-ff5c4fbc1d94",_MyPosition,1,1,__Me)				
+				//Sleep(0.5)
+				Add(_Successes,1)	
+			ELIF "c1"
+				IsEqual(_Successes,4)
+			THEN
+				//Sleep(0.5)			
+				//CharacterPlayAnimation("Point_01",0,0)
+				CharacterPlayEffect(__Me,"FX_Skills_Air_Summon_Cast_A")			
+				PlayEffectAt(_MyPosition,"FX_Creatures_Shadow_Spawn_A")	
+				//Sleep(0.7)				
+				SpawnCharacter(_ImalDouble,"AMER_CHAR_DAF_Imal_Knight_a132cbbd-6adf-46a0-9859-6150d7068069",_MyPosition,1,1,__Me)			
+				//Sleep(0.5)
+				Add(_Successes,1)	
+			ELSE
+				Add(_Failures,1)
+			ENDIF
+		ELSE
+			 Add(_Failures,1)
+		ENDIF
+	ENDWHILE
+	IF "c1"
+		IsEqual(_Failures,50)
+	THEN
+		Set(_Failures,0)
+		SetPriority("Imal_HyperSummon",0)	
+	ENDIF
+	Set(_Successes,0)
+	SetPriority("Imal_HyperSummon",0)
+INTERRUPT
+	Reset()
+	
+REACTION Imal_Waiting_Showoff, 10
+USAGE WAITING
+VARS 
+	FIXEDSTRING:_Animation
+	FLOAT:_SleepTime 
+ACTIONS
+	GetWeightedRandom(_Animation,"still",INT:10,"Point_01",INT:20,"emotion_insulting",INT:10,"Dust_Off_01",INT:10,"Intimidate_01",INT:10,"Intimidate_02",INT:10)
+	CharacterPlayAnimation(_Animation)
+	GetRandomBetween(_SleepTime,1,8)
+	Sleep(_SleepTime)
+
+//----------	
+EVENTS
+EVENT ImalCombatStarted
+ON
+	OnCombatStarted()
+ACTIONS
+	SetPriority(Imal_HyperSummon, 1500)
+	
+	
+	
+EVENT ImalCombatEnded
+ON
+	OnCombatEnded()
+ACTIONS
+	IF "!c1"
+		CharacterIsDead(__Me)
+	THEN
+		IterateCharactersNear(__Me, 30.0, "AMER_Imal_Cleanup")
+	ENDIF
+	
+	
+	
+EVENT ImalCleanupSummons
+VARS
+	CHARACTER:_Char
+	CHARACTER:_Owner
+ON
+	OnIterateCharacter(_Char "AMER_Imal_Cleanup")
+ACTIONS
+	IF "c1&c2"
+		CharacterGetOwner(_Owner, _Char)
+		IsEqual(_Owner, __Me)
+	THEN
+		CharacterDestroy(_Char)
+	ENDIF
+	
+
+	
+EVENT OnInit_StartTimerToFX
+ON
+	OnInit()
+ACTIONS
+	StartTimer("DAF_Imal_InitialTimer",0.5,0)
+	/*
+	CharacterAddSkill("Shout_EnemyPurifyingShout")
+	CharacterAddSkill("Shout_EnemyNaturesCurse")
+	CharacterAddSkill("Projectile_EnemyCharm")
+	CharacterAddSkill("Projectile_EnemySilence")
+	CharacterAddSkill("Projectile_EnemyStaffOfMagusFire")
+	*/
+
+EVENT OnCharacterEvent_Dialog
+ON
+	OnCharacterEvent(__Me,"stopEvent")
+ACTIONS
+	Set(%Bool_Disabled,1)
+	SetPriority("Imal_Peace_Anim",0)
+	StopLoopEffect(%EffectHandle)
+		
+EVENT OnTimer_PlayLoopFX
+ON
+	OnTimer("DAF_Imal_InitialTimer")
+ACTIONS
+	IF "!c1"
+		IsEqual(%Bool_Disabled,1)
+	THEN
+		CharacterPlayLoopEffect(%EffectHandle,__Me,"FX_Skills_WitchCraft_Generic_A_Prepare_Hands","Bip001 L Forearm")
+	ENDIF
+	
+EVENT OnCombatEnded_OnDie_StopLoopFX
+ON
+	OnCombatEnded()	
+	OnDie(__Me,_,_,_)
+	OnDeactivate()
+ACTIONS
+	StopLoopEffect(%EffectHandle)
