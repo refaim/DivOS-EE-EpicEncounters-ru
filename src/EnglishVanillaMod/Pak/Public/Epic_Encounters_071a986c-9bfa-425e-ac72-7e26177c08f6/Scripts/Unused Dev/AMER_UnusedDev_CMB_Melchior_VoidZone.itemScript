@@ -1,0 +1,53 @@
+//===============================================//
+//                                               //
+//      M E L C H I O R   V O I D   Z O N E      //
+//                                               //
+//     Written by Matteo "Ameranth" T. (2016)    //
+//===============================================//
+INIT
+ITEM:__Me
+//CHARACTER:%AMER_MelchiorVoidZone_Owner = null
+CHARACTER:%AMER_MelchiorVoidZone_LastDamaged = null
+INT:%AMER_MelchiorVoidZone_Active = 0
+INT:%AMER_MelchiorVoidZone_TurnCount = 0
+//FLOAT:%AMER_MelchiorVoidZone_PercentileDamage = 0.5
+	
+	/*
+EVENTS
+EVENT MelchiorVoidZoneActivate
+VARS
+	CHARACTER:_Char
+	ITEM:_Item
+ON
+	OnCharacterEvent(_Char, "AMER_MelchiorVoidZone_Activate")
+ACTIONS
+	IF "c1"
+		GetVar(_Item, _Char, "AMER_MelchiorVoidZone_ItemToActivate")
+	THEN
+		IF "c1"
+			
+		THEN
+		ENDIF
+	ENDIF
+	
+	
+	
+EVENT KillSphereFindEnemies
+VARS
+	CHARACTER:_Char
+ON
+	On
+	OnIterateCharacter(_Char, "AMER_KillSphere_FindEnemies")
+ACTIONS
+	IF "c1"
+		CharacterIsEnemy(%AMER_KillSphere_User, _Char)
+	THEN
+		CharacterPlayEffect(_Char, "FX_Skills_WitchCraft_DestroySummon_Impact_A")
+		CharacterDie(_Char, Piercing)
+	ENDIF
+	*/
+//===============================================//
+//                                               //
+//      M E L C H I O R   V O I D   Z O N E      //
+//                                               //
+//===============================================//

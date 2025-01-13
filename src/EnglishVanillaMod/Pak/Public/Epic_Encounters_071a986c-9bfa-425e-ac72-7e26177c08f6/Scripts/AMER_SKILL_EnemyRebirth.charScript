@@ -1,0 +1,76 @@
+#TEMPLATE "_SKILL_Base" : AMER_SKILL_Rebirth
+
+INIT
+CHARACTER:__Me
+// [GLOBAL_VARS]
+EXTERN FLOAT:%AMER_SKILL_Rebirth_VitalityPercentToUse = 0.25
+INT:%AMER_SKILL_Rebirth_AllyCount
+// [~GLOBAL_VARS]
+
+EVENTS
+
+// [EVENTS]
+// [~EVENTS]
+
+// Calculate the priority of the skill
+EVENT CalculateScore_AMER_SKILL_Rebirth
+VARS
+	// [CALC_VARS]
+	FLOAT:_Score
+	FLOAT:_Vitality
+	FLOAT:_AP
+	// [~CALC_VARS]
+ON
+	OnFunction("CalculateScore_AMER_SKILL_Rebirth")
+ACTIONS	
+	// [CALC_ACTIONS_PRE]
+	Set(_Score, 0.0)
+	// [~CALC_ACTIONS_PRE]
+	// [CALC_ACTIONS]
+	IF "c1&c2"
+		CharacterGetStat(_AP, __Me, ActionPoints)
+		IsLessThen(_AP, 4.0)
+	THEN
+		IF "c1&c2"
+			CharacterGetStat(_Vitality, __Me, Vitality)
+			IsLessThen(_Vitality, %AMER_SKILL_Rebirth_VitalityPercentToUse)
+		THEN
+			Set(%AMER_SKILL_Rebirth_AllyCount, INT:0)
+			IterateCharactersInCombat(__Me,  "AMER_SKILL_Rebirth_CountAllies")
+			
+			IF "!c1"
+				IsEqual(%AMER_SKILL_Rebirth_AllyCount, INT:0)
+			THEN
+				Add(_Score, 10.0)
+			    Set(%SkillTargetChar_AMER_SKILL_Rebirth, __Me)
+			    Add(%ActionScore_AMER_SKILL_Rebirth, _Score)
+			ENDIF
+		ENDIF
+	ENDIF
+	// [~CALC_ACTIONS]
+	
+	
+	
+EVENT AMER_SKILL_Rebirth_CountAllies
+VARS
+	CHARACTER:_Char
+ON
+	OnIterateCharacter(_Char, "AMER_SKILL_Rebirth_CountAllies")
+ACTIONS
+	IF "c1"
+		CharacterIsAlly(__Me, _Char)
+	THEN
+		IF "!c1"
+			CharacterIsDead(_Char)
+		THEN
+			IF "!c1"
+				IsEqual(_Char, __Me)
+			THEN
+				Add(%AMER_SKILL_Rebirth_AllyCount, INT:1)
+			ENDIF
+		ENDIF
+	ENDIF
+	
+	
+
+	

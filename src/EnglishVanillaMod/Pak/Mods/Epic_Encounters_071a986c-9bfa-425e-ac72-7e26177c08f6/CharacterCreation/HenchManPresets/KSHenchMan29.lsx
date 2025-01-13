@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<save>
+    <header version="2" time="1427201041" />
+    <version major="1" minor="3" revision="1" build="3" />
+    <region id="CharacterCreationClass">
+        <node id="root">
+            <attribute id="Armour" value="" type="22" />
+            <attribute id="Boots" value="" type="22" />
+            <attribute id="ClassDescription" value="A healer, a brawler, and a sotted drunk" handle="h884d9621g7032g44b5gab14g8f0e605b8c89" type="28" />
+            <attribute id="ClassLongDescription" value="Berthold is a boisterous man of middle years, expansive girth, and a prediliction for exchanging his healing magics for strong drink." handle="h159ad3d4ge34bg4362gb510gc0dd4c913fbc" type="28" />
+            <attribute id="ClassName" value="Cleric" handle="h8539ffc3g85a9g4240gb927g2250e05d3d79" type="28" />
+            <attribute id="ClassType" value="Cleric" type="22" />
+            <attribute id="ExtraEquipmentSet" value="" type="22" />
+            <attribute id="Gloves" value="" type="22" />
+            <attribute id="Leggings" value="" type="22" />
+            <attribute id="SkillSet" value="" type="22" />
+            <attribute id="Voice" value="0" type="5" />
+            <children>
+                <node id="AbilityChanges">
+                    <children>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="SingleHanded" type="23" />
+                            <attribute id="AmountIncreased" value="1" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="Shield" type="23" />
+                            <attribute id="AmountIncreased" value="1" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="ArmorMastery" type="23" />
+                            <attribute id="AmountIncreased" value="1" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="WaterSpecialist" type="23" />
+                            <attribute id="AmountIncreased" value="2" type="4" />
+                        </node>
+                    </children>
+                </node>
+                <node id="AttributeChanges">
+                    <children>
+                        <node id="AttributeChange">
+                            <attribute id="AmountIncreased" value="2" type="4" />
+                            <attribute id="Attribute" value="STR" type="23" />
+                        </node>
+                        <node id="AttributeChange">
+                            <attribute id="AmountIncreased" value="2" type="4" />
+                            <attribute id="Attribute" value="INT" type="23" />
+                        </node>
+                        <node id="AttributeChange">
+                            <attribute id="AmountIncreased" value="2" type="4" />
+                            <attribute id="Attribute" value="CON" type="23" />
+                        </node>
+                    </children>
+                </node>
+                <node id="HenchManData">
+                    <attribute id="HairColor" value="3" type="5" />
+                    <attribute id="HairType" value="1" type="5" />
+                    <attribute id="HeadType" value="6" type="5" />
+                    <attribute id="ID" value="9775012c-8e21-472c-bf29-cc91505acd61" type="22" />
+                    <attribute id="Icon" value="19" type="5" />
+                    <attribute id="IsMale" value="1" type="19" />
+                    <attribute id="Level" value="2" type="4" />
+                    <attribute id="Name" value='Berthold &quot;The Barrel&quot;' type="30" />
+                    <attribute id="Race" value="0" type="5" />
+                    <attribute id="SkinColor" value="0" type="5" />
+                    <children>
+                        <node id="Skills">
+                            <attribute id="Object" value="Target_ImmuneToFreeze" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="Heal_RegenerateStart" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="Target_FreezingTouch" type="22" />
+                        </node>
+                    </children>
+                </node>
+                <node id="TalentsAdded">
+                    <children>
+                        <node id="TalentAdded">
+                            <attribute id="Talent" value="MrKnowItAll" type="23" />
+                        </node>
+                        <node id="TalentAdded">
+                            <attribute id="Talent" value="Stench" type="23" />
+                        </node>
+                    </children>
+                </node>
+            </children>
+        </node>
+    </region>
+</save>

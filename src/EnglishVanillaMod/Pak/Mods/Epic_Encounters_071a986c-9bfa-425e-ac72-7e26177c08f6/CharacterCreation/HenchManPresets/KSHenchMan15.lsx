@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<save>
+    <header version="2" time="1427201041" />
+    <version major="1" minor="3" revision="1" build="3" />
+    <region id="CharacterCreationClass">
+        <node id="root">
+            <attribute id="Armour" value="" type="22" />
+            <attribute id="Boots" value="" type="22" />
+            <attribute id="ClassDescription" value="A crafty rogue with a natural talent for magic" handle="hf6889204g49d7g4dd9gad27g0ec91f857d38" type="28" />
+            <attribute id="ClassLongDescription" value="After years of trying to scrape by any way she could, Tal&apos;sana learned that taking regular work as a mercenary makes earning gold almost as fun as spending it. Though she prefers to avoid direct confrontation, her unconventional fighting style has helped her out of many a sticky situation. Employing intelligence and athletics in equal measure, she uses magic to deceive and cripple her foes from afar before moving in for the kill." handle="h617aa000g6cbcg4edega21agb4bf0ee17b45" type="28" />
+            <attribute id="ClassName" value="Shadowblade" handle="hb6eb0f87gcc24g447fg82f2g959446e5edec" type="28" />
+            <attribute id="ClassType" value="Shadowblade" type="22" />
+            <attribute id="ExtraEquipmentSet" value="" type="22" />
+            <attribute id="Gloves" value="" type="22" />
+            <attribute id="Leggings" value="" type="22" />
+            <attribute id="SkillSet" value="" type="22" />
+            <attribute id="Voice" value="0" type="5" />
+            <children>
+                <node id="AbilityChanges">
+                    <children>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="RogueLore" type="23" />
+                            <attribute id="AmountIncreased" value="1" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="SingleHanded" type="23" />
+                            <attribute id="AmountIncreased" value="2" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="Sourcery" type="23" />
+                            <attribute id="AmountIncreased" value="2" type="4" />
+                        </node>
+                    </children>
+                </node>
+                <node id="AttributeChanges">
+                    <children>
+                        <node id="AttributeChange">
+                            <attribute id="AmountIncreased" value="4" type="4" />
+                            <attribute id="Attribute" value="DEX" type="23" />
+                        </node>
+                        <node id="AttributeChange">
+                            <attribute id="AmountIncreased" value="2" type="4" />
+                            <attribute id="Attribute" value="INT" type="23" />
+                        </node>
+                    </children>
+                </node>
+                <node id="HenchManData">
+                    <attribute id="HairColor" value="7" type="5" />
+                    <attribute id="HairType" value="0" type="5" />
+                    <attribute id="HeadType" value="7" type="5" />
+                    <attribute id="ID" value="298c0261-a6c1-40da-8748-340b67ffe115" type="22" />
+                    <attribute id="Icon" value="10" type="5" />
+                    <attribute id="IsMale" value="0" type="19" />
+                    <attribute id="Level" value="3" type="4" />
+                    <attribute id="Name" value="Tal&apos;sana" type="30" />
+                    <attribute id="Race" value="0" type="5" />
+                    <attribute id="SkinColor" value="0" type="5" />
+                    <children>
+                        <node id="Skills">
+                            <attribute id="Object" value="Shout_FastTrack" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="Target_TargetedCurse" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="Target_TargetedDamageBoost" type="22" />
+                        </node>
+                    </children>
+                </node>
+                <node id="TalentsAdded">
+                    <children>
+                        <node id="TalentAdded">
+                            <attribute id="Talent" value="MrKnowItAll" type="23" />
+                        </node>
+                        <node id="TalentAdded">
+                            <attribute id="Talent" value="ElementalAffinity" type="23" />
+                        </node>
+                        <node id="TalentAdded">
+                            <attribute id="Talent" value="Bully" type="23" />
+                        </node>
+                    </children>
+                </node>
+            </children>
+        </node>
+    </region>
+</save>

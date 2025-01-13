@@ -1,0 +1,209 @@
+#TEMPLATE "_SKILL_Base" : AMER_SKILL_Stasis
+	
+INIT
+CHARACTER:__Me
+FLOAT:%SkillTargetScore_AMER_SKILL_Stasis=-1000000
+// [GLOBAL_VARS]
+EXTERN FLOAT:%AMER_SKILL_Stasis_ReserveVitality = 0.35
+// [~GLOBAL_VARS]
+	
+EVENTS
+	
+// [EVENTS]
+// [~EVENTS]
+	
+// Calculate the priority of the skill
+EVENT CalculateScore_AMER_SKILL_Stasis
+VARS
+	// [CALC_VARS]
+	FLOAT:_SkillRangeMin
+	FLOAT:_SkillRangeMax
+	FLOAT3:_TargetPos
+	FLOAT:_Vitality
+	// [~CALC_VARS]
+ON
+	OnFunction("CalculateScore_AMER_SKILL_Stasis")
+ACTIONS
+	Set(%SkillTargetScore_AMER_SKILL_Stasis, -1000000)
+
+	// [CALC_ACTIONS_PRE]
+	// [~CALC_ACTIONS_PRE]
+	// [CALC_ACTIONS]
+	IF "c1&!c2"
+		CharacterGetStat(_Vitality, __Me, Vitality)
+		IsLessThen(_Vitality, %AMER_SKILL_Stasis_ReserveVitality)
+	THEN
+		IterateCharactersInCombat(__Me, "CalculateTarget_AMER_SKILL_Stasis", Lowest, Vitality)
+		IF "!c1"
+			IsEqual(%SkillTargetChar_AMER_SKILL_Stasis, null)
+		THEN
+			Add(%ActionScore_AMER_SKILL_Stasis, %SkillTargetScore_AMER_SKILL_Stasis)
+		ENDIF
+	ENDIF
+	// [~CALC_ACTIONS]
+	
+	
+	
+	
+// Calculate the character we should attack
+EVENT CalculateTarget_AMER_SKILL_Stasis
+VARS	
+	CHARACTER:_Char
+	// [CALC_TARGET_VARS]
+	INT:_ClassScore_AMER_SKILL_Stasis
+	FLOAT:_StatResistance
+	FLOAT:_Score
+	FLOAT:_HealWeight
+	FLOAT:_SkillRangeMin
+	FLOAT:_SkillRangeMax
+	FLOAT:_DistanceToChar
+	FLOAT:_DistanceScore
+	FLOAT:_SaveScore
+	FLOAT:_Vitality
+	INT:_SaveAmount
+	ABILITY:_SaveType = BodyBuilding
+	FLOAT:_VitalityPercentage = 0.4
+	// [~CALC_TARGET_VARS]
+ON
+	OnIterateCharacter(_Char, "CalculateTarget_AMER_SKILL_Stasis")	
+ACTIONS
+	// [CALC_CHAR_TARGET_ACTIONS_PRE]
+	Set(_Score, 0.0)
+	// [~CALC_CHAR_TARGET_ACTIONS_PRE]
+	// [CALC_CHAR_TARGET_ACTIONS]
+	IF "c1"
+	    CharacterIsAlly(__Me, _Char)
+	THEN
+		IF "!c1"
+			CharacterIsDead(_Char)
+		THEN
+			IF "c1&(c2|(c3&c4))"
+				CharacterGetStat(_Vitality, _Char, Vitality)
+				IsLessThen(_Vitality, _VitalityPercentage)
+				IsEqual(_Char, __Me)
+				IsLessThen(_Vitality, 0.20)
+			THEN
+				IF "!c1"
+					CharacterHasStatus(_Char, CHARMED)	//Don't heal charmed enemies.
+				THEN
+					IF "!c1"
+						CharacterIsSummon(_Char)	//Don't use this on a summon.
+					THEN
+						IF "!c1"
+							CharacterHasStatus(_Char, CONSUME, "AMER_StasisBuff")
+						THEN
+							//Saving Throw score calculation
+							IF "c1"
+								CharacterGetAbility(_SaveAmount, _Char, _SaveType)
+							THEN
+								Cast(_SaveScore, _SaveAmount)
+								Multiply(_SaveScore, 2.0)
+								Add(_Score, _SaveScore)
+							ENDIF
+							
+							//Status score calculation
+							IF "c1|c2|c3|c4|c5|c6|c7|c8"
+								CharacterHasStatus(_Char, CONSUME, "SKILLBOOST_ImmuneToFreezing")
+								CharacterHasStatus(_Char, FROZEN)
+								CharacterHasStatus(_Char, WARM)
+								CharacterHasStatus(_Char, BURNING)
+								CharacterHasStatus(_Char, CONSUME, "AMER_STATUS_FrozenImmune1")
+								CharacterHasStatus(_Char, CONSUME, "AMER_STATUS_FrozenImmune2")
+								CharacterHasStatus(_Char, CONSUME, "AMER_STATUS_FrozenImmune3")
+								CharacterHasStatus(_Char, CONSUME, "AMER_STATUS_FrozenImmune4")
+							THEN
+								Add(_Score, 5.0)
+							ENDIF
+							IF "c1|c2|c3|c4|c5"
+								CharacterHasStatus(_Char, BLIND)
+								CharacterHasStatus(_Char, KNOCKED_DOWN)
+								CharacterHasStatus(_Char, FEAR)
+								CharacterHasStatus(_Char, PETRIFIED)
+								CharacterHasStatus(_Char, STUNNED)
+							THEN
+								Add(_Score, 3.0)
+							ENDIF
+							IF "c1|c2|c3|c4"
+								CharacterHasStatus(_Char, SLOWED)
+								CharacterHasStatus(_Char, CRIPPLED)
+								CharacterHasStatus(_Char, MUTED)
+								CharacterHasStatus(_Char, WEAK)
+							THEN
+								Add(_Score, 2.0)
+							ENDIF
+							
+							//Consider removing heals
+							Set(_HealWeight, 0.0)
+							IF "c1"
+								CharacterHasStatus(_Char, HEALING)
+							THEN
+								Add(_HealWeight, -0.75)
+							ENDIF
+							IF "c1"
+								CharacterHasStatus(_Char, CONSUME, AMER_MassHeal)
+							THEN
+								Add(_HealWeight, -1.25)
+							ENDIF
+							IF "c1"
+								CharacterHasStatus(_Char, DECAYING_TOUCH)
+							THEN
+								Add(_Score, 2.0)
+								Multiply(_HealWeight, -2.0)
+							ENDIF
+							Add(_Score, _HealWeight)
+							
+							//Triage score calculation
+							Multiply(_Vitality, -1.0)
+							Add(_Vitality, 1.0)
+							Multiply(_Vitality, 5.0)
+							
+							// Range score calculation
+							IF "c1&c2"
+								CharacterGetSkillRange(_SkillRangeMin, _SkillRangeMax, __Me, AMER_SKILL_Stasis)
+								GetDistance(_DistanceToChar, __Me, _Char)
+							THEN
+								Set(_DistanceScore, _DistanceToChar)
+								IF "c1"
+									IsGreaterThen(_DistanceScore, _SkillRangeMax)
+								THEN
+									Subtract(_DistanceScore, _SkillRangeMax)
+									Multiply(_DistanceScore, -1.0)
+								ELIF "c1"
+									IsLessThen(_DistanceScore, _SkillRangeMin)
+								THEN
+									Subtract(_DistanceScore, _SkillRangeMin)
+									Multiply(_DistanceScore, 1.0)
+								ELSE 
+									Set(_DistanceScore, 0.0)
+								ENDIF
+								Add(_Score, _DistanceScore)
+							ENDIF
+							
+							// Can see score calculation
+							IF "!c1"
+								CharacterCanSee(__Me, _Char)
+							THEN
+								Add(_Score, -10.0)
+							ENDIF
+							
+							IF "c1"
+								IsGreaterThen(_Score, %SkillTargetScore_AMER_SKILL_Stasis)
+							THEN
+								Set(%SkillTargetChar_AMER_SKILL_Stasis, _Char)
+								Set(%SkillTargetScore_AMER_SKILL_Stasis, _Score)
+							ENDIF
+						ENDIF
+					ENDIF
+				ENDIF
+			ENDIF
+		ENDIF
+	ENDIF
+	// [~CALC_CHAR_TARGET_ACTIONS]
+	
+	
+	
+	
+	
+	
+	
+	

@@ -1,0 +1,1107 @@
+//===============================================//
+//                                               //
+//       D E F A U L T   C H A R A C T E R       //
+//                                               //
+//           Original script by Larian           //
+//     Modified by Matteo "Ameranth" T. (2017)   //
+//===============================================//
+#INCLUDE Base
+#INCLUDE AMER_MAIN_CharacterExtensions
+	
+INIT
+	USING Base
+	CHARACTER:__Me
+	CHARACTER:%DialogLookAtChar=null
+	FLOAT3:%PeaceReturnPosition=null
+	FLOAT:%setTargetDefaultBestScore=10000
+	INT:%defaultEvaluateTarget=1
+	INT:%EvaluateScores=0
+	ITEM:%AMER_IceWallTarget
+	FLOAT:%AMER_IceWallDistance
+	//Blacklist player indecies if they cannot be
+	//reached for default attacks. 6 players + 6
+	//player summons are supported with 12 indecies.
+	//BlacklistGeneric is for blacklisting npcs.
+	//Only one is supported for performance concerns,
+	//at the moment.
+	INT:%AMER_BlacklistUsed = 0
+	INT:%AMER_BlacklistIndex0 = 0
+	INT:%AMER_BlacklistIndex1 = 0
+	INT:%AMER_BlacklistIndex2 = 0
+	INT:%AMER_BlacklistIndex3 = 0
+	INT:%AMER_BlacklistIndex4 = 0
+	INT:%AMER_BlacklistIndex5 = 0
+	INT:%AMER_BlacklistIndex6 = 0
+	INT:%AMER_BlacklistIndex7 = 0
+	INT:%AMER_BlacklistIndex8 = 0
+	INT:%AMER_BlacklistIndex9 = 0
+	INT:%AMER_BlacklistIndex10 = 0
+	INT:%AMER_BlacklistIndex11 = 0
+	CHARACTER:%AMER_BlacklistGeneric = null
+	CHARACTER:%AMER_BlacklistCmp = null
+	//Used to detect if a character is timing out.
+	INT:%AMER_TimeoutDetection = 0
+	FLOAT:%AMER_TimeoutOldAP
+	//Used to provide a reliable means to interrupt
+	//behaviors when they "stall."
+	FIXEDSTRING:%AMER_InterruptBehavior = null
+	
+USING AMER_MAIN_CharacterExtensions
+	
+EVENTS
+EVENT TauntedByChar
+VARS
+	CHARACTER:_Char
+ON
+	OnCharacterStatus(__Me,TAUNTED)
+ACTIONS
+	IF "c1"
+		CharacterGetStatusSourceCharacter(__Me,TAUNTED,_Char)
+	THEN
+		Set(%defaultEvaluateTarget,0)
+		CharacterSetEnemy(__Me,_Char)
+	ELSE
+		CharacterRemoveStatus(__Me,TAUNTED)
+	ENDIF
+	
+	
+	
+EVENT TauntedFinished
+ON
+	OnCharacterStatusRemoved(__Me,TAUNTED)
+ACTIONS
+	CharacterSetEnemy(__Me,null)
+	Set(%defaultEvaluateTarget,1)
+	
+	
+	
+EVENT FallbackIterateTarget
+VARS
+	CHARACTER:_Char
+	FLOAT:_targetDistance
+	FLOAT:_targetClosestThisScore=0	
+ON
+	OnIterateCharacter(_Char,"FallbackTargetClosestIterator")
+ACTIONS
+	IF "c1"
+		CharacterIsEnemy(__Me,_Char)
+	THEN
+		IF "!c1"
+			CharacterIsDead(_Char)
+		THEN
+			IF "!c1"
+				IsEqual(__Me, _Char)
+			THEN
+				IF "c1&!c2&!c3&!c4"
+					IsVisible(_Char)
+					CharacterHasStatus(_Char,INVISIBLE)
+					CharacterHasStatus(_Char,SNEAKING)
+					CharacterHasStatus(_Char,CHARMED)
+				THEN
+					IF "c1"
+						GetDistance(_targetDistance,__Me,_Char)
+					THEN
+						IF "(c1|c2|!c3)&!c4"
+							CharacterHasTalent(_Char,Stench)
+							CharacterIsSummon(_Char)
+							CharacterIsPlayer(_Char)
+							CharacterHasStatus(_Char,AGGRO_MARKED)
+						THEN
+							Multiply(_targetDistance,4)
+						ENDIF
+						
+						IF "(c1|c2|!c3)&c4"
+							CharacterHasTalent(_Char,Stench)
+							CharacterIsSummon(_Char)
+							CharacterIsPlayer(_Char)
+							CharacterHasStatus(_Char,AGGRO_MARKED)
+						THEN
+							Multiply(_targetDistance,2)
+						ENDIF
+						
+						//Disfavor targets who have Invulnerability.
+						IF "c1"
+							CharacterHasStatus(_Char, CONSUME, "AMER_Invulnerability")
+						THEN
+							Multiply(_targetDistance,4)
+						ENDIF
+						
+						Set(_targetClosestThisScore,_targetDistance)
+						
+						IF "!c1"
+							IsGreaterThen(_targetClosestThisScore,%setTargetDefaultBestScore)
+						THEN
+							//If the blacklist is in use, determine if this target was blacklisted.
+							//If it was, then ignore this target.
+							IF "!c1&c2"
+								IsEqual(%AMER_BlacklistUsed, INT:0)
+								CharacterIsPlayer(_Char)
+							THEN
+								Set(%AMER_BlacklistCmp, _Char)
+								CallFunction("AMER_CheckIfBlacklisted")
+								IF "!c1"
+									IsEqual(%AMER_BlacklistCmp, null)
+								THEN
+									//If character was not blacklisted, %AMER_BlacklistCmp
+									//will not be null.
+									Set(%setTargetDefaultBestScore,_targetClosestThisScore)
+									CharacterSetEnemy(__Me,_Char)
+									Set(%AMER_BlacklistCmp, null)
+								ENDIF
+							ELIF "!c1"
+								IsEqual(_Char, %AMER_BlacklistGeneric)
+							THEN
+								Set(%setTargetDefaultBestScore,_targetClosestThisScore)
+								CharacterSetEnemy(__Me,_Char)
+							ENDIF
+						ENDIF
+					ENDIF
+				ENDIF
+			ENDIF
+		ENDIF
+	ENDIF
+	
+	
+	
+EVENT DefaultIterateSetTarget
+VARS 
+	CHARACTER:_Char
+	CHARACTER:_previousSetTarget
+	FLOAT:_targetDistance
+	//INT:_alreadyTargetedBy
+	FLOAT:_targetClosestThisScore=0
+	FLOAT:_Vitality
+	FLOAT:_Movement
+	FLOAT:_MyRange
+	FLOAT3:_Pos
+ON
+	OnIterateCharacter(_Char,"DefaultSetTargetClosestIterator")
+ACTIONS
+	IF "c1"
+		CharacterIsEnemy(__Me,_Char)
+	THEN
+		IF "!c1"
+			CharacterIsDead(_Char)
+		THEN
+			IF "!c1"
+				IsEqual(__Me, _Char)
+			THEN
+				IF "c1&!c2&!c3&!c4"
+					IsVisible(_Char)
+					CharacterHasStatus(_Char,INVISIBLE)
+					CharacterHasStatus(_Char,SNEAKING)
+					CharacterHasStatus(_Char,CHARMED)
+				THEN
+					IF "!c1&!c2"
+						CharacterHasStatus(_Char, INVULNERABLE)
+						CharacterHasStatus(_Char, CONSUME, AMER_VoidRegeneration)
+					THEN
+						//All of the targeting priority for basic attacks is a
+						//function of the distance between self and a potential
+						//target. Iterated characters with the lowest calculated
+						//distance score are selected for attack.
+						//
+						//It would be best to directly influence an overall priority
+						//score with other factors, but I have not gotten to such a
+						//rework as of yet.
+						IF "c1"
+							GetDistance(_targetDistance,__Me,_Char)
+						THEN
+							//Offset distance by my range.
+							IF "c1"
+								CharacterGetWeaponRange(_, _MyRange, __Me)
+							THEN
+								Subtract(_targetDistance, _MyRange)
+								IF "c1"
+									IsLessThen(_targetDistance, 1.0)
+								THEN
+									Set(_targetDistance, 1.0)
+								ENDIF
+								
+								//Disfavor targets that I am not in range of and for 
+								//whom I cannot find a place to attack them from.
+								GetPosition(_Char, _Pos)
+								IF "!c1&!c2"
+									FindValidPosition(_Pos, _MyRange, __Me)
+									CharacterInWeaponRange(__Me, _Char)
+								THEN
+									Multiply(_targetDistance, 4)
+								ENDIF
+							ENDIF
+						
+							//Favor attacking the existing target.
+							IF "c1&c2"
+								CharacterGetEnemy(_previousSetTarget,__Me)
+								IsEqual(_previousSetTarget,_Char)
+							THEN
+								Multiply(_targetDistance,0.5)
+							ENDIF
+							
+							//Favor low vitality targets.
+							IF "c1"
+								CharacterGetStat(_Vitality, _Char, Vitality)
+							THEN
+								Multiply(_Vitality, 2.0)
+								Multiply(_targetDistance, _Vitality)
+							ENDIF
+							
+							//Avoid moving into dangerous surfaces to attack.
+							IF "c1"
+								IsInDangerousSurface(_Char)
+							THEN
+								IF "!c1"
+									CharacterInWeaponRange(__Me, _Char)
+								THEN
+									IF "!c1&!c2"
+										CharacterIsFloating(__Me)
+										CharacterHasStatus(__Me,ETHEREAL_SOLES)
+									THEN
+										Multiply(_targetDistance,4)
+									ENDIF
+								ENDIF
+							ENDIF
+							
+							//Disfavor attacking summons.
+							IF "c1"
+								CharacterIsSummon(_Char)
+							THEN
+								Multiply(_targetDistance,1.5)
+							ENDIF
+							
+							//Favor marked targets.
+							IF "c1"
+								CharacterHasStatus(_Char,AGGRO_MARKED)
+							THEN
+								Multiply(_targetDistance,0.2)
+							ENDIF
+							
+							//Disfavor targets who are behind cover.
+							IF "!c1"
+								CharacterCanSee(__Me,_Char)
+							THEN
+								Multiply(_targetDistance,3)
+							ENDIF
+							
+							//Disfavor targets with Stench, as well
+							//as those who are summons or NPCs.
+							IF "(c1|c2|!c3)"
+								CharacterHasTalent(_Char,Stench)
+								CharacterIsSummon(_Char)
+								CharacterIsPlayer(_Char)
+							THEN
+								//Severity of disfavor dependent on Marked.
+								IF "c1"
+									CharacterHasStatus(_Char,AGGRO_MARKED)
+								THEN
+									Multiply(_targetDistance,2)
+								ELSE
+									Multiply(_targetDistance,4)
+								ENDIF
+							ENDIF
+							
+							//Disfavor targets who have Invulnerability.
+							IF "c1"
+								CharacterHasStatus(_Char, CONSUME, "AMER_Invulnerability")
+							THEN
+								Multiply(_targetDistance,4)
+							ENDIF
+							
+							//Consider how easy it is to move to something.
+							IF "c1"
+								CharacterGetStat(_Movement, __Me, Movement)
+							THEN
+								Divide(_targetDistance, _Movement)
+							ENDIF
+							
+							Set(_targetClosestThisScore,_targetDistance)
+							
+							//Enemies with *less* distance "score" are targeted for attack.
+							IF "!c1"
+								IsGreaterThen(_targetClosestThisScore,%setTargetDefaultBestScore)
+							THEN
+								//If the blacklist is in use, determine if this target was blacklisted.
+								//If it was, then ignore this target.
+								IF "!c1&c2"
+									IsEqual(%AMER_BlacklistUsed, INT:0)
+									CharacterIsPlayer(_Char)
+								THEN
+									Set(%AMER_BlacklistCmp, _Char)
+									CallFunction("AMER_CheckIfBlacklisted")
+									IF "!c1"
+										IsEqual(%AMER_BlacklistCmp, null)
+									THEN
+										//If character was not blacklisted, %AMER_BlacklistCmp
+										//will not be null.
+										Set(%setTargetDefaultBestScore,_targetClosestThisScore)
+										CharacterSetEnemy(__Me,_Char)
+										Set(%AMER_BlacklistCmp, null)
+									ENDIF
+								ELIF "!c1"
+									IsEqual(_Char, %AMER_BlacklistGeneric)
+								THEN
+									Set(%setTargetDefaultBestScore,_targetClosestThisScore)
+									CharacterSetEnemy(__Me,_Char)
+								ENDIF
+							ENDIF
+						ENDIF
+					ENDIF
+				ENDIF
+			ENDIF
+		ENDIF
+	ENDIF
+	
+	
+	
+EVENT AttackMovementFailedDeliberation
+//If my target is an unreachable player, blacklist it
+//and flag to reevaluate targets. If all players are
+//blacklisted, check for Ice Walls.
+VARS
+	CHARACTER:_Enemy
+	CHARACTER:_Player
+	INT:_Count
+	INT:_PartySize
+	STRING:_Str
+	FIXEDSTRING:_BlacklistVar
+ON
+	OnFunction("AMER_AttackMovementFailedDeliberation")
+ACTIONS
+	//Prevent timeout when deliberation is happening.
+	//Set(%AMER_TimeoutDetection, INT:0)
+	
+	IF "c1"
+		GetPlayerCount(_PartySize)
+	THEN
+		//StatusText(__Me, "AMER_ChainOne")	//TEST
+		IF "c1&c2"
+			CharacterGetEnemy(_Enemy, __Me)
+			CharacterIsPlayer(_Enemy)
+		THEN
+			Set(_Count, INT:0)
+			WHILE "c1"
+				IsLessThen(_Count, _PartySize)
+			DO
+				IF "c1&c2"
+					GetPlayerByIndex(_Player, _Count)
+					IsEqual(_Player, _Enemy)
+				THEN
+					//StatusText(_Player, "AMER_ExtraCrit")	//TEST
+					Print(_Str, "AMER_BlacklistIndex[1]", _Count)
+					Cast(_BlacklistVar, _Str)
+					SetVar(__Me, _BlacklistVar, INT:1)
+					Add(%AMER_BlacklistUsed, INT:1)
+					
+					//Flag to reevaluate targets.
+					CharacterSetEnemy(__Me, null)
+					Set(%defaultEvaluateTarget, INT:1)
+				ENDIF
+				
+				Add(_Count, INT:1)
+			ENDWHILE
+		//If it was an NPC and I haven't blacklisted one
+		//yet, blacklist it and reevaluate.
+		ELIF "c1"
+			IsEqual(%AMER_BlacklistGeneric, null)
+		THEN
+			//StatusText(_Enemy, "AMER_ExtraCrit")	//TEST
+			Set(%AMER_BlacklistGeneric, _Enemy)
+			//Flag to reevaluate targets.
+			CharacterSetEnemy(__Me, null)
+			Set(%defaultEvaluateTarget, INT:1)
+		ENDIF
+	ENDIF
+	
+	
+	
+EVENT DefaultCheckIfBlacklisted
+//Compare %AMER_BlacklistCmp against the active player characters
+//to see if it has been blacklisted.
+VARS
+	CHARACTER:_Player
+	INT:_Count
+	INT:_PartySize
+	INT:_IsBlacklisted
+	STRING:_Str
+	FIXEDSTRING:_BlacklistVar
+ON
+	OnFunction("AMER_CheckIfBlacklisted")
+ACTIONS
+	IF "c1"
+		GetPlayerCount(_PartySize)
+	THEN
+		Set(_Count, INT:0)
+		WHILE "c1&!c2"
+			IsLessThen(_Count, _PartySize)
+			IsEqual(%AMER_BlacklistCmp, null)
+		DO
+			IF "c1&c2"
+				GetPlayerByIndex(_Player, _Count)
+				IsEqual(_Player, %AMER_BlacklistCmp)
+			THEN
+				Print(_Str, "AMER_BlacklistIndex[1]", _Count)
+				Cast(_BlacklistVar, _Str)
+				IF "c1&c2"
+					GetVar(_IsBlacklisted, __Me, _BlacklistVar)
+					IsEqual(_IsBlacklisted, INT:1)
+				THEN
+					//Character is blacklisted, set to null to escape
+					//loop and denote that character should be ignored.
+					Set(%AMER_BlacklistCmp, null)
+				ENDIF
+			ENDIF
+			
+			Add(_Count, INT:1)
+		ENDWHILE
+	ENDIF
+	
+	
+	
+EVENT DefaultActivityDetection
+//Used as a means to reliably detect when a character
+//is timing out.
+VARS
+	FLOAT:_AP
+	FLOAT3:_Pos
+	FLOAT3:_OldPos
+ON
+	OnTimer("AMER_ActivityDetection")
+ACTIONS
+	IF "c1&c2"
+		GetPosition(__Me, _Pos)
+		CharacterGetStat(_AP, __Me, ActionPoints)
+	THEN
+		IF "c1&c2"
+			IsEqual(_Pos, _OldPos)
+			IsEqual(_AP, %AMER_TimeoutOldAP)
+		THEN
+			// Need to check if the character is in dialogue, because
+			//some characters will be in combat while also in dialogue.
+			IF "!c1"
+				IsInDialog(__Me)
+			THEN
+				Add(%AMER_TimeoutDetection, 1)
+				
+				//If a behavior has flagged that it may be doing something that
+				//could stall, interrupt it, if it has started stalling.
+				IF "!c1"
+					IsEqual(%AMER_InterruptBehavior, null)
+				THEN
+					IF "c1"
+						IsGreaterThen(%AMER_TimeoutDetection, 2)
+					THEN
+						//StatusText(__Me, "AMER_TEST_5")	//TEST
+						Interrupt(%AMER_InterruptBehavior)
+					ENDIF
+				ENDIF
+				
+				//Non-bosses get 4 ticks before timeout. Bosses get 12 ticks before
+				//timeout because they tend to have long scripted components.
+				IF "c1"
+					IsGreaterThen(%AMER_TimeoutDetection, INT:4)
+				THEN
+					IF "!c1"
+						CharacterIsBoss(__Me)
+					THEN
+						CharacterPlayEffect(__Me, "FX_GP_Status_SkipTurn_A_Icon", "Dummy_OverheadFX")
+						StatusText(__Me, "AMER_TEST_TurnTimeout")	//TEST
+						CharacterEndTurn()
+					ELIF "c1"
+						IsGreaterThen(%AMER_TimeoutDetection, INT:12)	//Bosses have extra time.
+					THEN
+						CharacterPlayEffect(__Me, "FX_GP_Status_SkipTurn_A_Icon", "Dummy_OverheadFX")
+						StatusText(__Me, "AMER_TEST_TurnTimeout")	//TEST
+						CharacterEndTurn()
+					ENDIF
+				ENDIF
+			ELSE
+				//Give extra time if this character is in a dialogue.
+				Set(%AMER_TimeoutDetection, INT:-6)
+			ENDIF
+		ELSE
+			Set(%AMER_TimeoutOldAP, _AP)
+			Set(_OldPos, _Pos)
+			//External behaviors may set this below zero.
+			IF "c1"
+				IsGreaterThen(%AMER_TimeoutDetection, INT:0)
+			THEN
+				Set(%AMER_TimeoutDetection, INT:0)
+			ENDIF
+		ENDIF
+	ENDIF
+	
+	
+	
+EVENT DefaultIterateForIceWall
+//Give enemies a way to target and destroy Ice Walls.
+VARS 
+	ITEM:_Item
+	ITEMTEMPLATE:_ItemRoot
+	FLOAT:_Distance
+ON
+	OnIterateItem(_Item,"AMER_DefaultIterateForIceWall")
+ACTIONS
+	IF "!c1"
+		ItemIsDestroyed(_Item)
+	THEN
+		IF "c1&(c2|c3|c4)"
+			ItemGetTemplate(_Item, _ItemRoot)
+			IsEqual(_ItemRoot, "AMER_Icewall_A_e41a67ed-9e7b-4df9-981a-a97a649b3cde")
+			IsEqual(_ItemRoot, "AMER_Icewall_B_05ade06a-6ec0-42a5-a86f-02aaec6688b5")
+			IsEqual(_ItemRoot, "AMER_Icewall_C_c64d607b-192b-45c7-95c5-02363b2ca30c")
+		THEN
+			IF "c1&c2"
+				GetDistance(_Distance, __Me, _Item)
+				IsLessThen(_Distance, %AMER_IceWallDistance)
+			THEN
+				Set(%AMER_IceWallTarget, _Item)
+				Set(%AMER_IceWallDistance, _Distance)
+			ENDIF
+		ENDIF
+	ENDIF
+	
+	
+	
+EVENT ScanForIceWalls
+ON
+	OnFunction("AMER_ScanForIceWalls")
+ACTIONS
+	Set(%AMER_IceWallTarget, null)
+	Set(%AMER_IceWallDistance, 10000.0)
+	IterateItemsNear(__Me, 25.0, "AMER_DefaultIterateForIceWall")	//Can I break out?
+	
+	
+	
+EVENT StartCombatFetchPos
+ON
+	OnCombatStarted()
+ACTIONS
+	CharacterSetEnemy(__Me,null)
+	Set(%defaultEvaluateTarget,1)
+	IF "c1" 
+		IsEqual(%PeaceReturnPosition,null)
+	THEN
+		GetPosition(__Me,%PeaceReturnPosition)
+		CharacterForceUpdate(1)
+	ENDIF
+	
+	
+	
+EVENT ReturnToPosOnCombatEnded
+ON
+	OnCombatEnded()
+ACTIONS
+	IF "c1|c2" 
+		CharacterIsInParty(__Me)
+		CharacterIsDead(__Me)
+	THEN
+		CharacterEvent(__Me,"ClearPeaceReturn")
+	ELSE
+		SetHealth(__Me,1)
+	ENDIF
+	
+	
+	
+EVENT StoryOverridePeaceReturn
+ON 
+	OnStoryOverride()
+	OnCharacterEvent(__Me,"ClearPeaceReturn")
+ACTIONS
+	IF "!c1"
+		IsEqual(%PeaceReturnPosition,null)
+	THEN
+		Set(%PeaceReturnPosition,null)
+		Interrupt("ReturnToPeacePosition")
+		CharacterForceUpdate(0)
+	ENDIF
+	
+	
+	
+EVENT StartEvaluateScore
+ON
+	OnFunction("StartEvaluateScore")
+ACTIONS
+	IF "c1&c2"
+		IsEqual(%EvaluateScores,0)
+		CharacterIsInActiveTurn(__Me)
+	THEN	
+		CallFunction("CalculateScore")
+		StartTimer("CalcScoreTimer",0.2,-1)
+		Set(%EvaluateScores,1)
+	ENDIF
+	
+	
+	
+EVENT StopEvaluateScore
+ON
+	OnFunction("StopEvaluateScore")
+ACTIONS
+	IF "c1"
+		IsEqual(%EvaluateScores,1)
+	THEN
+		StopTimer("CalcScoreTimer")
+		Set(%EvaluateScores,0)
+	ENDIF
+	
+	
+	
+EVENT DontAttackAlliesOrInvisibles // to solve charmed chars getting back to normal but still targeting as if they were charmed
+VARS
+	CHARACTER:_Target
+ON
+	OnTurn()
+ACTIONS
+	IF "c1&(c2|c3|c4|!c5)"
+		CharacterGetEnemy(_Target,__Me)
+		CharacterIsAlly(__Me,_Target)
+		CharacterHasStatus(_Target,INVISIBLE)
+		CharacterHasStatus(_Target,SNEAKING)
+		IsVisible(_Target)
+	THEN
+		CharacterSetEnemy(__Me,null)
+		Set(%defaultEvaluateTarget,1)
+	ENDIF
+	
+	
+	
+EVENT ClearTauntedWhenTaunterDies
+VARS
+	CHARACTER:_EventChar=null
+	CHARACTER:_Taunter=null
+ON
+	OnDie(_EventChar,_,_,_)
+ACTIONS
+	IF "c1&c2&c3"
+		CharacterHasStatus(__Me,TAUNTED)
+		CharacterGetStatusSourceCharacter(__Me,TAUNTED,_Taunter)
+		IsEqual(_Taunter,_EventChar)
+	THEN
+		CharacterRemoveStatus(__Me,TAUNTED)
+	ENDIF
+	
+	
+	
+EVENT ClearSetEnemy
+VARS
+	CHARACTER:_Char
+	CHARACTER:_EventChar
+ON
+	OnDie(_EventChar,_,_,_)
+	OnCharacterStatus(_EventChar,INVISIBLE)
+	OnCharacterStatus(_EventChar,CHARMED)
+	OnCharacterStatus(_EventChar,SNEAKING)
+ACTIONS
+	IF "c1&c2"
+		CharacterGetEnemy(_Char,__Me)
+		IsEqual(_Char,_EventChar)
+	THEN
+		CharacterSetEnemy(__Me,null)
+		Set(%defaultEvaluateTarget,1)
+	ENDIF	
+	
+	
+	
+EVENT ForceNewEnemyWhenCharmed
+ON
+	OnCharacterStatus(__Me,CHARMED)
+ACTIONS
+	CharacterSetEnemy(__Me,null)
+	Set(%defaultEvaluateTarget,1)
+	
+	
+	
+EVENT EvaluateTargets
+ON
+	OnTurn()
+ACTIONS
+	IF "!c1"
+		CharacterIsPlayer(__Me)
+	THEN
+		IF "!c1"
+			CharacterIsDead(__Me)
+		THEN
+			Set(%AMER_TimeoutDetection, INT:0)
+			Set(%AMER_TimeoutOldAP, -1.0)
+			StartTimer("AMER_ActivityDetection", 1.0, -1)
+		ENDIF
+	ENDIF
+	
+	IF "!c1"
+		IsEqual(%AMER_BlacklistUsed, INT:0)
+	THEN
+		Set(%AMER_BlacklistGeneric, null)
+		Set(%AMER_BlacklistUsed, INT:0)
+		Set(%AMER_BlacklistIndex0, INT:0)
+		Set(%AMER_BlacklistIndex1, INT:0)
+		Set(%AMER_BlacklistIndex2, INT:0)
+		Set(%AMER_BlacklistIndex3, INT:0)
+		Set(%AMER_BlacklistIndex4, INT:0)
+		Set(%AMER_BlacklistIndex5, INT:0)
+		Set(%AMER_BlacklistIndex6, INT:0)
+		Set(%AMER_BlacklistIndex7, INT:0)
+		Set(%AMER_BlacklistIndex8, INT:0)
+		Set(%AMER_BlacklistIndex9, INT:0)
+		Set(%AMER_BlacklistIndex10, INT:0)
+		Set(%AMER_BlacklistIndex11, INT:0)
+	ENDIF
+	
+	Set(%AMER_IceWallTarget, null)
+	SetPriority("Combat_AttackIceWall",8)
+	
+	IF "!c1"
+		CharacterHasStatus(__Me,TAUNTED)
+	THEN
+		SetPriority("Combat_DefaultChooseEnemy",9)
+		SetPriority("Combat_NoSetEnemy",6)
+		Set(%setTargetDefaultBestScore,10000)
+		Set(%defaultEvaluateTarget,1)
+		CallFunction("StartEvaluateScore")
+		//SetPriority("Combat_WhenInvisible_RunAway",10)
+	ENDIF
+	
+	
+	
+EVENT KillScoreTimer
+ON
+	OnTurnEnded()
+	OnCombatEnded()
+ACTIONS
+	IF "!c1"
+		CharacterIsPlayer(__Me)
+	THEN
+		StopTimer("AMER_ActivityDetection")
+	ENDIF
+	CallFunction("StopEvaluateScore")
+	
+EVENT CalcScoreTimer
+ON
+	OnTimer("CalcScoreTimer")
+ACTIONS
+	CallFunction("CalculateScore")
+
+//----	
+BEHAVIOUR
+REACTION ReturnToPeacePosition,15000
+USAGE PEACE
+CHECK "!c1"
+	IsEqual(%PeaceReturnPosition,null)
+ACTIONS
+	CharacterMoveTo(%PeaceReturnPosition,1,1,1,0)
+	CharacterEvent(__Me,"ClearPeaceReturn")
+	
+	
+	
+REACTION Combat_DefaultChooseEnemy, 9
+USAGE COMBAT
+VARS
+	CHARACTER:_Enemy
+CHECK "c1|!c2"
+	IsEqual(%defaultEvaluateTarget,1)
+	CharacterGetEnemy(_Enemy,__Me)
+ACTIONS
+	//Prevent timeout when deliberation is happening.
+	Set(%AMER_TimeoutDetection, INT:0)
+	
+	//StatusText(__Me, "AMER_ChainFive")	//TEST
+	Set(%setTargetDefaultBestScore,10000)
+	IterateCharactersInCombat(__Me,"DefaultSetTargetClosestIterator")
+	IF "c1"
+		CharacterGetEnemy(_Enemy,__Me)
+	THEN
+		//StatusText(__Me, "AMER_ChainTwo")	//TEST
+		Set(%defaultEvaluateTarget,0)
+	ELSE
+		//Scan for Ice Walls if I couldn't find a valid target.
+		//Ice Wall routine will reset target evaluations when
+		//an Ice Wall is destroyed.
+		CallFunction("AMER_ScanForIceWalls")
+		//StatusText(__Me, "AMER_ChainFour")	//TEST
+		SetPriority("Combat_DefaultChooseEnemy",0)
+	ENDIF
+	
+	
+	
+REACTION Combat_AttackSetEnemy, 8
+USAGE COMBAT
+VARS
+	CHARACTER:_Enemy
+	FLOAT:_dist
+	FLOAT:_minRange
+	FLOAT:_maxRange
+CHECK "c1&c2&c3&(c4|(c5&!c6&!c7))"
+	CharacterGetEnemy(_Enemy,__Me) // returns false if null
+	CharacterGetWeaponRange(_minRange,_maxRange,__Me)
+	GetInnerDistance(_dist,__Me,_Enemy)
+	CharacterCanSee(__Me,_Enemy)
+	IsLessThen(_dist,_maxRange)
+	CharacterHasWeaponType(__Me,Bow,1)
+	CharacterHasWeaponType(__Me,CrossBow,1)
+ACTIONS
+	Set(%AMER_TimeoutDetection, INT:-4)	//Attack animations warrant extra time.
+	CharacterAttack(_Enemy)
+INTERRUPT
+ON
+	OnMovementFailed(_)
+ACTIONS
+	CallFunction("AMER_AttackMovementFailedDeliberation")
+	
+	
+	
+REACTION Combat_AttackSetEnemyWithBowHack, 8
+USAGE COMBAT
+VARS
+	CHARACTER:_Enemy
+	FLOAT:_dist
+	FLOAT:_minRange
+	FLOAT:_maxRange
+CHECK "c1&c2&c3&!c4&c5&(c6|c7)"
+	CharacterGetEnemy(_Enemy,__Me) // returns false if null
+	CharacterGetWeaponRange(_minRange,_maxRange,__Me)
+	GetInnerDistance(_dist,__Me,_Enemy)
+	CharacterCanSee(__Me,_Enemy)
+	IsLessThen(_dist,2)
+	CharacterHasWeaponType(__Me,Bow,1)
+	CharacterHasWeaponType(__Me,CrossBow,1)
+ACTIONS
+	Set(%AMER_TimeoutDetection, INT:-4)	//Attack animations warrant extra time.
+	CharacterAttack(_Enemy)
+INTERRUPT
+ON
+	OnMovementFailed(_)
+ACTIONS
+	CallFunction("AMER_AttackMovementFailedDeliberation")
+	
+	
+	
+REACTION Combat_AttackIceWall, 8
+VARS
+	FLOAT:_Distance
+	FLOAT:_Range
+	FLOAT3:_Pos
+USAGE COMBAT
+CHECK "!c1"
+	IsEqual(%AMER_IceWallTarget, null)
+ACTIONS
+	//StatusText(%AMER_IceWallTarget, "AMER_ChainFour")	//TEST
+	//StatusText(__Me, "AMER_ChainFour")	//TEST
+	IF "c1&!c2"
+		GetDistance(_Distance, __Me, %AMER_IceWallTarget)
+		IsGreaterThen(_Distance, 3.0)
+	THEN
+		Set(%AMER_TimeoutDetection, INT:-4)	//Attack animations warrant extra time.
+		CharacterAttackWithoutMove(%AMER_IceWallTarget, 1)
+	ELIF "c1&c2"
+		CharacterGetWeaponRange(_, _Range, __Me)
+		IsLessThen(_Distance, _Range)
+	THEN
+		Set(%AMER_TimeoutDetection, INT:-4)	//Attack animations warrant extra time.
+		CharacterAttackWithoutMove(%AMER_IceWallTarget, 1)
+	ELSE
+		GetPosition(%AMER_IceWallTarget, _Pos)
+		IF "c1"
+			FindValidPosition(_Pos, 3.0, __Me)
+		THEN
+			Set(%AMER_InterruptBehavior, "Combat_AttackIceWall")
+			CharacterMoveTo(_Pos, 1)
+			Set(%AMER_InterruptBehavior, null)
+			CharacterAttackWithoutMove(%AMER_IceWallTarget, 1)
+		ELSE
+			//I can't get into range of the Ice Wall.
+			Set(%AMER_IceWallTarget, null)
+			SetPriority("Combat_AttackIceWall",0)
+		ENDIF
+		//CharacterMoveInRange(%AMER_IceWallTarget, 3.0, _Range, 1)
+		//CharacterMoveTo(%AMER_IceWallTarget)
+	ENDIF
+		
+	IF "c1"
+		ItemIsDestroyed(%AMER_IceWallTarget)
+	THEN
+		//StatusText(__Me, "AMER_ChainFive")	//TEST
+		Set(%AMER_IceWallTarget, null)
+		//Reset blacklist, destroying this Ice Wall
+		//may have opened new paths.
+		Set(%AMER_BlacklistGeneric, null)
+		Set(%AMER_BlacklistUsed, INT:0)
+		Set(%AMER_BlacklistIndex0, INT:0)
+		Set(%AMER_BlacklistIndex1, INT:0)
+		Set(%AMER_BlacklistIndex2, INT:0)
+		Set(%AMER_BlacklistIndex3, INT:0)
+		Set(%AMER_BlacklistIndex4, INT:0)
+		Set(%AMER_BlacklistIndex5, INT:0)
+		Set(%AMER_BlacklistIndex6, INT:0)
+		Set(%AMER_BlacklistIndex7, INT:0)
+		Set(%AMER_BlacklistIndex8, INT:0)
+		Set(%AMER_BlacklistIndex9, INT:0)
+		Set(%AMER_BlacklistIndex10, INT:0)
+		Set(%AMER_BlacklistIndex11, INT:0)
+		
+		//Flag to reevaluate targets.
+		CharacterSetEnemy(__Me, null)
+		Set(%defaultEvaluateTarget, INT:1)
+		SetPriority("Combat_DefaultChooseEnemy",9)
+		//StatusText(__Me, "AMER_ChainFive")	//TEST
+	ENDIF
+INTERRUPT
+ON
+	OnMovementFailed(_)
+ACTIONS
+	//StatusText(__Me, "AMER_ChainThree")	//TEST
+	DelayReaction("Combat_AttackIceWall",1)
+INTERRUPT
+	//OnManualInterrupt doesn't seem to work. Catch the manual
+	//interupt behavior in this manner instead. OnMovementFailed
+	//sometimes doesn't work, so use the custom interrupt also.
+	IF "!c1"
+		IsEqual(%AMER_InterruptBehavior, null)
+	THEN
+		//StatusText(__Me, "AMER_TEST_2")	//TEST
+		Set(%AMER_InterruptBehavior, null)
+		Set(%AMER_TimeoutDetection, INT:0)	//Prevent timeout while deliberating.
+		DelayReaction("Combat_AttackIceWall",1)
+	ENDIF
+	
+	
+	
+REACTION Combat_MoveToSetEnemy, 7
+USAGE COMBAT
+VARS
+	CHARACTER:_Enemy
+	FLOAT:_minRange
+	FLOAT:_maxRange
+CHECK "c1&!c2&c3"
+	CharacterGetEnemy(_Enemy,__Me)
+	CharacterCanSee(__Me,_Enemy)
+	CharacterGetWeaponRange(_minRange,_maxRange,__Me)
+ACTIONS	
+	Set(%AMER_InterruptBehavior, "Combat_MoveToSetEnemy")
+	CharacterMoveTo(_Enemy,1,0,0,_minRange,_maxRange)
+	Set(%AMER_InterruptBehavior, null)
+INTERRUPT
+ON
+	OnMovementFailed(_)
+ACTIONS
+	CallFunction("AMER_AttackMovementFailedDeliberation")
+	//DelayReaction("Combat_MoveToSetEnemy",3)
+INTERRUPT
+	//OnManualInterrupt doesn't seem to work. Catch the manual
+	//interupt behavior in this manner instead. OnMovementFailed
+	//sometimes doesn't work, so use the custom interrupt also.
+	IF "!c1"
+		IsEqual(%AMER_InterruptBehavior, null)
+	THEN
+		//StatusText(__Me, "AMER_TEST_2")	//TEST
+		Set(%AMER_InterruptBehavior, null)
+		Set(%AMER_TimeoutDetection, INT:0)	//Prevent timeout while deliberating.
+		CallFunction("AMER_AttackMovementFailedDeliberation")
+	ENDIF
+	
+	
+	
+REACTION Combat_NoSetEnemy, 6
+USAGE COMBAT
+VARS
+	CHARACTER:_Char
+CHECK "!c1"
+	CharacterGetEnemy(_Char,__Me)
+ACTIONS	
+	IterateCharactersInCombat(__Me,"FallbackTargetClosestIterator")
+	IF "!c1"
+		CharacterGetEnemy(_Char,__Me)
+	THEN
+		//If I can't find a target, see if I can find an Ice Wall.
+		Set(%AMER_IceWallTarget, null)
+		Set(%AMER_IceWallDistance, 10000.0)
+		IterateItemsNear(__Me, 10.0, "AMER_DefaultIterateForIceWall")
+		IF "c1"
+			IsEqual(%AMER_IceWallTarget, null)
+		THEN
+			SetPriority("Combat_NoSetEnemy",0)
+		ENDIF
+	ENDIF
+	
+	
+	
+REACTION Combat_MoveOutOfSurfaces, 5
+USAGE COMBAT
+CHECK "(c1|c2)&!c3&!c4"
+	IsInSurface(__Me,Oil)
+	IsInDangerousSurface(__Me)
+	CharacterIsFloating(__Me)
+	CharacterHasStatus(__Me,ETHEREAL_SOLES)
+ACTIONS
+	IF "c1"
+		IsInSurface(__Me,Oil)
+	THEN
+		CharacterFleeFromSurface(Oil)
+	ELIF "c1"
+		IsInDangerousSurface(__Me)
+	THEN
+		CharacterFleeFromDangerousSurface()
+	ENDIF
+INTERRUPT
+ON
+	OnException()
+ACTIONS
+	DelayReaction("Combat_MoveOutOfSurfaces",6)
+	
+	
+	
+//Some creature-specific scripts directly reference this
+//behavior, so I leave it implemented, but with zero priority.
+REACTION Combat_TakeCover, 0
+USAGE COMBAT
+VARS	
+	FLOAT3:_Pos	
+	FLOAT:_Value
+CHECK "c1&c2&c3&c4&c5"	
+	CharacterGetStat(_Value,__Me,Vitality)
+	IsLessThen(_Value,1)
+	FindCover(_Pos,__Me,__Me,20)
+	GetDistance(_Value,_Pos,__Me)
+	IsGreaterThen(_Value,1)
+ACTIONS
+	CharacterPlayEffect(__Me,"FX_GP_QuestionMark_A")
+	CharacterEndTurn()
+INTERRUPT
+ON
+	OnMovementFailed(_)
+ACTIONS
+	DelayReaction("Combat_TakeCover",3)
+	
+	
+	
+	/*
+//_Base provides the same reaction, which is inherited.
+REACTION Combat_NoReactionFound, 1
+USAGE COMBAT
+ACTIONS
+	CharacterPlayEffect(__Me, "FX_GP_Status_SkipTurn_A_Icon", "Dummy_OverheadFX")
+	StatusText(__Me, "AMER_TEST_TurnNoTargets")	//TEST
+	//CharacterPlayEffect(__Me,"FX_GP_QuestionMark_A")
+	CharacterEndTurn()
+	*/
+	
+	
+	
+REACTION AutomatedDialog_Interrupt, 1700
+USAGE PEACE
+CHECK "c1&!c2"
+	IsInDialog(__Me)
+	CharacterIsPlayer(__Me)
+ACTIONS
+	IF "!c1"
+		IsEqual(%DialogLookAtChar,null)
+	THEN
+		CharacterLookAt(%DialogLookAtChar,0)
+	ENDIF
+	Sleep(2.0)
+INTERRUPT
+	Set(%DialogLookAtChar,null)	
+	
+	
+	
+//===============================================//
+//                                               //
+//       D E F A U L T   C H A R A C T E R       //
+//                                               //
+//===============================================//

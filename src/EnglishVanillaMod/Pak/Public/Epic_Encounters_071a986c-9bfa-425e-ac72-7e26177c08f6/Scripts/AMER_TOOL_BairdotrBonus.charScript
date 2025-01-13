@@ -1,0 +1,75 @@
+//=====================================================//
+//                                                     //
+//            B A I R D O T R   B O N U S              //
+//                                                     //
+//       Written by Matteo "Ameranth" T. (2017)        //
+//=====================================================//
+INIT
+CHARACTER:__Me
+	
+EVENTS
+EVENT BairdotrBonusOnInit
+VARS
+	FLOAT:_Rand
+ON
+	OnInit()
+ACTIONS
+	IF "!c1"
+		CharacterIsDead(__Me)
+	THEN
+		StopTimer("AMER_BairdotrBonus_Delay")
+		GetRandomBetween(_Rand, 6.0, 20.0)
+		StartTimer("AMER_BairdotrBonus_Delay", _Rand, 0)
+	ENDIF
+	
+	
+	
+EVENT BairdotrBonusDelay
+VARS
+	INT:_Flag = 0
+	INT:_Ability
+	FLOAT:_Level
+ON
+	OnTimer("AMER_BairdotrBonus_Delay")
+ACTIONS
+	//This would have been more foolproof with story code,
+	//but that's not an option now.
+	//If Bairdotr's Tenebrium is one and her level is 3, we
+	//know she needs her bonus.
+	IF "c1&c2&c3&c4&c5&!c6"
+		CharacterGetAbility(_Ability, __Me, Blackrock)
+		IsEqual(_Ability, INT:0)
+		CharacterGetStat(_Level, __Me, Level)
+		IsEqual(_Level, 3.0)
+		IsEqual(_Flag, INT:0)
+		CharacterHasStatus(__Me, CONSUME, AMER_BairdotrTenebrium)
+	THEN
+		Add(_Flag, 1)
+		AddStatusInfluence(__Me, CONSUME, 1, AMER_BairdotrTenebrium, 0)
+	ENDIF
+	
+	
+	
+//Remove the Ranger bonus from previous patches, replace it with only the Tenebrium bonus.
+EVENT BairdotrBonusOnLoaded
+VARS
+	INT:_Ability
+ON
+	OnLoaded(_, _, _, _)
+ACTIONS
+	IF "c1&c2"
+		CharacterGetAbility(_Ability, __Me, RangerLore)
+		IsEqual(_Ability, INT:6)
+	THEN
+		IF "c1"
+			CharacterHasStatus(__Me, CONSUME, AMER_BairdotrBuff)
+		THEN
+			RemoveStatusInfluence(__Me, CONSUME, 1, AMER_BairdotrBuff, 0)
+			AddStatusInfluence(__Me, CONSUME, 1, AMER_BairdotrTenebrium, 0)
+		ENDIF
+	ENDIF
+//=====================================================//
+//                                                     //
+//            B A I R D O T R   B O N U S              //
+//                                                     //
+//=====================================================//

@@ -1,0 +1,183 @@
+//===============================================//
+//                                               //
+//                 I T E M   S F X               //
+//                                               //
+//     Written by Matteo "Ameranth" T. (2016)    //
+//===============================================//
+INIT
+ITEM:__Me
+EXTERN STRING:%AMER_ItemSFX_FX01 = "NONE"
+EXTERN STRING:%AMER_ItemSFX_FX02 = "NONE"
+EXTERN STRING:%AMER_ItemSFX_FX03 = "NONE"
+EXTERN FIXEDSTRING:%AMER_ItemSFX_Bone01 = "NONE"
+EXTERN FIXEDSTRING:%AMER_ItemSFX_Bone02 = "NONE"
+EXTERN FIXEDSTRING:%AMER_ItemSFX_Bone03 = "NONE"
+EXTERN INT:%AMER_ItemSFX_PlaceFXAtPointInstead01 = 0
+EXTERN INT:%AMER_ItemSFX_PlaceFXAtPointInstead02 = 0
+EXTERN INT:%AMER_ItemSFX_PlaceFXAtPointInstead03 = 0
+EXTERN TRIGGER:%AMER_ItemSFX_PointTrigger01 = "NONE"
+EXTERN TRIGGER:%AMER_ItemSFX_PointTrigger02 = "NONE"
+EXTERN TRIGGER:%AMER_ItemSFX_PointTrigger03 = "NONE"
+EXTERN INT:%AMER_ItemSFX_IsLoopingEffect01 = 0
+EXTERN INT:%AMER_ItemSFX_IsLoopingEffect02 = 0
+EXTERN INT:%AMER_ItemSFX_IsLoopingEffect03 = 0
+EXTERN FLOAT:%AMER_ItemSFX_NonLoopingFXRepeatInterval01 = 0
+EXTERN FLOAT:%AMER_ItemSFX_NonLoopingFXRepeatInterval02 = 0
+EXTERN FLOAT:%AMER_ItemSFX_NonLoopingFXRepeatInterval03 = 0
+EXTERN INT:%AMER_ItemSFX_NonLoopingFXRepeatIterations01 = 0
+EXTERN INT:%AMER_ItemSFX_NonLoopingFXRepeatIterations02 = 0
+EXTERN INT:%AMER_ItemSFX_NonLoopingFXRepeatIterations03 = 0
+INT:%AMER_ItemSFX_Handle01 = null
+INT:%AMER_ItemSFX_Handle02 = null
+INT:%AMER_ItemSFX_Handle03 = null
+	
+EVENTS
+EVENT ItemSFXOnInit
+VARS
+//==========================//
+	INT:_SupportedEffects = 3
+//==========================//
+	INT:_Count
+	INT:_PlaceAtPoint
+	INT:_IsLooping
+	INT:_Handle
+	INT:_TimerIterations
+	FLOAT:_TimerInterval
+	STRING:_Effect
+	TRIGGER:_Point
+	FIXEDSTRING:_HandleVar
+	FIXEDSTRING:_Bone
+	FIXEDSTRING:_TimerName
+ON
+	OnInit()
+ACTIONS
+	Set(_Count, INT:0)
+	WHILE "c1"
+		IsLessThen(_Count, _SupportedEffects)
+	DO
+		GetElement(_Effect, _Count, %AMER_ItemSFX_FX01, %AMER_ItemSFX_FX02, %AMER_ItemSFX_FX03)
+		IF "!c1"
+			IsEqual(_Effect, "NONE")
+		THEN
+			GetElement(_IsLooping, _Count, %AMER_ItemSFX_IsLoopingEffect01, %AMER_ItemSFX_IsLoopingEffect02, %AMER_ItemSFX_IsLoopingEffect03)
+			IF "c1"
+				IsEqual(_IsLooping, INT:1)
+			THEN
+				GetElement(_PlaceAtPoint, _Count, %AMER_ItemSFX_PlaceFXAtPointInstead01, _Count, %AMER_ItemSFX_PlaceFXAtPointInstead02, _Count, %AMER_ItemSFX_PlaceFXAtPointInstead03)
+				GetElement(_HandleVar, _Count, "AMER_ItemSFX_Handle01", "AMER_ItemSFX_Handle02", "AMER_ItemSFX_Handle03")
+				IF "c1"
+					IsEqual(_PlaceAtPoint, INT:1)
+				THEN
+					GetElement(_Point, _Count, %AMER_ItemSFX_PointTrigger01, %AMER_ItemSFX_PointTrigger02, %AMER_ItemSFX_PointTrigger03)
+					PlayLoopEffectAt(_Handle, _Point, _Effect)
+				ELSE
+					GetElement(_Bone, _Count, %AMER_ItemSFX_Bone01, %AMER_ItemSFX_Bone02, %AMER_ItemSFX_Bone03)
+					IF "!c1"
+						IsEqual(_Bone, "NONE")
+					THEN
+						ItemPlayLoopEffect(_Handle, __Me, _Effect, _Bone)
+					ELSE
+						ItemPlayLoopEffect(_Handle, __Me, _Effect)
+					ENDIF
+				ENDIF
+				SetVar(__Me, _HandleVar, _Handle)
+			ELSE
+				GetElement(_TimerInterval, _Count, %AMER_ItemSFX_NonLoopingFXRepeatInterval01, %AMER_ItemSFX_NonLoopingFXRepeatInterval02, %AMER_ItemSFX_NonLoopingFXRepeatInterval03)
+				GetElement(_TimerIterations, _Count, %AMER_ItemSFX_NonLoopingFXRepeatIterations01, %AMER_ItemSFX_NonLoopingFXRepeatIterations02, %AMER_ItemSFX_NonLoopingFXRepeatIterations03)
+				GetElement(_TimerName, _Count, "AMER_ItemSFX_RepeatEffect01", "AMER_ItemSFX_RepeatEffect02", "AMER_ItemSFX_RepeatEffect03")
+				StartTimer(_TimerName, _TimerInterval, _TimerIterations)
+			ENDIF
+		ENDIF
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+	
+	
+EVENT ItemSFXRepeatEffect01
+ON
+	OnTimer("AMER_ItemSFX_RepeatEffect01")
+ACTIONS
+	IF "c1"
+		IsEqual(%AMER_ItemSFX_PlaceFXAtPointInstead01, INT:1)
+	THEN
+		PlayEffectAt(%AMER_ItemSFX_PointTrigger01, %AMER_ItemSFX_FX01)
+	ELSE
+		IF "!c1"
+			IsEqual(%AMER_ItemSFX_Bone01, "NONE")
+		THEN
+			ItemPlayEffect(__Me, %AMER_ItemSFX_FX01, %AMER_ItemSFX_Bone01)
+		ELSE
+			ItemPlayEffect(__Me, %AMER_ItemSFX_FX01)
+		ENDIF
+	ENDIF
+	
+	
+	
+EVENT ItemSFXRepeatEffect02
+ON
+	OnTimer("AMER_ItemSFX_RepeatEffect02")
+ACTIONS
+	IF "c1"
+		IsEqual(%AMER_ItemSFX_PlaceFXAtPointInstead02, INT:1)
+	THEN
+		PlayEffectAt(%AMER_ItemSFX_PointTrigger02, %AMER_ItemSFX_FX02)
+	ELSE
+		IF "!c1"
+			IsEqual(%AMER_ItemSFX_Bone02, "NONE")
+		THEN
+			ItemPlayEffect(__Me, %AMER_ItemSFX_FX02, %AMER_ItemSFX_Bone02)
+		ELSE
+			ItemPlayEffect(__Me, %AMER_ItemSFX_FX02)
+		ENDIF
+	ENDIF
+	
+	
+	
+EVENT ItemSFXRepeatEffect03
+ON
+	OnTimer("AMER_ItemSFX_RepeatEffect03")
+ACTIONS
+	IF "c1"
+		IsEqual(%AMER_ItemSFX_PlaceFXAtPointInstead03, INT:1)
+	THEN
+		PlayEffectAt(%AMER_ItemSFX_PointTrigger03, %AMER_ItemSFX_FX03)
+	ELSE
+		IF "!c1"
+			IsEqual(%AMER_ItemSFX_Bone03, "NONE")
+		THEN
+			ItemPlayEffect(__Me, %AMER_ItemSFX_FX03, %AMER_ItemSFX_Bone03)
+		ELSE
+			ItemPlayEffect(__Me, %AMER_ItemSFX_FX03)
+		ENDIF
+	ENDIF
+	
+	
+	
+EVENT ItemSFXOnShutdown
+ON
+	OnShutdown()
+ACTIONS
+	IF "!c1"
+		IsEqual(%AMER_ItemSFX_Handle01, null)
+	THEN
+		StopLoopEffect(%AMER_ItemSFX_Handle01)
+		StopTimer("AMER_ItemSFX_RepeatEffect01")
+	ENDIF
+	IF "!c1"
+		IsEqual(%AMER_ItemSFX_Handle02, null)
+	THEN
+		StopLoopEffect(%AMER_ItemSFX_Handle02)
+		StopTimer("AMER_ItemSFX_RepeatEffect02")
+	ENDIF
+	IF "!c1"
+		IsEqual(%AMER_ItemSFX_Handle03, null)
+	THEN
+		StopLoopEffect(%AMER_ItemSFX_Handle03)
+		StopTimer("AMER_ItemSFX_RepeatEffect03")
+	ENDIF
+	
+//===============================================//
+//                                               //
+//                 I T E M   S F X               //
+//                                               //
+//===============================================//

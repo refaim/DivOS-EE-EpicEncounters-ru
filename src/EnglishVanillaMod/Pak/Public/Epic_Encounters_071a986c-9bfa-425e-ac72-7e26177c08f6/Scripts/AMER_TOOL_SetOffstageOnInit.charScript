@@ -1,0 +1,53 @@
+//=====================================================//
+//                                                     //
+//   S E T   O F F S T A G E   O F F   O N   I N I T   //
+//                                                     //
+//       Written by Matteo "Ameranth" T. (2017)        //
+//=====================================================//
+INIT
+CHARACTER:__Me
+EXTERN INT:%AMER_SetOffStageOnInit_CasualOnly = 0
+EXTERN INT:%AMER_SetOffStageOnInit_HardcoreOnly = 0
+EXTERN INT:%AMER_SetOffStageOnInit_DisableOnCombat = 0
+	
+EVENTS
+EVENT SetOffStageOnInit
+ON
+	OnInit()
+ACTIONS
+	IF "c1"
+		IsEqual(%AMER_SetOffStageOnInit_CasualOnly, INT:1)
+	THEN
+		IF "c1"
+			IsCasual()
+		THEN
+			CharacterSetOffStage()
+		ENDIF
+	ELIF "c1"
+		IsEqual(%AMER_SetOffStageOnInit_HardcoreOnly, INT:1)
+	THEN
+		IF "c1"
+			IsHardcore()
+		THEN
+			CharacterSetOffStage()
+		ENDIF
+	ELSE
+		CharacterSetOffStage()
+	ENDIF
+	
+	
+	
+EVENT SetOffStageOnCombat
+ON
+	OnCombatStarted()
+ACTIONS
+	IF "c1"
+		IsEqual(%AMER_SetOffStageOnInit_DisableOnCombat, INT:1)
+	THEN
+		CharacterSetOffStage()
+	ENDIF
+//=====================================================//
+//                                                     //
+//   S E T   O F F S T A G E   O F F   O N   I N I T   //
+//                                                     //
+//=====================================================//

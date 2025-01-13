@@ -1,0 +1,659 @@
+//===============================================//
+//                                               //
+//             S U B R O U T I N E S             //
+//                                               //
+//     Written by Matteo "Ameranth" T. (2016)    //
+//===============================================//
+INIT
+CHARACTER:__Me
+	
+//Var for AMER_SetBackstabBonus
+INT:%AMER_SetBackstabBonusBase
+	
+//Vars for AMER_RemoveCurrentAP:
+FLOAT:%AMER_RemoveCurrentAPAmount
+CHARACTER:%AMER_RemoveCurrentAPTarget
+	
+//Vars for AMER_UnmapAttribute:
+FLOAT:%AMER_UnmapAttributeValue
+FLOAT:%AMER_UnmapAttributeLevel
+	
+//Vars for AMER_DoRemoteEffect:
+CHARACTER:%AMER_RemoteEffectSource	//Used to pass the source of a remotely-occuring script effect.
+SKILL:%AMER_RemoteEffectProjectile	//Used to pass the skill to use for a remotely-occuring script effect.
+INT:%AMER_RemoteEffectSourceAsTarget = 0	//Flag which denotes whether AMER_DoRemoteEffect should use %AMER_RemoteEffectSource as the target instead.
+	
+//Recommended Attribute governing the incomming status, these are set
+//when the relevant ability is used. Else it is assumed that it is not
+//used, such as is the case with items.
+FLOAT:%AMER_STATUS_AttributePower
+FLOAT:%AMER_STATUS_BaseChance
+	
+//Used in calculating and tracking the success chance without considering
+//special modifiers like Wet for Shocked.
+FLOAT:%AMER_STATUS_RawChance
+	
+//Used for getting the display string for status success chance.
+FIXEDSTRING:%AMER_STATUS_DisplayChance
+INT:%AMER_STATUS_DisplayIndex
+	
+//Used for tracking movement
+FLOAT3:%AMER_Position
+FLOAT:%AMER_DistanceMoved = -1
+INT:%AMER_ForceTeleDetect = 0
+	
+EVENTS
+//=====================================================//
+//                  F U N C T I O N S                  //
+//=====================================================//
+EVENT DetectMovement
+//					AMER_DetectMovement
+// This timer shouldn't always run, start it on a case-by-
+// case basis. The calling function should initialize
+// %AMER_Position so that there is something to compare to
+// the first time the timer fires. This timer should stop
+// itself when it detects that there is no longer a cause
+// to run. When stopping, it must set %AMER_DistanceMoved
+// to -1, this is what calling functions should check for
+// to detect whether the timer is already running or not.
+// _TeleportThreshold is the amount of distance a character
+// needs to move between two timer ticks before it is assumed
+// to have teleported. Set %AMER_ForceTeleDetect to 1 to
+// force this routine to treat the character as if it has
+// teleported.
+VARS
+	FLOAT3:_Position
+	FLOAT:_Distance
+	INT:_Teleported = 0
+ON
+	OnTimer("AMER_DetectMovement")
+ACTIONS
+	//Check if character satisfies any conditions to continue running
+	//the timer. If not, stop running.
+	IF "c1"
+		CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_Torment")
+	THEN
+		Set(_Teleported, INT:0)
+		//Check if the character has moved, if it has, then add the
+		//distance moved to their distance tracker and update their
+		//last recorded position to this one.
+		IF "c1&!c2&c3"
+			GetPosition(__Me, _Position)
+			IsEqual(%AMER_Position, _Position)
+			GetDistance(_Distance, _Position, %AMER_Position)
+		THEN
+			Set(%AMER_Position, _Position)
+			Abs(_Distance)
+			Add(%AMER_DistanceMoved, _Distance)
+			
+			//If teleporting is detected, set the _Teleported flag and let
+			//individual routines react to this.
+			IF "c1|c2"
+				IsGreaterThen(_Distance, 3.0)
+				IsEqual(%AMER_ForceTeleDetect, INT:1)
+			THEN
+				Set(_Teleported, INT:1)
+			ENDIF
+			
+			//Check the distance moved against distance required for various
+			//conditions. Will need multiple distance trackers if we implement
+			//conditions with varying distance requirements.
+			IF "c1&c2"
+				IsGreaterThen(%AMER_DistanceMoved, 1.0)
+				CharacterHasStatus(__Me, CONSUME, "AMER_STATUS_Torment")
+			THEN
+				//Torment doesn't do damage if the target teleported, so just
+				//subtract the distanced moved when teleporting to essentially
+				//"ignore" the movement that happened.
+				IF "c1"
+					IsEqual(_Teleported, INT:0)
+				THEN
+					WHILE "c1"
+						IsGreaterThen(%AMER_DistanceMoved, 1.0)
+					DO
+						CallFunction("AMER_STATUS_TormentMovementDamage")
+						Subtract(%AMER_DistanceMoved, 1.0)
+					ENDWHILE
+				ELSE
+					Subtract(%AMER_DistanceMoved, _Distance)
+				ENDIF
+			ENDIF
+		ENDIF
+	ELSE
+		//Stop timer and reset distance tracker.
+		StopTimer("AMER_DetectMovement")
+		Set(%AMER_DistanceMoved, FLOAT:-1)
+	ENDIF
+	
+EVENT ResetForceTeleDetect
+// Used to reset the teleport detection override flag after it
+// has served whatever purpose it was set for.
+ON
+	OnTimer("AMER_ResetForceTeleDetect")
+ACTIONS
+	Set(%AMER_ForceTeleDetect, INT:0)
+	
+	
+	
+EVENT GetRawChance
+//					AMER_STATUS_GetRawChance
+// Takes the source character of the status in %AMER_SkillSource,
+// the saving throw ability to roll against (Bodybuilding/Willpower),
+// the fixedstring variable name of the status being calculated so
+// that it can be saved for turn-based saving throws, and the sum
+// of any special success chance modifiers like Wet for Shocked.
+// Will return the correct chance to roll against in %AMER_STATUS_RawChance.
+VARS
+	ABILITY:_SaveType
+	INT:_SaveBonus
+	INT:_Index
+	INT:_IntSaveModifier
+	FLOAT:_SaveModifier
+	FLOAT:_Overhead
+	FLOAT:_StatusChance
+	FLOAT:_ChanceBonus
+	FLOAT:_SourceLevel
+	FLOAT:_MyLevel
+	FLOAT:_AttributePower
+	CHARACTER:_CharSource
+	FIXEDSTRING:_WhichStatus
+ON
+	OnFunction("AMER_STATUS_GetRawChance")
+ACTIONS
+	//%AMER_SkillSource should be set to give the caster.
+	//%AMER_STATUS_SaveType should contain the proper saving throw type.
+	//%AMER_STATUS_Variable should contain the status chance variable.
+	//%AMER_STATUS_ChanceBonus should contain any modifiers to the success chance.
+	IF "c1&c2&c3&c4"
+		GetVar(_CharSource, __Me, "AMER_SkillSource")
+		GetVar(_SaveType, __Me, "AMER_STATUS_SaveType")
+		GetVar(_WhichStatus, __Me, "AMER_STATUS_Variable")
+		GetVar(_ChanceBonus, __Me, "AMER_STATUS_ChanceModifier")
+	THEN
+		
+		IF "c1&c2&c3&c4"
+			GetVar(_AttributePower, _CharSource, "AMER_STATUS_AttributePower")
+			GetVar(_StatusChance, _CharSource, "AMER_STATUS_BaseChance")
+			CharacterGetStat(_SourceLevel, _CharSource, Level)
+			CharacterGetStat(_MyLevel, __Me, Level)
+		THEN
+			//If the caster had less than the spell's recommended attribute,
+			//subtract 10% per point under. Else add 5% per point above.
+			IF "c1"
+				IsLessThen(_AttributePower, FLOAT:0)
+			THEN
+				Multiply(_AttributePower, FLOAT:10)
+			ELSE
+				Multiply(_AttributePower, FLOAT:5)
+			ENDIF
+			
+			//Willpower/Grit influence.
+			IF "!c1"
+				IsEqual(_SaveType, null)
+			THEN
+				IF "c1"
+					CharacterGetAbility(_SaveBonus, __Me, _SaveType)
+				THEN
+					//Calculate how effective the Grit/Willpower is. Divinity
+					//multiplies the 15% per Grit/Willpower by the spell's
+					//listed success chance before applying it to the save.
+					Set(_SaveModifier, _StatusChance)
+					Add(_SaveModifier, _AttributePower)
+					Divide(_SaveModifier, 100.0)
+					Multiply(_SaveModifier, 15.0)
+					Cast(_IntSaveModifier, _SaveModifier)
+					
+					Multiply(_SaveBonus, _IntSaveModifier)			//Bonus from Bodybuilding or Willpower.
+				ENDIF
+			ENDIF
+			
+			//Level difference influence.
+			Subtract(_MyLevel, _SourceLevel)	//Difference in my level - caster level.
+			Multiply(_MyLevel, FLOAT:5)			//For each level of difference, 5%.
+			
+			//After adding these values we have the chance of success without
+			//considering willpower/bodybuilding or other effects.
+			Subtract(_StatusChance, _MyLevel)
+			Add(_StatusChance, _AttributePower)
+		
+			//Store the chance without save bonuses since those bonuses may
+			//change at times; we can apply them on a turn-by-turn basis.
+			IF "!c1"
+				IsEqual(_WhichStatus, "NONE")
+			THEN
+				SetVar(__Me, _WhichStatus, _StatusChance)
+			ENDIF
+			
+			//If this amount was lower than a 100% chance, we know that the
+			//caster already "rolled" for success. That roll didn't account
+			//for willpower or bodybuilding, though, so to produce a probability
+			//equivalent to what the roll *should* have been, we need to do a
+			//little algebra to modify our internal roll to a value that will
+			//account for this.
+			IF "c1"
+				IsLessThen(_StatusChance, FLOAT:100)
+			THEN
+				Set(_Overhead, _StatusChance)		//the roll the caster already made.
+				Add(_StatusChance, _ChanceBonus)	//Add in any special modifiers.
+				Subtract(_StatusChance, _SaveBonus)	//what the roll *should* have been.
+				Cast(_Index, _StatusChance)			//we'll use this later to get the string index for the combat log.
+				Divide(_StatusChance, _Overhead)	//the roll to be made, modified for correct probability.
+				Multiply(_StatusChance, FLOAT:100)
+			ELSE
+				Add(_StatusChance, _ChanceBonus)
+				Subtract(_StatusChance, _SaveBonus)
+				Cast(_Index, _StatusChance)
+			ENDIF
+			
+			//Return the calculated success chance
+			Set(%AMER_STATUS_RawChance, _StatusChance)
+			
+			//Get the %chance display string by sending the correct success chance,
+			//it will return with the correct display string.
+			Set(%AMER_STATUS_DisplayIndex, _Index)
+			//CallFunction("AMER_STATUS_GetChanceDisplay")
+		ENDIF
+	ENDIF
+	
+	
+	
+EVENT GetChanceDisplayString
+//				AMER_STATUS_GetChanceDisplay
+// Using the int passed through %AMER_STATUS_DisplayIndex, finds
+// and returns the corresponding string to display this chance as
+// text in the combat log.
+// The result is stored in %AMER_STATUS_DisplayChance.
+VARS
+	INT:_Index
+	INT:_ResChance
+	STRING:_Str
+	ABILITY:_SaveType
+ON
+	OnFunction("AMER_STATUS_GetChanceDisplay")
+ACTIONS
+	//AMER_STATUS_DisplayIndex was given holding the success chance
+	//of the status, we need to calculate the *resist* chance from this
+	//to produce the correct string index.
+	Set(_Index, %AMER_STATUS_DisplayIndex)
+	Set(_ResChance, 100)
+	Subtract(_ResChance, _Index)
+	Set(_Index, _ResChance)
+	
+	//Check if it's a value past what's supported.
+	IF "c1"
+		IsGreaterThen(_Index, 150)
+	THEN
+		Set(_Index, 150)
+	ELIF "c1"
+		IsLessThen(_Index, -50)
+	THEN
+		Set(_Index, -50)
+	ENDIF
+	
+	
+	//Load the corresponding success chance string, if it is negative,
+	//make the index positive to match the naming format of the string.
+	//Also, the string name is slightly different. If the save type
+	//cannot be found for some reason, default to Special.
+	IF "!c1|c2"
+		GetVar(_SaveType, __Me, "AMER_STATUS_SaveType")
+		IsEqual(_SaveType, null)
+	THEN
+		IF "c1"
+			IsLessThen(_Index, INT:0)
+		THEN
+			Multiply(_Index, -1)
+			Print(_Str, "AMER_STATUS_SaveInfoSpecialN[1]", _Index)
+			Cast(%AMER_STATUS_DisplayChance, _Str)
+		ELSE
+			Print(_Str, "AMER_STATUS_SaveInfoSpecial[1]", _Index)
+			Cast(%AMER_STATUS_DisplayChance, _Str)
+		ENDIF
+	ELIF "c1"
+		IsEqual(_SaveType, BodyBuilding)
+	THEN
+		IF "c1"
+			IsLessThen(_Index, INT:0)
+		THEN
+			Multiply(_Index, -1)
+			Print(_Str, "AMER_STATUS_SaveInfoGritN[1]", _Index)
+			Cast(%AMER_STATUS_DisplayChance, _Str)
+		ELSE
+			Print(_Str, "AMER_STATUS_SaveInfoGrit[1]", _Index)
+			Cast(%AMER_STATUS_DisplayChance, _Str)
+		ENDIF
+	ELIF "c1"
+		IsEqual(_SaveType, Willpower)
+	THEN
+		IF "c1"
+			IsLessThen(_Index, INT:0)
+		THEN
+			Multiply(_Index, -1)
+			Print(_Str, "AMER_STATUS_SaveInfoWillpowerN[1]", _Index)
+			Cast(%AMER_STATUS_DisplayChance, _Str)
+		ELSE
+			Print(_Str, "AMER_STATUS_SaveInfoWillpower[1]", _Index)
+			Cast(%AMER_STATUS_DisplayChance, _Str)
+		ENDIF
+	ENDIF
+	
+	
+	
+EVENT DoRemoteEffect
+//					AMER_DoRemoteEffect
+// Takes a character from %AMER_RemoteEffectSource and a
+// projectile skill id from %AMER_RemoteEffectProjectile.
+// If %AMER_RemoteEffectSourceAsTarget is not equal to zero,
+// this routine will use %AMER_RemoteEffectSource as the target
+// character and __Me as the source instead.
+//
+// The intent is to have a source character execute the effects
+// of the given skill upon a single target character. This is
+// achieved by placing the 1m explode radius projectile slightly
+// under the ground beneath the target character, thereby
+// only effecting it, and no others. This was necessary to do
+// because remote projectile and cone creation functions are
+// all bugged or limited in their own ways. Note that the
+// projectile is placed more than 1m underground--this is because,
+// through testing, it was found that the 1m radius was able
+// to reach farther that expected, suggesting that it likely
+// isn't spawned at a relative Y of zero.
+VARS
+	CHARACTER:_CharSource
+	CHARACTER:_CharTarget
+	FLOAT3:_TargPos
+	FLOAT:_TargY
+	FLOAT:_SourceLevel
+	INT:_Level
+	SKILL:_Projectile
+ON
+	OnFunction("AMER_DoRemoteEffect")
+ACTIONS
+	IF "!c1"
+		IsEqual(%AMER_RemoteEffectSourceAsTarget, INT:0)
+	THEN
+		Set(_CharTarget, %AMER_RemoteEffectSource)
+		Set(_CharSource, __Me)
+		Set(%AMER_RemoteEffectSourceAsTarget, INT:0)
+	ELSE
+		Set(_CharTarget, __Me)
+		Set(_CharSource, %AMER_RemoteEffectSource)
+	ENDIF
+	Set(_Projectile, %AMER_RemoteEffectProjectile)
+	GetPosition(_CharTarget, _TargPos)
+	IF "c1&c2"
+		CharacterGetStat(_SourceLevel, _CharSource, Level)
+		GetY(_TargPos, _TargY)
+	THEN
+		Cast(_Level, _SourceLevel)
+		Add(_TargY, -1.25)
+		SetY(_TargPos, _TargY)
+		ExplodeAt(_TargPos, _Projectile, _Level, _CharSource)
+	ENDIF
+	
+	
+	
+EVENT UnmapAttribute
+//					AMER_UnmapAttribute
+// Takes a float attribute value from %AMER_UnmapAttributeValue
+// and a float level value from %AMER_UnmapAttributeLevel. The
+// goal is to acquire a "pretty" accurate value which represents
+// a creature's pre-mapped attribute value (the value from 1-10
+// that is assigned to a character as an attribute in character.txt)
+// This formula is derived from testing to discover post-mapped
+// values and some basic algebra:
+//
+//							     Post-mapped Attribute
+// Pre-mapped Attribute   =   --------------------------
+//							      (LEVEL x 0.085) + 1
+VARS
+	FLOAT:_Value
+	FLOAT:_Level
+ON
+	OnFunction("AMER_UnmapAttribute")
+ACTIONS
+	Set(_Value, %AMER_UnmapAttributeValue)
+	Set(_Level, %AMER_UnmapAttributeLevel)
+	Multiply(_Level, 0.085)
+	Add(_Level, FLOAT:1)
+	Divide(_Value, _Level)
+	Set(%AMER_UnmapAttributeValue, _Value)
+	
+	
+	
+EVENT UnmapArmor
+//					AMER_UnmapArmor
+// Takes a float armor value from %AMER_UnmapAttributeValue
+// and a float level value from %AMER_UnmapAttributeLevel.
+// Same as AMER_UnmapAttribute above, but for armor values.
+// Unmapped armor values seem to relate to a specific reduction
+// percentage, which is maintained throughout levels by adding
+// 10 armor per level. This method removes this added armor
+// to find the base value that correlates to the reduction
+// percentage, and therefore to the unmapped value. Unfortunately,
+// I could not derive a formula from the values I discovered, so
+// a switch is implemented instead.
+VARS
+	FLOAT:_LevelModifier
+	FLOAT:_Value
+ON
+	OnFunction("AMER_UnmapArmor")
+ACTIONS
+	Set(_LevelModifier, %AMER_UnmapAttributeLevel)
+	Subtract(_LevelModifier, 1.0)
+	Multiply(_LevelModifier, 10.0)
+	Set(_Value, %AMER_UnmapAttributeValue)
+	Subtract(_Value, _LevelModifier)
+	
+	
+	IF "!c1"
+		IsLessThen(_Value, 107.0)
+	THEN
+		Set(%AMER_UnmapAttributeValue, 10.0)
+	ELIF "!c1"
+		IsLessThen(_Value, 103.0)
+	THEN
+		Set(%AMER_UnmapAttributeValue, 9.0)
+	ELIF "!c1"
+		IsLessThen(_Value, 98.0)
+	THEN
+		Set(%AMER_UnmapAttributeValue, 8.0)
+	ELIF "!c1"
+		IsLessThen(_Value, 93.0)
+	THEN
+		Set(%AMER_UnmapAttributeValue, 7.0)
+	ELIF "!c1"
+		IsLessThen(_Value, 86.0)
+	THEN
+		Set(%AMER_UnmapAttributeValue, 6.0)
+	ELIF "!c1"
+		IsLessThen(_Value, 79.0)
+	THEN
+		Set(%AMER_UnmapAttributeValue, 5.0)
+	ELIF "!c1"
+		IsLessThen(_Value, 70.0)
+	THEN
+		Set(%AMER_UnmapAttributeValue, 4.0)
+	ELIF "!c1"
+		IsLessThen(_Value, 60.0)
+	THEN
+		Set(%AMER_UnmapAttributeValue, 3.0)	
+	ELIF "!c1"
+		IsLessThen(_Value, 48.0)
+	THEN
+		Set(%AMER_UnmapAttributeValue, 2.0)
+	ELIF "!c1"
+		IsLessThen(_Value, 33.0)
+	THEN
+		Set(%AMER_UnmapAttributeValue, 1.0)
+	ELSE
+		Set(%AMER_UnmapAttributeValue, 0.0)
+	ENDIF
+	
+	
+	
+EVENT RemoveCurrentAP
+//					AMER_RemoveCurrentAP
+// Takes a float AP value from %AMER_RemoveCurrentAPAmount
+// and a character from %AMER_RemoveCurrentAPTarget.
+// The goal is to manipulate the target's maximum AP value
+// to an amount that will simulate a loss of AP equivalent
+// to the amount specified. Set %AMER_RemoveCurrentAPAMount
+// to any negative number to remove all AP.
+//
+// APMax Adjustment = (Current AP to Remove) + (APMax) - (Current AP)
+VARS
+	CHARACTER:_Char
+	FLOAT:_AP
+	FLOAT:_MaximumAP
+	FLOAT:_RemoveAP
+	FLOAT:_RemoveMaximum
+	INT:_Adjustment
+	INT:_Amount
+	INT:_Count
+	STRING:_Str
+	FIXEDSTRING:_WhichEffect
+ON
+	OnFunction("AMER_RemoveCurrentAP")
+ACTIONS
+	Set(_Char, %AMER_RemoveCurrentAPTarget)
+	Set(_RemoveAP, %AMER_RemoveCurrentAPAmount)
+	
+	IF "c1&c2"
+		CharacterGetStat(_AP, _Char, ActionPoints)
+		CharacterGetStat(_MaximumAP, _Char, APMaximum)
+	THEN
+		//Calculate the maximum AP adjustment to make. If a negative
+		//value was sent, assume all AP should be removed.
+		IF "!c1"
+			IsLessThen(_RemoveAP, 0.0)
+		THEN
+			Add(_RemoveAP, _MaximumAP)
+			Subtract(_RemoveAP, _AP)
+			Cast(_Adjustment, _RemoveAP)
+		ELSE
+			Cast(_Adjustment, _MaximumAP)
+		ENDIF
+		
+		Set(_Count, INT:0)
+		WHILE "c1&c2"
+			IsLessThen(_Count, 7)
+			IsGreaterThen(_Adjustment, INT:0)
+		DO
+			GetElement(_Amount, _Count, INT:64, INT:32, INT:16, INT:8, INT:4, INT:2, INT:1)
+			IF "!c1"
+				IsLessThen(_Adjustment, _Amount)
+			THEN
+				Print(_Str, "AMER_REMOVEAP_MaxAP[1]", _Amount)
+				Cast(_WhichEffect, _Str)
+				AddTemporaryStatusInfluence(__Me, CONSUME, 1, _WhichEffect, 0)
+				Subtract(_Adjustment, _Amount)
+			ENDIF
+			
+			Add(_Count, INT:1)
+		ENDWHILE
+	ENDIF
+	
+	
+	
+EVENT GetRoundNumber
+//				AMER_GetRoundNumber
+// Makes use of IsRound() to discover what the current combat
+// round is. This allows us to detect if players have used
+// the wait function without using consumes(!).
+VARS
+	INT:_Count
+ON
+	OnFunction("AMER_GetRoundNumber")
+ACTIONS
+	Set(_Count, INT:0)
+	WHILE "!c1"
+		IsRound(_Count)
+	DO
+		Add(_Count, INT:1)
+	ENDWHILE
+	SetVar(__Me, "AMER_RoundCount", _Count)
+	
+	
+	
+EVENT SetBackstabBonusDamage
+//				AMER_SetBackstabBonusDamage
+// Takes an int value from %AMER_GenericInt, Returns a skill
+// value to %AMER_BackstabDamageProjectile.
+// The goal is to provide a means to pre-load the damage gained
+// by a backstab, so that it does not need to be done when the
+// actual hit is occuring. This is most commonly used by skills
+// that use weapon damage multipliers other than 100%, so that
+// the resulting backstab damage is adjusted to match it.
+//
+// This function currently assumes that each level of Tricks
+// of the Trade past _MinimumTricks adds 0.5 to the backstab
+// multiplier, and currently supports these base damages:
+// 50%, 90%, 100%, 130%, 150%, 180%, 200%.
+VARS
+	INT:_Base
+	INT:_Tricks
+	SKILL:_Bonus
+ON
+	OnFunction("AMER_SetBackstabBonusDamage")
+ACTIONS
+	Set(_Base, %AMER_SetBackstabBonusBase)
+	
+	IF "c1&!c2"
+		CharacterGetAbility(_Tricks, __Me, Sneaking)
+		IsLessThen(_Tricks, 3)
+	THEN
+		//Don't let the index go out of bounds.
+		IF "c1"
+			IsGreaterThen(_Tricks, 9)
+		THEN
+			Set(_Tricks, 9)
+		ENDIF
+		
+		Subtract(_Tricks, 3)
+		
+		IF "c1"
+			IsEqual(_Base, INT:50)
+		THEN
+			GetElement(_Bonus, _Tricks, "AMER_SCRIPTSKILL_BackstabBonus15", "AMER_SCRIPTSKILL_BackstabBonus30", "AMER_SCRIPTSKILL_BackstabBonus45", "AMER_SCRIPTSKILL_BackstabBonus60", "AMER_SCRIPTSKILL_BackstabBonus75", "AMER_SCRIPTSKILL_BackstabBonus90", "AMER_SCRIPTSKILL_BackstabBonus105")
+			SetVar(__Me, "AMER_BackstabDamageProjectile", _Bonus)
+		ELIF "c1"
+			IsEqual(_Base, INT:90)
+		THEN
+			GetElement(_Bonus, _Tricks, "AMER_SCRIPTSKILL_BackstabBonus27", "AMER_SCRIPTSKILL_BackstabBonus54", "AMER_SCRIPTSKILL_BackstabBonus81", "AMER_SCRIPTSKILL_BackstabBonus108", "AMER_SCRIPTSKILL_BackstabBonus135", "AMER_SCRIPTSKILL_BackstabBonus162", "AMER_SCRIPTSKILL_BackstabBonus189")
+			SetVar(__Me, "AMER_BackstabDamageProjectile", _Bonus)
+		ELIF "c1"
+			IsEqual(_Base, INT:100)
+		THEN
+			GetElement(_Bonus, _Tricks, "AMER_SCRIPTSKILL_BackstabBonus30", "AMER_SCRIPTSKILL_BackstabBonus60", "AMER_SCRIPTSKILL_BackstabBonus90", "AMER_SCRIPTSKILL_BackstabBonus120", "AMER_SCRIPTSKILL_BackstabBonus150", "AMER_SCRIPTSKILL_BackstabBonus180", "AMER_SCRIPTSKILL_BackstabBonus210")
+			SetVar(__Me, "AMER_BackstabDamageProjectile", _Bonus)
+		ELIF "c1"
+			IsEqual(_Base, INT:130)
+		THEN
+			GetElement(_Bonus, _Tricks, "AMER_SCRIPTSKILL_BackstabBonus39", "AMER_SCRIPTSKILL_BackstabBonus78", "AMER_SCRIPTSKILL_BackstabBonus117", "AMER_SCRIPTSKILL_BackstabBonus156", "AMER_SCRIPTSKILL_BackstabBonus195", "AMER_SCRIPTSKILL_BackstabBonus234", "AMER_SCRIPTSKILL_BackstabBonus273")
+			SetVar(__Me, "AMER_BackstabDamageProjectile", _Bonus)
+		ELIF "c1"
+			IsEqual(_Base, INT:150)
+		THEN
+			GetElement(_Bonus, _Tricks, "AMER_SCRIPTSKILL_BackstabBonus45", "AMER_SCRIPTSKILL_BackstabBonus90", "AMER_SCRIPTSKILL_BackstabBonus135", "AMER_SCRIPTSKILL_BackstabBonus180", "AMER_SCRIPTSKILL_BackstabBonus225", "AMER_SCRIPTSKILL_BackstabBonus270", "AMER_SCRIPTSKILL_BackstabBonus315")
+			SetVar(__Me, "AMER_BackstabDamageProjectile", _Bonus)
+		ELIF "c1"
+			IsEqual(_Base, INT:180)
+		THEN
+			GetElement(_Bonus, _Tricks, "AMER_SCRIPTSKILL_BackstabBonus54", "AMER_SCRIPTSKILL_BackstabBonus108", "AMER_SCRIPTSKILL_BackstabBonus162", "AMER_SCRIPTSKILL_BackstabBonus216", "AMER_SCRIPTSKILL_BackstabBonus270", "AMER_SCRIPTSKILL_BackstabBonus324", "AMER_SCRIPTSKILL_BackstabBonus378")
+			SetVar(__Me, "AMER_BackstabDamageProjectile", _Bonus)
+		ELIF "c1"
+			IsEqual(_Base, INT:200)
+		THEN
+			GetElement(_Bonus, _Tricks, "AMER_SCRIPTSKILL_BackstabBonus60", "AMER_SCRIPTSKILL_BackstabBonus120", "AMER_SCRIPTSKILL_BackstabBonus180", "AMER_SCRIPTSKILL_BackstabBonus240", "AMER_SCRIPTSKILL_BackstabBonus300", "AMER_SCRIPTSKILL_BackstabBonus360", "AMER_SCRIPTSKILL_BackstabBonus420")
+			SetVar(__Me, "AMER_BackstabDamageProjectile", _Bonus)
+		ENDIF
+	ENDIF
+	
+	
+	
+//===============================================//
+//                                               //
+//             S U B R O U T I N E S             //
+//                                               //
+//===============================================//

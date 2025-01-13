@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<save>
+    <header version="2" time="1472357536" />
+    <version major="2" minor="0" revision="0" build="0" />
+    <region id="keywordDialog">
+        <node id="root">
+            <attribute id="KeywordVoiced" value="0" type="19" />
+            <attribute id="PlayGreeting" value="1" type="19" />
+            <attribute id="keywordAutoImport" value="0" type="19" />
+            <children>
+                <node id="keywordContentMap">
+                    <attribute id="keywordContentMapKey" value="59752848-6013-406f-831c-262a9fc31863" type="22" />
+                    <attribute id="keywordContentMapValue" value="Please come back soon. I&apos;m a little lost... and very cold." handle="ls::TranslatedStringRepository::s_HandleUnknown" type="28" />
+                </node>
+                <node id="keywordContentMap">
+                    <attribute id="keywordContentMapKey" value="620650db-5765-4d54-abb5-6340305500ec" type="22" />
+                    <attribute id="keywordContentMapValue" value="Oh thank Mercer; HUMANS! It&apos;s been so long since I&apos;ve spoken to anything other than a hungry wolf or... My maps..." handle="ls::TranslatedStringRepository::s_HandleUnknown" type="28" />
+                </node>
+                <node id="keywordContentMap">
+                    <attribute id="keywordContentMapKey" value="73639bf9-f5bc-4041-91c4-4c40a980a5c4" type="22" />
+                    <attribute id="keywordContentMapValue" value="Right... Well... I&apos;ll be seeing you?" handle="ls::TranslatedStringRepository::s_HandleUnknown" type="28" />
+                </node>
+                <node id="keywordContentMap">
+                    <attribute id="keywordContentMapKey" value="8401b795-f2ea-4d99-a408-655418461eaf" type="22" />
+                    <attribute id="keywordContentMapValue" value="Greeting&#x0D;&#x0A;" handle="ls::TranslatedStringRepository::s_HandleUnknown" type="28" />
+                </node>
+                <node id="keywordNode">
+                    <attribute id="ResetRotation" value="0" type="19" />
+                    <attribute id="ZoomCamera" value="1" type="19" />
+                    <attribute id="keywordActions" value="" type="23" />
+                    <attribute id="keywordConditions" value="" type="23" />
+                    <attribute id="keywordDisplayedText" value="8401b795-f2ea-4d99-a408-655418461eaf" type="22" />
+                    <attribute id="keywordDisplayedTextVoiced" value="0" type="19" />
+                    <attribute id="keywordId" value="Greeting" type="22" />
+                    <attribute id="keywordLast" value="0" type="19" />
+                    <attribute id="keywordOwner" value="-1" type="4" />
+                    <attribute id="keywordShow" value="0" type="19" />
+                    <attribute id="keywordSource" value="0" type="5" />
+                    <children>
+                        <node id="keywordText">
+                            <attribute id="PopCount" value="1" type="5" />
+                            <attribute id="keywordActions" value="" type="23" />
+                            <attribute id="keywordConditions" value="" type="23" />
+                            <attribute id="keywordEmotion" value="0" type="5" />
+                            <attribute id="keywordEndDialog" value="0" type="19" />
+                            <attribute id="keywordPushPop" value="0" type="5" />
+                            <attribute id="keywordSpeaker" value="0" type="5" />
+                            <attribute id="keywordSpeakerOverride" value="" type="23" />
+                            <attribute id="keywordStub" value="1" type="19" />
+                            <attribute id="keywordTransition" value="0" type="5" />
+                            <attribute id="keywordWaitSeconds" value="3" type="6" />
+                            <children>
+                                <node id="keywordTextUid">
+                                    <attribute id="Object" value="620650db-5765-4d54-abb5-6340305500ec" type="22" />
+                                </node>
+                            </children>
+                        </node>
+                    </children>
+                </node>
+                <node id="keywordNode">
+                    <attribute id="ResetRotation" value="0" type="19" />
+                    <attribute id="ZoomCamera" value="1" type="19" />
+                    <attribute id="keywordActions" value="" type="23" />
+                    <attribute id="keywordConditions" value="" type="23" />
+                    <attribute id="keywordDisplayedText" value="73639bf9-f5bc-4041-91c4-4c40a980a5c4" type="22" />
+                    <attribute id="keywordDisplayedTextVoiced" value="0" type="19" />
+                    <attribute id="keywordId" value="Leave" type="22" />
+                    <attribute id="keywordLast" value="1" type="19" />
+                    <attribute id="keywordOwner" value="-1" type="4" />
+                    <attribute id="keywordShow" value="1" type="19" />
+                    <attribute id="keywordSource" value="0" type="5" />
+                    <children>
+                        <node id="keywordText">
+                            <attribute id="PopCount" value="1" type="5" />
+                            <attribute id="keywordActions" value="" type="23" />
+                            <attribute id="keywordConditions" value="" type="23" />
+                            <attribute id="keywordEmotion" value="0" type="5" />
+                            <attribute id="keywordEndDialog" value="1" type="19" />
+                            <attribute id="keywordPushPop" value="0" type="5" />
+                            <attribute id="keywordSpeaker" value="0" type="5" />
+                            <attribute id="keywordSpeakerOverride" value="" type="23" />
+                            <attribute id="keywordStub" value="1" type="19" />
+                            <attribute id="keywordTransition" value="0" type="5" />
+                            <attribute id="keywordWaitSeconds" value="3" type="6" />
+                            <children>
+                                <node id="keywordTextUid">
+                                    <attribute id="Object" value="59752848-6013-406f-831c-262a9fc31863" type="22" />
+                                </node>
+                            </children>
+                        </node>
+                    </children>
+                </node>
+                <node id="keywordSpeakerNames" />
+            </children>
+        </node>
+    </region>
+</save>

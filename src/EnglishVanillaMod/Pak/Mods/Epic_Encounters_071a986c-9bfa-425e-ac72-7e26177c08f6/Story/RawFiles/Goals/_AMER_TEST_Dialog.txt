@@ -1,0 +1,11 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+DB_Dialogs(CHARACTER_AMER_TEST_Mulch, "AMER_TEST_Mulch");
+DB_Dialogs(CHARACTER_AMER_SNO_Tyriok, "AMER_SNO_Tyriok");
+KBSECTION
+
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "__Start"

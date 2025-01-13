@@ -1,0 +1,395 @@
+//===================================================//
+//                                                   //
+//  C H A R A C T E R   I T E M   F U N C T I O N S  //
+//                                                   //
+//       Written by Matteo "Ameranth" T. (2017)      //
+//===================================================//
+INIT
+CHARACTER:__Me
+	
+INT:%AMER_CharacterConsumeChoke = 0
+	
+EVENTS
+EVENT ItemAffixConsumeCatch
+VARS
+	CHARACTER:_CharSource
+	SURFACE:_Surface
+	SKILL:_Projectile
+	FLOAT:_SourceLevel
+	FLOAT:_Stat
+	INT:_Ability
+	INT:_MyAbility
+	INT:_Level
+ON
+	OnCharacterStatus(__Me, CONSUME)
+ACTIONS
+	IF "c1"
+		IsEqual(%AMER_CharacterConsumeChoke, INT:0)
+	THEN
+		//Need to choke consume handling because the applicator consumes
+		//are removed through the application of a secondary consume.
+		Set(%AMER_CharacterConsumeChoke, 1)
+		StartTimer("AMER_CharacterItemAffixChoke", 0.2, 0)
+		
+		IF "c1"
+			CharacterHasStatus(__Me ,CONSUME, AMER_UNI_ZenithProc)
+		THEN
+			//Zenith fires a standard fireball spell at the target creature.
+			CharacterConsume(__Me, AMER_UNI_RemoveZenithProc)
+			IF "c1&c2"
+				GetVar(_CharSource, __Me, "AMER_CharSource")
+				CharacterGetStat(_SourceLevel, _CharSource, Level)
+			THEN
+				CreateSurfaceAt(_CharSource, Fire, 2, 1)
+				CreateSurfaceAt(__Me, Fire, 2, 1)
+				Cast(_Level, _SourceLevel)
+				ShootLocalProjectileAt(Projectile_Fireball, _CharSource, null, __Me, _Level)
+			ENDIF
+		ENDIF
+		
+		IF "c1"
+			CharacterHasStatus(__Me ,CONSUME, AMER_UNI_ChthonianProc)
+		THEN
+			//Chthonian grants AoE weapon damage centered on target. The damage increases
+			//based on how much more Grit the wielder has than the target creature.
+			CharacterConsume(__Me, AMER_UNI_RemoveChthonianProc)
+			IF "c1&c2&c3&c4"
+				GetVar(_CharSource, __Me, "AMER_CharSource")
+				CharacterGetStat(_SourceLevel, _CharSource, Level)
+				CharacterGetAbility(_Ability, _CharSource, BodyBuilding)
+				CharacterGetAbility(_MyAbility, __Me, BodyBuilding)
+			THEN
+				Subtract(_Ability, MyAbility)
+				Subtract(_Ability, 1)	//Index starts at zero.
+				IF "c1"
+					IsGreaterThen(_Ability, 6)
+				THEN
+					Set(_Ability, 6)
+				ENDIF
+				IF "!c1"
+					IsLessThen(_Ability, INT:0)
+				THEN
+					GetElement(_Projectile, _Ability, AMER_SCRIPTSKILL_UNI_Chthonian_1, AMER_SCRIPTSKILL_UNI_Chthonian_2, AMER_SCRIPTSKILL_UNI_Chthonian_3, AMER_SCRIPTSKILL_UNI_Chthonian_4, AMER_SCRIPTSKILL_UNI_Chthonian_5, AMER_SCRIPTSKILL_UNI_Chthonian_6, AMER_SCRIPTSKILL_UNI_Chthonian_7)
+					Cast(_Level, _SourceLevel)
+					ExplodeAt(__Me, _Projectile, _Level, _CharSource)
+				ENDIF
+			ENDIF
+		ENDIF
+		
+		IF "c1"
+			CharacterHasStatus(__Me ,CONSUME, AMER_UNI_MomentumProc)
+		THEN
+			//Momentum fires a piercing projectile at the target creature. Its damage
+			//is % of weapon damage, based on the wielder's movement speed. 1.5 is the
+			//minimum speed to benefit, every 1.0 movement beyond that increases damage,
+			//up to 5.5 movement. Every shot fired with Momentum lowers movement speed by
+			//0.5 for 2 turns, up to -2.5.
+			CharacterConsume(__Me, AMER_UNI_RemoveMomentumProc)
+			
+			//Apply movement debuff.
+			IF "c1"
+				CharacterHasStatus(_CharSource, CONSUME, "AMER_UNI_MomentumDebuff1")
+			THEN
+				CharacterConsume(_CharSource, "AMER_UNI_MomentumDebuff2")
+			ELIF "c1"
+				CharacterHasStatus(_CharSource, CONSUME, "AMER_UNI_MomentumDebuff2")
+			THEN
+				CharacterConsume(_CharSource, "AMER_UNI_MomentumDebuff3")
+			ELIF "c1"
+				CharacterHasStatus(_CharSource, CONSUME, "AMER_UNI_MomentumDebuff3")
+			THEN
+				CharacterConsume(_CharSource, "AMER_UNI_MomentumDebuff4")
+			ELIF "c1"
+				CharacterHasStatus(_CharSource, CONSUME, "AMER_UNI_MomentumDebuff4")
+			THEN
+				CharacterConsume(_CharSource, "AMER_UNI_MomentumDebuff5")
+			ELIF "c1"
+				CharacterHasStatus(_CharSource, CONSUME, "AMER_UNI_MomentumDebuff5")
+			THEN
+				CharacterConsume(_CharSource, "AMER_UNI_MomentumDebuff5")
+			ELSE
+				CharacterConsume(_CharSource, "AMER_UNI_MomentumDebuff1")
+			ENDIF
+			
+			//Calculate piercing projectile.
+			IF "c1&c2&c3"
+				GetVar(_CharSource, __Me, "AMER_CharSource")
+				CharacterGetStat(_SourceLevel, _CharSource, Level)
+				CharacterGetStat(_Stat, _CharSource, Movement)
+			THEN
+				IF "c1"
+					IsGreaterThen(_Stat, 1.5)
+				THEN
+					Subtract(_Stat, 1.5)	//Index starts at zero.
+					Cast(_Ability, _Stat)
+					IF "c1"
+						IsGreaterThen(_Ability, 4)
+					THEN
+						Set(_Ability, 4)
+					ENDIF
+					IF "!c1"
+						IsLessThen(_Ability, INT:0)
+					THEN
+						GetElement(_Projectile, _Ability, AMER_SCRIPTSKILL_UNI_Momentum_1, AMER_SCRIPTSKILL_UNI_Momentum_2, AMER_SCRIPTSKILL_UNI_Momentum_3, AMER_SCRIPTSKILL_UNI_Momentum_4, AMER_SCRIPTSKILL_UNI_Momentum_5)
+						Cast(_Level, _SourceLevel)
+						ShootLocalProjectileAt(_Projectile, _CharSource, null, __Me, _Level)
+					ENDIF
+				ENDIF
+			ENDIF
+		ENDIF
+		
+		//Gram, Sword of Grief fires a Nature's Fury projectile.
+		IF "c1"
+			CharacterHasStatus(__Me ,CONSUME, AMER_UNI_GramProc)
+		THEN
+			CharacterConsume(__Me, AMER_UNI_RemoveGramProc)
+			IF "c1&c2"
+				GetVar(_CharSource, __Me, "AMER_CharSource")
+				CharacterGetStat(_SourceLevel, _CharSource, Level)
+			THEN
+				ShootLocalProjectileAt(AMER_SKILL_NaturesFury, _CharSource, null, __Me, _Level)
+			ENDIF
+		ENDIF
+	ENDIF
+	
+EVENT CharacterItemAffixChoke
+ON
+	OnTimer("AMER_CharacterItemAffixChoke")
+ACTIONS
+	Set(%AMER_CharacterConsumeChoke, INT:0)
+	
+//===========================================================//
+//                    Item Affix Scripting                   //
+//===========================================================//
+//Credit to the wonderful Baardvaark for much of this work, and
+//all of his work within the actual stat files for these great
+//item affixes.
+EVENT WaterVulnerabilityProc
+ON
+	OnFunction("AMER_WaterVulnerabilityProc")
+ACTIONS
+	IF "c1"
+		CharacterHasStatus(__Me, CONSUME, WaterVulnerability)
+	THEN
+		IF "c1"
+			CharacterHasStatus(__Me, CONSUME, WaterVulnerability1)
+		THEN
+			CharacterConsume(__Me, WaterVulnerability2)
+		ELIF "c1"
+			CharacterHasStatus(__Me, CONSUME, WaterVulnerability2)
+		THEN
+			CharacterConsume(__Me, WaterVulnerability3)
+		ELIF "c1"
+			CharacterHasStatus(__Me, CONSUME, WaterVulnerability3)
+		THEN
+			CharacterConsume(__Me, WaterVulnerability4)
+		ELIF "c1"
+			CharacterHasStatus(__Me, CONSUME, WaterVulnerability4)
+		THEN
+			CharacterConsume(__Me, WaterVulnerability5)
+		ELIF "c1"
+			CharacterHasStatus(__Me, CONSUME, WaterVulnerability5)
+		THEN
+			CharacterConsume(__Me, WaterVulnerability5)
+		ELSE
+			CharacterConsume(__Me, WaterVulnerability1)
+		ENDIF
+	ENDIF
+	
+EVENT FireVulnerabilityProc
+ON
+	OnFunction("AMER_FireVulnerabilityProc")
+ACTIONS
+	IF "c1"
+		CharacterHasStatus(__Me, CONSUME, FireVulnerability)
+	THEN
+		IF "c1"
+			CharacterHasStatus(__Me, CONSUME, FireVulnerability1)
+		THEN
+			CharacterConsume(__Me, FireVulnerability2)
+		ELIF "c1"
+			CharacterHasStatus(__Me, CONSUME, FireVulnerability2)
+		THEN
+			CharacterConsume(__Me, FireVulnerability3)
+		ELIF "c1"
+			CharacterHasStatus(__Me, CONSUME, FireVulnerability3)
+		THEN
+			CharacterConsume(__Me, FireVulnerability4)
+		ELIF "c1"
+			CharacterHasStatus(__Me, CONSUME, FireVulnerability4)
+		THEN
+			CharacterConsume(__Me, FireVulnerability5)
+		ELIF "c1"
+			CharacterHasStatus(__Me, CONSUME, FireVulnerability5)
+		THEN
+			CharacterConsume(__Me, FireVulnerability5)
+		ELSE
+			CharacterConsume(__Me, FireVulnerability1)
+		ENDIF
+	ENDIF
+	
+EVENT AirVulnerabilityProc
+ON
+	OnFunction("AMER_AirVulnerabilityProc")
+ACTIONS
+	IF "c1"
+		CharacterHasStatus(__Me, CONSUME, AirVulnerability)
+	THEN
+		IF "c1"
+			CharacterHasStatus(__Me, CONSUME, AirVulnerability1)
+		THEN
+			CharacterConsume(__Me, AirVulnerability2)
+		ELIF "c1"
+			CharacterHasStatus(__Me, CONSUME, AirVulnerability2)
+		THEN
+			CharacterConsume(__Me, AirVulnerability3)
+		ELIF "c1"
+			CharacterHasStatus(__Me, CONSUME, AirVulnerability3)
+		THEN
+			CharacterConsume(__Me, AirVulnerability4)
+		ELIF "c1"
+			CharacterHasStatus(__Me, CONSUME, AirVulnerability4)
+		THEN
+			CharacterConsume(__Me, AirVulnerability5)
+		ELIF "c1"
+			CharacterHasStatus(__Me, CONSUME, AirVulnerability5)
+		THEN
+			CharacterConsume(__Me, AirVulnerability5)
+		ELSE
+			CharacterConsume(__Me, AirVulnerability1)
+		ENDIF
+	ENDIF
+	
+EVENT EarthVulnerabilityProc
+ON
+	OnFunction("AMER_EarthVulnerabilityProc")
+ACTIONS
+	IF "c1"
+		CharacterHasStatus(__Me, CONSUME, EarthVulnerability)
+	THEN
+		IF "c1"
+			CharacterHasStatus(__Me, CONSUME, EarthVulnerability1)
+		THEN
+			CharacterConsume(__Me, EarthVulnerability2)
+		ELIF "c1"
+			CharacterHasStatus(__Me, CONSUME, EarthVulnerability2)
+		THEN
+			CharacterConsume(__Me, EarthVulnerability3)
+		ELIF "c1"
+			CharacterHasStatus(__Me, CONSUME, EarthVulnerability3)
+		THEN
+			CharacterConsume(__Me, EarthVulnerability4)
+		ELIF "c1"
+			CharacterHasStatus(__Me, CONSUME, EarthVulnerability4)
+		THEN
+			CharacterConsume(__Me, EarthVulnerability5)
+		ELIF "c1"
+			CharacterHasStatus(__Me, CONSUME, EarthVulnerability5)
+		THEN
+			CharacterConsume(__Me, EarthVulnerability5)
+		ELSE
+			CharacterConsume(__Me, EarthVulnerability1)
+		ENDIF
+	ENDIF
+	
+EVENT PoisonVulnerabilityProc
+ON
+	OnFunction("AMER_PoisonVulnerabilityProc")
+ACTIONS
+	IF "c1"
+		CharacterHasStatus(__Me, CONSUME, PoisonVulnerability)
+	THEN
+		IF "c1"
+			CharacterHasStatus(__Me, CONSUME, PoisonVulnerability1)
+		THEN
+			CharacterConsume(__Me, PoisonVulnerability2)
+		ELIF "c1"
+			CharacterHasStatus(__Me, CONSUME, PoisonVulnerability2)
+		THEN
+			CharacterConsume(__Me, PoisonVulnerability3)
+		ELIF "c1"
+			CharacterHasStatus(__Me, CONSUME, PoisonVulnerability3)
+		THEN
+			CharacterConsume(__Me, PoisonVulnerability4)
+		ELIF "c1"
+			CharacterHasStatus(__Me, CONSUME, PoisonVulnerability4)
+		THEN
+			CharacterConsume(__Me, PoisonVulnerability5)
+		ELIF "c1"
+			CharacterHasStatus(__Me, CONSUME, PoisonVulnerability5)
+		THEN
+			CharacterConsume(__Me, PoisonVulnerability5)
+		ELSE
+			CharacterConsume(__Me, PoisonVulnerability1)
+		ENDIF
+	ENDIF
+	
+EVENT ShadowVulnerabilityProc
+ON
+	OnFunction("AMER_ShadowVulnerabilityProc")
+ACTIONS
+	IF "c1"
+		CharacterHasStatus(__Me, CONSUME, ShadowVulnerability)
+	THEN
+		IF "c1"
+			CharacterHasStatus(__Me, CONSUME, ShadowVulnerability1)
+		THEN
+			CharacterConsume(__Me, ShadowVulnerability2)
+		ELIF "c1"
+			CharacterHasStatus(__Me, CONSUME, ShadowVulnerability2)
+		THEN
+			CharacterConsume(__Me, ShadowVulnerability3)
+		ELIF "c1"
+			CharacterHasStatus(__Me, CONSUME, ShadowVulnerability3)
+		THEN
+			CharacterConsume(__Me, ShadowVulnerability4)
+		ELIF "c1"
+			CharacterHasStatus(__Me, CONSUME, ShadowVulnerability4)
+		THEN
+			CharacterConsume(__Me, ShadowVulnerability5)
+		ELIF "c1"
+			CharacterHasStatus(__Me, CONSUME, ShadowVulnerability5)
+		THEN
+			CharacterConsume(__Me, ShadowVulnerability5)
+		ELSE
+			CharacterConsume(__Me, ShadowVulnerability1)
+		ENDIF
+	ENDIF
+	
+EVENT SpeedVulnerabilityProc
+ON
+	OnFunction("AMER_SpeedVulnerabilityProc")
+ACTIONS
+	IF "c1"
+		CharacterHasStatus(__Me, CONSUME, SpeedDrain)
+	THEN
+		IF "c1"
+			CharacterHasStatus(__Me, CONSUME, SpeedDrain1)
+		THEN
+			CharacterConsume(__Me, SpeedDrain2)
+		ELIF "c1"
+			CharacterHasStatus(__Me, CONSUME, SpeedDrain2)
+		THEN
+			CharacterConsume(__Me, SpeedDrain3)
+		ELIF "c1"
+			CharacterHasStatus(__Me, CONSUME, SpeedDrain3)
+		THEN
+			CharacterConsume(__Me, SpeedDrain4)
+		ELIF "c1"
+			CharacterHasStatus(__Me, CONSUME, SpeedDrain4)
+		THEN
+			CharacterConsume(__Me, SpeedDrain5)
+		ELIF "c1"
+			CharacterHasStatus(__Me, CONSUME, SpeedDrain5)
+		THEN
+			CharacterConsume(__Me, SpeedDrain5)
+		ELSE
+			CharacterConsume(__Me, SpeedDrain1)
+		ENDIF
+	ENDIF
+	
+//===================================================//
+//                                                   //
+//  C H A R A C T E R   I T E M   F U N C T I O N S  //
+//                                                   //
+//===================================================//

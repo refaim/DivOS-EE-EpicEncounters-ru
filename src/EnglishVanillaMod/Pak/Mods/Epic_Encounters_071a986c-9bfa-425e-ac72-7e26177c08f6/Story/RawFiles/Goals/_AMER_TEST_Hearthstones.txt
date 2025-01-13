@@ -1,0 +1,13 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+IF
+	CharacterUsedItemTemplate(_Char, "AMER_TEST_Hearthstone_4d76341b-b1a3-4d59-b4fe-4ce7ab2bc7e3", _)
+THEN
+	CharacterTeleportPartyToTrigger(_Char, TRIGGER_AMER_TEST_WorldStart, "AMER_TEST_Hearthing");
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "__Start"

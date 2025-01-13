@@ -1,0 +1,225 @@
+//===============================================//
+//                                               //
+//        R E V E A L   O N   C O M B A T        //
+//                                               //
+//     Written by Matteo "Ameranth" T. (2016)    //
+//===============================================//
+INIT
+CHARACTER:__Me
+EXTERN STRING:%AMER_RevealOnCombat_FX1 = "NONE"
+EXTERN STRING:%AMER_RevealOnCombat_FX2 = "NONE"
+EXTERN FIXEDSTRING:%AMER_RevealOnCombat_FXBone1 = "NONE"
+EXTERN FIXEDSTRING:%AMER_RevealOnCombat_FXBone2 = "NONE"
+EXTERN FLOAT:%AMER_RevealOnCombat_RevealDuringAnimationDelay = 0.3	//How long after a specified animation starts is the character set to be visible.
+EXTERN FLOAT:%AMER_RevealOnCombat_ActivateDelayMin = 0.0
+EXTERN FLOAT:%AMER_RevealOnCombat_ActivateDelayMax = 0.0
+EXTERN FLOAT:%AMER_RevealOnCombat_FXDelay1 = 0.0		//Set to negative to play after animation
+EXTERN FLOAT:%AMER_RevealOnCombat_FXDelay2 = 0.0		//Set to negative to play after animation
+EXTERN FLOAT:%AMER_RevealOnCombat_PointOffsetZ = 0.0
+EXTERN FLOAT:%AMER_RevealOnCombat_PointOffsetX = 0.0
+EXTERN FLOAT:%AMER_RevealOnCombat_CombatCheckFrequency = 1.5
+EXTERN CHARACTER:%AMER_RevealOnCombat_TriggerCharacter = null
+EXTERN FIXEDSTRING:%AMER_RevealOnCombat_PlayRevealAnimation = "spawn"
+EXTERN INT:%AMER_RevealOnCombat_AddToCombat = 0
+EXTERN TRIGGER:%AMER_RevealOnCombat_TeleportToTrigger = null
+INT:%AMER_RevealOnCombat_OkayToReveal
+INT:%AMER_RevealOnCombat_StopTimer = 0
+	
+EVENTS
+EVENT RevealOnCombatInit
+VARS
+	FLOAT:_CheckTimerOffset
+ON
+	OnInit()
+ACTIONS
+	//Start the trigger check timer with a random offset, so that
+	//in the case that many instances of this script are loaded
+	//simultaneously, they are not checking at the same time.
+	SetVisible(__Me, INT:0)
+	GetRandomBetween(_CheckTimerOffset, 0.0, %AMER_RevealOnCombat_CombatCheckFrequency)
+	StartTimer("AMER_RevealOnCombat_CheckTriggerOffset", _CheckTimerOffset, 0)
+	//CharacterSetOffStage()
+	
+
+EVENT RevealOnCombatCheckTriggerOffset
+ON
+	OnTimer("AMER_RevealOnCombat_CheckTriggerOffset")
+ACTIONS
+	StartTimer("AMER_RevealOnCombat_CheckTrigger", %AMER_RevealOnCombat_CombatCheckFrequency, 0)
+	
+	
+	
+EVENT RevealOnCombatCheckTrigger
+VARS
+	FLOAT:_ActivateDelay
+	FLOAT:_X
+	FLOAT:_Z
+	SKILL:_GroupCombat = "AMER_SCRIPTSKILL_GroupCombat"
+	FLOAT3:_Pos
+ON
+	OnTimer("AMER_RevealOnCombat_CheckTrigger")
+ACTIONS
+	IF "c1"
+		IsInCombat(%AMER_RevealOnCombat_TriggerCharacter)
+	THEN
+		//Apply a delay for activation if it's needed.
+		IF "c1&c2"
+			IsGreaterThen(%AMER_RevealOnCombat_ActivateDelayMin, 0.0)
+			IsGreaterThen(%AMER_RevealOnCombat_ActivateDelayMax, 0.0)
+		THEN
+			GetRandomBetween(_ActivateDelay, %AMER_RevealOnCombat_ActivateDelayMin, %AMER_RevealOnCombat_ActivateDelayMax)
+			Set(%AMER_RevealOnCombat_ActivateDelayMin, 0.0)
+			Set(%AMER_RevealOnCombat_ActivateDelayMax, 0.0)
+			StartTimer("AMER_RevealOnCombat_CheckTrigger", _ActivateDelay, INT:0)
+		ELSE
+			//Get the position of the trigger character or the assigned trigger.
+			IF "c1"
+				IsEqual(%AMER_RevealOnCombat_TeleportToTrigger, null)
+			THEN
+				GetPosition(%AMER_RevealOnCombat_TriggerCharacter, _Pos)
+			ELSE
+				GetPosition(%AMER_RevealOnCombat_TeleportToTrigger, _Pos)
+			ENDIF
+			
+			//Apply an offset to the position if provided.
+			IF "(!c1|!c2)&c3&c4"
+				IsEqual(%AMER_RevealOnCombat_PointOffsetZ, 0.0)
+				IsEqual(%AMER_RevealOnCombat_PointOffsetX, 0.0)
+				GetZ(_Pos, _Z)
+				GetX(_Pos, _X)
+			THEN
+				Add(_Z, %AMER_RevealOnCombat_PointOffsetZ)
+				Add(_X, %AMER_RevealOnCombat_PointOffsetX)
+				SetZ(_Pos, _Z)
+				SetX(_Pos, _X)
+			ENDIF
+			
+			//Teleport to the position.
+			TeleportTo(__Me, _Pos)
+			
+			//Get me into combat.
+			IF "c1"
+				IsEqual(%AMER_RevealOnCombat_AddToCombat, INT:1)
+			THEN
+				SetVar(__Me, "AMER_RemoteEffectProjectile", _GroupCombat)
+				SetVar(__Me, "AMER_RemoteEffectSource", %AMER_RevealOnCombat_TriggerCharacter)
+				CallFunction("AMER_DoRemoteEffect")
+			ENDIF
+			
+			//Play Special Effect.
+			IF "!c1&!c2"
+				IsEqual(%AMER_RevealOnCombat_FX1, "NONE")
+				IsLessThen(%AMER_RevealOnCombat_FXDelay1, 0.0)
+			THEN
+				StartTimer("AMER_RevealOnCombat_FXDelay1", %AMER_RevealOnCombat_FXDelay1, 0)
+			ENDIF
+			IF "!c1&!c2"
+				IsEqual(%AMER_RevealOnCombat_FX2, "NONE")
+				IsLessThen(%AMER_RevealOnCombat_FXDelay2, 0.0)
+			THEN
+				StartTimer("AMER_RevealOnCombat_FXDelay2", %AMER_RevealOnCombat_FXDelay2, 0)
+			ENDIF
+		
+			//Play Animation.
+			IF "!c1"
+				IsEqual(%AMER_RevealOnCombat_PlayRevealAnimation, "NONE")
+			THEN
+				SetPriority(RevealOnCombatAnimation, 100000)
+			ELSE
+				SetVisible(__Me, INT:1)
+			ENDIF
+		ENDIF
+	ELSE
+		StartTimer("AMER_RevealOnCombat_CheckTrigger", %AMER_RevealOnCombat_CombatCheckFrequency, 0)
+	ENDIF
+	
+	
+	
+EVENT RevealOnCombatFXDelay1
+ON
+	OnTimer("AMER_RevealOnCombat_FXDelay1")
+ACTIONS
+	IF "!c1"
+		IsEqual(%AMER_RevealOnCombat_FXBone1, "NONE")
+	THEN
+		CharacterPlayEffect(__Me, %AMER_RevealOnCombat_FX1, %AMER_RevealOnCombat_FXBone1)
+	ELSE
+		CharacterPlayEffect(__Me, %AMER_RevealOnCombat_FX1)
+	ENDIF
+	
+	
+	
+EVENT RevealOnCombatFXDelay2
+ON
+	OnTimer("AMER_RevealOnCombat_FXDelay2")
+ACTIONS
+	IF "!c1"
+		IsEqual(%AMER_RevealOnCombat_FXBone2, "NONE")
+	THEN
+		CharacterPlayEffect(__Me, %AMER_RevealOnCombat_FX2, %AMER_RevealOnCombat_FXBone2)
+	ELSE
+		CharacterPlayEffect(__Me, %AMER_RevealOnCombat_FX2)
+	ENDIF
+	
+	
+	
+EVENT RevealOnCombatVisibleDelay
+//There's a notable amount of time that other behaviors apparently are
+//interrupting this one before it actually gets to fire. This method
+//ensures that the character is not revealed until the animation behaviour
+//is able to execute correctly.
+ON
+	OnTimer("AMER_RevealOnCombat_VisibleDelay")
+ACTIONS
+	IF "c1"
+		IsEqual(%AMER_RevealOnCombat_OkayToReveal, INT:1)
+	THEN
+		SetVisible(__Me, INT:1)
+	ENDIF
+	
+	
+	
+BEHAVIOUR
+REACTION RevealOnCombatAnimation, 0
+USAGE ALL
+CHECK "!c1"
+	IsEqual(%AMER_RevealOnCombat_PlayRevealAnimation, "NONE")
+ACTIONS
+	StartTimer("AMER_RevealOnCombat_VisibleDelay", %AMER_RevealOnCombat_RevealDuringAnimationDelay, 0)
+	Set(%AMER_RevealOnCombat_OkayToReveal, INT:1)
+	CharacterPlayAnimation(%AMER_RevealOnCombat_PlayRevealAnimation, 1, 1)
+	
+	//Play Special Effects.
+	IF "c1"
+		IsLessThen(%AMER_RevealOnCombat_FXDelay1, 0.0)
+	THEN
+		IF "!c1"
+			IsEqual(%AMER_RevealOnCombat_FXBone1, "NONE")
+		THEN
+			CharacterPlayEffect(__Me, %AMER_RevealOnCombat_FX1, %AMER_RevealOnCombat_FXBone1)
+		ELSE
+			CharacterPlayEffect(__Me, %AMER_RevealOnCombat_FX1)
+		ENDIF
+	ENDIF
+	IF "c1"
+		IsLessThen(%AMER_RevealOnCombat_FXDelay2, 0.0)
+	THEN
+		IF "!c1"
+			IsEqual(%AMER_RevealOnCombat_FXBone2, "NONE")
+		THEN
+			CharacterPlayEffect(__Me, %AMER_RevealOnCombat_FX2, %AMER_RevealOnCombat_FXBone2)
+		ELSE
+			CharacterPlayEffect(__Me, %AMER_RevealOnCombat_FX2)
+		ENDIF
+	ENDIF
+	SetPriority(RevealOnCombatAnimation, 0)
+INTERRUPT
+ACTIONS
+	Set(%AMER_RevealOnCombat_OkayToReveal, INT:0)
+	StopTimer("AMER_RevealOnCombat_VisibleDelay")
+	Reset()
+//===============================================//
+//                                               //
+//        R E V E A L   O N   C O M B A T        //
+//                                               //
+//===============================================//

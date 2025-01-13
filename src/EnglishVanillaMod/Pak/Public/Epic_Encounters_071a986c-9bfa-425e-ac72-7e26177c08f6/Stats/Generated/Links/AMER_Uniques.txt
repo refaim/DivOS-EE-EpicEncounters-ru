@@ -1,0 +1,421 @@
+object itemstat "AMER_UNI_Drog","f8b42ee5-cd81-4fd9-9faa-2693ad7c818e","",0,0,"",-1,-1,-1,1,-1,-1
+
+object itemstat "AMER_UNI_AngelEgg_15","742ff57c-ba25-4028-9b8c-a08af06870c2","",0,0,"KickstarterUniques",1,1,1,1,13,17
+object itemstat "AMER_UNI_AngelEgg_20","60cb6b39-f528-4cc4-9c85-4b409b21d7c9","",0,0,"KickstarterUniques",1,1,1,1,18,25
+object itemstat "AMER_UNI_AngelEgg_25","c7424d5a-c45a-4db5-8a10-790974ed4372","",0,0,"KickstarterUniques",1,1,1,1,26,99
+
+object itemstat "AMER_UNI_FoolsCrest_15","25c33218-59e1-454f-b481-a65eaed61b4b","",0,0,"KickstarterUniques",1,1,1,1,13,17
+object itemstat "AMER_UNI_FoolsCrest_20","286aeb2d-372c-427d-b34f-9c18560b0c16","",0,0,"KickstarterUniques",1,1,1,1,18,25
+object itemstat "AMER_UNI_FoolsCrest_25","d735cb82-bdb9-4c8b-a8ea-c630fe94c925","",0,0,"KickstarterUniques",1,1,1,1,26,99
+
+object itemstat "AMER_UNI_EyeoftheStorm_15","fa72f954-de1e-4472-823b-190d48db2a12","",0,0,"KickstarterUniques",1,1,1,1,13,17
+object itemstat "AMER_UNI_EyeoftheStorm_20","a79d5147-95f0-4e89-8685-60923889fc55","",0,0,"KickstarterUniques",1,1,1,1,18,25
+object itemstat "AMER_UNI_EyeoftheStorm_25","7e58bb45-a01e-4a87-b77b-9ace17f159f6","",0,0,"KickstarterUniques",1,1,1,1,26,99
+
+object itemstat "AMER_UNI_Apostacy_15","06d38069-8633-4165-b954-1d75ed3b7ea1","",0,0,"KickstarterUniques",1,1,1,1,13,17
+object itemstat "AMER_UNI_Apostacy_20","8482f116-6626-4d86-8c41-cf5e43b3bcbb","",0,0,"KickstarterUniques",1,1,1,1,18,25
+object itemstat "AMER_UNI_Apostacy_25","aa0a5391-70ce-41fc-b916-6cca11a5f655","",0,0,"KickstarterUniques",1,1,1,1,26,99
+
+object itemstat "AMER_UNI_Famine_5","1e2c3189-bfa4-432a-9d83-25ec8a4012a1","",0,0,"KickstarterUniques",1,1,1,1,1,7
+object itemstat "AMER_UNI_Famine_10","fe3f14b6-1016-4d6b-a288-6107951ab1d5","",0,0,"KickstarterUniques",1,1,1,1,8,12
+object itemstat "AMER_UNI_Famine_15","895f6c3f-71f3-48e7-ae78-545fa04d60e7","",0,0,"KickstarterUniques",1,1,1,1,13,17
+object itemstat "AMER_UNI_Famine_20","d1291ece-6242-478a-8f79-615513c359d1","",0,0,"KickstarterUniques",1,1,1,1,18,22
+object itemstat "AMER_UNI_Famine_25","b014acab-ff2b-4acf-8a55-2c3e1cd5b367","",0,0,"KickstarterUniques",1,1,1,1,26,99
+
+object itemstat "AMER_UNI_Ouroboros_5","46416c1b-52e5-4a64-86cd-275a17b732b8","",0,0,"KickstarterUniques",1,1,1,1,1,7
+object itemstat "AMER_UNI_Ouroboros_10","67335289-eba2-4845-8e46-204304fcb3bd","",0,0,"KickstarterUniques",1,1,1,1,8,12
+object itemstat "AMER_UNI_Ouroboros_15","55cb1630-3f34-4daa-8293-07ec9cbaf7a7","",0,0,"KickstarterUniques",1,1,1,1,13,17
+object itemstat "AMER_UNI_Ouroboros_20","0a3b6757-eda0-4ef0-9419-de82bea52b16","",0,0,"KickstarterUniques",1,1,1,1,18,22
+object itemstat "AMER_UNI_Ouroboros_25","09b98d99-9642-462c-bcb7-795b34210060","",0,0,"KickstarterUniques",1,1,1,1,26,99
+
+object itemstat "AMER_UNI_Zenith_5","8af9502a-5dc2-46c4-917c-24e0a2cb42b9","",0,0,"",1,1,1,1,1,7
+object itemstat "AMER_UNI_Zenith_10","de0b5c52-27e1-4ccb-971b-84dbda60e339","",0,0,"",1,1,1,1,8,12
+object itemstat "AMER_UNI_Zenith_15","45221e31-9622-4737-969b-be5aa3ff09e5","",0,0,"KickstarterUniques",1,1,1,1,13,17
+object itemstat "AMER_UNI_Zenith_20","6f978d00-32db-45f5-b5cb-2f744cb6136c","",0,0,"KickstarterUniques",1,1,1,1,18,22
+object itemstat "AMER_UNI_Zenith_25","a8e2959c-36b5-4d24-b5b5-ac3c706d0d3d","",0,0,"KickstarterUniques",1,1,1,1,26,99
+
+object itemstat "AMER_UNI_Cataclysm_10","6640cca3-312a-4802-ae45-639076de45b6","",0,0,"KickstarterUniques",1,1,1,1,8,12
+object itemstat "AMER_UNI_Cataclysm_15","70312deb-26ec-4e68-afae-67ddc83bc5f2","",0,0,"KickstarterUniques",1,1,1,1,13,17
+object itemstat "AMER_UNI_Cataclysm_20","763805b8-e238-44a5-a637-909f1e1fc8d5","",0,0,"KickstarterUniques",1,1,1,1,18,22
+object itemstat "AMER_UNI_Cataclysm_25","9269751e-988f-4dc0-9366-984b3eddcf84","",0,0,"KickstarterUniques",1,1,1,1,26,99
+
+object itemstat "AMER_UNI_Wraith_5","5a88b976-9095-49a8-b5f0-3b34465a4623","",0,0,"",1,1,1,1,1,7
+object itemstat "AMER_UNI_Wraith_10","148dda6a-abbe-48cd-921e-040a9f1809cb","",0,0,"",1,1,1,1,8,12
+object itemstat "AMER_UNI_Wraith_15","3fc0850c-47f6-435b-ae47-b3f1cc33f6d6","",0,0,"KickstarterUniques",1,1,1,1,13,17
+object itemstat "AMER_UNI_Wraith_20","8053126b-84c4-4ae8-841a-409567ff2c34","",0,0,"KickstarterUniques",1,1,1,1,18,22
+object itemstat "AMER_UNI_Wraith_25","2fe10d19-fc6c-41a7-a274-727c461e3877","",0,0,"KickstarterUniques",1,1,1,1,26,99
+
+object itemstat "AMER_UNI_Eclipse_15","9a890cf0-c9ae-4546-bf07-38e426d88e34","",0,0,"KickstarterUniques",1,1,1,1,13,17
+object itemstat "AMER_UNI_Eclipse_20","38602dae-6f2b-4c18-a6a6-cf1f412c44a3","",0,0,"KickstarterUniques",1,1,1,1,18,22
+object itemstat "AMER_UNI_Eclipse_25","a7bd2dc0-0ba9-463a-a2c3-efd1be2a3280","",0,0,"KickstarterUniques",1,1,1,1,26,99
+
+object itemstat "AMER_UNI_Malleus_5","20ea941d-01c5-4354-9189-89bb52e9b6d5","",0,0,"KickstarterUniques",1,1,1,1,1,7
+object itemstat "AMER_UNI_Malleus_10","f7a5216b-8bf6-47de-9d66-8ba2e33502d1","",0,0,"KickstarterUniques",1,1,1,1,8,12
+object itemstat "AMER_UNI_Malleus_15","bcf50e74-a978-420b-8221-3d382d33f8ba","",0,0,"KickstarterUniques",1,1,1,1,13,17
+object itemstat "AMER_UNI_Malleus_20","b251060e-5c8e-42f3-843c-c6b6a0b5ace5","",0,0,"KickstarterUniques",1,1,1,1,18,22
+object itemstat "AMER_UNI_Malleus_25","1a883ba3-a618-48f3-94d1-f7d20abe1baf","",0,0,"KickstarterUniques",1,1,1,1,26,99
+
+
+
+object itemstat "AMER_UNI_Nightfall_15","ed0ccfde-9255-4340-96a0-fad95520c593","",0,0,"KickstarterUniques",1,1,1,1,13,17
+object itemstat "AMER_UNI_Nightfall_20","327522a8-befb-4549-b8af-80ae42450f3a","",0,0,"KickstarterUniques",1,1,1,1,18,22
+object itemstat "AMER_UNI_Nightfall_25","0bc82df5-d381-4bb9-901e-b55302f70f9e","",0,0,"KickstarterUniques",1,1,1,1,26,99
+
+object itemstat "AMER_UNI_Amaranthine_5","2b1a3273-9ffb-473c-980a-60c5597b4968","",0,0,"KickstarterUniques",1,1,1,1,1,7
+object itemstat "AMER_UNI_Amaranthine_10","aca8b997-f751-4818-832b-b5646570deec","",0,0,"KickstarterUniques",1,1,1,1,8,12
+object itemstat "AMER_UNI_Amaranthine_15","193ce14b-17e0-48fe-8149-21405861b41e","",0,0,"KickstarterUniques",1,1,1,1,13,17
+object itemstat "AMER_UNI_Amaranthine_20","71b813b6-f3f6-4ae9-8423-b3b96a3466a7","",0,0,"KickstarterUniques",1,1,1,1,18,22
+object itemstat "AMER_UNI_Amaranthine_25","31ae2869-bf7f-4603-928b-dd159873615a","",0,0,"KickstarterUniques",1,1,1,1,26,99
+
+object itemstat "AMER_UNI_Infernal_15","987ad51f-f441-4df7-a267-08f3bf037e3d","",0,0,"KickstarterUniques",1,1,1,1,13,17
+object itemstat "AMER_UNI_Infernal_20","252fefc5-09b3-48b3-a4b6-86664dca03f0","",0,0,"KickstarterUniques",1,1,1,1,18,22
+object itemstat "AMER_UNI_Infernal_25","cc866048-5a00-44c8-b0ea-3309f3ce358f","",0,0,"KickstarterUniques",1,1,1,1,26,99
+
+object itemstat "AMER_UNI_Prismatic_5","c82683f1-06b2-4b93-a91d-c1ee7110af3f","",0,0,"KickstarterUniques",1,1,1,1,1,7
+object itemstat "AMER_UNI_Prismatic_10","ec9255e1-c3f9-4497-9d56-7887f92be327","",0,0,"KickstarterUniques",1,1,1,1,8,12
+object itemstat "AMER_UNI_Prismatic_15","486cf064-0e6f-48fc-ae6d-87cd48356fa1","",0,0,"KickstarterUniques",1,1,1,1,13,17
+object itemstat "AMER_UNI_Prismatic_20","d234657c-877f-49bd-a9de-e8e69a078c83","",0,0,"KickstarterUniques",1,1,1,1,18,22
+object itemstat "AMER_UNI_Prismatic_25","7ff41073-27ce-456f-9083-513062ee0e43","",0,0,"KickstarterUniques",1,1,1,1,26,99
+
+object itemstat "AMER_UNI_Axiom_5","ed0f29ed-9405-4b99-b5c3-09999020a1a6","",0,0,"KickstarterUniques",1,1,1,1,1,7
+object itemstat "AMER_UNI_Axiom_10","32556ce0-dab8-4624-9123-fada94d38cf4","",0,0,"KickstarterUniques",1,1,1,1,8,12
+object itemstat "AMER_UNI_Axiom_15","1d3ec9cb-b0b5-4829-a748-48edb93a6a05","",0,0,"KickstarterUniques",1,1,1,1,13,17
+object itemstat "AMER_UNI_Axiom_20","06ebb673-550b-4141-97f8-d35c62f6d5b2","",0,0,"KickstarterUniques",1,1,1,1,18,22
+object itemstat "AMER_UNI_Axiom_25","175a7a90-f608-44c3-8a1c-6c88a2723907","",0,0,"KickstarterUniques",1,1,1,1,26,99
+
+object itemstat "AMER_UNI_Nightmare_15","383bc1bf-af54-4bd3-b94f-af22a20690d2","",0,0,"KickstarterUniques",1,1,1,1,13,17
+object itemstat "AMER_UNI_Nightmare_20","0e3ef8b8-1663-4e98-907f-fbd0299c09b3","",0,0,"KickstarterUniques",1,1,1,1,18,22
+object itemstat "AMER_UNI_Nightmare_25","0cf8d044-e711-4d93-914b-fb61e5133028","",0,0,"KickstarterUniques",1,1,1,1,26,99
+
+object itemstat "AMER_UNI_Pestilence_5","36d6bf7b-23bc-4e4e-8ed8-406c891c30d0","",0,0,"KickstarterUniques",1,1,1,1,1,7
+object itemstat "AMER_UNI_Pestilence_10","0ab6f860-b212-486e-bb32-95db4856bb52","",0,0,"KickstarterUniques",1,1,1,1,8,12
+object itemstat "AMER_UNI_Pestilence_15","8f277809-a99c-4817-b25c-25be24690c7f","",0,0,"KickstarterUniques",1,1,1,1,13,17
+object itemstat "AMER_UNI_Pestilence_20","efe2e0d3-1491-450b-868a-19901b907407","",0,0,"KickstarterUniques",1,1,1,1,18,22
+object itemstat "AMER_UNI_Pestilence_25","15b88def-f490-451f-adc1-fb98b99a8edf","",0,0,"KickstarterUniques",1,1,1,1,26,99
+
+object itemstat "AMER_UNI_Locust_5","306d1e3c-4369-496f-afc1-7c91df4a01dc","",0,0,"KickstarterUniques",1,1,1,1,1,7
+object itemstat "AMER_UNI_Locust_10","a529d816-de16-4c52-b767-033e508db16f","",0,0,"KickstarterUniques",1,1,1,1,8,12
+object itemstat "AMER_UNI_Locust_15","59355744-2abc-48f5-8d87-e7d42828ab32","",0,0,"KickstarterUniques",1,1,1,1,13,17
+object itemstat "AMER_UNI_Locust_20","d2d7e2ab-9acd-40b9-a230-a077226ceb5f","",0,0,"KickstarterUniques",1,1,1,1,18,22
+object itemstat "AMER_UNI_Locust_25","3b93582d-f6e8-40b7-a7ee-2592a31f0ab8","",0,0,"KickstarterUniques",1,1,1,1,26,99
+
+
+
+object itemstat "AMER_UNI_Leper_5","c77f34ed-f159-444a-b3c1-fc2a6251da6e","",0,0,"KickstarterUniques",1,1,1,1,1,7
+object itemstat "AMER_UNI_Leper_10","b11d33c1-33fb-41fc-8276-4ca63a1e154d","",0,0,"KickstarterUniques",1,1,1,1,8,12
+object itemstat "AMER_UNI_Leper_15","b845cb86-aeb6-4858-a436-7371c57e4c06","",0,0,"KickstarterUniques",1,1,1,1,13,17
+object itemstat "AMER_UNI_Leper_20","1fbc529b-d99b-417e-9240-0df6d1586f16","",0,0,"KickstarterUniques",1,1,1,1,18,22
+object itemstat "AMER_UNI_Leper_25","49d66d9a-c326-40f9-844b-824fcbe07d99","",0,0,"KickstarterUniques",1,1,1,1,26,99
+
+object itemstat "AMER_UNI_Answerer_5","7440acad-0a8a-4136-bb19-6783d01605a3","",0,0,"KickstarterUniques",1,1,1,1,1,7
+object itemstat "AMER_UNI_Answerer_10","94a07df1-4b2f-4803-8e32-1bbbf681ce00","",0,0,"KickstarterUniques",1,1,1,1,8,12
+object itemstat "AMER_UNI_Answerer_15","33a076bb-7df2-4478-bc6f-55e437d18418","",0,0,"KickstarterUniques",1,1,1,1,13,17
+object itemstat "AMER_UNI_Answerer_20","fb2a5886-f06b-412b-9301-52b8fec1fee5","",0,0,"KickstarterUniques",1,1,1,1,18,22
+object itemstat "AMER_UNI_Answerer_25","cfef8862-fb4c-4902-96a3-101f28275bb1","",0,0,"KickstarterUniques",1,1,1,1,26,99
+
+
+
+object itemstat "AMER_UNI_Vertigo_5","ee60d96e-53e8-4496-80a2-2eecf2125611","",0,0,"KickstarterUniques",1,1,1,1,1,7
+object itemstat "AMER_UNI_Vertigo_10","96ba33fd-fcae-4b1c-aa5a-83db2ce0f7a7","",0,0,"KickstarterUniques",1,1,1,1,8,12
+object itemstat "AMER_UNI_Vertigo_15","5686ca87-cde1-4cec-adb0-2e4985b86dcb","",0,0,"KickstarterUniques",1,1,1,1,13,17
+object itemstat "AMER_UNI_Vertigo_20","386de43a-eee6-48fd-b7b3-b6e3a410678c","",0,0,"KickstarterUniques",1,1,1,1,18,22
+object itemstat "AMER_UNI_Vertigo_25","0779d5ac-4ce0-47cd-8ec8-14d5bfbcb67e","",0,0,"KickstarterUniques",1,1,1,1,26,99
+
+object itemstat "AMER_UNI_Expedition_5","5f585ef0-9af9-49b7-817c-2ba6be4abdb6","",0,0,"KickstarterUniques",1,1,1,1,1,7
+object itemstat "AMER_UNI_Expedition_10","cec4d6ea-b30f-46ca-9ae6-00850772ae0c","",0,0,"KickstarterUniques",1,1,1,1,8,12
+object itemstat "AMER_UNI_Expedition_15","b4f03a8d-f890-406d-90fd-658577a88468","",0,0,"KickstarterUniques",1,1,1,1,13,17
+object itemstat "AMER_UNI_Expedition_20","b834300a-e623-4e9f-b4a2-fb59de3d4e0d","",0,0,"KickstarterUniques",1,1,1,1,18,22
+object itemstat "AMER_UNI_Expedition_25","90fe318a-0d11-494e-be06-a3261abd9a47","",0,0,"KickstarterUniques",1,1,1,1,26,99
+
+
+
+object itemstat "AMER_UNI_Furin_5","504e3e25-e499-4634-a038-2855c8a6c7ee","",0,0,"KickstarterUniques",1,1,1,1,1,7
+object itemstat "AMER_UNI_Furin_10","a3abe376-90e3-4482-ae77-1fab34482c4e","",0,0,"KickstarterUniques",1,1,1,1,8,12
+object itemstat "AMER_UNI_Furin_15","e9c051b2-4f8a-44a4-896f-3affc0457e0f","",0,0,"KickstarterUniques",1,1,1,1,13,17
+object itemstat "AMER_UNI_Furin_20","44231f3e-849c-4f2a-81b0-52d7b798ecee","",0,0,"KickstarterUniques",1,1,1,1,18,22
+object itemstat "AMER_UNI_Furin_25","1ea114d8-2cbf-4488-8619-5a1705773ffe","",0,0,"KickstarterUniques",1,1,1,1,26,99
+
+object itemstat "AMER_UNI_Lambent_5","f2d67376-f43b-4bc4-93d7-481e0e9956bf","",0,0,"KickstarterUniques",1,1,1,1,1,7
+object itemstat "AMER_UNI_Lambent_10","f250fb47-3aa9-408b-8bc4-733b469e717f","",0,0,"KickstarterUniques",1,1,1,1,8,12
+object itemstat "AMER_UNI_Lambent_15","c2f7ce16-4b8a-4859-9c0c-08f926e52d73","",0,0,"KickstarterUniques",1,1,1,1,13,17
+object itemstat "AMER_UNI_Lambent_20","a9703bc3-d3b2-402a-978b-8256a1dbb873","",0,0,"KickstarterUniques",1,1,1,1,18,22
+object itemstat "AMER_UNI_Lambent_25","ebc05c52-d2f2-4b4d-9a5a-167dc6d57855","",0,0,"KickstarterUniques",1,1,1,1,26,99
+
+object itemstat "AMER_UNI_Pariah_5","57173447-3959-43c0-ad4f-c83e211b9bec","",0,0,"KickstarterUniques",1,1,1,1,1,7
+object itemstat "AMER_UNI_Pariah_10","ccea9447-90e9-44f5-b806-58de4bf6a0ee","",0,0,"KickstarterUniques",1,1,1,1,8,12
+object itemstat "AMER_UNI_Pariah_15","3945f2f0-fe5c-4bd2-9231-7b8373aa091f","",0,0,"KickstarterUniques",1,1,1,1,13,17
+object itemstat "AMER_UNI_Pariah_20","baa0ac81-0e75-42ec-a729-4afb9957ce8d","",0,0,"KickstarterUniques",1,1,1,1,18,22
+object itemstat "AMER_UNI_Pariah_25","62b55129-c014-46f7-8c79-f63159f8e860","",0,0,"KickstarterUniques",1,1,1,1,26,99
+
+object itemstat "AMER_UNI_Patience_5","6b3bd1c0-85d4-4447-8aef-d6d228380db9","",0,0,"",1,1,1,1,1,7
+object itemstat "AMER_UNI_Patience_10","922c5622-1374-4a24-a902-f0230d3129d8","",0,0,"",1,1,1,1,8,12
+object itemstat "AMER_UNI_Patience_15","b32f6ab7-c0c4-4748-8435-a7e05528471f","",0,0,"KickstarterUniques",1,1,1,1,13,17
+object itemstat "AMER_UNI_Patience_20","560b8d44-1820-4f58-86b0-c181dc3b795a","",0,0,"KickstarterUniques",1,1,1,1,18,22
+object itemstat "AMER_UNI_Patience_25","56f06ae1-e5b5-4a94-bb04-8659b236c16f","",0,0,"KickstarterUniques",1,1,1,1,26,99
+
+object itemstat "AMER_UNI_Sacrifice_5","f9341c81-f54a-4d73-9783-7cd7035f9284","",0,0,"KickstarterUniques",1,1,1,1,1,7
+object itemstat "AMER_UNI_Sacrifice_10","005cd1c0-82bd-4b50-95a6-221b7a720ed1","",0,0,"KickstarterUniques",1,1,1,1,8,12
+object itemstat "AMER_UNI_Sacrifice_15","0c717eb3-c61d-41a4-b825-ac6bafb0829a","",0,0,"KickstarterUniques",1,1,1,1,13,17
+object itemstat "AMER_UNI_Sacrifice_20","be525cfe-b17d-42c0-bd78-1755b5ad3d84","",0,0,"KickstarterUniques",1,1,1,1,18,22
+object itemstat "AMER_UNI_Sacrifice_25","b2e4c6ce-6bf6-4632-912d-7f4373e7c2f8","",0,0,"KickstarterUniques",1,1,1,1,26,99
+
+object itemstat "AMER_UNI_Rancor_15","2f283ecd-5f6b-4604-8b8f-057596df68d1","",0,0,"KickstarterUniques",1,1,1,1,13,17
+object itemstat "AMER_UNI_Rancor_20","4449bf97-1486-4406-ae41-a6267340c7cb","",0,0,"KickstarterUniques",1,1,1,1,18,22
+object itemstat "AMER_UNI_Rancor_25","c32b0c20-370a-4fcf-b8e5-90ad46681d5d","",0,0,"KickstarterUniques",1,1,1,1,26,99
+
+object itemstat "AMER_UNI_RoAbeyance_10","05cf7612-6164-4da4-9502-9b5df5f0659c","",0,0,"KickstarterUniques",1,1,1,1,8,12
+object itemstat "AMER_UNI_RoAbeyance_15","a7d0b8cf-9477-4fd2-8f70-07b7a9da8c4e","",0,0,"KickstarterUniques",1,1,1,1,13,17
+object itemstat "AMER_UNI_RoAbeyance_20","df3b8441-4bf9-4b0e-b708-978d8375649c","",0,0,"KickstarterUniques",1,1,1,1,18,22
+object itemstat "AMER_UNI_RoAbeyance_25","b9108555-d1e5-4663-96c5-88ac2d15f279","",0,0,"KickstarterUniques",1,1,1,1,26,99
+
+object itemstat "AMER_UNI_RoCommand_10","839264dd-e981-4084-ab78-a5755702bed4","",0,0,"KickstarterUniques",1,1,1,1,8,12
+object itemstat "AMER_UNI_RoCommand_15","e23b143f-6257-43f6-88f6-5c213a0d0086","",0,0,"KickstarterUniques",1,1,1,1,13,17
+object itemstat "AMER_UNI_RoCommand_20","5c87e318-cbba-4173-a168-0231af620ead","",0,0,"KickstarterUniques",1,1,1,1,18,22
+object itemstat "AMER_UNI_RoCommand_25","592f8728-d899-4b55-bb4f-874754ba784e","",0,0,"KickstarterUniques",1,1,1,1,26,99
+
+object itemstat "AMER_UNI_RoConviction_5","ddc42233-af58-4b24-92dd-4767e392acda","",0,0,"KickstarterUniques",1,1,1,1,1,7
+object itemstat "AMER_UNI_RoConviction_10","b3583297-5e88-4087-8bff-73d4514fd199","",0,0,"KickstarterUniques",1,1,1,1,8,12
+object itemstat "AMER_UNI_RoConviction_15","56bb4267-bf08-4e95-823e-7c768b6639e5","",0,0,"KickstarterUniques",1,1,1,1,13,17
+object itemstat "AMER_UNI_RoConviction_20","e92403b4-2940-456a-b21b-21009503112e","",0,0,"KickstarterUniques",1,1,1,1,18,22
+object itemstat "AMER_UNI_RoConviction_25","e84b1dd2-ac43-42bf-833b-70a1e18f4a9d","",0,0,"KickstarterUniques",1,1,1,1,26,99
+
+
+
+
+object itemstat "AMER_UNI_Arcturus_5","d2b6621e-cde5-43a9-9668-b67b173075b0","",0,0,"",1,1,1,1,1,7
+object itemstat "AMER_UNI_Arcturus_10","b14b6dce-2fb2-4b34-b477-877b0cc35d58","",0,0,"KickstarterUniques",1,1,1,1,8,12
+object itemstat "AMER_UNI_Arcturus_15","595d3ab4-1c74-4aa3-847e-7cdd2c9863a3","",0,0,"KickstarterUniques",1,1,1,1,13,17
+object itemstat "AMER_UNI_Arcturus_20","ec73f435-6f0c-4da1-a714-7488ea17ac06","",0,0,"KickstarterUniques",1,1,1,1,18,22
+object itemstat "AMER_UNI_Arcturus_25","8ea16581-eb6f-4330-bdd2-23e4672bf923","",0,0,"KickstarterUniques",1,1,1,1,26,99
+
+object itemstat "AMER_UNI_Ghostflame_5","2b069811-1b5c-415c-9802-fa7f836d49a9","",0,0,"KickstarterUniques",1,1,1,1,1,7
+object itemstat "AMER_UNI_Ghostflame_10","67968349-0845-4541-82a5-ac5f6011756a","",0,0,"KickstarterUniques",1,1,1,1,8,12
+object itemstat "AMER_UNI_Ghostflame_15","7a5956b8-c909-4900-9fa3-7c7d048b1a58","",0,0,"KickstarterUniques",1,1,1,1,13,17
+object itemstat "AMER_UNI_Ghostflame_20","042012e4-4a33-4d07-9ed2-6e82367091ae","",0,0,"KickstarterUniques",1,1,1,1,18,22
+object itemstat "AMER_UNI_Ghostflame_25","3accf479-6b89-4910-a171-81e479a10dc3","",0,0,"KickstarterUniques",1,1,1,1,26,99
+
+object itemstat "AMER_UNI_Seraph_5","ce2a50a7-6f5f-4d17-b21a-741d2a429220","",0,0,"KickstarterUniques",1,1,1,1,1,7
+object itemstat "AMER_UNI_Seraph_10","77083776-cdc3-402b-8ca8-5c7fa002a6f7","",0,0,"KickstarterUniques",1,1,1,1,8,12
+object itemstat "AMER_UNI_Seraph_15","a1c6e705-8c98-4a1d-bbb3-63163a00e17f","",0,0,"KickstarterUniques",1,1,1,1,13,17
+object itemstat "AMER_UNI_Seraph_20","f9588e07-d938-41e6-a5bb-a30458a052be","",0,0,"KickstarterUniques",1,1,1,1,18,22
+object itemstat "AMER_UNI_Seraph_25","f0732a4c-4cfc-42c0-a248-fb144f7ffebe","",0,0,"KickstarterUniques",1,1,1,1,26,99
+
+object itemstat "AMER_UNI_Wendigo_5","fc2d74a0-0a62-4143-83f0-77f4c6b8560d","",0,0,"KickstarterUniques",1,1,1,1,1,7
+object itemstat "AMER_UNI_Wendigo_10","1953f724-c292-42f2-a022-8fa2d8beeb70","",0,0,"KickstarterUniques",1,1,1,1,8,12
+object itemstat "AMER_UNI_Wendigo_15","d5de5bf8-68dd-4575-9165-9e04d1ac0be0","",0,0,"KickstarterUniques",1,1,1,1,13,17
+object itemstat "AMER_UNI_Wendigo_20","6bc8b008-eafc-43a4-bb17-3d512846f090","",0,0,"KickstarterUniques",1,1,1,1,18,22
+object itemstat "AMER_UNI_Wendigo_25","474edc96-670d-4931-b612-e40ddddc0c2e","",0,0,"KickstarterUniques",1,1,1,1,26,99
+
+object itemstat "AMER_UNI_Abyss_5","b7291984-f095-4053-8177-b3ee1e0cbcd0","",0,0,"KickstarterUniques",1,1,1,1,1,7
+object itemstat "AMER_UNI_Abyss_10","7d3dd58d-bae1-4506-af7e-14cc68368689","",0,0,"KickstarterUniques",1,1,1,1,8,12
+object itemstat "AMER_UNI_Abyss_15","5e3f2625-ee9f-4e1f-bdcc-46ac49ee90dc","",0,0,"KickstarterUniques",1,1,1,1,13,17
+object itemstat "AMER_UNI_Abyss_20","8186ea5e-7c6b-467e-ab77-90d310f78611","",0,0,"KickstarterUniques",1,1,1,1,18,22
+object itemstat "AMER_UNI_Abyss_25","a1644418-9a72-4023-930c-aeca37b47c88","",0,0,"KickstarterUniques",1,1,1,1,26,99
+
+object itemstat "AMER_UNI_AntediluvianCarapace_15","40a18ae5-0032-4b4b-9f11-91f2c2236c59","",0,0,"KickstarterUniques",1,1,1,1,13,17
+object itemstat "AMER_UNI_AntediluvianCarapace_20","f92d1883-e961-4623-acc3-d1f57447316e","",0,0,"KickstarterUniques",1,1,1,1,18,22
+object itemstat "AMER_UNI_AntediluvianCarapace_25","ebf8a1b9-bdd1-44e2-b8f1-28b77d8a6e4a","",0,0,"KickstarterUniques",1,1,1,1,26,99
+
+object itemstat "AMER_UNI_BountyHunter_5","9676ab1a-f16d-43cf-9998-73c2fccff6a6","",0,0,"KickstarterUniques",1,1,1,1,1,7
+object itemstat "AMER_UNI_BountyHunter_10","d9d33fd1-f046-432e-9d88-80265e3d6c2b","",0,0,"KickstarterUniques",1,1,1,1,8,12
+object itemstat "AMER_UNI_BountyHunter_15","44625a3e-a387-474a-8644-e826b5118d78","",0,0,"KickstarterUniques",1,1,1,1,13,17
+object itemstat "AMER_UNI_BountyHunter_20","2e891c23-d731-44bf-a393-f62714b441d2","",0,0,"KickstarterUniques",1,1,1,1,18,22
+object itemstat "AMER_UNI_BountyHunter_25","9ccf3088-543a-4c4b-818a-8be725b3b69f","",0,0,"KickstarterUniques",1,1,1,1,26,99
+
+object itemstat "AMER_UNI_CoruscatingSilks_5","079a2373-86cd-4e65-a445-43b8bda8d5e4","",0,0,"KickstarterUniques",1,1,1,1,1,7
+object itemstat "AMER_UNI_CoruscatingSilks_10","b18cec52-85e7-45bf-aaac-a01eda6a299d","",0,0,"KickstarterUniques",1,1,1,1,8,12
+object itemstat "AMER_UNI_CoruscatingSilks_15","3bda548a-ae90-44dc-94a1-ede25c19dba8","",0,0,"KickstarterUniques",1,1,1,1,13,17
+object itemstat "AMER_UNI_CoruscatingSilks_20","ba38bb5b-0cff-4fa7-b8c1-0667a5be30b9","",0,0,"KickstarterUniques",1,1,1,1,18,22
+object itemstat "AMER_UNI_CoruscatingSilks_25","eb98da61-c10e-4e8b-b3b0-568cd9871c97","",0,0,"KickstarterUniques",1,1,1,1,26,99
+
+object itemstat "AMER_UNI_EmpyreanVestments_15","40f17e67-223a-4b68-8674-766de3810662","",0,0,"KickstarterUniques",1,1,1,1,13,17
+object itemstat "AMER_UNI_EmpyreanVestments_20","e51a9349-6bad-47b7-8d39-7ace97b6959b","",0,0,"KickstarterUniques",1,1,1,1,18,22
+object itemstat "AMER_UNI_EmpyreanVestments_25","500a4752-22fd-47bf-9d90-85ede3013c04","",0,0,"KickstarterUniques",1,1,1,1,26,99
+
+object itemstat "AMER_UNI_TheJaguar_5","b5306353-633d-4389-b85e-a38d3c67f044","",0,0,"KickstarterUniques",1,1,1,1,1,7
+object itemstat "AMER_UNI_TheJaguar_10","0e33ed4c-0582-4235-bd63-074f54f07271","",0,0,"KickstarterUniques",1,1,1,1,8,12
+object itemstat "AMER_UNI_TheJaguar_15","70c24872-47ca-4d03-be49-702528b4c58b","",0,0,"KickstarterUniques",1,1,1,1,13,17
+object itemstat "AMER_UNI_TheJaguar_20","a2708bdf-621a-483e-9c42-ed83665bc2c7","",0,0,"KickstarterUniques",1,1,1,1,18,22
+object itemstat "AMER_UNI_TheJaguar_25","20d1b050-67a0-4ae0-9946-99c544ae67dd","",0,0,"KickstarterUniques",1,1,1,1,26,99
+
+object itemstat "AMER_UNI_Mountain_5","34387c25-4ca0-461f-903b-0360f1c0bcd0","",0,0,"KickstarterUniques",1,1,1,1,1,7
+object itemstat "AMER_UNI_Mountain_10","51ad48b4-1aca-49fc-8a4f-4859289246e7","",0,0,"KickstarterUniques",1,1,1,1,8,12
+object itemstat "AMER_UNI_Mountain_15","c127e85c-b0a1-43b8-b3b9-ff46e66f3c0c","",0,0,"KickstarterUniques",1,1,1,1,13,17
+object itemstat "AMER_UNI_Mountain_20","092e7377-5663-48c3-b3e7-9a49950ee099","",0,0,"KickstarterUniques",1,1,1,1,18,22
+object itemstat "AMER_UNI_Mountain_25","3f6b3cef-8ccd-424e-956b-86d4edfb1791","",0,0,"KickstarterUniques",1,1,1,1,26,99
+
+object itemstat "AMER_UNI_NecromancersRaiment_15","ca31dd04-874a-4600-aa3b-bc54a238be07","",0,0,"KickstarterUniques",1,1,1,1,13,17
+object itemstat "AMER_UNI_NecromancersRaiment_20","31655d31-7179-49cd-94cf-b4c7471d54ce","",0,0,"KickstarterUniques",1,1,1,1,18,22
+object itemstat "AMER_UNI_NecromancersRaiment_25","bea75d1f-0afa-4fde-aa77-25cdc0c05bfc","",0,0,"KickstarterUniques",1,1,1,1,26,99
+
+object itemstat "AMER_UNI_Nemesis_5","45e738d7-78b4-4b3e-8969-b5b4baf28b58","",0,0,"KickstarterUniques",1,1,1,1,1,7
+object itemstat "AMER_UNI_Nemesis_10","a96fa4fb-df4f-407e-b7ec-700a7edc73e2","",0,0,"KickstarterUniques",1,1,1,1,8,12
+object itemstat "AMER_UNI_Nemesis_15","c799bc95-87c9-44c4-9035-01b6afbc05ac","",0,0,"KickstarterUniques",1,1,1,1,13,17
+object itemstat "AMER_UNI_Nemesis_20","cb90b922-03d8-4100-a17c-05b89e9942e3","",0,0,"KickstarterUniques",1,1,1,1,18,22
+object itemstat "AMER_UNI_Nemesis_25","ee01ef5d-278e-4b32-8194-3728fff853da","",0,0,"KickstarterUniques",1,1,1,1,26,99
+
+object itemstat "AMER_UNI_Urgency_5","d6cc71f5-bf61-4e21-bf8f-70ef245ad59d","",0,0,"KickstarterUniques",1,1,1,1,1,7
+object itemstat "AMER_UNI_Urgency_10","fd000549-5656-4f5a-afa8-338e33b64956","",0,0,"KickstarterUniques",1,1,1,1,8,12
+object itemstat "AMER_UNI_Urgency_15","4e2ffde3-34bb-4ab9-9d6d-2eec04a1291d","",0,0,"KickstarterUniques",1,1,1,1,13,17
+object itemstat "AMER_UNI_Urgency_20","d80fb45a-0ec5-4977-bfbb-ef528cb8c50b","",0,0,"KickstarterUniques",1,1,1,1,18,22
+object itemstat "AMER_UNI_Urgency_25","c85dfdcd-71b7-4ad5-96e3-30fc913a628e","",0,0,"KickstarterUniques",1,1,1,1,26,99
+
+object itemstat "AMER_UNI_TheVault_5","8f29af5c-33f5-4c2a-9773-eb7d07fe9d8e","",0,0,"KickstarterUniques",1,1,1,1,1,7
+object itemstat "AMER_UNI_TheVault_10","06179f57-3569-4524-ac0a-1f8fbb920073","",0,0,"KickstarterUniques",1,1,1,1,8,12
+object itemstat "AMER_UNI_TheVault_15","88e6e297-cd1e-4f2c-980a-2c37bdab67fb","",0,0,"KickstarterUniques",1,1,1,1,13,17
+object itemstat "AMER_UNI_TheVault_20","e16c1b1e-471d-42bb-b1a4-53f2cbfd7e2c","",0,0,"KickstarterUniques",1,1,1,1,18,22
+object itemstat "AMER_UNI_TheVault_25","f89f04ae-652d-4c50-b583-e4608091f9eb","",0,0,"KickstarterUniques",1,1,1,1,26,99
+
+object itemstat "AMER_UNI_Exaltation_5","275ee837-9863-47ab-a980-3c14ee6cc31e","",0,0,"KickstarterUniques",1,1,1,1,1,7
+object itemstat "AMER_UNI_Exaltation_10","f7f182be-4526-4377-b71f-7e2608c58487","",0,0,"KickstarterUniques",1,1,1,1,8,12
+object itemstat "AMER_UNI_Exaltation_15","264b69f4-4996-4a64-8ef2-960d8c18017c","",0,0,"KickstarterUniques",1,1,1,1,13,17
+object itemstat "AMER_UNI_Exaltation_20","f59a8f6b-c5dd-48f7-be52-830832ea8451","",0,0,"KickstarterUniques",1,1,1,1,18,22
+object itemstat "AMER_UNI_Exaltation_25","d93f01bd-1be4-4085-8f43-61b428bc8e57","",0,0,"KickstarterUniques",1,1,1,1,26,99
+
+object itemstat "AMER_UNI_Dread_15","cf1b1a14-5a7d-4c5f-aac1-0f1081015cf8","",0,0,"KickstarterUniques",1,1,1,1,13,17
+object itemstat "AMER_UNI_Dread_20","a2cecd41-6dda-4311-a2b8-c9aa33d8ae5e","",0,0,"KickstarterUniques",1,1,1,1,18,22
+object itemstat "AMER_UNI_Dread_25","8c9033f7-d0d2-45e6-a777-49a408104415","",0,0,"KickstarterUniques",1,1,1,1,26,99
+
+object itemstat "AMER_UNI_Fecundity_5","e3f9b076-4943-4685-a387-8a0deec0885e","",0,0,"KickstarterUniques",1,1,1,1,1,7
+object itemstat "AMER_UNI_Fecundity_10","b4104c1f-5874-4ada-8412-8823bd5f86a1","",0,0,"KickstarterUniques",1,1,1,1,8,12
+object itemstat "AMER_UNI_Fecundity_15","ae21f24f-6567-40e3-9bb8-a992161f38bf","",0,0,"KickstarterUniques",1,1,1,1,13,17
+object itemstat "AMER_UNI_Fecundity_20","9f7fc3a0-0c46-43c9-bc44-e30414bc3c19","",0,0,"KickstarterUniques",1,1,1,1,18,22
+object itemstat "AMER_UNI_Fecundity_25","99b06070-2b71-4e33-971a-6ee23fae9b45","",0,0,"KickstarterUniques",1,1,1,1,26,99
+
+object itemstat "AMER_UNI_Prophecy_5","ae076bd9-cb9a-4763-935d-459647f3a159","",0,0,"KickstarterUniques",1,1,1,1,1,7
+object itemstat "AMER_UNI_Prophecy_10","9b3d5b54-b66e-45dd-83cb-91e6a2b6cf3e","",0,0,"KickstarterUniques",1,1,1,1,8,12
+object itemstat "AMER_UNI_Prophecy_15","ab8c62ad-1427-474a-aab9-b8a706a1aa8f","",0,0,"KickstarterUniques",1,1,1,1,13,17
+object itemstat "AMER_UNI_Prophecy_20","8219c73e-0523-443f-a316-0ae3c72c3698","",0,0,"KickstarterUniques",1,1,1,1,18,22
+object itemstat "AMER_UNI_Prophecy_25","98399c52-4018-4c53-ad8a-1db9fad51650","",0,0,"KickstarterUniques",1,1,1,1,26,99
+
+object itemstat "AMER_UNI_Hibernaculum_5","12eaa4bb-9e09-4b11-8d5d-26a88bc0d556","",0,0,"KickstarterUniques",1,1,1,1,1,7
+object itemstat "AMER_UNI_Hibernaculum_10","a6d590a4-4c2f-4c09-a531-fd009257f2cb","",0,0,"KickstarterUniques",1,1,1,1,8,12
+object itemstat "AMER_UNI_Hibernaculum_15","51f6eda7-cbb5-4838-9d61-8bdff9558d42","",0,0,"KickstarterUniques",1,1,1,1,13,17
+object itemstat "AMER_UNI_Hibernaculum_20","095e3164-0777-4628-bf6f-b023e0471c7b","",0,0,"KickstarterUniques",1,1,1,1,18,22
+object itemstat "AMER_UNI_Hibernaculum_25","3ae33209-19b4-409e-a899-dafe825a5558","",0,0,"KickstarterUniques",1,1,1,1,26,99
+
+object itemstat "AMER_UNI_TheChthonian_15","540eebba-9f17-4def-ab36-4f1d2e5e1e10","",0,0,"KickstarterUniques",1,1,1,1,13,17
+object itemstat "AMER_UNI_TheChthonian_20","29c1d661-da85-422a-98ae-050c66a76479","",0,0,"KickstarterUniques",1,1,1,1,18,22
+object itemstat "AMER_UNI_TheChthonian_25","c9eba73d-8426-4c48-b793-6f9eae92336b","",0,0,"KickstarterUniques",1,1,1,1,26,99
+
+object itemstat "AMER_UNI_Convergence_5","a1beb199-2113-4b25-8da0-7d55db71df49","",0,0,"KickstarterUniques",1,1,1,1,1,7
+object itemstat "AMER_UNI_Convergence_10","d3baef3f-80ab-4d18-960a-71cbc7f6c068","",0,0,"KickstarterUniques",1,1,1,1,8,12
+object itemstat "AMER_UNI_Convergence_15","d9088d77-e29a-4e76-a26f-bf736a568818","",0,0,"KickstarterUniques",1,1,1,1,13,17
+object itemstat "AMER_UNI_Convergence_20","f75d90a6-b797-48b3-bdd3-23e29a6956bf","",0,0,"KickstarterUniques",1,1,1,1,18,22
+object itemstat "AMER_UNI_Convergence_25","4ddc2ed0-cbe7-45a6-8d67-5ba9fc1a77ed","",0,0,"KickstarterUniques",1,1,1,1,26,99
+
+object itemstat "AMER_UNI_Momentum_5","a347c140-94d9-44e0-8d09-ffc7a068a10a","",0,0,"KickstarterUniques",1,1,1,1,1,7
+object itemstat "AMER_UNI_Momentum_10","8e1c500d-75c2-4b01-8e1e-2d6f82131951","",0,0,"KickstarterUniques",1,1,1,1,8,12
+object itemstat "AMER_UNI_Momentum_15","d468fa5d-0ef5-44d7-8ac5-8a65ea454ea7","",0,0,"KickstarterUniques",1,1,1,1,13,17
+object itemstat "AMER_UNI_Momentum_20","133bd54b-4bf4-4f12-8efd-7ff8e906b5e8","",0,0,"KickstarterUniques",1,1,1,1,18,22
+object itemstat "AMER_UNI_Momentum_25","ceaa091c-b4eb-4325-afc4-e7b2202baf1b","",0,0,"KickstarterUniques",1,1,1,1,26,99
+
+object itemstat "AMER_UNI_Discipline_5","87750d69-0ed1-4be1-b60f-4baecdd3d1c4","",0,0,"KickstarterUniques",1,1,1,1,1,7
+object itemstat "AMER_UNI_Discipline_10","fe836dec-42ad-44b0-9d2d-fe8f28c7df2c","",0,0,"KickstarterUniques",1,1,1,1,8,12
+object itemstat "AMER_UNI_Discipline_15","456a8bc5-1c6c-4831-84ff-25f3769d77de","",0,0,"KickstarterUniques",1,1,1,1,13,17
+object itemstat "AMER_UNI_Discipline_20","144fa282-05bb-4bae-9030-73d26dae81d3","",0,0,"KickstarterUniques",1,1,1,1,18,22
+object itemstat "AMER_UNI_Discipline_25","716b05a2-7e9e-4d81-a8b3-8a27f400d449","",0,0,"KickstarterUniques",1,1,1,1,26,99
+
+object itemstat "AMER_UNI_Mirage_5","704d0a3c-9912-4950-96d2-c59f74080994","",0,0,"KickstarterUniques",1,1,1,1,1,7
+object itemstat "AMER_UNI_Mirage_10","28106d55-9cfd-4b00-b0b2-fde92d523c71","",0,0,"KickstarterUniques",1,1,1,1,8,12
+object itemstat "AMER_UNI_Mirage_15","fec2ec19-2bb0-4285-96ef-d609f46b562b","",0,0,"KickstarterUniques",1,1,1,1,13,17
+object itemstat "AMER_UNI_Mirage_20","2a08db43-66c6-4fc4-bcfc-812beb732079","",0,0,"KickstarterUniques",1,1,1,1,18,22
+object itemstat "AMER_UNI_Mirage_25","406fb7e8-0d34-4468-9674-4b35cd8f1f32","",0,0,"KickstarterUniques",1,1,1,1,26,99
+
+object itemstat "AMER_UNI_Zeal_5","14123404-6924-4620-ac80-9214acb08a1b","",0,0,"KickstarterUniques",1,1,1,1,1,7
+object itemstat "AMER_UNI_Zeal_10","0b3b10be-4935-46f6-a680-e0f946116254","",0,0,"KickstarterUniques",1,1,1,1,8,12
+object itemstat "AMER_UNI_Zeal_15","5a405232-4aa9-43bf-affb-6dcc2c94ed61","",0,0,"KickstarterUniques",1,1,1,1,13,17
+object itemstat "AMER_UNI_Zeal_20","2d00de0b-a305-47ee-acde-c704329c8e1e","",0,0,"KickstarterUniques",1,1,1,1,18,22
+object itemstat "AMER_UNI_Zeal_25","217645f7-9768-42a8-9010-7035c3c0326a","",0,0,"KickstarterUniques",1,1,1,1,26,99
+
+object itemstat "AMER_UNI_Leviathan_5","abc7d148-a61f-4100-ad47-36fdd4b1843e","",0,0,"KickstarterUniques",1,1,1,1,1,7
+object itemstat "AMER_UNI_Leviathan_10","218b10ff-f3fb-47d5-b55c-0073d75710ab","",0,0,"KickstarterUniques",1,1,1,1,8,12
+object itemstat "AMER_UNI_Leviathan_15","986850d0-6f9c-4e39-ab32-1ddfec68b9d3","",0,0,"KickstarterUniques",1,1,1,1,13,17
+object itemstat "AMER_UNI_Leviathan_20","923f1f68-2164-437a-9b32-d2a9c314ddeb","",0,0,"KickstarterUniques",1,1,1,1,18,22
+object itemstat "AMER_UNI_Leviathan_25","02b7f76a-ab29-41c9-a98c-cce85a906d07","",0,0,"KickstarterUniques",1,1,1,1,26,99
+
+object itemstat "AMER_UNI_Lodestone_5","720c3b17-2589-44a3-9c07-0f46ac68b6c5","",0,0,"KickstarterUniques",1,1,1,1,1,7
+object itemstat "AMER_UNI_Lodestone_10","1ae80d7d-1b46-43dd-b5dd-3a99eabb96bf","",0,0,"KickstarterUniques",1,1,1,1,8,12
+object itemstat "AMER_UNI_Lodestone_15","5e089902-533f-4152-84df-0f44322533f7","",0,0,"KickstarterUniques",1,1,1,1,13,17
+object itemstat "AMER_UNI_Lodestone_20","7198767b-274b-4aa8-80d7-581ba5565579","",0,0,"KickstarterUniques",1,1,1,1,18,22
+object itemstat "AMER_UNI_Lodestone_25","f2c3d05b-9e6f-4c37-8fc9-82b5e72dae16","",0,0,"KickstarterUniques",1,1,1,1,26,99
+
+object itemstat "AMER_UNI_Ambition_5","8334ac5e-0c31-4a86-ac67-e434263f2d21","",0,0,"KickstarterUniques",1,1,1,1,1,7
+object itemstat "AMER_UNI_Ambition_10","b3c59374-9b36-4a77-b39b-6e5cab4e4480","",0,0,"KickstarterUniques",1,1,1,1,8,12
+object itemstat "AMER_UNI_Ambition_15","3a988979-748d-40d8-8e6d-6ef4f6aa0a6b","",0,0,"KickstarterUniques",1,1,1,1,13,17
+object itemstat "AMER_UNI_Ambition_20","05cafd2a-fbab-490d-82e1-e08bd158dccc","",0,0,"KickstarterUniques",1,1,1,1,18,22
+object itemstat "AMER_UNI_Ambition_25","eaeb04ea-56c5-46e3-9954-6581fa742b5e","",0,0,"KickstarterUniques",1,1,1,1,26,99
+
+object itemstat "AMER_UNI_Marauder_15","a391d243-225d-4c23-bdef-c1c57a3bedc2","",0,0,"KickstarterUniques",1,1,1,1,13,17
+object itemstat "AMER_UNI_Marauder_20","7e6928ba-237f-41bc-9345-c4247bd45aaa","",0,0,"KickstarterUniques",1,1,1,1,18,22
+object itemstat "AMER_UNI_Marauder_25","624ba8fc-2a77-40cf-93b1-7a2d9a754604","",0,0,"KickstarterUniques",1,1,1,1,26,99
+
+object itemstat "AMER_UNI_GramSwordOfGrief_15","f1f75e46-0f13-435b-9b63-ef649696ea3c","",0,0,"KickstarterUniques",1,1,1,1,13,17
+object itemstat "AMER_UNI_GramSwordOfGrief_20","d4ae74a5-dee9-4dd7-b882-9dbbbd8460ea","",0,0,"KickstarterUniques",1,1,1,1,18,22
+object itemstat "AMER_UNI_GramSwordOfGrief_25","de846938-3b3f-42a2-bfb4-de76fee7f596","",0,0,"KickstarterUniques",1,1,1,1,26,99
+
+object itemstat "AMER_UNI_TheCannibal_5","6c75f195-6de9-41e7-b55c-b093bd79c1ef","",0,0,"KickstarterUniques",1,1,1,1,1,7
+object itemstat "AMER_UNI_TheCannibal_10","61d875a5-958b-4741-96f9-6482782e629b","",0,0,"KickstarterUniques",1,1,1,1,8,12
+object itemstat "AMER_UNI_TheCannibal_15","f1597c3b-c679-42d9-bbb4-0b8f5a217a8c","",0,0,"KickstarterUniques",1,1,1,1,13,17
+object itemstat "AMER_UNI_TheCannibal_20","661f1dcb-4cc7-43a5-85e9-70f6a71d76fa","",0,0,"KickstarterUniques",1,1,1,1,18,22
+object itemstat "AMER_UNI_TheCannibal_25","c80bff02-8ed5-4526-8c8e-d51fa56a4869","",0,0,"KickstarterUniques",1,1,1,1,26,99
+
+object itemstat "AMER_UNI_TheSavage_5","0a103acd-61c9-4cc7-a13b-a041fe920be6","",0,0,"KickstarterUniques",1,1,1,1,1,7
+object itemstat "AMER_UNI_TheSavage_10","46584a32-1bfd-4355-ad93-b2451a6fb6f4","",0,0,"KickstarterUniques",1,1,1,1,8,12
+object itemstat "AMER_UNI_TheSavage_15","36f68f5f-c7b9-4ec8-b4ef-18c1f2063491","",0,0,"KickstarterUniques",1,1,1,1,13,17
+object itemstat "AMER_UNI_TheSavage_20","28af48ab-4ad8-4ab6-9e8c-115e9e993411","",0,0,"KickstarterUniques",1,1,1,1,18,22
+object itemstat "AMER_UNI_TheSavage_25","714efa18-5f87-41e0-9863-a8a07562f6a2","",0,0,"KickstarterUniques",1,1,1,1,26,99
+
+object itemstat "AMER_UNI_Zodiac_5","e30a7311-cc0a-4073-9b77-59dc47d420d0","",0,0,"",1,1,1,1,1,7
+object itemstat "AMER_UNI_Zodiac_10","eb9cfa38-e045-4a38-bc4c-42e16b8b75ba","",0,0,"",1,1,1,1,8,12
+object itemstat "AMER_UNI_Zodiac_15","6c44a0de-76a3-4d1e-a46f-264e9ae39050","",0,0,"",1,1,1,1,13,17
+object itemstat "AMER_UNI_Zodiac_20","05cbe55f-d855-4030-85d3-96f0e7de589b","",0,0,"",1,1,1,1,18,22
+object itemstat "AMER_UNI_Zodiac_25","01ca7583-f672-4753-a6b7-7501a82fd8de","",0,0,"",1,1,1,1,26,99
+
+object itemstat "AMER_UNI_FaceOfTheFallen_15","a5950f10-3d48-4bb1-bdb2-e66ab6f0f8d2","",0,0,"KickstarterUniques",1,1,1,1,13,17
+object itemstat "AMER_UNI_FaceOfTheFallen_20","1cb982e3-b819-4e86-add1-0f2c3b3a7814","",0,0,"KickstarterUniques",1,1,1,1,18,22
+object itemstat "AMER_UNI_FaceOfTheFallen_25","d739d054-ef2e-4647-bb70-336c42a0b3f8","",0,0,"KickstarterUniques",1,1,1,1,26,99
+
+
+
+
+
+object itemstat "WPN_UNIQUE_Snakebite_2","947d1719-931a-4c9b-922e-81f42aacd4a8","",0,0,"",-1,-1,-1,1,-1,-1
+object itemstat "WPN_UNIQUE_Snakebite_3","947d1719-931a-4c9b-922e-81f42aacd4a8","",0,0,"",-1,-1,-1,1,-1,-1
+object itemstat "WPN_UNIQUE_SeaSpiderClaw_2","e1caefe4-806f-4234-af9d-c55e220a28c7","",0,0,"",-1,-1,-1,1,-1,-1
+object itemstat "WPN_UNIQUE_SeaSpiderClaw_3","e1caefe4-806f-4234-af9d-c55e220a28c7","",0,0,"",-1,-1,-1,1,-1,-1
+object itemstat "WPN_CYS_UNI_Cathedral_Guardian_Sword_2","69fe2745-ad2e-4da2-a9b0-0094fe430485","",0,0,"",-1,-1,-1,1,-1,-1
+object itemstat "WPN_CYS_UNI_Cathedral_Guardian_Sword_3","69fe2745-ad2e-4da2-a9b0-0094fe430485","",0,0,"",-1,-1,-1,1,-1,-1
+object itemstat "WPN_UNIQUE_Coffinfeeder_2","d94b541d-172e-4c0a-b735-c5fd29ca587a","",0,0,"",-1,-1,-1,1,-1,-1
+object itemstat "WPN_UNIQUE_Coffinfeeder_3","d94b541d-172e-4c0a-b735-c5fd29ca587a","",0,0,"",-1,-1,-1,1,-1,-1
+object itemstat "WPN_Sword_Kickstarter_Japanese_2","86aefec4-1693-4d83-8ed3-bc96c57d1a92","",0,0,"KickstarterUniques",1,1,1,1,1,7
+object itemstat "WPN_Sword_Kickstarter_Japanese_3","86aefec4-1693-4d83-8ed3-bc96c57d1a92","",0,0,"KickstarterUniques",1,1,1,1,1,7
+object itemstat "WPN_UNIQUE_Hanneman_2","5ced9ee2-e718-4933-9afb-0b351af58f09","",0,0,"",-1,-1,-1,1,-1,-1
+object itemstat "WPN_UNIQUE_Hanneman_3","5ced9ee2-e718-4933-9afb-0b351af58f09","",0,0,"",-1,-1,-1,1,-1,-1
+object itemstat "WPN_UNIQUE_HacksawDecapitator_2","c201d048-fcc9-4f0f-92df-dd3a9ca9c12a","",0,0,"",-1,-1,-1,1,-1,-1
+object itemstat "WPN_UNIQUE_HacksawDecapitator_3","c201d048-fcc9-4f0f-92df-dd3a9ca9c12a","",0,0,"",-1,-1,-1,1,-1,-1
+object itemstat "WPN_UNIQUE_ClobberingTime_2","c5ecca87-72f7-4a5a-918e-2b9042872ccb","",0,0,"",-1,-1,-1,1,-1,-1
+object itemstat "WPN_UNIQUE_ClobberingTime_3","c5ecca87-72f7-4a5a-918e-2b9042872ccb","",0,0,"",-1,-1,-1,1,-1,-1
+object itemstat "WPN_UNIQUE_Gungir_Morningstar_2","fb371bd3-b72b-4012-8306-e9f12577811d","",0,0,"",-1,-1,-1,1,-1,-1
+object itemstat "WPN_UNIQUE_Gungir_Morningstar_3","fb371bd3-b72b-4012-8306-e9f12577811d","",0,0,"",-1,-1,-1,1,-1,-1
+object itemstat "WPN_UNIQUE_2H_Axe_Braccus_A_2","deba8ddf-00ad-4271-bf85-1256c0b6ff16","",0,0,"",-1,-1,-1,1,-1,-1
+object itemstat "WPN_UNIQUE_2H_Axe_Braccus_A_3","deba8ddf-00ad-4271-bf85-1256c0b6ff16","",0,0,"",-1,-1,-1,1,-1,-1
+object itemstat "WPN_Kickstarter_SwordOfHolyFlame_2","65a418eb-177b-4031-93ab-32d8842f7509","",0,0,"KickstarterUniques",1,1,1,1,10,15
+object itemstat "WPN_Kickstarter_SwordOfHolyFlame_3","65a418eb-177b-4031-93ab-32d8842f7509","",0,0,"KickstarterUniques",1,1,1,1,10,15
+object itemstat "WPN_UNIQUE_Impaler_2","6f3df5bd-e1a6-422e-b8fd-d10f953d04fe","",0,0,"",-1,-1,-1,1,-1,-1
+object itemstat "WPN_UNIQUE_Impaler_3","6f3df5bd-e1a6-422e-b8fd-d10f953d04fe","",0,0,"",-1,-1,-1,1,-1,-1
+object itemstat "WPN_UNIQUE_Pergamon_2","59539880-adb5-46bf-b0ba-3e281a6e87d3","",0,0,"",-1,-1,-1,1,-1,-1
+object itemstat "WPN_UNIQUE_Pergamon_3","59539880-adb5-46bf-b0ba-3e281a6e87d3","",0,0,"",-1,-1,-1,1,-1,-1
+object itemstat "WPN_Kickstarter_StaffOfImagination_2","635f25f1-ca7b-43ea-a9ea-2463098df5d0","",0,0,"KickstarterUniques",1,1,1,1,13,18
+object itemstat "WPN_Kickstarter_StaffOfImagination_3","635f25f1-ca7b-43ea-a9ea-2463098df5d0","",0,0,"KickstarterUniques",1,1,1,1,13,18
+object itemstat "WPN_Unique_Heartseeker_2","09db8ed4-61df-4587-ba48-c4d89c8aa0cc","",0,0,"",-1,-1,-1,1,-1,-1
+object itemstat "WPN_Unique_Heartseeker_3","09db8ed4-61df-4587-ba48-c4d89c8aa0cc","",0,0,"",-1,-1,-1,1,-1,-1
+object itemstat "WPN_Leandra_Staff_A_2","5b4717bf-e938-47fa-a6db-dc70ac1ac9cf","",0,0,"",-1,-1,-1,1,-1,-1
+object itemstat "WPN_Leandra_Staff_A_3","5b4717bf-e938-47fa-a6db-dc70ac1ac9cf","",0,0,"",-1,-1,-1,1,-1,-1
+object itemstat "WPN_Human_Normal_Buffalo_Sabre_A_2","699561cb-bb3c-4c6e-9258-fba68bd62d90","",0,0,"",-1,-1,-1,0,-1,-1
+object itemstat "WPN_Human_Normal_Buffalo_Sabre_A_3","699561cb-bb3c-4c6e-9258-fba68bd62d90","",0,0,"",-1,-1,-1,0,-1,-1
+
+object itemstat "ARM_UNIQUE_PhantomAmulet_2","862575bb-628d-42f8-937e-b9ad3c059653","",0,0,"",-1,-1,-1,1,-1,-1
+object itemstat "ARM_UNIQUE_PhantomAmulet_3","862575bb-628d-42f8-937e-b9ad3c059653","",0,0,"",-1,-1,-1,1,-1,-1
+object itemstat "ARM_UNIQUE_PhantomAmulet_4","862575bb-628d-42f8-937e-b9ad3c059653","",0,0,"",-1,-1,-1,1,-1,-1
+

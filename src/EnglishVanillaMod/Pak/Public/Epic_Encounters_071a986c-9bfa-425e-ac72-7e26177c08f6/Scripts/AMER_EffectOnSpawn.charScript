@@ -1,0 +1,217 @@
+//===============================================//
+//                                               //
+//         E F F E C T   O N   S P A W N         //
+//                                               //
+//     Written by Matteo "Ameranth" T. (2016)    //
+//===============================================//
+INIT
+CHARACTER:__Me
+EXTERN STRING:%AMER_EffectOnInit_FX1 = "NONE"
+EXTERN STRING:%AMER_EffectOnInit_FX2 = "NONE"
+EXTERN STRING:%AMER_EffectOnInit_FX3 = "NONE"
+EXTERN STRING:%AMER_EffectOnInit_FX4 = "NONE"
+EXTERN STRING:%AMER_EffectOnInit_FX5 = "NONE"
+EXTERN FIXEDSTRING:%AMER_EffectOnInit_Bone1 = "NONE"
+EXTERN FIXEDSTRING:%AMER_EffectOnInit_Bone2 = "NONE"
+EXTERN FIXEDSTRING:%AMER_EffectOnInit_Bone3 = "NONE"
+EXTERN FIXEDSTRING:%AMER_EffectOnInit_Bone4 = "NONE"
+EXTERN FIXEDSTRING:%AMER_EffectOnInit_Bone5 = "NONE"
+EXTERN INT:%AMER_EffectOnInit_EffectIsLooping1 = 1
+EXTERN INT:%AMER_EffectOnInit_EffectIsLooping2 = 1
+EXTERN INT:%AMER_EffectOnInit_EffectIsLooping3 = 1
+EXTERN INT:%AMER_EffectOnInit_EffectIsLooping4 = 1
+EXTERN INT:%AMER_EffectOnInit_EffectIsLooping5 = 1
+EXTERN FLOAT:%AMER_EffectOnInit_EffectRepeatInterval1 = 0
+EXTERN FLOAT:%AMER_EffectOnInit_EffectRepeatInterval2 = 0
+EXTERN FLOAT:%AMER_EffectOnInit_EffectRepeatInterval3 = 0
+EXTERN FLOAT:%AMER_EffectOnInit_EffectRepeatInterval4 = 0
+EXTERN FLOAT:%AMER_EffectOnInit_EffectRepeatInterval5 = 0
+EXTERN INT:%AMER_EffectOnInit_EffectRepeatIterations1 = 0
+EXTERN INT:%AMER_EffectOnInit_EffectRepeatIterations2 = 0
+EXTERN INT:%AMER_EffectOnInit_EffectRepeatIterations3 = 0
+EXTERN INT:%AMER_EffectOnInit_EffectRepeatIterations4 = 0
+EXTERN INT:%AMER_EffectOnInit_EffectRepeatIterations5 = 0
+EXTERN INT:%AMER_EffectOnInit_RemoveOnDeath1 = 1
+EXTERN INT:%AMER_EffectOnInit_RemoveOnDeath2 = 1
+EXTERN INT:%AMER_EffectOnInit_RemoveOnDeath3 = 1
+EXTERN INT:%AMER_EffectOnInit_RemoveOnDeath4 = 1
+EXTERN INT:%AMER_EffectOnInit_RemoveOnDeath5 = 1
+INT:%AMER_EffectOnInit_Handle1
+INT:%AMER_EffectOnInit_Handle2
+INT:%AMER_EffectOnInit_Handle3
+INT:%AMER_EffectOnInit_Handle4
+INT:%AMER_EffectOnInit_Handle5
+	
+EVENTS
+EVENT EffectOnInit
+VARS
+//===============================//
+	INT:_SupportedEffects = 5
+//===============================//
+	STRING:_Effect
+	FIXEDSTRING:_Bone
+	FIXEDSTRING:_WhichHandle
+	FIXEDSTRING:_WhichTimer
+	INT:_IsLooping
+	FLOAT:_RepeatInterval
+	INT:_Iterations
+	INT:_Handle
+	INT:_Count
+ON
+	OnInit()
+ACTIONS
+	Set(_Count, INT:0)
+	WHILE "c1"
+		IsLessThen(_Count, _SupportedEffects)
+	DO
+		GetElement(_Effect, _Count, %AMER_EffectOnInit_FX1, %AMER_EffectOnInit_FX2, %AMER_EffectOnInit_FX3, %AMER_EffectOnInit_FX4, %AMER_EffectOnInit_FX5)
+		IF "!c1"
+			IsEqual(_Effect, "NONE")
+		THEN
+			GetElement(_IsLooping, _Count, %AMER_EffectOnInit_EffectIsLooping1, %AMER_EffectOnInit_EffectIsLooping2, %AMER_EffectOnInit_EffectIsLooping3, %AMER_EffectOnInit_EffectIsLooping4, %AMER_EffectOnInit_EffectIsLooping5)
+			IF "!c1"
+				IsEqual(_IsLooping, INT:1)
+			THEN
+				GetElement(_Bone, _Count, %AMER_EffectOnInit_Bone1, %AMER_EffectOnInit_Bone2, %AMER_EffectOnInit_Bone3, %AMER_EffectOnInit_Bone4, %AMER_EffectOnInit_Bone5)
+				IF "!c1"
+					IsEqual(_Bone = "NONE")
+				THEN
+					//TIMER
+					CharacterPlayEffect(__Me, _Effect, _Bone)
+				ELSE
+					//TIMER
+					CharacterPlayEffect(__Me, _Effect)
+				ENDIF
+				
+				GetElement(_RepeatInterval, _Count, %AMER_EffectOnInit_EffectRepeatInterval1, %AMER_EffectOnInit_EffectRepeatInterval2, %AMER_EffectOnInit_EffectRepeatInterval3, %AMER_EffectOnInit_EffectRepeatInterval4, %AMER_EffectOnInit_EffectRepeatInterval5)
+				GetElement(_Iterations, _Count, %AMER_EffectOnInit_EffectRepeatIterations1, %AMER_EffectOnInit_EffectRepeatIterations2, %AMER_EffectOnInit_EffectRepeatIterations3, %AMER_EffectOnInit_EffectRepeatIterations4, %AMER_EffectOnInit_EffectRepeatIterations5)
+				GetElement(_WhichTimer, _Count, "AMER_EffectOnInit_Timer1", "AMER_EffectOnInit_Timer2", "AMER_EffectOnInit_Timer3", "AMER_EffectOnInit_Timer4", "AMER_EffectOnInit_Timer5")
+				StartTimer(_WhichTimer, _RepeatInterval, _Iterations)
+			ELSE
+				GetElement(_Bone, _Count, %AMER_EffectOnInit_Bone1, %AMER_EffectOnInit_Bone2, %AMER_EffectOnInit_Bone3, %AMER_EffectOnInit_Bone4, %AMER_EffectOnInit_Bone5)
+				IF "!c1"
+					IsEqual(_Bone = "NONE")
+				THEN
+					CharacterPlayLoopEffect(_Handle, __Me, _Effect, _Bone)
+				ELSE
+					CharacterPlayLoopEffect(_Handle, __Me, _Effect)
+				ENDIF
+				GetElement(_WhichHandle, _Count, "AMER_EffectOnInit_Handle1", "AMER_EffectOnInit_Handle2", "AMER_EffectOnInit_Handle3", "AMER_EffectOnInit_Handle4", "AMER_EffectOnInit_Handle5")
+				SetVar(__Me, _WhichHandle, _Handle)
+			ENDIF
+		ENDIF
+		
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+	
+	
+EVENT CleanUpEffectOnInit
+VARS
+//===============================//
+	INT:_SupportedEffects = 5
+//===============================//
+	INT:_IsLooping
+	INT:_Handle
+	INT:_RemoveOnDeath
+	INT:_Count
+	STRING:_Effect
+	FIXEDSTRING:_WhichTimer
+ON
+	OnCharacterStatus(__Me, DYING)
+ACTIONS
+	WHILE "c1"
+		IsLessThen(_Count, _SupportedEffects)
+	DO
+		GetElement(_Effect, _Count, %AMER_EffectOnInit_FX1, %AMER_EffectOnInit_FX2, %AMER_EffectOnInit_FX3, %AMER_EffectOnInit_FX4, %AMER_EffectOnInit_FX5)
+		IF "!c1"
+			IsEqual(_Effect, "NONE")
+		THEN
+			GetElement(_RemoveOnDeath, _Count, %AMER_EffectOnInit_RemoveOnDeath1, %AMER_EffectOnInit_RemoveOnDeath2, %AMER_EffectOnInit_RemoveOnDeath3, %AMER_EffectOnInit_RemoveOnDeath4, %AMER_EffectOnInit_RemoveOnDeath5)
+			IF "c1"
+				IsEqual(_RemoveOnDeath, INT:1)
+			THEN
+				GetElement(_IsLooping, _Count, %AMER_EffectOnInit_EffectIsLooping1, %AMER_EffectOnInit_EffectIsLooping2, %AMER_EffectOnInit_EffectIsLooping3, %AMER_EffectOnInit_EffectIsLooping4, %AMER_EffectOnInit_EffectIsLooping5)
+				IF "c1"
+					IsEqual(_IsLooping, INT:1)
+				THEN
+					GetElement(_Handle, _Count, %AMER_EffectOnInit_Handle1, %AMER_EffectOnInit_Handle2, %AMER_EffectOnInit_Handle3, %AMER_EffectOnInit_Handle4, %AMER_EffectOnInit_Handle5)
+					StopLoopEffect(_Handle)
+				ELSE
+					GetElement(_WhichTimer, _Count, "AMER_EffectOnInit_Timer1", "AMER_EffectOnInit_Timer2", "AMER_EffectOnInit_Timer3", "AMER_EffectOnInit_Timer4", "AMER_EffectOnInit_Timer5")
+					StopTimer(_WhichTimer)
+				ENDIF
+			ENDIF
+		ENDIF
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+	
+	
+EVENT EffectOnInitTimer1
+ON
+	OnTimer("AMER_EffectOnInit_Timer1")
+ACTIONS
+	IF "c1"
+		IsEqual(%AMER_EffectOnInit_Bone1, "NONE")
+	THEN
+		CharacterPlayEffect(__Me, %AMER_EffectOnInit_FX1)
+	ELSE
+		CharacterPlayEffect(__Me, %AMER_EffectOnInit_FX1, %AMER_EffectOnInit_Bone1)
+	ENDIF
+	
+	
+	
+EVENT EffectOnInitTimer2
+ON
+	OnTimer("AMER_EffectOnInit_Timer2")
+ACTIONS
+	IF "c1"
+		IsEqual(%AMER_EffectOnInit_Bone2, "NONE")
+	THEN
+		CharacterPlayEffect(__Me, %AMER_EffectOnInit_FX2)
+	ELSE
+		CharacterPlayEffect(__Me, %AMER_EffectOnInit_FX2, %AMER_EffectOnInit_Bone2)
+	ENDIF
+	
+	
+	
+EVENT EffectOnInitTimer3
+ON
+	OnTimer("AMER_EffectOnInit_Timer3")
+ACTIONS
+	IF "c1"
+		IsEqual(%AMER_EffectOnInit_Bone3, "NONE")
+	THEN
+		CharacterPlayEffect(__Me, %AMER_EffectOnInit_FX3)
+	ELSE
+		CharacterPlayEffect(__Me, %AMER_EffectOnInit_FX3, %AMER_EffectOnInit_Bone3)
+	ENDIF
+	
+	
+	
+EVENT EffectOnInitTimer4
+ON
+	OnTimer("AMER_EffectOnInit_Timer4")
+ACTIONS
+	IF "c1"
+		IsEqual(%AMER_EffectOnInit_Bone4, "NONE")
+	THEN
+		CharacterPlayEffect(__Me, %AMER_EffectOnInit_FX4)
+	ELSE
+		CharacterPlayEffect(__Me, %AMER_EffectOnInit_FX4, %AMER_EffectOnInit_Bone4)
+	ENDIF
+	
+	
+	
+EVENT EffectOnInitTimer5
+ON
+	OnTimer("AMER_EffectOnInit_Timer5")
+ACTIONS
+	IF "c1"
+		IsEqual(%AMER_EffectOnInit_Bone5, "NONE")
+	THEN
+		CharacterPlayEffect(__Me, %AMER_EffectOnInit_FX5)
+	ELSE
+		CharacterPlayEffect(__Me, %AMER_EffectOnInit_FX5, %AMER_EffectOnInit_Bone5)
+	ENDIF

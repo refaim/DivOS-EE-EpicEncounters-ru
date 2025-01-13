@@ -1,0 +1,195 @@
+#TEMPLATE "_SKILL_Base" : AMER_SKILL_Despair
+	
+INIT
+CHARACTER:__Me
+FLOAT:%SkillTargetScore_AMER_SKILL_Despair=-1000000
+// [GLOBAL_VARS]
+// [~GLOBAL_VARS]
+	
+EVENTS
+	
+// [EVENTS]
+// [~EVENTS]
+	
+// Calculate the priority of the skill
+EVENT CalculateScore_AMER_SKILL_Despair
+VARS
+	// [CALC_VARS]
+	FLOAT:_SkillRangeMin
+	FLOAT:_SkillRangeMax
+	FLOAT3:_TargetPos
+	// [~CALC_VARS]
+ON
+	OnFunction("CalculateScore_AMER_SKILL_Despair")
+ACTIONS
+	Set(%SkillTargetScore_AMER_SKILL_Despair, -1000000)
+
+	// [CALC_ACTIONS_PRE]
+	// [~CALC_ACTIONS_PRE]
+	// [CALC_ACTIONS]
+	IterateCharactersInCombat(__Me, "CalculateTarget_AMER_SKILL_Despair", Highest, Vitality)
+	IF "!c1"
+		IsEqual(%SkillTargetChar_AMER_SKILL_Despair, null)
+	THEN
+		Add(%ActionScore_AMER_SKILL_Despair, %SkillTargetScore_AMER_SKILL_Despair)
+	ENDIF
+	// [~CALC_ACTIONS]
+	
+	
+	
+	
+// Calculate the character we should attack
+EVENT CalculateTarget_AMER_SKILL_Despair
+VARS	
+	CHARACTER:_Char
+	// [CALC_TARGET_VARS]
+	INT:_ClassScore_AMER_SKILL_Despair
+	FLOAT:_StatResistance
+	FLOAT:_Score
+	FLOAT:_SkillRangeMin
+	FLOAT:_SkillRangeMax
+	FLOAT:_DistanceToChar
+	FLOAT:_DistanceScore
+	FLOAT:_Vitality
+	FLOAT:_SaveScore
+	INT:_SaveAmount
+
+	// [~CALC_TARGET_VARS]
+ON
+	OnIterateCharacter(_Char, "CalculateTarget_AMER_SKILL_Despair")	
+ACTIONS
+	// [CALC_CHAR_TARGET_ACTIONS_PRE]
+	Set(_Score, 0.0)
+	// [~CALC_CHAR_TARGET_ACTIONS_PRE]
+	// [CALC_CHAR_TARGET_ACTIONS]
+	IF "c1"
+	    CharacterIsEnemy(__Me, _Char)
+	THEN
+		IF "!c1"
+			CharacterIsDead(_Char)
+		THEN
+			IF "!c1&!c2"
+			    CharacterHasStatus(_Char, INVISIBLE)
+			    CharacterHasStatus(_Char, SNEAKING)
+			THEN
+				IF "!c1"
+					CharacterHasStatus(_Char, INVULNERABLE)
+				THEN
+					//Kill range calculation
+					IF "c1"
+						CharacterGetStat(_Vitality,  _Char, Vitality)
+					THEN
+						//Favor high vitality targets.
+						Multiply(_Vitality, 2.0)
+						Add(_Score, _Vitality)
+					ENDIF
+					
+					//Disable charmed friend calculation
+					IF "c1"
+						CharacterHasStatus(_Char, CHARMED)
+					THEN
+						Add(_Score, -10.0)
+					ENDIF
+					
+					//Marked
+					IF "c1"
+						CharacterHasStatus(_Char, AGGRO_MARKED)
+					THEN
+						Add(_Score, 1.0)
+					ENDIF
+								
+					//Summons are worth less.
+					IF "c1"
+						CharacterIsSummon(_Char)
+					THEN
+						Add(_Score, -5.0)
+					ENDIF
+					
+					//Debuff Refresh score calculation
+					IF "c1"
+						CharacterHasStatus(_Char, MUTED)
+					THEN
+						Add(_Score, -10.0)
+					ENDIF
+					IF "c1"
+						CharacterHasStatus(_Char, SLOWED)
+					THEN
+						Add(_Score, -5.0)
+					ENDIF
+					IF "c1"
+						CharacterHasStatus(_Char, WEAK)
+					THEN
+						Add(_Score, -5.0)
+					ENDIF
+					
+					//Remove haste.
+					IF "c1"
+						CharacterHasStatus(_Char, HASTED)
+					THEN
+						Add(_Score, 3.0)
+					ENDIF
+					
+					//Saving Throw score calculation
+					IF "c1"
+						CharacterGetAbility(_SaveAmount, _Char, Willpower)
+					THEN
+						Cast(_SaveScore, _SaveAmount)
+						Multiply(_SaveScore, -2.0)
+						Add(_Score, _SaveScore)
+					ENDIF
+					IF "c1"
+						CharacterGetAbility(_SaveAmount, _Char, BodyBuilding)
+					THEN
+						Cast(_SaveScore, _SaveAmount)
+						Multiply(_SaveScore, -1.0)
+						Add(_Score, _SaveScore)
+					ENDIF
+					
+					// Range score calculation
+					IF "c1&c2"
+						CharacterGetSkillRange(_SkillRangeMin, _SkillRangeMax, __Me, AMER_SKILL_Despair)
+						GetDistance(_DistanceToChar, __Me, _Char)
+					THEN
+						Set(_DistanceScore, _DistanceToChar)
+						IF "c1"
+							IsGreaterThen(_DistanceScore, _SkillRangeMax)
+						THEN
+							Subtract(_DistanceScore, _SkillRangeMax)
+							Multiply(_DistanceScore, -1.0)
+						ELIF "c1"
+							IsLessThen(_DistanceScore, _SkillRangeMin)
+						THEN
+							Subtract(_DistanceScore, _SkillRangeMin)
+							Multiply(_DistanceScore, 1.0)
+						ELSE 
+							Set(_DistanceScore, 0.0)
+						ENDIF
+						Add(_Score, _DistanceScore)
+					ENDIF
+					
+					// Can see score calculation
+					IF "!c1"
+						CharacterCanSee(__Me, _Char)
+					THEN
+						Add(_Score, -10.0)
+					ENDIF
+					
+					IF "c1"
+						IsGreaterThen(_Score, %SkillTargetScore_AMER_SKILL_Despair)
+					THEN
+						Set(%SkillTargetChar_AMER_SKILL_Despair, _Char)
+						Set(%SkillTargetScore_AMER_SKILL_Despair, _Score)
+					ENDIF
+				ENDIF
+			ENDIF
+		ENDIF
+	ENDIF
+	// [~CALC_CHAR_TARGET_ACTIONS]
+	
+	
+	
+	
+	
+	
+	
+	

@@ -1,0 +1,144 @@
+//===============================================//
+//                                               //
+//      S H A D O W   B O S S   M I R A G E      //
+//                                               //
+//     Written by Matteo "Ameranth" T. (2016)    //
+//===============================================//
+INIT
+CHARACTER:__Me
+	
+CHARACTER:%AMER_ShadowBossMirage_Boss
+INT:%AMER_ShadowBossMirage_RemoveSelf = 0
+INT:%AMER_ShadowBossMirage_CorrectMirage = 0
+	
+	
+EVENTS
+EVENT ShadowBossMirageDestroyOnDamage
+VARS
+//===========================//
+	FLOAT:_DestroyDelay = 1
+//===========================//
+	CHARACTER:_Char
+	FLOAT:_Damage
+ON
+	OnDamage(_, _Damage, _Char, _)
+ACTIONS
+	//Only damage with a source character will do, this
+	//prevents oddities and burning ground spam from being
+	//effective.
+	IF "!c1&!c2"
+		IsEqual(_Char, null)
+		IsEqual(_Damage, FLOAT:0)
+	THEN
+		//If I am the correct mirage, move the boss to me, remove all other
+		//mirages, and let the boss know that the mirages are removed before
+		//I am destroyed.
+		IF "c1"
+			IsEqual(%AMER_ShadowBossMirage_CorrectMirage, INT:1)
+		THEN
+			TeleportTo(%AMER_ShadowBossMirage_Boss, __Me, 1)
+			CharacterRemoveStatus(%AMER_ShadowBossMirage_Boss, INVISIBLE)
+			DisplayCombatInfoText(%AMER_ShadowBossMirage_Boss, "AMER_CMB_ShadowBoss_Reappear", 1)
+			DisplayText(%AMER_ShadowBossMirage_Boss, "AMER_BLANK", 1)
+			//SetVisible(%AMER_ShadowBossMirage_Boss, 1)
+			//CharacterRemoveStatus(%AMER_ShadowBossMirage_Boss, INVISIBLE)
+			//SetVar(%AMER_ShadowBossMirage_Boss, "AMER_ShadowBoss_MiragesExist", INT:0)
+			IterateCharactersInCombat(__Me, "AMER_ShadowBossMirage_RemoveAll")
+		ENDIF
+		
+		//Destroy the character with a slight delay. This is necessary to
+		//prevent some skills from bugging when their target is removed.
+		PlayEffectAt(__Me, "FX_GP_TeleportSmoke_A")
+		CharacterDie(__Me)
+		StartTimer("AMER_ShadowBossMirage_DelayedDestroy", _DestroyDelay, 0)
+	ENDIF
+	
+	
+EVENT ShadowBossMirageDelayedDestroy
+ON
+	OnTimer("AMER_ShadowBossMirage_DelayedDestroy")
+ACTIONS
+	CharacterDestroy(__Me)
+	
+	/*
+EVENT ShadowBossMirageOnTurn
+ON
+	OnTurn()
+ACTIONS
+	//Destroy all mirages on the battlefield.
+	IterateCharactersInCombat(__Me, "AMER_ShadowBossMirage_RemoveAll")
+	Set(%AMER_ShadowBossMirage_RemoveSelf, INT:1)
+	
+	
+EVENT ShadowBossMirageCombatEnded
+ON
+	OnCombatEnded()
+ACTIONS
+	//Remove me if combat ends and I am alive.
+	Set(%AMER_ShadowBossMirage_RemoveSelf, INT:1)
+	
+	
+EVENT ShadowBossMirageRemoveAll
+VARS
+	CHARACTER:_Char
+	CHARACTERTEMPLATE:_Root
+	INT:_IsRealBoss = 0
+ON
+	OnIterateCharacter(_Char, "AMER_ShadowBossMirage_RemoveAll")
+ACTIONS
+	IF "c1&c2"
+		CharacterGetTemplate(_Char, _Root)
+		IsEqual(_Root, "AMER_CHAR_Shadow_NightwalkerFake_114bd6a4-7dda-4d46-ba70-88f3040afc95")
+	THEN
+		IF "!c1"
+			IsEqual(_Char, __Me)
+		THEN
+			SetVar(_Char, "AMER_ShadowBossMirage_RemoveSelf", INT:1)
+		ENDIF
+	ENDIF
+	*/
+	
+	
+//===================BEHAVIOR====================//
+BEHAVIOUR
+REACTION ShadowBossMirageRemoveSelf, 10000
+USAGE ALL
+VARS
+//===========================//
+	FLOAT:_SleepBase = 0.2
+	FLOAT:_SleepRandom = 1.0
+//===========================//
+	FLOAT:_Sleep
+CHECK "c1"
+	IsEqual(%AMER_ShadowBossMirage_RemoveSelf, INT:1)
+ACTIONS
+	GetRandomBetween(_Sleep, FLOAT:0, _SleepRandom)
+	Add(_Sleep, _SleepBase)
+	Sleep(_Sleep)
+	//If I am the correct mirage, move the boss to me and let
+	//the boss know that the mirages are removed before I am destroyed.
+	IF "c1"
+		IsEqual(%AMER_ShadowBossMirage_CorrectMirage, INT:1)
+	THEN
+		TeleportTo(%AMER_ShadowBossMirage_Boss, __Me, 1)
+		//CharacterRemoveStatus(%AMER_ShadowBossMirage_Boss, INVISIBLE)
+		DisplayCombatInfoText(%AMER_ShadowBossMirage_Boss, "AMER_CMB_ShadowBoss_Reappear", 1)
+		DisplayText(%AMER_ShadowBossMirage_Boss, "AMER_BLANK", 1)
+		Sleep(_SleepBase)
+		//SetVisible(%AMER_ShadowBossMirage_Boss, 1)
+		//CharacterRemoveStatus(%AMER_ShadowBossMirage_Boss, INVISIBLE)
+		//SetVar(%AMER_ShadowBossMirage_Boss, "AMER_ShadowBoss_MiragesExist", INT:0)
+		//IterateCharactersInCombat(__Me, "AMER_ShadowBossMirage_RemoveAll")
+	ENDIF
+	PlayEffectAt(__Me, "FX_GP_TeleportSmoke_A")
+	CharacterDestroy(__Me)
+INTERRUPT
+	Reset()
+	
+	
+	
+//===============================================//
+//                                               //
+//      S H A D O W   B O S S   M I R A G E      //
+//                                               //
+//===============================================//

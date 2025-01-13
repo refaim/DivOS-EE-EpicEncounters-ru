@@ -1,0 +1,74 @@
+INIT
+	CHARACTER:__Me
+	ITEM:%UnholyStoup
+	INT:%FXHandle1
+	INT:%FXHandle2
+	
+//-------------
+BEHAVIOUR
+REACTION Character_ScanForUnholyStoup,1000
+USAGE COMBAT
+VARS
+	FLOAT:_MyHealth
+	FLOAT:_MyAP
+	FLOAT:_DistBetwMeAndStoup
+CHECK "c1&c2"
+	CharacterGetStat(_MyHealth,__Me,Vitality)
+	IsLessThen(_MyHealth, 0.7)
+ACTIONS
+	Set(%UnholyStoup,null)
+	IterateItemsNear(__Me,10.0,"CMBHC_CYS_IterateForUnholyStoup")
+	IF "!c1"
+		IsEqual(%UnholyStoup,null)
+	THEN
+		CharacterMoveTo(%UnholyStoup,1)
+		CharacterPlayLoopEffect(%FXHandle2,__Me,"FX_Skills_WitchCraft_Generic_A_Prepare")		
+		ItemPlayLoopEffect(%FXHandle1,%UnholyStoup,"FX_GP_LightPillarRed_A")				
+		SetVar(__Me, "AMER_TimeoutDetection", INT:-8)	//Allow extra time for animation.
+		CharacterPlayAnimation("Worship_01",1,1)		
+		CharacterUseItem(%UnholyStoup)
+		PlayEffectAt(%UnholyStoup,"FX_Skills_WitchCraft_UndeadHeal_Cast_A")		
+		PlayEffectAt(%UnholyStoup,"FX_GP_Hit_Blood_A_Small")
+		CombatLogText(__Me,"CYS_CMBHC_UnholyStoup_BL",0,1)			
+		CharacterPlayEffect(__Me,"FX_Skills_WitchCraft_UndeadHeal_Impact_A")		
+		CharacterHeal(__Me, 1.0)
+		StopLoopEffect(%FXHandle1)
+		StopLoopEffect(%FXHandle2)
+	ELSE
+		SetPriority("Character_ScanForUnholyStoup",0)
+	ENDIF
+INTERRUPT
+	StopLoopEffect(%FXHandle1)
+	StopLoopEffect(%FXHandle2)
+	Reset()
+
+//-------------	
+EVENTS
+EVENT OnTurn_GeneralControl
+ON
+	OnTurn()
+ACTIONS
+	SetPriority("Character_ScanForUnholyStoup",1000)
+	
+EVENT OnIterateItem_ScanForUnholyStoup
+VARS
+	ITEM:_Item
+	ITEMTEMPLATE:_UnholyStoupTemplate="PUZ_BloodStoup_A_9238019e-db73-4ef3-ba08-9fcc21b7039c"
+	ITEMTEMPLATE:_ItemTemplate
+ON
+	OnIterateItem(_Item,"CMBHC_CYS_IterateForUnholyStoup")
+ACTIONS
+	IF "c1&c2&!c3"
+		ItemGetTemplate(_Item,_ItemTemplate)
+		IsEqual(_ItemTemplate,_UnholyStoupTemplate)
+		ItemIsDestroyed(_Item)		
+	THEN
+		Set(%UnholyStoup,_Item)
+	ENDIF	
+	
+EVENT OnDeactivate_StopLoopFX
+ON
+	OnDeactivate()
+ACTIONS
+	StopLoopEffect(%FXHandle1)
+	StopLoopEffect(%FXHandle2)	

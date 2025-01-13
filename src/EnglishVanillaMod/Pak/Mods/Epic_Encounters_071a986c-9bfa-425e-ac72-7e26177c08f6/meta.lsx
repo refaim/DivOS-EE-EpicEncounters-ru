@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<save>
+    <header version="2" time="1505282295" />
+    <version major="2" minor="0" revision="0" build="0" />
+    <region id="Config">
+        <node id="root">
+            <children>
+                <node id="DataPacks">
+                    <children>
+                        <node id="DataPack">
+                            <attribute id="Folder" value="Epic_Encounters_071a986c-9bfa-425e-ac72-7e26177c08f6" type="30" />
+                            <attribute id="MD5" value="" type="23" />
+                            <attribute id="Name" value="Epic Encounters" type="22" />
+                            <attribute id="UUID" value="071a986c-9bfa-425e-ac72-7e26177c08f6" type="22" />
+                            <attribute id="Version" value="268435456" type="4" />
+                        </node>
+                        <node id="DataPack">
+                            <attribute id="Folder" value="Shared" type="30" />
+                            <attribute id="MD5" value="" type="23" />
+                            <attribute id="Name" value="Shared" type="22" />
+                            <attribute id="UUID" value="2bd9bdbe-22ae-4aa2-9c93-205880fc6564" type="22" />
+                            <attribute id="Version" value="268435456" type="4" />
+                        </node>
+                        <node id="DataPack">
+                            <attribute id="Folder" value="Main" type="30" />
+                            <attribute id="MD5" value="" type="23" />
+                            <attribute id="Name" value="Main" type="22" />
+                            <attribute id="UUID" value="00000000-0000-0000-0000-000000000000" type="22" />
+                            <attribute id="Version" value="268435456" type="4" />
+                        </node>
+                    </children>
+                </node>
+                <node id="DependentModules">
+                    <children>
+                        <node id="ModuleShortDesc">
+                            <attribute id="Folder" value="Main" type="30" />
+                            <attribute id="MD5" value="" type="23" />
+                            <attribute id="Name" value="Main" type="22" />
+                            <attribute id="UUID" value="00000000-0000-0000-0000-000000000000" type="22" />
+                            <attribute id="Version" value="268435456" type="4" />
+                        </node>
+                        <node id="ModuleShortDesc">
+                            <attribute id="Folder" value="Shared" type="30" />
+                            <attribute id="MD5" value="" type="23" />
+                            <attribute id="Name" value="Shared" type="22" />
+                            <attribute id="UUID" value="2bd9bdbe-22ae-4aa2-9c93-205880fc6564" type="22" />
+                            <attribute id="Version" value="268435456" type="4" />
+                        </node>
+                    </children>
+                </node>
+                <node id="ModuleInfo">
+                    <attribute id="Author" value='Matteo &quot;Ameranth&quot; T. &amp; Davide &quot;Elric&quot; T.' type="30" />
+                    <attribute id="Description" value="Gameplay overhaul and content expansion. Gird your loins and enjoy, it&apos;s gonna be rough." type="30" />
+                    <attribute id="Folder" value="Epic_Encounters_071a986c-9bfa-425e-ac72-7e26177c08f6" type="30" />
+                    <attribute id="MD5" value="" type="23" />
+                    <attribute id="MenuLevelName" value="Catalogue of Fates" type="22" />
+                    <attribute id="Name" value="Epic Encounters" type="22" />
+                    <attribute id="NumPlayers" value="4" type="1" />
+                    <attribute id="StartupLevelName" value="Epic Creation" type="22" />
+                    <attribute id="Tags" value="" type="30" />
+                    <attribute id="Type" value="EE" type="22" />
+                    <attribute id="UUID" value="071a986c-9bfa-425e-ac72-7e26177c08f6" type="22" />
+                    <attribute id="Version" value="285802501" type="4" />
+                    <children>
+                        <node id="Scripts">
+                            <children>
+                                <node id="Script">
+                                    <attribute id="UUID" value="5bc80992-a7f6-4da6-83e2-3d276384d8f7" type="22" />
+                                    <children>
+                                        <node id="Parameters">
+                                            <children>
+                                                <node id="Parameter">
+                                                    <attribute id="MapKey" value="HardcoreOnly" type="22" />
+                                                    <attribute id="Type" value="1" type="4" />
+                                                    <attribute id="Value" value="0" type="23" />
+                                                </node>
+                                                <node id="Parameter">
+                                                    <attribute id="MapKey" value="SayBlindedText" type="22" />
+                                                    <attribute id="Type" value="1" type="4" />
+                                                    <attribute id="Value" value="1" type="23" />
+                                                </node>
+                                            </children>
+                                        </node>
+                                    </children>
+                                </node>
+                            </children>
+                        </node>
+                    </children>
+                </node>
+            </children>
+        </node>
+    </region>
+</save>

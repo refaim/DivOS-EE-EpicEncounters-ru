@@ -1,0 +1,242 @@
+//===============================================//
+//                                               //
+//   M E L C H I O R ' S   C O M P A S S I O N   //
+//                                               //
+//     Written by Matteo "Ameranth" T. (2016)    //
+//===============================================//
+INIT
+CHARACTER:__Me
+EXTERN CHARACTER:%AMER_MelchiorCompassion_Cruelty = null
+INT:%AMER_MelchiorCompassion_TurnCount
+INT:%AMER_MelchiorCompassion_FreshEngage = 1	//Is it the first time I was attacked?
+INT:%AMER_MelchiorCompassion_DoDeath = 0
+	
+EVENTS
+EVENT MelchiorCompassionInit
+ON
+	OnInit()
+ACTIONS
+	CharacterApplyStatus(__Me, VOID_AURA, -1, 1)
+	
+	
+	
+EVENT MelchiorCompassionCombatEnded
+ON
+	OnCombatEnded()
+ACTIONS
+	IF "!c1"
+		CharacterIsDead(__Me)
+	THEN
+		SetHealth(__Me, 1.0)
+	ENDIF
+	
+	
+	
+EVENT MelchiorCompassionCombatStart
+ON
+	OnCombatStarted()
+ACTIONS
+	Set(%AMER_MelchiorCompassion_DoDeath, INT:0)
+	Set(%AMER_MelchiorCompassion_TurnCount, INT:0)
+	
+	
+	
+EVENT MelchiorCompassionOnTurn
+ON
+	OnTurn()
+ACTIONS
+	Add(%AMER_MelchiorCompassion_TurnCount, INT:1)
+	
+	
+	
+EVENT MelchiorCompassionHealIterator
+VARS
+//===========================//
+	FLOAT:_HealSize = 0.2
+	FLOAT:_HealCostCruelty = 0.05
+	FLOAT:_HealCostLoneWolf = 0.03
+	FLOAT:_HealCostPlayer = 0.02
+	FLOAT:_HealCostSummon = 0.01
+//===========================//
+	CHARACTER:_Char
+	FLOAT:_Cost
+	FLOAT:_Vitality
+	FLOAT:_Overheal
+ON
+	OnIterateCharacter(_Char, "AMER_MelchiorCompassion_HealIterator")
+ACTIONS
+	IF "!c1"
+		CharacterIsDead(_Char)
+	THEN
+		IF "!c1"
+			IsEqual(_Char, __Me)
+		THEN
+			IF "!c1"
+				IsEqual(%AMER_MelchiorCompassion_DoDeath, INT:1)
+			THEN
+				IF "c1&c2"
+					CharacterGetStat(_Vitality, _Char, Vitality)
+					IsLessThen(_Vitality, 1.0)
+				THEN
+					//Calculate how much vitality this heal will cost me.
+					IF "c1"
+						IsEqual(_Char, %AMER_MelchiorCompassion_Cruelty)
+					THEN
+						Set(_Cost, _HealCostCruelty)
+					ELIF "c1"
+						CharacterIsSummon(_Char)
+					THEN
+						Set(_Cost, _HealCostSummon)
+					ELIF "c1"
+						CharacterHasTalent(_Char, LoneWolf)
+					THEN
+						Set(_Cost, _HealCostLoneWolf)
+					ELSE
+						Set(_Cost, _HealCostPlayer)
+					ENDIF
+					
+					//Calculate a healing cost reduction if the target doesn't
+					//need the full healing tick.
+					Set(_Overheal, 1.0)
+					Subtract(_Overheal, Vitality)
+					IF "c1"
+						IsLessThen(_Overheal, _HealSize)
+					THEN
+						Divide(_Overheal, _HealSize)
+						Multiply(_Cost, _Overheal)
+					ENDIF
+					
+					//Heal the target
+					CharacterHeal(_Char, _HealSize)
+					
+					//Modify my vitality.
+					IF "c1"
+						CharacterGetStat(_Vitality, __Me, Vitality)
+					THEN
+						Subtract(_Vitality, _Cost)
+						IF "!c1"
+							IsLessThen(_Vitality, 0.01)
+						THEN
+							SetHealth(__Me, _Vitality)
+						ELSE
+							//This heal has killed me.
+							Set(%AMER_MelchiorCompassion_DoDeath, INT:1)
+						ENDIF
+					ENDIF
+				ENDIF
+			ENDIF
+		ENDIF
+	ENDIF
+	
+	
+	
+//===================BEHAVIOR====================//
+BEHAVIOUR
+REACTION MelchiorCompassionHeal, 10000
+USAGE COMBAT
+VARS
+//===========================//
+	FLOAT:_PreSleep = 0.7
+	INT:_HealTicks = 5
+	INT:_SupportedBuffIndex = 7
+	FLOAT:_TickSleep = 1.00
+//===========================//
+	POTION:_WhichEffect
+	FIXEDSTRING:_Text
+	STRING:_Str
+	FLOAT3:_Position
+	FLOAT:_Distance
+	INT:_Rand
+	INT:_Handle
+	INT:_Count
+	INT:_Index
+ACTIONS
+	SetVar(__Me, "AMER_TimeoutDetection", INT:-10)	//Casting animations warrant extra time.
+	//Short sleep here ensures the cast declaration
+	//isn't lost far up in the combat log.
+	Sleep(_PreSleep)
+	
+	//If I'm too far from Cruelty, teleport closer.
+	//GetPosition(%AMER_MelchiorCompassion_Cruelty, _Position)
+	IF "c1&c2"
+		GetDistance(_Distance, __Me, %AMER_MelchiorCompassion_Cruelty)
+		IsGreaterThen(_Distance, 6.0)
+	THEN
+		IF "c1"
+			FindPosition(_Position, __Me, 30.0, 10.0, __Me, 1, -1, -1, -1)
+		THEN
+			PlayEffectAt(__Me, "FX_Skills_Air_NetherSwap_Disappear_A")
+			CharacterTeleportTo(_Position)
+			CharacterPlayEffect(__Me, "FX_Skills_Air_NetherSwap_Reappear_A")
+		ENDIF
+	ENDIF
+	
+	//Animations and text biznis for casting the heal.
+	CharacterLookAt(%AMER_MelchiorCompassion_Cruelty)
+	Sleep(0.75)
+	
+	GetRandomBetween(_Rand, INT:1, INT:3)
+	Print(_Str, "AMER_CMB_MelchiorCompassion_Healing[1]", _Rand)
+	Cast(_Text, _Str)
+	DisplayCombatInfoText(__Me, _Text, 5.0)
+	
+	CharacterRemoveStatus(__Me, VOID_AURA)
+	
+	CharacterPlayLoopEffect(_Handle, __Me, "FX_Skills_Water_MassHeal_Prepare_A")
+	CharacterPlayAnimation("cast_self_start",1,1)
+	CharacterPlayAnimation("cast_self_loop",1,1)
+	CharacterPlayAnimation("cast_self_cast",1,0)
+	
+	Sleep(0.75)
+	
+	CharacterPlayEffect(__Me, "FX_Skills_Water_MassHeal_Cast_A")
+	PlayEffectAt(%AMER_MelchiorCompassion_Cruelty, "FX_Skills_Water_MassHeal_TargetHit_A")
+	
+	Set(_Count, INT:0)
+	WHILE "c1&!c2"
+		IsLessThen(_Count, _HealTicks)
+		IsEqual(%AMER_MelchiorCompassion_DoDeath, INT:1)
+	DO
+		IterateCharactersNear(%AMER_MelchiorCompassion_Cruelty, 6.0, "AMER_MelchiorCompassion_HealIterator")
+		Add(_Count, INT:1)
+		Sleep(_TickSleep)
+	ENDWHILE
+	
+	StopLoopEffect(_Handle)
+	
+	IF "c1"
+		IsEqual(%AMER_MelchiorCompassion_DoDeath, INT:1)
+	THEN
+		GetRandomBetween(_Rand, INT:1, INT:3)
+		Print(_Str, "AMER_CMB_MelchiorCompassion_Death[1]", _Rand)
+		Cast(_Text, _Str)
+		DisplayCombatInfoText(__Me, _Text, 3.0)
+		
+		Sleep(3.0)
+		
+		CharacterSetImmortal(%AMER_MelchiorCompassion_Cruelty, 0)
+		CharacterDie(__Me)
+	ELSE
+		CharacterApplyStatus(__Me, VOID_AURA, -1, 1)
+		
+		Set(_Index, %AMER_MelchiorCompassion_TurnCount)
+		IF "c1"
+			IsGreaterThen(_Index, _SupportedBuffIndex)
+		THEN
+			Set(_Index, _SupportedBuffIndex)
+		ENDIF
+		Subtract(_Index, INT:1)	//index starts at zero.
+		GetElement(_WhichEffect, _Index, "AMER_CMB_MelchiorCruelty_Buff1", "AMER_CMB_MelchiorCruelty_Buff2", "AMER_CMB_MelchiorCruelty_Buff3", "AMER_CMB_MelchiorCruelty_Buff4", "AMER_CMB_MelchiorCruelty_Buff5", "AMER_CMB_MelchiorCruelty_Buff6", "AMER_CMB_MelchiorCruelty_Buff7")
+		CharacterConsume(%AMER_MelchiorCompassion_Cruelty, _WhichEffect)
+		StatusText(%AMER_MelchiorCompassion_Cruelty, "AMER_CMB_MelchiorCruelty_Buff1")
+	ENDIF
+	
+	
+	CharacterEndTurn()
+	
+	
+//===============================================//
+//                                               //
+//   M E L C H I O R ' S   C O M P A S S I O N   //
+//                                               //
+//===============================================//

@@ -1,0 +1,35 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+//Cyseal
+ItemToCharacter(ITEM_AMER_CYS_TheTreetard, CHARACTER_CYS_Eglandaer);
+
+//Subterranean Passage
+ItemToCharacter(ITEM_AMER_SUB_BOOK_HistoryComplete, CHARACTER_AMER_SUB_Herald);
+ItemToCharacter(ITEM_AMER_SUB_BOOK_Herald1, CHARACTER_AMER_SUB_Herald);
+ItemToCharacter(ITEM_AMER_SUB_BOOK_History5, CHARACTER_AMER_SUB_Infestor);
+ItemToCharacter(ITEM_AMER_SUB_BOOK_History6, CHARACTER_AMER_SUB_ClericAtExit);
+
+//Kadath
+ItemToCharacter(ITEM_AMER_LED_BOOK_History3, CHARACTER_AMER_LED_Scavenger);
+ItemToCharacter(ITEM_AMER_LED_BOOK_History4, CHARACTER_AMER_LED_Huntmaster);
+
+//Tower of Ascension
+ItemToCharacter(ITEM_AMER_ASC_BOOK_Melchior5, CHARACTER_AMER_ASC_Melchior_Ignorance);
+ItemToCharacter(ITEM_AMER_ASC_BOOK_Melchior6, CHARACTER_AMER_ASC_Melchior_Restraint);
+ItemToCharacter(ITEM_AMER_ASC_BOOK_Melchior7, CHARACTER_AMER_ASC_Melchior_Cruelty);
+ItemToCharacter(ITEM_AMER_ASC_BOOK_Terrestra2, CHARACTER_AMER_ASC_Terrestra);
+KBSECTION
+IF
+ItemEquipped(ITEM_AMER_CYS_TheTreetard, _Char)
+THEN
+CharacterApplyStatus(_Char, "BLIND", -1.0, 1);
+
+IF
+ItemUnEquipped(ITEM_AMER_CYS_TheTreetard, _Char)
+THEN
+CharacterRemoveStatus(_Char, "BLIND");
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "__Start"

@@ -1,0 +1,155 @@
+#TEMPLATE "_SKILL_Base" : AMER_SKILL_EnemyVampireEnergyDrain
+	
+INIT
+CHARACTER:__Me
+FLOAT:%SkillTargetScore_AMER_SKILL_EnemyVampireEnergyDrain=-1000000
+// [GLOBAL_VARS]
+EXTERN FLOAT:%AMER_SKILL_EnemyVampireEnergyDrain_DrainMaximumSearch = 20.0
+EXTERN FLOAT:%AMER_SKILL_EnemyVampireEnergyDrain_LowHPSearchMultiplierMax = 3.0
+EXTERN INT:%AMER_SKILL_EnemyVampireEnergyDrain_LowHPSearchesFarther = 0
+INT:%AMER_SKILL_EnemyVampireEnergyDrain_BlockedByScript = 0
+// [~GLOBAL_VARS]
+	
+EVENTS
+	
+// [EVENTS]
+// [~EVENTS]
+	
+// Calculate the priority of the skill
+EVENT CalculateScore_AMER_SKILL_EnemyVampireEnergyDrain
+VARS
+	// [CALC_VARS]
+	FLOAT:_SkillRangeMin
+	FLOAT:_SkillRangeMax
+	FLOAT:_Vitality
+	FLOAT:_SearchRadius
+	FLOAT:_RadiusModifier
+	FLOAT3:_TargetPos
+	// [~CALC_VARS]
+ON
+	OnFunction("CalculateScore_AMER_SKILL_EnemyVampireEnergyDrain")
+ACTIONS
+	Set(%SkillTargetScore_AMER_SKILL_EnemyVampireEnergyDrain, -1000000)
+
+	// [CALC_ACTIONS_PRE]
+	// [~CALC_ACTIONS_PRE]
+	// [CALC_ACTIONS]
+	IF "c1"
+		IsEqual(%AMER_SKILL_EnemyVampireEnergyDrain_BlockedByScript, INT:0)
+	THEN
+		Set(_SearchRadius, %AMER_SKILL_EnemyVampireEnergyDrain_DrainMaximumSearch)
+	
+		//If allowed, raise my search range when I am hurt.
+		IF "c1"
+			IsEqual(%AMER_SKILL_EnemyVampireEnergyDrain_LowHPSearchesFarther, INT:1)
+		THEN
+			IF "c1&c2"
+				CharacterGetStat(_Vitality, __Me, Vitality)
+				IsLessThen(_Vitality, 0.78)
+			THEN
+				Set(_SearchRadius, 1.0)
+				Subtract(_SearchRadius, _Vitality)
+				Multiply(_SearchRadius, %AMER_SKILL_EnemyVampireEnergyDrain_LowHPSearchMultiplierMax)
+				Add(_SearchRadius, 1.0)
+				Multiply(_SearchRadius, %AMER_SKILL_EnemyVampireEnergyDrain_DrainMaximumSearch)
+			ENDIF
+		ENDIF
+		
+		IterateCharactersNear(__Me, _SearchRadius, "CalculateTarget_AMER_SKILL_EnemyVampireEnergyDrain", Lowest, Vitality)
+		IF "!c1"
+			IsEqual(%SkillTargetChar_AMER_SKILL_EnemyVampireEnergyDrain, null)
+		THEN
+			Add(%ActionScore_AMER_SKILL_EnemyVampireEnergyDrain, %SkillTargetScore_AMER_SKILL_EnemyVampireEnergyDrain)
+		ENDIF
+	ENDIF
+	// [~CALC_ACTIONS]
+	
+	
+	
+	
+// Calculate the character we should attack
+EVENT CalculateTarget_AMER_SKILL_EnemyVampireEnergyDrain
+VARS	
+	CHARACTER:_Char
+	// [CALC_TARGET_VARS]
+	INT:_ClassScore_AMER_SKILL_EnemyVampireEnergyDrain
+	FLOAT:_StatResistance
+	FLOAT:_Score
+	FLOAT:_SkillRangeMin
+	FLOAT:_SkillRangeMax
+	FLOAT:_DistanceToChar
+	FLOAT:_DistanceScore
+	FLOAT:_SaveScore
+	INT:_SaveAmount
+	// [~CALC_TARGET_VARS]
+ON
+	OnIterateCharacter(_Char, "CalculateTarget_AMER_SKILL_EnemyVampireEnergyDrain")	
+ACTIONS
+	// [CALC_CHAR_TARGET_ACTIONS_PRE]
+	Set(_Score, 0.0)
+	// [~CALC_CHAR_TARGET_ACTIONS_PRE]
+	// [CALC_CHAR_TARGET_ACTIONS]
+	IF "c1"
+	    CharacterIsEnemy(__Me, _Char)
+	THEN
+		IF "!c1"
+			CharacterIsDead(_Char)
+		THEN
+			IF "!c1&!c2"
+			    CharacterHasStatus(_Char, INVISIBLE)
+			    CharacterHasStatus(_Char, SNEAKING)
+			THEN
+				//Marked.
+				IF "c1"
+					CharacterHasStatus(_Char, AGGRO_MARKED)
+				THEN
+					Add(_Score, 1.0)
+				ENDIF
+					
+				// Range score calculation
+				IF "c1&c2"
+					CharacterGetSkillRange(_SkillRangeMin, _SkillRangeMax, __Me, AMER_SKILL_EnemyVampireEnergyDrain)
+					GetDistance(_DistanceToChar, __Me, _Char)
+				THEN
+					Set(_DistanceScore, _DistanceToChar)
+					IF "(c1)"
+						IsGreaterThen(_DistanceScore, _SkillRangeMax)
+					THEN
+						Subtract(_DistanceScore, _SkillRangeMax)
+						Multiply(_DistanceScore, -1.0)
+					ELIF "(c1)"
+						IsLessThen(_DistanceScore, _SkillRangeMin)
+					THEN
+						Subtract(_DistanceScore, _SkillRangeMin)
+						Multiply(_DistanceScore, 1.0)
+					ELSE 
+						Set(_DistanceScore, 0.0)
+					ENDIF
+					Add(_Score, _DistanceScore)
+				ENDIF
+				    
+				// Can see score calculation
+				IF "!c1"
+					CharacterCanSee(__Me, _Char)
+				THEN
+					Add(_Score, -10.0)
+				ENDIF
+				    
+				IF "c1"
+					IsGreaterThen(_Score, %SkillTargetScore_AMER_SKILL_EnemyVampireEnergyDrain)
+				THEN
+					Set(%SkillTargetChar_AMER_SKILL_EnemyVampireEnergyDrain, _Char)
+					Set(%SkillTargetScore_AMER_SKILL_EnemyVampireEnergyDrain, _Score)
+				ENDIF
+			ENDIF
+		ENDIF
+	ENDIF
+	// [~CALC_CHAR_TARGET_ACTIONS]
+	
+	
+	
+	
+	
+	
+	
+	

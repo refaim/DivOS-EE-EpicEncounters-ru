@@ -1,0 +1,858 @@
+//=================================================//
+//                                                 //
+// P L A Y E R   F E A T U R E   F U N C T I O N S //
+//                                                 //
+//     Written by Matteo "Ameranth" T. (2017)      //
+//=================================================//
+INIT
+CHARACTER:__Me
+	
+//These are used for imposing a maximum resistance
+//cap on the player.
+STRING:%AMER_ResString
+CHARACTERSTAT:%AMER_ResType
+INT:%AMER_ResValue
+INT:%AMER_ResDifference
+FLOAT:%AMER_MaxRes
+FLOAT:%AMER_AllResOverride = 0.0
+INT:%AMER_FireResLimited = 0
+INT:%AMER_WaterResLimited = 0 
+INT:%AMER_AirResLimited = 0
+INT:%AMER_EarthResLimited = 0
+INT:%AMER_PoisonResLimited = 0
+INT:%AMER_ShadowResLimited = 0
+INT:%AMER_PiercingResLimited = 0
+INT:%AMER_SlashingResLimited = 0
+INT:%AMER_CrushingResLimited = 0
+FLOAT:%AMER_MaxFireRes = 75
+FLOAT:%AMER_MaxWaterRes = 75
+FLOAT:%AMER_MaxAirRes = 75
+FLOAT:%AMER_MaxPoisonRes = 75
+FLOAT:%AMER_MaxEarthRes = 75
+FLOAT:%AMER_MaxShadowRes = 75
+FLOAT:%AMER_MaxPiercingRes = 75
+FLOAT:%AMER_MaxSlashingRes = 75
+FLOAT:%AMER_MaxCrushingRes = 75
+	
+FIXEDSTRING:%AMER_ResistLimiterEffect
+	
+//Used to fix broken maximum resistances when recalculating.
+STRING:%AMER_ResToFix
+INT:%AMER_ResFixDone = 2
+	
+//Used to track how many times Overcharge has been cast in a row
+//and whether or not it has been used this round.
+INT:%AMER_OverchargeUsed = 0
+INT:%AMER_OverchargeCount = 0
+	
+//Used to determine when out of combat healing should activate.
+INT:%AMER_OoCHealingEnabled = 1
+INT:%AMER_OoCHealingTicks = -1
+	
+//Used to track if the player's party is in combat.
+INT:%AMER_PartyInCombat = 0
+	
+//Used to ensure that the player removes Blindness simulation at
+//the end of their turn, as the obvious method doesn't always work...
+INT:%AMER_BlindThisTurn = 0
+	
+	
+EVENTS
+//NOTE: If an event executes > 100 actions in a single frame, it exits.
+	
+//===========================================================//
+//                    Invisible/Sneaking                     //
+//     Hit Bonus                                             //
+//     OoC Enemy Hyperacute detection                        //
+//     Guerrilla damage bonus                                //
+//     Item affix damage bonus                               //
+//===========================================================//
+//The hit bonus was implemented in part to buff sneaking but
+//mostly because *sometimes* invisibility does not correctly
+//convey the 100% chance to hit as it attempts to do.
+EVENT CheckInvisHitBonus
+ON
+	OnFunction("AMER_CheckInvis")
+ACTIONS
+	IF "c1|c2"
+		CharacterHasStatus(__Me, INVISIBLE)
+		CharacterHasStatus(__Me, SNEAKING)
+	THEN
+		//AddTemporaryStatusInfluence(__Me, CONSUME, 1, "AMER_InvisHit", 0)
+		//CharacterConsume(__Me, "AMER_InvisHit")
+		
+		IF "!c1"
+			IsInCombat(__Me)
+		THEN
+			//If out of combat, look for enemy Hawkeyes to detect me.
+			SetVar(__Me, "AMER_ReverseDetect", INT:1)
+			IterateCharactersNear(__Me, 20.0, "AMER_DetectInvis")
+			SetVar(__Me, "AMER_ReverseDetect", INT:0)
+		ENDIF
+	ENDIF
+	
+//Apply the hit buff on gaining these statuses--this way
+//the player will always have the hit buff instantly.
+EVENT OnInvis
+ON
+	OnCharacterStatus(__Me, INVISIBLE)
+ACTIONS
+	IF "!c1"
+		CharacterHasStatus(__Me, CONSUME, "AMER_InvisHit")
+	THEN
+		AddStatusInfluence(__Me, CONSUME, 1, "AMER_InvisHit", 0)
+		AddStatusInfluence(__Me, CONSUME, 1, "AMER_GuerrillaDamage", 0)
+	ENDIF
+	//CharacterConsume(__Me, "AMER_InvisHit")
+	
+EVENT OnSneak
+ON
+	OnCharacterStatus(__Me, SNEAKING)
+ACTIONS
+	IF "!c1"
+		CharacterHasStatus(__Me, CONSUME, "AMER_InvisHit")
+	THEN
+		AddStatusInfluence(__Me, CONSUME, 1, "AMER_InvisHit", 0)
+	ENDIF
+	//CharacterConsume(__Me, "AMER_InvisHit")
+	
+	IF "c1"
+		CharacterHasStatus(__Me, CONSUME, UrgeToSneak)
+	THEN
+		CharacterConsume(__Me, SneakingDamageBuff)
+	ENDIF
+	
+//Delaying the loss of this buff is why this method solves the
+//incorrect base game behavior; for slow skills, the buff should
+//still be active on the player when the skill actually strikes.
+EVENT InvisBroke
+ON
+	OnCharacterStatusRemoved(__Me, INVISIBLE)
+ACTIONS
+	StartTimer("AMER_RemoveInvisHitBonus", 1.0, 0)
+	
+	
+EVENT SneakingBroke
+ON
+	OnCharacterStatusRemoved(__Me, SNEAKING)
+ACTIONS
+	StartTimer("AMER_RemoveInvisHitBonus", 1.0, 0)
+	
+EVENT RemoveInvisHitBonus
+ON
+	OnTimer("AMER_RemoveInvisHitBonus")
+ACTIONS
+	RemoveStatusInfluence(__Me, CONSUME, 1, "AMER_InvisHit", 0)
+	RemoveStatusInfluence(__Me, CONSUME, 1, "AMER_GuerrillaDamage", 0)
+	//CharacterConsume(__Me, "AMER_RemoveInvisHit")
+	
+	//Remove item affix damage bonus.
+	IF "c1"
+		CharacterHasStatus(__Me, CONSUME, SneakingDamageBuff)
+	THEN
+		CharacterConsume(__Me, SneakingDamageBuffRemoved)
+	ENDIF
+	
+	
+	
+//===========================================================//
+//                 Out of Combat Healing                     //
+//===========================================================//
+EVENT BeginOoCHealing
+VARS
+//============================//
+	FLOAT:_OoCHealingTickTime = 0.35
+//============================//
+	FLOAT:_Vitality
+ON
+	OnFunction("AMER_BeginOoCHealing")
+ACTIONS
+	IF "!c1"
+		IsInCombat(__Me)
+	THEN
+		IF "c1&c2"
+			CharacterGetStat(_Vitality, __Me, Vitality)
+			IsLessThen(_Vitality, 1.0)
+		THEN
+			//Out of Combat healing starts a timer when Vitality changes.
+			//The timer counts up to a designated amount of "ticks"
+			//before healing begins. Every time vitality is lowered the
+			//"tick" counter resets. If the character is ever brought
+			//to 100% vitality the timer stops, setting the tick
+			//counter to -1.
+			IF "c1"
+				IsEqual(%AMER_OoCHealingTicks, INT:-1)
+			THEN
+				Set(%AMER_OoCHealingTicks, INT:0)
+				StartTimer("AMER_OoCHealing", _OoCHealingTickTime, -1)
+			ENDIF
+		ENDIF
+		
+		//Set(%AMER_OoCPreviousVitality, _Vitality)
+	ENDIF
+	
+	
+	
+EVENT OoCHealing
+VARS
+//============================//
+	FLOAT:_HealPerTick = 0.08
+	//INT:_TicksBeforeHeal = 24
+	INT:_TicksToHeal = 30
+//============================//
+	FLOAT:_Vitality
+ON
+	OnTimer("AMER_OoCHealing")
+ACTIONS
+	IF "c1"
+		CharacterGetStat(_Vitality, __Me, Vitality)
+	THEN
+		//Check if any party members are in combat.
+		Set(%AMER_PartyInCombat, INT:0)
+		IterateParty("AMER_OoCIterateForCombat", null, null, __Me)
+		IF "c1&!c2"
+			IsEqual(%AMER_PartyInCombat, INT:0)
+			CharacterIsDead(__Me)
+		THEN
+			//Reset the timer if I lose control of my character.
+			IF "!c1&!c2&!c3&!c4&!c5&!c6&!c7"
+				CharacterHasStatus(__Me, KNOCKED_DOWN)
+				CharacterHasStatus(__Me, FROZEN)
+				CharacterHasStatus(__Me, STUNNED)
+				CharacterHasStatus(__Me, FEAR)
+				CharacterHasStatus(__Me, PETRIFIED)
+				CharacterHasStatus(__Me, CHARMED)
+				CharacterHasStatus(__Me, DECAYING_TOUCH)
+			THEN
+				IF "!c1"
+					IsLessThen(%AMER_OoCHealingTicks, _TicksToHeal)
+				THEN
+					Add(_Vitality, _HealPerTick)
+					SetHealth(__Me, _Vitality)
+				ELSE
+					Add(%AMER_OoCHealingTicks, INT:1)
+					
+					//Play special effect once when the healing begins.
+					IF "c1"
+						IsEqual(%AMER_OoCHealingTicks, _TicksToHeal)
+					THEN
+						//Clue the player in to what's happening with a buff icon.
+						IF "!c1"
+							CharacterHasStatus(__Me, CONSUME, "AMER_OoCHealing")
+						THEN
+							AddStatusInfluence(__Me, CONSUME, 1, "AMER_OoCHealing", 0)
+						ENDIF
+						
+						CharacterPlayEffect(__Me, "FX_GP_Regenerate")
+					ENDIF
+				ENDIF
+			ELSE
+				Set(%AMER_OoCHealingTicks, INT:0)
+				IF "c1"
+					CharacterHasStatus(__Me, CONSUME, "AMER_OoCHealing")
+				THEN
+					RemoveStatusInfluence(__Me, CONSUME, 1, "AMER_OoCHealing", 0)
+				ENDIF
+			ENDIF
+			
+			IF "!c1"
+				IsLessThen(_Vitality, 1.0)
+			THEN
+				Set(%AMER_OoCHealingTicks, INT:-1)
+				StopTimer("AMER_OoCHealing")
+				RemoveStatusInfluence(__Me, CONSUME, 1, "AMER_OoCHealing", 0)
+			ENDIF
+		ELSE
+			Set(%AMER_OoCHealingTicks, INT:-1)
+			StopTimer("AMER_OoCHealing")
+			RemoveStatusInfluence(__Me, CONSUME, 1, "AMER_OoCHealing", 0)
+		ENDIF
+	ENDIF
+	
+	
+	
+EVENT OoCIterateForCombat
+VARS
+	CHARACTER:_Char
+ON
+	OnIterateCharacter(_Char, "AMER_OoCIterateForCombat")
+ACTIONS
+	IF "c1"
+		IsInCombat(_Char)
+	THEN
+		Set(%AMER_PartyInCombat, INT:1)
+	ENDIF
+	
+	
+	
+	
+//===========================================================//
+//                  Simulate Blindness                       //
+//===========================================================//	
+//If the player is in combat and is blind, then simulate blindness.
+EVENT CheckBlind
+VARS
+	CHARACTER:_Char
+ON
+	OnFunction("AMER_CheckBlind")
+ACTIONS
+	IF "c1&c2"
+		CharacterIsInActiveTurn(__Me)
+		CharacterHasStatus(__Me, BLIND)
+	THEN
+		Set(%AMER_BlindThisTurn, INT:1)
+		IterateCharactersInCombat(__Me, "AMER_SimulateBlindness")
+	ENDIF
+	
+//Iterator which sets characters to be invisible if they are too
+//far away during the blind player's turn. _BlindVision is the
+//maximum "inner distance" allowed between the blind player and
+//another character before they become invisible.
+EVENT SimulateBlindness
+VARS
+//============================//
+	FLOAT:_BlindVision = 1.35
+//============================//
+	CHARACTER:_Char
+	FLOAT:_Distance
+	INT:_InvisibleFromBlind
+ON
+	OnIterateCharacter(_Char, "AMER_SimulateBlindness")
+ACTIONS
+	IF "c1&c2"
+		GetInnerDistance(_Distance, __Me, _Char)
+		IsGreaterThen(_Distance, _BlindVision)
+	THEN
+		IF "c1&c2"
+			//We don't use _InvisibleFromBlind in this context, but we check
+			//if the variable exists so we don't break characters who are
+			//missing Epic Encounters' scripting.
+			GetVar(_InvisibleFromBlind, _Char, "AMER_InvisibleFromBlind")
+			IsVisible(_Char)
+		THEN
+			SetVar(_Char, "AMER_InvisibleFromBlind", INT:1)
+			SetVisible(_Char, INT:0)
+		ENDIF
+	ELIF "!c1"
+		IsVisible(_Char)
+	THEN
+		IF "c1&c2"
+			GetVar(_InvisibleFromBlind, _Char, "AMER_InvisibleFromBlind")
+			IsEqual(_InvisibleFromBlind, INT:1)
+		THEN
+			SetVar(_Char, "AMER_InvisibleFromBlind", INT:0)
+			SetVisible(_Char, INT:1)
+		ENDIF
+	ENDIF
+	
+//If blindness is removed from the player during her turn, then
+//run the iterator to set characters to visible
+EVENT LostBlindness
+ON
+	OnCharacterStatusRemoved(__Me, BLIND)
+ACTIONS
+	IF "c1"
+		CharacterIsInActiveTurn(__Me)
+	THEN
+		IterateCharactersInCombat(__Me, "AMER_RemoveSimulatedBlindness")
+	ENDIF
+	
+//Iterator that sets characters to be visible.
+EVENT RemoveSimulatedBlindness
+VARS
+	CHARACTER:_Char
+	INT:_InvisibleFromBlind
+ON
+	OnIterateCharacter(_Char, "AMER_RemoveSimulatedBlindness")
+ACTIONS
+	IF "!c1"
+		IsVisible(_Char)
+	THEN
+		IF "c1&c2"
+			GetVar(_InvisibleFromBlind, _Char, "AMER_InvisibleFromBlind")
+			IsEqual(_InvisibleFromBlind, INT:1)
+		THEN
+			SetVar(_Char, "AMER_InvisibleFromBlind", INT:0)
+			SetVisible(_Char, INT:1)
+		ENDIF
+	ENDIF
+	
+	
+	
+//===========================================================//
+//                        On Combat                          //
+//                      Inconspicuous                        //
+//===========================================================//	
+EVENT OnPlayerCombatStarted
+ON
+	OnCombatStarted()
+ACTIONS
+	Set(%AMER_OverchargeUsed, INT:0)
+	
+	IF "c1"
+		CharacterHasTalent(__Me, Stench)
+	THEN
+		IF "!c1&!c2"
+			CharacterHasStatus(__Me, SNEAKING)
+			CharacterHasStatus(__Me, INVISIBLE)
+		THEN
+			CharacterApplyStatus(__Me, SNEAKING)
+		ENDIF
+	ENDIF
+	
+	
+	
+//===========================================================//
+//                     Limit Resistance                      //
+//===========================================================//
+// Ideally, this would be one large function, but the scripting language
+// imposes a 100 action limit per function execution, so it is separated
+// into three functions. I have taken care to limit the actions called
+// to what I think are the bare necessities for this functionality. The
+// final result is that any amount of resistance up to an excess of
+// 511 can be limited to whatever the maximum should be.
+	
+EVENT LimitResists
+VARS
+//==================================//
+	INT:_SupportedResistances = 9
+	INT:_MaxAmountIndex = 9		//An excess of up to 511 resistance can be handled.
+//==================================//
+	FLOAT:_Res
+	INT:_Count
+	INT:_LimitedRes
+	FIXEDSTRING:_WhichEffect
+	FIXEDSTRING:_Var
+	STRING:_Str
+ON
+	OnFunction("AMER_LimitResists")
+ACTIONS
+	IF "c1"
+		//Don't try to limit resistances while the fixing
+		//procedure is running. This is done on reloading a save.
+		IsEqual(%AMER_ResFixDone, INT:2)
+	THEN
+		Print(_Str, "AMER_[1]ResLimited", %AMER_ResString)
+		Cast(_Var, _Str)
+		IF "!c1"
+			GetVar(_LimitedRes, __Me, _Var)
+		THEN
+			RETURN
+		ENDIF
+		
+		Print(_Str, "AMER_Max[1]Res", %AMER_ResString)
+		Cast(_Var, _Str)
+		IF "!c1"
+			GetVar(%AMER_MaxRes, __Me, _Var)
+		THEN
+			RETURN
+		ENDIF
+		//Check if an override is in play, else find my normal
+		//maximum resistance. This is currently only used for
+		//Fossilize and Invulnerability, but if it is necessary,
+		//this can be changed to use Print to acquire an override
+		//for any resistance.
+		IF "c1"
+			IsGreaterThen(%AMER_AllResOverride, %AMER_MaxRes)
+		THEN
+			Set(%AMER_MaxRes, %AMER_AllResOverride)
+		ENDIF
+		
+		//Check if resists need to be limited.
+		IF "c1"
+			CharacterGetStat(_Res, __Me, %AMER_ResType)
+		THEN
+			IF "c1|c2"
+				IsGreaterThen(_Res, %AMER_MaxRes)
+				IsGreaterThen(_LimitedRes, INT:0)
+			THEN
+				Add(_Res, _LimitedRes)
+				//Calculate amount of resist to remove.
+				Subtract(_Res, %AMER_MaxRes)
+				Cast(%AMER_ResDifference, _Res)
+				
+				//Construct the ResLimited string and record the new limited amount.
+				Print(_Str, "AMER_[1]ResLimited", %AMER_ResString)
+				Cast(_Var, _Str)
+				IF "c1"
+					IsLessThen(%AMER_ResDifference, INT:0)
+				THEN
+					SetVar(__Me, _Var, INT:0)
+				ELSE
+					SetVar(__Me, _Var, %AMER_ResDifference)
+				ENDIF
+				
+				Set(_Count, INT:0)
+				WHILE "c1"//&c2"
+					IsLessThen(_Count, _MaxAmountIndex)
+					//IsGreaterThen(%AMER_ResDifference, INT:0)
+				DO
+					GetElement(%AMER_ResValue, _Count, INT:256, INT:128, INT:64, INT:32, INT:16, INT:8, INT:4, INT:2, INT:1)
+					//IF "!c1"
+					//	IsLessThen(%AMER_ResDifference, %AMER_ResValue)
+					//THEN
+						CallFunction("AMER_ApplyResLimit")
+					//	Subtract(%AMER_ResDifference, %AMER_ResValue)
+					//ENDIF
+					Add(_Count, INT:1)
+				ENDWHILE
+			ENDIF
+		ENDIF
+	ENDIF
+	
+EVENT ApplyResLimit
+//Having AMER_LimitResists call this function within its main loop
+//prevents breaking the action limit.
+VARS
+	STRING:_Str
+	FIXEDSTRING:_WhichEffect
+ON
+	OnFunction("AMER_ApplyResLimit")
+ACTIONS
+	//Construct the appropriate consume effect's string, then apply it.
+	Print(_Str, "AMER_RES_[1][2]", %AMER_ResString, %AMER_ResValue)
+	Cast(_WhichEffect, _Str)
+	//AddTemporaryStatusInfluence(__Me, CONSUME, 1, _WhichEffect, 0)
+	IF "!c1"
+		IsLessThen(%AMER_ResDifference, %AMER_ResValue)
+	THEN
+		IF "!c1"
+			CharacterHasStatus(__Me, CONSUME, _WhichEffect)
+		THEN
+			AddStatusInfluence(__Me, CONSUME, 1, _WhichEffect, 0)
+		ENDIF
+		Subtract(%AMER_ResDifference, %AMER_ResValue)
+	ELIF "c1"
+		CharacterHasStatus(__Me, CONSUME, _WhichEffect)
+	THEN
+		RemoveStatusInfluence(__Me, CONSUME, 1, _WhichEffect, 0)
+	ENDIF
+	
+EVENT RecalculateMaxResists
+//Because nothing ever works the way it's supposed to--call this
+//to recalculate a player's maximum resistances. If new effects
+//that directly modify maximum resistance variables are ever
+//introduced, this function needs to be updated.
+VARS
+	FLOAT:_Res
+	FLOAT:_SpecificRes
+	INT:_Ability
+ON
+	OnFunction("AMER_RecalculateMaxResists")
+ACTIONS
+	//Base Maximum resistance is 75.
+	Set(_Res, 75.0)
+	
+	//Iron Hide adds +1% per Soldier.
+	IF "c1"
+		CharacterHasTalent(__Me, WarriorLoreNaturalResistance)
+	THEN
+		IF "c1&c2"
+			CharacterGetAbility(_Ability, __Me, WarriorLore)
+			IsGreaterThen(_Ability, INT:0)
+		THEN
+			Multiply(_Ability, INT:1)
+			Add(_Res, _Ability)
+		ENDIF
+	ENDIF
+	
+	//Physique adds +1% per point, +2% per point >5.
+	IF "c1&c2"
+		CharacterGetAbility(_Ability, __Me, ArmorMastery)
+		IsGreaterThen(_Ability, INT:0)
+	THEN
+		IF "c1"
+			IsGreaterThen(_Ability, INT:5)
+		THEN
+			Add(_Res, INT:5)
+			Subtract(_Ability, INT:5)
+			Multiply(_Ability, INT:2)
+			Add(_Res, _Ability)
+		ENDIF
+		Multiply(_Ability, INT:1)
+		Add(_Res, _Ability)
+	ENDIF
+	
+	//F I R E
+	//Rage of the Phoenix adds +25%.
+	Set(_SpecificRes, _Res)
+	IF "c1"
+		CharacterHasStatus(__Me, CONSUME, "AMER_RageOfThePhoenix")
+	THEN
+		Add(_SpecificRes, 25.0)
+	ENDIF
+	//Demon adds +10%.
+	IF "c1"
+		CharacterHasTalent(__Me, Demon)
+	THEN
+		Add(_SpecificRes, 10.0)
+	ENDIF
+	Set(%AMER_MaxFireRes, _SpecificRes)
+	
+	//W A T E R
+	//Angel adds +10%.
+	Set(_SpecificRes, _Res)
+	IF "c1"
+		CharacterHasTalent(__Me, IceKing)
+	THEN
+		Add(_SpecificRes, 10.0)
+	ENDIF
+	Set(%AMER_MaxWaterRes, _SpecificRes)
+	
+	//P O I S O N
+	//Zombie adds +300%.
+	Set(_SpecificRes, _Res)
+	IF "c1"
+		CharacterHasTalent(__Me, Zombie)
+	THEN
+		Set(%AMER_PoisonResLimited, INT:0)
+		Add(_SpecificRes, 300.0)
+		//StartTimer("AMER_FixPoisonRes", 0.5, -1)
+	ENDIF
+	Set(%AMER_MaxPoisonRes, _SpecificRes)
+	
+	//S H A D O W
+	//Tenebrium adds +1% per point, +2% per point >5.
+	Set(_SpecificRes, _Res)
+	IF "c1&c2"
+		CharacterGetAbility(_Ability, __Me, Blackrock)
+		IsGreaterThen(_Ability, INT:0)
+	THEN
+		IF "c1"
+			IsGreaterThen(_Ability, INT:5)
+		THEN
+			Add(_SpecificRes, INT:5)
+			Subtract(_Ability, INT:5)
+			Multiply(_Ability, INT:2)
+			Add(_SpecificRes, _Ability)
+		ENDIF
+		Multiply(_Ability, INT:1)
+		Add(_SpecificRes, _Ability)
+	ENDIF
+	Set(%AMER_MaxShadowRes, _SpecificRes)
+	
+	Set(_SpecificRes, _Res)
+	Set(%AMER_MaxAirRes, _SpecificRes)
+	Set(%AMER_MaxEarthRes, _SpecificRes)
+	Set(%AMER_MaxPiercingRes, _SpecificRes)
+	Set(%AMER_MaxSlashingRes, _SpecificRes)
+	Set(%AMER_MaxCrushingRes, _SpecificRes)
+	
+	//Antediluvian grants +5% to non-physical max resistances.
+	IF "c1"
+		CharacterHasStatus(__Me, CONSUME, "AMER_UNI_Antediluvian")
+	THEN
+		Add(%AMER_MaxFireRes, 5.0)
+		Add(%AMER_MaxWaterRes, 5.0)
+		Add(%AMER_MaxAirRes, 5.0)
+		Add(%AMER_MaxEarthRes, 5.0)
+		Add(%AMER_MaxPoisonRes, 5.0)
+		Add(%AMER_MaxShadowRes, 5.0)
+	ENDIF
+	
+	//Remove any res limiter effects, because stuff doesn't
+	//ever work correctly. Flag Limiter system to wait.
+	Set(%AMER_ResFixDone, INT:0)
+	StartTimer("AMER_FixMaxResControl", 0.5, -1)
+	
+	
+	
+EVENT FixMaxResControl
+VARS
+	INT:_Count
+ON
+	OnTimer("AMER_FixMaxResControl")
+ACTIONS
+	IF "c1"
+		IsEqual(%AMER_ResFixDone, INT:1)	//If no limiters were found, then we're done.
+	THEN
+		StopTimer("AMER_FixMaxResControl")
+		Set(%AMER_ResFixDone, INT:2)	//2 lets the resistance limiter system resume.
+	ELSE
+		Set(%AMER_ResFixDone, INT:1)
+		Set(_Count, INT:0)
+		WHILE "c1"
+			IsLessThen(_Count, 9)
+		DO
+			GetElement(%AMER_ResToFix, _Count, "Fire", "Water", "Air", "Earth", "Poison", "Shadow", "Piercing", "Slashing", "Crushing")
+			CallFunction("AMER_FixMaxRes")
+			Add(_Count, INT:1)
+		ENDWHILE
+	ENDIF
+	
+	
+	
+EVENT FixMaxRes
+VARS
+	INT:_Count
+	INT:_Value
+	STRING:_Str
+	FIXEDSTRING:_WhichEffect
+ON
+	OnFunction("AMER_FixMaxRes")
+ACTIONS
+	Set(_Count, INT:0)
+	WHILE "c1"
+		IsLessThen(_Count, 9)
+	DO
+		GetElement(_Value, _Count, INT:256, INT:128, INT:64, INT:32, INT:16, INT:8, INT:4, INT:2, INT:1)
+		Print(_Str, "AMER_RES_[1][2]", %AMER_ResToFix, _Value)
+		Cast(_WhichEffect, _Str)
+		IF "c1"
+			CharacterHasStatus(__Me, CONSUME, _WhichEffect)
+		THEN
+			RemoveStatusInfluence(__Me, CONSUME, 1, _WhichEffect, 0)
+			Set(%AMER_ResFixDone, INT:0)	//If a limiter was found, flag to continue this procedure.
+		ENDIF
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+	
+	
+//===========================================================//
+//                   Game Loaded Failsafes                   //
+//===========================================================//
+EVENT PlayerOnLoadFixes
+ON
+	OnFunction("AMER_OnLoadFixes")
+ACTIONS
+	//This is set here to allow users to modify this value
+	//during a game that has already begun.
+	//Set to 1 to enable OoC Healing, 0 to disable.
+	Set(%AMER_OoCHealingEnabled, INT:1)
+	
+	//Recalculate player's maximum resistances and fix it if 
+	//it's broken. Apparently sometimes the OnTalentUnlocked()
+	//events don't fire.
+	//Set(%AMER_ResFixDone, INT:0)
+	//CallFunction("AMER_RecalculateMaxResists")
+	
+	//Attempt to remove lingering Overcharge icons.
+	IF "!c1"
+		IsInCombat(__Me)
+	THEN
+		IF "c1"
+			CharacterHasTalent(__Me, WandCharge)
+		THEN
+			RemoveStatusInfluence(__Me, CONSUME, 1, "AMER_Overcharge1", 0)
+			RemoveStatusInfluence(__Me, CONSUME, 1, "AMER_Overcharge2", 0)
+			RemoveStatusInfluence(__Me, CONSUME, 1, "AMER_Overcharge3", 0)
+			RemoveStatusInfluence(__Me, CONSUME, 1, "AMER_Overcharge4", 0)
+		ENDIF
+	ENDIF
+	
+	//Patch 1.1.8: Had a bug report of lingering Machinist benefit after respec.
+	//This probably means that any of the talent benefits have a chance of lingering.
+	//Patch 1.1.9: Turned Machinist into Alchemist anyway, so remove this buff.
+	IF "c1"
+		CharacterHasStatus(__Me, CONSUME, "AMER_MachinistCrafting")
+	THEN
+		IF "!c1"
+			CharacterHasTalent(__Me, WarriorLoreGrenadeRange)
+		THEN
+			RemoveStatusInfluence(__Me, CONSUME, 1, "AMER_MachinistCrafting",0)
+		ENDIF
+	ENDIF
+	
+	//Patch 1.1.9: Added effects to these talents, add them manually for saved games.
+	IF "c1"
+		CharacterHasTalent(__Me, RogueLoreGrenadePrecision)
+	THEN
+		IF "!c1"
+			CharacterHasStatus(__Me, CONSUME, "AMER_PinpointCrit")
+		THEN
+			AddStatusInfluence(__Me, CONSUME, 1, "AMER_PinpointCrit", 0)
+		ENDIF
+	ENDIF
+	IF "c1"
+		CharacterHasTalent(__Me, DualWieldingBlock)
+	THEN
+		IF "!c1"
+			CharacterHasStatus(__Me, CONSUME, "AMER_ParryMasterDefense")
+		THEN
+			AddStatusInfluence(__Me, CONSUME, 1, "AMER_ParryMasterDefense", 0)
+		ENDIF
+	ENDIF
+	
+	//Patch 1.1.9: Discover lingering vanilla essences/souls and replace them.
+	//This is done via timer because players may have many of these to replace.
+	//As a result, it is necessary to work around the 100 actions/frame limit.
+	//StartTimer("AMER_FixIngredients", 0.7, -1)
+	
+	
+	
+EVENT FixDepreciatedIngredients
+VARS
+	ITEM:_Item
+	FLOAT:_Value
+	INT:_Stacksize
+	INT:_Count
+	INT:_Repeat
+	INT:_Iterations
+	FIXEDSTRING:_OldStat
+	FIXEDSTRING:_NewStat
+ON
+	OnTimer("AMER_FixIngredients")
+ACTIONS
+	//Patch 1.1.9: Discover lingering vanilla essences/souls and replace them.
+	Set(_Count, INT:0)
+	Set(_Iterations, INT:0)
+	WHILE "c1"
+		IsLessThen(_Count, INT:6)
+	DO
+		GetElement(_OldStat, _Count, "LOOT_Essence_Fire_A", "LOOT_Essence_Water_A", "LOOT_Essence_Earth_A", "LOOT_Essence_Air_A", "LOOT_Essence_Shadow_A", "LOOT_Soul_Tormented_A")
+		
+		Set(_Repeat, INT:1)
+		WHILE "c1&c2"
+			ItemGetFromInventory(_Item, __Me, _OldStat)
+			IsEqual(_Repeat, 1)
+		DO
+			IF "c1"
+				ItemGetStat(_Value, _Item, Value)
+			THEN
+				//Set(_Repeat, INT:1)
+				Add(_Iterations, INT:1)
+				//ItemTeleportTo(_Item, __Me)
+				//ItemDestroy(_Item)
+				IF "c1"
+					IsEqual(_Count, INT:5)
+				THEN
+					Divide(_Value, 394.0)
+				ELSE
+					Divide(_Value, 250.0)
+				ENDIF
+				Cast(_Stacksize, _Value)
+				
+				CharacterRemoveFromInventory(__Me, _OldStat, _Stacksize)
+				
+				GetElement(_NewStat, _Count, "AMER_LOOT_Essence_Fire_A", "AMER_LOOT_Essence_Water_A", "AMER_LOOT_Essence_Earth_A", "AMER_LOOT_Essence_Air_A", "AMER_LOOT_Essence_Shadow_A", "AMER_LOOT_Soul_Tormented_A")
+				CharacterAddToInventory(__Me, _NewStat, _Stacksize)
+					
+				//Avoid hitting the action limit if too many
+				//iterations were executed. The timer will fire
+				//another execution of this routine to finish.
+				IF "c1"
+					IsGreaterThen(_Iterations, INT:8)
+				THEN
+					//Flag for exit.
+					Set(_Repeat, INT:0)
+					Set(_Count, INT:6)
+				ENDIF
+			ENDIF
+		ENDWHILE
+		
+		Add(_Count, INT:1)
+	ENDWHILE
+	
+	//If no items to fix were found during this
+	//execution, it is safe to terminate the timer.
+	IF "c1"
+		IsEqual(_Iterations, INT:0)
+	THEN
+		StopTimer("AMER_FixIngredients")
+	ENDIF
+//=================================================//
+//                                                 //
+// P L A Y E R   F E A T U R E   F U N C T I O N S //
+//                                                 //
+//=================================================//

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<save>
+    <header version="2" time="1427201041" />
+    <version major="1" minor="3" revision="1" build="3" />
+    <region id="CharacterCreationClass">
+        <node id="root">
+            <attribute id="Armour" value="" type="22" />
+            <attribute id="Boots" value="" type="22" />
+            <attribute id="ClassDescription" value="Conjurer of parlour tricks and purveyor of mystery" handle="h887ed797gc75dg4e31g8043g6dbf54d2a23b" type="28" />
+            <attribute id="ClassLongDescription" value="Explodo is an odd little fellow, best-known around town for his odd little magic tricks, like moving small objects across tables and reshaping small rocks with his hands. He looks perfectly harmless with his bright orange hair and beard. Rumour has it that the last town he was in mysteriously burnt down over night. As you look at him you catch a glimpse of something in his eye. Fire, fire brighter than the sun and shadows darker than the blackest night. Its there for a second and gone again." handle="hfcbfb597g5509g42a0g896fg4bb6cb089802" type="28" />
+            <attribute id="ClassName" value="Wizard" handle="h6ed659b3g1890g402bg848cg3a960d04efe2" type="28" />
+            <attribute id="ClassType" value="Wizard" type="22" />
+            <attribute id="ExtraEquipmentSet" value="" type="22" />
+            <attribute id="Gloves" value="" type="22" />
+            <attribute id="Leggings" value="" type="22" />
+            <attribute id="SkillSet" value="" type="22" />
+            <attribute id="Voice" value="0" type="5" />
+            <children>
+                <node id="AbilityChanges">
+                    <children>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="Telekinesis" type="23" />
+                            <attribute id="AmountIncreased" value="1" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="FireSpecialist" type="23" />
+                            <attribute id="AmountIncreased" value="3" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="AirSpecialist" type="23" />
+                            <attribute id="AmountIncreased" value="1" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="EarthSpecialist" type="23" />
+                            <attribute id="AmountIncreased" value="1" type="4" />
+                        </node>
+                    </children>
+                </node>
+                <node id="AttributeChanges">
+                    <children>
+                        <node id="AttributeChange">
+                            <attribute id="AmountIncreased" value="5" type="4" />
+                            <attribute id="Attribute" value="INT" type="23" />
+                        </node>
+                        <node id="AttributeChange">
+                            <attribute id="AmountIncreased" value="1" type="4" />
+                            <attribute id="Attribute" value="CON" type="23" />
+                        </node>
+                        <node id="AttributeChange">
+                            <attribute id="AmountIncreased" value="1" type="4" />
+                            <attribute id="Attribute" value="PER" type="23" />
+                        </node>
+                    </children>
+                </node>
+                <node id="HenchManData">
+                    <attribute id="HairColor" value="5" type="5" />
+                    <attribute id="HairType" value="3" type="5" />
+                    <attribute id="HeadType" value="0" type="5" />
+                    <attribute id="ID" value="b76c3c5f-2c7d-41d3-85ee-7be44c166d80" type="22" />
+                    <attribute id="Icon" value="15" type="5" />
+                    <attribute id="IsMale" value="1" type="19" />
+                    <attribute id="Level" value="5" type="4" />
+                    <attribute id="Name" value="Explodo the Mystical" type="30" />
+                    <attribute id="Race" value="0" type="5" />
+                    <attribute id="SkinColor" value="5" type="5" />
+                    <children>
+                        <node id="Skills">
+                            <attribute id="Object" value="Target_TargetedPerception" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="Projectile_PoisonDartStart" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="Target_BurningTouch" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="Target_Haste" type="22" />
+                        </node>
+                        <node id="Skills">
+                            <attribute id="Object" value="Target_TargetedOilSurface" type="22" />
+                        </node>
+                    </children>
+                </node>
+                <node id="TalentsAdded">
+                    <children>
+                        <node id="TalentAdded">
+                            <attribute id="Talent" value="MrKnowItAll" type="23" />
+                        </node>
+                        <node id="TalentAdded">
+                            <attribute id="Talent" value="WhatARush" type="23" />
+                        </node>
+                        <node id="TalentAdded">
+                            <attribute id="Talent" value="FaroutDude" type="23" />
+                        </node>
+                    </children>
+                </node>
+            </children>
+        </node>
+    </region>
+</save>

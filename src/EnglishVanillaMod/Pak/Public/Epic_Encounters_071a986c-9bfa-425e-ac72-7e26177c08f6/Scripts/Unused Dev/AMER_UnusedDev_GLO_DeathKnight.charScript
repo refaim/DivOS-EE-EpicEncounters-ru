@@ -1,0 +1,91 @@
+INIT
+	CHARACTER:__Me	INT:%Counter = 0
+	INT:%AMER_DK_ConsumeHandled = 0
+//--------
+EVENTSEVENT DKInitialization
+ON
+	OnInit()
+ACTIONS
+	//Remove old Invulnerability status from saved games.
+	IF "c1"
+		CharacterHasStatus(__Me, INVULNERABLE)
+	THEN
+		CharacterRemoveStatus(__Me, INVULNERABLE)
+	ENDIF
+	
+	IF "!c1"
+		CharacterHasStatus(__Me, CONSUME, AMER_VoidRegeneration)
+	THEN
+		AddStatusInfluence(__Me, CONSUME, 1, AMER_VoidRegeneration, 0)
+	ENDIF
+	//StartTimer("AMER_DK_ApplyVoidInit", 0.5, 0)
+		
+		
+		
+EVENT DKRedoStatus
+ON
+	OnTurn()
+ACTIONS
+	IF "!c1"
+		CharacterHasStatus(__Me, CONSUME, AMER_VoidRegeneration)
+	THEN
+		Add(%Counter, 1)
+		IF "c1"
+			IsEqual(%Counter, 4)
+		THEN
+			AddStatusInfluence(__Me, CONSUME, 1, AMER_VoidRegeneration, 0)
+			Set(%Counter, 0)
+		ENDIF
+	ENDIF
+	
+	
+	
+EVENT DKVoidRegeneration
+VARS
+	FLOAT:_Damage
+	DAMAGE:_Type
+	CHARACTER:_CharSource
+ON
+	OnDamage(_Type, _Damage, _CharSource, _)
+ACTIONS
+	IF "c1"
+		CharacterHasStatus(__Me, CONSUME, AMER_VoidRegeneration)
+	THEN
+		IF "c1"
+			IsGreaterThen(_Damage, 0.0)
+		THEN
+			CharacterHeal(__Me, _Damage)
+		ENDIF
+	ENDIF
+	
+	
+	
+EVENT DKConsumeHook
+ON
+	OnCharacterStatus(__Me, CONSUME)
+ACTIONS
+	IF "c1"
+		IsEqual(%AMER_DK_ConsumeHandled, INT:0)
+	THEN
+		IF "c1"
+			CharacterHasStatus(__Me, CONSUME, AMER_VoidRemoval)
+		THEN
+			Set(%AMER_DK_ConsumeHandled, 1)
+			StartTimer("AMER_DK_ResetConsumeChoke", 0.8, 0)
+			CharacterConsume(__Me, AMER_RemoveVoidRemoval)
+			RemoveStatusInfluence(__Me, CONSUME, 1, AMER_VoidRegeneration, 0)
+		ENDIF
+	ENDIF
+	
+	
+	
+EVENT DKResetConsumeChoke
+ON
+	OnTimer("AMER_DK_ResetConsumeChoke")
+ACTIONS
+	Set(%AMER_DK_ConsumeHandled, INT:0)
+	
+	
+	
+	
+	

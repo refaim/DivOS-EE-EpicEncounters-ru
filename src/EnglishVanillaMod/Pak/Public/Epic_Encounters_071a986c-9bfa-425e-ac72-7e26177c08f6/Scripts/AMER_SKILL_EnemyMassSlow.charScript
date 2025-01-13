@@ -1,0 +1,91 @@
+#TEMPLATE "_SKILL_Base" : Shout_EnemySlowMass
+
+INIT
+CHARACTER:__Me
+// [GLOBAL_VARS]
+INT:%Shout_EnemySlowMass_PreAffectedTargets
+// [~GLOBAL_VARS]
+
+EVENTS
+
+// [EVENTS]
+// [~EVENTS]
+
+// Calculate the priority of the skill
+EVENT CalculateScore_Shout_EnemySlowMass
+VARS
+	// [CALC_VARS]
+	FLOAT:_SkillRangeMin
+	FLOAT:_SkillRangeMax
+	FLOAT:_SkillImpactRange
+	FLOAT3:_TargetPos
+	// [~CALC_VARS]
+ON
+	OnFunction("CalculateScore_Shout_EnemySlowMass")
+ACTIONS
+
+	// [CALC_ACTIONS_PRE]
+	// [~CALC_ACTIONS_PRE]
+	// [CALC_ACTIONS]
+	
+	//Check if there are any non-summons unaffected by this debuff. If some are,
+	//just cast it on the closest non-summon.
+	Set(%Shout_EnemySlowMass_PreAffectedTargets, INT:0)
+	IterateCharactersInCombat(__Me, "Shout_EnemySlowMass_CheckForReapply", Highest, Distance)
+	
+	//If no non-summons were affected by this debuff, cast it wherever there are the most targets affected.
+	IF "c1&c2&c3"
+	    CharacterGetSkillRange(_SkillRangeMin, _SkillRangeMax, __Me, Shout_EnemySlowMass) // c1
+	    CharacterGetSkillImpactRange(_SkillImpactRange, __Me, Shout_EnemySlowMass) // c2
+		IsEqual(%Shout_EnemySlowMass_PreAffectedTargets, INT:0)
+	THEN
+		IF "c1"
+			FindPosition(_TargetPos, __Me, _SkillRangeMax, _SkillImpactRange, __Me, -1, -1, 4, -1) // c3
+		THEN
+		    Set(%SkillTargetPos_Shout_EnemySlowMass, _TargetPos)
+		    Add(%ActionScore_Shout_EnemySlowMass, 20.0)
+		ELIF "c1"
+			FindPosition(_TargetPos, __Me, _SkillRangeMax, _SkillImpactRange, __Me, -1, -1, 3, -1) // c3
+		THEN
+		    Set(%SkillTargetPos_Shout_EnemySlowMass, _TargetPos)
+		    Add(%ActionScore_Shout_EnemySlowMass, 20.0)
+		ELIF "c1"
+			FindPosition(_TargetPos, __Me, _SkillRangeMax, _SkillImpactRange, __Me, -1, -1, 2, -1) // c3
+		THEN
+		    Set(%SkillTargetPos_Shout_EnemySlowMass, _TargetPos)
+		    Add(%ActionScore_Shout_EnemySlowMass, 20.0)
+		ENDIF
+	ENDIF
+	// [~CALC_ACTIONS]
+	
+	
+EVENT Shout_EnemySlowMass_CheckForReapply
+VARS
+	CHARACTER:_Char
+ON
+	OnIterateCharacter(_Char, "Shout_EnemySlowMass_CheckForReapply")
+ACTIONS
+	IF "c1"
+		CharacterIsEnemy(__Me, _Char)
+	THEN
+		IF "c1"
+			CharacterHasStatus(_Char, SLOWED)
+		THEN
+			IF "!c1"
+				CharacterIsSummon(_Char)
+			THEN
+				Set(%Shout_EnemySlowMass_PreAffectedTargets, INT:1)
+			ENDIF
+		ELIF "!c1&c2"
+			CharacterIsSummon(_Char)
+			IsEqual(%Shout_EnemySlowMass_PreAffectedTargets, INT:1)
+		THEN
+			Set(%SkillTargetChar_Shout_EnemySlowMass, _Char)
+		    Set(%ActionScore_Shout_EnemySlowMass, 20.0)
+		ENDIF
+	ENDIF
+	
+	
+	
+	
+	
