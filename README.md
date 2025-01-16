@@ -1,4 +1,4 @@
-Это **частично** переведённый на русский язык мод [Epic Encounters](https://www.nexusmods.com/divinityoriginalsin/mods/103) для игры Divinity: Original Sin - Epic Encounters.
+Это **частично** переведённый на русский язык мод [Epic Encounters](https://www.nexusmods.com/divinityoriginalsin/mods/103) версии 1.1.9.5c для игры Divinity: Original Sin - Epic Encounters.
 
 Перевод основан на [исправленном официальном переводе Divinity: Original Sin - Enhanced Edition](https://github.com/EugVV/DivOS-EE-ru).
 

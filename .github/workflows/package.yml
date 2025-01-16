@@ -10,6 +10,21 @@ on:
 jobs:
   package:
     runs-on: windows-latest
+    strategy:
+      matrix:
+        mod_variant:
+          - name: Default
+            args: ''
+            suffix: ''
+          - name: WithAdditionalCraftingRecipes
+            args: '--with-additional-crafting-recipes'
+          - name: WithoutIncreasedEnemyVitality
+            args: '--without-increased-enemy-vitality'
+        translation_variant:
+          - name: Official
+            args: ''
+          - name: Fixed
+            args: '--with-russian-translation-fixes'
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -20,35 +35,22 @@ jobs:
           python-version: '3.10'
           architecture: x64
 
-      - name: Pack default
+      - name: Pack
         shell: cmd
-        run: ./pack.cmd
+        run: ./pack.cmd ${{ matrix.mod_variant.args }} ${{ matrix.translation_variant.args }}
 
-      - name: Upload default
+      - name: Get filename
+        id: get-filename
+        shell: pwsh
+        run: |
+          $file = Get-ChildItem output\*.pak | Select-Object -First 1
+          if ($file) {
+            echo "FILENAME=$($file.BaseName)" >> $env:GITHUB_OUTPUT
+          }
+
+      - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: EpicEncountersRu_v1.1.9.5c
-          path: output\
-          if-no-files-found: error
-
-      - name: Pack with additional crafting recipes
-        shell: cmd
-        run: ./pack.cmd --with-additional-crafting-recipes
-
-      - name: Upload with additional crafting recipes
-        uses: actions/upload-artifact@v4
-        with:
-          name: EpicEncountersRu_v1.1.9.5c_WithAdditionalCraftingRecipes
-          path: output\
-          if-no-files-found: error
-
-      - name: Pack without increased enemy vitality
-        shell: cmd
-        run: ./pack.cmd --without-increased-enemy-vitality
-
-      - name: Upload without increased enemy vitality
-        uses: actions/upload-artifact@v4
-        with:
-          name: EpicEncountersRu_v1.1.9.5c_WithoutIncreasedEnemyVitality
+          name: ${{ steps.get-filename.outputs.FILENAME }}
           path: output\
           if-no-files-found: error

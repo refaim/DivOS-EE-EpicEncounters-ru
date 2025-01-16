@@ -1005,7 +1005,7 @@ Ln\AMER_SaveValues.lsx;AMER_STATUS_SaveInfoSpecial147;chance to resist: 147% (Sp
 Ln\AMER_SaveValues.lsx;AMER_STATUS_SaveInfoSpecial148;chance to resist: 148% (Special).;шанс защититься: 148% (спец.)
 Ln\AMER_SaveValues.lsx;AMER_STATUS_SaveInfoSpecial149;chance to resist: 149% (Special).;шанс защититься: 149% (спец.)
 Ln\AMER_SaveValues.lsx;AMER_STATUS_SaveInfoSpecial150;chance to resist: 150% (Special).;шанс защититься: 150% (спец.)
-Ln\AMER_Speech.lsx;AMER_CMB_MelchiorCruelty_Turn1;You will suffer! You will *all* suffer!;Вы будете страдать! Все вы будете страдать!
+Ln\AMER_Speech.lsx;AMER_CMB_MelchiorCruelty_Turn1;You will suffer! You will *all* suffer!;Вы будете страдать! *Все* вы будете страдать!
 Ln\AMER_Speech.lsx;AMER_CMB_MelchiorCruelty_Turn2;Kneel before your king!;На колени перед своим королём!
 Ln\AMER_Speech.lsx;AMER_CMB_MelchiorCruelty_Turn3;The bones of the weak pave the road to power.;Кости слабых мостят дорогу к власти.
 Ln\AMER_Speech.lsx;AMER_CMB_MelchiorCruelty_Turn4;TREASON!;ИЗМЕНА!
@@ -1283,9 +1283,9 @@ Ln\AMER_UniqueEffects.lsx;AMER_UNI_Arcturus;"<font color=""c7a758"">Arcturus</fo
 Ln\AMER_UniqueEffects.lsx;AMER_SKILL_UNI_ArcturusStance_DisplayName;Arcturus;Арктур
 Ln\AMER_UniqueEffects.lsx;AMER_SKILL_UNI_ArcturusStance_Description;Opportunist's attack bonuses apply to Centurion retaliations.;Бонусы к атаке от таланта «Оппортунист» применяются к ответным ударам Центуриона.
 Ln\AMER_UniqueEffects.lsx;AMER_SKILL_UNI_GhostflameStance_DisplayName;Ghostflame;Призрачное Пламя
-Ln\AMER_UniqueEffects.lsx;AMER_SKILL_UNI_GhostflameStance_Description;With the Demon talent, this ghastly token grants one additional Demon reaction each round.;Этот зловещий знак даёт одну дополнительную реакцию демона за ход, если у вас есть талант «Демон».
+Ln\AMER_UniqueEffects.lsx;AMER_SKILL_UNI_GhostflameStance_Description;With the Demon talent, this ghastly token grants one additional Demon reaction each round.;Этот зловещий знак даёт одну дополнительную демоническую реакцию за ход, если у вас есть талант «Демон».
 Ln\AMER_UniqueEffects.lsx;AMER_SKILL_UNI_SeraphStance_DisplayName;Seraph;Серафим
-Ln\AMER_UniqueEffects.lsx;AMER_SKILL_UNI_SeraphStance_Description;With the Angel talent, this angelic relic grants one additional Angel reaction each round.;Эта ангельская реликвия даёт одну дополнительную реакцию ангела за ход, если у вас есть талант «Ангел».
+Ln\AMER_UniqueEffects.lsx;AMER_SKILL_UNI_SeraphStance_Description;With the Angel talent, this angelic relic grants one additional Angel reaction each round.;Эта ангельская реликвия даёт одну дополнительную ангельскую реакцию за ход, если у вас есть талант «Ангел».
 Ln\AMER_UniqueEffects.lsx;AMER_SKILL_UNI_AbyssStance_DisplayName;Abyss;Бездна
 Ln\AMER_UniqueEffects.lsx;AMER_SKILL_UNI_AbyssStance_Description;In attuning to the hellish voidplate, Abyss grants +[1]% increased damage and +[2]% critical chance.;Настроившись на адскую пустотную пластину, Бездна даёт +[1]% к урону и +[2]% к шансу крита.
 Ln\AMER_UniqueEffects.lsx;AMER_UNI_Abyss_A;"<font color=""c7a758"">Abyss</font>";"<font color=""c7a758"">Бездна</font>"
@@ -1958,16 +1958,16 @@ Ln\ayylmao.lsx;AMER_LuckyCharm_Constitution3;Lucky!;Удача!
 Ln\ayylmao.lsx;AMER_LuckyCharm_Grit3;Lucky!;Удача!
 Ln\ayylmao.lsx;AMER_LuckyCharm_Willpower3;Lucky!;Удача!
 Ln\ayylmao.lsx;AMER_LuckyCharm_StatusRemoval3;Lucky!;Удача!
-Ln\ayylmao.lsx;AMER_LuckyCharm_BaseCrit1;Lucky Charm;Удачливость
-Ln\ayylmao.lsx;AMER_LuckyCharm_BaseCrit2;Lucky Charm;Удачливость
-Ln\ayylmao.lsx;AMER_LuckyCharm_BaseCrit3;Lucky Charm;Удачливость
-Ln\ayylmao.lsx;AMER_LuckyCharm_BaseCrit4;Lucky Charm;Удачливость
-Ln\ayylmao.lsx;AMER_LuckyCharm_BaseCrit5;Lucky Charm;Удачливость
-Ln\ayylmao.lsx;AMER_LuckyCharm_BaseCrit6;Lucky Charm;Удачливость
-Ln\ayylmao.lsx;AMER_LuckyCharm_BaseCrit7;Lucky Charm;Удачливость
-Ln\ayylmao.lsx;AMER_LuckyCharm_BaseCrit8;Lucky Charm;Удачливость
-Ln\ayylmao.lsx;AMER_LuckyCharm_BaseCrit9;Lucky Charm;Удачливость
-Ln\ayylmao.lsx;AMER_LuckyCharm_BaseCrit10;Lucky Charm;Удачливость
+Ln\ayylmao.lsx;AMER_LuckyCharm_BaseCrit1;Lucky Charm;Талисман удачи
+Ln\ayylmao.lsx;AMER_LuckyCharm_BaseCrit2;Lucky Charm;Талисман удачи
+Ln\ayylmao.lsx;AMER_LuckyCharm_BaseCrit3;Lucky Charm;Талисман удачи
+Ln\ayylmao.lsx;AMER_LuckyCharm_BaseCrit4;Lucky Charm;Талисман удачи
+Ln\ayylmao.lsx;AMER_LuckyCharm_BaseCrit5;Lucky Charm;Талисман удачи
+Ln\ayylmao.lsx;AMER_LuckyCharm_BaseCrit6;Lucky Charm;Талисман удачи
+Ln\ayylmao.lsx;AMER_LuckyCharm_BaseCrit7;Lucky Charm;Талисман удачи
+Ln\ayylmao.lsx;AMER_LuckyCharm_BaseCrit8;Lucky Charm;Талисман удачи
+Ln\ayylmao.lsx;AMER_LuckyCharm_BaseCrit9;Lucky Charm;Талисман удачи
+Ln\ayylmao.lsx;AMER_LuckyCharm_BaseCrit10;Lucky Charm;Талисман удачи
 Ln\ayylmao.lsx;AMER_Shield_Air_StatsDescription;"<p align=""left""><font color=""ff9500"" size=19 face=""Copperplate Gothic Light"">   RECOMMENDED</font><br><font color=cc7700"" face=""Copperplate Gothic Light"">    •    9 Intelligence<br>    •    2 Aerotheurge<br>    •    Cooldown -3 at 15 Intelligence</font><br><br><font face=""Copperplate Gothic Bold"">Range: [3]<br>Absorbs up to [2] of your maximum vitality.</font></p>";
 Ln\ayylmao.lsx;AMER_SKILLBOOK_NaturalOrder;"<font color=""c7a758"">Natural Order Skillbook</font>";Книга навыка «Буйный рост»
 Ln\ayylmao.lsx;AMER_SKILL_NaturalOrder_DisplayName;Natural Order;Буйный рост
