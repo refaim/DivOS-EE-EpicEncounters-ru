@@ -47,14 +47,14 @@ if %WITH_RUSSIAN_TRANSLATION_FIXES% == yes set TRANSLATION_DIR=%SRC_DIR%\MainGam
 goto Main
 
 :CompressLsxToLsb
-%DIVINE% -g dos2de -a convert-resources -i lsx -o lsb -s %1 -d %1
+%DIVINE% -g dos2de -a convert-resources -i lsx -o lsb -s %1 -d %1 || exit 1
 pushd %1
 del /s /q *.lsx >nul
 popd
 exit /b 0
 
 :ExtractLsbToLsx
-%DIVINE% -g dos2de -a convert-resources -i lsb -o lsx -s %1 -d %1
+%DIVINE% -g dos2de -a convert-resources -i lsb -o lsx -s %1 -d %1 || exit 1
 pushd %1
 del /s /q *.lsb >nul
 popd
@@ -71,7 +71,7 @@ robocopy /S %SRC_DIR%\EnglishVanillaMod\Pak %MOD_BUILD_DIR% >nul
 echo Patching mod files with localization strings...
 call :ExtractLsbToLsx %MOD_BUILD_DIR%\Mods\Epic_Encounters_071a986c-9bfa-425e-ac72-7e26177c08f6\Localization
 call :ExtractLsbToLsx %MOD_BUILD_DIR%\Public\Epic_Encounters_071a986c-9bfa-425e-ac72-7e26177c08f6\RootTemplates
-call python3 %TOOLS_DIR%\strings.py text_to_game %SRC_DIR%\ModRussianTranslation\strings.csv %MOD_BUILD_DIR%
+call python3 %TOOLS_DIR%\strings.py text_to_game %SRC_DIR%\ModRussianTranslation\strings.csv %MOD_BUILD_DIR% || exit 1
 call :CompressLsxToLsb %MOD_BUILD_DIR%\Mods\Epic_Encounters_071a986c-9bfa-425e-ac72-7e26177c08f6\Localization
 call :CompressLsxToLsb %MOD_BUILD_DIR%\Public\Epic_Encounters_071a986c-9bfa-425e-ac72-7e26177c08f6\RootTemplates
 
@@ -82,15 +82,15 @@ if %WITH_ADDITIONAL_CRAFTING_RECIPES% == yes (
 
 if %WITHOUT_INCREASED_ENEMY_VITALITY% == yes (
     echo Applying normal tactician vitality patch...
-    call python3 %SRC_DIR%\NormalTacticianVitality\patch.py %MOD_BUILD_DIR%\Public\Epic_Encounters_071a986c-9bfa-425e-ac72-7e26177c08f6\Stats\Generated\Data\Character.txt
+    call python3 %SRC_DIR%\NormalTacticianVitality\patch.py %MOD_BUILD_DIR%\Public\Epic_Encounters_071a986c-9bfa-425e-ac72-7e26177c08f6\Stats\Generated\Data\Character.txt || exit 1
 )
 
 echo Building Epic Encounters PAK...
 rmdir /s /q %OUTPUT_DIR% 2>nul
 mkdir %OUTPUT_DIR%
-%DIVINE% -g dos2de -a create-package -c lz4hc -s %MOD_BUILD_DIR% -d %OUTPUT_DIR%\%PAK_NAME%.pak
+%DIVINE% -g dos2de -a create-package -c lz4hc -s %MOD_BUILD_DIR% -d %OUTPUT_DIR%\%PAK_NAME%.pak || exit 1
 robocopy /S %SRC_DIR%\EnglishVanillaMod\LooseFiles %OUTPUT_DIR% >nul
-if %WITH_ADDITIONAL_CRAFTING_RECIPES% == yes copy /y %SRC_DIR%\CustomItemCombos\readme.txt %OUTPUT_DIR%\NewCraftingRecipes.txt >nul
+if %WITH_ADDITIONAL_CRAFTING_RECIPES% == yes copy /y %SRC_DIR%\CustomItemCombos\readme.txt %OUTPUT_DIR%\NewCraftingRecipes.txt >nul || exit 1
 
 echo Patching main game russian translation with mod-specific strings...
 set TRANSLATION_BUILD_DIR=%BUILD_DIR%\MainGameRussianTranslation
@@ -98,6 +98,6 @@ robocopy /S %TRANSLATION_DIR%\Localization %TRANSLATION_BUILD_DIR%\Localization 
 call python3 %SRC_DIR%\ModRussianTranslation\patch_russian_xml.py %TRANSLATION_BUILD_DIR%\Localization\Russian\russian.xml %SRC_DIR%\ModRussianTranslation\russian.xml %TRANSLATION_BUILD_DIR%\Localization\Russian\russian.xml || exit 1
 
 echo Building main game russian translation PAK...
-%DIVINE% -g dos2de -a create-package -c lz4hc -s %BUILD_DIR%\MainGameRussianTranslation -d %OUTPUT_DIR%\Data\Localization\Russian.pak
+%DIVINE% -g dos2de -a create-package -c lz4hc -s %BUILD_DIR%\MainGameRussianTranslation -d %OUTPUT_DIR%\Data\Localization\Russian.pak || exit 1
 
 popd
