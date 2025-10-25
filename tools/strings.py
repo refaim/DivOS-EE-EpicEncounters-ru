@@ -55,7 +55,7 @@ class GenericEntryAttribute(object):
     def __repr__(self):
         return self._raw
 
-    def _get_name(self):
+    def _get_name(self) -> str:
         return 'generic'
 
     def get_id(self):
@@ -64,7 +64,7 @@ class GenericEntryAttribute(object):
     def get_translatable_strings(self):
         yield from []
 
-    def translate_string(self, key, text):
+    def translate_string(self, key, text) -> None:
         assert False
 
 
@@ -85,13 +85,13 @@ class ExtraPropertiesEntryAttribute(GenericEntryAttribute):
             props.append(self._translatable_props.get(i, prop))
         return 'data "ExtraProperties" "{}"'.format(';'.join(props))
 
-    def _get_name(self):
+    def _get_name(self) -> str:
         return 'ep'
 
     def get_translatable_strings(self):
         yield from self._translatable_props.items()
 
-    def translate_string(self, key, text):
+    def translate_string(self, key, text) -> None:
         assert key in self._translatable_props
         self._translatable_props[key] = text
 
