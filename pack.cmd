@@ -2,6 +2,7 @@
 
 set WITH_ADDITIONAL_CRAFTING_RECIPES=no
 set WITHOUT_INCREASED_ENEMY_VITALITY=no
+set WITH_RUSSIAN_TRANSLATION_FIXES=no
 
 :ParseArgs
 if "%~1"=="" goto SetupEnvironment
@@ -15,12 +16,19 @@ if "%~1"=="--without-increased-enemy-vitality" (
     shift
     goto ParseArgs
 )
+if "%~1"=="--with-russian-translation-fixes" (
+    set WITH_RUSSIAN_TRANSLATION_FIXES=yes
+    shift
+    goto ParseArgs
+)
 shift
 goto ParseArgs
 
 :SetupEnvironment
-set MOD_VERSION=v1.1.9.5c
-set PAK_NAME=EpicEncountersRu_%MOD_VERSION%
+set TRANSLATION_NAME=RuOfficial
+if %WITH_RUSSIAN_TRANSLATION_FIXES% == yes set TRANSLATION_NAME=RuUnofficialFixed
+
+set PAK_NAME=EpicEncounters_%TRANSLATION_NAME%_v1.1.9.5c
 if %WITH_ADDITIONAL_CRAFTING_RECIPES% == yes set PAK_NAME=%PAK_NAME%_WithAdditionalCraftingRecipes
 if %WITHOUT_INCREASED_ENEMY_VITALITY% == yes set PAK_NAME=%PAK_NAME%_WithoutIncreasedEnemyVitality
 
@@ -32,6 +40,9 @@ set MOD_BUILD_DIR=%BUILD_DIR%\Mod
 
 set TOOLS_DIR=%~dp0\tools
 set DIVINE=%TOOLS_DIR%\Divine\Divine.exe
+
+set TRANSLATION_DIR=%SRC_DIR%\MainGameRussianTranslationSteam
+if %WITH_RUSSIAN_TRANSLATION_FIXES% == yes set TRANSLATION_DIR=%SRC_DIR%\MainGameRussianTranslationFixed
 
 goto Main
 
@@ -57,7 +68,7 @@ rmdir /s /q %BUILD_DIR% 2>nul
 mkdir %BUILD_DIR%
 robocopy /S %SRC_DIR%\EnglishVanillaMod\Pak %MOD_BUILD_DIR% >nul
 
-echo Incorporating localization strings...
+echo Patching mod files with localization strings...
 call :ExtractLsbToLsx %MOD_BUILD_DIR%\Mods\Epic_Encounters_071a986c-9bfa-425e-ac72-7e26177c08f6\Localization
 call :ExtractLsbToLsx %MOD_BUILD_DIR%\Public\Epic_Encounters_071a986c-9bfa-425e-ac72-7e26177c08f6\RootTemplates
 call python3 %TOOLS_DIR%\strings.py text_to_game %SRC_DIR%\ModRussianTranslation\strings.csv %MOD_BUILD_DIR%
@@ -81,8 +92,12 @@ mkdir %OUTPUT_DIR%
 robocopy /S %SRC_DIR%\EnglishVanillaMod\LooseFiles %OUTPUT_DIR% >nul
 if %WITH_ADDITIONAL_CRAFTING_RECIPES% == yes copy /y %SRC_DIR%\CustomItemCombos\readme.txt %OUTPUT_DIR%\NewCraftingRecipes.txt >nul
 
+echo Patching main game russian translation with mod-specific strings...
+set TRANSLATION_BUILD_DIR=%BUILD_DIR%\MainGameRussianTranslation
+robocopy /S %TRANSLATION_DIR%\Localization %TRANSLATION_BUILD_DIR%\Localization >nul
+call python3 %SRC_DIR%\ModRussianTranslation\patch_russian_xml.py %TRANSLATION_BUILD_DIR%\Localization\Russian\russian.xml %SRC_DIR%\ModRussianTranslation\russian.xml %TRANSLATION_BUILD_DIR%\Localization\Russian\russian.xml || exit 1
+
 echo Building main game russian translation PAK...
-robocopy /S %SRC_DIR%\MainGameRussianTranslation\Localization %BUILD_DIR%\MainGameRussianTranslation\Localization >nul
 %DIVINE% -g dos2de -a create-package -c lz4hc -s %BUILD_DIR%\MainGameRussianTranslation -d %OUTPUT_DIR%\Data\Localization\Russian.pak
 
 popd
