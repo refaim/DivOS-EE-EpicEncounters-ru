@@ -2,7 +2,7 @@
 
 Перевод основан на [исправленном официальном переводе Divinity: Original Sin - Enhanced Edition](https://github.com/EugVV/DivOS-EE-ru).
 
-Перевод в процессе. Готовность: 68%.
+Перевод в процессе. Готовность: 53%.
 
 [Тема на форуме Arcane Coast для обсуждения перевода](https://arcanecoast.ru/forum/viewtopic.php?f=69&t=1379).
 
